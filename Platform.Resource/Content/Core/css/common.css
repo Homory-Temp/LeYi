@@ -1,0 +1,129 @@
+﻿html, html .button.ui, body {
+  font-family: "Microsoft YaHei UI", 'Microsoft YaHei', "Lucida Grande", Verdana, Lucida,Arial,  Helvetica, 宋体,sans-serif; 
+}
+
+body {
+  background: url("../../../Images/Common/BG.gif") center 0 repeat;
+}
+
+.rootPointer {
+  cursor: pointer;
+}
+
+.rootFooter {
+  font-family: Arial;
+  font-size: 0.8em;
+}
+
+  .rootFooter a {
+    color: black;
+  }
+
+.rootHidden {
+  display: none;
+}
+
+.coreAuto {
+	margin: auto;
+}
+
+.coreCenter {
+	text-align: center;
+}
+
+.coreFull {
+	width: 100%;
+}
+
+.coreLeft {
+	text-align: left;
+}
+
+.coreRight {
+	text-align: right;
+}
+
+.coreTop {
+	vertical-align: top;
+}
+
+.coreMiddle {
+	vertical-align: middle;
+}
+
+.coreFloatLeft {
+	float: left;
+}
+
+.coreClear {
+	clear: both;
+}
+
+html .RadGrid .rgBatchContainer {
+  margin: auto;
+}
+
+html .RadSearchBox, html .RadSearchBox .rsbInner, html .RadSearchBox .rsbInput {
+  text-align: center;
+  vertical-align: middle;
+  width: 250px;
+  height: 30px;
+  line-height: 24px;
+  font-size: 16px;
+}
+
+  html .RadSearchBox .rsbButtonSearch {
+    width: 24px;
+    height: 24px;
+    margin: 2px 2px 2px 0;
+    cursor: pointer;
+  }
+
+html .segment.ui, html :first-child.segment.basic.ui {
+  padding: 1em;
+  margin: 0;
+}
+
+.GroupBoxTitle {
+  font-size:14px;
+	font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+.FullWidth {
+  width: 100%;
+}
+
+.coreFooter {
+  font-family: Arial;
+  font-size: 0.8em;
+}
+
+  .coreFooter a {
+    color: black;
+  }
+
+  .disappear_item {
+	  display: none;
+  }
+
+  .appear_item {
+	  display: block;
+  }
+
+  html .button.mini.ui {
+	  font-size: 0.75rem;
+  }
+
+  html .header.ui {
+	  font-size: 14px;
+	  line-height: 14px;
+  }
+  
+  html h2.header.ui {
+	  font-size: 1.33em;
+	  line-height: 1.33em;
+  }
+  
+  html .RadTreeView_Default {
+	  font-size: 14px;
+  }

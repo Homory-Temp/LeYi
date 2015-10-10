@@ -1,0 +1,81 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+
+
+/* 整个Tab */
+.tabControl {
+  width:575px;
+   margin:auto
+  
+}
+
+/* 整个Tab */
+.tabControl1 {
+  width:575px;
+   margin:auto
+  
+}
+
+
+/* 单个Tab选择区 */
+ .tab{
+  float: left;
+ background:url("../image/tab2_0311.png") no-repeat top center;
+ width:60px;
+ height:25px;
+  cursor:pointer;
+ text-align:center;
+ line-height:25px;
+ font-size:14px; color:#666;
+}
+
+
+
+/* 当前单个Tab选择区 */
+.tabCurrent {
+background:#227DC5;
+ cursor:pointer;
+  width:60px;
+ height:25px; 
+ text-align:center;
+ line-height:25px;
+ font-size:14px; color:#FFFFFF;
+}
+
+
+
+
+
+/* Tab更多 */
+.tabMores {
+  float: right;
+  height:26px; line-height:26px;
+  margin:6px;
+  margin-right:10px
+}
+
+/* 清除样式 */
+.tabClear {
+  clear: both;
+  margin:auto;
+  width:500px
+}
+
+/*首页选显卡文章样式*/
+
+
+.tabContent li a{
+
+color:#999;
+
+}
+
+.tabContent li {
+
+color:#999;
+width:270px;
+float:left;
+margin:1px 0px 0px 3px;
+line-height:25px;
+}

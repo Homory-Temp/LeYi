@@ -1,0 +1,30 @@
+﻿body {
+  transition-property: margin, transform;
+  transition-duration: 0.3s, 0.3s;
+  transition-timing-function: ease, ease;
+  transition-delay: 0s, 0s;
+  font-family: 'Microsoft YaHei UI', 'Microsoft YaHei', Arial, SimHei;
+}
+
+.menu.ui {
+  background: url("../../../Images/Common/BG.gif") center 0 repeat;
+}
+
+#sidebar {
+  cursor: default;
+}
+
+  #sidebar a {
+    text-decoration: none;
+  }
+
+#sideHome {
+  margin-left: 8px;
+}
+
+.welcome {
+	font-size: 10pt;
+}
+
+.launch {
+}

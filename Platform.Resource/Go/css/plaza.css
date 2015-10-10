@@ -1,0 +1,32 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+.c-plaza h1,.c-plaza h2{font-weight:bold}.c-plaza{position:relative;margin:0 auto;width:690px; height:1000px;overflow:hidden;line-height:22px}.c-p-top{position:relative}.c-p-top h2{text-indent:-9999px;height:20px;}.c-p-top ul{text-indent:-9999px;height:20px;) -15px -7px no-repeat;width:690px;height:auto;background-color:white}.c-pt-opts{position:absolute;top:342px;right:30px}.c-pt-opts a em{width:97px;text-align:center}.c-pc-left{width:690px;overflow:hidden}.wrap-all{word-wrap:break-word;word-break:break-all}.c-color-a{color:#aaa}.c-p-title{position:relative;_zoom:1;margin:10px 5px 0px 15px}.c-p-title i{position:absolute;top:-2px;left:0;color:#c5c5c5;font-size:16px}.c-p-title h2{margin-left:20px}.c-p-title a{position:absolute;top:0;right:0}.c-p-list{width:690px}.c-p-box1{width:141px;border:1px solid #ddd;background-color:white;padding:8px;text-align:center;margin-right:12px;float:left}.c-pb-ul-box{overflow:hidden;width:141px; text-align:center}.c-pb-ul{width:300px;}.c-pb-ul li{float:left;padding-right:7px;margin-right:7px;border-right:1px solid #ddd}.c-pb-ul em{display:block;font-weight:bold}.c-p-right{padding:50px 0 0 15px}.c-pr-box{width:204px;border:1px solid #ddd;background-color:white}.c-prb-uinfo{padding:10px}.c-prb-nickname{margin-bottom:2px}.c-prb-face{position:absolute;left:0;top:15px}.c-prb-role{border-top:1px solid #ddd;padding:15px 10px 20px}.c-prb-role li{border-top:1px dashed #ddd;padding-top:10px;margin-top:10px;position:relative;_zoom:1}.c-prb-role .first-child{border-top:0;padding-top:0;margin-top:0}.c-prb-role .first-child .c-prb-face{top:5px}.c-prb-title{position:relative;_zoom:1}.c-prb-tabs{position:absolute;top:0;right:0}.c-prb-tabs a{color:#c5c5c5;font-family:Simsun}.c-prb-tabs a:hover{text-decoration:none}.c-prb-tabs .sele{color:#71b775}
+
+.box-hd,.r_topic h3,.r-weekly h3{padding:0 0 12px;font-size:18px;font-family:"Microsoft YaHei"}
+
+
+
+
+/**文章列表**/
+.center_right{float:left;width:740px;z-index:2;margin-right:15px;background-color:#FFF}
+.left,.right,.center,.center_right{float:left;position:relative;margin:5px 0 0 0;display:inline;zoom:1;}
+.aments{ height:245px}
+.aments h3{ float:left; width:100%; font-size:14px; color:#737373; border-bottom:solid #e0e0e0 1px; padding-bottom:5px;}
+
+.aList{ float:left; width:98%; margin-left:15px;}
+.aList li{ float:left; width:98%; line-height:31px; height:31px; border-bottom:dashed #e0e0e0 1px; 
+-moz-transition:background 0.3s ease-in;
+-o-transition:background 0.3s ease-in;
+-webkit-transition:background 0.3s ease-in;
+}
+.aList li:hover, .aList li.hover{ background:#fefde9;}
+.aList li strong{ float:left; width:650px; height:31px; overflow:hidden; font-weight:lighter;}
+.aList li a{ font-size:14px;background-color:#FFF;}
+.aList li span{ font-size:12px; color:#227dc5; float:right;}
+.aFoot{ float:left; width:100%; padding:20px 0; text-align:center; }
+
+/**名师简介**/
+.l_schPrincipal{width:100%;background:url("../images/dotted.png") repeat-x;padding-top:8px;text-align:center}.l_schPrincipal h3{font-size:14px;color:#707070;width:100%;text-align:left;padding-bottom:10px}.l_schPrincipal .face{display:inline-block;margin-top:10px}.l_schPrincipal strong,.l_schPrincipal em{display:block;width:100%;font-weight:lighter;font-size:12px;color:#227dc5;padding-top:5px}.l_schPrincipal p{display:block;text-align:left;width:100%;line-height:22px;overflow:hidden;padding-top:5px}.l_schPrincipal .more{display:block;width:100%;text-align:right;padding-bottom:10px}
+.img65{width:65px;height:65px;background-position:0 -159px}
+

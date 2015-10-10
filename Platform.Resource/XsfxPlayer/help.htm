@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>升级文档</title>
+<style type="text/css">
+body,td,th {
+	font-size: 14px;
+	line-height: 22px;
+}
+p {
+	padding-left: 20px;
+	margin: 0px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+</style>
+</head>
+
+<body>
+<p>6.6升级说明<br />
+6.4升级至6.6的方法</p>
+<p>1：替换ckplayer.swf<br />
+  2：替换ckplayer.js中的315行（(function() {）及以下的所有内容<br />
+  3：如果想在滚动文字广告使用发光滤镜，需要ckplayer.js的ckstyle()函数中和ckplayer.xml文件中增加pm_glowfilter参数。详细的可参考6.5的该函数<br />
+  4： ckplayer.js和ckplayer.xml中setup参数最后新增加二个参数，默认是0
+</p>
+<p>6.5升级至6.6的方法<br />
+1：替换ckplayer.swf<br />
+2：替换ckplayer.js中的315行（(function() {）及以下的所有内容<br />
+3：
+ckplayer.js和ckplayer.xml中setup参数最后新增二个参数，默认是0
+</p>
+<p>  <br />
+一：修复Bug</p>
+<p>1：修复了多段视频播放时间出错的bug<br />
+  2：修复了控制栏隐藏的相关问题<br />
+  3：修复了滚动文字广告使用普通方式滚动时出错的bug
+  <br />
+  4：修复了在使用js调用播放器时设置c:1并同时改动x值的情况下CKobject函数出错的bug
+</p>
+<p>二：新增加的内容</p>
+<p>1：增加了视频截图的api，详细的使用可以看帮助手册<br />
+  2：setup的第41个参数指当flashvars里s&gt;2时使用的swf解析文件可以放在风格包里style.swf<br />
+  3：增强了setup里第36个参数的（控制进度栏是否启用的）功能，现在分5种作用，,0不启用，1是启用，2是只能前进（向右拖动），3是只能后退，4是只能前进但能回到第一次拖动时的位置，5是看过的地方可以随意拖动，
+  <br />
+  4：优化了多段视频的播放，在多段播放时当播放到第n段时播放器默认将清空n段之前段落的视频数据，释放内存，可以关闭该功能
+</p>
+<p>感谢各位朋友对ckplayer的支持，在本次升级中，许多朋友提供了好的建议，虽然因为考虑到大部分用户的需求后决定一些功能没有对其进行更改。</p>
+</body>
+</html>
