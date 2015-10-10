@@ -1,0 +1,52 @@
+﻿body {
+  background: url("../../../Images/Common/BG.gif") center 0 repeat;
+}
+
+.signOnPointer {
+  cursor: pointer;
+}
+
+.width80 {
+  width: 80px;
+}
+
+.width100 {
+  width: 100px;
+}
+
+.square100 {
+  width: 100px;
+  height: 100px;
+}
+
+.padTop15 {
+  padding-top: 15px;
+}
+
+.header.ui .header.sub {
+  color: whitesmoke;
+}
+
+.signFooter {
+  font-family: Arial;
+  font-size: 0.8em;
+}
+
+  .signFooter a {
+    color: black;
+  }
+
+.signBreak {
+    word-wrap: break-word;
+}
+
+#signModal {
+  background-color: transparent;
+  color: whitesmoke;
+  border: none;
+  text-align: center;
+}
+
+.signHidden {
+  display: none;
+}

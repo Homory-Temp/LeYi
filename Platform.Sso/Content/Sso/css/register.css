@@ -1,0 +1,27 @@
+﻿.RadUpload_BlackMetroTouch .ruButtonHover {
+  background-color: rgb(0, 181, 173);
+}
+
+.RadUpload_BlackMetroTouch .ruButton {
+  margin-left: 20px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.RadUpload_BlackMetroTouch {
+  margin-left: 30px;
+    margin-top: 3px;
+  width: 100px;
+  line-height: 40px;
+}
+
+#viewer {
+  margin-left: 20px;
+}
+
+#tips {
+  width: 100%;
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 10px;
+}
