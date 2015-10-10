@@ -16,8 +16,8 @@
     <link href="../Style/commentInputBox.css" rel="stylesheet" />
     <link href="../Style/1.css" rel="stylesheet" />
     <script src="../Script/jquery.min.js"></script>
-      <base target="_top" />
-  <script>
+    <base target="_top" />
+    <script>
         function GetUrlParms() {
             var args = new Object();
             var query = location.search.substring(1);//获取查询串   
@@ -31,6 +31,35 @@
             }
             return args;
         }
+
+        function GetUrlParmsEx(name) {
+            var args = new Object();
+            args = GetUrlParms();
+            return args[name];
+        }
+
+        function isIE() {
+            if (window.ActiveXObject || "ActiveXObject" in window)
+                return true;
+            else
+                return false;
+        }
+        function isIE6() {
+            return isIE() && !window.XMLHttpRequest;
+        }
+        function isIE7() {
+            return isIE() && window.XMLHttpRequest && !document.documentMode;
+        }
+        function isIE8() {
+            return isIE() && !-[1, ] && document.documentMode;
+        }
+        function fixIE(url) {
+            if (isIE() && (isIE6() || isIE7() || isIE8()))
+                top.location.href = url;
+        }
+
+        if (isIE())
+            fixIE('./ViewPlainFix?Id=' + GetUrlParmsEx('Id'));
     </script>
 </head>
 <body>
@@ -73,13 +102,13 @@
                                     <span id="catalog" runat="server">栏目：<%= CurrentResource.ResourceCatalog.Where(o=>o.State==State.启用 &&o.Catalog.Type== CatalogType.文章).Aggregate(string.Empty,Combine).CutString(null) %></span>
                                     <br />
                                     <asp:Panel runat="server" ID="cg">
-                                    <span><%= CombineGrade() %></span>&nbsp;&nbsp;
+                                        <span><%= CombineGrade() %></span>&nbsp;&nbsp;
                                     <span><%= CombineCourse() %></span>
-                                    <br />
+                                        <br />
                                     </asp:Panel>
                                     <asp:Panel runat="server" ID="tag">
-                                    <span>标签：<%= CombineTags() %></span>
-                                    <br />
+                                        <span>标签：<%= CombineTags() %></span>
+                                        <br />
                                     </asp:Panel>
                                     <span>时间：<%= CurrentResource.Time.ToString("yyyy-MM-dd HH:mm") %></span>
                                 </div>
@@ -201,14 +230,17 @@
                                                         </div>
                                                         <div class="srx-comment-content">
                                                             <label style="color: #333333; font-weight: bold; font-size: 14px;"><%# Eval("Content") %></label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <a target="_self" id="goReply" runat="server" onserverclick="goReply_OnServerClick"><img src="Image/c.gif" style="width: 26px;" /></a>&nbsp;&nbsp;&nbsp;
-                                                            <a target="_self" id="goDelP" runat="server" alt='<%# Eval("Id").ToString() %>' name='<%# Eval("Id").ToString() %>' onserverclick="goDelP_ServerClick" visible='<%# IsOnline &&  ((Homory.Model.ResourceComment)Container.DataItem).User.Id == CurrentUser.Id %>'><img src="Image/b.gif" style="width: 26px;" /></a>
+                                                            <a target="_self" id="goReply" runat="server" onserverclick="goReply_OnServerClick">
+                                                                <img src="Image/c.gif" style="width: 26px;" /></a>&nbsp;&nbsp;&nbsp;
+                                                            <a target="_self" id="goDelP" runat="server" alt='<%# Eval("Id").ToString() %>' name='<%# Eval("Id").ToString() %>' onserverclick="goDelP_ServerClick" visible='<%# IsOnline &&  ((Homory.Model.ResourceComment)Container.DataItem).User.Id == CurrentUser.Id %>'>
+                                                                <img src="Image/b.gif" style="width: 26px;" /></a>
                                                         </div>
                                                         <div class="srx-comment-info" style="margin-top: 4px;">
                                                             <br />
                                                             <span runat="server" id="reply" visible="False">
                                                                 <input id="replyId" type="hidden" runat="server" value='<%# Eval("Id").ToString() %>' /><textarea id="replyContent" runat="server" style="width: 90%; height: 40px;" /><br />
-                                                                <a id="replyReply" runat="server" onserverclick="replyReply_OnServerClick" target="_self"><img src="Image/a.gif" style="width: 26px;" /></a></a>&nbsp;&nbsp;&nbsp;<a id="noReply" runat="server" onserverclick="noReply_OnServerClick" target="_self"><img src="Image/d.gif" style="width: 26px;" /></a></a></span>
+                                                                <a id="replyReply" runat="server" onserverclick="replyReply_OnServerClick" target="_self">
+                                                                    <img src="Image/a.gif" style="width: 26px;" /></a></a>&nbsp;&nbsp;&nbsp;<a id="noReply" runat="server" onserverclick="noReply_OnServerClick" target="_self"><img src="Image/d.gif" style="width: 26px;" /></a></a></span>
                                                         </div>
                                                     </dd>
                                                 </dl>
@@ -234,9 +266,16 @@
                                         <asp:Image runat="server" ID="icon" class="fl" Height="50" Width="50" />
                                     </a>
                                     <span class="rbox-uz-right fl">
-                                        <h3><div><a href='<%= string.Format("../Go/Personal?Id={0}", TargetUser.Id) %>'>
-                                            <asp:Label runat="server" ID="name"></asp:Label></a></div><div><a href='<%= string.Format("../Go/Personal?Id={0}", TargetUser.Id) %>'>
-                                            <asp:Label runat="server" ID="nameX"></asp:Label></a></div></h3>
+                                        <h3>
+                                            <div>
+                                                <a href='<%= string.Format("../Go/Personal?Id={0}", TargetUser.Id) %>'>
+                                                    <asp:Label runat="server" ID="name"></asp:Label></a>
+                                            </div>
+                                            <div>
+                                                <a href='<%= string.Format("../Go/Personal?Id={0}", TargetUser.Id) %>'>
+                                                    <asp:Label runat="server" ID="nameX"></asp:Label></a>
+                                            </div>
+                                        </h3>
                                         <a id="go" href='<%= string.Format("../Go/Personal?Id={0}", TargetUser.Id) %>'>进入教师空间</a>
                                     </span>
                                 </div>
