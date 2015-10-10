@@ -1,0 +1,156 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homory.Model", "Homory.Model\Homory.Model.csproj", "{FB9005B4-B875-4E58-AACE-BFE42CE60CDE}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Core", "http://localhost:3998", "{904811AA-CB83-405C-A498-2DB0A7212387}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.1"
+		ProjectReferences = "{FB9005B4-B875-4E58-AACE-BFE42CE60CDE}|Homory.Model.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_3998"
+		Debug.AspNetCompiler.PhysicalPath = "Platform.Core\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_3998\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_3998"
+		Release.AspNetCompiler.PhysicalPath = "Platform.Core\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_3998\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "Platform.Core\"
+	EndProjectSection
+	ProjectSection(SvnOrigin) = preProject
+		@Keys = Enlist,Svn.Uri
+		Enlist = Required
+		Svn.Uri = Platform.Core/
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Resource", "http://localhost:4845", "{BD2E36CD-AF37-4CDA-A0BC-FFC4B450EC64}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.1"
+		ProjectReferences = "{fb9005b4-b875-4e58-aace-bfe42ce60cde}|Homory.Model.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_4845"
+		Debug.AspNetCompiler.PhysicalPath = "Platform.Resource\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4845\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_4845"
+		Release.AspNetCompiler.PhysicalPath = "Platform.Resource\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4845\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "Platform.Resource\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+	ProjectSection(SvnOrigin) = preProject
+		@Keys = Enlist,Svn.Uri
+		Enlist = Required
+		Svn.Uri = Platform.Resource/
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Sso", "http://localhost:7545", "{524C8711-97BA-4431-A849-383A22FD0F0D}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.1"
+		ProjectReferences = "{fb9005b4-b875-4e58-aace-bfe42ce60cde}|Homory.Model.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_7545"
+		Debug.AspNetCompiler.PhysicalPath = "Platform.Sso\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_7545\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_7545"
+		Release.AspNetCompiler.PhysicalPath = "Platform.Sso\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_7545\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "Platform.Sso\"
+	EndProjectSection
+	ProjectSection(SvnOrigin) = preProject
+		@Keys = Enlist,Svn.Uri
+		Enlist = Required
+		Svn.Uri = Platform.Sso/
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.ResourceCount", "Service.ResourceCount\Service.ResourceCount.csproj", "{4CC25DEC-6DA3-4BDE-99EE-B9CA0738F406}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.ResourceConvert", "Service.ResourceConvert\Service.ResourceConvert.csproj", "{5B566ADC-4F6E-45A8-9255-2ED344F1D024}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Picture.Import", "Windows.MMS.Picture.Import\Windows.MMS.Picture.Import.csproj", "{584C559C-9AD0-4DAD-909D-FDBB106C2F25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Tool.Import", "Windows.MMS.Tool.Import\Windows.MMS.Tool.Import.csproj", "{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB9005B4-B875-4E58-AACE-BFE42CE60CDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9005B4-B875-4E58-AACE-BFE42CE60CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9005B4-B875-4E58-AACE-BFE42CE60CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9005B4-B875-4E58-AACE-BFE42CE60CDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{904811AA-CB83-405C-A498-2DB0A7212387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{904811AA-CB83-405C-A498-2DB0A7212387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{904811AA-CB83-405C-A498-2DB0A7212387}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{904811AA-CB83-405C-A498-2DB0A7212387}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{BD2E36CD-AF37-4CDA-A0BC-FFC4B450EC64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2E36CD-AF37-4CDA-A0BC-FFC4B450EC64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2E36CD-AF37-4CDA-A0BC-FFC4B450EC64}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2E36CD-AF37-4CDA-A0BC-FFC4B450EC64}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{524C8711-97BA-4431-A849-383A22FD0F0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{524C8711-97BA-4431-A849-383A22FD0F0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{524C8711-97BA-4431-A849-383A22FD0F0D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{524C8711-97BA-4431-A849-383A22FD0F0D}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{4CC25DEC-6DA3-4BDE-99EE-B9CA0738F406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CC25DEC-6DA3-4BDE-99EE-B9CA0738F406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CC25DEC-6DA3-4BDE-99EE-B9CA0738F406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CC25DEC-6DA3-4BDE-99EE-B9CA0738F406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B566ADC-4F6E-45A8-9255-2ED344F1D024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B566ADC-4F6E-45A8-9255-2ED344F1D024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B566ADC-4F6E-45A8-9255-2ED344F1D024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B566ADC-4F6E-45A8-9255-2ED344F1D024}.Release|Any CPU.Build.0 = Release|Any CPU
+		{584C559C-9AD0-4DAD-909D-FDBB106C2F25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{584C559C-9AD0-4DAD-909D-FDBB106C2F25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{584C559C-9AD0-4DAD-909D-FDBB106C2F25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{584C559C-9AD0-4DAD-909D-FDBB106C2F25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+EndGlobal
