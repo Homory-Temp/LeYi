@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
     <title>基础平台</title>
-	<script src="../Content/jQuery/jquery.min.js"></script>
+    <script src="../Content/jQuery/jquery.min.js"></script>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/style-responsive.css" rel="stylesheet" />
     <link href="../assets/css/style.css" rel="stylesheet" />
@@ -31,9 +31,9 @@
         </div>
         <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
-            <div class="col-md-12">
-                <telerik:RadComboBox ID="combo" runat="server" Skin="MetroTouch" Label="统计年份：" Width="80" OnSelectedIndexChanged="combo_OnSelectedIndexChanged" AutoPostBack="True"></telerik:RadComboBox>
-                &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="col-md-12" style="text-align: center;">
+                    <telerik:RadComboBox ID="combo" runat="server" Skin="MetroTouch" Label="统计年份：" Width="80" OnSelectedIndexChanged="combo_OnSelectedIndexChanged" AutoPostBack="True"></telerik:RadComboBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                 <telerik:RadComboBox ID="comboX" runat="server" Skin="MetroTouch" Label="统计月份：" Width="80" OnSelectedIndexChanged="combo_OnSelectedIndexChanged" AutoPostBack="True">
                     <Items>
                         <telerik:RadComboBoxItem runat="server" Text="全部" Selected="True" Value="0" />
@@ -51,70 +51,76 @@
                         <telerik:RadComboBoxItem runat="server" Text="12月" Value="12" />
                     </Items>
                 </telerik:RadComboBox>
+                </div>
             </div>
-            <div class="col-md-12">
-                <telerik:RadChart ID="c" runat="server" Skin="Black" DefaultType="Bar" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Height="600">
-                    <Legend>
-                        <Appearance Position-AlignedPosition="Left">
-                        </Appearance>
-                    </Legend>
-                    <PlotArea>
-                        <EmptySeriesMessage Visible="True">
-                            <Appearance Visible="True">
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                    <telerik:RadChart ID="c" runat="server" Skin="Black" DefaultType="Bar" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Height="400" Style="margin: auto;">
+                        <Legend>
+                            <Appearance Position-AlignedPosition="Left">
                             </Appearance>
-                            <TextBlock Text="无统计数据">
+                        </Legend>
+                        <PlotArea>
+                            <EmptySeriesMessage Visible="True">
+                                <Appearance Visible="True">
+                                </Appearance>
+                                <TextBlock Text="无统计数据">
+                                </TextBlock>
+                            </EmptySeriesMessage>
+                        </PlotArea>
+                        <ChartTitle>
+                            <TextBlock Text="">
                             </TextBlock>
-                        </EmptySeriesMessage>
-                    </PlotArea>
-                    <ChartTitle>
-                        <TextBlock Text="">
-                        </TextBlock>
-                    </ChartTitle>
-                </telerik:RadChart>
+                        </ChartTitle>
+                    </telerik:RadChart>
+                </div>
             </div>
-            <div class="col-md-12">
-                <telerik:RadGrid ID="grid" runat="server" CssClass="coreAuto coreFull coreCenter" AllowPaging="true" AutoGenerateColumns="False" LocalizationPath="../Language/" AllowSorting="True" PageSize="20" AllowFilteringByColumn="False" Culture="zh-CN" ShowGroupPanel="True" OnNeedDataSource="grid_OnNeedDataSource">
-                    <ClientSettings AllowDragToGroup="True">
-                    </ClientSettings>
-                    <MasterTableView CssClass="coreAuto coreFull coreCenter" CommandItemDisplay="Top" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
-                        <HeaderStyle HorizontalAlign="Center" />
-                        <GroupHeaderItemStyle HorizontalAlign="Left"></GroupHeaderItemStyle>
-                        <CommandItemSettings ShowAddNewRecordButton="false" />
-                        <Columns>
-                            <telerik:GridBoundColumn HeaderText="学校" DataField="学校" SortExpression="学校" UniqueName="学校" ItemStyle-HorizontalAlign="Left">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn HeaderText="教师" DataField="教师" SortExpression="教师" UniqueName="教师">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn HeaderText="发布视频" DataField="发布视频" SortExpression="发布视频" UniqueName="发布视频">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn HeaderText="发布文章" DataField="发布文章" SortExpression="发布文章" UniqueName="发布文章">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn HeaderText="发布课件" DataField="发布课件" SortExpression="发布课件" UniqueName="发布课件">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn HeaderText="发布试卷" DataField="发布试卷" SortExpression="发布试卷" UniqueName="发布试卷">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn HeaderText="浏览资源" DataField="浏览资源" SortExpression="浏览资源" UniqueName="浏览资源">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn HeaderText="收藏资源" DataField="收藏资源" SortExpression="收藏资源" UniqueName="收藏资源">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn HeaderText="下载资源" DataField="下载资源" SortExpression="下载资源" UniqueName="下载资源">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn HeaderText="评论资源" DataField="评论资源" SortExpression="评论资源" UniqueName="评论资源">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn HeaderText="回复评论" DataField="回复评论" SortExpression="回复评论" UniqueName="回复评论">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn HeaderText="评定资源" DataField="评定资源" SortExpression="评定资源" UniqueName="评定资源">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn HeaderText="获得积分" DataField="获得积分" SortExpression="获得积分" UniqueName="获得积分">
-                            </telerik:GridBoundColumn>
-                        </Columns>
-                        <PagerStyle Mode="NextPrevAndNumeric" PageSizes="10,20,50,100" Position="Bottom" PageSizeControlType="RadComboBox" AlwaysVisible="true" PagerTextFormat="{4} 第{0}页，共{1}页；第{2}-{3}项，共{5}项" />
-                    </MasterTableView>
-                    <ClientSettings>
-                        <Selecting AllowRowSelect="true" UseClientSelectColumnOnly="true" />
-                    </ClientSettings>
-                </telerik:RadGrid>
-            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <telerik:RadGrid ID="grid" runat="server" CssClass="coreAuto coreFull coreCenter" AllowPaging="true" AutoGenerateColumns="False" LocalizationPath="../Language/" AllowSorting="True" PageSize="20" AllowFilteringByColumn="False" Culture="zh-CN" ShowGroupPanel="True" OnNeedDataSource="grid_OnNeedDataSource">
+                        <ClientSettings AllowDragToGroup="True">
+                        </ClientSettings>
+                        <MasterTableView CssClass="coreAuto coreFull coreCenter" CommandItemDisplay="Top" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
+                            <HeaderStyle HorizontalAlign="Center" />
+                            <GroupHeaderItemStyle HorizontalAlign="Left"></GroupHeaderItemStyle>
+                            <CommandItemSettings ShowAddNewRecordButton="false" />
+                            <Columns>
+                                <telerik:GridBoundColumn HeaderText="学校" DataField="学校" SortExpression="学校" UniqueName="学校" ItemStyle-HorizontalAlign="Left">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="教师" DataField="教师" SortExpression="教师" UniqueName="教师">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="发布视频" DataField="发布视频" SortExpression="发布视频" UniqueName="发布视频">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="发布文章" DataField="发布文章" SortExpression="发布文章" UniqueName="发布文章">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="发布课件" DataField="发布课件" SortExpression="发布课件" UniqueName="发布课件">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="发布试卷" DataField="发布试卷" SortExpression="发布试卷" UniqueName="发布试卷">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="浏览资源" DataField="浏览资源" SortExpression="浏览资源" UniqueName="浏览资源">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="收藏资源" DataField="收藏资源" SortExpression="收藏资源" UniqueName="收藏资源">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="下载资源" DataField="下载资源" SortExpression="下载资源" UniqueName="下载资源">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="评论资源" DataField="评论资源" SortExpression="评论资源" UniqueName="评论资源">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="回复评论" DataField="回复评论" SortExpression="回复评论" UniqueName="回复评论">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="评定资源" DataField="评定资源" SortExpression="评定资源" UniqueName="评定资源">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="获得积分" DataField="获得积分" SortExpression="获得积分" UniqueName="获得积分">
+                                </telerik:GridBoundColumn>
+                            </Columns>
+                            <PagerStyle Mode="NextPrevAndNumeric" PageSizes="10,20,50,100" Position="Bottom" PageSizeControlType="RadComboBox" AlwaysVisible="true" PagerTextFormat="{4} 第{0}页，共{1}页；第{2}-{3}项，共{5}项" />
+                        </MasterTableView>
+                        <ClientSettings>
+                            <Selecting AllowRowSelect="true" UseClientSelectColumnOnly="true" />
+                        </ClientSettings>
+                    </telerik:RadGrid>
+                </div>
             </div>
         </telerik:RadAjaxPanel>
     </form>

@@ -63,17 +63,17 @@
                                     <HeaderStyle HorizontalAlign="Center" />
                                     <CommandItemSettings ShowAddNewRecordButton="false" />
                                     <Columns>
-                                        <telerik:GridTemplateColumn ReadOnly="true" HeaderText="获奖范围" DataField="PrizeRange" SortExpression="PrizeRange" UniqueName="PrizeRange">
+                                        <telerik:GridTemplateColumn ReadOnly="true" HeaderText="获奖范围" DataField="PrizeRange" SortExpression="PrizeRange" UniqueName="PrizeRange" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Label runat="server" Text='<%# (Homory.Model.ResourcePrizeRange)Eval("PrizeRange") %>'></asp:Label>
                                             </ItemTemplate>
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn ReadOnly="true" HeaderText="获奖等级" DataField="PrizeLevel" SortExpression="PrizeLevel" UniqueName="PrizeLevel">
+                                        <telerik:GridTemplateColumn ReadOnly="true" HeaderText="获奖等级" DataField="PrizeLevel" SortExpression="PrizeLevel" UniqueName="PrizeLevel" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Label runat="server" Text='<%# (Homory.Model.ResourcePrizeLevel)Eval("PrizeLevel") %>'></asp:Label>
                                             </ItemTemplate>
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn HeaderText="荣誉分值 *" DataField="Credit" SortExpression="Credit" UniqueName="Credit">
+                                        <telerik:GridTemplateColumn HeaderText="荣誉分值 *" DataField="Credit" SortExpression="Credit" UniqueName="Credit" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:Label ID="creditLabel" runat="server" Text='<%# Eval("Credit") %>'></asp:Label>
                                             </ItemTemplate>

@@ -54,7 +54,7 @@
 						</Columns>
 					</MasterTableView>
 				</telerik:RadGrid>
-                <div class="ui divider"></div>
+                <div class="coreTop">&nbsp;</div>
 				<telerik:RadGrid ID="gridX" runat="server" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="gridX_NeedDataSource" OnBatchEditCommand="gridX_BatchEditCommand" OnItemCreated="grid_ItemCreated">
 					<MasterTableView EditMode="Batch" DataKeyNames="Id" CommandItemDisplay="Top" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
 						<BatchEditingSettings EditType="Row" OpenEditingEvent="DblClick" />

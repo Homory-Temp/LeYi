@@ -84,8 +84,11 @@
                         </ClientSettings>
                     </telerik:RadGrid>
                 </div>
-                <div class="sixteen wide column">
-                    <telerik:RadChart ID="c" runat="server" Skin="Black" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Height="600">
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                    <telerik:RadChart ID="c" runat="server" Skin="Black" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Height="400" Style="margin: auto; width: 100%;">
                         <Legend>
                             <Appearance Position-AlignedPosition="Left">
                             </Appearance>

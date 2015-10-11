@@ -21,6 +21,7 @@
     <link href="../Content/Core/css/common.css" rel="stylesheet" />
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
+    <link href="../Content/Core/css/complex.css" rel="stylesheet" />
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
@@ -39,7 +40,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;
                     <telerik:RadComboBox ID="course" runat="server" Skin="MetroTouch" DataTextField="Name" DataValueField="Id" Label="课程：" Width="120" AutoPostBack="true" OnSelectedIndexChanged="combo_SelectedIndexChanged"></telerik:RadComboBox>
                     </div>
-                    <div class="ui divider"></div>
+                    <div class="coreTop">&nbsp;</div>
                     <div>
                         <telerik:RadGrid ID="grid" runat="server" CssClass="coreCenter" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="grid_NeedDataSource" OnBatchEditCommand="grid_BatchEditCommand" OnItemCreated="grid_ItemCreated" OnItemCommand="grid_ItemCommand">
                             <MasterTableView EditMode="Batch" DataKeyNames="Id" CommandItemDisplay="Top" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
@@ -88,7 +89,7 @@
                         </telerik:RadGrid>
                     </div>
                     <asp:Panel ID="items" runat="server" Visible="false">
-                        <div class="ui divider"></div>
+                        <div class="coreTop">&nbsp;</div>
                         <div>
                             <input id="v" runat="server" type="hidden" />
                             <asp:Repeater ID="repeater" runat="server">
@@ -128,9 +129,10 @@
                                 </FooterTemplate>
                             </asp:Repeater>
                         </div>
-                        <p>
-                            <telerik:RadButton ID="buttonOk" runat="server" Skin="MetroTouch" Text="保存" OnClick="buttonOk_Click"></telerik:RadButton>
-                        </p>
+                        <div class="coreTop">&nbsp;</div>
+                        <div style="text-align: center;">
+                            <telerik:RadButton ID="buttonOk" runat="server" CssClass="coreAuto" Skin="MetroTouch" Text="保存" OnClick="buttonOk_Click"></telerik:RadButton>
+                        </div>
                     </asp:Panel>
                 </div>
             </div>

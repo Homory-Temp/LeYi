@@ -31,70 +31,82 @@
         </div>
         <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                    <telerik:RadComboBox ID="combo" runat="server" Skin="MetroTouch" Label="统计年份：" Width="80" OnSelectedIndexChanged="combo_OnSelectedIndexChanged" AutoPostBack="True" CssClass="coreAuto"></telerik:RadComboBox>
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div id="fullChart" runat="server" class="col-md-12" style="text-align: center;">
+                    <telerik:RadChart ID="c" runat="server" Skin="Black" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Height="400" Style="margin: auto;">
+                        <Legend>
+                            <Appearance Position-AlignedPosition="Left">
+                            </Appearance>
+                        </Legend>
+                        <PlotArea>
+                            <EmptySeriesMessage Visible="True">
+                                <Appearance Visible="True">
+                                </Appearance>
+                                <TextBlock Text="无统计数据">
+                                </TextBlock>
+                            </EmptySeriesMessage>
+                        </PlotArea>
+                        <ChartTitle>
+                            <TextBlock Text="">
+                            </TextBlock>
+                        </ChartTitle>
+                    </telerik:RadChart>
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                    <telerik:RadChart ID="c2" runat="server" DefaultType="Pie" Skin="Black" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Height="400" Style="margin: auto;">
+                        <Legend>
+                            <Appearance Position-AlignedPosition="Left">
+                            </Appearance>
+                        </Legend>
+                        <PlotArea>
+                            <EmptySeriesMessage Visible="True">
+                                <Appearance Visible="True">
+                                </Appearance>
+                                <TextBlock Text="无统计数据">
+                                </TextBlock>
+                            </EmptySeriesMessage>
+                        </PlotArea>
+                        <ChartTitle>
+                            <TextBlock Text="">
+                            </TextBlock>
+                        </ChartTitle>
+                    </telerik:RadChart>
+                </div>
+                </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                    <telerik:RadChart ID="c3" runat="server" ChartTitle-TextBlock-Text="浏览器类型" DefaultType="Pie" Skin="Black" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Height="400" Style="margin: auto;">
+                        <Legend>
+                            <Appearance Position-AlignedPosition="Left">
+                            </Appearance>
+                        </Legend>
+                        <PlotArea>
+                            <EmptySeriesMessage Visible="True">
+                                <Appearance Visible="True">
+                                </Appearance>
+                                <TextBlock Text="无统计数据">
+                                </TextBlock>
+                            </EmptySeriesMessage>
+                        </PlotArea>
+                        <ChartTitle>
+                            <TextBlock Text="">
+                            </TextBlock>
+                        </ChartTitle>
+                    </telerik:RadChart>
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
                 <div class="col-md-12">
-                    <telerik:RadComboBox ID="combo" runat="server" Skin="MetroTouch" Label="统计年份：" Width="80" OnSelectedIndexChanged="combo_OnSelectedIndexChanged" AutoPostBack="True"></telerik:RadComboBox>
-                </div>
-                <div id="fullChart" runat="server" class="sixteen wide column">
-                    <telerik:RadChart ID="c" runat="server" Skin="Black" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Height="600">
-                        <Legend>
-                            <Appearance Position-AlignedPosition="Left">
-                            </Appearance>
-                        </Legend>
-                        <PlotArea>
-                            <EmptySeriesMessage Visible="True">
-                                <Appearance Visible="True">
-                                </Appearance>
-                                <TextBlock Text="无统计数据">
-                                </TextBlock>
-                            </EmptySeriesMessage>
-                        </PlotArea>
-                        <ChartTitle>
-                            <TextBlock Text="">
-                            </TextBlock>
-                        </ChartTitle>
-                    </telerik:RadChart>
-                </div>
-                <div class="col-md-12">
-                    <telerik:RadChart ID="c2" runat="server" DefaultType="Pie" Skin="Black" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Width="800" Height="600" Style="margin: auto;">
-                        <Legend>
-                            <Appearance Position-AlignedPosition="Left">
-                            </Appearance>
-                        </Legend>
-                        <PlotArea>
-                            <EmptySeriesMessage Visible="True">
-                                <Appearance Visible="True">
-                                </Appearance>
-                                <TextBlock Text="无统计数据">
-                                </TextBlock>
-                            </EmptySeriesMessage>
-                        </PlotArea>
-                        <ChartTitle>
-                            <TextBlock Text="">
-                            </TextBlock>
-                        </ChartTitle>
-                    </telerik:RadChart>
-                </div>
-                <div class="sixteen wide column">
-                    <telerik:RadChart ID="c3" runat="server" ChartTitle-TextBlock-Text="浏览器类型" DefaultType="Pie" Skin="Black" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Width="800" Height="600" Style="margin: auto;">
-                        <Legend>
-                            <Appearance Position-AlignedPosition="Left">
-                            </Appearance>
-                        </Legend>
-                        <PlotArea>
-                            <EmptySeriesMessage Visible="True">
-                                <Appearance Visible="True">
-                                </Appearance>
-                                <TextBlock Text="无统计数据">
-                                </TextBlock>
-                            </EmptySeriesMessage>
-                        </PlotArea>
-                        <ChartTitle>
-                            <TextBlock Text="">
-                            </TextBlock>
-                        </ChartTitle>
-                    </telerik:RadChart>
-                </div>
-                <div class="sixteen wide column">
                     <telerik:RadGrid ID="grid" runat="server" CssClass="coreAuto coreFull coreCenter" AllowPaging="true" AutoGenerateColumns="False" LocalizationPath="../Language/" AllowSorting="True" PageSize="20" AllowFilteringByColumn="False" Culture="zh-CN" ShowGroupPanel="True" OnInit="grid_OnInit" OnNeedDataSource="grid_NeedDataSource">
                         <ClientSettings AllowDragToGroup="True">
                         </ClientSettings>

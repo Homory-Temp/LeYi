@@ -9,12 +9,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
     <title>选择引领</title>
 	<%-- ReSharper disable Html.PathError --%>
-    <link href="../Content/Semantic/css/semantic.min.css" rel="stylesheet" />
     <link href="../Content/Homory/css/common.css" rel="stylesheet" />
     <link href="../Content/Core/css/home.css" rel="stylesheet" />
     <link href="../Content/Core/css/common.css" rel="stylesheet" />
     <script src="../Content/jQuery/jquery.min.js"></script>
-    <script src="../Content/Semantic/javascript/semantic.min.js"></script>
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
     <script src="../Content/Core/js/home.js"></script>

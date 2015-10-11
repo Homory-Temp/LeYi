@@ -57,8 +57,12 @@
                             <Selecting AllowRowSelect="true" UseClientSelectColumnOnly="true" />
                         </ClientSettings>
                     </telerik:RadGrid>
-                    <div class="ui divider"></div>
-                    <telerik:RadChart ID="c" runat="server" DefaultType="Pie" Skin="Black" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Width="1000" Height="600" Style="margin: auto;">
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                    <telerik:RadChart ID="c" runat="server" DefaultType="Pie" Skin="Black" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Width="600" Height="400" Style="margin: auto;">
                         <Legend>
                             <Appearance Position-AlignedPosition="Left">
                             </Appearance>

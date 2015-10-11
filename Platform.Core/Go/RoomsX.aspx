@@ -33,8 +33,8 @@
             </Windows>
         </telerik:RadWindowManager>
         <script>
-            function popupPopup(video) {
-                window.radopen("http://localhost:4845/Go/PlayVideoX?" + encodeURIComponent("http://localhost:4845/Common/临时/" + video), "popup");
+            function popupPopup(video, url) {
+                window.radopen(url + "?" + encodeURIComponent("../Common/临时/" + video), "popup");
                 return false;
             }
         </script>
@@ -45,17 +45,17 @@
             <div class="row">
                 <div class="col-md-12">
                     <div style="float: left; width: 50%; text-align: left; line-height: 36px;">
-                        <h6 class="ui teal header"><i class="ui teal circle icon"></i>直播视频</h6>
+                        <h6 class="btn btn-primary">直播视频</h6>
                         <br />
                         <asp:Repeater ID="rLeft" runat="server">
                             <ItemTemplate>
-                                <%# LabelLeft(Eval("Name")) %>&nbsp;&nbsp;<a style="background-color: rgb(110, 207, 245); padding: 4px 8px; color: white; cursor: pointer;" onclick='<%# "popupPopup(\""+Eval("Name")+"\");" %>'>预览</a>&nbsp;<a style="background-color: rgb(110, 207, 245); padding: 4px 8px; color: white;" target="_blank" href='<%# System.Web.Configuration.WebConfigurationManager.AppSettings["ResourceCenter"].Replace("/Go/Center", "/Go/Publishing?Type=Media") %>'>发布</a>
+                                <%# LabelLeft(Eval("Name")) %>&nbsp;&nbsp;<a style="background-color: rgb(110, 207, 245); padding: 4px 8px; color: white; cursor: pointer;" onclick='<%# "popupPopup(\""+Eval("Name")+"\", \"" + System.Web.Configuration.WebConfigurationManager.AppSettings["ResourceCenter"].Replace("/Go/Center", "/Go/PlayVideoX") + "\");" %>'>预览</a>&nbsp;<a style="background-color: rgb(110, 207, 245); padding: 4px 8px; color: white;" target="_blank" href='<%# System.Web.Configuration.WebConfigurationManager.AppSettings["ResourceCenter"].Replace("/Go/Center", "/Go/Publishing?Type=Media") %>'>发布</a>
                                 <br />
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
                     <div style="float: left; width: 50%; text-align: left; line-height: 36px;">
-                        <h6 class="ui purple header"><i class="ui purple circle icon"></i>在线评论</h6>
+                        <h6 class="btn btn-primary">在线评论</h6>
                         <br />
                         直播间号：<telerik:RadComboBox runat="server" ID="num" Width="60" DataTextField="Ordinal" DataValueField="Id"></telerik:RadComboBox>
                         <br />

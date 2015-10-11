@@ -92,7 +92,7 @@ namespace Go
                 {
                     this.BuildSeriesItem(this.c.Series[SeriesIndexes[1]], (double)item.Num, item.Num.ToString());
                 }
-                this.c.Width = 150 + 200 * width;
+                //this.c.Width = 150 + 200 * width;
                 this.c.PlotArea.XAxis.AutoScale = false;
                 this.c.PlotArea.XAxis.Clear();
                 this.c.PlotArea.XAxis.AddRange(1, l.Count, 1);

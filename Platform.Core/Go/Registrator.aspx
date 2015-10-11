@@ -34,7 +34,7 @@
                 <div class="col-md-12">
                     <telerik:RadSearchBox ID="peek" runat="server" OnSearch="peek_Search" EmptyMessage="查找用户...." EnableAutoComplete="false">
                     </telerik:RadSearchBox>
-                    <div class="ui divider"></div>
+                    <div class="coreTop">&nbsp;</div>
                     <telerik:RadGrid ID="grid" runat="server" AllowPaging="true" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="10" GridLines="None" OnNeedDataSource="grid_NeedDataSource" OnBatchEditCommand="grid_BatchEditCommand" OnItemCreated="grid_ItemCreated">
                         <MasterTableView EditMode="Batch" DataKeyNames="Id" CommandItemDisplay="Top" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
                             <BatchEditingSettings EditType="Row" OpenEditingEvent="DblClick" />
