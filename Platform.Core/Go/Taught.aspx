@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
     <title>基础平台</title>
-	<script src="../Content/jQuery/jquery.min.js"></script>
+    <script src="../Content/jQuery/jquery.min.js"></script>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/style-responsive.css" rel="stylesheet" />
     <link href="../assets/css/style.css" rel="stylesheet" />
@@ -49,10 +49,9 @@
         <div>
             <homory:SideBar runat="server" ID="SideBar" />
         </div>
-        <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="ui left aligned stackable page grid" Style="margin: 0; padding: 0;" LoadingPanelID="loading">
-            <div class="ui row"></div>
+        <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
-                <div class="eight wide column">
+                <div class="col-md-6">
                     <h6 class="ui teal header"><i class="ui teal circle icon"></i>教师</h6>
                     <telerik:RadComboBox ID="combo" runat="server" AutoPostBack="true" OnSelectedIndexChanged="combo_SelectedIndexChanged" DataTextField="Name" DataValueField="Id" Label="选择学校：" Width="220px" Filter="Contains" MarkFirstMatch="true" AllowCustomText="true" Height="202px">
                         <ItemTemplate>
@@ -63,7 +62,7 @@
                     <telerik:RadSearchBox ID="peek" runat="server" OnSearch="peek_Search" EmptyMessage="查找...." EnableAutoComplete="false">
                     </telerik:RadSearchBox>
                 </div>
-                <div class="eight wide column">
+                <div class="col-md-6">
                     <h6 class="ui purple header"><i class="ui purple circle icon"></i>班级课程</h6>
                     <telerik:RadComboBox ID="comboX" runat="server" AutoPostBack="true" OnSelectedIndexChanged="comboX_SelectedIndexChanged" DataTextField="Name" DataValueField="Id" Label="选择学校：" Width="220px" Filter="Contains" MarkFirstMatch="true" AllowCustomText="true" Height="202px">
                         <ItemTemplate>
@@ -73,7 +72,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="eight wide column">
+                <div class="col-md-6">
                     <table>
                         <tr class="coreTop">
                             <td>
@@ -99,7 +98,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="eight wide column">
+                <div class="col-md-6">
                     <table>
                         <tr class="coreTop">
                             <td>

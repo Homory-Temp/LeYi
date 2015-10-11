@@ -31,8 +31,9 @@
 		<div>
 			<homory:SideBar runat="server" ID="SideBar" />
 		</div>
-		<telerik:RadAjaxPanel ID="panel" runat="server" CssClass="ui center aligned page grid" style="margin:0;padding:0;" LoadingPanelID="loading">
-			<div class="column">
+		<telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
+            <div class="row">
+			<div class="col-md-12">
 				<telerik:RadGrid ID="grid" runat="server" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="grid_NeedDataSource" OnItemCreated="grid_ItemCreated">
 					<MasterTableView DataKeyNames="Id" CommandItemDisplay="None" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
 						<HeaderStyle HorizontalAlign="Center" />
@@ -109,6 +110,7 @@
 					</MasterTableView>
 				</telerik:RadGrid>
 			</div>
+            </div>
 		</telerik:RadAjaxPanel>
 	</form>
 </body>

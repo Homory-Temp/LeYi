@@ -31,8 +31,9 @@
         <div>
             <homory:SideBar runat="server" ID="SideBar" />
         </div>
-        <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="ui center aligned page grid" style="margin:0;padding:0;" LoadingPanelID="loading">
-            <div class="column">
+        <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
+            <div class="row">
+            <div class="col-md-12">
                             <p style="text-align: left;">互动荣誉：</p>
                             <p>
                                 <telerik:RadNumericTextBox ID="count1" CssClass="coreCenter" Width="120" Label="发布资源：" LabelWidth="60" runat="server" MinValue="0" MaxValue="99">
@@ -88,6 +89,7 @@
                                 </MasterTableView>
                             </telerik:RadGrid>
                         </p>
+            </div>
             </div>
         </telerik:RadAjaxPanel>
     </form>

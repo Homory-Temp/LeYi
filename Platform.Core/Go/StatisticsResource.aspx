@@ -31,8 +31,9 @@
         <div>
             <homory:SideBar runat="server" ID="SideBar" />
         </div>
-        <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="ui center aligned page grid" Style="margin: 0; padding: 0;" LoadingPanelID="loading">
-            <div class="sixteen wide column">
+        <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
+            <div class="row">
+            <div class="col-md-12">
                 <telerik:RadComboBox ID="combo" runat="server" Skin="MetroTouch" Label="统计年份：" Width="80" OnSelectedIndexChanged="combo_OnSelectedIndexChanged" AutoPostBack="True"></telerik:RadComboBox>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <telerik:RadComboBox ID="comboX" runat="server" Skin="MetroTouch" Label="统计月份：" Width="80" OnSelectedIndexChanged="combo_OnSelectedIndexChanged" AutoPostBack="True">
@@ -53,7 +54,7 @@
                     </Items>
                 </telerik:RadComboBox>
             </div>
-            <div class="sixteen wide column">
+            <div class="col-md-12">
                 <telerik:RadChart ID="c" runat="server" Skin="Black" DefaultType="Bar" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Height="600">
                     <Legend>
                         <Appearance Position-AlignedPosition="Left">
@@ -73,7 +74,7 @@
                     </ChartTitle>
                 </telerik:RadChart>
             </div>
-            <div class="sixteen wide column">
+            <div class="col-md-12">
                 <telerik:RadGrid ID="grid" runat="server" CssClass="coreAuto coreFull coreCenter" AllowPaging="true" AutoGenerateColumns="False" LocalizationPath="../Language/" AllowSorting="True" PageSize="20" AllowFilteringByColumn="False" Culture="zh-CN" ShowGroupPanel="True" OnNeedDataSource="grid_OnNeedDataSource">
                     <ClientSettings AllowDragToGroup="True">
                     </ClientSettings>
@@ -115,6 +116,7 @@
                         <Selecting AllowRowSelect="true" UseClientSelectColumnOnly="true" />
                     </ClientSettings>
                 </telerik:RadGrid>
+            </div>
             </div>
         </telerik:RadAjaxPanel>
     </form>

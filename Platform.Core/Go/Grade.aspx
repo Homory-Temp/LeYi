@@ -30,7 +30,6 @@
 			<homory:SideBar runat="server" ID="SideBar" />
 		</div>
 		<telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
-            <div class="row">&nbsp;</div>
             <div class="row">
                 <div class="col-md-12">
                     <table style="text-align: left;">
@@ -88,7 +87,6 @@
 				    </telerik:RadGrid>
                 </div>
             </div>
-            <div class="row">&nbsp;</div>
 		</telerik:RadAjaxPanel>
         <style>
             .btn-padded {
