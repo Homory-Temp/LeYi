@@ -15,10 +15,8 @@
     <link href="../assets/css/style-responsive.css" rel="stylesheet" />
     <link href="../assets/css/style.css" rel="stylesheet" />
     <script src="../assets/js/bootstrap.min.js"></script>
-    <link href="../Content/Semantic/css/semantic.min.css" rel="stylesheet" />
     <link href="../Content/Homory/css/common.css" rel="stylesheet" />
     <link href="../Content/Core/css/common.css" rel="stylesheet" />
-    <script src="../Content/Semantic/javascript/semantic.min.js"></script>
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
     <!--[if lt IE 9]>
