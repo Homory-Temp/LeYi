@@ -23,9 +23,6 @@ namespace Go
 
         private void LoadInit()
         {
-            loading.InitialDelayTime = int.Parse("Busy".FromWebConfig());
-         
-
             years.Value = __Year;
             toYear.Value = years.Value + 1;
         }

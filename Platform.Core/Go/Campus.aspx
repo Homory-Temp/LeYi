@@ -29,22 +29,7 @@
 		<div>
 			<homory:SideBar runat="server" ID="SideBar" />
 		</div>
-        <telerik:RadCodeBlock runat="server">
-            <div class="container-fluid">
-                <div class="row">&nbsp;</div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="btn-info btn btn-lg">组织管理 - 学校管理</div>
-                    </div>
-                </div>
-            </div>
-        </telerik:RadCodeBlock>
-		<telerik:RadAjaxLoadingPanel ID="loading" runat="server">
-			<div>&nbsp;</div>
-			<div class="btn btn-lg btn-warning" style="margin-top: 50px;">正在加载 请稍候....</div>
-		</telerik:RadAjaxLoadingPanel>
 		<telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
-            <div class="row">&nbsp;</div>
 			<div class="row">
                 <div class="col-md-12">
 				    <telerik:RadGrid ID="grid" runat="server" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="grid_NeedDataSource" OnBatchEditCommand="grid_BatchEditCommand" OnItemCreated="grid_ItemCreated">
@@ -132,7 +117,6 @@
 				    </telerik:RadGrid>
                 </div>
 			</div>
-            <div class="row">&nbsp;</div>
 		</telerik:RadAjaxPanel>
 	</form>
 </body>

@@ -9,7 +9,7 @@ namespace Control
 	public partial class ControlSideBar : HomoryCoreControl
 	{
 		private List<Menu> _menus;
-		
+
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (!IsPostBack)
@@ -29,6 +29,7 @@ namespace Control
 				.ToList();
 			repeater.DataSource = menuList;
 			repeater.DataBind();
+            loading.InitialDelayTime = int.Parse("Busy".FromWebConfig());
 		}
 
 		protected string SubMenu(Menu menu)
@@ -38,7 +39,7 @@ namespace Control
 			foreach (var item in query)
 			{
 				if (CurrentRights.Contains(item.RightName))
-					sb.Append(string.Format("<li><a href=\"{0}\">{1}</a></li>", item.Redirect.StartsWith("+") ? Application["Sso"] + "Go/Board" : item.Redirect, item.Name));
+					sb.Append(string.Format("<li><a class=\"coreSB\" alt=\"{2} - {1}\" href=\"{0}\">{1}</a></li>", item.Redirect.StartsWith("+") ? Application["Sso"] + "Go/Board" : item.Redirect, item.Name, menu.Name));
             }
 			return sb.ToString();
 		}

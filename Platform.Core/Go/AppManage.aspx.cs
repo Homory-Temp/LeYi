@@ -15,7 +15,7 @@ namespace Go
         {
             if (!IsPostBack)
             {
-                LoadInit();
+                LogOp(OperationType.查询);
             }
         }
 
@@ -23,12 +23,6 @@ namespace Go
         {
             var r = app.ApplicationRole.Aggregate("&nbsp;", (a, b) => string.Format("{0}&nbsp;{1}", a, b.UserType.ToString()));
             return string.IsNullOrWhiteSpace(r.Replace("&nbsp;", "").Trim()) ? "（无）" : r;
-        }
-
-        private void LoadInit()
-        {
-			loading.InitialDelayTime = int.Parse("Busy".FromWebConfig());
-            LogOp(OperationType.查询);
         }
 
         protected void grid_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)

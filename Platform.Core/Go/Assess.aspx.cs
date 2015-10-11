@@ -23,7 +23,6 @@ namespace Go
 
         private void LoadInit()
         {
-			loading.InitialDelayTime = int.Parse("Busy".FromWebConfig());
             grade.DataSource = HomoryContext.Value.Catalog.Where(o => o.State < State.审核 && (o.Type == CatalogType.年级_小学 || o.Type == CatalogType.年级_初中 || o.Type == CatalogType.年级_高中 || o.Type == CatalogType.年级_幼儿园)).OrderBy(o => o.Ordinal).ToList();
             grade.DataBind();
             course.DataSource = HomoryContext.Value.Catalog.Where(o => o.State < State.审核 && o.Type == CatalogType.课程).OrderBy(o => o.State).ThenBy(o => o.Ordinal).ToList();

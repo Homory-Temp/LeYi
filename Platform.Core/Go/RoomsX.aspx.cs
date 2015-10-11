@@ -21,7 +21,6 @@ namespace Go
 
 		private void LoadInit()
 		{
-			loading.InitialDelayTime = int.Parse("Busy".FromWebConfig());
 			DirectoryInfo dir = new DirectoryInfo(Server.MapPath("~/Common/临时"));
 			var files = dir.GetFiles("*.mp4");
 			rLeft.DataSource = files.OrderByDescending(o => o.Name).ToList();

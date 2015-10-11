@@ -31,12 +31,6 @@
         <div>
             <homory:SideBar runat="server" ID="SideBar" />
         </div>
-        <telerik:RadAjaxLoadingPanel ID="loading" runat="server">
-            <i class="ui huge teal loading icon" style="margin-top: 50px;"></i>
-            <div>&nbsp;</div>
-            <div style="color: #564F8A; font-size: 16px;">正在加载 请稍候....</div>
-        </telerik:RadAjaxLoadingPanel>
-        <div style="clear: both;"></div>
         <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="coreAuto coreFull coreCenter" Style="margin: 0; padding: 0;" LoadingPanelID="loading">
             <telerik:RadGrid ID="grid" runat="server" CssClass="coreAuto coreFull coreCenter" AllowPaging="true" AutoGenerateColumns="False" LocalizationPath="../Language/" AllowSorting="True" PageSize="20" AllowFilteringByColumn="True" Culture="zh-CN" ShowGroupPanel="True" OnInit="grid_OnInit" OnItemCommand="grid_OnItemCommand" OnNeedDataSource="grid_NeedDataSource">
                 <ClientSettings AllowDragToGroup="True">

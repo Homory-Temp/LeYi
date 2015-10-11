@@ -21,8 +21,6 @@ namespace Go
 
         private void LoadInit()
         {
-            loading.InitialDelayTime = int.Parse("Busy".FromWebConfig());
-         
             count1.Value = int.Parse(HomoryContext.Value.Dictionary.Single(o => o.Key == "CreditPublish").Value);
             count2.Value = int.Parse(HomoryContext.Value.Dictionary.Single(o => o.Key == "CreditComment").Value);
             count3.Value = int.Parse(HomoryContext.Value.Dictionary.Single(o => o.Key == "CreditReply").Value);

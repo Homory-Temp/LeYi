@@ -17,7 +17,6 @@ namespace Go
 		{
 			if (!IsPostBack)
 			{
-				LoadInit();
                 BindChartDataSource();
                 LogOp(OperationType.查询);
             }
@@ -102,11 +101,6 @@ namespace Go
 
         protected static string[] SeriesNames = new string[] { "学生" };
         protected static int[] SeriesIndexes = new int[] { 0 };
-
-        private void LoadInit()
-		{
-			loading.InitialDelayTime = int.Parse("Busy".FromWebConfig());
-		}
 
         protected void grid_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {

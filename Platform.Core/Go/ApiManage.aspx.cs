@@ -15,14 +15,8 @@ namespace Go
         {
             if (!IsPostBack)
             {
-                LoadInit();
                 LogOp(OperationType.查询);
             }
-        }
-
-        private void LoadInit()
-        {
-			loading.InitialDelayTime = int.Parse("Busy".FromWebConfig());
         }
 
         protected void grid_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)

@@ -33,11 +33,6 @@
 		<div>
 			<homory:SideBar runat="server" ID="SideBar" />
 		</div>
-		<telerik:RadAjaxLoadingPanel ID="loading" runat="server">
-			<i class="ui huge teal loading icon" style="margin-top: 50px;"></i>
-			<div>&nbsp;</div>
-			<div style="color: #564F8A; font-size: 16px;">正在加载 请稍候....</div>
-		</telerik:RadAjaxLoadingPanel>
 		<telerik:RadAjaxPanel ID="panel" runat="server" CssClass="ui left aligned stackable page grid" style="margin:0;padding:0;" LoadingPanelID="loading">
 			<div class="column">
 				<table class="coreAuto">

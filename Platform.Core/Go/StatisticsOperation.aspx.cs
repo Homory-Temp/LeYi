@@ -181,7 +181,6 @@ namespace Go
 
         private void LoadInit()
         {
-            loading.InitialDelayTime = int.Parse("Busy".FromWebConfig());
             var year = DateTime.Today.Year;
             if (HomoryContext.Value.SignLog.Count() == 0)
                 return;

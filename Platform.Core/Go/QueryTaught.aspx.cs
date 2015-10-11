@@ -17,16 +17,10 @@ namespace Go
 		{
 			if (!IsPostBack)
 			{
-				LoadInit();
                 BindChartDataSource();
                 LogOp(OperationType.查询);
             }
         }
-
-        private void LoadInit()
-		{
-			loading.InitialDelayTime = int.Parse("Busy".FromWebConfig());
-		}
 
         protected void BindChartDataSource()
         {
