@@ -21,6 +21,7 @@
     <link href="../Content/Core/css/common.css" rel="stylesheet" />
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
+    <link href="../Content/Core/css/treefix.css" rel="stylesheet" />
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>

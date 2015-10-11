@@ -19,6 +19,7 @@
     <link href="../Content/Core/css/common.css" rel="stylesheet" />
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
+    <link href="../Content/Core/css/complex.css" rel="stylesheet" />
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
@@ -82,231 +83,231 @@
                     <asp:Panel ID="right" runat="server" CssClass="left aligned column">
                         <div>
                             权限范围：
-						<telerik:RadButton ID="Global" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+						<telerik:RadButton ID="Global" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 全部学校" Value="True" CssClass="ui teal mini button" />
-                                <telerik:RadButtonToggleState Text="× 所在学校" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 全部学校" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 所在学校" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
                         </div>
                         <div>
                             组织管理：
-						<telerik:RadButton ID="Department" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+						<telerik:RadButton ID="Department" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 部门管理" Value="True" CssClass="ui teal mini button" />
-                                <telerik:RadButtonToggleState Text="× 部门管理" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 部门管理" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 部门管理" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
-                            <telerik:RadButton ID="Grade" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="Grade" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 年级管理" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 年级管理" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 年级管理" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 年级管理" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
-                            <telerik:RadButton ID="Class" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="Class" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 班级管理" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 班级管理" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 班级管理" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 班级管理" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<telerik:RadButton ID="MoveDepartment" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+						<telerik:RadButton ID="MoveDepartment" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 组织调动" Value="True" CssClass="ui teal mini button" />
-                                <telerik:RadButtonToggleState Text="× 组织调动" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 组织调动" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 组织调动" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
                         </div>
                         <div>
                             用户管理：
-						<telerik:RadButton ID="Teacher" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+						<telerik:RadButton ID="Teacher" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 教师管理" Value="True" CssClass="ui teal mini button" />
-                                <telerik:RadButtonToggleState Text="× 教师管理" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 教师管理" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 教师管理" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
-                            <telerik:RadButton ID="Student" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="Student" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 学生管理" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 学生管理" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 学生管理" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 学生管理" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
-                            <telerik:RadButton ID="Registrator" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="Registrator" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 注册用户" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 注册用户" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 注册用户" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 注册用户" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<telerik:RadButton ID="MoveUser" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+						<telerik:RadButton ID="MoveUser" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 用户调动" Value="True" CssClass="ui teal mini button" />
-                                <telerik:RadButtonToggleState Text="× 用户调动" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 用户调动" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 用户调动" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
                         </div>
                         <div>
                             系统管理：
-						<telerik:RadButton ID="Role" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+						<telerik:RadButton ID="Role" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 角色管理" Value="True" CssClass="ui teal mini button" />
-                                <telerik:RadButtonToggleState Text="× 角色管理" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 角色管理" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 角色管理" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
-                            <telerik:RadButton ID="Authorize" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="Authorize" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 角色分配" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 角色分配" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 角色分配" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 角色分配" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
-                            <telerik:RadButton ID="Policy" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="Policy" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 策略配置" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 策略配置" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 策略配置" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 策略配置" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
-                            <telerik:RadButton ID="Application" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="Application" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 应用管理" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 应用管理" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 应用管理" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 应用管理" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
-                            <telerik:RadButton ID="Api" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="Api" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 接口授权" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 接口授权" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 接口授权" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 接口授权" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
                         </div>
                         <div>
                             课程管理：
-						<telerik:RadButton ID="Course" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+						<telerik:RadButton ID="Course" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 课程设定" Value="True" CssClass="ui teal mini button" />
-                                <telerik:RadButtonToggleState Text="× 课程设定" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 课程设定" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 课程设定" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
-                            <telerik:RadButton ID="CourseLearned" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="CourseLearned" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 课程选择" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 课程选择" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 课程选择" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 课程选择" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
-                            <telerik:RadButton ID="CourseTaught" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="CourseTaught" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 教师授课" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 教师授课" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 教师授课" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 教师授课" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
                         </div>
                         <div>
                             团队管理：
-						<telerik:RadButton ID="Group" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+						<telerik:RadButton ID="Group" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 名师团队" Value="True" CssClass="ui teal mini button" />
-                                <telerik:RadButtonToggleState Text="× 名师团队" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 名师团队" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 名师团队" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
-                            <telerik:RadButton ID="Studio" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="Studio" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 教研团队" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 教研团队" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 教研团队" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 教研团队" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
                         </div>
                         <div>
                             栏目管理：
-						<telerik:RadButton ID="Video" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+						<telerik:RadButton ID="Video" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 视频栏目" Value="True" CssClass="ui teal mini button" />
-                                <telerik:RadButtonToggleState Text="× 视频栏目" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 视频栏目" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 视频栏目" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
-                            <telerik:RadButton ID="Article" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="Article" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 文章栏目" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 文章栏目" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 文章栏目" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 文章栏目" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
-                            <telerik:RadButton ID="Note" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="Note" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 通知公告" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 通知公告" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 通知公告" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 通知公告" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
                         </div>
                         <div>
                             物资管理：
-						<telerik:RadButton ID="StorageCreate" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+						<telerik:RadButton ID="StorageCreate" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 创建仓库" Value="True" CssClass="ui teal mini button" />
-                                <telerik:RadButtonToggleState Text="× 创建仓库" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 创建仓库" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 创建仓库" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
                         </div>
                         <div>
                             资源设定：
-						<telerik:RadButton ID="Honor" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+						<telerik:RadButton ID="Honor" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 荣誉分值" Value="True" CssClass="ui teal mini button" />
-                                <telerik:RadButtonToggleState Text="× 荣誉分值" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 荣誉分值" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 荣誉分值" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
-                            <telerik:RadButton ID="Assess" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="Assess" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 课堂评估" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 课堂评估" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 课堂评估" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 课堂评估" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
-                            <telerik:RadButton ID="Rooms" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="Rooms" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 直播课堂" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 直播课堂" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 直播课堂" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 直播课堂" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
-                            <telerik:RadButton ID="OtherPublish" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="OtherPublish" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 资源代发" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 资源代发" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 资源代发" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 资源代发" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
                         </div>
                         <div>
                             查询审计：
-						<telerik:RadButton ID="QueryTeacher" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+						<telerik:RadButton ID="QueryTeacher" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 教师查询" Value="True" CssClass="ui teal mini button" />
-                                <telerik:RadButtonToggleState Text="× 教师查询" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 教师查询" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 教师查询" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
-                            <telerik:RadButton ID="QueryStudent" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="QueryStudent" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 学生查询" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 学生查询" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 学生查询" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 学生查询" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
-                            <telerik:RadButton ID="QueryTaught" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="QueryTaught" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 授课查询" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 授课查询" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 授课查询" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 授课查询" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
-                            <telerik:RadButton ID="StatisticsOperation" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="StatisticsOperation" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 操作审计" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 操作审计" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 操作审计" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 操作审计" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
-                            <telerik:RadButton ID="StatisticsResource" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="StatisticsResource" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 资源审计" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 资源审计" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 资源审计" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 资源审计" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
-                            <telerik:RadButton ID="StatisticsLogin" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Style="margin: 10px;" OnClick="Right_OnClick">
+                            <telerik:RadButton ID="StatisticsLogin" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
-                                    <telerik:RadButtonToggleState Text="√ 登录审计" Value="True" CssClass="ui teal mini button" />
-                                    <telerik:RadButtonToggleState Text="× 登录审计" Value="False" CssClass="ui black mini button" />
+                                    <telerik:RadButtonToggleState Text="√ 登录审计" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 登录审计" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
                         </div>

@@ -19,6 +19,7 @@
     <link href="../Content/Core/css/common.css" rel="stylesheet" />
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
+    <link href="../Content/Core/css/treefix.css" rel="stylesheet" />
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
@@ -51,42 +52,53 @@
                 <div class="col-md-4">
                     &nbsp;
                 </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
                 <div class="col-md-12">
                     <table>
                         <tr class="coreTop">
                             <td rowspan="2">
-                                <telerik:RadTreeView ID="tree" runat="server" CssClass="coreLeft" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" OnNodeClick="tree_NodeClick">
+                                <telerik:RadTreeView ID="tree" runat="server" CssClass="coreLeft" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" OnNodeClick="tree_NodeClick" Style="margin-right: 10px;">
                                     <NodeTemplate>
                                         <span><%# ForceTreeName(Container.DataItem as Homory.Model.Department) %></span>
                                     </NodeTemplate>
                                 </telerik:RadTreeView>
                             </td>
-                            <td>
+                            <td style="width: 100%;">
                                 <telerik:RadListView ID="view" runat="server" ItemPlaceholderID="holder" OnNeedDataSource="view_NeedDataSource">
                                     <LayoutTemplate>
-                                        <asp:Panel ID="innerPanel" runat="server" CssClass="ui left middle aligned stackable grid" Style="border: solid 1px #828282; padding: 20px; margin: 0px;" Visible='<%# ActionTeachers.Count > 0 %>'>
-                                            <div class="sixteen wide column" style="margin: 0; padding: 0;">
+                                        <asp:Panel ID="innerPanel" runat="server" CssClass="container-fluid" Style="border: solid 1px #828282;" Visible='<%# ActionTeachers.Count > 0 %>'>
+                                            <div class="row">&nbsp;</div>
+                                            <div class="row">
                                                 <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
                                             </div>
-                                            <div class="sixteen wide column" style="margin: 10px 0 0 0; padding: 0;">
-                                                <asp:Button ID="btnM" runat="server" CssClass="ui teal mini button" Text="主职设定" OnClick="btnM_Click"></asp:Button>
-                                                <asp:Button ID="btnP" runat="server" CssClass="ui teal mini button" Text="兼职设定" OnClick="btnP_Click"></asp:Button>
-                                                <asp:Button ID="btnB" runat="server" CssClass="ui teal mini button" Text="借调设定" OnClick="btnB_Click" OnPreRender="btnB_Load"></asp:Button>
-                                                <asp:Button ID="btnV" runat="server" CssClass="ui teal mini button" Text="可访设定" OnClick="btnV_Click" OnPreRender="btnV_Load"></asp:Button>
-                                                <asp:Button ID="btnR" runat="server" CssClass="ui teal mini button" Text="密码重置" OnClick="btnR_Click"></asp:Button>
+                                            <div class="row">&nbsp;</div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    &nbsp;
+                                                <asp:Button ID="btnM" runat="server" CssClass="btn btn-warning" Text="主职设定" OnClick="btnM_Click"></asp:Button>
+                                                <asp:Button ID="btnP" runat="server" CssClass="btn btn-warning" Text="兼职设定" OnClick="btnP_Click"></asp:Button>
+                                                <asp:Button ID="btnB" runat="server" CssClass="btn btn-warning" Text="借调设定" OnClick="btnB_Click" OnPreRender="btnB_Load"></asp:Button>
+                                                <asp:Button ID="btnV" runat="server" CssClass="btn btn-warning" Text="可访设定" OnClick="btnV_Click" OnPreRender="btnV_Load"></asp:Button>
+                                                <asp:Button ID="btnR" runat="server" CssClass="btn btn-warning" Text="密码重置" OnClick="btnR_Click"></asp:Button>
+                                                </div>
                                             </div>
+                                            <div class="row">&nbsp;</div>
                                         </asp:Panel>
                                     </LayoutTemplate>
                                     <ItemTemplate>
-                                        <telerik:RadButton ID="actionButton" runat="server" Text='<%# Eval("RealName") %>' Value='<%# Eval("Id") %>' OnClick="actionButton_Click"></telerik:RadButton>
+                                        <div class="col-md-6">
+                                            <telerik:RadButton ID="actionButton" Style="margin: 6px;" runat="server" Text='<%# Eval("RealName") %>' Value='<%# Eval("Id") %>' OnClick="actionButton_Click"></telerik:RadButton>
+                                        </div>
                                     </ItemTemplate>
                                 </telerik:RadListView>
                             </td>
                         </tr>
                         <tr class="coreTop">
                             <td>
-                                <div id="MainPanel" runat="server">
-                                    <h6 class="ui teal header left floated"><i class="ui teal circle icon"></i>主职</h6>
+                                <div id="MainPanel" runat="server" style="margin-top: 20px;">
+                                    <h6 class="btn btn-primary"><i class="ui teal circle icon"></i>主职</h6>
                                     <div style="clear: both;"></div>
                                     <telerik:RadGrid ID="grid" runat="server" AllowPaging="true" BackImageUrl="../../../Images/Common/BG.gif" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="25" GridLines="None" OnNeedDataSource="grid_NeedDataSource" OnBatchEditCommand="grid_BatchEditCommand" OnItemCreated="grid_ItemCreated">
                                         <MasterTableView EditMode="Batch" DataKeyNames="Id" CommandItemDisplay="Top" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
@@ -254,8 +266,8 @@
                                         </MasterTableView>
                                         <ExportSettings Excel-Format="ExcelML" FileName="Teachers" Excel-FileExtension="xls" IgnorePaging="true" ExportOnlyData="true" OpenInNewWindow="true"></ExportSettings>
                                     </telerik:RadGrid>
-                                    <div class="ui divider"></div>
-                                    <h6 class="ui purple header left floated"><i class="ui purple circle icon"></i>兼职</h6>
+                                    <div class="ui divider">&nbsp;</div>
+                                    <h6 class="btn btn-primary"><i class="ui purple circle icon"></i>兼职</h6>
                                     <div style="clear: both;"></div>
                                     <telerik:RadGrid ID="gridX" runat="server" AllowPaging="true" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="10" GridLines="None" OnNeedDataSource="gridX_NeedDataSource" OnBatchEditCommand="gridX_BatchEditCommand" OnItemCreated="grid_ItemCreated">
                                         <MasterTableView EditMode="Batch" DataKeyNames="Id" CommandItemDisplay="Top" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
@@ -311,8 +323,8 @@
                                             <PagerStyle Mode="NextPrevAndNumeric" PageSizes="10,20,50,100" Position="Bottom" PageSizeControlType="RadComboBox" AlwaysVisible="true" PagerTextFormat="{4} 第{0}页，共{1}页；第{2}-{3}项，共{5}项" />
                                         </MasterTableView>
                                     </telerik:RadGrid>
-                                    <div class="ui divider"></div>
-                                    <h6 class="ui red header left floated"><i class="ui red circle icon"></i>借调</h6>
+                                    <div class="ui divider">&nbsp;</div>
+                                    <h6 class="btn btn-primary"><i class="ui red circle icon"></i>借调</h6>
                                     <div style="clear: both;"></div>
                                     <telerik:RadGrid ID="grid_b" runat="server" AllowPaging="true" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="10" GridLines="None" OnNeedDataSource="grid_b_NeedDataSource" OnBatchEditCommand="grid_b_BatchEditCommand" OnItemCreated="grid_ItemCreated">
                                         <MasterTableView EditMode="Batch" DataKeyNames="Id,DepartmentId,Type" CommandItemDisplay="Top" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
@@ -366,8 +378,8 @@
                                             <PagerStyle Mode="NextPrevAndNumeric" PageSizes="10,20,50,100" Position="Bottom" PageSizeControlType="RadComboBox" AlwaysVisible="true" PagerTextFormat="{4} 第{0}页，共{1}页；第{2}-{3}项，共{5}项" />
                                         </MasterTableView>
                                     </telerik:RadGrid>
-                                    <div class="ui divider"></div>
-                                    <h6 class="ui black header left floated"><i class="ui black circle icon"></i>可访</h6>
+                                    <div class="ui divider">&nbsp;</div>
+                                    <h6 class="btn btn-primary"><i class="ui black circle icon"></i>可访</h6>
                                     <div style="clear: both;"></div>
                                     <telerik:RadGrid ID="grid_view" runat="server" AllowPaging="true" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="10" GridLines="None" OnNeedDataSource="grid_view_NeedDataSource" OnBatchEditCommand="grid_view_BatchEditCommand" OnItemCreated="grid_ItemCreated">
                                         <MasterTableView EditMode="Batch" DataKeyNames="Id" CommandItemDisplay="Top" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">

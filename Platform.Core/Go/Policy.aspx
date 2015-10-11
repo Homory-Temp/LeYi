@@ -29,30 +29,31 @@
         <div>
             <homory:SideBar runat="server" ID="SideBar" />
         </div>
-        <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid" Style="margin: 0; padding: 0;" LoadingPanelID="loading">
+        <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
-                <div class="col-md-12">
-                    <div><i class="ui red circle icon"></i>是否开启用户自主注册</div>
+                <div class="col-md-4">&nbsp;</div>
+                <div class="col-md-8">
+                    <div style="font-size: 14pt; font-weight: bold;"><i class="ui red circle icon"></i>是否开启用户自主注册</div>
                     <p>
                         <i class="ui icon"></i>
-                        <telerik:RadButton ID="p1" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button">
+                        <telerik:RadButton ID="p1" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Width="100" Height="30" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 开启" Value="True" CssClass="ui red mini button" />
-                                <telerik:RadButtonToggleState Text="× 关闭" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 开启" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 关闭" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
                     </p>
-                    <div><i class="ui red circle icon"></i>电子邮件正则表达式（com/cn结尾的电子邮件地址）</div>
+                    <div style="font-size: 14pt; font-weight: bold;"><i class="ui red circle icon"></i>电子邮件正则表达式（com/cn结尾的电子邮件地址）</div>
                     <p>
                         <i class="ui icon"></i>
                         <input id="p2" runat="server" cssclass="ui input" style="width: 550px; height: 22px; text-align: center;" />
                     </p>
-                    <div><i class="ui red circle icon"></i>手机号码正则表达式（13/14/15/18号段开头的11位手机号码）</div>
+                    <div style="font-size: 14pt; font-weight: bold;"><i class="ui red circle icon"></i>手机号码正则表达式（13/14/15/18号段开头的11位手机号码）</div>
                     <p>
                         <i class="ui icon"></i>
                         <input id="p3" runat="server" cssclass="ui input" style="width: 200px; height: 22px; text-align: center;" />
                     </p>
-                    <div><i class="ui red circle icon"></i>安全选项</div>
+                    <div style="font-size: 14pt; font-weight: bold;"><i class="ui red circle icon"></i>安全选项</div>
                     <p>
                         <i class="ui icon"></i>
                         <i class="ui purple circle icon"></i>
@@ -89,23 +90,27 @@
                         <i class="ui purple circle icon"></i>
                         <label>端口：&nbsp;&nbsp;</label><input id="p9" runat="server" cssclass="ui input" style="width: 200px; height: 22px; text-align: center;" />
                     </p>
-                    <div><i class="ui red circle icon"></i>其他选项</div>
+                    <div style="font-size: 14pt; font-weight: bold;"><i class="ui red circle icon"></i>其他选项</div>
                     <p>
                         <i class="ui icon"></i>
                         <i class="ui purple circle icon"></i>
                         <label>教师调动保留原有兼职：&nbsp;&nbsp;</label>
-                        <telerik:RadButton ID="p12" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button">
+                        <telerik:RadButton ID="p12" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="ui mini button" Width="100" Height="30" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 保留" Value="True" CssClass="ui red mini button" />
-                                <telerik:RadButtonToggleState Text="× 删除" Value="False" CssClass="ui black mini button" />
+                                <telerik:RadButtonToggleState Text="√ 保留" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 删除" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
                     </p>
-                    <div class="ui divider"></div>
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <p style="text-align: center; width: 100%;">
-                        <asp:Button ID="save" runat="server" CssClass="ui teal small button" Text="保存更改" OnClick="save_OnClick"></asp:Button>
+                        <asp:Button ID="save" runat="server" CssClass="btn btn-warning" Text="保存更改" OnClick="save_OnClick"></asp:Button>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<asp:Button ID="restore" runat="server" CssClass="ui purple small button" Text="还原默认" OnClick="restore_OnClick"></asp:Button>
+					<asp:Button ID="restore" runat="server" CssClass="btn btn-warning" Text="还原默认" OnClick="restore_OnClick"></asp:Button>
                     </p>
                 </div>
             </div>

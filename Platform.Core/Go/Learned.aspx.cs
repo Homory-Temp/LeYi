@@ -183,7 +183,7 @@ namespace Go
             var part2 = level == 1
                 ? (department.Learned.Count(o => o.State == State.启用) == 0
                     ? " [未选择]" : string.Empty) : (department.Learned.Count(o => o.State == State.启用) > 0
-                    ? " <i class=\"ui star red icon\"></i>" : string.Empty);
+                    ? " ★" : string.Empty);
             return string.Format("{0}{1}", part1, part2);
         }
 
@@ -222,7 +222,7 @@ namespace Go
         protected string HandleButton(Catalog course)
         {
             var id = Guid.Parse(tree.SelectedNode.Value);
-            return course.Learned.Count(o => o.State == State.启用 && o.DepartmentId == id) == 0 ? "ui black small button" : "ui teal small button";
+            return course.Learned.Count(o => o.State == State.启用 && o.DepartmentId == id) == 0 ? "btn btn-primary" : "btn btn-info";
         }
 
         protected string Iconed(Catalog course)

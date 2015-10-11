@@ -299,7 +299,7 @@ namespace Go
         protected string GetIcon(ViewTeacher teacher)
         {
 			var count = HomoryContext.Value.Taught.Count(o => o.UserId == teacher.Id && o.State == State.启用);
-            return count == 0 ? "ui black circle icon" : "ui teal circle icon";
+            return count == 0 ? "badge-default" : "badge-primary";
         }
 
         protected void view_OnNeedDataSource(object sender, RadListViewNeedDataSourceEventArgs e)

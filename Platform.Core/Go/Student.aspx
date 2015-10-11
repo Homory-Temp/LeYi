@@ -19,6 +19,7 @@
     <link href="../Content/Core/css/common.css" rel="stylesheet" />
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
+    <link href="../Content/Core/css/treefix.css" rel="stylesheet" />
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
@@ -53,37 +54,48 @@
                     </telerik:RadButton>
                     <telerik:RadButton ID="btnDown" runat="server" Target="_blank" Text="模版下载" ButtonType="LinkButton" NavigateUrl="~/学生数据-完整.xls" AutoPostBack="false"></telerik:RadButton>
                 </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
                 <div class="col-md-12">
                     <table>
-                        <tr>
+                        <tr class="coreTop">
                             <td rowspan="2">
-                                <telerik:RadTreeView ID="tree" runat="server" CssClass="coreLeft" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" OnNodeClick="tree_NodeClick">
+                                <telerik:RadTreeView ID="tree" runat="server" CssClass="coreLeft" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" OnNodeClick="tree_NodeClick" Style="margin-right: 10px;">
                                     <NodeTemplate>
                                         <span id='<%# string.Format("homory_{0}", Container.Value) %>'><%# GenerateTreeName((Homory.Model.Department)Container.DataItem, Container.Index, Container.Level) %></span>
                                     </NodeTemplate>
                                 </telerik:RadTreeView>
                             </td>
-                            <td>
+                            <td style="width: 100%;">
                                 <telerik:RadListView ID="view" runat="server" ItemPlaceholderID="holder" OnNeedDataSource="view_NeedDataSource">
                                     <LayoutTemplate>
-                                        <asp:Panel ID="innerPanel" runat="server" CssClass="ui left middle aligned stackable grid" Style="border: solid 1px #828282; padding: 20px; margin: 0px;" Visible='<%# ActionStudents.Count > 0 %>'>
-                                            <div class="sixteen wide column" style="margin: 0; padding: 0;">
+                                        <asp:Panel ID="innerPanel" runat="server" CssClass="container-fluid" Style="border: solid 1px #828282;" Visible='<%# ActionStudents.Count > 0 %>'>
+                                            <div class="row">&nbsp;</div>
+                                            <div class="row">
                                                 <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
                                             </div>
-                                            <div class="sixteen wide column" style="margin: 10px 0 0 0; padding: 0;">
-                                                <asp:Button ID="btnMove" runat="server" CssClass="ui teal mini button" Text="调动" OnClick="btnMove_Click"></asp:Button>
+                                            <div class="row">&nbsp;</div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    &nbsp;
+                                                    <asp:Button ID="btnMove" runat="server" CssClass="btn btn-warning" Text="调动" OnClick="btnMove_Click"></asp:Button>
+                                                </div>
                                             </div>
+                                            <div class="row">&nbsp;</div>
                                         </asp:Panel>
                                     </LayoutTemplate>
                                     <ItemTemplate>
-                                        <telerik:RadButton ID="actionButton" runat="server" Text='<%# Eval("RealName") %>' Value='<%# Eval("Id") %>' OnClick="actionButton_Click"></telerik:RadButton>
+                                        <div class="col-md-6">
+                                            <telerik:RadButton ID="actionButton" Style="margin: 6px;" runat="server" Text='<%# Eval("RealName") %>' Value='<%# Eval("Id") %>' OnClick="actionButton_Click"></telerik:RadButton>
+                                        </div>
                                     </ItemTemplate>
                                 </telerik:RadListView>
                             </td>
                         </tr>
                         <tr class="coreTop">
                             <td>
-                                <telerik:RadGrid ID="grid" runat="server" AllowPaging="true" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="60" GridLines="None" OnNeedDataSource="grid_NeedDataSource" OnBatchEditCommand="grid_BatchEditCommand" OnItemCreated="grid_ItemCreated">
+                                <telerik:RadGrid ID="grid" runat="server" AllowPaging="true" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="60" GridLines="None" OnNeedDataSource="grid_NeedDataSource" OnBatchEditCommand="grid_BatchEditCommand" OnItemCreated="grid_ItemCreated" Style="margin-top: 20px;">
                                     <MasterTableView EditMode="Batch" DataKeyNames="Id" CommandItemDisplay="Top" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
                                         <BatchEditingSettings EditType="Row" OpenEditingEvent="DblClick" />
                                         <CommandItemSettings ShowExportToExcelButton="true" ExportToExcelText="导出" />

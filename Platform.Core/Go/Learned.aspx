@@ -19,6 +19,7 @@
     <link href="../Content/Core/css/common.css" rel="stylesheet" />
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
+    <link href="../Content/Core/css/treefix.css" rel="stylesheet" />
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
@@ -39,6 +40,7 @@
                     </telerik:RadComboBox>
                 </div>
             </div>
+            <div class="row">&nbsp;</div>
             <div class="row">
                 <div class="col-md-12">
                     <table class="coreAuto">
@@ -46,7 +48,7 @@
                             <td>
                                 <telerik:RadTreeView ID="tree" runat="server" EnableDragAndDrop="true" EnableDragAndDropBetweenNodes="false" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" OnNodeClick="tree_NodeClick">
                                     <NodeTemplate>
-                                        <i class='<%# FormatTreeNode(Container.DataItem) %>'></i>&nbsp;<%# GenerateTreeName((Homory.Model.Department)Container.DataItem, Container.Index, Container.Level) %>
+                                        &nbsp;<%# GenerateTreeName((Homory.Model.Department)Container.DataItem, Container.Index, Container.Level) %>
                                     </NodeTemplate>
                                 </telerik:RadTreeView>
                             </td>
@@ -55,14 +57,16 @@
                                 <div class="ui basic segment">
                                     <telerik:RadListView ID="view" runat="server" ItemPlaceholderID="holderS" DataKeyNames="Id" ClientDataKeyNames="Id" OnNeedDataSource="view_NeedDataSource">
                                         <LayoutTemplate>
-                                            <div class="ui left aligned grid" style="margin-left: 60px;">
-                                                <asp:PlaceHolder ID="holderS" runat="server"></asp:PlaceHolder>
+                                            <div class="container-fluid" style="margin-left: 160px;">
+                                                <div class="row">
+                                                    <asp:PlaceHolder ID="holderS" runat="server"></asp:PlaceHolder>
+                                                </div>
                                                 <div style="clear: both;"></div>
                                             </div>
                                         </LayoutTemplate>
                                         <ItemTemplate>
-                                            <div class="rootPointer ui five wide column">
-                                                <telerik:RadButton runat="server" CssClass='<%# HandleButton(Container.DataItem as Homory.Model.Catalog) %>' Text='<%# Iconed(Container.DataItem as Homory.Model.Catalog) %>' CommandArgument='<%# Eval("Id") %>' ButtonType="ToggleButton" OnClick="OnClick" AutoPostBack="True">
+                                            <div class="rootPointer col-md-3">
+                                                <telerik:RadButton runat="server" ForeColor="White" CssClass='<%# HandleButton(Container.DataItem as Homory.Model.Catalog) %>' Text='<%# Iconed(Container.DataItem as Homory.Model.Catalog) %>' CommandArgument='<%# Eval("Id") %>' ButtonType="ToggleButton" OnClick="OnClick" AutoPostBack="True" Width="80" Height="40" Style="margin: 20px;">
                                                 </telerik:RadButton>
                                             </div>
                                         </ItemTemplate>

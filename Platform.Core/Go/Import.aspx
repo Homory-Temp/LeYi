@@ -33,11 +33,11 @@
                     $("#title").text("学生导入");
                 </script>
             </div>
-            <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
+            <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container" LoadingPanelID="loading">
                 <div class="row">
                     <div class="col-md-12">
                         <div>
-                            <div class="ui teal circular label">1</div>
+                            <div class="btn btn-primary">1</div>
                             上传学生Excel文档
                         </div>
                         <div style="margin-left: 50px;">
@@ -45,8 +45,9 @@
                             <input type="hidden" id="file" runat="server" />
                         </div>
                         <div>&nbsp;</div>
+                        <div>&nbsp;</div>
                         <div>
-                            <div class="ui teal circular label">2</div>
+                            <div class="btn btn-primary">2</div>
                             <telerik:RadButton ID="im_do" runat="server" Text="生成并预览学生数据" OnClick="im_do_Click"></telerik:RadButton>
                         </div>
                         <div style="margin-left: 50px;">
@@ -56,11 +57,13 @@
                     </div>
                 </div>
             </telerik:RadAjaxPanel>
-            <telerik:RadAjaxPanel ID="panelX" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <telerik:RadAjaxPanel ID="panelX" runat="server" CssClass="container" LoadingPanelID="loading">
                 <div class="row">
                     <div class="col-md-12">
                         <div>
-                            <div class="ui teal circular label">3</div>
+                            <div class="btn btn-primary">3</div>
                             <telerik:RadButton ID="im_ok" runat="server" Text="完成学生数据导入" OnClick="im_ok_Click"></telerik:RadButton>
                         </div>
                     </div>

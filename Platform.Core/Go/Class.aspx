@@ -19,6 +19,7 @@
     <link href="../Content/Core/css/common.css" rel="stylesheet" />
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
+    <link href="../Content/Core/css/treefix.css" rel="stylesheet" />
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
@@ -38,6 +39,9 @@
                         </ItemTemplate>
                     </telerik:RadComboBox>
                 </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
                 <div class="col-md-12">
                     <table class="coreAuto">
                         <tr class="coreTop">
@@ -116,7 +120,7 @@
                                         <div class="col-md-6" style="text-align: left;">
                                             <h6 class="btn btn-warning">班主任：</h6>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
-										    <telerik:RadButton ID="charging" runat="server" CssClass="btn btn-primary" ForeColor="White" Width="80" Height="32" ButtonType="ToggleButton" AutoPostBack="True" OnClick="charging_OnClick" Style="margin-top: 10px;">
+										    <telerik:RadButton ID="charging" runat="server" CssClass="btn btn-info" ForeColor="White" Width="80" Height="32" ButtonType="ToggleButton" AutoPostBack="True" OnClick="charging_OnClick" Style="margin-top: 10px;">
                                             </telerik:RadButton>
                                         </div>
                                         <div class="col-md-6" style="text-align: left;">
@@ -139,7 +143,7 @@
                                         <telerik:RadListView ID="view" runat="server" DataKeyNames="Id" ClientDataKeyNames="Id" OnNeedDataSource="view_OnNeedDataSource">
                                             <ItemTemplate>
                                                 <div class="rootPointer col-md-2 col-xs-4">
-                                                    <telerik:RadButton ID="charger" runat="server" Width="80" Height="32" ForeColor="White" CssClass='<%# Eval("Id").ToString() == charging.CommandArgument ? "btn btn-primary" : "btn btn-info" %>' ButtonType="ToggleButton" CommandArgument='<%# Eval("Id") %>' AutoPostBack="True" Text='<%# Eval("RealName").ToString().Length == 2 ? Eval("RealName").ToString()[0] + "　" + Eval("RealName").ToString()[1] : Eval("RealName").ToString() %>' OnClick="charger_OnClick">
+                                                    <telerik:RadButton ID="charger" runat="server" Width="80" Height="32" ForeColor="White" CssClass='<%# Eval("Id").ToString() == charging.CommandArgument ? "btn btn-info" : "btn btn-primary" %>' ButtonType="ToggleButton" CommandArgument='<%# Eval("Id") %>' AutoPostBack="True" Text='<%# Eval("RealName").ToString().Length == 2 ? Eval("RealName").ToString()[0] + "　" + Eval("RealName").ToString()[1] : Eval("RealName").ToString() %>' OnClick="charger_OnClick">
                                                     </telerik:RadButton>
                                                 </div>
                                             </ItemTemplate>

@@ -19,6 +19,7 @@
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
+    <link href="../Content/Core/css/treefix.css" rel="stylesheet" />
 </head>
 <body>
     <form id="formHome" runat="server">
