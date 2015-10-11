@@ -37,7 +37,7 @@
             </div>
             <div class="row">&nbsp;</div>
             <div class="row">
-                <div id="fullChart" runat="server" class="col-md-12">
+                <div id="fullChart" runat="server" class="col-md-12" style="text-align: center; overflow: scroll;">
                     <telerik:RadChart ID="c" runat="server" Skin="Black" DefaultType="StackedBar" AutoLayout="True" PlotArea-EmptySeriesMessage-TextBlock-Text="无统计数据" Height="400" Style="margin: auto;">
                         <Legend>
                             <Appearance Position-AlignedPosition="Left">

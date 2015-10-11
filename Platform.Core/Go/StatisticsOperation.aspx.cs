@@ -162,7 +162,7 @@ namespace Go
                     this.BuildSeriesItem(this.c.Series[SeriesIndexes[3]], (double)item.Num, item.Num.ToString(), lSum[index]);
                     index++;
                 }
-                //this.c.Width = 100 + 200 * width;
+                this.c.Width = 100 + 200 * width;
                 this.c.PlotArea.XAxis.AutoScale = false;
                 this.c.PlotArea.XAxis.Clear();
                 this.c.PlotArea.XAxis.AddRange(1, l.Count, 1);
