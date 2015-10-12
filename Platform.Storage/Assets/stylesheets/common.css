@@ -1,0 +1,20 @@
+﻿body, .center {
+    text-align: center;
+}
+
+ul, ul li, .left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+a, a:hover, a:link, a:visited {
+    text-decoration: none;
+    color: blue;
+}
+
+.header {
+    color: crimson;
+}

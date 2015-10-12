@@ -1,0 +1,36 @@
+.ui-hada {
+	background: rgba(0, 0, 0, 0.8); width: 100%; height: 46px; bottom: 0px; position: fixed; z-index: 99999; max-width: 640px;
+}
+.ui-hada-logo {
+	background: url("../images/114x114.png") no-repeat 0px 0px / 48px auto; border-radius: 8px; border: 1px solid rgb(92, 79, 61); left: 25px; top: -8px; width: 48px; height: 48px; position: absolute; border-image: none; -webkit-border-radius: 8px;
+}
+.ui-hada-intro {
+	color: rgb(255, 255, 255); line-height: 14px; padding-top: 4px; margin-left: 82px;
+}
+.ui-hada-desc {
+	font-size: 12px;
+}
+.ui-hada-name {
+	font-size: 12px; vertical-align: middle; display: inline-block;
+}
+.ui-hada-stars {
+	font-size: 12px; vertical-align: middle; display: inline-block;
+}
+.ui-hada-stars {
+	margin-top: -4px;
+}
+.ui-hada-stars i {
+	color: rgb(253, 192, 9); margin-left: 2px;
+}
+.ui-hada-close {
+	border-width: 20px; border-style: solid; border-color: transparent transparent rgba(0, 0, 0, 0.9); border-radius: 50%; left: -20px; top: -20px; width: 0px; height: 0px; display: block; position: absolute; transform: rotate(-45deg); -webkit-border-radius: 50%; -webkit-transform: rotate(-45deg);
+}
+.ui-hada-close i {
+	left: -5px; color: rgb(204, 204, 204); font-size: 12px; position: absolute; transform: rotate(-45deg); -webkit-transform: rotate(-45deg);
+}
+.ui-app-name {
+	color: rgb(204, 204, 204); font-size: 9px; -webkit-transform: scale(.9); -webkit-transform-origin: 0 0;
+}
+.ui-hada-btn {
+	border-radius: 3px; top: 8px; width: 22%; height: 30px; text-align: center; right: 8px; color: rgb(68, 68, 68); line-height: 30px; font-size: 14px; position: absolute; -webkit-border-radius: 3px;
+}
