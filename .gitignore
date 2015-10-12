@@ -200,3 +200,5 @@ FakesAssemblies/
 *.mdf
 /Platform.Common/资源
 *.config
+*.table
+/Platform.Storage/Upload
