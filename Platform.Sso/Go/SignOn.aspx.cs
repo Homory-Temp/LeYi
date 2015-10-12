@@ -26,7 +26,10 @@ namespace Go
                     {
                         if (string.IsNullOrEmpty(Request.QueryString["SsoRedirect"]))
                         {
-                            Response.Redirect(string.Format("SsoRedirect".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirect".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt), user.UserOnline.First().Id), false);
+                            if (user.Type == UserType.教师)
+                                Response.Redirect(string.Format("SsoRedirect".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirect".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt), user.UserOnline.First().Id), false);
+                            else
+                                Response.Redirect(string.Format("SsoRedirectOther".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirectOther".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt), user.UserOnline.First().Id), false);
                         }
                         else
                         {
@@ -257,7 +260,10 @@ namespace Go
                 {
                     if (string.IsNullOrWhiteSpace(Request.QueryString["SsoRedirect"]))
                     {
-                        output.Data.RedirectUrl = string.Format(string.Format("SsoRedirect".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirect".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt)));
+                        if (user.Type == UserType.教师)
+                            output.Data.RedirectUrl = string.Format(string.Format("SsoRedirect".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirect".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt)));
+                        else
+                            output.Data.RedirectUrl = string.Format(string.Format("SsoRedirectOther".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirectOther".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt)));
                     }
                     else
                     {
@@ -286,7 +292,17 @@ namespace Go
                                 url += "&" + qx + "=" + query_x[qx.ToString()];
                         }
                         output.Entity = null;
-                        output.Data.RedirectUrl = string.IsNullOrWhiteSpace(url) ? string.Format(string.Format("SsoRedirect".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirect".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt))) : url;
+                        if (string.IsNullOrWhiteSpace(url))
+                        {
+                            if (user.Type == UserType.教师)
+                                string.Format(string.Format("SsoRedirect".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirect".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt)));
+                            else
+                                string.Format(string.Format("SsoRedirectOther".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirectOther".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt)));
+                        }
+                        else
+                        {
+                            output.Data.RedirectUrl = url;
+                        }
                     }
                 }
                 else

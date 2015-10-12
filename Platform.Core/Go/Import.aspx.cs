@@ -118,11 +118,22 @@ public partial class Extended_Import : HomoryCorePage
         {
             var campusName = row[0].ToString();
             var campus = HomoryContext.Value.Department.First(o => o.Name == campusName);
-            var yearFinish = int.Parse(row[1].ToString()) + GradeCount(campus.ClassType);
+            var yearFinish = int.Parse(row[1].ToString().Substring(0, 4)) + GradeCount(campus.ClassType);
             var year = campus.DepartmentChildren.First(o => o.Ordinal == yearFinish);
             var classNo = int.Parse(row[2].ToString());
             var @class = year.DepartmentChildren.First(o => o.Ordinal == classNo);
-            StudentAdd(HomoryContext.Value, campus.Id, @class.Id, int.Parse(row[3].ToString()), row[4].ToString(), row[5].ToString(), row[5].ToString().Substring(12), State.启用, row[6].ToString(), row[5].ToString(), row[7] == null ? null : (row[7].ToString() == "" ? (bool?)null : (row[7].ToString() == "男" ? true : false)), row[8] == null ? null : (row[8].ToString() == "" ? (DateTime?)null : DateTime.Parse(row[8].ToString())), row[9].ToString(), row[10].ToString(), row[11].ToString(), row[12].ToString(), row[13].ToString());
+            var pwd = row[5].ToString();
+            var pwdArray = new char[6];
+            try
+            {
+                pwdArray = new char[] { pwd[pwd.Length - 6], pwd[pwd.Length - 5], pwd[pwd.Length - 4], pwd[pwd.Length - 3], pwd[pwd.Length - 2], pwd[pwd.Length - 1] };
+            }
+            catch
+            {
+                pwdArray = new char[] { '0', '0', '0', '0', '0', '0' };
+            }
+            var pwdString = pwdArray[0].ToString() + pwdArray[1].ToString() + pwdArray[2].ToString() + pwdArray[3].ToString() + pwdArray[4].ToString() + pwdArray[5].ToString();
+            StudentAdd(HomoryContext.Value, campus.Id, @class.Id, int.Parse(row[3].ToString()), row[4].ToString(), row[5].ToString(), pwd, State.启用, row[6].ToString(), row[5].ToString(), row[7] == null ? null : (row[7].ToString() == "" ? (bool?)null : (row[7].ToString() == "男" ? true : false)), row[8] == null ? null : (row[8].ToString() == "" ? (DateTime?)null : DateTime.Parse(row[8].ToString())), row[9].ToString(), row[10].ToString(), row[11].ToString(), row[12].ToString(), row[13].ToString());
             LogOp(OperationType.新增);
         }
         HomoryContext.Value.SaveChanges();
