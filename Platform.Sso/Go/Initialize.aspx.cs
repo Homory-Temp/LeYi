@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Homory.Model;
+using System;
 using System.Linq;
-using Homory.Model;
 
 namespace Go
 {

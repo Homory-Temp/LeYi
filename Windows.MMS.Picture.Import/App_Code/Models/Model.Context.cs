@@ -11,10 +11,9 @@ namespace Models
 {
     using System;
     using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
-    using System.Linq;
-    
+    using System.Data.Entity.Infrastructure;
+
     public partial class StorageEntity : DbContext
     {
         public StorageEntity()

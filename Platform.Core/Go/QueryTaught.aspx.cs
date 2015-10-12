@@ -1,15 +1,13 @@
-﻿using System;
-using System.Linq;
-using Homory.Model;
-using Telerik.Web.UI;
-using Telerik.Charting;
-using System.Drawing;
+﻿using Homory.Model;
+using System;
 using System.Collections.Generic;
-using Telerik.Charting.Styles;
+using System.Linq;
+using Telerik.Charting;
+using Telerik.Web.UI;
 
 namespace Go
 {
-	public partial class GoQueryTaught : HomoryCorePageWithGrid
+    public partial class GoQueryTaught : HomoryCorePageWithGrid
 	{
         private const string Right = "QueryTaught";
 

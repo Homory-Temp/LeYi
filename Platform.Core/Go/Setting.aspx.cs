@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq;
-using Homory.Model;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web.Configuration;
+﻿using Homory.Model;
+using System;
 using System.IO;
+using System.Linq;
 
 namespace Go
 {
-	public partial class GoSetting : HomoryCorePageWithNotify
+    public partial class GoSetting : HomoryCorePageWithNotify
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

@@ -1,16 +1,13 @@
-﻿using System;
+﻿using Homory.Model;
+using System;
 using System.Data.Entity.Migrations;
-using System.IO;
 using System.Linq;
 using System.Web.UI.HtmlControls;
-using Homory.Model;
 using Telerik.Web.UI;
-using Resource = Homory.Model.Resource;
-using ResourceType = Homory.Model.ResourceType;
 
 namespace Popup
 {
-	public partial class PopupPublishPush : HomoryResourcePage
+    public partial class PopupPublishPush : HomoryResourcePage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

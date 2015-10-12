@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Homory.Model;
+using System;
 using System.Linq;
 using System.Xml.Linq;
-using Homory.Model;
 
 namespace Control
 {

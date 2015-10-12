@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Homory.Model;
+using System;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using Homory.Model;
 
 public partial class Go_ViewRate : HomoryPage
 {

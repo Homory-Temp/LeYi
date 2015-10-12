@@ -1,15 +1,14 @@
-﻿using System;
+﻿using EntityFramework.Extensions;
+using Homory.Model;
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using EntityFramework.Extensions;
-using Homory.Model;
 using Telerik.Web.UI;
 
 namespace Popup
 {
-	public partial class ExtendedStudioCatalog : HomoryResourcePage
+    public partial class ExtendedStudioCatalog : HomoryResourcePage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

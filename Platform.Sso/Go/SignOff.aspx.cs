@@ -1,15 +1,13 @@
-﻿using System;
-using System.Dynamic;
+﻿using EntityFramework.Extensions;
+using Homory.Model;
+using System;
 using System.Linq;
 using System.Web;
-using EntityFramework.Extensions;
-using Homory.Model;
-using System.Net;
 using System.Xml.Linq;
 
 namespace Go
 {
-	public partial class GoSignOff : HomoryPage
+    public partial class GoSignOff : HomoryPage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Linq;
-using EntityFramework.Extensions;
+﻿using EntityFramework.Extensions;
 using Homory.Model;
+using System;
+using System.Linq;
 using Telerik.Web.UI;
-using System.Data.Entity.Migrations;
 
 namespace Go
 {
-	public partial class GoApiManage : HomoryCorePageWithGrid
+    public partial class GoApiManage : HomoryCorePageWithGrid
     {
         private const string Right = "Api";
 

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using EntityFramework.Extensions;
-using System;
-using System.Linq;
+﻿using EntityFramework.Extensions;
 using Homory.Model;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace Go
 {

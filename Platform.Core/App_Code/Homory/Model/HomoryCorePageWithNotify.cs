@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Telerik.Web.UI;
+﻿using Telerik.Web.UI;
 
 namespace Homory.Model
 {

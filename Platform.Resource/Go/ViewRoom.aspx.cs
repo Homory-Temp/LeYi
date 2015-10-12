@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Homory.Model;
+using System;
 using System.Data;
-using System.IO;
 using System.Linq;
-using System.ServiceModel.Activities;
-using System.Web;
-using System.Web.DynamicData;
-using System.Web.Services.Description;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using Aspose.Words.Lists;
-using Homory.Model;
 
 namespace Go
 {
-	public partial class GoViewRoom : HomoryResourcePage
+    public partial class GoViewRoom : HomoryResourcePage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

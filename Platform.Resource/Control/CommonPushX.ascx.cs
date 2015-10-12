@@ -1,16 +1,14 @@
-﻿using System;
+﻿using Homory.Model;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web.UI.HtmlControls;
-using Aspose.Pdf;
-using Aspose.Words.Lists;
-using Homory.Model;
 using Telerik.Web.UI;
 
 namespace Control
 {
-	public partial class ControlCommonPushX : HomoryResourceControl
+    public partial class ControlCommonPushX : HomoryResourceControl
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

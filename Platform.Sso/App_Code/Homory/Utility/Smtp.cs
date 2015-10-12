@@ -1,15 +1,14 @@
-﻿using System;
+﻿using EntityFramework.Extensions;
+using Homory.Model;
+using System;
 using System.Linq;
-using System.Data.Entity;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
-using EntityFramework.Extensions;
-using Homory.Model;
 
 namespace Homory.Utility
 {
-	public class Smtp
+    public class Smtp
 	{
 		public static bool SendEmail(Entities db, string title, string alias, string content, string address, string sender)
 		{

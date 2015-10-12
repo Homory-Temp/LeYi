@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Homory.Model;
+using System;
 using System.Linq;
-using Homory.Model;
-using System.IO;
 using System.Xml.Linq;
 
 namespace Go
 {
-	public partial class GoBoard : HomoryPage
+    public partial class GoBoard : HomoryPage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

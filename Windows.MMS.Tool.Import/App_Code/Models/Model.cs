@@ -9,9 +9,7 @@
 
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class Application
     {
         public System.Guid Id { get; set; }
@@ -28,7 +26,7 @@ namespace Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Department
     {
         public Department()
@@ -66,9 +64,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class DepartmentUser
     {
         public System.Guid DepartmentId { get; set; }
@@ -86,9 +82,8 @@ namespace Models
 }
 namespace Models
 {
-    using System;
     using System.Collections.Generic;
-    
+
     public partial class Storage
     {
         public Storage()
@@ -120,7 +115,7 @@ namespace Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class StorageCatalog
     {
         public StorageCatalog()
@@ -151,7 +146,7 @@ namespace Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class StorageConsume
     {
         public StorageConsume()
@@ -180,9 +175,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class StorageConsumeSingle
     {
         public System.Guid Id { get; set; }
@@ -198,9 +191,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class StorageDictionary
     {
         public string Name { get; set; }
@@ -213,9 +204,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class StorageFlow
     {
         public System.Guid Id { get; set; }
@@ -258,7 +247,7 @@ namespace Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class StorageIn
     {
         public StorageIn()
@@ -306,9 +295,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class StorageInSingle
     {
         public System.Guid Id { get; set; }
@@ -329,7 +316,7 @@ namespace Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class StorageLend
     {
         public StorageLend()
@@ -362,9 +349,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class StorageLendSingle
     {
         public System.Guid Id { get; set; }
@@ -381,9 +366,8 @@ namespace Models
 }
 namespace Models
 {
-    using System;
     using System.Collections.Generic;
-    
+
     public partial class StorageObject
     {
         public StorageObject()
@@ -444,7 +428,7 @@ namespace Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class StorageOut
     {
         public StorageOut()
@@ -475,9 +459,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class StorageOutSingle
     {
         public System.Guid Id { get; set; }
@@ -493,9 +475,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class StoragePlace
     {
         public System.Guid Id { get; set; }
@@ -509,9 +489,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class StorageQueryObject
     {
         public System.Guid Id { get; set; }
@@ -535,7 +513,7 @@ namespace Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class StorageReturn
     {
         public StorageReturn()
@@ -564,9 +542,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class StorageReturnSingle
     {
         public System.Guid Id { get; set; }
@@ -581,9 +557,8 @@ namespace Models
 }
 namespace Models
 {
-    using System;
     using System.Collections.Generic;
-    
+
     public partial class StorageRole
     {
         public StorageRole()
@@ -605,9 +580,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class StorageRoleRight
     {
         public System.Guid RoleId { get; set; }
@@ -620,7 +593,7 @@ namespace Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class StorageTarget
     {
         public StorageTarget()
@@ -654,8 +627,7 @@ namespace Models
 namespace Models
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class Teacher
     {
         public System.Guid Id { get; set; }
@@ -676,9 +648,8 @@ namespace Models
 }
 namespace Models
 {
-    using System;
     using System.Collections.Generic;
-    
+
     public partial class User
     {
         public User()
@@ -738,9 +709,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class UserOnline
     {
         public System.Guid Id { get; set; }
@@ -753,8 +722,7 @@ namespace Models
 namespace Models
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class ViewTeacher
     {
         public System.Guid Id { get; set; }
@@ -786,9 +754,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class 查询_报废单
     {
         public System.Guid 报废标识 { get; set; }
@@ -819,9 +785,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class 查询_购置单
     {
         public System.Guid 主键 { get; set; }
@@ -842,9 +806,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class 查询_归还单
     {
         public System.Guid 归还标识 { get; set; }
@@ -874,8 +836,7 @@ namespace Models
 namespace Models
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class 查询_借还流
     {
         public System.Guid 单借标识 { get; set; }
@@ -895,8 +856,7 @@ namespace Models
 namespace Models
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class 查询_借用单
     {
         public System.Guid 借用标识 { get; set; }
@@ -928,9 +888,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class 查询_领用单
     {
         public System.Guid 领用标识 { get; set; }
@@ -960,8 +918,7 @@ namespace Models
 namespace Models
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class 查询_盘库流
     {
         public System.Guid 单计标识 { get; set; }
@@ -983,9 +940,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class 查询_入库单
     {
         public System.Guid 入库标识 { get; set; }
@@ -1022,9 +977,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class 查询_数据流
     {
         public string Name { get; set; }
@@ -1063,8 +1016,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    
+
     public partial class QueryStorageBorrow_Result
     {
         public System.Guid Id { get; set; }
@@ -1087,7 +1039,7 @@ namespace Models
 namespace Models
 {
     using System;
-    
+
     public partial class QueryStorageTarget_Result
     {
         public System.Guid Id { get; set; }
@@ -1109,8 +1061,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    
+
     public enum DepartmentType : int
     {
         学校 = 0,
@@ -1119,8 +1070,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    
+
     public enum DepartmentUserType : int
     {
         主职 = -1,
@@ -1129,8 +1079,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    
+
     public enum DictionaryType : int
     {
         单位 = 1,
@@ -1144,7 +1093,7 @@ namespace Models
 namespace Models
 {
     using System;
-    
+
     [Flags]
     public enum FlowType : int
     {
@@ -1161,8 +1110,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    
+
     public enum OutType : int
     {
         人为损耗 = 1,
@@ -1171,8 +1119,7 @@ namespace Models
 }
 namespace Models
 {
-    using System;
-    
+
     public enum State : int
     {
         内置 = 0,

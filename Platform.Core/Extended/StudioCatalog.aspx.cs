@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using EntityFramework.Extensions;
+﻿using EntityFramework.Extensions;
 using Homory.Model;
+using System;
+using System.Linq;
 using Telerik.Web.UI;
 
 namespace Extended
 {
-	public partial class ExtendedStudioCatalog : HomoryCorePageWithGrid
+    public partial class ExtendedStudioCatalog : HomoryCorePageWithGrid
 	{
 		private const string Right = "Studio";
 

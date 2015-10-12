@@ -1,16 +1,10 @@
-﻿using System;
+﻿using Homory.Model;
+using System;
 using System.Data.Entity.Migrations;
-using System.IO;
 using System.Linq;
-using System.Web.Configuration;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using EntityFramework.Extensions;
-using Homory.Model;
-using Telerik.Web.UI;
-using Resource = Homory.Model.Resource;
-using ResourceType = Homory.Model.ResourceType;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using Telerik.Web.UI;
 
 namespace Go
 {

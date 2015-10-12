@@ -1,14 +1,13 @@
-﻿using System;
-using System.Linq;
-using EntityFramework.Extensions;
-using Homory.Model;
-using Telerik.Web.UI;
+﻿using Homory.Model;
+using System;
 using System.IO;
+using System.Linq;
 using System.Web.UI.WebControls;
+using Telerik.Web.UI;
 
 namespace Go
 {
-	public partial class GoRoomsX : HomoryCorePageWithGrid
+    public partial class GoRoomsX : HomoryCorePageWithGrid
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

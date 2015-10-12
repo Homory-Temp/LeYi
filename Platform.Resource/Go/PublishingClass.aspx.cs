@@ -1,13 +1,12 @@
-﻿using System;
+﻿using EntityFramework.Extensions;
+using Homory.Model;
+using System;
 using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
-using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using EntityFramework.Extensions;
-using Homory.Model;
 using Telerik.Web.UI;
 using Telerik.Web.UI.Editor;
 using Resource = Homory.Model.Resource;

@@ -1,19 +1,9 @@
-﻿using System;
-using System.Data.Entity.Migrations;
-using System.IO;
-using System.Linq;
-using System.Web.Configuration;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using EntityFramework.Extensions;
-using Homory.Model;
-using Telerik.Web.UI;
-using Resource = Homory.Model.Resource;
-using ResourceType = Homory.Model.ResourceType;
+﻿using Homory.Model;
+using System;
 
 namespace Go
 {
-	public partial class GoCenter : HomoryResourcePage
+    public partial class GoCenter : HomoryResourcePage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

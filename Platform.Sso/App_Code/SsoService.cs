@@ -1,10 +1,9 @@
-﻿using Homory.Model;
+﻿using EntityFramework.Extensions;
+using Homory.Model;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
-using EntityFramework.Extensions;
 
 [WebService(Namespace = "http://i.btedu.gov.cn/")]
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]

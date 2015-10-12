@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Homory.Model;
+using System;
 using System.Linq;
-using System.Web.Configuration;
-using Homory.Model;
 
 namespace Document.web
 {
-	public partial class DocumentWebPdfViewer : HomoryPage
+    public partial class DocumentWebPdfViewer : HomoryPage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

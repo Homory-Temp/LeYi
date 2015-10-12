@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Models;
-using Windows.MMS.Picture.Import.App_Code.ToModels;
+﻿using Models;
+using System;
 using System.Configuration;
+using System.Linq;
+using Windows.MMS.Picture.Import.App_Code.ToModels;
 
 namespace Windows.MMS.Picture.Import
 {

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Configuration;
+﻿using Homory.Model;
+using System;
 using System.Linq;
 using System.Web.UI.WebControls;
-using Homory.Model;
 
 namespace Control
 {
-	public partial class ControlCommonAssistant : HomoryResourceControl
+    public partial class ControlCommonAssistant : HomoryResourceControl
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

@@ -1,9 +1,8 @@
 ﻿using System;
-using Homory.Model;
 
 namespace Go
 {
-	public partial class GoQuit : System.Web.UI.Page
+    public partial class GoQuit : System.Web.UI.Page
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

@@ -1,5 +1,5 @@
-﻿using System;
-using Homory.Model;
+﻿using Homory.Model;
+using System;
 
 namespace Control
 {
