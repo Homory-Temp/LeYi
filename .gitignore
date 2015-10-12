@@ -202,3 +202,14 @@ FakesAssemblies/
 *.config
 *.table
 /Platform.Storage/Upload
+*.xls
+*.xlsx
+*.doc
+*.docx
+*.vob
+*.mpg
+*.mpeg
+*.avi
+*.mp4
+*.rm
+*.rmvb
