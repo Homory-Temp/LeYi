@@ -107,27 +107,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Picture.Import"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Tool.Import", "Windows.MMS.Tool.Import\Windows.MMS.Tool.Import.csproj", "{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Storage", "Platform.Storage\", "{FA6CFE45-697A-446F-BF4F-CA5208A8C473}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_41501"
-		Debug.AspNetCompiler.PhysicalPath = "Platform.Storage\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_41501\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_41501"
-		Release.AspNetCompiler.PhysicalPath = "Platform.Storage\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_41501\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "41501"
-		SlnRelativePath = "Platform.Storage\"
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -166,10 +145,6 @@ Global
 		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA6CFE45-697A-446F-BF4F-CA5208A8C473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA6CFE45-697A-446F-BF4F-CA5208A8C473}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA6CFE45-697A-446F-BF4F-CA5208A8C473}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA6CFE45-697A-446F-BF4F-CA5208A8C473}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
