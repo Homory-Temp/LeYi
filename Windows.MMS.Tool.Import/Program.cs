@@ -153,7 +153,7 @@ namespace Windows.MMS.Tool.Import
                             var cco = db.StorageCatalog.SingleOrDefault(o => o.Code == cc);
                             if (cco == null || !wz.num.HasValue || wz.num.Value == 0)
                                 continue;
-                            var picid = db.StorageObjectAdd(教玩具库Id, cco.Id, wz.name ?? "", "件", wz.gg, false, false, false, "", 0, 0, image, 教玩具库用户Id, ordinal, DateTime.Now, wz.xh, wz.code);
+                            var picid = db.StorageObjectAdd(教玩具库Id, cco.Id, wz.name ?? "", "件", wz.gg, false, false, false, "", 0, 0, image, 教玩具库用户Id, ordinal, DateTime.Now, wz.xh, wz.classcode);
                             db.SaveChanges();
                             db.SetIn(picid, 教玩具库购置单Id, Age(wz.syfw.HasValue ? wz.syfw.Value : 0), "教玩具库", null, 教玩具库用户Id, wz.num.HasValue ? wz.num.Value : 0, 0.00M, 0.00M, "");
                             db.SaveChanges();

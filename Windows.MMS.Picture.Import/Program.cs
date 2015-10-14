@@ -153,7 +153,7 @@ namespace Windows.MMS.Picture.Import
                             var cco = db.StorageCatalog.SingleOrDefault(o => o.Code == cc);
                             if (cco == null)
                                 continue;
-                            var picid = db.StorageObjectAdd(图片库Id, cco.Id, wz.name ?? "", "张", wz.gg, false, false, false, "", 0, 0, image, 图片库用户Id, ordinal, DateTime.Now, wz.xh, wz.code);
+                            var picid = db.StorageObjectAdd(图片库Id, cco.Id, wz.name ?? "", "张", wz.gg, false, false, false, "", 0, 0, image, 图片库用户Id, ordinal, DateTime.Now, wz.xh, wz.classcode);
                             db.SaveChanges();
                             db.SetIn(picid, 图片库购置单Id, Age(wz.syfw.HasValue ? wz.syfw.Value : 0), "图片库", null, 图片库用户Id, 1, 0.00M, 0.00M, "");
                             db.SaveChanges();
