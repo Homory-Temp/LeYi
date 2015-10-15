@@ -1,0 +1,2651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="256" />
+          <Property Name="Home" Type="nvarchar" MaxLength="256" />
+          <Property Name="Quit" Type="nvarchar" MaxLength="256" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="DefaultView" Type="int" Nullable="false" />
+          <Property Name="DefaultType" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreCatalog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="StoreId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreConsume">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ConsumeUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="AutoId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="numeric" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreConsumeSingle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ConsumeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="PerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="SourcePerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Fee" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreDictionary">
+          <Key>
+            <PropertyRef Name="StoreId" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="StoreId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreFlow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreFlowSingle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectOrdinal" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreIn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TargetId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ResponsibleUserId" Type="uniqueidentifier" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="SourcePerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Fee" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreInSingle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="In" Type="bit" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreLend">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LendUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Returned" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreLendSingle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LendId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="PerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="SourcePerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Fee" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ReturnedAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ReturnedMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreObject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SourceCatalogId" Type="uniqueidentifier" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Single" Type="bit" Nullable="false" />
+          <Property Name="Consumable" Type="bit" Nullable="false" />
+          <Property Name="Fixed" Type="bit" Nullable="false" />
+          <Property Name="Serial" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Specification" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Low" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="High" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreOut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OutUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreOutSingle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OutId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="PerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="SourcePerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Fee" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreReturn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReturnUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreReturnSingle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LendId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReturnId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StoreId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Right" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreStatistics">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="TimeNode" />
+          </Key>
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Month" Type="int" Nullable="false" />
+          <Property Name="StartInAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartInMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartLendAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartLendMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartConsumeAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartConsumeMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartOutAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartOutMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndInAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndInMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndLendAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndLendMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndConsumeAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndConsumeMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndOutAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndOutMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreTarget">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StoreId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="ReceiptNumber" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="OrderSource" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="UsageTarget" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ToPay" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Paid" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="BrokerageUserId" Type="uniqueidentifier" />
+          <Property Name="KeepUserId" Type="uniqueidentifier" />
+          <Property Name="In" Type="bit" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Account" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="256" />
+          <Property Name="Stamp" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PasswordEx" Type="nvarchar(max)" />
+          <Property Name="CryptoKey" Type="nvarchar(max)" />
+          <Property Name="CryptoSalt" Type="nvarchar(max)" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <Association Name="FK_StoreCatalog_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="StoreCatalog" Type="Self.StoreCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreCatalog">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreCatalog_StoreCatalog">
+          <End Role="StoreCatalog" Type="Self.StoreCatalog" Multiplicity="0..1" />
+          <End Role="StoreCatalog1" Type="Self.StoreCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreCatalog1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreConsume_ConsumeUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreConsume" Type="Self.StoreConsume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreConsume">
+              <PropertyRef Name="ConsumeUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreConsume_OperationUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreConsume" Type="Self.StoreConsume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreConsume">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreConsume_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreConsume" Type="Self.StoreConsume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreConsume">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreConsumeSingle_StoreConsume">
+          <End Role="StoreConsume" Type="Self.StoreConsume" Multiplicity="1" />
+          <End Role="StoreConsumeSingle" Type="Self.StoreConsumeSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreConsume">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreConsumeSingle">
+              <PropertyRef Name="ConsumeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreConsumeSingle_StoreIn">
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="1" />
+          <End Role="StoreConsumeSingle" Type="Self.StoreConsumeSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreConsumeSingle">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreDictionary_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="StoreDictionary" Type="Self.StoreDictionary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreDictionary">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreFlow_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreFlow" Type="Self.StoreFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreFlow">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreFlow_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreFlow" Type="Self.StoreFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreFlow">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreFlowSingle_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreFlowSingle" Type="Self.StoreFlowSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreFlowSingle">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreFlowSingle_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreFlowSingle" Type="Self.StoreFlowSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreFlowSingle">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreIn_OperationUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreIn">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreIn_ResponsibleUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreIn">
+              <PropertyRef Name="ResponsibleUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreIn_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreIn">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreIn_StoreTarget">
+          <End Role="StoreTarget" Type="Self.StoreTarget" Multiplicity="1" />
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreTarget">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreIn">
+              <PropertyRef Name="TargetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreInSingle_StoreIn">
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="1" />
+          <End Role="StoreInSingle" Type="Self.StoreInSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreInSingle">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreInSingle_StoreInSingle">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreInSingle" Type="Self.StoreInSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreInSingle">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreLend_LendUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreLend" Type="Self.StoreLend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreLend">
+              <PropertyRef Name="LendUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreLend_OperationUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreLend" Type="Self.StoreLend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreLend">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreLend_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreLend" Type="Self.StoreLend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreLend">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreLendSingle_StoreIn">
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="1" />
+          <End Role="StoreLendSingle" Type="Self.StoreLendSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreLendSingle">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreLendSingle_StoreLend">
+          <End Role="StoreLend" Type="Self.StoreLend" Multiplicity="1" />
+          <End Role="StoreLendSingle" Type="Self.StoreLendSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreLend">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreLendSingle">
+              <PropertyRef Name="LendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreObject_SourceStoreCatalog">
+          <End Role="StoreCatalog" Type="Self.StoreCatalog" Multiplicity="0..1" />
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreObject">
+              <PropertyRef Name="SourceCatalogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreObject_StoreCatalog">
+          <End Role="StoreCatalog" Type="Self.StoreCatalog" Multiplicity="1" />
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreObject">
+              <PropertyRef Name="CatalogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreObject_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreObject">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreOut_OperationUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreOut" Type="Self.StoreOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreOut">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreOut_OutUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreOut" Type="Self.StoreOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreOut">
+              <PropertyRef Name="OutUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreOut_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreOut" Type="Self.StoreOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreOut">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreOutSingle_StoreIn">
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="1" />
+          <End Role="StoreOutSingle" Type="Self.StoreOutSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreOutSingle">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreOutSingle_StoreOutSingle">
+          <End Role="StoreOut" Type="Self.StoreOut" Multiplicity="1" />
+          <End Role="StoreOutSingle" Type="Self.StoreOutSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreOut">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreOutSingle">
+              <PropertyRef Name="OutId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreReturn_OperationUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreReturn" Type="Self.StoreReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreReturn">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreReturn_ReturnUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreReturn" Type="Self.StoreReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreReturn">
+              <PropertyRef Name="ReturnUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreReturn_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreReturn" Type="Self.StoreReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreReturn">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreReturnSingle_StoreLend">
+          <End Role="StoreLend" Type="Self.StoreLend" Multiplicity="1" />
+          <End Role="StoreReturnSingle" Type="Self.StoreReturnSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreLend">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreReturnSingle">
+              <PropertyRef Name="LendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreReturnSingle_StoreReturn">
+          <End Role="StoreReturn" Type="Self.StoreReturn" Multiplicity="1" />
+          <End Role="StoreReturnSingle" Type="Self.StoreReturnSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreReturn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreReturnSingle">
+              <PropertyRef Name="ReturnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreRole_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="StoreRole" Type="Self.StoreRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreRole">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreStatistics_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreStatistics" Type="Self.StoreStatistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreStatistics">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreTarget_BrokerageUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="StoreTarget" Type="Self.StoreTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreTarget">
+              <PropertyRef Name="BrokerageUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreTarget_KeepUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="StoreTarget" Type="Self.StoreTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreTarget">
+              <PropertyRef Name="KeepUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreTarget_OperationUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreTarget" Type="Self.StoreTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreTarget">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreTarget_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="StoreTarget" Type="Self.StoreTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreTarget">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreUser_StoreRole">
+          <End Role="StoreRole" Type="Self.StoreRole" Multiplicity="1" />
+          <End Role="StoreUser" Type="Self.StoreUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreUser" Type="Self.StoreUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StoreModelStoreContainer">
+          <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreCatalog" EntityType="Self.StoreCatalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreConsume" EntityType="Self.StoreConsume" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreConsumeSingle" EntityType="Self.StoreConsumeSingle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreDictionary" EntityType="Self.StoreDictionary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreFlow" EntityType="Self.StoreFlow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreFlowSingle" EntityType="Self.StoreFlowSingle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreIn" EntityType="Self.StoreIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreInSingle" EntityType="Self.StoreInSingle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreLend" EntityType="Self.StoreLend" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreLendSingle" EntityType="Self.StoreLendSingle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreObject" EntityType="Self.StoreObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreOut" EntityType="Self.StoreOut" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreOutSingle" EntityType="Self.StoreOutSingle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreReturn" EntityType="Self.StoreReturn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreReturnSingle" EntityType="Self.StoreReturnSingle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreRole" EntityType="Self.StoreRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreStatistics" EntityType="Self.StoreStatistics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreTarget" EntityType="Self.StoreTarget" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreUser" EntityType="Self.StoreUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_StoreCatalog_Store" Association="Self.FK_StoreCatalog_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="StoreCatalog" EntitySet="StoreCatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreCatalog_StoreCatalog" Association="Self.FK_StoreCatalog_StoreCatalog">
+            <End Role="StoreCatalog" EntitySet="StoreCatalog" />
+            <End Role="StoreCatalog1" EntitySet="StoreCatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreConsume_ConsumeUser" Association="Self.FK_StoreConsume_ConsumeUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreConsume" EntitySet="StoreConsume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreConsume_OperationUser" Association="Self.FK_StoreConsume_OperationUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreConsume" EntitySet="StoreConsume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreConsume_StoreObject" Association="Self.FK_StoreConsume_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreConsume" EntitySet="StoreConsume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreConsumeSingle_StoreConsume" Association="Self.FK_StoreConsumeSingle_StoreConsume">
+            <End Role="StoreConsume" EntitySet="StoreConsume" />
+            <End Role="StoreConsumeSingle" EntitySet="StoreConsumeSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreConsumeSingle_StoreIn" Association="Self.FK_StoreConsumeSingle_StoreIn">
+            <End Role="StoreIn" EntitySet="StoreIn" />
+            <End Role="StoreConsumeSingle" EntitySet="StoreConsumeSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreDictionary_Store" Association="Self.FK_StoreDictionary_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="StoreDictionary" EntitySet="StoreDictionary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreFlow_StoreObject" Association="Self.FK_StoreFlow_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreFlow" EntitySet="StoreFlow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreFlow_User" Association="Self.FK_StoreFlow_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreFlow" EntitySet="StoreFlow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreFlowSingle_StoreObject" Association="Self.FK_StoreFlowSingle_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreFlowSingle" EntitySet="StoreFlowSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreFlowSingle_User" Association="Self.FK_StoreFlowSingle_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreFlowSingle" EntitySet="StoreFlowSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreIn_OperationUser" Association="Self.FK_StoreIn_OperationUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreIn" EntitySet="StoreIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreIn_ResponsibleUser" Association="Self.FK_StoreIn_ResponsibleUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreIn" EntitySet="StoreIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreIn_StoreObject" Association="Self.FK_StoreIn_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreIn" EntitySet="StoreIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreIn_StoreTarget" Association="Self.FK_StoreIn_StoreTarget">
+            <End Role="StoreTarget" EntitySet="StoreTarget" />
+            <End Role="StoreIn" EntitySet="StoreIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreInSingle_StoreIn" Association="Self.FK_StoreInSingle_StoreIn">
+            <End Role="StoreIn" EntitySet="StoreIn" />
+            <End Role="StoreInSingle" EntitySet="StoreInSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreInSingle_StoreInSingle" Association="Self.FK_StoreInSingle_StoreInSingle">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreInSingle" EntitySet="StoreInSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreLend_LendUser" Association="Self.FK_StoreLend_LendUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreLend" EntitySet="StoreLend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreLend_OperationUser" Association="Self.FK_StoreLend_OperationUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreLend" EntitySet="StoreLend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreLend_StoreObject" Association="Self.FK_StoreLend_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreLend" EntitySet="StoreLend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreLendSingle_StoreIn" Association="Self.FK_StoreLendSingle_StoreIn">
+            <End Role="StoreIn" EntitySet="StoreIn" />
+            <End Role="StoreLendSingle" EntitySet="StoreLendSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreLendSingle_StoreLend" Association="Self.FK_StoreLendSingle_StoreLend">
+            <End Role="StoreLend" EntitySet="StoreLend" />
+            <End Role="StoreLendSingle" EntitySet="StoreLendSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreObject_SourceStoreCatalog" Association="Self.FK_StoreObject_SourceStoreCatalog">
+            <End Role="StoreCatalog" EntitySet="StoreCatalog" />
+            <End Role="StoreObject" EntitySet="StoreObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreObject_StoreCatalog" Association="Self.FK_StoreObject_StoreCatalog">
+            <End Role="StoreCatalog" EntitySet="StoreCatalog" />
+            <End Role="StoreObject" EntitySet="StoreObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreObject_User" Association="Self.FK_StoreObject_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreObject" EntitySet="StoreObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreOut_OperationUser" Association="Self.FK_StoreOut_OperationUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreOut" EntitySet="StoreOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreOut_OutUser" Association="Self.FK_StoreOut_OutUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreOut" EntitySet="StoreOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreOut_StoreObject" Association="Self.FK_StoreOut_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreOut" EntitySet="StoreOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreOutSingle_StoreIn" Association="Self.FK_StoreOutSingle_StoreIn">
+            <End Role="StoreIn" EntitySet="StoreIn" />
+            <End Role="StoreOutSingle" EntitySet="StoreOutSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreOutSingle_StoreOutSingle" Association="Self.FK_StoreOutSingle_StoreOutSingle">
+            <End Role="StoreOut" EntitySet="StoreOut" />
+            <End Role="StoreOutSingle" EntitySet="StoreOutSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreReturn_OperationUser" Association="Self.FK_StoreReturn_OperationUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreReturn" EntitySet="StoreReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreReturn_ReturnUser" Association="Self.FK_StoreReturn_ReturnUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreReturn" EntitySet="StoreReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreReturn_StoreObject" Association="Self.FK_StoreReturn_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreReturn" EntitySet="StoreReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreReturnSingle_StoreLend" Association="Self.FK_StoreReturnSingle_StoreLend">
+            <End Role="StoreLend" EntitySet="StoreLend" />
+            <End Role="StoreReturnSingle" EntitySet="StoreReturnSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreReturnSingle_StoreReturn" Association="Self.FK_StoreReturnSingle_StoreReturn">
+            <End Role="StoreReturn" EntitySet="StoreReturn" />
+            <End Role="StoreReturnSingle" EntitySet="StoreReturnSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreRole_Store" Association="Self.FK_StoreRole_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="StoreRole" EntitySet="StoreRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreStatistics_StoreObject" Association="Self.FK_StoreStatistics_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreStatistics" EntitySet="StoreStatistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreTarget_BrokerageUser" Association="Self.FK_StoreTarget_BrokerageUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreTarget" EntitySet="StoreTarget" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreTarget_KeepUser" Association="Self.FK_StoreTarget_KeepUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreTarget" EntitySet="StoreTarget" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreTarget_OperationUser" Association="Self.FK_StoreTarget_OperationUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreTarget" EntitySet="StoreTarget" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreTarget_Store" Association="Self.FK_StoreTarget_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="StoreTarget" EntitySet="StoreTarget" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreUser_StoreRole" Association="Self.FK_StoreUser_StoreRole">
+            <End Role="StoreRole" EntitySet="StoreRole" />
+            <End Role="StoreUser" EntitySet="StoreUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreUser_User" Association="Self.FK_StoreUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreUser" EntitySet="StoreUser" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CampusId" Type="Guid" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="DefaultView" Type="Int32" Nullable="false" />
+          <Property Name="DefaultType" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StoreCatalog" Relationship="Self.FK_StoreCatalog_Store" FromRole="Store" ToRole="StoreCatalog" />
+          <NavigationProperty Name="StoreDictionary" Relationship="Self.FK_StoreDictionary_Store" FromRole="Store" ToRole="StoreDictionary" />
+          <NavigationProperty Name="StoreRole" Relationship="Self.FK_StoreRole_Store" FromRole="Store" ToRole="StoreRole" />
+          <NavigationProperty Name="StoreTarget" Relationship="Self.FK_StoreTarget_Store" FromRole="Store" ToRole="StoreTarget" />
+        </EntityType>
+        <EntityType Name="StoreCatalog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="StoreId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_StoreCatalog_Store" FromRole="StoreCatalog" ToRole="Store" />
+          <NavigationProperty Name="ChildrenStoreCatalog" Relationship="Self.FK_StoreCatalog_StoreCatalog" FromRole="StoreCatalog" ToRole="StoreCatalog1" />
+          <NavigationProperty Name="ParentStoreCatalog" Relationship="Self.FK_StoreCatalog_StoreCatalog" FromRole="StoreCatalog1" ToRole="StoreCatalog" />
+          <NavigationProperty Name="SourceStoreObject" Relationship="Self.FK_StoreObject_SourceStoreCatalog" FromRole="StoreCatalog" ToRole="StoreObject" />
+          <NavigationProperty Name="StoreObject" Relationship="Self.FK_StoreObject_StoreCatalog" FromRole="StoreCatalog" ToRole="StoreObject" />
+        </EntityType>
+        <EntityType Name="StoreConsume">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="ConsumeUserId" Type="Guid" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <NavigationProperty Name="ConsumeUser" Relationship="Self.FK_StoreConsume_ConsumeUser" FromRole="StoreConsume" ToRole="User" />
+          <NavigationProperty Name="OperationUser" Relationship="Self.FK_StoreConsume_OperationUser" FromRole="StoreConsume" ToRole="User" />
+          <NavigationProperty Name="StoreObject" Relationship="Self.FK_StoreConsume_StoreObject" FromRole="StoreConsume" ToRole="StoreObject" />
+          <NavigationProperty Name="StoreConsumeSingle" Relationship="Self.FK_StoreConsumeSingle_StoreConsume" FromRole="StoreConsume" ToRole="StoreConsumeSingle" />
+        </EntityType>
+        <EntityType Name="StoreConsumeSingle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
+          <Property Name="ConsumeId" Type="Guid" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="PerPrice" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="SourcePerPrice" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Fee" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <NavigationProperty Name="StoreConsume" Relationship="Self.FK_StoreConsumeSingle_StoreConsume" FromRole="StoreConsumeSingle" ToRole="StoreConsume" />
+          <NavigationProperty Name="StoreIn" Relationship="Self.FK_StoreConsumeSingle_StoreIn" FromRole="StoreConsumeSingle" ToRole="StoreIn" />
+        </EntityType>
+        <EntityType Name="StoreDictionary">
+          <Key>
+            <PropertyRef Name="StoreId" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="StoreId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_StoreDictionary_Store" FromRole="StoreDictionary" ToRole="Store" />
+        </EntityType>
+        <EntityType Name="StoreFlow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="TypeName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="StoreObject" Relationship="Self.FK_StoreFlow_StoreObject" FromRole="StoreFlow" ToRole="StoreObject" />
+          <NavigationProperty Name="User" Relationship="Self.FK_StoreFlow_User" FromRole="StoreFlow" ToRole="User" />
+        </EntityType>
+        <EntityType Name="StoreFlowSingle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectOrdinal" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="TypeName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="StoreObject" Relationship="Self.FK_StoreFlowSingle_StoreObject" FromRole="StoreFlowSingle" ToRole="StoreObject" />
+          <NavigationProperty Name="User" Relationship="Self.FK_StoreFlowSingle_User" FromRole="StoreFlowSingle" ToRole="User" />
+        </EntityType>
+        <EntityType Name="StoreIn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TargetId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Age" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Place" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ResponsibleUserId" Type="Guid" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PerPrice" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="SourcePerPrice" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Fee" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <NavigationProperty Name="StoreConsumeSingle" Relationship="Self.FK_StoreConsumeSingle_StoreIn" FromRole="StoreIn" ToRole="StoreConsumeSingle" />
+          <NavigationProperty Name="OperationUser" Relationship="Self.FK_StoreIn_OperationUser" FromRole="StoreIn" ToRole="User" />
+          <NavigationProperty Name="ResponsibleUser" Relationship="Self.FK_StoreIn_ResponsibleUser" FromRole="StoreIn" ToRole="User" />
+          <NavigationProperty Name="StoreObject" Relationship="Self.FK_StoreIn_StoreObject" FromRole="StoreIn" ToRole="StoreObject" />
+          <NavigationProperty Name="StoreTarget" Relationship="Self.FK_StoreIn_StoreTarget" FromRole="StoreIn" ToRole="StoreTarget" />
+          <NavigationProperty Name="StoreInSingle" Relationship="Self.FK_StoreInSingle_StoreIn" FromRole="StoreIn" ToRole="StoreInSingle" />
+          <NavigationProperty Name="StoreOutSingle" Relationship="Self.FK_StoreOutSingle_StoreIn" FromRole="StoreIn" ToRole="StoreOutSingle" />
+          <NavigationProperty Name="StoreLendSingle" Relationship="StoreModel.FK_StoreLendSingle_StoreIn" FromRole="StoreIn" ToRole="StoreLendSingle" />
+        </EntityType>
+        <EntityType Name="StoreInSingle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="In" Type="Boolean" Nullable="false" />
+          <Property Name="Place" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="StoreIn" Relationship="Self.FK_StoreInSingle_StoreIn" FromRole="StoreInSingle" ToRole="StoreIn" />
+          <NavigationProperty Name="StoreObject" Relationship="Self.FK_StoreInSingle_StoreInSingle" FromRole="StoreInSingle" ToRole="StoreObject" />
+        </EntityType>
+        <EntityType Name="StoreLend">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="LendUserId" Type="Guid" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Returned" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LendUser" Relationship="Self.FK_StoreLend_LendUser" FromRole="StoreLend" ToRole="User" />
+          <NavigationProperty Name="OperationUser" Relationship="Self.FK_StoreLend_OperationUser" FromRole="StoreLend" ToRole="User" />
+          <NavigationProperty Name="StoreObject" Relationship="Self.FK_StoreLend_StoreObject" FromRole="StoreLend" ToRole="StoreObject" />
+          <NavigationProperty Name="StoreReturnSingle" Relationship="Self.FK_StoreReturnSingle_StoreLend" FromRole="StoreLend" ToRole="StoreReturnSingle" />
+          <NavigationProperty Name="StoreLendSingle" Relationship="StoreModel.FK_StoreLendSingle_StoreLend" FromRole="StoreLend" ToRole="StoreLendSingle" />
+        </EntityType>
+        <EntityType Name="StoreLendSingle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
+          <Property Name="LendId" Type="Guid" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="PerPrice" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="SourcePerPrice" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Fee" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ReturnedAmount" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ReturnedMoney" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <NavigationProperty Name="StoreIn" Relationship="StoreModel.FK_StoreLendSingle_StoreIn" FromRole="StoreLendSingle" ToRole="StoreIn" />
+          <NavigationProperty Name="StoreLend" Relationship="StoreModel.FK_StoreLendSingle_StoreLend" FromRole="StoreLendSingle" ToRole="StoreLend" />
+        </EntityType>
+        <EntityType Name="StoreObject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="SourceCatalogId" Type="Guid" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Single" Type="Boolean" Nullable="false" />
+          <Property Name="Consumable" Type="Boolean" Nullable="false" />
+          <Property Name="Fixed" Type="Boolean" Nullable="false" />
+          <Property Name="Serial" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Unit" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Specification" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Low" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="High" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <NavigationProperty Name="SourceStoreCatalog" Relationship="Self.FK_StoreObject_SourceStoreCatalog" FromRole="StoreObject" ToRole="StoreCatalog" />
+          <NavigationProperty Name="StoreCatalog" Relationship="Self.FK_StoreObject_StoreCatalog" FromRole="StoreObject" ToRole="StoreCatalog" />
+          <NavigationProperty Name="StoreConsume" Relationship="Self.FK_StoreConsume_StoreObject" FromRole="StoreObject" ToRole="StoreConsume" />
+          <NavigationProperty Name="StoreFlow" Relationship="Self.FK_StoreFlow_StoreObject" FromRole="StoreObject" ToRole="StoreFlow" />
+          <NavigationProperty Name="StoreFlowSingle" Relationship="Self.FK_StoreFlowSingle_StoreObject" FromRole="StoreObject" ToRole="StoreFlowSingle" />
+          <NavigationProperty Name="StoreIn" Relationship="Self.FK_StoreIn_StoreObject" FromRole="StoreObject" ToRole="StoreIn" />
+          <NavigationProperty Name="StoreInSingle" Relationship="Self.FK_StoreInSingle_StoreInSingle" FromRole="StoreObject" ToRole="StoreInSingle" />
+          <NavigationProperty Name="StoreLend" Relationship="Self.FK_StoreLend_StoreObject" FromRole="StoreObject" ToRole="StoreLend" />
+          <NavigationProperty Name="User" Relationship="Self.FK_StoreObject_User" FromRole="StoreObject" ToRole="User" />
+          <NavigationProperty Name="StoreOut" Relationship="Self.FK_StoreOut_StoreObject" FromRole="StoreObject" ToRole="StoreOut" />
+          <NavigationProperty Name="StoreReturn" Relationship="Self.FK_StoreReturn_StoreObject" FromRole="StoreObject" ToRole="StoreReturn" />
+          <NavigationProperty Name="StoreStatistics" Relationship="StoreModel.FK_StoreStatistics_StoreObject" FromRole="StoreObject" ToRole="StoreStatistics" />
+        </EntityType>
+        <EntityType Name="StoreOut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="OutUserId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <NavigationProperty Name="StoreObject" Relationship="Self.FK_StoreOut_StoreObject" FromRole="StoreOut" ToRole="StoreObject" />
+          <NavigationProperty Name="OperationUser" Relationship="Self.FK_StoreOut_OperationUser" FromRole="StoreOut" ToRole="User" />
+          <NavigationProperty Name="OutUser" Relationship="Self.FK_StoreOut_OutUser" FromRole="StoreOut" ToRole="User" />
+          <NavigationProperty Name="StoreOutSingle" Relationship="Self.FK_StoreOutSingle_StoreOutSingle" FromRole="StoreOut" ToRole="StoreOutSingle" />
+        </EntityType>
+        <EntityType Name="StoreOutSingle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
+          <Property Name="OutId" Type="Guid" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="PerPrice" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="SourcePerPrice" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Fee" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <NavigationProperty Name="StoreIn" Relationship="Self.FK_StoreOutSingle_StoreIn" FromRole="StoreOutSingle" ToRole="StoreIn" />
+          <NavigationProperty Name="StoreOut" Relationship="Self.FK_StoreOutSingle_StoreOutSingle" FromRole="StoreOutSingle" ToRole="StoreOut" />
+        </EntityType>
+        <EntityType Name="StoreReturn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="ReturnUserId" Type="Guid" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <NavigationProperty Name="StoreObject" Relationship="Self.FK_StoreReturn_StoreObject" FromRole="StoreReturn" ToRole="StoreObject" />
+          <NavigationProperty Name="OperationUser" Relationship="Self.FK_StoreReturn_OperationUser" FromRole="StoreReturn" ToRole="User" />
+          <NavigationProperty Name="ReturnUser" Relationship="Self.FK_StoreReturn_ReturnUser" FromRole="StoreReturn" ToRole="User" />
+          <NavigationProperty Name="StoreReturnSingle" Relationship="Self.FK_StoreReturnSingle_StoreReturn" FromRole="StoreReturn" ToRole="StoreReturnSingle" />
+        </EntityType>
+        <EntityType Name="StoreReturnSingle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="LendId" Type="Guid" Nullable="false" />
+          <Property Name="ReturnId" Type="Guid" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <NavigationProperty Name="StoreLend" Relationship="Self.FK_StoreReturnSingle_StoreLend" FromRole="StoreReturnSingle" ToRole="StoreLend" />
+          <NavigationProperty Name="StoreReturn" Relationship="Self.FK_StoreReturnSingle_StoreReturn" FromRole="StoreReturnSingle" ToRole="StoreReturn" />
+        </EntityType>
+        <EntityType Name="StoreRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="StoreId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Right" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_StoreRole_Store" FromRole="StoreRole" ToRole="Store" />
+          <NavigationProperty Name="User" Relationship="Self.StoreUser" FromRole="StoreRole" ToRole="User" />
+        </EntityType>
+        <EntityType Name="StoreTarget">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="StoreId" Type="Guid" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReceiptNumber" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrderSource" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UsageTarget" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ToPay" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Paid" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="BrokerageUserId" Type="Guid" />
+          <Property Name="KeepUserId" Type="Guid" />
+          <Property Name="In" Type="Boolean" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_StoreTarget_Store" FromRole="StoreTarget" ToRole="Store" />
+          <NavigationProperty Name="StoreIn" Relationship="Self.FK_StoreIn_StoreTarget" FromRole="StoreTarget" ToRole="StoreIn" />
+          <NavigationProperty Name="BrokerageUser" Relationship="Self.FK_StoreTarget_BrokerageUser" FromRole="StoreTarget" ToRole="User" />
+          <NavigationProperty Name="KeepUser" Relationship="Self.FK_StoreTarget_KeepUser" FromRole="StoreTarget" ToRole="User" />
+          <NavigationProperty Name="OperationUser" Relationship="Self.FK_StoreTarget_OperationUser" FromRole="StoreTarget" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Account" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RealName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Icon" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Stamp" Type="Guid" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordEx" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CryptoKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CryptoSalt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StoreConsumeUser" Relationship="Self.FK_StoreConsume_ConsumeUser" FromRole="User" ToRole="StoreConsume" />
+          <NavigationProperty Name="StoreConsumeOperator" Relationship="Self.FK_StoreConsume_OperationUser" FromRole="User" ToRole="StoreConsume" />
+          <NavigationProperty Name="StoreFlowUser" Relationship="Self.FK_StoreFlow_User" FromRole="User" ToRole="StoreFlow" />
+          <NavigationProperty Name="StoreFlowSingleUser" Relationship="Self.FK_StoreFlowSingle_User" FromRole="User" ToRole="StoreFlowSingle" />
+          <NavigationProperty Name="StoreInOperator" Relationship="Self.FK_StoreIn_OperationUser" FromRole="User" ToRole="StoreIn" />
+          <NavigationProperty Name="StoreInResponsible" Relationship="Self.FK_StoreIn_ResponsibleUser" FromRole="User" ToRole="StoreIn" />
+          <NavigationProperty Name="StoreLendUser" Relationship="Self.FK_StoreLend_LendUser" FromRole="User" ToRole="StoreLend" />
+          <NavigationProperty Name="StoreLendOperator" Relationship="Self.FK_StoreLend_OperationUser" FromRole="User" ToRole="StoreLend" />
+          <NavigationProperty Name="StoreObjectOperator" Relationship="Self.FK_StoreObject_User" FromRole="User" ToRole="StoreObject" />
+          <NavigationProperty Name="StoreOutOperator" Relationship="Self.FK_StoreOut_OperationUser" FromRole="User" ToRole="StoreOut" />
+          <NavigationProperty Name="StoreOutUser" Relationship="Self.FK_StoreOut_OutUser" FromRole="User" ToRole="StoreOut" />
+          <NavigationProperty Name="StoreReturnOperator" Relationship="Self.FK_StoreReturn_OperationUser" FromRole="User" ToRole="StoreReturn" />
+          <NavigationProperty Name="StoreReturnUser" Relationship="Self.FK_StoreReturn_ReturnUser" FromRole="User" ToRole="StoreReturn" />
+          <NavigationProperty Name="StoreTargetBrokerage" Relationship="Self.FK_StoreTarget_BrokerageUser" FromRole="User" ToRole="StoreTarget" />
+          <NavigationProperty Name="StoreTargetKeep" Relationship="Self.FK_StoreTarget_KeepUser" FromRole="User" ToRole="StoreTarget" />
+          <NavigationProperty Name="StoreTargetUser" Relationship="Self.FK_StoreTarget_OperationUser" FromRole="User" ToRole="StoreTarget" />
+          <NavigationProperty Name="StoreRole" Relationship="Self.StoreUser" FromRole="User" ToRole="StoreRole" />
+        </EntityType>
+        <Association Name="FK_StoreCatalog_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="StoreCatalog" Type="Self.StoreCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreCatalog">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreDictionary_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="StoreDictionary" Type="Self.StoreDictionary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreDictionary">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreRole_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="StoreRole" Type="Self.StoreRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreRole">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreTarget_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="StoreTarget" Type="Self.StoreTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreTarget">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreCatalog_StoreCatalog">
+          <End Role="StoreCatalog" Type="Self.StoreCatalog" Multiplicity="0..1" />
+          <End Role="StoreCatalog1" Type="Self.StoreCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreCatalog1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreObject_SourceStoreCatalog">
+          <End Role="StoreCatalog" Type="Self.StoreCatalog" Multiplicity="0..1" />
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreObject">
+              <PropertyRef Name="SourceCatalogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreObject_StoreCatalog">
+          <End Role="StoreCatalog" Type="Self.StoreCatalog" Multiplicity="1" />
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreObject">
+              <PropertyRef Name="CatalogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreConsume_ConsumeUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreConsume" Type="Self.StoreConsume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreConsume">
+              <PropertyRef Name="ConsumeUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreConsume_OperationUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreConsume" Type="Self.StoreConsume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreConsume">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreConsume_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreConsume" Type="Self.StoreConsume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreConsume">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreConsumeSingle_StoreConsume">
+          <End Role="StoreConsume" Type="Self.StoreConsume" Multiplicity="1" />
+          <End Role="StoreConsumeSingle" Type="Self.StoreConsumeSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreConsume">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreConsumeSingle">
+              <PropertyRef Name="ConsumeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreConsumeSingle_StoreIn">
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="1" />
+          <End Role="StoreConsumeSingle" Type="Self.StoreConsumeSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreConsumeSingle">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreFlow_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreFlow" Type="Self.StoreFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreFlow">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreFlow_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreFlow" Type="Self.StoreFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreFlow">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreFlowSingle_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreFlowSingle" Type="Self.StoreFlowSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreFlowSingle">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreFlowSingle_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreFlowSingle" Type="Self.StoreFlowSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreFlowSingle">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreIn_OperationUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreIn">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreIn_ResponsibleUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreIn">
+              <PropertyRef Name="ResponsibleUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreIn_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreIn">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreIn_StoreTarget">
+          <End Role="StoreTarget" Type="Self.StoreTarget" Multiplicity="1" />
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreTarget">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreIn">
+              <PropertyRef Name="TargetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreInSingle_StoreIn">
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="1" />
+          <End Role="StoreInSingle" Type="Self.StoreInSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreInSingle">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreOutSingle_StoreIn">
+          <End Role="StoreIn" Type="Self.StoreIn" Multiplicity="1" />
+          <End Role="StoreOutSingle" Type="Self.StoreOutSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreOutSingle">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreInSingle_StoreInSingle">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreInSingle" Type="Self.StoreInSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreInSingle">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreLend_LendUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreLend" Type="Self.StoreLend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreLend">
+              <PropertyRef Name="LendUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreLend_OperationUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreLend" Type="Self.StoreLend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreLend">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreLend_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreLend" Type="Self.StoreLend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreLend">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreReturnSingle_StoreLend">
+          <End Role="StoreLend" Type="Self.StoreLend" Multiplicity="1" />
+          <End Role="StoreReturnSingle" Type="Self.StoreReturnSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreLend">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreReturnSingle">
+              <PropertyRef Name="LendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreObject_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreObject">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreOut_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreOut" Type="Self.StoreOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreOut">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreReturn_StoreObject">
+          <End Role="StoreObject" Type="Self.StoreObject" Multiplicity="1" />
+          <End Role="StoreReturn" Type="Self.StoreReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreReturn">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreOut_OperationUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreOut" Type="Self.StoreOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreOut">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreOut_OutUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreOut" Type="Self.StoreOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreOut">
+              <PropertyRef Name="OutUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreOutSingle_StoreOutSingle">
+          <End Role="StoreOut" Type="Self.StoreOut" Multiplicity="1" />
+          <End Role="StoreOutSingle" Type="Self.StoreOutSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreOut">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreOutSingle">
+              <PropertyRef Name="OutId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreReturn_OperationUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreReturn" Type="Self.StoreReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreReturn">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreReturn_ReturnUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreReturn" Type="Self.StoreReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreReturn">
+              <PropertyRef Name="ReturnUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreReturnSingle_StoreReturn">
+          <End Role="StoreReturn" Type="Self.StoreReturn" Multiplicity="1" />
+          <End Role="StoreReturnSingle" Type="Self.StoreReturnSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreReturn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreReturnSingle">
+              <PropertyRef Name="ReturnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreTarget_BrokerageUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="StoreTarget" Type="Self.StoreTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreTarget">
+              <PropertyRef Name="BrokerageUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreTarget_KeepUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="StoreTarget" Type="Self.StoreTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreTarget">
+              <PropertyRef Name="KeepUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreTarget_OperationUser">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StoreTarget" Type="Self.StoreTarget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreTarget">
+              <PropertyRef Name="OperationUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StoreUser">
+          <End Role="StoreRole" Type="Self.StoreRole" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="StoreEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Store" EntityType="Self.Store" />
+          <EntitySet Name="StoreCatalog" EntityType="Self.StoreCatalog" />
+          <EntitySet Name="StoreConsume" EntityType="Self.StoreConsume" />
+          <EntitySet Name="StoreConsumeSingle" EntityType="Self.StoreConsumeSingle" />
+          <EntitySet Name="StoreDictionary" EntityType="Self.StoreDictionary" />
+          <EntitySet Name="StoreFlow" EntityType="Self.StoreFlow" />
+          <EntitySet Name="StoreFlowSingle" EntityType="Self.StoreFlowSingle" />
+          <EntitySet Name="StoreIn" EntityType="Self.StoreIn" />
+          <EntitySet Name="StoreInSingle" EntityType="Self.StoreInSingle" />
+          <EntitySet Name="StoreLend" EntityType="Self.StoreLend" />
+          <EntitySet Name="StoreLendSingle" EntityType="Self.StoreLendSingle" />
+          <EntitySet Name="StoreObject" EntityType="Self.StoreObject" />
+          <EntitySet Name="StoreOut" EntityType="Self.StoreOut" />
+          <EntitySet Name="StoreOutSingle" EntityType="Self.StoreOutSingle" />
+          <EntitySet Name="StoreReturn" EntityType="Self.StoreReturn" />
+          <EntitySet Name="StoreReturnSingle" EntityType="Self.StoreReturnSingle" />
+          <EntitySet Name="StoreRole" EntityType="Self.StoreRole" />
+          <EntitySet Name="StoreTarget" EntityType="Self.StoreTarget" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_StoreCatalog_Store" Association="Self.FK_StoreCatalog_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="StoreCatalog" EntitySet="StoreCatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreDictionary_Store" Association="Self.FK_StoreDictionary_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="StoreDictionary" EntitySet="StoreDictionary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreRole_Store" Association="Self.FK_StoreRole_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="StoreRole" EntitySet="StoreRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreTarget_Store" Association="Self.FK_StoreTarget_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="StoreTarget" EntitySet="StoreTarget" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreCatalog_StoreCatalog" Association="Self.FK_StoreCatalog_StoreCatalog">
+            <End Role="StoreCatalog" EntitySet="StoreCatalog" />
+            <End Role="StoreCatalog1" EntitySet="StoreCatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreObject_SourceStoreCatalog" Association="Self.FK_StoreObject_SourceStoreCatalog">
+            <End Role="StoreCatalog" EntitySet="StoreCatalog" />
+            <End Role="StoreObject" EntitySet="StoreObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreObject_StoreCatalog" Association="Self.FK_StoreObject_StoreCatalog">
+            <End Role="StoreCatalog" EntitySet="StoreCatalog" />
+            <End Role="StoreObject" EntitySet="StoreObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreConsume_ConsumeUser" Association="Self.FK_StoreConsume_ConsumeUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreConsume" EntitySet="StoreConsume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreConsume_OperationUser" Association="Self.FK_StoreConsume_OperationUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreConsume" EntitySet="StoreConsume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreConsume_StoreObject" Association="Self.FK_StoreConsume_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreConsume" EntitySet="StoreConsume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreConsumeSingle_StoreConsume" Association="Self.FK_StoreConsumeSingle_StoreConsume">
+            <End Role="StoreConsume" EntitySet="StoreConsume" />
+            <End Role="StoreConsumeSingle" EntitySet="StoreConsumeSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreConsumeSingle_StoreIn" Association="Self.FK_StoreConsumeSingle_StoreIn">
+            <End Role="StoreIn" EntitySet="StoreIn" />
+            <End Role="StoreConsumeSingle" EntitySet="StoreConsumeSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreFlow_StoreObject" Association="Self.FK_StoreFlow_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreFlow" EntitySet="StoreFlow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreFlow_User" Association="Self.FK_StoreFlow_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreFlow" EntitySet="StoreFlow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreFlowSingle_StoreObject" Association="Self.FK_StoreFlowSingle_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreFlowSingle" EntitySet="StoreFlowSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreFlowSingle_User" Association="Self.FK_StoreFlowSingle_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreFlowSingle" EntitySet="StoreFlowSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreIn_OperationUser" Association="Self.FK_StoreIn_OperationUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreIn" EntitySet="StoreIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreIn_ResponsibleUser" Association="Self.FK_StoreIn_ResponsibleUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreIn" EntitySet="StoreIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreIn_StoreObject" Association="Self.FK_StoreIn_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreIn" EntitySet="StoreIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreIn_StoreTarget" Association="Self.FK_StoreIn_StoreTarget">
+            <End Role="StoreTarget" EntitySet="StoreTarget" />
+            <End Role="StoreIn" EntitySet="StoreIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreInSingle_StoreIn" Association="Self.FK_StoreInSingle_StoreIn">
+            <End Role="StoreIn" EntitySet="StoreIn" />
+            <End Role="StoreInSingle" EntitySet="StoreInSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreOutSingle_StoreIn" Association="Self.FK_StoreOutSingle_StoreIn">
+            <End Role="StoreIn" EntitySet="StoreIn" />
+            <End Role="StoreOutSingle" EntitySet="StoreOutSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreInSingle_StoreInSingle" Association="Self.FK_StoreInSingle_StoreInSingle">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreInSingle" EntitySet="StoreInSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreLend_LendUser" Association="Self.FK_StoreLend_LendUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreLend" EntitySet="StoreLend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreLend_OperationUser" Association="Self.FK_StoreLend_OperationUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreLend" EntitySet="StoreLend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreLend_StoreObject" Association="Self.FK_StoreLend_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreLend" EntitySet="StoreLend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreReturnSingle_StoreLend" Association="Self.FK_StoreReturnSingle_StoreLend">
+            <End Role="StoreLend" EntitySet="StoreLend" />
+            <End Role="StoreReturnSingle" EntitySet="StoreReturnSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreObject_User" Association="Self.FK_StoreObject_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreObject" EntitySet="StoreObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreOut_StoreObject" Association="Self.FK_StoreOut_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreOut" EntitySet="StoreOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreReturn_StoreObject" Association="Self.FK_StoreReturn_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreReturn" EntitySet="StoreReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreOut_OperationUser" Association="Self.FK_StoreOut_OperationUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreOut" EntitySet="StoreOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreOut_OutUser" Association="Self.FK_StoreOut_OutUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreOut" EntitySet="StoreOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreOutSingle_StoreOutSingle" Association="Self.FK_StoreOutSingle_StoreOutSingle">
+            <End Role="StoreOut" EntitySet="StoreOut" />
+            <End Role="StoreOutSingle" EntitySet="StoreOutSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreReturn_OperationUser" Association="Self.FK_StoreReturn_OperationUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreReturn" EntitySet="StoreReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreReturn_ReturnUser" Association="Self.FK_StoreReturn_ReturnUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreReturn" EntitySet="StoreReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreReturnSingle_StoreReturn" Association="Self.FK_StoreReturnSingle_StoreReturn">
+            <End Role="StoreReturn" EntitySet="StoreReturn" />
+            <End Role="StoreReturnSingle" EntitySet="StoreReturnSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreTarget_BrokerageUser" Association="Self.FK_StoreTarget_BrokerageUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreTarget" EntitySet="StoreTarget" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreTarget_KeepUser" Association="Self.FK_StoreTarget_KeepUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreTarget" EntitySet="StoreTarget" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreTarget_OperationUser" Association="Self.FK_StoreTarget_OperationUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="StoreTarget" EntitySet="StoreTarget" />
+          </AssociationSet>
+          <AssociationSet Name="StoreUser" Association="Self.StoreUser">
+            <End Role="StoreRole" EntitySet="StoreRole" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreLendSingle_StoreIn" Association="StoreModel.FK_StoreLendSingle_StoreIn">
+            <End Role="StoreIn" EntitySet="StoreIn" />
+            <End Role="StoreLendSingle" EntitySet="StoreLendSingle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreLendSingle_StoreLend" Association="StoreModel.FK_StoreLendSingle_StoreLend">
+            <End Role="StoreLend" EntitySet="StoreLend" />
+            <End Role="StoreLendSingle" EntitySet="StoreLendSingle" />
+          </AssociationSet>
+          <EntitySet Name="StoreStatistics" EntityType="StoreModel.StoreStatistics" />
+          <AssociationSet Name="FK_StoreStatistics_StoreObject" Association="StoreModel.FK_StoreStatistics_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreStatistics" EntitySet="StoreStatistics" />
+          </AssociationSet>
+          <EntitySet Name="Application" EntityType="StoreModel.Application" />
+        </EntityContainer>
+        <Association Name="FK_StoreLendSingle_StoreIn">
+          <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
+          <End Type="StoreModel.StoreLendSingle" Role="StoreLendSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreLendSingle">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreLendSingle_StoreLend">
+          <End Type="StoreModel.StoreLend" Role="StoreLend" Multiplicity="1" />
+          <End Type="StoreModel.StoreLendSingle" Role="StoreLendSingle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreLend">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreLendSingle">
+              <PropertyRef Name="LendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StoreStatistics">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="TimeNode" />
+          </Key>
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="Int32" Nullable="false" />
+          <Property Name="StartInAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartInMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartLendAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartLendMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartConsumeAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartConsumeMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartOutAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartOutMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndInAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndInMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndLendAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndLendMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndConsumeAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndConsumeMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndOutAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndOutMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <NavigationProperty Name="StoreObject" Relationship="StoreModel.FK_StoreStatistics_StoreObject" FromRole="StoreStatistics" ToRole="StoreObject" />
+        </EntityType>
+        <Association Name="FK_StoreStatistics_StoreObject">
+          <End Type="StoreModel.StoreObject" Role="StoreObject" Multiplicity="1" />
+          <End Type="StoreModel.StoreStatistics" Role="StoreStatistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreStatistics">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Home" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Quit" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StoreModelStoreContainer" CdmEntityContainer="StoreEntity">
+          <EntitySetMapping Name="Store">
+            <EntityTypeMapping TypeName="StoreModel.Store">
+              <MappingFragment StoreEntitySet="Store">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="DefaultView" ColumnName="DefaultView" />
+                <ScalarProperty Name="DefaultType" ColumnName="DefaultType" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreCatalog">
+            <EntityTypeMapping TypeName="StoreModel.StoreCatalog">
+              <MappingFragment StoreEntitySet="StoreCatalog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreConsume">
+            <EntityTypeMapping TypeName="StoreModel.StoreConsume">
+              <MappingFragment StoreEntitySet="StoreConsume">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="ConsumeUserId" ColumnName="ConsumeUserId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreConsumeSingle">
+            <EntityTypeMapping TypeName="StoreModel.StoreConsumeSingle">
+              <MappingFragment StoreEntitySet="StoreConsumeSingle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
+                <ScalarProperty Name="ConsumeId" ColumnName="ConsumeId" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />
+                <ScalarProperty Name="SourcePerPrice" ColumnName="SourcePerPrice" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreDictionary">
+            <EntityTypeMapping TypeName="StoreModel.StoreDictionary">
+              <MappingFragment StoreEntitySet="StoreDictionary">
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreFlow">
+            <EntityTypeMapping TypeName="StoreModel.StoreFlow">
+              <MappingFragment StoreEntitySet="StoreFlow">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreFlowSingle">
+            <EntityTypeMapping TypeName="StoreModel.StoreFlowSingle">
+              <MappingFragment StoreEntitySet="StoreFlowSingle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="ObjectOrdinal" ColumnName="ObjectOrdinal" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreIn">
+            <EntityTypeMapping TypeName="StoreModel.StoreIn">
+              <MappingFragment StoreEntitySet="StoreIn">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ResponsibleUserId" ColumnName="ResponsibleUserId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />
+                <ScalarProperty Name="SourcePerPrice" ColumnName="SourcePerPrice" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreInSingle">
+            <EntityTypeMapping TypeName="StoreModel.StoreInSingle">
+              <MappingFragment StoreEntitySet="StoreInSingle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="In" ColumnName="In" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreLend">
+            <EntityTypeMapping TypeName="StoreModel.StoreLend">
+              <MappingFragment StoreEntitySet="StoreLend">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="LendUserId" ColumnName="LendUserId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Returned" ColumnName="Returned" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreLendSingle">
+            <EntityTypeMapping TypeName="StoreModel.StoreLendSingle">
+              <MappingFragment StoreEntitySet="StoreLendSingle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
+                <ScalarProperty Name="LendId" ColumnName="LendId" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />
+                <ScalarProperty Name="SourcePerPrice" ColumnName="SourcePerPrice" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="ReturnedAmount" ColumnName="ReturnedAmount" />
+                <ScalarProperty Name="ReturnedMoney" ColumnName="ReturnedMoney" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreObject">
+            <EntityTypeMapping TypeName="StoreModel.StoreObject">
+              <MappingFragment StoreEntitySet="StoreObject">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="SourceCatalogId" ColumnName="SourceCatalogId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Single" ColumnName="Single" />
+                <ScalarProperty Name="Consumable" ColumnName="Consumable" />
+                <ScalarProperty Name="Fixed" ColumnName="Fixed" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreOut">
+            <EntityTypeMapping TypeName="StoreModel.StoreOut">
+              <MappingFragment StoreEntitySet="StoreOut">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="OutUserId" ColumnName="OutUserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreOutSingle">
+            <EntityTypeMapping TypeName="StoreModel.StoreOutSingle">
+              <MappingFragment StoreEntitySet="StoreOutSingle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
+                <ScalarProperty Name="OutId" ColumnName="OutId" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />
+                <ScalarProperty Name="SourcePerPrice" ColumnName="SourcePerPrice" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreReturn">
+            <EntityTypeMapping TypeName="StoreModel.StoreReturn">
+              <MappingFragment StoreEntitySet="StoreReturn">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="ReturnUserId" ColumnName="ReturnUserId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreReturnSingle">
+            <EntityTypeMapping TypeName="StoreModel.StoreReturnSingle">
+              <MappingFragment StoreEntitySet="StoreReturnSingle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LendId" ColumnName="LendId" />
+                <ScalarProperty Name="ReturnId" ColumnName="ReturnId" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreRole">
+            <EntityTypeMapping TypeName="StoreModel.StoreRole">
+              <MappingFragment StoreEntitySet="StoreRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Right" ColumnName="Right" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreTarget">
+            <EntityTypeMapping TypeName="StoreModel.StoreTarget">
+              <MappingFragment StoreEntitySet="StoreTarget">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+                <ScalarProperty Name="OrderSource" ColumnName="OrderSource" />
+                <ScalarProperty Name="UsageTarget" ColumnName="UsageTarget" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="ToPay" ColumnName="ToPay" />
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
+                <ScalarProperty Name="BrokerageUserId" ColumnName="BrokerageUserId" />
+                <ScalarProperty Name="KeepUserId" ColumnName="KeepUserId" />
+                <ScalarProperty Name="In" ColumnName="In" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="StoreModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Stamp" ColumnName="Stamp" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordEx" ColumnName="PasswordEx" />
+                <ScalarProperty Name="CryptoKey" ColumnName="CryptoKey" />
+                <ScalarProperty Name="CryptoSalt" ColumnName="CryptoSalt" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="StoreUser" TypeName="StoreModel.StoreUser" StoreEntitySet="StoreUser">
+            <EndProperty Name="StoreRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="StoreStatistics">
+            <EntityTypeMapping TypeName="StoreModel.StoreStatistics">
+              <MappingFragment StoreEntitySet="StoreStatistics">
+                <ScalarProperty Name="EndOutMoney" ColumnName="EndOutMoney" />
+                <ScalarProperty Name="EndOutAmount" ColumnName="EndOutAmount" />
+                <ScalarProperty Name="EndConsumeMoney" ColumnName="EndConsumeMoney" />
+                <ScalarProperty Name="EndConsumeAmount" ColumnName="EndConsumeAmount" />
+                <ScalarProperty Name="EndLendMoney" ColumnName="EndLendMoney" />
+                <ScalarProperty Name="EndLendAmount" ColumnName="EndLendAmount" />
+                <ScalarProperty Name="EndInMoney" ColumnName="EndInMoney" />
+                <ScalarProperty Name="EndInAmount" ColumnName="EndInAmount" />
+                <ScalarProperty Name="StartOutMoney" ColumnName="StartOutMoney" />
+                <ScalarProperty Name="StartOutAmount" ColumnName="StartOutAmount" />
+                <ScalarProperty Name="StartConsumeMoney" ColumnName="StartConsumeMoney" />
+                <ScalarProperty Name="StartConsumeAmount" ColumnName="StartConsumeAmount" />
+                <ScalarProperty Name="StartLendMoney" ColumnName="StartLendMoney" />
+                <ScalarProperty Name="StartLendAmount" ColumnName="StartLendAmount" />
+                <ScalarProperty Name="StartInMoney" ColumnName="StartInMoney" />
+                <ScalarProperty Name="StartInAmount" ColumnName="StartInAmount" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Application">
+            <EntityTypeMapping TypeName="StoreModel.Application">
+              <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Quit" ColumnName="Quit" />
+                <ScalarProperty Name="Home" ColumnName="Home" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

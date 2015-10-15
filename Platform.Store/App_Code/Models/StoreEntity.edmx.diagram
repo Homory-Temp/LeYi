@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a40fa783cf5346e89a2243b0e8589b5b" Name="Diagram">
+        <EntityTypeShape EntityType="StoreModel.Store" Width="1.5" PointX="0.75" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreCatalog" Width="1.5" PointX="3" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreConsume" Width="1.5" PointX="9.75" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreConsumeSingle" Width="1.5" PointX="18" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreDictionary" Width="1.5" PointX="3" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreFlow" Width="1.5" PointX="15.75" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreFlowSingle" Width="1.5" PointX="12.75" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreIn" Width="1.5" PointX="15.75" PointY="29.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreInSingle" Width="1.5" PointX="21" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreLend" Width="1.5" PointX="12.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreLendSingle" Width="1.5" PointX="21" PointY="34.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreObject" Width="1.5" PointX="7.5" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreOut" Width="1.5" PointX="12.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreOutSingle" Width="1.5" PointX="18" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreReturn" Width="1.5" PointX="15.75" PointY="37" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreReturnSingle" Width="1.5" PointX="18" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreRole" Width="1.5" PointX="3" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreTarget" Width="1.5" PointX="10.5" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.User" Width="1.5" PointX="5.25" PointY="30.75" IsExpanded="true" />
+        <AssociationConnector Association="StoreModel.FK_StoreCatalog_Store" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreDictionary_Store" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreRole_Store" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreTarget_Store" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreCatalog_StoreCatalog" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreObject_SourceStoreCatalog" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreObject_StoreCatalog" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreConsume_ConsumeUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreConsume_OperationUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreConsume_StoreObject" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreConsumeSingle_StoreConsume" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreConsumeSingle_StoreIn" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreFlow_StoreObject" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreFlow_User" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreFlowSingle_StoreObject" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreFlowSingle_User" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreIn_OperationUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreIn_ResponsibleUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreIn_StoreObject" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreIn_StoreTarget" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreInSingle_StoreIn" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreOutSingle_StoreIn" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreInSingle_StoreInSingle" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreLend_LendUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreLend_OperationUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreLend_StoreObject" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreReturnSingle_StoreLend" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreObject_User" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreOut_StoreObject" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreReturn_StoreObject" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreOut_OperationUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreOut_OutUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreOutSingle_StoreOutSingle" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreReturn_OperationUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreReturn_ReturnUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreReturnSingle_StoreReturn" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreTarget_BrokerageUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreTarget_KeepUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreTarget_OperationUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.StoreUser" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreModel.FK_StoreLendSingle_StoreIn" />
+        <AssociationConnector Association="StoreModel.FK_StoreLendSingle_StoreLend" />
+        <EntityTypeShape EntityType="StoreModel.StoreStatistics" Width="1.5" PointX="9.75" PointY="37.625" />
+        <AssociationConnector Association="StoreModel.FK_StoreStatistics_StoreObject" />
+        <EntityTypeShape EntityType="StoreModel.Application" Width="1.5" PointX="0.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
