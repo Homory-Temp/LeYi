@@ -106,6 +106,21 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class Store_Visitor
+    {
+        public System.Guid Id { get; set; }
+        public string RealName { get; set; }
+        public string PinYin { get; set; }
+        public int State { get; set; }
+        public string Right { get; set; }
+        public System.Guid StoreId { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class StoreCatalog
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

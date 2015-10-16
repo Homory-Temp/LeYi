@@ -15,12 +15,43 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle navbar-link" data-toggle="dropdown">物资管理</a>
                         <ul class="dropdown-menu">
-                            <li><a href="../StoreTarget/TargetAdd">购置登记</a></li>
-                            <li style='<%= (CurrentStore.State == Models.StoreState.食品 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>快捷入库</a></li>
-                            <li><a href="../StoreScan/Use">领用借用</a></li>
-                            <li><a href="../StoreScan/Return">物资归还</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>购置登记</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>物资入库</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>物资借领</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>物资归还</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>物资管理</a></li>
+                            <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href="../StoreImport/Go">物资分库</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href="../StoreImport/Go">数据导入</a></li>
-                            <li><a href="../StoreObject/Object">物资管理</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle navbar-link" data-toggle="dropdown">日常查询</a>
+                        <ul class="dropdown-menu">
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>购置查询</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>入库查询</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>借领查询</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>归还查询</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>物资查询</a></li>
+                            <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href="../StoreImport/Go">导入查询</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle navbar-link" data-toggle="dropdown">统计报表</a>
+                        <ul class="dropdown-menu">
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>购置报表</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>入库报表</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>出库报表</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>借还报表</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>库存报表</a></li>
+                            <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href="../StoreImport/Go">导入查询</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle navbar-link" data-toggle="dropdown">系统设置</a>
+                        <ul class="dropdown-menu">
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>物资类别</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>基础数据</a></li>
+                            <li><a href='<%= "../StoreIn/InMultiple?StoreId={0}".Formatted(StoreId) %>'>权限设置</a></li>
                         </ul>
                     </li>
                 </ul>

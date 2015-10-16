@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="HomeAdd.aspx.cs" Inherits="Store_HomeAdd" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="HomeEdit.aspx.cs" Inherits="Store_HomeEdit" %>
 
 <%@ Register Src="~/Control/SideBar.ascx" TagPrefix="homory" TagName="SideBar" %>
 
@@ -30,7 +30,7 @@
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-12">
-                    <input type="button" class="btn btn-tumblr" value="新增仓库" />
+                    <input type="button" class="btn btn-tumblr" value="编辑仓库" />
                     <hr style="color: #2B2B2B; margin-top: 4px;" />
                 </div>
             </div>
@@ -58,7 +58,7 @@
                             </telerik:RadComboBox>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" id="allowed" runat="server">
                         <div class="col-md-4 text-right">物资类型：</div>
                         <div class="col-md-8 text-left">
                             <div>
@@ -94,23 +94,11 @@
                             </div>
                         </div>
                     </div>
-                     <div class="row" id="sp" runat="server">
-                        <div class="col-md-4 text-right">特殊仓库：</div>
-                        <div class="col-md-8 text-left">
-                            <telerik:RadComboBox ID="state" runat="server" Width="400">
-                                <Items>
-                                    <telerik:RadComboBoxItem Text="非特殊仓库" Value="1" Selected="true" />
-                                    <telerik:RadComboBoxItem Text="食品进出库" Value="-1" />
-                                    <telerik:RadComboBoxItem Text="固定资产库" Value="-2" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </div>
-                    </div>
                     <div class="row">&nbsp;</div>
                     <div class="row">
                         <div class="col-md-4 text-right">&nbsp;</div>
                         <div class="col-md-8 text-left">
-                            <input type="button" class="btn btn-tumblr" id="add" runat="server" value="保存" onserverclick="add_ServerClick" />
+                            <input type="button" class="btn btn-tumblr" id="edit" runat="server" value="保存" onserverclick="edit_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="button" class="btn btn-tumblr" id="cancel" runat="server" value="取消" onserverclick="cancel_ServerClick" />
                         </div>

@@ -419,6 +419,23 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Creator' does not have a pri
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Store_Visitor">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="RealName" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Right" />
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Right" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StoreId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <Association Name="FK_DepartmentUser_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="DepartmentUser" Type="Self.DepartmentUser" Multiplicity="*" />
@@ -971,6 +988,9 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Creator' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetPinYin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar(max)">
+          <Parameter Name="text" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="StoreModelStoreContainer">
           <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepartmentUser" EntityType="Self.DepartmentUser" Schema="dbo" store:Type="Tables" />
@@ -1014,6 +1034,16 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Creator' does not have a pri
     [Store_Creator].[Description] AS [Description], 
     [Store_Creator].[PinYin] AS [PinYin]
     FROM [dbo].[Store_Creator] AS [Store_Creator]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Store_Visitor" EntityType="Self.Store_Visitor" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Store_Visitor].[Id] AS [Id], 
+    [Store_Visitor].[RealName] AS [RealName], 
+    [Store_Visitor].[PinYin] AS [PinYin], 
+    [Store_Visitor].[State] AS [State], 
+    [Store_Visitor].[Right] AS [Right], 
+    [Store_Visitor].[StoreId] AS [StoreId]
+    FROM [dbo].[Store_Visitor] AS [Store_Visitor]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_DepartmentUser_User" Association="Self.FK_DepartmentUser_User">
             <End Role="User" EntitySet="User" />
@@ -2282,6 +2312,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Creator' does not have a pri
             <End Role="UserOnline" EntitySet="UserOnline" />
           </AssociationSet>
           <EntitySet Name="Store_Creator" EntityType="StoreModel.Store_Creator" />
+          <EntitySet Name="Store_Visitor" EntityType="StoreModel.Store_Visitor" />
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -2443,6 +2474,21 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Creator' does not have a pri
           <Member Name="食品" Value="-1" />
           <Member Name="固产" Value="-2" />
         </EnumType>
+        <EntityType Name="Store_Visitor">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="RealName" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Right" />
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RealName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Right" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StoreId" Type="Guid" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2868,6 +2914,18 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Creator' does not have a pri
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="RealName" ColumnName="RealName" />
                 <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_Visitor">
+            <EntityTypeMapping TypeName="StoreModel.Store_Visitor">
+              <MappingFragment StoreEntitySet="Store_Visitor">
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="Right" ColumnName="Right" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

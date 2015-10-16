@@ -13,48 +13,21 @@ public partial class Store_HomeRemove : StorePage
     {
         if (!IsPostBack)
         {
-            foreach (var store in db.Value.Store.Where(o => o.State < StoreState.内置))
-                if (state.Items.FindItemByValue(((int)store.State).ToString()) != null)
-                    state.Items.FindItemByValue(((int)store.State).ToString()).Remove();
-            sp.Visible = state.Items.Count > 1;
+            var id = "StoreId".Query().GlobalId();
+            store.InnerText = db.Value.Store.Single(o => o.Id == id).Name;
         }
     }
 
-    protected void add_ServerClick(object sender, EventArgs e)
+    protected void remove_ServerClick(object sender, EventArgs e)
     {
-        if (name.Text.Trim().Null())
+        if (!name.Text.Equals(store.InnerText.Trim(), StringComparison.InvariantCultureIgnoreCase))
         {
-            Notify(ap, "请输入仓库名称", "error");
+            Notify(ap, "请输入完整的仓库名称", "error");
             return;
         }
-        if ("{0}{1}{2}".Formatted(t1.PeekValue(true), t2.PeekValue(true), t3.PeekValue(true)).Null())
-        {
-            Notify(ap, "请选择物资类型", "error");
-            return;
-        }
-        var store = new Store
-        {
-            Id = db.Value.GlobalId(),
-            Name = name.Text.Trim(),
-            CampusId = CurrentCampus,
-            Ordinal = ordinal.PeekValue(),
-            DefaultView = view.PeekValue(1),
-            DefaultType = new[] { t1x, t2x, t3x }.PeekValue(1),
-            Types = "{0}{1}{2}".Formatted(t1.PeekValue(true), t2.PeekValue(true), t3.PeekValue(true)),
-            State = (StoreState)int.Parse(state.SelectedValue)
-        };
-        db.Value.Store.Add(store);
-        var role = new StoreRole
-        {
-            Id = db.Value.GlobalId(),
-            StoreId = store.Id,
-            Name = "{0}管理组".Formatted(store.Name),
-            Right = "*",
-            Ordinal = 0,
-            State = 0
-        };
-        db.Value.StoreRole.Add(role);
-        role.User.Add(db.Value.GetUser(CurrentUser));
+        var id = "StoreId".Query().GlobalId();
+        var item = db.Value.Store.Single(o => o.Id == id);
+        item.State = StoreState.删除;
         db.Value.SaveChanges();
         Response.Redirect("~/Store/Home");
     }
@@ -62,18 +35,5 @@ public partial class Store_HomeRemove : StorePage
     protected void cancel_ServerClick(object sender, EventArgs e)
     {
         Response.Redirect("~/Store/Home");
-    }
-
-    protected void t_CheckedChanged(object sender, EventArgs e)
-    {
-        t1x.Visible = t1.Checked;
-        t2x.Visible = t2.Checked;
-        t3x.Visible = t3.Checked;
-    }
-
-    protected void tx_CheckedChanged(object sender, EventArgs e)
-    {
-        if ((sender as RadButton).Checked)
-            new RadButton[] { t1x, t2x, t3x }.Where(o => o.ID != (sender as RadButton).ID).ToList().ForEach(o => o.Checked = false);
     }
 }

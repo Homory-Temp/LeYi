@@ -49,5 +49,6 @@ namespace Models
         public virtual DbSet<DepartmentUser> DepartmentUser { get; set; }
         public virtual DbSet<UserOnline> UserOnline { get; set; }
         public virtual DbSet<Store_Creator> Store_Creator { get; set; }
+        public virtual DbSet<Store_Visitor> Store_Visitor { get; set; }
     }
 }

@@ -9,7 +9,15 @@ public partial class Store_Home : StorePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if(!IsPostBack)
+        {
+            creating.Visible = Right_Create;
+        }
+    }
 
+    protected bool CanVisit(Guid storeId)
+    {
+        return db.Value.Store_Visitor.Count(o => o.Id == CurrentUser && o.StoreId == storeId) > 0;
     }
 
     protected void add_ServerClick(object sender, EventArgs e)

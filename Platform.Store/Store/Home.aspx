@@ -7,6 +7,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
     <script src="../Content/jQuery/jquery.min.js"></script>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/style-responsive.css" rel="stylesheet" />
@@ -25,7 +28,7 @@
     <form id="form" runat="server">
         <homory:SideBar runat="server" ID="SideBar" Crumb="物资管理" />
         <div class="container">
-            <div class="row">
+            <div class="row" id="creating" runat="server">
                 <div class="col-md-12">
                     <input type="button" class="btn btn-tumblr" id="add" runat="server" value="新增仓库" onserverclick="add_ServerClick" />
                     <hr style="color: #2B2B2B; margin-top: 4px;" />
@@ -34,7 +37,7 @@
             <div class="row">
                 <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource">
                     <ItemTemplate>
-                        <div class="col-md-4 text-center" style="cursor: pointer;">
+                        <div class="col-md-4 text-center" style="cursor: pointer;" id="area" runat="server" visible='<%# CanVisit((Guid)Eval("Id")) %>'>
                             <div class="row" onclick="top.location.href = '../StoreHome/Home?StoreId=<%# Eval("Id") %>';">
                                 <div class="col-md-12">
                                     <img src="../Content/Images/Store.png" />
@@ -47,8 +50,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="button" class="btn btn-tumblr" id="edit" runat="server" value="编辑" />
-                                    <input type="button" class="btn btn-tumblr" id="remove" runat="server" value="删除" visible='<%# (Models.StoreState)Eval("State") > Models.StoreState.内置 %>' onclick='<%# "top.location.href='" + "../Home/HomeRemove?StoreId={0}".Formatted(Eval("Id")) + "'; return false;" %>' />
+                                    <input type="button" class="btn btn-tumblr" id="edit" runat="server" value="编辑" visible='<%# Right_Create %>' onclick=<%# "top.location.href='../Store/HomeEdit?StoreId={0}'; return false;".Formatted(Eval("Id")) %> />
+                                    <input type="button" class="btn btn-tumblr" id="remove" runat="server" value="删除" visible='<%# (Models.StoreState)Eval("State") > Models.StoreState.内置 && Right_Create %>' onclick=<%# "top.location.href='../Store/HomeRemove?StoreId={0}'; return false;".Formatted(Eval("Id")) %> />
                                 </div>
                             </div>
                         </div>
