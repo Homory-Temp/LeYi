@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Dictionary.aspx.cs" Inherits="StoreHome_Home" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Dictionary.aspx.cs" Inherits="StoreSetting_Dictionary" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
 
@@ -61,6 +61,7 @@
                             <ItemTemplate>
                                 <div class="col-md-3 viewPad text-center">
                                     <span class="btn btn-info dictionaryX"><%# Eval("Name") %></span>
+                                    <input type="button" class="btn btn-danger" value="╳" id="remove" runat="server" match='<%# Eval("Name") %>' onserverclick="remove_ServerClick" />
                                 </div>
                             </ItemTemplate>
                         </telerik:RadListView>

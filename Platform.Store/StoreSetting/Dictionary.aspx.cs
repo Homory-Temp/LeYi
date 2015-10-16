@@ -7,7 +7,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-public partial class StoreHome_Home : SingleStorePage
+public partial class StoreSetting_Dictionary : SingleStorePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -49,17 +49,33 @@ public partial class StoreHome_Home : SingleStorePage
             Notify(ap, "请输入要添加的基础数据", "error");
             return;
         }
-        var dictionary = new StoreDictionary
+        var type = (DictionaryType)int.Parse(dh.Value);
+        var content = name.Text.Trim();
+        if (db.Value.StoreDictionary.Count(o => o.StoreId == StoreId && o.Type == type && o.Name == content) == 0)
         {
-            StoreId = StoreId,
-            Type = (DictionaryType)int.Parse(dh.Value),
-            Name = name.Text.Trim(),
-            PinYin = db.Value.ToPinYin(name.Text.Trim()).Single()
-        };
-        db.Value.StoreDictionary.Add(dictionary);
-        db.Value.SaveChanges();
-        view.Rebind();
+            var dictionary = new StoreDictionary
+            {
+                StoreId = StoreId,
+                Type = type,
+                Name = name.Text.Trim(),
+                PinYin = db.Value.ToPinYin(name.Text.Trim()).Single()
+            };
+            db.Value.StoreDictionary.Add(dictionary);
+            db.Value.SaveChanges();
+            view.Rebind();
+        }
         name.Text = string.Empty;
         Notify(ap, "基础数据添加成功", "success");
+    }
+
+    protected void remove_ServerClick(object sender, EventArgs e)
+    {
+        var content = (sender as HtmlInputButton).Attributes["match"];
+        var type = (DictionaryType)int.Parse(dh.Value);
+        var dictionary = db.Value.StoreDictionary.Single(o => o.StoreId == StoreId && o.Type == type && o.Name == content);
+        db.Value.StoreDictionary.Remove(dictionary);
+        db.Value.SaveChanges();
+        view.Rebind();
+        Notify(ap, "基础数据删除成功", "success");
     }
 }
