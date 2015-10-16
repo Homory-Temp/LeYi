@@ -54,8 +54,8 @@ public static class BusinessExtensions
         return detectCheckState ? (control.Checked ? control.Value : string.Empty) : control.Value;
     }
 
-    public static int PeekValue(this RadButton[] controls)
+    public static int PeekValue(this RadButton[] controls, int @default)
     {
-        return int.Parse(controls.Single(o => o.Checked).Value);
+        return controls.Count(o => o.Checked) == 1 ? int.Parse(controls.Single(o => o.Checked).Value) : @default;
     }
 }

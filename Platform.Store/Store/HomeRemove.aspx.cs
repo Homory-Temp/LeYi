@@ -7,7 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
-public partial class Store_HomeAdd : StorePage
+public partial class Store_HomeRemove : StorePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

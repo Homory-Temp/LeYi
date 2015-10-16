@@ -48,7 +48,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <input type="button" class="btn btn-tumblr" id="edit" runat="server" value="编辑" />
-                                    <input type="button" class="btn btn-tumblr" id="remove" runat="server" value="删除" visible='<%# (Models.StoreState)Eval("State") > Models.StoreState.内置 %>' />
+                                    <input type="button" class="btn btn-tumblr" id="remove" runat="server" value="删除" visible='<%# (Models.StoreState)Eval("State") > Models.StoreState.内置 %>' onclick='<%# "top.location.href='" + "../Home/HomeRemove?StoreId={0}".Formatted(Eval("Id")) + "'; return false;" %>' />
                                 </div>
                             </div>
                         </div>

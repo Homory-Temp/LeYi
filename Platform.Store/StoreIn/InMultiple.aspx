@@ -24,14 +24,14 @@
 <body>
     <form id="form" runat="server">
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="快捷入库" />
-        <div class="container-fluid">
+        <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-4 text-right">选择购置单：</div>
                         <div class="col-md-8 text-left">
-                            <telerik:RadComboBox ID="targets" runat="server" EmptyMessage="输入购置单号进行筛选" Width="400"></telerik:RadComboBox>
+                            <telerik:RadComboBox ID="targets" runat="server" EmptyMessage="输入购置单号进行筛选" Filter="Contains" Width="400"></telerik:RadComboBox>
                         </div>
                     </div>
                     <div class="row">&nbsp;</div>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-md-2"></div>
             </div>
-        </div>
+        </telerik:RadAjaxPanel>
     </form>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿html .container .row {
+﻿html .container .row, html .container-fluid .row {
     margin-top: 6px;
     line-height: 36px;
 }
