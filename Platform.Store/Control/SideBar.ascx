@@ -18,7 +18,7 @@
         <div style="clear: both;"></div>
     </nav>
 </div>
-<telerik:RadAjaxLoadingPanel ID="loading" runat="server">
+<telerik:RadAjaxLoadingPanel ID="loading" runat="server" InitialDelayTime="1000">
     <div>&nbsp;</div>
     <div class="btn btn-lg btn-warning" style="margin-top: 50px;">正在加载 请稍候....</div>
 </telerik:RadAjaxLoadingPanel>

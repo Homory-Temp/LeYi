@@ -12,6 +12,8 @@ namespace Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class StoreEntity : DbContext
     {
@@ -50,5 +52,14 @@ namespace Models
         public virtual DbSet<UserOnline> UserOnline { get; set; }
         public virtual DbSet<Store_Creator> Store_Creator { get; set; }
         public virtual DbSet<Store_Visitor> Store_Visitor { get; set; }
+    
+        public virtual ObjectResult<string> ToPinYin(string name)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ToPinYin", nameParameter);
+        }
     }
 }

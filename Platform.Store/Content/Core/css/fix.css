@@ -10,3 +10,15 @@ html .rbToggleButton .rbToggleCheckbox, html .rbToggleButton .rbToggleCheckboxCh
 html .tableSpan {
     width: 20px;
 }
+
+html .dictionary {
+    width: 100px;
+}
+
+html .dictionaryX {
+    width: 160px;
+}
+
+html .viewPad {
+    margin-top: 4px;
+}

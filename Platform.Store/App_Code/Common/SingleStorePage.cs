@@ -18,11 +18,20 @@ public class SingleStorePage : StorePage
         get { return "StoreId".Query().GlobalId(); }
     }
 
-    protected string StoreName
+    private Models.Store s;
+
+    protected Models.Store CurrentStore
     {
         get
         {
-            return db.Value.Store.Single(o => o.Id == StoreId).Name;
+            if (s == null)
+            {
+                var id = "StoreId".Query().GlobalId();
+                s = db.Value.Store.SingleOrDefault(o => o.Id == id);
+                if (s == null)
+                    s = new Models.Store { Id = Guid.Empty, Name = string.Empty, State = Models.StoreState.删除 };
+            }
+            return s;
         }
     }
 }

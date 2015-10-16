@@ -988,8 +988,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="GetPinYin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar(max)">
-          <Parameter Name="text" Type="nvarchar(max)" Mode="In" />
+        <Function Name="ToPinYin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
         </Function>
         <EntityContainer Name="StoreModelStoreContainer">
           <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
@@ -1314,7 +1314,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <PropertyRef Name="Name" />
           </Key>
           <Property Name="StoreId" Type="Guid" Nullable="false" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="StoreModel.DictionaryType" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Store" Relationship="Self.FK_StoreDictionary_Store" FromRole="StoreDictionary" ToRole="Store" />
@@ -2313,6 +2313,9 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           </AssociationSet>
           <EntitySet Name="Store_Creator" EntityType="StoreModel.Store_Creator" />
           <EntitySet Name="Store_Visitor" EntityType="StoreModel.Store_Visitor" />
+          <FunctionImport Name="ToPinYin" ReturnType="Collection(String)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -2489,6 +2492,13 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="Right" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="StoreId" Type="Guid" Nullable="false" />
         </EntityType>
+        <EnumType Name="DictionaryType">
+          <Member Name="单位" Value="1" />
+          <Member Name="规格" Value="2" />
+          <Member Name="采购来源" Value="3" />
+          <Member Name="使用对象" Value="4" />
+          <Member Name="年龄段" Value="5" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2930,6 +2940,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ToPinYin" FunctionName="StoreModel.Store.ToPinYin" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

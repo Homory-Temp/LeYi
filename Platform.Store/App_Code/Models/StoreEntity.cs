@@ -213,7 +213,7 @@ namespace Models
     public partial class StoreDictionary
     {
         public System.Guid StoreId { get; set; }
-        public int Type { get; set; }
+        public DictionaryType Type { get; set; }
         public string Name { get; set; }
         public string PinYin { get; set; }
     
@@ -766,6 +766,19 @@ namespace Models
         public System.DateTime TimeStamp { get; set; }
     
         public virtual User User { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    
+    public enum DictionaryType : int
+    {
+        单位 = 1,
+        规格 = 2,
+        采购来源 = 3,
+        使用对象 = 4,
+        年龄段 = 5
     }
 }
 namespace Models
