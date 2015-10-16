@@ -18,6 +18,20 @@
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="DepartmentUser">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="DepartmentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TopDepartmentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Store">
           <Key>
             <PropertyRef Name="Id" />
@@ -28,6 +42,7 @@
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="DefaultView" Type="int" Nullable="false" />
           <Property Name="DefaultType" Type="int" Nullable="false" />
+          <Property Name="Types" Type="nvarchar(max)" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="StoreCatalog">
@@ -366,6 +381,56 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
         </EntityType>
+        <EntityType Name="UserOnline">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.Store_Creator' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Store_Creator">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Account" />
+            <PropertyRef Name="RealName" />
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="Stamp" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Ordinal" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Account" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="256" />
+          <Property Name="Stamp" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PasswordEx" Type="nvarchar(max)" />
+          <Property Name="CryptoKey" Type="nvarchar(max)" />
+          <Property Name="CryptoSalt" Type="nvarchar(max)" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <Association Name="FK_DepartmentUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="DepartmentUser" Type="Self.DepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StoreCatalog_Store">
           <End Role="Store" Type="Self.Store" Multiplicity="1" />
           <End Role="StoreCatalog" Type="Self.StoreCatalog" Multiplicity="*" />
@@ -894,8 +959,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserOnline_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserOnline" Type="Self.UserOnline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserOnline">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="StoreModelStoreContainer">
           <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepartmentUser" EntityType="Self.DepartmentUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreCatalog" EntityType="Self.StoreCatalog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreConsume" EntityType="Self.StoreConsume" Schema="dbo" store:Type="Tables" />
@@ -917,6 +995,30 @@
           <EntitySet Name="StoreTarget" EntityType="Self.StoreTarget" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreUser" EntityType="Self.StoreUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store_Creator" EntityType="Self.Store_Creator" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Store_Creator].[Id] AS [Id], 
+    [Store_Creator].[Account] AS [Account], 
+    [Store_Creator].[RealName] AS [RealName], 
+    [Store_Creator].[DisplayName] AS [DisplayName], 
+    [Store_Creator].[Icon] AS [Icon], 
+    [Store_Creator].[Stamp] AS [Stamp], 
+    [Store_Creator].[Password] AS [Password], 
+    [Store_Creator].[PasswordEx] AS [PasswordEx], 
+    [Store_Creator].[CryptoKey] AS [CryptoKey], 
+    [Store_Creator].[CryptoSalt] AS [CryptoSalt], 
+    [Store_Creator].[Type] AS [Type], 
+    [Store_Creator].[State] AS [State], 
+    [Store_Creator].[Ordinal] AS [Ordinal], 
+    [Store_Creator].[Description] AS [Description], 
+    [Store_Creator].[PinYin] AS [PinYin]
+    FROM [dbo].[Store_Creator] AS [Store_Creator]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_DepartmentUser_User" Association="Self.FK_DepartmentUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DepartmentUser" EntitySet="DepartmentUser" />
+          </AssociationSet>
           <AssociationSet Name="FK_StoreCatalog_Store" Association="Self.FK_StoreCatalog_Store">
             <End Role="Store" EntitySet="Store" />
             <End Role="StoreCatalog" EntitySet="StoreCatalog" />
@@ -1093,6 +1195,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="StoreUser" EntitySet="StoreUser" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserOnline_User" Association="Self.FK_UserOnline_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserOnline" EntitySet="UserOnline" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1108,7 +1214,8 @@
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <Property Name="DefaultView" Type="Int32" Nullable="false" />
           <Property Name="DefaultType" Type="Int32" Nullable="false" />
-          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Types" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="StoreModel.StoreState" Nullable="false" />
           <NavigationProperty Name="StoreCatalog" Relationship="Self.FK_StoreCatalog_Store" FromRole="Store" ToRole="StoreCatalog" />
           <NavigationProperty Name="StoreDictionary" Relationship="Self.FK_StoreDictionary_Store" FromRole="Store" ToRole="StoreDictionary" />
           <NavigationProperty Name="StoreRole" Relationship="Self.FK_StoreRole_Store" FromRole="Store" ToRole="StoreRole" />
@@ -1495,6 +1602,8 @@
           <NavigationProperty Name="StoreTargetKeep" Relationship="Self.FK_StoreTarget_KeepUser" FromRole="User" ToRole="StoreTarget" />
           <NavigationProperty Name="StoreTargetUser" Relationship="Self.FK_StoreTarget_OperationUser" FromRole="User" ToRole="StoreTarget" />
           <NavigationProperty Name="StoreRole" Relationship="Self.StoreUser" FromRole="User" ToRole="StoreRole" />
+          <NavigationProperty Name="DepartmentUser" Relationship="StoreModel.FK_DepartmentUser_User" FromRole="User" ToRole="DepartmentUser" />
+          <NavigationProperty Name="UserOnline" Relationship="StoreModel.FK_UserOnline_User" FromRole="User" ToRole="UserOnline" />
         </EntityType>
         <Association Name="FK_StoreCatalog_Store">
           <End Role="Store" Type="Self.Store" Multiplicity="1" />
@@ -2162,6 +2271,17 @@
             <End Role="StoreStatistics" EntitySet="StoreStatistics" />
           </AssociationSet>
           <EntitySet Name="Application" EntityType="StoreModel.Application" />
+          <EntitySet Name="DepartmentUser" EntityType="StoreModel.DepartmentUser" />
+          <AssociationSet Name="FK_DepartmentUser_User" Association="StoreModel.FK_DepartmentUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DepartmentUser" EntitySet="DepartmentUser" />
+          </AssociationSet>
+          <EntitySet Name="UserOnline" EntityType="StoreModel.UserOnline" />
+          <AssociationSet Name="FK_UserOnline_User" Association="StoreModel.FK_UserOnline_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserOnline" EntitySet="UserOnline" />
+          </AssociationSet>
+          <EntitySet Name="Store_Creator" EntityType="StoreModel.Store_Creator" />
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -2240,6 +2360,89 @@
           <Property Name="State" Type="Int32" Nullable="false" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="DepartmentUser">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="DepartmentId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="TopDepartmentId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="StoreModel.FK_DepartmentUser_User" FromRole="DepartmentUser" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_DepartmentUser_User">
+          <End Type="StoreModel.User" Role="User" Multiplicity="1" />
+          <End Type="StoreModel.DepartmentUser" Role="DepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserOnline">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="User" Relationship="StoreModel.FK_UserOnline_User" FromRole="UserOnline" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_UserOnline_User">
+          <End Type="StoreModel.User" Role="User" Multiplicity="1" />
+          <End Type="StoreModel.UserOnline" Role="UserOnline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserOnline">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Store_Creator">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Account" />
+            <PropertyRef Name="RealName" />
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="Stamp" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Ordinal" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Account" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="RealName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Stamp" Type="Guid" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordEx" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CryptoKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CryptoSalt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EnumType Name="StoreState">
+          <Member Name="内置" Value="0" />
+          <Member Name="启用" Value="1" />
+          <Member Name="删除" Value="2" />
+          <Member Name="食品" Value="-1" />
+          <Member Name="固产" Value="-2" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2249,6 +2452,7 @@
           <EntitySetMapping Name="Store">
             <EntityTypeMapping TypeName="StoreModel.Store">
               <MappingFragment StoreEntitySet="Store">
+                <ScalarProperty Name="Types" ColumnName="Types" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CampusId" ColumnName="CampusId" />
@@ -2621,6 +2825,49 @@
                 <ScalarProperty Name="Home" ColumnName="Home" />
                 <ScalarProperty Name="Icon" ColumnName="Icon" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepartmentUser">
+            <EntityTypeMapping TypeName="StoreModel.DepartmentUser">
+              <MappingFragment StoreEntitySet="DepartmentUser">
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TopDepartmentId" ColumnName="TopDepartmentId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserOnline">
+            <EntityTypeMapping TypeName="StoreModel.UserOnline">
+              <MappingFragment StoreEntitySet="UserOnline">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_Creator">
+            <EntityTypeMapping TypeName="StoreModel.Store_Creator">
+              <MappingFragment StoreEntitySet="Store_Creator">
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CryptoSalt" ColumnName="CryptoSalt" />
+                <ScalarProperty Name="CryptoKey" ColumnName="CryptoKey" />
+                <ScalarProperty Name="PasswordEx" ColumnName="PasswordEx" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Stamp" ColumnName="Stamp" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

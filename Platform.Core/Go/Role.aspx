@@ -238,7 +238,7 @@
                         </div>
                         <div>
                             物资管理：
-						<telerik:RadButton ID="StorageCreate" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
+						<telerik:RadButton ID="Store" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
                                 <telerik:RadButtonToggleState Text="√ 创建仓库" Value="True" CssClass="btn btn-info" />
                                 <telerik:RadButtonToggleState Text="× 创建仓库" Value="False" CssClass="btn btn-primary" />

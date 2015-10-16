@@ -99,16 +99,13 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Sso", "http://loca
 		Svn.Uri = Platform.Sso/
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.ResourceCount", "Service.ResourceCount\Service.ResourceCount.csproj", "{4CC25DEC-6DA3-4BDE-99EE-B9CA0738F406}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.ResourceConvert", "Service.ResourceConvert\Service.ResourceConvert.csproj", "{5B566ADC-4F6E-45A8-9255-2ED344F1D024}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Picture.Import", "Windows.MMS.Picture.Import\Windows.MMS.Picture.Import.csproj", "{584C559C-9AD0-4DAD-909D-FDBB106C2F25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Tool.Import", "Windows.MMS.Tool.Import\Windows.MMS.Tool.Import.csproj", "{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}"
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Store", "Platform.Store\", "{8954937B-63C7-4634-B07E-94D53A6C673C}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Store", "http://localhost:24681", "{8954937B-63C7-4634-B07E-94D53A6C673C}"
 	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.1"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_24681"
 		Debug.AspNetCompiler.PhysicalPath = "Platform.Store\"
@@ -124,9 +121,16 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Store", "Platform.
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "24681"
 		SlnRelativePath = "Platform.Store\"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.ResourceCount", "Service.ResourceCount\Service.ResourceCount.csproj", "{4CC25DEC-6DA3-4BDE-99EE-B9CA0738F406}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.ResourceConvert", "Service.ResourceConvert\Service.ResourceConvert.csproj", "{5B566ADC-4F6E-45A8-9255-2ED344F1D024}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Picture.Import", "Windows.MMS.Picture.Import\Windows.MMS.Picture.Import.csproj", "{584C559C-9AD0-4DAD-909D-FDBB106C2F25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Tool.Import", "Windows.MMS.Tool.Import\Windows.MMS.Tool.Import.csproj", "{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -150,6 +154,10 @@ Global
 		{524C8711-97BA-4431-A849-383A22FD0F0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{524C8711-97BA-4431-A849-383A22FD0F0D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{524C8711-97BA-4431-A849-383A22FD0F0D}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{8954937B-63C7-4634-B07E-94D53A6C673C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8954937B-63C7-4634-B07E-94D53A6C673C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8954937B-63C7-4634-B07E-94D53A6C673C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{8954937B-63C7-4634-B07E-94D53A6C673C}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{4CC25DEC-6DA3-4BDE-99EE-B9CA0738F406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4CC25DEC-6DA3-4BDE-99EE-B9CA0738F406}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CC25DEC-6DA3-4BDE-99EE-B9CA0738F406}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -166,10 +174,6 @@ Global
 		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8954937B-63C7-4634-B07E-94D53A6C673C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8954937B-63C7-4634-B07E-94D53A6C673C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8954937B-63C7-4634-B07E-94D53A6C673C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{8954937B-63C7-4634-B07E-94D53A6C673C}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

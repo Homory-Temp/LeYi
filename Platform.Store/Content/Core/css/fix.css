@@ -1,0 +1,12 @@
+﻿html .container .row {
+    margin-top: 6px;
+    line-height: 36px;
+}
+
+html .rbToggleButton .rbToggleCheckbox, html .rbToggleButton .rbToggleCheckboxChecked {
+    margin-top: 11px;
+}
+
+html .tableSpan {
+    width: 20px;
+}

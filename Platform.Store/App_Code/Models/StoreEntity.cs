@@ -29,6 +29,24 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepartmentUser
+    {
+        public System.Guid DepartmentId { get; set; }
+        public System.Guid UserId { get; set; }
+        public System.Guid TopDepartmentId { get; set; }
+        public int Type { get; set; }
+        public System.DateTime Time { get; set; }
+        public int State { get; set; }
+        public int Ordinal { get; set; }
+    
+        public virtual User User { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Store
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -46,7 +64,8 @@ namespace Models
         public int Ordinal { get; set; }
         public int DefaultView { get; set; }
         public int DefaultType { get; set; }
-        public int State { get; set; }
+        public string Types { get; set; }
+        public StoreState State { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StoreCatalog> StoreCatalog { get; set; }
@@ -56,6 +75,30 @@ namespace Models
         public virtual ICollection<StoreRole> StoreRole { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StoreTarget> StoreTarget { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Store_Creator
+    {
+        public System.Guid Id { get; set; }
+        public string Account { get; set; }
+        public string RealName { get; set; }
+        public string DisplayName { get; set; }
+        public string Icon { get; set; }
+        public System.Guid Stamp { get; set; }
+        public string Password { get; set; }
+        public string PasswordEx { get; set; }
+        public string CryptoKey { get; set; }
+        public string CryptoSalt { get; set; }
+        public int Type { get; set; }
+        public int State { get; set; }
+        public int Ordinal { get; set; }
+        public string Description { get; set; }
+        public string PinYin { get; set; }
     }
 }
 namespace Models
@@ -636,6 +679,8 @@ namespace Models
             this.StoreTargetKeep = new HashSet<StoreTarget>();
             this.StoreTargetUser = new HashSet<StoreTarget>();
             this.StoreRole = new HashSet<StoreRole>();
+            this.DepartmentUser = new HashSet<DepartmentUser>();
+            this.UserOnline = new HashSet<UserOnline>();
         }
     
         public System.Guid Id { get; set; }
@@ -688,5 +733,36 @@ namespace Models
         public virtual ICollection<StoreTarget> StoreTargetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StoreRole> StoreRole { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepartmentUser> DepartmentUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserOnline> UserOnline { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class UserOnline
+    {
+        public System.Guid Id { get; set; }
+        public System.Guid UserId { get; set; }
+        public System.DateTime TimeStamp { get; set; }
+    
+        public virtual User User { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    
+    public enum StoreState : int
+    {
+        内置 = 0,
+        启用 = 1,
+        删除 = 2,
+        食品 = -1,
+        固产 = -2
     }
 }
