@@ -62,7 +62,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <telerik:RadButton ID="t1" runat="server" Text="易耗品" AutoPostBack="true" ButtonType="ToggleButton" ToggleType="CheckBox" Value="0" OnCheckedChanged="t_CheckedChanged"></telerik:RadButton>
+                                            <telerik:RadButton ID="t1" runat="server" Text="易耗品（领用）" AutoPostBack="true" ButtonType="ToggleButton" ToggleType="CheckBox" Value="0" OnCheckedChanged="t_CheckedChanged"></telerik:RadButton>
                                         </td>
                                         <td class="tableSpan">&nbsp;</td>
                                         <td>
@@ -71,7 +71,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <telerik:RadButton ID="t2" runat="server" Text="非单件管理品" AutoPostBack="true" ButtonType="ToggleButton" ToggleType="CheckBox" Value="1" OnCheckedChanged="t_CheckedChanged"></telerik:RadButton>
+                                            <telerik:RadButton ID="t2" runat="server" Text="低值非易耗（领用借用）" AutoPostBack="true" ButtonType="ToggleButton" ToggleType="CheckBox" Value="1" OnCheckedChanged="t_CheckedChanged"></telerik:RadButton>
                                         </td>
                                         <td class="tableSpan">&nbsp;</td>
                                         <td>
@@ -80,7 +80,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <telerik:RadButton ID="t3" runat="server" Text="单件管理品" AutoPostBack="true" ButtonType="ToggleButton" ToggleType="CheckBox" Value="2" OnCheckedChanged="t_CheckedChanged"></telerik:RadButton>
+                                            <telerik:RadButton ID="t3" runat="server" Text="准固定资产（自动拆分）" AutoPostBack="true" ButtonType="ToggleButton" ToggleType="CheckBox" Value="2" OnCheckedChanged="t_CheckedChanged"></telerik:RadButton>
                                         </td>
                                         <td class="tableSpan">&nbsp;</td>
                                         <td>
