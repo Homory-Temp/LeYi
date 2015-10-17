@@ -84,7 +84,7 @@ public partial class StoreQuery_Target : SingleStorePage
 
     protected void in_ServerClick(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/StoreAction/In?StoreId={0}&TargetId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"].GlobalId()));
     }
 
     protected void remove_ServerClick(object sender, EventArgs e)

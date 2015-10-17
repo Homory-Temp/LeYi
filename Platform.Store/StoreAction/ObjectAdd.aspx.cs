@@ -41,18 +41,48 @@ public partial class StoreAction_ObjectAdd : SingleStorePage
 
     protected void in_ServerClick(object sender, EventArgs e)
     {
+        if (name.Text.Trim().Null())
+        {
+            Notify(ap, "请输入物资名称", "error");
+            return;
+        }
+        if (new[] { t1, t2, t3 }.Count(o => o.Checked == true) == 0)
+        {
+            Notify(ap, "请选择物资类型", "error");
+            return;
+        }
         var id = Save();
         Response.Redirect("~/StoreAction/In?StoreId={0}&ObjectId={1}".Formatted(StoreId, id));
     }
 
     protected void goon_ServerClick(object sender, EventArgs e)
     {
+        if (name.Text.Trim().Null())
+        {
+            Notify(ap, "请输入物资名称", "error");
+            return;
+        }
+        if (new[] { t1, t2, t3 }.Count(o => o.Checked == true) == 0)
+        {
+            Notify(ap, "请选择物资类型", "error");
+            return;
+        }
         Save();
         Response.Redirect(Request.Url.PathAndQuery);
     }
 
     protected void go_ServerClick(object sender, EventArgs e)
     {
+        if (name.Text.Trim().Null())
+        {
+            Notify(ap, "请输入物资名称", "error");
+            return;
+        }
+        if (new[] { t1, t2, t3 }.Count(o => o.Checked == true) == 0)
+        {
+            Notify(ap, "请选择物资类型", "error");
+            return;
+        }
         Save();
         Response.Redirect("~/StoreAction/Object?StoreId={0}&CatalogId={1}".Formatted(StoreId, "CatalogId".Query()));
     }

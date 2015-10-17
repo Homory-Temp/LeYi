@@ -46,12 +46,22 @@ public partial class StoreAction_Target : SingleStorePage
 
     protected void goon_ServerClick(object sender, EventArgs e)
     {
+        if (number.Text.Trim().Null() && number.EmptyMessage.Trim().Null())
+        {
+            Notify(ap, "请输入购置单号", "error");
+            return;
+        }
         Save();
         Response.Redirect(Request.Url.PathAndQuery);
     }
 
     protected void go_ServerClick(object sender, EventArgs e)
     {
+        if (number.Text.Trim().Null() && number.EmptyMessage.Trim().Null())
+        {
+            Notify(ap, "请输入购置单号", "error");
+            return;
+        }
         Save();
         Response.Redirect("~/StoreHome/Home?StoreId={0}".Formatted(StoreId));
     }
@@ -63,6 +73,11 @@ public partial class StoreAction_Target : SingleStorePage
 
     protected void in_ServerClick(object sender, EventArgs e)
     {
+        if (number.Text.Trim().Null() && number.EmptyMessage.Trim().Null())
+        {
+            Notify(ap, "请输入购置单号", "error");
+            return;
+        }
         var id = Save();
         Response.Redirect("~/StoreAction/In?StoreId={0}&TargetId={1}".Formatted(StoreId, id));
     }
