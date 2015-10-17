@@ -106,6 +106,48 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class Store_Target
+    {
+        public System.Guid Id { get; set; }
+        public System.Guid StoreId { get; set; }
+        public string 购置单号 { get; set; }
+        public string 发票编号 { get; set; }
+        public string 采购来源 { get; set; }
+        public string 使用对象 { get; set; }
+        public string 清单简述 { get; set; }
+        public decimal 应付金额 { get; set; }
+        public decimal 实付金额 { get; set; }
+        public Nullable<decimal> 校正金额 { get; set; }
+        public Nullable<System.Guid> BrokerageUserId { get; set; }
+        public string 经手人 { get; set; }
+        public Nullable<System.Guid> KeepUserId { get; set; }
+        public string 保管人 { get; set; }
+        public bool In { get; set; }
+        public int TimeNode { get; set; }
+        public System.DateTime Time { get; set; }
+        public System.Guid OperationUserId { get; set; }
+        public string 操作人 { get; set; }
+        public System.DateTime OperationTime { get; set; }
+        public int State { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Store_User
+    {
+        public System.Guid Id { get; set; }
+        public string RealName { get; set; }
+        public string PinYin { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Store_Visitor
     {
         public System.Guid Id { get; set; }
@@ -659,6 +701,7 @@ namespace Models
         public System.Guid OperationUserId { get; set; }
         public System.DateTime OperationTime { get; set; }
         public int State { get; set; }
+        public Nullable<decimal> AdjustedMoney { get; set; }
     
         public virtual Store Store { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

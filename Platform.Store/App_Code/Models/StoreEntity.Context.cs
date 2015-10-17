@@ -52,6 +52,8 @@ namespace Models
         public virtual DbSet<UserOnline> UserOnline { get; set; }
         public virtual DbSet<Store_Creator> Store_Creator { get; set; }
         public virtual DbSet<Store_Visitor> Store_Visitor { get; set; }
+        public virtual DbSet<Store_User> Store_User { get; set; }
+        public virtual DbSet<Store_Target> Store_Target { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {

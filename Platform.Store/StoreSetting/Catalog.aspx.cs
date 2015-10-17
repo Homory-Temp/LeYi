@@ -60,7 +60,7 @@ public partial class StoreSetting_Catalog : SingleStorePage
                     StoreId = StoreId,
                     Name = content,
                     PinYin = pinYin,
-                    Ordinal = ordinal.PeekValue(),
+                    Ordinal = ordinal.PeekValue(100),
                     State = 1,
                     Code = string.Empty
                 };
@@ -80,7 +80,7 @@ public partial class StoreSetting_Catalog : SingleStorePage
                     StoreId = StoreId,
                     Name = content,
                     PinYin = pinYin,
-                    Ordinal = ordinal.PeekValue(),
+                    Ordinal = ordinal.PeekValue(100),
                     State = 1,
                     Code = string.Empty
                 };

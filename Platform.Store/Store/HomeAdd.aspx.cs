@@ -42,7 +42,7 @@ public partial class Store_HomeAdd : StorePage
             Id = db.Value.GlobalId(),
             Name = name.Text.Trim(),
             CampusId = CurrentCampus,
-            Ordinal = ordinal.PeekValue(),
+            Ordinal = ordinal.PeekValue(100),
             DefaultView = view.PeekValue(1),
             DefaultType = new[] { t1x, t2x, t3x }.PeekValue(1),
             Types = "{0}{1}{2}".Formatted(t1.PeekValue(true), t2.PeekValue(true), t3.PeekValue(true)),

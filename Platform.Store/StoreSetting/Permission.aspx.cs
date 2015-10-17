@@ -51,7 +51,7 @@ public partial class StoreSetting_Permission : SingleStorePage
         {
             var id = CurrentNode.Value;
             var role = db.Value.StoreRole.Single(o => o.Id == id);
-            role.Ordinal = ordinal.PeekValue();
+            role.Ordinal = ordinal.PeekValue(100);
             role.Name = content;
             if (role.State == 1)
             {
@@ -71,7 +71,7 @@ public partial class StoreSetting_Permission : SingleStorePage
                 StoreId = StoreId,
                 Name = content,
                 Right = "{0}{1}{2}{3}{4}{5}".Formatted(r1.PeekValue(true), r2.PeekValue(true), r3.PeekValue(true), r4.PeekValue(true), r5.PeekValue(true), r6.PeekValue(true)),
-                Ordinal = ordinal.PeekValue(),
+                Ordinal = ordinal.PeekValue(100),
                 State = 1
             };
             db.Value.StoreRole.Add(role);

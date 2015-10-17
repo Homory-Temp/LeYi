@@ -46,7 +46,7 @@ public partial class Store_HomeEdit : StorePage
         var id = "StoreId".Query().GlobalId();
         var item = db.Value.Store.Single(o => o.Id == id);
         item.Name = name.Text.Trim();
-        item.Ordinal = ordinal.PeekValue();
+        item.Ordinal = ordinal.PeekValue(100);
         item.DefaultView = view.PeekValue(1);
         item.DefaultType = new[] { t1x, t2x, t3x }.PeekValue(1);
         item.Types = "{0}{1}{2}".Formatted(t1.PeekValue(true), t2.PeekValue(true), t3.PeekValue(true));

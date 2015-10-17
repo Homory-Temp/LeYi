@@ -26,3 +26,15 @@ html .viewPad {
 html .RadSearchBox .rsbInner .rsbEmptyMessage {
     font-size: 14px;
 }
+
+html .storeTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+html .storeTable th, html .storeTable td {
+    border: solid 1px #2B2B2B;
+    text-align: center;
+    color: black;
+    line-height: 50px;
+}

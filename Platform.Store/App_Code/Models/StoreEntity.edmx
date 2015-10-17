@@ -344,6 +344,7 @@
           <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ToPay" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Paid" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="AdjustedMoney" Type="decimal" Precision="18" Scale="6" />
           <Property Name="BrokerageUserId" Type="uniqueidentifier" />
           <Property Name="KeepUserId" Type="uniqueidentifier" />
           <Property Name="In" Type="bit" Nullable="false" />
@@ -417,6 +418,59 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Creator' does not have a pri
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.Store_Target' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Store_Target">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="StoreId" />
+            <PropertyRef Name="购置单号" />
+            <PropertyRef Name="发票编号" />
+            <PropertyRef Name="采购来源" />
+            <PropertyRef Name="使用对象" />
+            <PropertyRef Name="清单简述" />
+            <PropertyRef Name="应付金额" />
+            <PropertyRef Name="实付金额" />
+            <PropertyRef Name="In" />
+            <PropertyRef Name="TimeNode" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="OperationUserId" />
+            <PropertyRef Name="OperationTime" />
+            <PropertyRef Name="State" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StoreId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="购置单号" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="发票编号" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="采购来源" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="使用对象" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="清单简述" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="应付金额" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="实付金额" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="校正金额" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="BrokerageUserId" Type="uniqueidentifier" />
+          <Property Name="经手人" Type="nvarchar" MaxLength="64" />
+          <Property Name="KeepUserId" Type="uniqueidentifier" />
+          <Property Name="保管人" Type="nvarchar" MaxLength="64" />
+          <Property Name="In" Type="bit" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="操作人" Type="nvarchar" MaxLength="64" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.Store_User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Store_User">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="RealName" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -1037,6 +1091,38 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
     [Store_Creator].[PinYin] AS [PinYin]
     FROM [dbo].[Store_Creator] AS [Store_Creator]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Store_Target" EntityType="Self.Store_Target" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Store_Target].[Id] AS [Id], 
+    [Store_Target].[StoreId] AS [StoreId], 
+    [Store_Target].[购置单号] AS [购置单号], 
+    [Store_Target].[发票编号] AS [发票编号], 
+    [Store_Target].[采购来源] AS [采购来源], 
+    [Store_Target].[使用对象] AS [使用对象], 
+    [Store_Target].[清单简述] AS [清单简述], 
+    [Store_Target].[应付金额] AS [应付金额], 
+    [Store_Target].[实付金额] AS [实付金额], 
+    [Store_Target].[校正金额] AS [校正金额], 
+    [Store_Target].[BrokerageUserId] AS [BrokerageUserId], 
+    [Store_Target].[经手人] AS [经手人], 
+    [Store_Target].[KeepUserId] AS [KeepUserId], 
+    [Store_Target].[保管人] AS [保管人], 
+    [Store_Target].[In] AS [In], 
+    [Store_Target].[TimeNode] AS [TimeNode], 
+    [Store_Target].[Time] AS [Time], 
+    [Store_Target].[OperationUserId] AS [OperationUserId], 
+    [Store_Target].[操作人] AS [操作人], 
+    [Store_Target].[OperationTime] AS [OperationTime], 
+    [Store_Target].[State] AS [State]
+    FROM [dbo].[Store_Target] AS [Store_Target]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Store_User" EntityType="Self.Store_User" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Store_User].[Id] AS [Id], 
+    [Store_User].[RealName] AS [RealName], 
+    [Store_User].[PinYin] AS [PinYin]
+    FROM [dbo].[Store_User] AS [Store_User]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Store_Visitor" EntityType="Self.Store_Visitor" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Store_Visitor].[Id] AS [Id], 
@@ -1598,6 +1684,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <NavigationProperty Name="BrokerageUser" Relationship="Self.FK_StoreTarget_BrokerageUser" FromRole="StoreTarget" ToRole="User" />
           <NavigationProperty Name="KeepUser" Relationship="Self.FK_StoreTarget_KeepUser" FromRole="StoreTarget" ToRole="User" />
           <NavigationProperty Name="OperationUser" Relationship="Self.FK_StoreTarget_OperationUser" FromRole="StoreTarget" ToRole="User" />
+          <Property Name="AdjustedMoney" Type="Decimal" Precision="18" Scale="6" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -2319,6 +2406,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <FunctionImport Name="ToPinYin" ReturnType="Collection(String)">
           <Parameter Name="Name" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Store_User" EntityType="StoreModel.Store_User" />
+          <EntitySet Name="Store_Target" EntityType="StoreModel.Store_Target" />
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -2504,6 +2593,55 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Member Name="使用对象" Value="4" />
           <Member Name="年龄段" Value="5" />
         </EnumType>
+        <EntityType Name="Store_User">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="RealName" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RealName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Store_Target">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="StoreId" />
+            <PropertyRef Name="购置单号" />
+            <PropertyRef Name="发票编号" />
+            <PropertyRef Name="采购来源" />
+            <PropertyRef Name="使用对象" />
+            <PropertyRef Name="清单简述" />
+            <PropertyRef Name="应付金额" />
+            <PropertyRef Name="实付金额" />
+            <PropertyRef Name="In" />
+            <PropertyRef Name="TimeNode" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="OperationUserId" />
+            <PropertyRef Name="OperationTime" />
+            <PropertyRef Name="State" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="StoreId" Type="Guid" Nullable="false" />
+          <Property Name="购置单号" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="发票编号" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="采购来源" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="使用对象" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="清单简述" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="应付金额" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="实付金额" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="校正金额" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="BrokerageUserId" Type="Guid" />
+          <Property Name="经手人" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="KeepUserId" Type="Guid" />
+          <Property Name="保管人" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="In" Type="Boolean" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
+          <Property Name="操作人" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2800,6 +2938,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySetMapping Name="StoreTarget">
             <EntityTypeMapping TypeName="StoreModel.StoreTarget">
               <MappingFragment StoreEntitySet="StoreTarget">
+                <ScalarProperty Name="AdjustedMoney" ColumnName="AdjustedMoney" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StoreId" ColumnName="StoreId" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
@@ -2947,6 +3086,42 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="ToPinYin" FunctionName="StoreModel.Store.ToPinYin" />
+          <EntitySetMapping Name="Store_User">
+            <EntityTypeMapping TypeName="StoreModel.Store_User">
+              <MappingFragment StoreEntitySet="Store_User">
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_Target">
+            <EntityTypeMapping TypeName="StoreModel.Store_Target">
+              <MappingFragment StoreEntitySet="Store_Target">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="操作人" ColumnName="操作人" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="In" ColumnName="In" />
+                <ScalarProperty Name="保管人" ColumnName="保管人" />
+                <ScalarProperty Name="KeepUserId" ColumnName="KeepUserId" />
+                <ScalarProperty Name="经手人" ColumnName="经手人" />
+                <ScalarProperty Name="BrokerageUserId" ColumnName="BrokerageUserId" />
+                <ScalarProperty Name="校正金额" ColumnName="校正金额" />
+                <ScalarProperty Name="实付金额" ColumnName="实付金额" />
+                <ScalarProperty Name="应付金额" ColumnName="应付金额" />
+                <ScalarProperty Name="清单简述" ColumnName="清单简述" />
+                <ScalarProperty Name="使用对象" ColumnName="使用对象" />
+                <ScalarProperty Name="采购来源" ColumnName="采购来源" />
+                <ScalarProperty Name="发票编号" ColumnName="发票编号" />
+                <ScalarProperty Name="购置单号" ColumnName="购置单号" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

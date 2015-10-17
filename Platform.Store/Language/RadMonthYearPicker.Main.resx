@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MonthYearNavigationCancelButtonCaption" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
   </data>
   <data name="MonthYearNavigationNextText" xml:space="preserve">
     <value>&amp;gt;</value>
@@ -127,7 +127,7 @@
     <value>&gt;</value>
   </data>
   <data name="MonthYearNavigationOkButtonCaption" xml:space="preserve">
-    <value>OK</value>
+    <value>确定</value>
   </data>
   <data name="MonthYearNavigationPrevText" xml:space="preserve">
     <value>&amp;lt;</value>
@@ -136,16 +136,16 @@
     <value>&lt;</value>
   </data>
   <data name="MonthYearNavigationTodayButtonCaption" xml:space="preserve">
-    <value>Today</value>
+    <value>今日</value>
   </data>
   <data name="MonthYearViewCaptionText" xml:space="preserve">
-    <value>Month year picker</value>
+    <value>年月选择器</value>
   </data>
   <data name="MonthYearViewSummary" xml:space="preserve">
     <value>Table holding time picker for selecting time of day.</value>
   </data>
   <data name="PopupButtonToolTip" xml:space="preserve">
-    <value>Open the monthyear view popup.</value>
+    <value>打开年月选择器</value>
   </data>
   <data name="ReservedResource" xml:space="preserve">
     <value>Please do not remove this key.</value>
