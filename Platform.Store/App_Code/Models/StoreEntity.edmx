@@ -421,6 +421,24 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Creator' does not have a pri
           <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.Store_ObjectThumb' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Store_ObjectThumb">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="ObjectName" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="CatalogName" />
+            <PropertyRef Name="StoreId" />
+            <PropertyRef Name="StoreName" />
+          </Key>
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CatalogName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="StoreId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StoreName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Platform_LY.dbo.Store_Target' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Store_Target">
           <Key>
@@ -1044,6 +1062,10 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CountObjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CatalogId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="StoreId" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="ToPinYin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -1090,6 +1112,16 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
     [Store_Creator].[Description] AS [Description], 
     [Store_Creator].[PinYin] AS [PinYin]
     FROM [dbo].[Store_Creator] AS [Store_Creator]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Store_ObjectThumb" EntityType="Self.Store_ObjectThumb" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Store_ObjectThumb].[ObjectId] AS [ObjectId], 
+    [Store_ObjectThumb].[ObjectName] AS [ObjectName], 
+    [Store_ObjectThumb].[CatalogId] AS [CatalogId], 
+    [Store_ObjectThumb].[CatalogName] AS [CatalogName], 
+    [Store_ObjectThumb].[StoreId] AS [StoreId], 
+    [Store_ObjectThumb].[StoreName] AS [StoreName]
+    FROM [dbo].[Store_ObjectThumb] AS [Store_ObjectThumb]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Store_Target" EntityType="Self.Store_Target" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2408,6 +2440,11 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           </FunctionImport>
           <EntitySet Name="Store_User" EntityType="StoreModel.Store_User" />
           <EntitySet Name="Store_Target" EntityType="StoreModel.Store_Target" />
+          <EntitySet Name="Store_ObjectThumb" EntityType="StoreModel.Store_ObjectThumb" />
+          <FunctionImport Name="CountObjects" ReturnType="Collection(Int32)">
+            <Parameter Name="CatalogId" Mode="In" Type="Guid" />
+            <Parameter Name="StoreId" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -2641,6 +2678,22 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="操作人" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="State" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Store_ObjectThumb">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="ObjectName" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="CatalogName" />
+            <PropertyRef Name="StoreId" />
+            <PropertyRef Name="StoreName" />
+          </Key>
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="CatalogName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StoreId" Type="Guid" Nullable="false" />
+          <Property Name="StoreName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3122,6 +3175,19 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Store_ObjectThumb">
+            <EntityTypeMapping TypeName="StoreModel.Store_ObjectThumb">
+              <MappingFragment StoreEntitySet="Store_ObjectThumb">
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="CatalogName" ColumnName="CatalogName" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="ObjectName" ColumnName="ObjectName" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CountObjects" FunctionName="StoreModel.Store.CountObjects" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -106,6 +106,21 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class Store_ObjectThumb
+    {
+        public System.Guid ObjectId { get; set; }
+        public string ObjectName { get; set; }
+        public System.Guid CatalogId { get; set; }
+        public string CatalogName { get; set; }
+        public System.Guid StoreId { get; set; }
+        public string StoreName { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Store_Target
     {
         public System.Guid Id { get; set; }

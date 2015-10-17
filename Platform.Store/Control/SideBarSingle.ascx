@@ -64,9 +64,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <input type="button" class="btn btn-tumblr" value='<%= CurrentStore.Name %>' />&nbsp;&nbsp;&nbsp;&nbsp;
-                <span id="crumb" runat="server" class="btn btn-info"></span>
+                <input type="button" class="btn btn-tumblr" value='<%= CurrentStore.Name %>' />
+                <span id="crumb" runat="server" class="btn btn-info" style="margin-left: 10px;"></span>
                 <span class="btn btn-info" onclick="top.location.href = '../Store/Home';" style="float: right;">仓库切换</span>
+                <span class="btn btn-info" onclick='<%= "top.location.href = \"../StoreAction/Object?StoreId={0}\"".Formatted(StoreId) %>' style="float: right; margin-right: 13px;">物资管理</span>
+                <span style="clear: both;"></span>
                 <hr style="color: #2B2B2B; margin-top: 4px;" />
             </div>
             <div class="col-md-8">

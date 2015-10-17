@@ -33,6 +33,11 @@ public static class StoreExtensions
         return id.Null() ? Guid.Empty : Guid.Parse(id);
     }
 
+    public static string EmptyWhenZero(this int value, string prefix = "（", string suffix = "）")
+    {
+        return value == 0 ? string.Empty : "{0}{1}{2}".Formatted(prefix, value, suffix);
+    }
+
     public static string Formatted(this string format, object @object)
     {
         return string.Format(format, @object);

@@ -29,6 +29,43 @@
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资管理 - 物资管理" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
+                <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="btn btn-tumblr">类别：</span>
+                            <input id="manage" runat="server" type="button" class="btn btn-info" value="管理" onserverclick="manage_ServerClick" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <telerik:RadTreeView ID="tree0" runat="server" OnNodeClick="tree0_NodeClick" ShowLineImages="false">
+                                <Nodes>
+                                    <telerik:RadTreeNode Value="0" Selected="true"></telerik:RadTreeNode>
+                                </Nodes>
+                            </telerik:RadTreeView>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <telerik:RadTreeView ID="tree" runat="server" OnNodeClick="tree_NodeClick" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId">
+                                <NodeTemplate>
+                                    <%# Eval("Name") %><%# db.Value.CountObjects((Guid)Eval("Id"), StoreId).Single().Value.EmptyWhenZero() %>
+                                </NodeTemplate>
+                            </telerik:RadTreeView>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10" style="text-align: left;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="btn btn-tumblr">物资：</span>
+                            <input id="add" runat="server" type="button" class="btn btn-info" value="新增" onserverclick="add_ServerClick" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource"></telerik:RadListView>
+                    </div>
+                </div>
             </div>
         </telerik:RadAjaxPanel>
     </form>

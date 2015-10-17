@@ -54,6 +54,7 @@ namespace Models
         public virtual DbSet<Store_Visitor> Store_Visitor { get; set; }
         public virtual DbSet<Store_User> Store_User { get; set; }
         public virtual DbSet<Store_Target> Store_Target { get; set; }
+        public virtual DbSet<Store_ObjectThumb> Store_ObjectThumb { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {
@@ -62,6 +63,19 @@ namespace Models
                 new ObjectParameter("Name", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ToPinYin", nameParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> CountObjects(Nullable<System.Guid> catalogId, Nullable<System.Guid> storeId)
+        {
+            var catalogIdParameter = catalogId.HasValue ?
+                new ObjectParameter("CatalogId", catalogId) :
+                new ObjectParameter("CatalogId", typeof(System.Guid));
+    
+            var storeIdParameter = storeId.HasValue ?
+                new ObjectParameter("StoreId", storeId) :
+                new ObjectParameter("StoreId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("CountObjects", catalogIdParameter, storeIdParameter);
         }
     }
 }
