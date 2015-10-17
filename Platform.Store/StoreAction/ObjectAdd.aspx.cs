@@ -19,6 +19,7 @@ public partial class StoreAction_ObjectAdd : SingleStorePage
             unit.DataBind();
             specification.DataSource = db.Value.StoreDictionary.Where(o => o.StoreId == StoreId && o.Type == DictionaryType.规格).OrderBy(o => o.PinYin).ToList();
             specification.DataBind();
+            sp.Visible = CurrentStore.State != StoreState.食品;
             var types = CurrentStore.Types;
             r1.Visible = types.Contains("0");
             r2.Visible = types.Contains("1");
@@ -59,6 +60,58 @@ public partial class StoreAction_ObjectAdd : SingleStorePage
     protected Guid Save()
     {
         var id = db.Value.GlobalId();
+        var img = new[] { p0, p1, p2, p3 }.ToList();
+        var photo = img.Where(o => !o.Src.Contains("/Content/Images/Transparent.png")).Select(o => o.Src).Aggregate("", (a, b) => a += "*" + b, o => o.Substring(1));
+        var obj = new StoreObject
+        {
+            Id = id,
+            CatalogId = tree.SelectedValue.GlobalId(),
+            SourceCatalogId = null,
+            Name = name.Text.Trim(),
+            PinYin = db.Value.ToPinYin(name.Text.Trim()).Single(),
+            Single = t3.Checked,
+            Consumable = t1.Checked,
+            Fixed = false,
+            Serial = string.Empty,
+            Unit = unit.Text.Trim(),
+            Specification = specification.Text.Trim(),
+            Low = low.PeekValue(0.00M),
+            High = high.PeekValue(0.00M),
+            Image = photo,
+            Note = content.Text.Trim(),
+            TimeNode = DateTime.Today.ToTimeNode(),
+            Time = DateTime.Today,
+            OperationUserId = CurrentUser,
+            OperationTime = DateTime.Now,
+            Ordinal = ordinal.PeekValue(100),
+            State = 1,
+            Code = code.Text.Trim(),
+            Amount = 0.00M,
+            Money = 0.00M
+        };
+        db.Value.StoreObject.Add(obj);
+        if (db.Value.StoreDictionary.Count(o => o.StoreId == StoreId && o.Type == DictionaryType.单位 && o.Name == unit.Text) == 0)
+        {
+            var dictionary = new StoreDictionary
+            {
+                StoreId = StoreId,
+                Type = DictionaryType.单位,
+                Name = unit.Text,
+                PinYin = db.Value.ToPinYin(unit.Text).Single()
+            };
+            db.Value.StoreDictionary.Add(dictionary);
+        }
+        if (db.Value.StoreDictionary.Count(o => o.StoreId == StoreId && o.Type == DictionaryType.规格 && o.Name == specification.Text) == 0)
+        {
+            var dictionary = new StoreDictionary
+            {
+                StoreId = StoreId,
+                Type = DictionaryType.规格,
+                Name = specification.Text,
+                PinYin = db.Value.ToPinYin(specification.Text).Single()
+            };
+            db.Value.StoreDictionary.Add(dictionary);
+        }
         db.Value.SaveChanges();
         return id;
     }

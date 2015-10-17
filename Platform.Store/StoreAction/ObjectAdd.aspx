@@ -66,6 +66,12 @@
                             <telerik:RadTextBox ID="name" runat="server" Width="400"></telerik:RadTextBox>
                         </div>
                     </div>
+                    <div class="row" id="sp" runat="server">
+                        <div class="col-md-4 text-right">物资编码：</div>
+                        <div class="col-md-8 text-left">
+                            <telerik:RadTextBox ID="code" runat="server" Width="400" EmptyMessage="用于该仓库内的物资与其他系统对接"></telerik:RadTextBox>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-4 text-right">物资类别：</div>
                         <div class="col-md-8 text-left">
