@@ -88,6 +88,19 @@
                     </EmptyDataTemplate>
                 </telerik:RadListView>
             </div>
+            <div class="row">
+                <div class="col-md-4">&nbsp;</div>
+                <div class="col-md-4 text-center">
+                    <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="16">
+                        <Fields>
+                            <telerik:RadDataPagerButtonField FieldType="FirstPrev"></telerik:RadDataPagerButtonField>
+                            <telerik:RadDataPagerButtonField FieldType="Numeric"></telerik:RadDataPagerButtonField>
+                            <telerik:RadDataPagerButtonField FieldType="NextLast"></telerik:RadDataPagerButtonField>
+                        </Fields>
+                    </telerik:RadDataPager>
+                </div>
+                <div class="col-md-4">&nbsp;</div>
+            </div>
         </telerik:RadAjaxPanel>
     </form>
 </body>

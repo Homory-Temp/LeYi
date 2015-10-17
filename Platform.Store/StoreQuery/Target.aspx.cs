@@ -74,6 +74,7 @@ public partial class StoreQuery_Target : SingleStorePage
         if (people.SelectedIndex > 0)
             list = list.Where(o => o.操作人 == people.SelectedItem.Text).ToList();
         view.DataSource = list;
+        pager.Visible = list.Count > pager.PageSize;
     }
 
     protected void edit_ServerClick(object sender, EventArgs e)

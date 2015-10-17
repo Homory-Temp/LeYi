@@ -39,6 +39,14 @@ public partial class StoreAction_Object : SingleStorePage
         }
     }
 
+    protected bool IsSimple
+    {
+        get
+        {
+            return view_photo.Attributes["class"] != "btn btn-warning";
+        }
+    }
+
     protected Guid? CurrentNode
     {
         get
@@ -75,7 +83,20 @@ public partial class StoreAction_Object : SingleStorePage
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-
+        var node = CurrentNode;
+        var catalogs = new List<Guid>();
+        if (node.HasValue)
+        {
+            catalogs.Add(node.Value);
+            catalogs.AddRange(tree.SelectedNode.GetAllNodes().Select(o => o.Value.GlobalId()));
+        }
+        else
+        {
+            catalogs.AddRange(db.Value.StoreCatalog.Where(o => o.State < 2 && o.StoreId == StoreId).Select(o => o.Id).ToList());
+        }
+        var source = catalogs.Join(db.Value.StoreObject, o => o, o => o.CatalogId, (a, b) => b).Distinct().ToList();
+        view.DataSource = source;
+        pager.Visible = source.Count > pager.PageSize;
     }
 
     protected void view_simple_ServerClick(object sender, EventArgs e)

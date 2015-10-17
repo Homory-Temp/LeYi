@@ -70,12 +70,33 @@
                     <div class="row">
                         <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
                             <LayoutTemplate>
-                                <div></div>
+                                <asp:Panel runat="server" Visible='<%# IsSimple %>'>
+                                    简洁有表头
+                                </asp:Panel>
+                                <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
                             </LayoutTemplate>
                             <ItemTemplate>
-
+                                <asp:Panel runat="server" Visible='<%# IsSimple %>'>
+                                    简洁：<%# Eval("Name") %>
+                                </asp:Panel>
+                                <asp:Panel runat="server" Visible='<%# !IsSimple %>'>
+                                    图文：<%# Eval("Name") %>
+                                </asp:Panel>
                             </ItemTemplate>
                         </telerik:RadListView>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">&nbsp;</div>
+                        <div class="col-md-4 text-center">
+                            <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="16">
+                                <Fields>
+                                    <telerik:RadDataPagerButtonField FieldType="FirstPrev"></telerik:RadDataPagerButtonField>
+                                    <telerik:RadDataPagerButtonField FieldType="Numeric"></telerik:RadDataPagerButtonField>
+                                    <telerik:RadDataPagerButtonField FieldType="NextLast"></telerik:RadDataPagerButtonField>
+                                </Fields>
+                            </telerik:RadDataPager>
+                        </div>
+                        <div class="col-md-4">&nbsp;</div>
                     </div>
                 </div>
             </div>
