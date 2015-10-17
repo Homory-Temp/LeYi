@@ -3,6 +3,8 @@
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
 <%@ Register Src="~/Control/TargetHeader.ascx" TagPrefix="homory" TagName="TargetHeader" %>
 <%@ Register Src="~/Control/TargetBody.ascx" TagPrefix="homory" TagName="TargetBody" %>
+<%@ Register Src="~/Control/ObjectInHeader.ascx" TagPrefix="homory" TagName="ObjectInHeader" %>
+<%@ Register Src="~/Control/ObjectInBody.ascx" TagPrefix="homory" TagName="ObjectInBody" %>
 
 <!DOCTYPE html>
 
@@ -79,6 +81,25 @@
                     <div class="btn btn-tumblr dictionaryX">
                         入库物资选择
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <telerik:RadListView ID="view_obj" runat="server" OnNeedDataSource="view_obj_NeedDataSource" ItemPlaceholderID="inHolder">
+                        <LayoutTemplate>
+                            <table class="storeTable text-center">
+                                <homory:ObjectInHeader runat="server" ID="ObjectInHeader" />
+                                <asp:PlaceHolder ID="inHolder" runat="server"></asp:PlaceHolder>
+                            </table>
+                        </LayoutTemplate>
+                        <ItemTemplate>
+                            <homory:ObjectInBody runat="server" ID="ObjectInBody" />
+                        </ItemTemplate>
+                    </telerik:RadListView>
+                </div>
+                <div class="col-md-12">
+                    <input type="button" class="btn btn-tumblr" id="plus" runat="server" value="+" onserverclick="plus_ServerClick" />
+                    <input type="hidden" id="counter" runat="server" value="1" />
                 </div>
             </div>
         </telerik:RadAjaxPanel>

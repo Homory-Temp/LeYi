@@ -117,4 +117,16 @@ public partial class StoreAction_In : SingleStorePage
             view_target.Visible = true;
         }
     }
+
+    protected void plus_ServerClick(object sender, EventArgs e)
+    {
+        counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
+        Title = (view_obj.Items[0].FindControl("ObjectInBody") as Control_ObjectInBody).Note;
+        view_obj.Rebind();
+    }
+
+    protected void view_obj_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
+    {
+        view_obj.DataSource = new int[(int.Parse(counter.Value))];
+    }
 }
