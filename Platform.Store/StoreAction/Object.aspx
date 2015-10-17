@@ -57,13 +57,25 @@
                 </div>
                 <div class="col-md-10" style="text-align: left;">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                             <span class="btn btn-tumblr">物资：</span>
                             <input id="add" runat="server" type="button" class="btn btn-info" value="新增" onserverclick="add_ServerClick" />
                         </div>
+                        <div class="col-md-4">&nbsp;</div>
+                        <div class="col-md-4 text-right">
+                            <input id="view_simple" runat="server" type="button" value="简洁模式" onserverclick="view_simple_ServerClick" />
+                            <input id="view_photo" runat="server" type="button" value="图文模式" onserverclick="view_photo_ServerClick" />
+                        </div>
                     </div>
                     <div class="row">
-                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource"></telerik:RadListView>
+                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
+                            <LayoutTemplate>
+                                <div></div>
+                            </LayoutTemplate>
+                            <ItemTemplate>
+
+                            </ItemTemplate>
+                        </telerik:RadListView>
                     </div>
                 </div>
             </div>

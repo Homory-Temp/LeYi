@@ -16,6 +16,26 @@ public partial class StoreAction_Object : SingleStorePage
             tree0.Nodes[0].Text = "总类别{0}".Formatted(db.Value.CountObjects(null, StoreId).Single().Value.EmptyWhenZero());
             tree.DataSource = db.Value.StoreCatalog.Where(o => o.StoreId == StoreId && o.State < 2).OrderBy(o => o.Ordinal).ToList();
             tree.DataBind();
+            if (CurrentStore.State == StoreState.食品)
+            {
+                tree0.Nodes[0].Selected = false;
+                tree0.Visible = false;
+                if (tree.Nodes.Count > 0)
+                {
+                    tree.Nodes[0].Selected = true;
+                    tree.Nodes[0].Expanded = true;
+                }
+            }
+            if (CurrentStore.DefaultView == 1)
+            {
+                view_simple.Attributes["class"] = "btn btn-warning";
+                view_photo.Attributes["class"] = "btn btn-info";
+            }
+            else
+            {
+                view_simple.Attributes["class"] = "btn btn-info";
+                view_photo.Attributes["class"] = "btn btn-warning";
+            }
         }
     }
 
@@ -56,5 +76,25 @@ public partial class StoreAction_Object : SingleStorePage
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
 
+    }
+
+    protected void view_simple_ServerClick(object sender, EventArgs e)
+    {
+        if (view_simple.Attributes["class"] == "btn btn-info")
+        {
+            view_simple.Attributes["class"] = "btn btn-warning";
+            view_photo.Attributes["class"] = "btn btn-info";
+            view.Rebind();
+        }
+    }
+
+    protected void view_photo_ServerClick(object sender, EventArgs e)
+    {
+        if (view_photo.Attributes["class"] == "btn btn-info")
+        {
+            view_simple.Attributes["class"] = "btn btn-info";
+            view_photo.Attributes["class"] = "btn btn-warning";
+            view.Rebind();
+        }
     }
 }
