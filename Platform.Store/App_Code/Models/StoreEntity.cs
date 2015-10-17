@@ -114,6 +114,7 @@ namespace Models
         public int State { get; set; }
         public string Right { get; set; }
         public System.Guid StoreId { get; set; }
+        public System.Guid RoleId { get; set; }
     }
 }
 namespace Models

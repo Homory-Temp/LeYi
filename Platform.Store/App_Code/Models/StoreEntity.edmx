@@ -428,6 +428,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <PropertyRef Name="State" />
             <PropertyRef Name="Right" />
             <PropertyRef Name="StoreId" />
+            <PropertyRef Name="RoleId" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RealName" Type="nvarchar" MaxLength="64" Nullable="false" />
@@ -435,6 +436,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="Right" Type="nvarchar(max)" Nullable="false" />
           <Property Name="StoreId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <Association Name="FK_DepartmentUser_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -1042,7 +1044,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
     [Store_Visitor].[PinYin] AS [PinYin], 
     [Store_Visitor].[State] AS [State], 
     [Store_Visitor].[Right] AS [Right], 
-    [Store_Visitor].[StoreId] AS [StoreId]
+    [Store_Visitor].[StoreId] AS [StoreId], 
+    [Store_Visitor].[RoleId] AS [RoleId]
     FROM [dbo].[Store_Visitor] AS [Store_Visitor]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_DepartmentUser_User" Association="Self.FK_DepartmentUser_User">
@@ -2314,7 +2317,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySet Name="Store_Creator" EntityType="StoreModel.Store_Creator" />
           <EntitySet Name="Store_Visitor" EntityType="StoreModel.Store_Visitor" />
           <FunctionImport Name="ToPinYin" ReturnType="Collection(String)">
-            <Parameter Name="Name" Mode="In" Type="String" />
+          <Parameter Name="Name" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
@@ -2484,6 +2487,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <PropertyRef Name="State" />
             <PropertyRef Name="Right" />
             <PropertyRef Name="StoreId" />
+            <PropertyRef Name="RoleId" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="RealName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
@@ -2491,6 +2495,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="State" Type="Int32" Nullable="false" />
           <Property Name="Right" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="StoreId" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
         </EntityType>
         <EnumType Name="DictionaryType">
           <Member Name="单位" Value="1" />
@@ -2931,6 +2936,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySetMapping Name="Store_Visitor">
             <EntityTypeMapping TypeName="StoreModel.Store_Visitor">
               <MappingFragment StoreEntitySet="Store_Visitor">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="StoreId" ColumnName="StoreId" />
                 <ScalarProperty Name="Right" ColumnName="Right" />
                 <ScalarProperty Name="State" ColumnName="State" />

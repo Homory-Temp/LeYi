@@ -880,10 +880,6 @@ public static class ModelFunction
                 table[x.Id] = x;
                 engine.Commit();
             }
-            catch(Exception ex)
-            {
-                var t = 0;
-            }
             finally
             {
                 engine.Close();

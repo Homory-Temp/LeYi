@@ -9,34 +9,21 @@ using System.Web.UI.WebControls;
 
 public partial class StoreSetting_Dictionary : SingleStorePage
 {
-    protected void Page_Load(object sender, EventArgs e)
+    protected void Page_PreRender(object sender, EventArgs e)
     {
         if(!IsPostBack)
         {
-            d5.Visible = d4.Visible = ds4.Visible = CurrentStore.State != StoreState.食品;
+            if (CurrentStore.State == StoreState.食品)
+            {
+                tree.Nodes.RemoveAt(4);
+                tree.Nodes.RemoveAt(3);
+            }
         }
-    }
-
-    protected void d_ServerClick(object sender, EventArgs e)
-    {
-        new[] { d1, d2, d3, d4, d5 }.ToList().ForEach(o => 
-        {
-            if ((sender as HtmlInputButton).ID == o.ID)
-            {
-                o.Attributes["class"] = "btn btn-warning dictionary";
-                dh.Value = o.ID.Replace("d", "");
-            }
-            else
-            {
-                o.Attributes["class"] = "btn btn-info dictionary";
-            }
-        });
-        view.Rebind();
     }
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        var type = (DictionaryType)int.Parse(dh.Value);
+        var type = (DictionaryType)int.Parse(tree.SelectedValue);
         var source = db.Value.StoreDictionary.Where(o => o.StoreId == StoreId && o.Type == type).ToList();
         view.DataSource = source;
         pager.Visible = source.Count > pager.PageSize;
@@ -49,7 +36,7 @@ public partial class StoreSetting_Dictionary : SingleStorePage
             Notify(ap, "请输入要添加的基础数据", "error");
             return;
         }
-        var type = (DictionaryType)int.Parse(dh.Value);
+        var type = (DictionaryType)int.Parse(tree.SelectedValue);
         var content = name.Text.Trim();
         if (db.Value.StoreDictionary.Count(o => o.StoreId == StoreId && o.Type == type && o.Name == content) == 0)
         {
@@ -71,11 +58,16 @@ public partial class StoreSetting_Dictionary : SingleStorePage
     protected void remove_ServerClick(object sender, EventArgs e)
     {
         var content = (sender as HtmlInputButton).Attributes["match"];
-        var type = (DictionaryType)int.Parse(dh.Value);
+        var type = (DictionaryType)int.Parse(tree.SelectedValue);
         var dictionary = db.Value.StoreDictionary.Single(o => o.StoreId == StoreId && o.Type == type && o.Name == content);
         db.Value.StoreDictionary.Remove(dictionary);
         db.Value.SaveChanges();
         view.Rebind();
         Notify(ap, "基础数据删除成功", "success");
+    }
+
+    protected void tree_NodeClick(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
+    {
+        view.Rebind();
     }
 }

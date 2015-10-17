@@ -22,3 +22,7 @@ html .dictionaryX {
 html .viewPad {
     margin-top: 4px;
 }
+
+html .RadSearchBox .rsbInner .rsbEmptyMessage {
+    font-size: 14px;
+}
