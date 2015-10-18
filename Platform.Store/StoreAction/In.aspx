@@ -36,7 +36,21 @@
         <telerik:RadCodeBlock runat="server">
             <script>
                 function calc(sender, args) {
-                    alert($("#" + sender.get_id()).attr("PeekIndex"));
+                    var g_in_price;
+                    var id = sender.get_id().replace("amount", "").replace("perPrice", "");
+                    var g_in_amount = $find(id + "amount").get_value();
+                    var g_in_price = $find(id + "perPrice").get_value();
+                    $find(id + "money").set_value(g_in_amount * g_in_price);
+                }
+                function calcTotal(sender, args) {
+                    var g_total = 0.00;
+                    var ccs = $("input[tocalc='calc']");
+                    for (var j = 0; j < ccs.length; j++) {
+                        var v = $find(ccs[j].id).get_value();
+                        if (v)
+                            g_total += v;
+                    }
+                    $find('<%= total.ClientID %>').set_value(g_total);
                 }
             </script>
         </telerik:RadCodeBlock>
@@ -107,10 +121,15 @@
                         </ItemTemplate>
                     </telerik:RadListView>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-4">
                     <input type="button" class="btn btn-tumblr" id="plus" runat="server" value="+" onserverclick="plus_ServerClick" />
                     <input type="hidden" id="counter" runat="server" value="0" />
                     <input type="hidden" id="x" runat="server" value="" />
+                </div>
+                <div class="col-md-4">&nbsp;</div>
+                <div class="col-md-4 text-left">
+                    <div class="btn btn-info">总额：</div>
+                    <telerik:RadNumericTextBox ID="total" runat="server" Width="120" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true" NumberFormat-AllowRounding="false"></telerik:RadNumericTextBox>
                 </div>
                 <div class="col-md-12 text-center">
                     <input type="button" class="btn btn-tumblr" id="do_in" runat="server" value="入库" onserverclick="do_in_ServerClick" />

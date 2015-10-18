@@ -179,6 +179,11 @@ public partial class StoreAction_In : SingleStorePage
             var tid = target.SelectedValue.GlobalId();
             var t = db.Value.StoreTarget.Single(o => o.Id == tid);
             t.In = true;
+            if (total.Value.HasValue)
+            {
+                t.Paid = (decimal)total.Value.Value;
+                t.AdjustedMoney = (decimal)total.Value.Value;
+            }
             db.Value.SaveChanges();
         }
     }
