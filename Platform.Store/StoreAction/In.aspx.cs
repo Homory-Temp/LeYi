@@ -64,7 +64,6 @@ public partial class StoreAction_In : SingleStorePage
         target.SelectedIndex = -1;
         target.Text = string.Empty;
         counter.Value = "0";
-        view_obj.Visible = plus.Visible = target.SelectedIndex >= 0;
         var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
         var start = (new DateTime(time.Year, time.Month, 1).AddDays(-1)).ToTimeNode();
         var end = (new DateTime(time.Year, time.Month, 1).AddMonths(1)).ToTimeNode();
