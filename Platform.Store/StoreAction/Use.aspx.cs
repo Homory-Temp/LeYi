@@ -106,7 +106,7 @@ public partial class StoreAction_Use : SingleStorePage
 
     protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
     {
-        var c = e.Item.FindControl("ObjectInBody") as Control_ObjectInBody;
+        var c = e.Item.FindControl("ObjectInBody") as Control_ObjectUseBody;
         var list = x.Value.Null() ? new List<CachedIn>() : x.Value.FromJson<List<CachedIn>>();
         if (list.Count < c.ItemIndex + 1)
         {

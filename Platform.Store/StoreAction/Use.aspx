@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Use.aspx.cs" Inherits="StoreAction_Use" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
-<%@ Register Src="~/Control/ObjectInHeader.ascx" TagPrefix="homory" TagName="ObjectInHeader" %>
-<%@ Register Src="~/Control/ObjectInBody.ascx" TagPrefix="homory" TagName="ObjectInBody" %>
+<%@ Register Src="~/Control/ObjectUseHeader.ascx" TagPrefix="homory" TagName="ObjectUseHeader" %>
+<%@ Register Src="~/Control/ObjectUseBody.ascx" TagPrefix="homory" TagName="ObjectUseBody" %>
 
 <!DOCTYPE html>
 
@@ -28,7 +28,7 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资管理 - 物资入库" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资管理 - 物资借领" />
         <telerik:RadCodeBlock runat="server">
             <script>
                 function calc(sender, args) {
@@ -84,12 +84,12 @@
                     <telerik:RadListView ID="view_obj" runat="server" OnNeedDataSource="view_obj_NeedDataSource" ItemPlaceholderID="inHolder" OnItemDataBound="view_obj_ItemDataBound">
                         <LayoutTemplate>
                             <table class="storeTable text-center">
-                                <homory:ObjectInHeader runat="server" ID="ObjectInHeader" />
+                                <homory:ObjectUseHeader runat="server" ID="ObjectInHeader" />
                                 <asp:PlaceHolder ID="inHolder" runat="server"></asp:PlaceHolder>
                             </table>
                         </LayoutTemplate>
                         <ItemTemplate>
-                            <homory:ObjectInBody runat="server" ID="ObjectInBody" ItemIndex='<%# Container.DataItemIndex %>' />
+                            <homory:ObjectUseBody runat="server" ID="ObjectInBody" ItemIndex='<%# Container.DataItemIndex %>' />
                         </ItemTemplate>
                     </telerik:RadListView>
                 </div>
