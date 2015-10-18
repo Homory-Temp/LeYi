@@ -36,7 +36,7 @@
         <telerik:RadCodeBlock runat="server">
             <script>
                 function calc(sender, args) {
-                    alert(sender.id);
+                    alert($("#" + sender.get_id()).attr("PeekIndex"));
                 }
             </script>
         </telerik:RadCodeBlock>
@@ -143,9 +143,6 @@
                             </tr>
                         </ItemTemplate>
                         <EmptyDataTemplate>
-                            <div class="row">
-                                <div class="col-md-12 text-center" style="color: black;">本购置单暂无入库记录</div>
-                            </div>
                         </EmptyDataTemplate>
                     </telerik:RadListView>
                 </div>

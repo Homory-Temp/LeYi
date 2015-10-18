@@ -82,7 +82,7 @@
                         </tr>
                     </ItemTemplate>
                     <EmptyDataTemplate>
-                        <div class="col-md-12 text-center" style="color: black;">暂无记录</div>
+                        <div class="col-md-12 text-center"><div class="btn btn-warning">暂无记录</div></div>
                     </EmptyDataTemplate>
                 </telerik:RadListView>
             </div>

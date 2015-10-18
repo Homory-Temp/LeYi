@@ -30,16 +30,16 @@
         </telerik:RadDatePicker>
     </td>
     <td>
-        <telerik:RadNumericTextBox ID="amount" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true" PeekIndex='<%= ItemIndex %>' ClientEvents-OnValueChanged="calc"></telerik:RadNumericTextBox>
+        <telerik:RadNumericTextBox ID="amount" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true" PeekIndex='<%# ItemIndex %>' ClientEvents-OnValueChanged="calc"></telerik:RadNumericTextBox>
     </td>
     <td>
-        <telerik:RadNumericTextBox ID="perPrice" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true" PeekIndex='<%= ItemIndex %>' ClientEvents-OnValueChanged="calc"></telerik:RadNumericTextBox>
+        <telerik:RadNumericTextBox ID="perPrice" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true" PeekIndex='<%# ItemIndex %>' ClientEvents-OnValueChanged="calc"></telerik:RadNumericTextBox>
     </td>
     <td style="display: none;">
-        <telerik:RadNumericTextBox ID="fee" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true" PeekIndex='<%= ItemIndex %>' ClientEvents-OnValueChanged="calc"></telerik:RadNumericTextBox>
+        <telerik:RadNumericTextBox ID="fee" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true" PeekIndex='<%# ItemIndex %>' ClientEvents-OnValueChanged="calc"></telerik:RadNumericTextBox>
     </td>
     <td>
-        <telerik:RadNumericTextBox ID="money" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true" PeekIndex='<%= ItemIndex %>' ClientEvents-OnValueChanged="calc"></telerik:RadNumericTextBox>
+        <telerik:RadNumericTextBox ID="money" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true" PeekIndex='<%# ItemIndex %>' ClientEvents-OnValueChanged="calc"></telerik:RadNumericTextBox>
     </td>
     <td>
         <telerik:RadTextBox ID="place" runat="server" Width="100"></telerik:RadTextBox>
