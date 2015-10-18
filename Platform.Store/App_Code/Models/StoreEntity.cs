@@ -121,6 +121,35 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class Store_RecordIn
+    {
+        public System.Guid Id { get; set; }
+        public System.Guid TargetId { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public string 年龄段 { get; set; }
+        public string 存放地 { get; set; }
+        public string 备注 { get; set; }
+        public int 入库日期 { get; set; }
+        public System.DateTime Time { get; set; }
+        public System.Guid OperationUserId { get; set; }
+        public System.DateTime OperationTime { get; set; }
+        public int AutoId { get; set; }
+        public decimal 数量 { get; set; }
+        public decimal PerPrice { get; set; }
+        public decimal 单价 { get; set; }
+        public decimal 优惠价 { get; set; }
+        public decimal 合计 { get; set; }
+        public string 物资名称 { get; set; }
+        public string 单位 { get; set; }
+        public string 规格 { get; set; }
+        public string 类别 { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Store_Target
     {
         public System.Guid Id { get; set; }

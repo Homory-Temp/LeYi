@@ -5,6 +5,8 @@
 <%@ Register Src="~/Control/TargetBody.ascx" TagPrefix="homory" TagName="TargetBody" %>
 <%@ Register Src="~/Control/ObjectInHeader.ascx" TagPrefix="homory" TagName="ObjectInHeader" %>
 <%@ Register Src="~/Control/ObjectInBody.ascx" TagPrefix="homory" TagName="ObjectInBody" %>
+<%@ Register Src="~/Control/RecordInHeader.ascx" TagPrefix="homory" TagName="RecordInHeader" %>
+<%@ Register Src="~/Control/RecordInBody.ascx" TagPrefix="homory" TagName="RecordInBody" %>
 
 <!DOCTYPE html>
 
@@ -76,14 +78,15 @@
                     </EmptyDataTemplate>
                 </telerik:RadListView>
             </div>
-            <div class="row">
+            <div class="row">&nbsp;</div>
+            <div class="row" id="x1" runat="server">
                 <div class="col-md-2">
                     <div class="btn btn-tumblr dictionaryX">
                         入库物资选择
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id="x2" runat="server">
                 <div class="col-md-12">
                     <telerik:RadListView ID="view_obj" runat="server" OnNeedDataSource="view_obj_NeedDataSource" ItemPlaceholderID="inHolder" OnItemDataBound="view_obj_ItemDataBound">
                         <LayoutTemplate>
@@ -104,6 +107,35 @@
                 </div>
                 <div class="col-md-12 text-center">
                     <input type="button" class="btn btn-tumblr" id="do_in" runat="server" value="入库" onserverclick="do_in_ServerClick" />
+                    &nbsp;&nbsp;
+                    <input type="button" class="btn btn-tumblr" id="Button2" runat="server" value="入库并办结购置单" onserverclick="done_in_ServerClick" />
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row" id="x3" runat="server">
+                <div class="col-md-2">
+                    <div class="btn btn-tumblr dictionaryX">
+                        本购置单入库记录
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="x4" runat="server">
+                <div class="col-md-12">
+                    <telerik:RadListView ID="view_record" runat="server" OnNeedDataSource="view_record_NeedDataSource" ItemPlaceholderID="recordHolder">
+                        <LayoutTemplate>
+                            <table class="storeTable text-center">
+                                <tr>
+                                    <homory:RecordInHeader runat="server" ID="ObjectInHeader" />
+                                </tr>
+                                <asp:PlaceHolder ID="recordHolder" runat="server"></asp:PlaceHolder>
+                            </table>
+                        </LayoutTemplate>
+                        <ItemTemplate>
+                            <tr>
+                                <homory:RecordInBody runat="server" ID="ObjectInBody" ItemIndex='<%# Container.DataItemIndex %>' />
+                            </tr>
+                        </ItemTemplate>
+                    </telerik:RadListView>
                 </div>
             </div>
         </telerik:RadAjaxPanel>

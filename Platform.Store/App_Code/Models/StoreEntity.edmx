@@ -440,6 +440,51 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_ObjectThumb' does not have a
           <Property Name="StoreName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.Store_RecordIn' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Store_RecordIn">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="TargetId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="年龄段" />
+            <PropertyRef Name="存放地" />
+            <PropertyRef Name="备注" />
+            <PropertyRef Name="入库日期" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="OperationUserId" />
+            <PropertyRef Name="OperationTime" />
+            <PropertyRef Name="AutoId" />
+            <PropertyRef Name="数量" />
+            <PropertyRef Name="PerPrice" />
+            <PropertyRef Name="单价" />
+            <PropertyRef Name="优惠价" />
+            <PropertyRef Name="合计" />
+            <PropertyRef Name="物资名称" />
+            <PropertyRef Name="单位" />
+            <PropertyRef Name="规格" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TargetId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="年龄段" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="存放地" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="备注" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="入库日期" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="AutoId" Type="int" Nullable="false" />
+          <Property Name="数量" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="单价" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="优惠价" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="合计" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="物资名称" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="单位" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="规格" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="类别" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Platform_LY.dbo.Store_Target' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Store_Target">
           <Key>
@@ -1123,6 +1168,30 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
     [Store_ObjectThumb].[StoreId] AS [StoreId], 
     [Store_ObjectThumb].[StoreName] AS [StoreName]
     FROM [dbo].[Store_ObjectThumb] AS [Store_ObjectThumb]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Store_RecordIn" EntityType="Self.Store_RecordIn" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Store_RecordIn].[Id] AS [Id], 
+    [Store_RecordIn].[TargetId] AS [TargetId], 
+    [Store_RecordIn].[ObjectId] AS [ObjectId], 
+    [Store_RecordIn].[年龄段] AS [年龄段], 
+    [Store_RecordIn].[存放地] AS [存放地], 
+    [Store_RecordIn].[备注] AS [备注], 
+    [Store_RecordIn].[入库日期] AS [入库日期], 
+    [Store_RecordIn].[Time] AS [Time], 
+    [Store_RecordIn].[OperationUserId] AS [OperationUserId], 
+    [Store_RecordIn].[OperationTime] AS [OperationTime], 
+    [Store_RecordIn].[AutoId] AS [AutoId], 
+    [Store_RecordIn].[数量] AS [数量], 
+    [Store_RecordIn].[PerPrice] AS [PerPrice], 
+    [Store_RecordIn].[单价] AS [单价], 
+    [Store_RecordIn].[优惠价] AS [优惠价], 
+    [Store_RecordIn].[合计] AS [合计], 
+    [Store_RecordIn].[物资名称] AS [物资名称], 
+    [Store_RecordIn].[单位] AS [单位], 
+    [Store_RecordIn].[规格] AS [规格], 
+    [Store_RecordIn].[类别] AS [类别]
+    FROM [dbo].[Store_RecordIn] AS [Store_RecordIn]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Store_Target" EntityType="Self.Store_Target" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2446,6 +2515,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <End Role="StoreObject" EntitySet="StoreObject" />
             <End Role="StoreStatistics" EntitySet="StoreStatistics" />
           </AssociationSet>
+          <EntitySet Name="Store_RecordIn" EntityType="StoreModel.Store_RecordIn" />
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -2700,6 +2770,49 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Store_RecordIn">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="TargetId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="年龄段" />
+            <PropertyRef Name="存放地" />
+            <PropertyRef Name="备注" />
+            <PropertyRef Name="入库日期" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="OperationUserId" />
+            <PropertyRef Name="OperationTime" />
+            <PropertyRef Name="AutoId" />
+            <PropertyRef Name="数量" />
+            <PropertyRef Name="PerPrice" />
+            <PropertyRef Name="单价" />
+            <PropertyRef Name="优惠价" />
+            <PropertyRef Name="合计" />
+            <PropertyRef Name="物资名称" />
+            <PropertyRef Name="单位" />
+            <PropertyRef Name="规格" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TargetId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="年龄段" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="存放地" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="备注" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="入库日期" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" />
+          <Property Name="数量" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PerPrice" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="单价" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="优惠价" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="合计" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="物资名称" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="单位" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="规格" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="类别" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3190,6 +3303,32 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_RecordIn">
+            <EntityTypeMapping TypeName="StoreModel.Store_RecordIn">
+              <MappingFragment StoreEntitySet="Store_RecordIn">
+                <ScalarProperty Name="类别" ColumnName="类别" />
+                <ScalarProperty Name="规格" ColumnName="规格" />
+                <ScalarProperty Name="单位" ColumnName="单位" />
+                <ScalarProperty Name="物资名称" ColumnName="物资名称" />
+                <ScalarProperty Name="合计" ColumnName="合计" />
+                <ScalarProperty Name="优惠价" ColumnName="优惠价" />
+                <ScalarProperty Name="单价" ColumnName="单价" />
+                <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />
+                <ScalarProperty Name="数量" ColumnName="数量" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="入库日期" ColumnName="入库日期" />
+                <ScalarProperty Name="备注" ColumnName="备注" />
+                <ScalarProperty Name="存放地" ColumnName="存放地" />
+                <ScalarProperty Name="年龄段" ColumnName="年龄段" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -48,13 +48,13 @@ public partial class StoreAction_In : SingleStorePage
                 target.Items.FindItemByValue(value).Selected = true;
                 view_target.Rebind();
                 counter.Value = "1";
-                view_obj.Visible = plus.Visible = true;
+                x1.Visible = x2.Visible = x3.Visible = x4.Visible = true;
             }
             else
             {
                 target.DataSource = db.Value.Store_Target.Where(o => o.State < 2 && o.StoreId == StoreId && o.In == false).OrderByDescending(o => o.TimeNode).ToList();
                 target.DataBind();
-                view_obj.Visible = plus.Visible = false;
+                x1.Visible = x2.Visible = x3.Visible = x4.Visible = false;
             }
         }
     }
@@ -77,6 +77,7 @@ public partial class StoreAction_In : SingleStorePage
             list = list.Where(o => o.操作人 == people.SelectedItem.Text).ToList();
         target.DataSource = list;
         target.DataBind();
+        x1.Visible = x2.Visible = x3.Visible = x4.Visible = false;
     }
 
     protected void period_SelectedDateChanged(object sender, Telerik.Web.UI.Calendar.SelectedDateChangedEventArgs e)
@@ -110,7 +111,7 @@ public partial class StoreAction_In : SingleStorePage
     protected void target_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
         counter.Value = target.SelectedIndex == -1 ? "0" : "1";
-        view_obj.Visible = plus.Visible = target.SelectedIndex >= 0;
+        x1.Visible = x2.Visible = x3.Visible = x4.Visible = target.SelectedIndex >= 0;
         view_target.Rebind();
         view_obj.Rebind();
     }
@@ -152,6 +153,12 @@ public partial class StoreAction_In : SingleStorePage
 
     protected void do_in_ServerClick(object sender, EventArgs e)
     {
+        DoIn(false);
+        Response.Redirect("~/StoreQuery/In?StoreId={0}".Formatted(StoreId));
+    }
+
+    protected void DoIn(bool finish)
+    {
         for (var i = 0; i < view_obj.Items.Count; i++)
         {
             var c = view_obj.Items[i].FindControl("ObjectInBody") as Control_ObjectInBody;
@@ -168,6 +175,13 @@ public partial class StoreAction_In : SingleStorePage
                 db.Value.SaveChanges();
             }
         }
+        if (finish)
+        {
+            var tid = target.SelectedValue.GlobalId();
+            var t = db.Value.StoreTarget.Single(o => o.Id == tid);
+            t.In = true;
+            db.Value.SaveChanges();
+        }
     }
 
     protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
@@ -182,5 +196,25 @@ public partial class StoreAction_In : SingleStorePage
         {
             c.LoadDefaults(list[c.ItemIndex]);
         }
+    }
+
+    protected void view_record_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
+    {
+        var targetId = target.SelectedValue == null ? (Guid?)null : target.SelectedValue.GlobalId();
+        if (targetId.HasValue)
+        {
+            var id = targetId.Value;
+            view_record.DataSource = db.Value.Store_RecordIn.Where(o => o.TargetId == id).OrderByDescending(o => o.入库日期).ToList();
+        }
+        else
+        {
+            view_record.DataSource = null;
+        }
+    }
+
+    protected void done_in_ServerClick(object sender, EventArgs e)
+    {
+        DoIn(true);
+        Response.Redirect("~/StoreQuery/TargetPrint?StoreId={0}&TargetId={1}".Formatted(StoreId, target.SelectedValue));
     }
 }
