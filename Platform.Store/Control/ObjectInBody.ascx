@@ -2,10 +2,7 @@
 
 <tr>
     <td>
-        <%= ItemIndex + 1 %>
         <input type="hidden" id="tid" runat="server" />
-    </td>
-    <td>
         <telerik:RadDropDownTree ID="catalog" runat="server" AutoPostBack="true" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" DropDownSettings-CloseDropDownOnSelection="true" OnEntryAdded="catalog_EntryAdded"></telerik:RadDropDownTree>
     </td>
     <td>

@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="RecordInBody.ascx.cs" Inherits="Control_TargetBody" %>
 
-<td><%= ItemIndex + 1 %></td>
 <td><%# Eval("类别") %></td>
 <td><%# Eval("物资名称") %></td>
 <td><%# Eval("单位") %></td>

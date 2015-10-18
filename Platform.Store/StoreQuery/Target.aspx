@@ -74,10 +74,10 @@
                         <tr>
                             <homory:TargetBody runat="server" ID="TargetBody" />
                             <td>
-                                <input type="button" class="btn btn-tumblr" value="入" id="in" runat="server" match='<%# Eval("Id") %>' onserverclick="in_ServerClick" />
-                                <input type="button" class="btn btn-tumblr" value="编" id="edit" runat="server" match='<%# Eval("Id") %>' onserverclick="edit_ServerClick" />
-                                <input type="button" class="btn btn-tumblr" value="删" id="remove" runat="server" match='<%# Eval("Id") %>' onserverclick="remove_ServerClick" />
-                                <input type="button" class="btn btn-tumblr" value="结" id="done" runat="server" match='<%# Eval("Id") %>' onserverclick="done_ServerClick" />
+                                <input type="button" class="btn btn-tumblr" value="入库" id="in" runat="server" match='<%# Eval("Id") %>' visible='<%# !(bool)Eval("In") %>' onserverclick="in_ServerClick" />
+                                <input type="button" class="btn btn-tumblr" value="编辑" id="edit" runat="server" match='<%# Eval("Id") %>' onserverclick="edit_ServerClick" />
+                                <input type="button" class="btn btn-tumblr" value="办结" id="done" runat="server" match='<%# Eval("Id") %>' visible='<%# !(bool)Eval("In") %>' onserverclick="done_ServerClick" />
+                                <input type="button" class="btn btn-tumblr" value="打印" id="print" runat="server" match='<%# Eval("Id") %>' visible='<%# (bool)Eval("In") %>' onserverclick="print_ServerClick" />
                             </td>
                         </tr>
                     </ItemTemplate>

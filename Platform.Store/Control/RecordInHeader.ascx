@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="RecordInHeader.ascx.cs" Inherits="Control_RecordInHeader" %>
 
-<th>序号</th>
 <th>物资类别</th>
 <th>物资名称</th>
 <th>单位</th>

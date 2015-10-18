@@ -87,13 +87,17 @@ public partial class StoreQuery_Target : SingleStorePage
         Response.Redirect("~/StoreAction/In?StoreId={0}&TargetId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"].GlobalId()));
     }
 
-    protected void remove_ServerClick(object sender, EventArgs e)
-    {
-
-    }
-
     protected void done_ServerClick(object sender, EventArgs e)
     {
+        var id = (sender as HtmlInputButton).Attributes["match"].GlobalId();
+        var target = db.Value.StoreTarget.Single(o => o.Id == id);
+        target.In = true;
+        db.Value.SaveChanges();
+        Response.Redirect("~/StoreQuery/TargetPrint?StoreId={0}&TargetId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"].GlobalId()));
+    }
 
+    protected void print_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/StoreQuery/TargetPrint?StoreId={0}&TargetId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"].GlobalId()));
     }
 }

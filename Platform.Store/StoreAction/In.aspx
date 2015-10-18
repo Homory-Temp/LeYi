@@ -135,6 +135,9 @@
                                 <homory:RecordInBody runat="server" ID="ObjectInBody" ItemIndex='<%# Container.DataItemIndex %>' />
                             </tr>
                         </ItemTemplate>
+                        <EmptyDataTemplate>
+                            <div class="row"><div class="col-md-12 text-center" style="color: black;">暂无记录</div></div>
+                        </EmptyDataTemplate>
                     </telerik:RadListView>
                 </div>
             </div>
