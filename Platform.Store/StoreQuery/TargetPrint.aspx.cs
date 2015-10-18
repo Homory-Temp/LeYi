@@ -16,7 +16,6 @@ public partial class StoreQuery_TargetPrint : SingleStorePage
             var targetId = "TargetId".Query().GlobalId();
             var target = db.Value.StoreTarget.Single(o => o.Id == targetId);
             campus.InnerText = db.Value.Department.Single(o => o.Id == CurrentCampus).Name;
-            usage.InnerText = target.UsageTarget;
             time.InnerText = target.TimeNode.FromTimeNode();
             order.Value = target.OrderSource;
             total.Value = target.Paid.ToMoney();

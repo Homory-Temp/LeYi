@@ -102,10 +102,12 @@ public static class BusinessExtensions
             OperationTime = DateTime.Now,
             Code = code,
             Amount = amount,
+            SourceAmount = amount,
             PerPrice = decimal.Divide(totalPrice, amount),
             SourcePerPrice = sourcePerPrice,
             Fee = fee,
-            Money = totalPrice + fee
+            Money = totalPrice + fee,
+            SourceMoney = totalPrice + fee
         };
         db.StoreIn.Add(@in);
         var obj = db.StoreObject.Single(o => o.Id == objectId);
@@ -143,6 +145,106 @@ public static class BusinessExtensions
         {
             // To Do
         }
+    }
+
+    public static CachedUse ActionConsumeExt(this StoreEntity db, CachedUse use, Guid consumerId, string note, DateTime consumeTime, Guid operatorId, string code)
+    {
+        var objId = use.ObjectId.Value;
+        var obj = db.StoreObject.Single(o => o.Id == objId);
+        if (!obj.Single)
+        {
+            if (obj.Amount < use.Amount.Value)
+                use.Amount = obj.Amount;
+            if (use.Type == "领用")
+            {
+                var consume = new StoreConsume
+                {
+                    Id = db.GlobalId(),
+                    ObjectId = use.ObjectId.Value,
+                    ConsumeUserId = consumerId,
+                    Note = use.Note,
+                    TimeNode = consumeTime.ToTimeNode(),
+                    Time = consumeTime,
+                    OperationUserId = operatorId,
+                    OperationTime = DateTime.Now,
+                    Code = code,
+                    Amount = use.Amount.Value,
+                    Money = 0
+                };
+                db.StoreConsume.Add(consume);
+                var counter = 0;
+                var left = consume.Amount;
+                foreach (var @in in obj.StoreIn.Where(o => o.Amount > 0).OrderBy(o => o.TimeNode))
+                {
+                    counter++;
+                    if (@in.Amount >= left)
+                    {
+                        var @single = new StoreConsumeSingle();
+                        consume.Money += (decimal.Divide(@in.Money, @in.Amount)) * left;
+                        @single.Id = db.GlobalId();
+                        @single.InId = @in.Id;
+                        @single.ConsumeId = consume.Id;
+                        @single.Ordinal = counter;
+                        @single.Amount = left;
+                        @single.PerPrice = @in.PerPrice;
+                        @single.SourcePerPrice = @in.SourcePerPrice;
+                        @single.Fee = (decimal.Divide(@in.Fee, @in.Amount)) * left;
+                        @single.Money = (decimal.Divide(@in.Money, @in.Amount)) * left;
+                        @in.Amount -= left;
+                        if (@in.Amount == 0)
+                            @in.Money = 0;
+                        else
+                            @in.Money -= (decimal.Divide(@in.Money, @in.Amount)) * left;
+                        db.StoreConsumeSingle.Add(@single);
+                        break;
+                    }
+                    else
+                    {
+                        left -= @in.Amount;
+                        var @single = new StoreConsumeSingle();
+                        consume.Money += @in.Money;
+                        @single.Id = db.GlobalId();
+                        @single.InId = @in.Id;
+                        @single.ConsumeId = consume.Id;
+                        @single.Ordinal = counter;
+                        @single.Amount = @in.Amount;
+                        @single.PerPrice = @in.PerPrice;
+                        @single.SourcePerPrice = @in.SourcePerPrice;
+                        @single.Fee = @in.Fee;
+                        @single.Money = @in.Money;
+                        @in.Amount = 0;
+                        @in.Money = 0;
+                        db.StoreConsumeSingle.Add(@single);
+                    }
+                }
+                use.Money = consume.Money;
+                obj.Amount -= use.Amount.Value;
+                obj.Money -= use.Money;
+                var flow = new StoreFlow
+                {
+                    Id = db.GlobalId(),
+                    ObjectId = objId,
+                    UserId = operatorId,
+                    Type = FlowType.领用,
+                    TypeName = FlowType.领用.ToString(),
+                    TimeNode = consumeTime.ToTimeNode(),
+                    Time = consumeTime,
+                    Amount = -use.Amount.Value,
+                    Money = -consume.Money,
+                    Note = note
+                };
+                db.StoreFlow.Add(flow);
+                db.ActionRecord(objId, consumeTime, 0M, 0M, 0M, 0M, -use.Amount.Value, -use.Money, 0M, 0M);
+                db.SaveChanges();
+                return use;
+            }
+            else
+            {
+                // To Do
+                return new CachedUse();
+            }
+        }
+        return new CachedUse();
     }
 
     public static void ActionRecord(this StoreEntity db, Guid objectId, DateTime time, decimal @in, decimal inMoney, decimal lend, decimal lendMoney, decimal consume, decimal consumeMoney, decimal @out, decimal outMoney)

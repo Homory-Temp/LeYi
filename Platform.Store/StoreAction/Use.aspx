@@ -29,32 +29,11 @@
 <body>
     <form id="form" runat="server">
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资管理 - 物资借领" />
-        <telerik:RadCodeBlock runat="server">
-            <script>
-                function calc(sender, args) {
-                    var g_in_price;
-                    var id = sender.get_id().replace("amount", "").replace("perPrice", "");
-                    var g_in_amount = $find(id + "amount").get_value();
-                    var g_in_price = $find(id + "perPrice").get_value();
-                    $find(id + "money").set_value(g_in_amount * g_in_price);
-                }
-                function calcTotal(sender, args) {
-                    var g_total = 0.00;
-                    var ccs = $("input[tocalc='calc']");
-                    for (var j = 0; j < ccs.length; j++) {
-                        var v = $find(ccs[j].id).get_value();
-                        if (v)
-                            g_total += v;
-                    }
-                    $find('<%= total.ClientID %>').set_value(g_total);
-                }
-            </script>
-        </telerik:RadCodeBlock>
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-2">
                     <div class="btn btn-tumblr dictionaryX">
-                        借领对象选择
+                        借领信息选择
                     </div>
                 </div>
                 <div class="col-md-10 text-left">
@@ -69,6 +48,13 @@
                             <%# Eval("RealName") %><span style="display: none;"><%# Eval("PinYin") %></span>
                         </ItemTemplate>
                     </telerik:RadComboBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <telerik:RadDatePicker ID="time" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="true">
+                        <Calendar runat="server">
+                            <FastNavigationSettings TodayButtonCaption="今日" OkButtonCaption="确定" CancelButtonCaption="取消"></FastNavigationSettings>
+                        </Calendar>
+                        <DatePopupButton runat="server" Visible="false" />
+                    </telerik:RadDatePicker>
                 </div>
             </div>
             <div class="row">&nbsp;</div>
@@ -81,15 +67,15 @@
             </div>
             <div class="row" id="x2" runat="server">
                 <div class="col-md-12">
-                    <telerik:RadListView ID="view_obj" runat="server" OnNeedDataSource="view_obj_NeedDataSource" ItemPlaceholderID="inHolder" OnItemDataBound="view_obj_ItemDataBound">
+                    <telerik:RadListView ID="view_obj" runat="server" OnNeedDataSource="view_obj_NeedDataSource" ItemPlaceholderID="useHolder" OnItemDataBound="view_obj_ItemDataBound">
                         <LayoutTemplate>
                             <table class="storeTable text-center">
-                                <homory:ObjectUseHeader runat="server" ID="ObjectInHeader" />
-                                <asp:PlaceHolder ID="inHolder" runat="server"></asp:PlaceHolder>
+                                <homory:ObjectUseHeader runat="server" ID="ObjectUseHeader" />
+                                <asp:PlaceHolder ID="useHolder" runat="server"></asp:PlaceHolder>
                             </table>
                         </LayoutTemplate>
                         <ItemTemplate>
-                            <homory:ObjectUseBody runat="server" ID="ObjectInBody" ItemIndex='<%# Container.DataItemIndex %>' />
+                            <homory:ObjectUseBody runat="server" ID="ObjectUseBody" ItemIndex='<%# Container.DataItemIndex %>' />
                         </ItemTemplate>
                     </telerik:RadListView>
                 </div>
@@ -100,8 +86,7 @@
                 </div>
                 <div class="col-md-4">&nbsp;</div>
                 <div class="col-md-4 text-left">
-                    <div class="btn btn-info">总额：</div>
-                    <telerik:RadNumericTextBox ID="total" runat="server" Width="120" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true" NumberFormat-AllowRounding="false"></telerik:RadNumericTextBox>
+                    &nbsp;
                 </div>
                 <div class="col-md-12 text-center">
                     <input type="button" class="btn btn-tumblr" id="do_use" runat="server" value="借领" onserverclick="do_use_ServerClick" />

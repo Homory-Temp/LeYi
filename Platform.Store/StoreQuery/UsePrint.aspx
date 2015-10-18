@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="TargetPrint.aspx.cs" Inherits="StoreQuery_TargetPrint" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="UsePrint.aspx.cs" Inherits="StoreQuery_UsePrint" %>
 
-<%@ Register Src="~/Control/PrintInHeader.ascx" TagPrefix="homory" TagName="PrintInHeader" %>
-<%@ Register Src="~/Control/PrintInBody.ascx" TagPrefix="homory" TagName="PrintInBody" %>
+<%@ Register Src="~/Control/PrintUseHeader.ascx" TagPrefix="homory" TagName="PrintUseHeader" %>
+<%@ Register Src="~/Control/PrintUseBody.ascx" TagPrefix="homory" TagName="PrintUseBody" %>
 
 <!DOCTYPE html>
 
@@ -50,7 +50,7 @@
             <!-- Start Printing -->
             <div class="row" id="x4" runat="server" style="color: black;">
                 <div class="col-md-12 text-center" style="font-size: 18px; font-weight: bold;">
-                    <span>入库单</span>
+                    <span>出库单</span>
                 </div>
                 <div class="col-md-4 text-left">
                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -68,11 +68,11 @@
                         <LayoutTemplate>
                             <table class="storeTablePrint text-center">
                                 <tr>
-                                    <homory:PrintInHeader runat="server" ID="PrintInHeader" />
+                                    <homory:PrintUseHeader runat="server" ID="PrintInHeader" />
                                 </tr>
                                 <asp:PlaceHolder ID="recordHolder" runat="server"></asp:PlaceHolder>
                                 <tr>
-                                    <td colspan="5">
+                                    <td colspan="6">
                                         <telerik:RadCodeBlock runat="server">
                                             <span style="font-weight: bold;">合计：</span><span><%= total.Value %></span>
                                         </telerik:RadCodeBlock>
@@ -80,13 +80,7 @@
                                     <td colspan="2" style="text-align: left;">
                                         <telerik:RadCodeBlock runat="server">
                                             &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span style="font-weight: bold;">保管人：</span><span><%= keep.Value %></span>
-                                        </telerik:RadCodeBlock>
-                                    </td>
-                                    <td colspan="2" style="text-align: left;">
-                                        <telerik:RadCodeBlock runat="server">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span style="font-weight: bold;">经手人：</span><span><%= brokerage.Value %></span>
+                                            <span style="font-weight: bold;">借领人：</span><span><%= people.Value %></span>
                                         </telerik:RadCodeBlock>
                                     </td>
                                 </tr>
@@ -94,14 +88,12 @@
                         </LayoutTemplate>
                         <ItemTemplate>
                             <tr>
-                                <homory:PrintInBody runat="server" ID="PrintInBody" ItemIndex='<%# Container.DataItemIndex %>' OrderSource='<%# order.Value %>' />
+                                <homory:PrintUseBody runat="server" ID="PrintInBody" ItemIndex='<%# Container.DataItemIndex %>' ObjectId='<%# ((Guid?)Eval("ObjectId")).Value %>' />
                             </tr>
                         </ItemTemplate>
                     </telerik:RadListView>
-                    <input id="order" runat="server" type="hidden" />
                     <input id="total" runat="server" type="hidden" />
-                    <input id="keep" runat="server" type="hidden" />
-                    <input id="brokerage" runat="server" type="hidden" />
+                    <input id="people" runat="server" type="hidden" />
                 </div>
             </div>
             <!-- End Printing -->

@@ -13,6 +13,7 @@ public partial class StoreAction_Use : SingleStorePage
     {
         if (!IsPostBack)
         {
+            time.SelectedDate = DateTime.Today;
             people.Items.Clear();
             people.DataSource = db.Value.Store_User.ToList();
             people.DataBind();
@@ -36,11 +37,15 @@ public partial class StoreAction_Use : SingleStorePage
     protected void usage_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
         Detect();
+        x.Value = "";
+        view_obj.Rebind();
     }
 
     protected void people_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
         Detect();
+        x.Value = "";
+        view_obj.Rebind();
     }
 
     protected void Detect()
@@ -61,14 +66,15 @@ public partial class StoreAction_Use : SingleStorePage
             }
         }
         x1.Visible = x2.Visible = show;
+        counter.Value = show ? "1" : "0";
     }
 
     protected void plus_ServerClick(object sender, EventArgs e)
     {
-        //counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
-        //var toRem = view_obj.Items.Select(o => (o.FindControl("ObjectInBody") as Control_ObjectInBody)).Select(o => o.PeekValue()).ToList();
-        //x.Value = toRem.ToJson();
-        //view_obj.Rebind();
+        counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
+        var toRem = view_obj.Items.Select(o => (o.FindControl("ObjectUseBody") as Control_ObjectUseBody)).Select(o => o.PeekValue()).ToList();
+        x.Value = toRem.ToJson();
+        view_obj.Rebind();
     }
 
     protected void view_obj_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
@@ -85,32 +91,47 @@ public partial class StoreAction_Use : SingleStorePage
     protected Guid DoUse()
     {
         var gid = db.Value.GlobalId();
+        var list = new List<CachedUse>();
+        var tn = (time.SelectedDate.HasValue ? time.SelectedDate.Value : DateTime.Today).ToTimeNode();
         for (var i = 0; i < view_obj.Items.Count; i++)
         {
-            //var c = view_obj.Items[i].FindControl("ObjectInBody") as Control_ObjectInBody;
-            //var @in = c.PeekValue();
-            //var targetId = @in.TargetId;
-            //var t = db.Value.StoreTarget.Single(o => o.Id == targetId);
-            //decimal amount = @in.Amount.HasValue ? @in.Amount.Value : 0M;
-            //decimal fee = @in.Fee.HasValue ? @in.Fee.Value : 0M;
-            //decimal sourcePerPrice = @in.SourcePerPrice.HasValue ? @in.SourcePerPrice.Value : 0M;
-            //decimal money = @in.Money.HasValue ? @in.Money.Value : 0M;
-            //if (@in.ObjectId.HasValue && amount > 0M && money > 0M)
-            //{
-            //    db.Value.ActionIn(targetId, @in.ObjectId.Value, t.OrderSource, @in.Place, "", null, @in.Note, @in.TimeNode.ToTime(), CurrentUser, "", amount, money - fee, sourcePerPrice, fee, money);
-            //    db.Value.SaveChanges();
-            //}
+            var c = view_obj.Items[i].FindControl("ObjectUseBody") as Control_ObjectUseBody;
+            var use = c.PeekValue();
+            decimal amount = use.Amount.HasValue ? use.Amount.Value : 0M;
+            if (use.ObjectId.HasValue && amount > 0M && !use.Type.Null())
+            {
+                var result = db.Value.ActionConsumeExt(use, people.SelectedValue.GlobalId(), use.Note, tn.ToTime(), CurrentUser, "");
+                if (result.Amount.Value > 0)
+                {
+                    list.Add(result);
+                }
+            }
+        }
+        if (list.Count > 0)
+        {
+            var used = new StoreUsed
+            {
+                Id = gid,
+                TimeNode = tn,
+                Time = time.SelectedDate.HasValue ? time.SelectedDate.Value : DateTime.Today,
+                Amount = list.Sum(o => o.Amount.Value),
+                Money = list.Sum(o => o.Money),
+                Content = list.ToJson(),
+                PeopleId = people.SelectedValue.GlobalId()
+            };
+            db.Value.StoreUsed.Add(used);
+            db.Value.SaveChanges();
         }
         return gid;
     }
 
     protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
     {
-        var c = e.Item.FindControl("ObjectInBody") as Control_ObjectUseBody;
-        var list = x.Value.Null() ? new List<CachedIn>() : x.Value.FromJson<List<CachedIn>>();
+        var c = e.Item.FindControl("ObjectUseBody") as Control_ObjectUseBody;
+        var list = x.Value.Null() ? new List<CachedUse>() : x.Value.FromJson<List<CachedUse>>();
         if (list.Count < c.ItemIndex + 1)
         {
-            c.LoadDefaults(new CachedIn { });
+            c.LoadDefaults(new CachedUse { UserTarget = usage.SelectedItem.Text });
         }
         else
         {

@@ -331,7 +331,7 @@ namespace Models
         public System.Guid InId { get; set; }
         public System.Guid ConsumeId { get; set; }
         public int Ordinal { get; set; }
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
         public decimal PerPrice { get; set; }
         public decimal SourcePerPrice { get; set; }
         public decimal Fee { get; set; }
@@ -436,6 +436,8 @@ namespace Models
         public decimal SourcePerPrice { get; set; }
         public decimal Fee { get; set; }
         public decimal Money { get; set; }
+        public decimal SourceAmount { get; set; }
+        public decimal SourceMoney { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StoreConsumeSingle> StoreConsumeSingle { get; set; }
@@ -809,6 +811,22 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class StoreUsed
+    {
+        public System.Guid Id { get; set; }
+        public int TimeNode { get; set; }
+        public System.DateTime Time { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Money { get; set; }
+        public string Content { get; set; }
+        public System.Guid PeopleId { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -924,7 +942,8 @@ namespace Models
     
     public enum FlowType : int
     {
-        入库 = 1
+        入库 = 1,
+        领用 = 2
     }
 }
 namespace Models

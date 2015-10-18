@@ -103,7 +103,7 @@
           <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ConsumeId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="PerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="SourcePerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Fee" Type="decimal" Precision="18" Scale="6" Nullable="false" />
@@ -174,6 +174,8 @@
           <Property Name="SourcePerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Fee" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="SourceAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="SourceMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
         <EntityType Name="StoreInSingle">
           <Key>
@@ -373,6 +375,18 @@
           <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreUsed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PeopleId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="StoreUser">
           <Key>
@@ -1191,6 +1205,9 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Parameter Name="CatalogId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="StoreId" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="GetCatalogPath" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CatalogId" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="ToPinYin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -1217,6 +1234,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySet Name="StoreRole" EntityType="Self.StoreRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreStatistics" EntityType="Self.StoreStatistics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreTarget" EntityType="Self.StoreTarget" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreUsed" EntityType="Self.StoreUsed" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreUser" EntityType="Self.StoreUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
@@ -1591,7 +1609,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="InId" Type="Guid" Nullable="false" />
           <Property Name="ConsumeId" Type="Guid" Nullable="false" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="PerPrice" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="SourcePerPrice" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Fee" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
@@ -1677,6 +1695,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <NavigationProperty Name="StoreInSingle" Relationship="Self.FK_StoreInSingle_StoreIn" FromRole="StoreIn" ToRole="StoreInSingle" />
           <NavigationProperty Name="StoreOutSingle" Relationship="Self.FK_StoreOutSingle_StoreIn" FromRole="StoreIn" ToRole="StoreOutSingle" />
           <NavigationProperty Name="StoreLendSingle" Relationship="StoreModel.FK_StoreLendSingle_StoreIn" FromRole="StoreIn" ToRole="StoreLendSingle" />
+          <Property Name="SourceAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="SourceMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
         </EntityType>
         <EntityType Name="StoreInSingle">
           <Key>
@@ -2638,6 +2658,10 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <End Role="Department" EntitySet="Department" />
             <End Role="Store" EntitySet="Store" />
           </AssociationSet>
+          <EntitySet Name="StoreUsed" EntityType="StoreModel.StoreUsed" />
+          <FunctionImport Name="GetCatalogPath" ReturnType="Collection(String)">
+            <Parameter Name="CatalogId" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -2851,7 +2875,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="StoreName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EnumType Name="FlowType">
-          <Member Name="入库" Value="1" />
+        <Member Name="入库" Value="1" />
+          <Member Name="领用" Value="2" />
         </EnumType>
         <EntityType Name="StoreStatistics">
           <Key>
@@ -3023,6 +3048,18 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="StoreUsed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PeopleId" Type="Guid" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3137,6 +3174,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySetMapping Name="StoreIn">
             <EntityTypeMapping TypeName="StoreModel.StoreIn">
               <MappingFragment StoreEntitySet="StoreIn">
+                <ScalarProperty Name="SourceMoney" ColumnName="SourceMoney" />
+                <ScalarProperty Name="SourceAmount" ColumnName="SourceAmount" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TargetId" ColumnName="TargetId" />
                 <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
@@ -3562,6 +3601,20 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="StoreUsed">
+            <EntityTypeMapping TypeName="StoreModel.StoreUsed">
+              <MappingFragment StoreEntitySet="StoreUsed">
+                <ScalarProperty Name="PeopleId" ColumnName="PeopleId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCatalogPath" FunctionName="StoreModel.Store.GetCatalogPath" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -16,14 +16,13 @@ public partial class Control_ObjectUseBody : SingleStoreControl
         }
     }
 
-    public void LoadDefaults(CachedIn @in)
+    public void LoadDefaults(CachedUse use)
     {
-        tid.Value = @in.TargetId.ToString();
-        var target = db.Value.StoreTarget.Single(o => o.Id == @in.TargetId);
+        tid.Value = use.UserTarget;
         var catalogs = db.Value.StoreCatalog.Where(o => o.StoreId == StoreId && o.State < 2).OrderBy(o => o.Ordinal).ToList();
         if (CurrentStore.State == StoreState.食品)
         {
-            catalogs.RemoveAll(o => o.ParentId == null && o.Name != target.UsageTarget);
+            catalogs.RemoveAll(o => o.ParentId == null && o.Name != use.UserTarget);
             catalog.DataSource = catalogs;
             catalog.DataBind();
             catalog.EmbeddedTree.Nodes[0].Expanded = true;
@@ -33,16 +32,11 @@ public partial class Control_ObjectUseBody : SingleStoreControl
             catalog.DataSource = catalogs;
             catalog.DataBind();
         }
-        amount.Value = (double?)@in.Amount;
-        perPrice.Value = (double?)@in.SourcePerPrice;
-        fee.Value = (double?)@in.Fee;
-        money.Value = (double?)@in.Money;
-        place.Text = @in.Place;
-        note.Text = @in.Note;
-        time.SelectedDate = (@in.TimeNode.HasValue ? @in.TimeNode.Value : target.TimeNode).ToTime();
-        if (@in.CatalogId.HasValue && @in.CatalogId.Value != Guid.Empty)
+        amount.Value = (double?)use.Amount;
+        note.Text = use.Note;
+        if (use.CatalogId.HasValue && use.CatalogId.Value != Guid.Empty)
         {
-            var catalogId = @in.CatalogId.Value;
+            var catalogId = use.CatalogId.Value;
             var node = catalog.EmbeddedTree.FindNodeByValue(catalogId.ToString());
             node.Selected = true;
             node.ExpandParentNodes();
@@ -52,32 +46,42 @@ public partial class Control_ObjectUseBody : SingleStoreControl
             AddChildren(list, c);
             obj.DataSource = list.Join(db.Value.StoreObject, o => o, o => o.CatalogId, (a, b) => b).OrderBy(o => o.Ordinal).ToList();
             obj.DataBind();
-            if (@in.ObjectId.HasValue && @in.ObjectId.Value != Guid.Empty)
+            if (use.ObjectId.HasValue && use.ObjectId.Value != Guid.Empty)
             {
-                var oid = @in.ObjectId.Value;
+                var oid = use.ObjectId.Value;
                 var so = db.Value.StoreObject.Single(o => o.Id == oid);
                 unit.Text = so.Unit;
                 specification.Text = so.Specification;
                 stored.Text = so.Amount.ToAmount();
-                obj.SelectedIndex = obj.FindItemIndexByValue(@in.ObjectId.ToString());
+                obj.SelectedIndex = obj.FindItemIndexByValue(use.ObjectId.ToString());
+                if (so.Consumable)
+                {
+                    act.DataSource = new[] { "领用" };
+                    act.DataBind();
+                }
+                else
+                {
+                    act.DataSource = new[] { "借用", "领用" };
+                    act.DataBind();
+                }
+                if (!use.Type.Null())
+                {
+                    act.FindItemByText(use.Type).Selected = true;
+                }
             }
         }
     }
 
-    public CachedIn PeekValue()
+    public CachedUse PeekValue()
     {
-        var targetId = tid.Value.GlobalId();
-        var result = new CachedIn();
-        result.TargetId = targetId;
+        var use = tid.Value;
+        var result = new CachedUse();
+        result.UserTarget = use;
         result.CatalogId = catalog.SelectedValue == null ? (Guid?)null : catalog.SelectedValue.GlobalId();
         result.ObjectId = obj.SelectedValue == null ? (Guid?)null : obj.SelectedValue.GlobalId();
-        result.TimeNode = time.SelectedDate.HasValue ? time.SelectedDate.Value.ToTimeNode() : db.Value.StoreTarget.Single(o => o.Id == targetId).TimeNode;
         result.Amount = amount.Value.HasValue ? (decimal)amount.Value.Value : (decimal?)null;
-        result.SourcePerPrice = perPrice.Value.HasValue ? (decimal)perPrice.Value.Value : (decimal?)null;
-        result.Fee = fee.Value.HasValue ? (decimal)fee.Value.Value : (decimal?)null;
-        result.Money = money.Value.HasValue ? (decimal)money.Value.Value : (decimal?)null;
-        result.Place = place.Text;
         result.Note = note.Text;
+        result.Type = act.SelectedIndex == -1 ? "" : act.SelectedItem.Text;
         return result;
     }
 
@@ -114,12 +118,25 @@ public partial class Control_ObjectUseBody : SingleStoreControl
             unit.Text = so.Unit;
             specification.Text = so.Specification;
             stored.Text = so.Amount.ToAmount();
+            if (so.Consumable)
+            {
+                act.DataSource = new[] { "领用" };
+                act.DataBind();
+            }
+            else
+            {
+                act.DataSource = new[] { "借用", "领用" };
+                act.DataBind();
+            }
+            act.SelectedIndex = 0;
         }
         else
         {
             unit.Text = "";
             specification.Text = "";
             stored.Text = "";
+            act.DataSource = null;
+            act.DataBind();
         }
     }
 }

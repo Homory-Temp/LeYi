@@ -57,6 +57,7 @@ namespace Models
         public virtual DbSet<StoreStatistics> StoreStatistics { get; set; }
         public virtual DbSet<Store_RecordIn> Store_RecordIn { get; set; }
         public virtual DbSet<Department> Department { get; set; }
+        public virtual DbSet<StoreUsed> StoreUsed { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {
@@ -78,6 +79,15 @@ namespace Models
                 new ObjectParameter("StoreId", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("CountObjects", catalogIdParameter, storeIdParameter);
+        }
+    
+        public virtual ObjectResult<string> GetCatalogPath(Nullable<System.Guid> catalogId)
+        {
+            var catalogIdParameter = catalogId.HasValue ?
+                new ObjectParameter("CatalogId", catalogId) :
+                new ObjectParameter("CatalogId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetCatalogPath", catalogIdParameter);
         }
     }
 }

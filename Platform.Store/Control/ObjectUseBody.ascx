@@ -13,6 +13,10 @@
         </telerik:RadComboBox>
     </td>
     <td>
+        <telerik:RadComboBox ID="act" runat="server" LocalizationPath="~/Language" AutoPostBack="true">
+        </telerik:RadComboBox>
+    </td>
+    <td>
         <asp:Label ID="unit" runat="server"></asp:Label>
     </td>
     <td>
@@ -22,15 +26,7 @@
         <asp:Label ID="stored" runat="server"></asp:Label>
     </td>
     <td>
-        <telerik:RadDatePicker ID="time" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="true">
-            <Calendar runat="server">
-                <FastNavigationSettings TodayButtonCaption="今日" OkButtonCaption="确定" CancelButtonCaption="取消"></FastNavigationSettings>
-            </Calendar>
-            <DatePopupButton runat="server" Visible="false" />
-        </telerik:RadDatePicker>
-    </td>
-    <td>
-        <telerik:RadNumericTextBox ID="amount" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true" ClientEvents-OnValueChanged="calc"></telerik:RadNumericTextBox>
+        <telerik:RadNumericTextBox ID="amount" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
     </td>
     <td>
         <telerik:RadTextBox ID="note" runat="server" Width="100"></telerik:RadTextBox>
