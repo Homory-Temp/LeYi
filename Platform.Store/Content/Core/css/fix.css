@@ -44,3 +44,16 @@ html .storeObjThumb {
     height: 100%;
     cursor: pointer;
 }
+
+html .storeTablePrint {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+html .storeTablePrint th, html .storeTablePrint td {
+    border: solid 1px #2B2B2B;
+    text-align: center;
+    color: black;
+    line-height: 28px;
+    height: 28px;
+}

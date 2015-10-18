@@ -29,6 +29,52 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class Department
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Department()
+        {
+            this.Department1 = new HashSet<Department>();
+            this.Department11 = new HashSet<Department>();
+            this.DepartmentUser = new HashSet<DepartmentUser>();
+            this.DepartmentUser1 = new HashSet<DepartmentUser>();
+            this.Store = new HashSet<Store>();
+        }
+    
+        public System.Guid Id { get; set; }
+        public Nullable<System.Guid> ParentId { get; set; }
+        public System.Guid TopId { get; set; }
+        public string Name { get; set; }
+        public string DisplayName { get; set; }
+        public int Level { get; set; }
+        public bool Hidden { get; set; }
+        public int Type { get; set; }
+        public int State { get; set; }
+        public int Ordinal { get; set; }
+        public int AutoId { get; set; }
+        public int BuildType { get; set; }
+        public int ClassType { get; set; }
+        public string Code { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> Department1 { get; set; }
+        public virtual Department Department2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> Department11 { get; set; }
+        public virtual Department Department3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepartmentUser> DepartmentUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepartmentUser> DepartmentUser1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Store> Store { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepartmentUser
     {
         public System.Guid DepartmentId { get; set; }
@@ -40,6 +86,8 @@ namespace Models
         public int Ordinal { get; set; }
     
         public virtual User User { get; set; }
+        public virtual Department Department { get; set; }
+        public virtual Department Department1 { get; set; }
     }
 }
 namespace Models
@@ -75,6 +123,7 @@ namespace Models
         public virtual ICollection<StoreRole> StoreRole { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StoreTarget> StoreTarget { get; set; }
+        public virtual Department Department { get; set; }
     }
 }
 namespace Models

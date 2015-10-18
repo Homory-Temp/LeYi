@@ -18,6 +18,25 @@
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="TopId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="Hidden" Type="bit" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuildType" Type="int" Nullable="false" />
+          <Property Name="ClassType" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="DepartmentUser">
           <Key>
             <PropertyRef Name="DepartmentId" />
@@ -556,6 +575,54 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="StoreId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Department_DepartmentParent">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Department1" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_DepartmentTop">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Department1" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department1">
+              <PropertyRef Name="TopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentUser_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="DepartmentUser" Type="Self.DepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentUser">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentUser_DepartmentCampus">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="DepartmentUser" Type="Self.DepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentUser">
+              <PropertyRef Name="TopDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DepartmentUser_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="DepartmentUser" Type="Self.DepartmentUser" Multiplicity="*" />
@@ -565,6 +632,18 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             </Principal>
             <Dependent Role="DepartmentUser">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Store_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Store" Type="Self.Store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Store">
+              <PropertyRef Name="CampusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1117,6 +1196,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
         </Function>
         <EntityContainer Name="StoreModelStoreContainer">
           <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepartmentUser" EntityType="Self.DepartmentUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreCatalog" EntityType="Self.StoreCatalog" Schema="dbo" store:Type="Tables" />
@@ -1236,9 +1316,29 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
     [Store_Visitor].[RoleId] AS [RoleId]
     FROM [dbo].[Store_Visitor] AS [Store_Visitor]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_Department_DepartmentParent" Association="Self.FK_Department_DepartmentParent">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Department1" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_DepartmentTop" Association="Self.FK_Department_DepartmentTop">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Department1" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentUser_Department" Association="Self.FK_DepartmentUser_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="DepartmentUser" EntitySet="DepartmentUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentUser_DepartmentCampus" Association="Self.FK_DepartmentUser_DepartmentCampus">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="DepartmentUser" EntitySet="DepartmentUser" />
+          </AssociationSet>
           <AssociationSet Name="FK_DepartmentUser_User" Association="Self.FK_DepartmentUser_User">
             <End Role="User" EntitySet="User" />
             <End Role="DepartmentUser" EntitySet="DepartmentUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Store_Department" Association="Self.FK_Store_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Store" EntitySet="Store" />
           </AssociationSet>
           <AssociationSet Name="FK_StoreCatalog_Store" Association="Self.FK_StoreCatalog_Store">
             <End Role="Store" EntitySet="Store" />
@@ -1441,6 +1541,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <NavigationProperty Name="StoreDictionary" Relationship="Self.FK_StoreDictionary_Store" FromRole="Store" ToRole="StoreDictionary" />
           <NavigationProperty Name="StoreRole" Relationship="Self.FK_StoreRole_Store" FromRole="Store" ToRole="StoreRole" />
           <NavigationProperty Name="StoreTarget" Relationship="Self.FK_StoreTarget_Store" FromRole="Store" ToRole="StoreTarget" />
+          <NavigationProperty Name="Department" Relationship="StoreModel.FK_Store_Department" FromRole="Store" ToRole="Department" />
         </EntityType>
         <EntityType Name="StoreCatalog">
           <Key>
@@ -2516,6 +2617,27 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <End Role="StoreStatistics" EntitySet="StoreStatistics" />
           </AssociationSet>
           <EntitySet Name="Store_RecordIn" EntityType="StoreModel.Store_RecordIn" />
+          <EntitySet Name="Department" EntityType="StoreModel.Department" />
+          <AssociationSet Name="FK_Department_DepartmentParent" Association="StoreModel.FK_Department_DepartmentParent">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Department1" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_DepartmentTop" Association="StoreModel.FK_Department_DepartmentTop">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Department1" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentUser_Department" Association="StoreModel.FK_DepartmentUser_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="DepartmentUser" EntitySet="DepartmentUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentUser_DepartmentCampus" Association="StoreModel.FK_DepartmentUser_DepartmentCampus">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="DepartmentUser" EntitySet="DepartmentUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Store_Department" Association="StoreModel.FK_Store_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Store" EntitySet="Store" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -2568,6 +2690,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="State" Type="Int32" Nullable="false" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="StoreModel.FK_DepartmentUser_User" FromRole="DepartmentUser" ToRole="User" />
+          <NavigationProperty Name="Department" Relationship="StoreModel.FK_DepartmentUser_Department" FromRole="DepartmentUser" ToRole="Department" />
+          <NavigationProperty Name="Department1" Relationship="StoreModel.FK_DepartmentUser_DepartmentCampus" FromRole="DepartmentUser" ToRole="Department" />
         </EntityType>
         <Association Name="FK_DepartmentUser_User">
           <End Type="StoreModel.User" Role="User" Multiplicity="1" />
@@ -2813,6 +2937,92 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="规格" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="类别" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="TopId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="Hidden" Type="Boolean" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuildType" Type="Int32" Nullable="false" />
+          <Property Name="ClassType" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Department1" Relationship="StoreModel.FK_Department_DepartmentParent" FromRole="Department" ToRole="Department1" />
+          <NavigationProperty Name="Department2" Relationship="StoreModel.FK_Department_DepartmentParent" FromRole="Department1" ToRole="Department" />
+          <NavigationProperty Name="Department11" Relationship="StoreModel.FK_Department_DepartmentTop" FromRole="Department" ToRole="Department1" />
+          <NavigationProperty Name="Department3" Relationship="StoreModel.FK_Department_DepartmentTop" FromRole="Department1" ToRole="Department" />
+          <NavigationProperty Name="DepartmentUser" Relationship="StoreModel.FK_DepartmentUser_Department" FromRole="Department" ToRole="DepartmentUser" />
+          <NavigationProperty Name="DepartmentUser1" Relationship="StoreModel.FK_DepartmentUser_DepartmentCampus" FromRole="Department" ToRole="DepartmentUser" />
+          <NavigationProperty Name="Store" Relationship="StoreModel.FK_Store_Department" FromRole="Department" ToRole="Store" />
+        </EntityType>
+        <Association Name="FK_Department_DepartmentParent">
+          <End Type="StoreModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="StoreModel.Department" Role="Department1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_DepartmentTop">
+          <End Type="StoreModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="StoreModel.Department" Role="Department1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department1">
+              <PropertyRef Name="TopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentUser_Department">
+          <End Type="StoreModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="StoreModel.DepartmentUser" Role="DepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentUser">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentUser_DepartmentCampus">
+          <End Type="StoreModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="StoreModel.DepartmentUser" Role="DepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentUser">
+              <PropertyRef Name="TopDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Store_Department">
+          <End Type="StoreModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="StoreModel.Store" Role="Store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Store">
+              <PropertyRef Name="CampusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3328,6 +3538,26 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
                 <ScalarProperty Name="年龄段" ColumnName="年龄段" />
                 <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
                 <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="StoreModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ClassType" ColumnName="ClassType" />
+                <ScalarProperty Name="BuildType" ColumnName="BuildType" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Hidden" ColumnName="Hidden" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TopId" ColumnName="TopId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

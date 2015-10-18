@@ -1,12 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="TargetPrint.aspx.cs" Inherits="StoreQuery_TargetPrint" %>
 
-<%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
-<%@ Register Src="~/Control/TargetHeader.ascx" TagPrefix="homory" TagName="TargetHeader" %>
-<%@ Register Src="~/Control/TargetBody.ascx" TagPrefix="homory" TagName="TargetBody" %>
-<%@ Register Src="~/Control/ObjectInHeader.ascx" TagPrefix="homory" TagName="ObjectInHeader" %>
-<%@ Register Src="~/Control/ObjectInBody.ascx" TagPrefix="homory" TagName="ObjectInBody" %>
-<%@ Register Src="~/Control/RecordInHeader.ascx" TagPrefix="homory" TagName="RecordInHeader" %>
-<%@ Register Src="~/Control/RecordInBody.ascx" TagPrefix="homory" TagName="RecordInBody" %>
+<%@ Register Src="~/Control/PrintInHeader.ascx" TagPrefix="homory" TagName="PrintInHeader" %>
+<%@ Register Src="~/Control/PrintInBody.ascx" TagPrefix="homory" TagName="PrintInBody" %>
 
 <!DOCTYPE html>
 
@@ -25,6 +20,20 @@
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
+    <script>
+        function printTarget() {
+            bdhtml = window.document.body.innerHTML;
+            sprnstr = "<!-- Start Printing -->";
+            eprnstr = "<!-- End Printing -->";
+            prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 23);
+            prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
+            prnhtml = "<body>" + prnhtml + "</body>";
+            window.document.body.innerHTML = prnhtml;
+            window.print();
+            window.document.body.innerHTML = bdhtml;
+            return false;
+        }
+    </script>
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
@@ -38,23 +47,70 @@
             <div class="btn btn-lg btn-warning" style="margin-top: 50px;">正在加载 请稍候....</div>
         </telerik:RadAjaxLoadingPanel>
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
-            <div class="row" id="x4" runat="server">
+            <!-- Start Printing -->
+            <div class="row" id="x4" runat="server" style="color: black;">
+                <div class="col-md-12 text-center" style="font-size: 18px; font-weight: bold;">
+                    <span>入库单</span>
+                </div>
+                <div class="col-md-4 text-left">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style="font-weight: bold;">园区：</span><span id="campus" runat="server"></span>
+                </div>
+                <div class="col-md-4 text-center">
+                    <span style="font-weight: bold;">用餐对象：</span><span id="usage" runat="server"></span>
+                </div>
+                <div class="col-md-4 text-right">
+                    <span style="font-weight: bold;">日期：</span><span id="time" runat="server"></span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
                 <div class="col-md-12">
                     <telerik:RadListView ID="view_record" runat="server" OnNeedDataSource="view_record_NeedDataSource" ItemPlaceholderID="recordHolder">
                         <LayoutTemplate>
-                            <table class="storeTable text-center">
+                            <table class="storeTablePrint text-center">
                                 <tr>
-                                    <homory:RecordInHeader runat="server" ID="ObjectInHeader" />
+                                    <homory:PrintInHeader runat="server" ID="PrintInHeader" />
                                 </tr>
                                 <asp:PlaceHolder ID="recordHolder" runat="server"></asp:PlaceHolder>
+                                <tr>
+                                    <td colspan="5">
+                                        <telerik:RadCodeBlock runat="server">
+                                            <span style="font-weight: bold;">合计：</span><span><%= total.Value %></span>
+                                        </telerik:RadCodeBlock>
+                                    </td>
+                                    <td colspan="2" style="text-align: left;">
+                                        <telerik:RadCodeBlock runat="server">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span style="font-weight: bold;">保管人：</span><span><%= keep.Value %></span>
+                                        </telerik:RadCodeBlock>
+                                    </td>
+                                    <td colspan="2" style="text-align: left;">
+                                        <telerik:RadCodeBlock runat="server">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span style="font-weight: bold;">经手人：</span><span><%= brokerage.Value %></span>
+                                        </telerik:RadCodeBlock>
+                                    </td>
+                                </tr>
                             </table>
                         </LayoutTemplate>
                         <ItemTemplate>
                             <tr>
-                                <homory:RecordInBody runat="server" ID="ObjectInBody" ItemIndex='<%# Container.DataItemIndex %>' />
+                                <homory:PrintInBody runat="server" ID="PrintInBody" ItemIndex='<%# Container.DataItemIndex %>' OrderSource='<%# order.Value %>' />
                             </tr>
                         </ItemTemplate>
                     </telerik:RadListView>
+                    <input id="order" runat="server" type="hidden" />
+                    <input id="total" runat="server" type="hidden" />
+                    <input id="keep" runat="server" type="hidden" />
+                    <input id="brokerage" runat="server" type="hidden" />
+                </div>
+            </div>
+            <!-- End Printing -->
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <input type="button" class="btn btn-tumblr" value="打印" id="in" onclick="return printTarget();" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="button" class="btn btn-tumblr" value="返回" id="go" runat="server" onserverclick="go_ServerClick" />
                 </div>
             </div>
         </telerik:RadAjaxPanel>
