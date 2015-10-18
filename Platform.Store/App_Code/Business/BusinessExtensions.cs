@@ -178,36 +178,14 @@ public static class BusinessExtensions
         else
         {
             var current = db.StoreStatistics.Single(o => o.ObjectId == objectId && o.Year == year && o.Month == month);
-            if (last == null)
-            {
-                current.EndInAmount += @in;
-                current.EndInMoney += inMoney;
-                current.EndLendAmount += lend;
-                current.EndLendMoney += lendMoney;
-                current.EndConsumeAmount += consume;
-                current.EndConsumeMoney += consumeMoney;
-                current.EndOutAmount += @out;
-                current.EndOutMoney += outMoney;
-            }
-            else
-            {
-                current.StartInAmount += @in;
-                current.StartInMoney += inMoney;
-                current.StartLendAmount += lend;
-                current.StartLendMoney += lendMoney;
-                current.StartConsumeAmount += consume;
-                current.StartConsumeMoney += consumeMoney;
-                current.StartOutAmount += @out;
-                current.StartOutMoney += outMoney;
-                current.EndInAmount += @in;
-                current.EndInMoney += inMoney;
-                current.EndLendAmount += lend;
-                current.EndLendMoney += lendMoney;
-                current.EndConsumeAmount += consume;
-                current.EndConsumeMoney += consumeMoney;
-                current.EndOutAmount += @out;
-                current.EndOutMoney += outMoney;
-            }
+            current.EndInAmount += @in;
+            current.EndInMoney += inMoney;
+            current.EndLendAmount += lend;
+            current.EndLendMoney += lendMoney;
+            current.EndConsumeAmount += consume;
+            current.EndConsumeMoney += consumeMoney;
+            current.EndOutAmount += @out;
+            current.EndOutMoney += outMoney;
         }
         foreach (var current in db.StoreStatistics.Where(o => o.ObjectId == objectId && o.TimeNode > stamp))
         {

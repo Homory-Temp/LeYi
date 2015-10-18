@@ -12,20 +12,25 @@ public partial class Control_ObjectInBody : SingleStoreControl
     {
         if (!IsPostBack)
         {
-            var catalogs = db.Value.StoreCatalog.Where(o => o.StoreId == StoreId && o.State < 2).OrderBy(o => o.Ordinal).ToList();
-            var target = db.Value.StoreTarget.Single(o => o.Id == TargetId);
-            if (CurrentStore.State == Models.StoreState.食品)
-            {
-                catalogs.RemoveAll(o => o.ParentId == null && o.Name != target.UsageTarget);
-                catalog.DataSource = catalogs;
-                catalog.DataBind();
-                catalog.EmbeddedTree.Nodes[0].Expanded = true;
-            }
-            else
-            {
-                catalog.DataSource = catalogs;
-                catalog.DataBind();
-            }
+            //LoadDefaults();
+        }
+    }
+
+    public void LoadDefaults()
+    {
+        var catalogs = db.Value.StoreCatalog.Where(o => o.StoreId == StoreId && o.State < 2).OrderBy(o => o.Ordinal).ToList();
+        var target = db.Value.StoreTarget.Single(o => o.Id == TargetId);
+        if (CurrentStore.State == StoreState.食品)
+        {
+            catalogs.RemoveAll(o => o.ParentId == null && o.Name != target.UsageTarget);
+            catalog.DataSource = catalogs;
+            catalog.DataBind();
+            catalog.EmbeddedTree.Nodes[0].Expanded = true;
+        }
+        else
+        {
+            catalog.DataSource = catalogs;
+            catalog.DataBind();
         }
     }
 

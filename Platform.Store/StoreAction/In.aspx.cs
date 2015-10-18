@@ -133,6 +133,8 @@ public partial class StoreAction_In : SingleStorePage
     protected void plus_ServerClick(object sender, EventArgs e)
     {
         counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
+        var toRem = view_obj.Items.Select(o => (o.FindControl("ObjectInBody") as Control_ObjectInBody)).Select(o => new object[] { o.ObjectId, o.Place, o.Note, o.Amount, o.Fee, o.SourcePerPrice, o.Money }).ToList();
+        x.InnerText = toRem.ToJson();
         view_obj.Rebind();
     }
 
@@ -143,10 +145,20 @@ public partial class StoreAction_In : SingleStorePage
 
     protected void do_in_ServerClick(object sender, EventArgs e)
     {
-        var c = view_obj.Items[0].FindControl("ObjectInBody") as Control_ObjectInBody;
-        var targetId = target.SelectedValue.GlobalId();
-        var t = db.Value.StoreTarget.Single(o => o.Id == targetId);
-        db.Value.ActionIn(targetId, c.ObjectId, t.OrderSource, c.Place, "", null, c.Note, new DateTime(2015, 10, 12), CurrentUser, "", c.Amount, c.Money - c.Fee, c.SourcePerPrice, c.Fee, c.Money);
-        db.Value.SaveChanges();
+        for (var i = 0; i < view_obj.Items.Count; i++)
+        {
+            var c = view_obj.Items[i].FindControl("ObjectInBody") as Control_ObjectInBody;
+            var targetId = target.SelectedValue.GlobalId();
+            var t = db.Value.StoreTarget.Single(o => o.Id == targetId);
+            db.Value.ActionIn(targetId, c.ObjectId, t.OrderSource, c.Place, "", null, c.Note, new DateTime(2015, 10, 12), CurrentUser, "", c.Amount, c.Money - c.Fee, c.SourcePerPrice, c.Fee, c.Money);
+            db.Value.SaveChanges();
+        }
+    }
+
+    protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
+    {
+        var c = e.Item.FindControl("ObjectInBody") as Control_ObjectInBody;
+        c.TargetId = target.SelectedValue.GlobalId();
+        c.LoadDefaults();
     }
 }

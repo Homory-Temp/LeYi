@@ -85,7 +85,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <telerik:RadListView ID="view_obj" runat="server" OnNeedDataSource="view_obj_NeedDataSource" ItemPlaceholderID="inHolder">
+                    <telerik:RadListView ID="view_obj" runat="server" OnNeedDataSource="view_obj_NeedDataSource" ItemPlaceholderID="inHolder" OnItemDataBound="view_obj_ItemDataBound">
                         <LayoutTemplate>
                             <table class="storeTable text-center">
                                 <homory:ObjectInHeader runat="server" ID="ObjectInHeader" />
@@ -100,6 +100,7 @@
                 <div class="col-md-12">
                     <input type="button" class="btn btn-tumblr" id="plus" runat="server" value="+" onserverclick="plus_ServerClick" />
                     <input type="hidden" id="counter" runat="server" value="0" />
+                    <div id="x" runat="server"></div>
                 </div>
                 <div class="col-md-12 text-center">
                     <input type="button" class="btn btn-tumblr" id="do_in" runat="server" value="入库" onserverclick="do_in_ServerClick" />
