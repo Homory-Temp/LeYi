@@ -130,13 +130,6 @@ public partial class StoreAction_In : SingleStorePage
         }
     }
 
-    public class Rem
-    {
-        public Guid? CatalogId { get; set; }
-        public Guid? ObjectId { get; set; }
-        public decimal? Amount { get; set; }
-    }
-
     protected void plus_ServerClick(object sender, EventArgs e)
     {
         counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
