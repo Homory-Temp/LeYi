@@ -288,7 +288,7 @@ namespace Models
         public System.Guid Id { get; set; }
         public System.Guid ObjectId { get; set; }
         public System.Guid UserId { get; set; }
-        public int Type { get; set; }
+        public FlowType Type { get; set; }
         public string TypeName { get; set; }
         public int TimeNode { get; set; }
         public System.DateTime Time { get; set; }
@@ -662,10 +662,10 @@ namespace Models
     public partial class StoreStatistics
     {
         public System.Guid ObjectId { get; set; }
-        public int TimeNode { get; set; }
-        public System.DateTime Time { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
+        public int TimeNode { get; set; }
+        public System.DateTime Time { get; set; }
         public decimal StartInAmount { get; set; }
         public decimal StartInMoney { get; set; }
         public decimal StartLendAmount { get; set; }
@@ -838,6 +838,15 @@ namespace Models
         采购来源 = 3,
         使用对象 = 4,
         年龄段 = 5
+    }
+}
+namespace Models
+{
+    using System;
+    
+    public enum FlowType : int
+    {
+        入库 = 1
     }
 }
 namespace Models

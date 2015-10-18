@@ -78,4 +78,155 @@ public static class BusinessExtensions
     {
         return controls.Count(o => o.Checked) == 1 ? int.Parse(controls.Single(o => o.Checked).Value) : @default;
     }
+
+    public static void ActionIn(this StoreEntity db, Guid targetId, Guid objectId, string age, string place, string image, Guid? responsibleId, string note, DateTime inTime, Guid operatorId, string code, decimal amount, decimal totalPrice, decimal sourcePerPrice, decimal fee, decimal money)
+    {
+        var @in = new StoreIn
+        {
+            Id = db.GlobalId(),
+            TargetId = targetId,
+            ObjectId = objectId,
+            Age = age,
+            Place = place,
+            Image = image,
+            ResponsibleUserId = responsibleId,
+            Note = note,
+            TimeNode = inTime.ToTimeNode(),
+            Time = inTime,
+            OperationUserId = operatorId,
+            OperationTime = DateTime.Now,
+            Code = code,
+            Amount = amount,
+            PerPrice = decimal.Divide(totalPrice, amount),
+            SourcePerPrice = sourcePerPrice,
+            Fee = fee,
+            Money = totalPrice + fee
+        };
+        db.StoreIn.Add(@in);
+        var obj = db.StoreObject.Single(o => o.Id == objectId);
+        obj.Amount += amount;
+        obj.Money += money;
+        var catalog = obj.StoreCatalog;
+        var store = catalog.Store;
+        if (store.State != StoreState.食品 && db.StoreDictionary.Count(o => o.StoreId == store.Id && o.Type == DictionaryType.年龄段 && o.Name == age) == 0)
+        {
+            var dictionary = new StoreDictionary
+            {
+                StoreId = catalog.StoreId,
+                Type = DictionaryType.年龄段,
+                Name = age,
+                PinYin = db.ToPinYin(age).Single()
+            };
+            db.StoreDictionary.Add(dictionary);
+        }
+        var flow = new StoreFlow
+        {
+            Id = db.GlobalId(),
+            ObjectId = objectId,
+            UserId = operatorId,
+            Type = FlowType.入库,
+            TypeName = FlowType.入库.ToString(),
+            TimeNode = inTime.ToTimeNode(),
+            Time = inTime,
+            Amount = amount,
+            Money = money,
+            Note = note
+        };
+        db.StoreFlow.Add(flow);
+        db.ActionRecord(objectId, inTime, amount, money, 0M, 0M, 0M, 0M, 0M, 0M);
+        if (obj.Single)
+        {
+            // To Do
+        }
+    }
+
+    public static void ActionRecord(this StoreEntity db, Guid objectId, DateTime time, decimal @in, decimal inMoney, decimal lend, decimal lendMoney, decimal consume, decimal consumeMoney, decimal @out, decimal outMoney)
+    {
+        var year = time.Year;
+        var month = time.Month;
+        var stamp = new DateTime(year, month, 1).ToTimeNode();
+        var exists = db.StoreStatistics.Count(o => o.ObjectId == objectId && o.Year == year && o.Month == month);
+        var last = db.StoreStatistics.Where(o => o.ObjectId == objectId && o.TimeNode < stamp).OrderByDescending(o => o.TimeNode).FirstOrDefault();
+        if (exists == 0)
+        {
+            var ss = new StoreStatistics
+            {
+                ObjectId = objectId,
+                Year = year,
+                Month = month,
+                TimeNode = stamp,
+                Time = new DateTime(year, month, 1),
+                StartInAmount = last == null ? 0M : last.EndInAmount,
+                StartInMoney = last == null ? 0M : last.EndInMoney,
+                StartConsumeAmount = last == null ? 0M : last.EndConsumeAmount,
+                StartConsumeMoney = last == null ? 0M : last.EndConsumeMoney,
+                StartLendAmount = last == null ? 0M : last.EndLendAmount,
+                StartLendMoney = last == null ? 0M : last.EndLendMoney,
+                StartOutAmount = last == null ? 0M : last.EndOutAmount,
+                StartOutMoney = last == null ? 0M : last.EndOutMoney,
+            };
+            ss.EndInAmount = ss.StartInAmount + @in;
+            ss.EndInMoney = ss.StartInMoney + inMoney;
+            ss.EndConsumeAmount = ss.StartConsumeAmount + consume;
+            ss.EndConsumeMoney = ss.StartConsumeMoney + consumeMoney;
+            ss.EndLendAmount = ss.StartLendAmount + lend;
+            ss.EndLendMoney = ss.StartLendMoney + lendMoney;
+            ss.EndOutAmount = ss.StartOutAmount + @out;
+            ss.EndOutMoney = ss.StartOutMoney + outMoney;
+            db.StoreStatistics.Add(ss);
+        }
+        else
+        {
+            var current = db.StoreStatistics.Single(o => o.ObjectId == objectId && o.Year == year && o.Month == month);
+            if (last == null)
+            {
+                current.EndInAmount += @in;
+                current.EndInMoney += inMoney;
+                current.EndLendAmount += lend;
+                current.EndLendMoney += lendMoney;
+                current.EndConsumeAmount += consume;
+                current.EndConsumeMoney += consumeMoney;
+                current.EndOutAmount += @out;
+                current.EndOutMoney += outMoney;
+            }
+            else
+            {
+                current.StartInAmount += @in;
+                current.StartInMoney += inMoney;
+                current.StartLendAmount += lend;
+                current.StartLendMoney += lendMoney;
+                current.StartConsumeAmount += consume;
+                current.StartConsumeMoney += consumeMoney;
+                current.StartOutAmount += @out;
+                current.StartOutMoney += outMoney;
+                current.EndInAmount += @in;
+                current.EndInMoney += inMoney;
+                current.EndLendAmount += lend;
+                current.EndLendMoney += lendMoney;
+                current.EndConsumeAmount += consume;
+                current.EndConsumeMoney += consumeMoney;
+                current.EndOutAmount += @out;
+                current.EndOutMoney += outMoney;
+            }
+        }
+        foreach (var current in db.StoreStatistics.Where(o => o.ObjectId == objectId && o.TimeNode > stamp))
+        {
+            current.StartInAmount += @in;
+            current.StartInMoney += inMoney;
+            current.StartLendAmount += lend;
+            current.StartLendMoney += lendMoney;
+            current.StartConsumeAmount += consume;
+            current.StartConsumeMoney += consumeMoney;
+            current.StartOutAmount += @out;
+            current.StartOutMoney += outMoney;
+            current.EndInAmount += @in;
+            current.EndInMoney += inMoney;
+            current.EndLendAmount += lend;
+            current.EndLendMoney += lendMoney;
+            current.EndConsumeAmount += consume;
+            current.EndConsumeMoney += consumeMoney;
+            current.EndOutAmount += @out;
+            current.EndOutMoney += outMoney;
+        }
+    }
 }

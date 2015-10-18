@@ -46,7 +46,6 @@ namespace Models
         public virtual DbSet<StoreRole> StoreRole { get; set; }
         public virtual DbSet<StoreTarget> StoreTarget { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<StoreStatistics> StoreStatistics { get; set; }
         public virtual DbSet<Application> Application { get; set; }
         public virtual DbSet<DepartmentUser> DepartmentUser { get; set; }
         public virtual DbSet<UserOnline> UserOnline { get; set; }
@@ -55,6 +54,7 @@ namespace Models
         public virtual DbSet<Store_User> Store_User { get; set; }
         public virtual DbSet<Store_Target> Store_Target { get; set; }
         public virtual DbSet<Store_ObjectThumb> Store_ObjectThumb { get; set; }
+        public virtual DbSet<StoreStatistics> StoreStatistics { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {
