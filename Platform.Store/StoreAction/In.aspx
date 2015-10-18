@@ -33,6 +33,13 @@
 <body>
     <form id="form" runat="server">
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资管理 - 物资入库" />
+        <telerik:RadCodeBlock runat="server">
+            <script>
+                function calc(sender, args) {
+                    alert(sender.id);
+                }
+            </script>
+        </telerik:RadCodeBlock>
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-2">
@@ -136,7 +143,9 @@
                             </tr>
                         </ItemTemplate>
                         <EmptyDataTemplate>
-                            <div class="row"><div class="col-md-12 text-center" style="color: black;">暂无记录</div></div>
+                            <div class="row">
+                                <div class="col-md-12 text-center" style="color: black;">本购置单暂无入库记录</div>
+                            </div>
                         </EmptyDataTemplate>
                     </telerik:RadListView>
                 </div>

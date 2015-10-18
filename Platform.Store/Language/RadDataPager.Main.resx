@@ -112,22 +112,22 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ReservedResource" xml:space="preserve">
     <value>Please do not remove this key.</value>
   </data>
   <data name="CurrentPageText" xml:space="preserve">
-    <value>Page</value>
+    <value>当前页</value>
   </data>
   <data name="FirstButtonText" xml:space="preserve">
     <value />
   </data>
   <data name="LabelText" xml:space="preserve">
-    <value>Page size</value>
+    <value>每页显示</value>
   </data>
   <data name="LastButtonText" xml:space="preserve">
     <value />
@@ -136,27 +136,27 @@
     <value />
   </data>
   <data name="PageSizeSubmitButtonText" xml:space="preserve">
-    <value>Change</value>
+    <value>设置</value>
   </data>
   <data name="PageSizeText" xml:space="preserve">
-    <value>Page size</value>
+    <value>每页显示</value>
   </data>
   <data name="PrevButtonText" xml:space="preserve">
     <value />
   </data>
   <data name="SliderDecreaseText" xml:space="preserve">
-    <value>Decrease</value>
+    <value>向前</value>
   </data>
   <data name="SliderDragText" xml:space="preserve">
-    <value>Drag</value>
+    <value>拖动</value>
   </data>
   <data name="SliderIncreaseText" xml:space="preserve">
-    <value>Increase</value>
+    <value>向后</value>
   </data>
   <data name="SubmitButtonText" xml:space="preserve">
-    <value>Go</value>
+    <value>转向</value>
   </data>
   <data name="TotalPageText" xml:space="preserve">
-    <value>of</value>
+    <value>/</value>
   </data>
 </root>
