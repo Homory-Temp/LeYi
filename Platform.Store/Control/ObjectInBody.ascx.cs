@@ -12,14 +12,15 @@ public partial class Control_ObjectInBody : SingleStoreControl
     {
         if (!IsPostBack)
         {
-            //LoadDefaults();
+
         }
     }
 
-    public void LoadDefaults()
+    public void LoadDefaults(CachedIn @in)
     {
+        tid.Value = @in.TargetId.ToString();
+        var target = db.Value.StoreTarget.Single(o => o.Id == @in.TargetId);
         var catalogs = db.Value.StoreCatalog.Where(o => o.StoreId == StoreId && o.State < 2).OrderBy(o => o.Ordinal).ToList();
-        var target = db.Value.StoreTarget.Single(o => o.Id == TargetId);
         if (CurrentStore.State == StoreState.食品)
         {
             catalogs.RemoveAll(o => o.ParentId == null && o.Name != target.UsageTarget);
@@ -32,96 +33,57 @@ public partial class Control_ObjectInBody : SingleStoreControl
             catalog.DataSource = catalogs;
             catalog.DataBind();
         }
-    }
-
-    public decimal Amount
-    {
-        get
+        amount.Value = (double?)@in.Amount;
+        perPrice.Value = (double?)@in.SourcePerPrice;
+        fee.Value = (double?)@in.Fee;
+        money.Value = (double?)@in.Money;
+        place.Text = @in.Place;
+        note.Text = @in.Note;
+        time.SelectedDate = (@in.TimeNode.HasValue ? @in.TimeNode.Value : target.TimeNode).ToTime();
+        if (@in.CatalogId.HasValue && @in.CatalogId.Value != Guid.Empty)
         {
-            return amount.PeekValue(0);
-        }
-        set
-        {
-            amount.Value = (double)value;
-        }
-    }
-
-    public decimal SourcePerPrice
-    {
-        get
-        {
-            return perPrice.PeekValue(0.00M);
-        }
-        set
-        {
-            perPrice.Value = (double)value;
-        }
-    }
-
-    public decimal Fee
-    {
-        get
-        {
-            return fee.PeekValue(0.00M);
-        }
-        set
-        {
-            fee.Value = (double)value;
+            var catalogId = @in.CatalogId.Value;
+            var node = catalog.EmbeddedTree.FindNodeByValue(catalogId.ToString());
+            node.Selected = true;
+            node.ExpandParentNodes();
+            catalog.SelectedValue = catalogId.ToString();
+            var c = db.Value.StoreCatalog.Single(o => o.Id == catalogId);
+            var list = new List<Guid>();
+            AddChildren(list, c);
+            obj.DataSource = list.Join(db.Value.StoreObject, o => o, o => o.CatalogId, (a, b) => b).OrderBy(o => o.Ordinal).ToList();
+            obj.DataBind();
+            if (@in.ObjectId.HasValue && @in.ObjectId.Value != Guid.Empty)
+            {
+                var oid = @in.ObjectId.Value;
+                var so = db.Value.StoreObject.Single(o => o.Id == oid);
+                unit.Text = so.Unit;
+                specification.Text = so.Specification;
+                stored.Text = so.Amount.ToAmount();
+                obj.SelectedIndex = obj.FindItemIndexByValue(@in.ObjectId.ToString());
+            }
         }
     }
 
-    public decimal Money
+    public CachedIn PeekValue()
     {
-        get
-        {
-            return money.PeekValue(0.00M);
-        }
-        set
-        {
-            money.Value = (double)value;
-        }
-    }
-
-    public string Place
-    {
-        get
-        {
-            return place.Text;
-        }
-        set
-        {
-            place.Text = value;
-        }
-    }
-
-    public string Note
-    {
-        get
-        {
-            return note.Text;
-        }
-        set
-        {
-            note.Text = value;
-        }
+        var targetId = tid.Value.GlobalId();
+        var result = new CachedIn();
+        result.TargetId = targetId;
+        result.CatalogId = catalog.SelectedValue == null ? (Guid?)null : catalog.SelectedValue.GlobalId();
+        result.ObjectId = obj.SelectedValue == null ? (Guid?)null : obj.SelectedValue.GlobalId();
+        result.TimeNode = time.SelectedDate.HasValue ? time.SelectedDate.Value.ToTimeNode() : db.Value.StoreTarget.Single(o => o.Id == targetId).TimeNode;
+        result.Amount = amount.Value.HasValue ? (decimal)amount.Value.Value : (decimal?)null;
+        result.SourcePerPrice = perPrice.Value.HasValue ? (decimal)perPrice.Value.Value : (decimal?)null;
+        result.Fee = fee.Value.HasValue ? (decimal)fee.Value.Value : (decimal?)null;
+        result.Money = money.Value.HasValue ? (decimal)money.Value.Value : (decimal?)null;
+        result.Place = place.Text;
+        result.Note = note.Text;
+        return result;
     }
 
     public int ItemIndex
     {
         get; set;
-    }
-
-    public Guid TargetId
-    {
-        get; set;
-    }
-
-    public Guid ObjectId
-    {
-        get
-        {
-            return obj.SelectedValue.GlobalId();
-        }
     }
 
     protected void catalog_EntryAdded(object sender, Telerik.Web.UI.DropDownTreeEntryEventArgs e)

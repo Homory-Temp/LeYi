@@ -3,6 +3,7 @@
 <tr>
     <td>
         <%= ItemIndex + 1 %>
+        <input type="hidden" id="tid" runat="server" />
     </td>
     <td>
         <telerik:RadDropDownTree ID="catalog" runat="server" AutoPostBack="true" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" DropDownSettings-CloseDropDownOnSelection="true" OnEntryAdded="catalog_EntryAdded"></telerik:RadDropDownTree>
@@ -14,9 +15,6 @@
             </ItemTemplate>
         </telerik:RadComboBox>
     </td>
-    <td runat="server">
-        <asp:Label ID="code" runat="server"></asp:Label>
-    </td>
     <td>
         <asp:Label ID="unit" runat="server"></asp:Label>
     </td>
@@ -27,12 +25,17 @@
         <asp:Label ID="stored" runat="server"></asp:Label>
     </td>
     <td>
+        <telerik:RadDatePicker ID="time" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="true">
+            <DatePopupButton runat="server" Visible="false" />
+        </telerik:RadDatePicker>
+    </td>
+    <td>
         <telerik:RadNumericTextBox ID="amount" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
     </td>
     <td>
         <telerik:RadNumericTextBox ID="perPrice" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
     </td>
-    <td>
+    <td style="display: none;">
         <telerik:RadNumericTextBox ID="fee" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
     </td>
     <td>

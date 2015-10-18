@@ -100,7 +100,7 @@
                 <div class="col-md-12">
                     <input type="button" class="btn btn-tumblr" id="plus" runat="server" value="+" onserverclick="plus_ServerClick" />
                     <input type="hidden" id="counter" runat="server" value="0" />
-                    <div id="x" runat="server"></div>
+                    <input type="hidden" id="x" runat="server" value="" />
                 </div>
                 <div class="col-md-12 text-center">
                     <input type="button" class="btn btn-tumblr" id="do_in" runat="server" value="入库" onserverclick="do_in_ServerClick" />

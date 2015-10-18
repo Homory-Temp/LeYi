@@ -59,6 +59,11 @@ public static class BusinessExtensions
         return decimal.Parse(money.ToString()).ToString("F2");
     }
 
+    public static DateTime ToTime(this object timeNode)
+    {
+        return DateTime.Parse("{0}-{1}-{2}".Formatted(timeNode.ToString().Substring(0, 4), timeNode.ToString().Substring(4, 2), timeNode.ToString().Substring(6, 2)));
+    }
+
     public static string FromTimeNode(this object timeNode)
     {
         return "{0}-{1}-{2}".Formatted(timeNode.ToString().Substring(0, 4), timeNode.ToString().Substring(4, 2), timeNode.ToString().Substring(6, 2));
