@@ -93,13 +93,16 @@
                             </table>
                         </LayoutTemplate>
                         <ItemTemplate>
-                            <homory:ObjectInBody runat="server" ID="ObjectInBody" />
+                            <homory:ObjectInBody runat="server" ID="ObjectInBody" ItemIndex='<%# Container.DataItemIndex %>' TargetId='<%# target.SelectedValue.GlobalId() %>' />
                         </ItemTemplate>
                     </telerik:RadListView>
                 </div>
                 <div class="col-md-12">
                     <input type="button" class="btn btn-tumblr" id="plus" runat="server" value="+" onserverclick="plus_ServerClick" />
-                    <input type="hidden" id="counter" runat="server" value="1" />
+                    <input type="hidden" id="counter" runat="server" value="0" />
+                </div>
+                <div class="col-md-12 text-center">
+                    <input type="button" class="btn btn-tumblr" id="do_in" runat="server" value="入库" onserverclick="do_in_ServerClick" />
                 </div>
             </div>
         </telerik:RadAjaxPanel>

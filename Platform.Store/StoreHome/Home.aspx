@@ -26,7 +26,7 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="首页" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="导航" />
     </form>
 </body>
 </html>

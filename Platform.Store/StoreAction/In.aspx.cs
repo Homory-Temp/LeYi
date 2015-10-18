@@ -47,11 +47,14 @@ public partial class StoreAction_In : SingleStorePage
                 ReloadTargets();
                 target.Items.FindItemByValue(value).Selected = true;
                 view_target.Rebind();
+                counter.Value = "1";
+                view_obj.Visible = plus.Visible = true;
             }
             else
             {
                 target.DataSource = db.Value.Store_Target.Where(o => o.State < 2 && o.StoreId == StoreId && o.In == false).OrderByDescending(o => o.TimeNode).ToList();
                 target.DataBind();
+                view_obj.Visible = plus.Visible = false;
             }
         }
     }
@@ -60,6 +63,8 @@ public partial class StoreAction_In : SingleStorePage
     {
         target.SelectedIndex = -1;
         target.Text = string.Empty;
+        counter.Value = "0";
+        view_obj.Visible = plus.Visible = target.SelectedIndex >= 0;
         var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
         var start = (new DateTime(time.Year, time.Month, 1).AddDays(-1)).ToTimeNode();
         var end = (new DateTime(time.Year, time.Month, 1).AddMonths(1)).ToTimeNode();
@@ -78,29 +83,36 @@ public partial class StoreAction_In : SingleStorePage
     {
         ReloadTargets();
         view_target.Rebind();
+        view_obj.Rebind();
     }
 
     protected void source_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
         ReloadTargets();
         view_target.Rebind();
+        view_obj.Rebind();
     }
 
     protected void usage_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
         ReloadTargets();
         view_target.Rebind();
+        view_obj.Rebind();
     }
 
     protected void people_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
         ReloadTargets();
         view_target.Rebind();
+        view_obj.Rebind();
     }
 
     protected void target_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
+        counter.Value = target.SelectedIndex == -1 ? "0" : "1";
+        view_obj.Visible = plus.Visible = target.SelectedIndex >= 0;
         view_target.Rebind();
+        view_obj.Rebind();
     }
 
     protected void view_target_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
@@ -121,12 +133,20 @@ public partial class StoreAction_In : SingleStorePage
     protected void plus_ServerClick(object sender, EventArgs e)
     {
         counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
-        Title = (view_obj.Items[0].FindControl("ObjectInBody") as Control_ObjectInBody).Note;
         view_obj.Rebind();
     }
 
     protected void view_obj_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         view_obj.DataSource = new int[(int.Parse(counter.Value))];
+    }
+
+    protected void do_in_ServerClick(object sender, EventArgs e)
+    {
+        var c = view_obj.Items[0].FindControl("ObjectInBody") as Control_ObjectInBody;
+        var targetId = target.SelectedValue.GlobalId();
+        var t = db.Value.StoreTarget.Single(o => o.Id == targetId);
+        db.Value.ActionIn(targetId, c.ObjectId, t.OrderSource, c.Place, "", null, c.Note, new DateTime(2015, 10, 12), CurrentUser, "", c.Amount, c.Money - c.Fee, c.SourcePerPrice, c.Fee, c.Money);
+        db.Value.SaveChanges();
     }
 }

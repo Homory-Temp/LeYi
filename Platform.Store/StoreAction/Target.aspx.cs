@@ -63,7 +63,7 @@ public partial class StoreAction_Target : SingleStorePage
             return;
         }
         Save();
-        Response.Redirect("~/StoreHome/Home?StoreId={0}".Formatted(StoreId));
+        Response.Redirect("~/StoreQuery/Target?StoreId={0}".Formatted(StoreId));
     }
 
     protected void cancel_ServerClick(object sender, EventArgs e)

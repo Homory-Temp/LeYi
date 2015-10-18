@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 public static class StoreExtensions
@@ -46,5 +47,36 @@ public static class StoreExtensions
     public static string Formatted(this string format, params object[] objects)
     {
         return string.Format(format, objects);
+    }
+
+    public static string ToAmount(this object amount)
+    {
+        var temp = ((decimal)amount).ToString("F2").Reverse();
+        var sb = new StringBuilder();
+        bool ext = false;
+        foreach (var c in temp)
+        {
+            if (c == '0')
+            {
+                if (ext)
+                {
+                    sb.Append(c);
+                }
+            }
+            else
+            {
+                sb.Append(c);
+                ext = true;
+            }
+        }
+        temp = sb.ToString().Reverse();
+        sb = new StringBuilder();
+        foreach (var c in temp)
+        {
+            sb.Append(c);
+        }
+        if (sb.ToString().EndsWith("."))
+            sb.Replace(".", "");
+        return sb.ToString();
     }
 }
