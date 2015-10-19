@@ -197,10 +197,14 @@ public partial class StoreAction_In : SingleStorePage
     protected void view_record_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         var targetId = target.SelectedValue == null ? (Guid?)null : target.SelectedValue.GlobalId();
+        var adjust = 0M;
         if (targetId.HasValue)
         {
             var id = targetId.Value;
-            view_record.DataSource = db.Value.Store_RecordIn.Where(o => o.TargetId == id).OrderByDescending(o => o.入库日期).ToList();
+            var source = db.Value.Store_RecordIn.Where(o => o.TargetId == id).OrderByDescending(o => o.入库日期).ToList();
+            view_record.DataSource = source;
+            adjust = source.Sum(o => o.合计);
+            ap.ResponseScripts.Add("set_adj({0});".Formatted(adjust));
         }
         else
         {

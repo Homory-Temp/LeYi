@@ -25,6 +25,9 @@
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
+    <script>
+        var adjust = 0;
+    </script>
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
@@ -50,7 +53,14 @@
                         if (v)
                             g_total += v;
                     }
-                    $find('<%= total.ClientID %>').set_value(g_total);
+                    $find('<%= total.ClientID %>').set_value(g_total + adjust);
+                }
+                function set_adj(value) {
+                    adjust = value;
+                    var co = $find('<%= total.ClientID %>');
+                    if (!co.get_value()) {
+                        co.set_value(adjust);
+                    }
                 }
             </script>
         </telerik:RadCodeBlock>
