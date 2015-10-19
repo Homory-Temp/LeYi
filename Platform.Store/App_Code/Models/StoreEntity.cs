@@ -239,22 +239,18 @@ namespace Models
         public int Y { get; set; }
         public int M { get; set; }
         public int Time { get; set; }
-        public decimal I_Start { get; set; }
-        public decimal IM_Start { get; set; }
-        public decimal L_Start { get; set; }
-        public decimal LM_Start { get; set; }
-        public decimal C_Start { get; set; }
-        public decimal CM_Start { get; set; }
-        public decimal O_Start { get; set; }
-        public decimal OM_Start { get; set; }
-        public decimal I_End { get; set; }
-        public decimal IM_End { get; set; }
-        public decimal L_End { get; set; }
-        public decimal LM_End { get; set; }
-        public decimal C_End { get; set; }
-        public decimal CM_End { get; set; }
-        public decimal O_End { get; set; }
-        public decimal OM_End { get; set; }
+        public decimal InAmount { get; set; }
+        public decimal InMoney { get; set; }
+        public decimal StartAmount { get; set; }
+        public decimal StartMoney { get; set; }
+        public decimal LendAmount { get; set; }
+        public decimal LendMoney { get; set; }
+        public decimal ConsumeAmount { get; set; }
+        public decimal ConsumeMoney { get; set; }
+        public decimal OutAmount { get; set; }
+        public decimal OutMoney { get; set; }
+        public decimal EndAmount { get; set; }
+        public decimal EndMoney { get; set; }
     }
 }
 namespace Models

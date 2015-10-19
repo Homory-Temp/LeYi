@@ -52,8 +52,8 @@ public partial class StoreStatistics_Object : SingleStorePage
 
     protected void grid_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
     {
-        var sv = ps.SelectedDate.Value;
-        var ev = pe.SelectedDate.Value;
+        var sv = ps.SelectedDate.HasValue ? ps.SelectedDate.Value : DateTime.Today;
+        var ev = pe.SelectedDate.HasValue ? pe.SelectedDate.Value : DateTime.Today;
         var _s = new DateTime(sv.Year, sv.Month, 1).ToTimeNode();
         var _e = new DateTime(ev.Year, ev.Month, 1).ToTimeNode();
         if (_s > _e)
@@ -74,16 +74,16 @@ public partial class StoreStatistics_Object : SingleStorePage
             obj.Single = v.First().Single;
             obj.Consumable = v.First().Consumable;
             obj.Fixed = v.First().Fixed;
-            obj.S = g.First().I_Start;
-            obj.SM = g.First().IM_Start;
-            obj.I = g.Last().I_End - g.First().I_Start;
-            obj.IM = g.Last().IM_End - g.First().IM_Start;
-            obj.U = g.Last().C_End - g.First().C_Start + g.Last().L_End - g.First().L_Start;
-            obj.UM = g.Last().CM_End - g.First().CM_Start + g.Last().LM_End - g.First().LM_Start;
-            obj.O = g.Last().O_End - g.First().O_Start;
-            obj.OM = g.Last().OM_End - g.First().OM_Start;
-            obj.E = g.Last().I_End;
-            obj.EM = g.Last().IM_End;
+            obj.S = g.First().StartAmount;
+            obj.SM = g.First().StartMoney;
+            obj.I = g.Sum(o => o.InAmount);
+            obj.IM = g.Sum(o => o.InMoney);
+            obj.U = g.Sum(o => o.LendAmount + o.ConsumeAmount);
+            obj.UM = g.Sum(o => o.LendMoney + o.ConsumeMoney);
+            obj.O = g.Sum(o => o.OutAmount);
+            obj.OM = g.Sum(o => o.OutMoney);
+            obj.E = g.Last().EndAmount;
+            obj.EM = g.Last().EndMoney;
             list.Add(obj);
         }
         grid.DataSource = list;

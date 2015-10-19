@@ -567,22 +567,18 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_ST' does not have a primary 
             <PropertyRef Name="Y" />
             <PropertyRef Name="M" />
             <PropertyRef Name="Time" />
-            <PropertyRef Name="I_Start" />
-            <PropertyRef Name="IM_Start" />
-            <PropertyRef Name="L_Start" />
-            <PropertyRef Name="LM_Start" />
-            <PropertyRef Name="C_Start" />
-            <PropertyRef Name="CM_Start" />
-            <PropertyRef Name="O_Start" />
-            <PropertyRef Name="OM_Start" />
-            <PropertyRef Name="I_End" />
-            <PropertyRef Name="IM_End" />
-            <PropertyRef Name="L_End" />
-            <PropertyRef Name="LM_End" />
-            <PropertyRef Name="C_End" />
-            <PropertyRef Name="CM_End" />
-            <PropertyRef Name="O_End" />
-            <PropertyRef Name="OM_End" />
+            <PropertyRef Name="InAmount" />
+            <PropertyRef Name="InMoney" />
+            <PropertyRef Name="StartAmount" />
+            <PropertyRef Name="StartMoney" />
+            <PropertyRef Name="LendAmount" />
+            <PropertyRef Name="LendMoney" />
+            <PropertyRef Name="ConsumeAmount" />
+            <PropertyRef Name="ConsumeMoney" />
+            <PropertyRef Name="OutAmount" />
+            <PropertyRef Name="OutMoney" />
+            <PropertyRef Name="EndAmount" />
+            <PropertyRef Name="EndMoney" />
           </Key>
           <Property Name="Consumable" Type="bit" Nullable="false" />
           <Property Name="Single" Type="bit" Nullable="false" />
@@ -594,22 +590,18 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_ST' does not have a primary 
           <Property Name="Y" Type="int" Nullable="false" />
           <Property Name="M" Type="int" Nullable="false" />
           <Property Name="Time" Type="int" Nullable="false" />
-          <Property Name="I_Start" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="IM_Start" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="L_Start" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="LM_Start" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="C_Start" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="CM_Start" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="O_Start" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="OM_Start" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="I_End" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="IM_End" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="L_End" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="LM_End" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="C_End" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="CM_End" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="O_End" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="OM_End" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="InAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="InMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LendAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LendMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ConsumeAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ConsumeMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OutAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OutMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Platform_LY.dbo.Store_Target' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1456,22 +1448,18 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
     [Store_ST].[Y] AS [Y], 
     [Store_ST].[M] AS [M], 
     [Store_ST].[Time] AS [Time], 
-    [Store_ST].[I_Start] AS [I_Start], 
-    [Store_ST].[IM_Start] AS [IM_Start], 
-    [Store_ST].[L_Start] AS [L_Start], 
-    [Store_ST].[LM_Start] AS [LM_Start], 
-    [Store_ST].[C_Start] AS [C_Start], 
-    [Store_ST].[CM_Start] AS [CM_Start], 
-    [Store_ST].[O_Start] AS [O_Start], 
-    [Store_ST].[OM_Start] AS [OM_Start], 
-    [Store_ST].[I_End] AS [I_End], 
-    [Store_ST].[IM_End] AS [IM_End], 
-    [Store_ST].[L_End] AS [L_End], 
-    [Store_ST].[LM_End] AS [LM_End], 
-    [Store_ST].[C_End] AS [C_End], 
-    [Store_ST].[CM_End] AS [CM_End], 
-    [Store_ST].[O_End] AS [O_End], 
-    [Store_ST].[OM_End] AS [OM_End]
+    [Store_ST].[InAmount] AS [InAmount], 
+    [Store_ST].[InMoney] AS [InMoney], 
+    [Store_ST].[StartAmount] AS [StartAmount], 
+    [Store_ST].[StartMoney] AS [StartMoney], 
+    [Store_ST].[LendAmount] AS [LendAmount], 
+    [Store_ST].[LendMoney] AS [LendMoney], 
+    [Store_ST].[ConsumeAmount] AS [ConsumeAmount], 
+    [Store_ST].[ConsumeMoney] AS [ConsumeMoney], 
+    [Store_ST].[OutAmount] AS [OutAmount], 
+    [Store_ST].[OutMoney] AS [OutMoney], 
+    [Store_ST].[EndAmount] AS [EndAmount], 
+    [Store_ST].[EndMoney] AS [EndMoney]
     FROM [dbo].[Store_ST] AS [Store_ST]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Store_Target" EntityType="Self.Store_Target" store:Type="Views" store:Schema="dbo">
@@ -2861,12 +2849,12 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           </FunctionImport>
           <EntitySet Name="Store_In" EntityType="StoreModel.Store_In" />
           <EntitySet Name="Store_Use" EntityType="StoreModel.Store_Use" />
-          <EntitySet Name="Store_ST" EntityType="StoreModel.Store_ST" />
           <EntitySet Name="StoreStatistics" EntityType="StoreModel.StoreStatistics" />
           <AssociationSet Name="FK_StoreStatistics_StoreObject" Association="StoreModel.FK_StoreStatistics_StoreObject">
             <End Role="StoreObject" EntitySet="StoreObject" />
             <End Role="StoreStatistics" EntitySet="StoreStatistics" />
           </AssociationSet>
+          <EntitySet Name="Store_ST" EntityType="StoreModel.Store_ST" />
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -3297,61 +3285,6 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="OperationUserId" Type="Guid" Nullable="false" />
           <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Store_ST">
-          <Key>
-            <PropertyRef Name="Consumable" />
-            <PropertyRef Name="Single" />
-            <PropertyRef Name="Fixed" />
-            <PropertyRef Name="CatalogId" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="ObjectId" />
-            <PropertyRef Name="Y" />
-            <PropertyRef Name="M" />
-            <PropertyRef Name="Time" />
-            <PropertyRef Name="I_Start" />
-            <PropertyRef Name="IM_Start" />
-            <PropertyRef Name="L_Start" />
-            <PropertyRef Name="LM_Start" />
-            <PropertyRef Name="C_Start" />
-            <PropertyRef Name="CM_Start" />
-            <PropertyRef Name="O_Start" />
-            <PropertyRef Name="OM_Start" />
-            <PropertyRef Name="I_End" />
-            <PropertyRef Name="IM_End" />
-            <PropertyRef Name="L_End" />
-            <PropertyRef Name="LM_End" />
-            <PropertyRef Name="C_End" />
-            <PropertyRef Name="CM_End" />
-            <PropertyRef Name="O_End" />
-            <PropertyRef Name="OM_End" />
-          </Key>
-          <Property Name="Consumable" Type="Boolean" Nullable="false" />
-          <Property Name="Single" Type="Boolean" Nullable="false" />
-          <Property Name="Fixed" Type="Boolean" Nullable="false" />
-          <Property Name="CatalogId" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="CatalogPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ObjectId" Type="Guid" Nullable="false" />
-          <Property Name="Y" Type="Int32" Nullable="false" />
-          <Property Name="M" Type="Int32" Nullable="false" />
-          <Property Name="Time" Type="Int32" Nullable="false" />
-          <Property Name="I_Start" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="IM_Start" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="L_Start" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="LM_Start" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="C_Start" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="CM_Start" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="O_Start" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="OM_Start" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="I_End" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="IM_End" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="L_End" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="LM_End" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="C_End" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="CM_End" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="O_End" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="OM_End" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-        </EntityType>
         <EntityType Name="StoreStatistics">
           <Key>
             <PropertyRef Name="ObjectId" />
@@ -3389,6 +3322,53 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Store_ST">
+          <Key>
+            <PropertyRef Name="Consumable" />
+            <PropertyRef Name="Single" />
+            <PropertyRef Name="Fixed" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Y" />
+            <PropertyRef Name="M" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="InAmount" />
+            <PropertyRef Name="InMoney" />
+            <PropertyRef Name="StartAmount" />
+            <PropertyRef Name="StartMoney" />
+            <PropertyRef Name="LendAmount" />
+            <PropertyRef Name="LendMoney" />
+            <PropertyRef Name="ConsumeAmount" />
+            <PropertyRef Name="ConsumeMoney" />
+            <PropertyRef Name="OutAmount" />
+            <PropertyRef Name="OutMoney" />
+            <PropertyRef Name="EndAmount" />
+            <PropertyRef Name="EndMoney" />
+          </Key>
+          <Property Name="Consumable" Type="Boolean" Nullable="false" />
+          <Property Name="Single" Type="Boolean" Nullable="false" />
+          <Property Name="Fixed" Type="Boolean" Nullable="false" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CatalogPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Y" Type="Int32" Nullable="false" />
+          <Property Name="M" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="Int32" Nullable="false" />
+          <Property Name="InAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="InMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="LendAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="LendMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ConsumeAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ConsumeMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OutAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OutMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3963,38 +3943,6 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Store_ST">
-            <EntityTypeMapping TypeName="StoreModel.Store_ST">
-              <MappingFragment StoreEntitySet="Store_ST">
-                <ScalarProperty Name="OM_End" ColumnName="OM_End" />
-                <ScalarProperty Name="O_End" ColumnName="O_End" />
-                <ScalarProperty Name="CM_End" ColumnName="CM_End" />
-                <ScalarProperty Name="C_End" ColumnName="C_End" />
-                <ScalarProperty Name="LM_End" ColumnName="LM_End" />
-                <ScalarProperty Name="L_End" ColumnName="L_End" />
-                <ScalarProperty Name="IM_End" ColumnName="IM_End" />
-                <ScalarProperty Name="I_End" ColumnName="I_End" />
-                <ScalarProperty Name="OM_Start" ColumnName="OM_Start" />
-                <ScalarProperty Name="O_Start" ColumnName="O_Start" />
-                <ScalarProperty Name="CM_Start" ColumnName="CM_Start" />
-                <ScalarProperty Name="C_Start" ColumnName="C_Start" />
-                <ScalarProperty Name="LM_Start" ColumnName="LM_Start" />
-                <ScalarProperty Name="L_Start" ColumnName="L_Start" />
-                <ScalarProperty Name="IM_Start" ColumnName="IM_Start" />
-                <ScalarProperty Name="I_Start" ColumnName="I_Start" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
-                <ScalarProperty Name="M" ColumnName="M" />
-                <ScalarProperty Name="Y" ColumnName="Y" />
-                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-                <ScalarProperty Name="CatalogPath" ColumnName="CatalogPath" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
-                <ScalarProperty Name="Fixed" ColumnName="Fixed" />
-                <ScalarProperty Name="Single" ColumnName="Single" />
-                <ScalarProperty Name="Consumable" ColumnName="Consumable" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="StoreStatistics">
             <EntityTypeMapping TypeName="StoreModel.StoreStatistics">
               <MappingFragment StoreEntitySet="StoreStatistics">
@@ -4015,6 +3963,34 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_ST">
+            <EntityTypeMapping TypeName="StoreModel.Store_ST">
+              <MappingFragment StoreEntitySet="Store_ST">
+                <ScalarProperty Name="EndMoney" ColumnName="EndMoney" />
+                <ScalarProperty Name="EndAmount" ColumnName="EndAmount" />
+                <ScalarProperty Name="OutMoney" ColumnName="OutMoney" />
+                <ScalarProperty Name="OutAmount" ColumnName="OutAmount" />
+                <ScalarProperty Name="ConsumeMoney" ColumnName="ConsumeMoney" />
+                <ScalarProperty Name="ConsumeAmount" ColumnName="ConsumeAmount" />
+                <ScalarProperty Name="LendMoney" ColumnName="LendMoney" />
+                <ScalarProperty Name="LendAmount" ColumnName="LendAmount" />
+                <ScalarProperty Name="StartMoney" ColumnName="StartMoney" />
+                <ScalarProperty Name="StartAmount" ColumnName="StartAmount" />
+                <ScalarProperty Name="InMoney" ColumnName="InMoney" />
+                <ScalarProperty Name="InAmount" ColumnName="InAmount" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="M" ColumnName="M" />
+                <ScalarProperty Name="Y" ColumnName="Y" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="CatalogPath" ColumnName="CatalogPath" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Fixed" ColumnName="Fixed" />
+                <ScalarProperty Name="Single" ColumnName="Single" />
+                <ScalarProperty Name="Consumable" ColumnName="Consumable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
