@@ -47,7 +47,6 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle navbar-link" data-toggle="dropdown">统计报表</a>
                         <ul class="dropdown-menu">
-                            <li><a href='<%= "../StoreStatistics/Target?StoreId={0}".Formatted(StoreId) %>'>购置报表</a></li>
                             <li><a href='<%= "../StoreStatistics/In?StoreId={0}".Formatted(StoreId) %>'>入库报表</a></li>
                             <li><a href='<%= "../StoreStatistics/Use?StoreId={0}".Formatted(StoreId) %>'>出库报表</a></li>
                             <li><a href='<%= "../StoreStatistics/Return?StoreId={0}".Formatted(StoreId) %>'>借还报表</a></li>

@@ -79,7 +79,7 @@ public partial class StoreQuery_Target : SingleStorePage
 
     protected void edit_ServerClick(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/StoreAction/TargetEdit?StoreId={0}&TargetId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"].GlobalId()));
     }
 
     protected void in_ServerClick(object sender, EventArgs e)
@@ -94,6 +94,15 @@ public partial class StoreQuery_Target : SingleStorePage
         target.In = true;
         db.Value.SaveChanges();
         Response.Redirect("~/StoreQuery/TargetPrint?StoreId={0}&TargetId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"].GlobalId()));
+    }
+
+    protected void redo_ServerClick(object sender, EventArgs e)
+    {
+        var id = (sender as HtmlInputButton).Attributes["match"].GlobalId();
+        var target = db.Value.StoreTarget.Single(o => o.Id == id);
+        target.In = false;
+        db.Value.SaveChanges();
+        view.Rebind();
     }
 
     protected void print_ServerClick(object sender, EventArgs e)
