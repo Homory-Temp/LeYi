@@ -235,7 +235,7 @@ public static class BusinessExtensions
                     Note = note
                 };
                 db.StoreFlow.Add(flow);
-                db.ActionRecord(objId, consumeTime, 0M, 0M, 0M, 0M, -use.Amount.Value, -use.Money, 0M, 0M);
+                db.ActionRecord(objId, consumeTime, 0M, 0M, 0M, 0M, use.Amount.Value, use.Money, 0M, 0M);
                 db.SaveChanges();
                 return use;
             }
@@ -273,8 +273,8 @@ public static class BusinessExtensions
                 StartOutAmount = last == null ? 0M : last.EndOutAmount,
                 StartOutMoney = last == null ? 0M : last.EndOutMoney,
             };
-            ss.EndInAmount = ss.StartInAmount + @in;
-            ss.EndInMoney = ss.StartInMoney + inMoney;
+            ss.EndInAmount = ss.StartInAmount + @in - @out - consume - lend;
+            ss.EndInMoney = ss.StartInMoney + inMoney - outMoney - consumeMoney - lendMoney;
             ss.EndConsumeAmount = ss.StartConsumeAmount + consume;
             ss.EndConsumeMoney = ss.StartConsumeMoney + consumeMoney;
             ss.EndLendAmount = ss.StartLendAmount + lend;
@@ -286,8 +286,8 @@ public static class BusinessExtensions
         else
         {
             var current = db.StoreStatistics.Single(o => o.ObjectId == objectId && o.Year == year && o.Month == month);
-            current.EndInAmount += @in;
-            current.EndInMoney += inMoney;
+            current.EndInAmount += @in - @out - consume - lend;
+            current.EndInMoney += inMoney - outMoney - consumeMoney - lendMoney;
             current.EndLendAmount += lend;
             current.EndLendMoney += lendMoney;
             current.EndConsumeAmount += consume;
@@ -297,15 +297,15 @@ public static class BusinessExtensions
         }
         foreach (var current in db.StoreStatistics.Where(o => o.ObjectId == objectId && o.TimeNode > stamp))
         {
-            current.StartInAmount += @in;
-            current.StartInMoney += inMoney;
+            current.StartInAmount += @in - @out - consume - lend;
+            current.StartInMoney += inMoney - outMoney - consumeMoney - lendMoney;
             current.StartLendAmount += lend;
             current.StartLendMoney += lendMoney;
             current.StartConsumeAmount += consume;
             current.StartConsumeMoney += consumeMoney;
             current.StartOutAmount += @out;
             current.StartOutMoney += outMoney;
-            current.EndInAmount += @in;
+            current.EndInAmount += @in - @out - consume - lend;
             current.EndInMoney += inMoney;
             current.EndLendAmount += lend;
             current.EndLendMoney += lendMoney;
