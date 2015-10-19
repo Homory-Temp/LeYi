@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="In.aspx.cs" Inherits="StoreQuery_In" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
-<%@ Register Src="~/Control/TargetHeader.ascx" TagPrefix="homory" TagName="TargetHeader" %>
-<%@ Register Src="~/Control/TargetBody.ascx" TagPrefix="homory" TagName="TargetBody" %>
+<%@ Register Src="~/Control/InHeader.ascx" TagPrefix="homory" TagName="InHeader" %>
+<%@ Register Src="~/Control/InBody.ascx" TagPrefix="homory" TagName="InBody" %>
 
 <!DOCTYPE html>
 
@@ -42,18 +42,50 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <telerik:RadTreeView ID="tree" runat="server" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" CheckBoxes="true" CheckChildNodes="true">
+                            <telerik:RadTreeView ID="tree" runat="server" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" CheckBoxes="true" CheckChildNodes="true" OnNodeCheck="tree_NodeCheck">
                             </telerik:RadTreeView>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-10" style="text-align: left;">
                     <div class="row">
-                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource">
+                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
+                            <LayoutTemplate>
+                                <div class="col-md-12">
+                                    <table class="storeTable text-center">
+                                        <tr>
+                                            <homory:InHeader runat="server" ID="InHeader" />
+                                            <th>操作</th>
+                                        </tr>
+                                        <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
+                                    </table>
+                                </div>
+                            </LayoutTemplate>
                             <ItemTemplate>
-                                <%# Eval("SourceAmount") %>
+                                <tr>
+                                    <homory:InBody runat="server" ID="InBody" />
+                                    <td>
+                                        <input type="button" class="btn btn-tumblr" value="编辑" id="edit" runat="server" match='<%# Eval("InId") %>' onserverclick="edit_ServerClick" />
+                                    </td>
+                                </tr>
                             </ItemTemplate>
+                            <EmptyDataTemplate>
+                                <div class="col-md-12 text-center"><div class="btn btn-warning">暂无记录</div></div>
+                            </EmptyDataTemplate>
                         </telerik:RadListView>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">&nbsp;</div>
+                        <div class="col-md-4 text-center">
+                            <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="10" OnPageIndexChanged="pager_PageIndexChanged">
+                                <Fields>
+                                    <telerik:RadDataPagerButtonField FieldType="FirstPrev"></telerik:RadDataPagerButtonField>
+                                    <telerik:RadDataPagerButtonField FieldType="Numeric"></telerik:RadDataPagerButtonField>
+                                    <telerik:RadDataPagerButtonField FieldType="NextLast"></telerik:RadDataPagerButtonField>
+                                </Fields>
+                            </telerik:RadDataPager>
+                        </div>
+                        <div class="col-md-4">&nbsp;</div>
                     </div>
                 </div>
             </div>

@@ -58,7 +58,7 @@
             </div>
             <div class="row">&nbsp;</div>
             <div class="row">
-                <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
+                <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
                     <LayoutTemplate>
                         <div class="col-md-12">
                             <table class="storeTable text-center">
@@ -89,7 +89,7 @@
             <div class="row">
                 <div class="col-md-4">&nbsp;</div>
                 <div class="col-md-4 text-center">
-                    <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="16">
+                    <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="10">
                         <Fields>
                             <telerik:RadDataPagerButtonField FieldType="FirstPrev"></telerik:RadDataPagerButtonField>
                             <telerik:RadDataPagerButtonField FieldType="Numeric"></telerik:RadDataPagerButtonField>

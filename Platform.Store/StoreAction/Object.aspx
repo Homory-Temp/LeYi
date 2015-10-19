@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
+                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
                             <LayoutTemplate>
                                 <asp:Panel runat="server" Visible='<%# IsSimple %>'>
                                     简洁有表头
