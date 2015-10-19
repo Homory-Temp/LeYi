@@ -25,14 +25,6 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle navbar-link" data-toggle="dropdown">二维码</a>
-                        <ul class="dropdown-menu">
-                            <li><a href='<%= "../StoreAction/Use?StoreId={0}".Formatted(StoreId) %>'>物资出库</a></li>
-                            <li><a href='<%= "../StoreAction/Return?StoreId={0}".Formatted(StoreId) %>'>物资归还</a></li>
-                            <li><a href='<%= "../StoreAction/Object?StoreId={0}".Formatted(StoreId) %>'>流通查询</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
                         <a class="dropdown-toggle navbar-link" data-toggle="dropdown">日常查询</a>
                         <ul class="dropdown-menu">
                             <li><a href='<%= "../StoreQuery/Target?StoreId={0}".Formatted(StoreId) %>'>购置查询</a></li>
@@ -52,6 +44,15 @@
                             <li><a href='<%= "../StoreStatistics/Return?StoreId={0}".Formatted(StoreId) %>'>借还报表</a></li>
                             <li><a href='<%= "../StoreStatistics/Object?StoreId={0}".Formatted(StoreId) %>'>库存报表</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href="../StoreImport/Go">导入查询</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle navbar-link" data-toggle="dropdown">物资条码</a>
+                        <ul class="dropdown-menu">
+                            <li><a href='<%= "../StoreAction/Use?StoreId={0}".Formatted(StoreId) %>'>条码打印</a></li>
+                            <li><a href='<%= "../StoreAction/Use?StoreId={0}".Formatted(StoreId) %>'>物资出库</a></li>
+                            <li><a href='<%= "../StoreAction/Return?StoreId={0}".Formatted(StoreId) %>'>物资归还</a></li>
+                            <li><a href='<%= "../StoreAction/Object?StoreId={0}".Formatted(StoreId) %>'>流通查询</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
