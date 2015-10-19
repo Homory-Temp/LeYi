@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Use.aspx.cs" Inherits="StoreQuery_Use" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
-<%@ Register Src="~/Control/InHeader.ascx" TagPrefix="homory" TagName="InHeader" %>
-<%@ Register Src="~/Control/InBody.ascx" TagPrefix="homory" TagName="InBody" %>
+<%@ Register Src="~/Control/UseHeader.ascx" TagPrefix="homory" TagName="UseHeader" %>
+<%@ Register Src="~/Control/UseBody.ascx" TagPrefix="homory" TagName="UseBody" %>
 
 <!DOCTYPE html>
 
@@ -28,7 +28,7 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 入库查询" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 借领查询" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
@@ -54,7 +54,7 @@
                                 <div class="col-md-12">
                                     <table class="storeTable text-center">
                                         <tr>
-                                            <homory:InHeader runat="server" ID="InHeader" />
+                                            <homory:UseHeader runat="server" ID="UseHeader" />
                                             <th>操作</th>
                                         </tr>
                                         <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
@@ -63,9 +63,9 @@
                             </LayoutTemplate>
                             <ItemTemplate>
                                 <tr>
-                                    <homory:InBody runat="server" ID="InBody" />
+                                    <homory:UseBody runat="server" ID="UseBody" />
                                     <td>
-                                        <input type="button" class="btn btn-tumblr" value="编辑" id="edit" runat="server" match='<%# Eval("InId") %>' onserverclick="edit_ServerClick" />
+                                        <input type="button" class="btn btn-tumblr" value="编辑" id="edit" runat="server" match='<%# Eval("Id") %>' matchx='<%# Eval("Type") %>' onserverclick="edit_ServerClick" />
                                     </td>
                                 </tr>
                             </ItemTemplate>

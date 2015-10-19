@@ -270,8 +270,8 @@ namespace Models
         public string Operator { get; set; }
         public string User { get; set; }
         public decimal Money { get; set; }
-        public System.Guid ConsumeUserId { get; set; }
         public System.Guid UserId { get; set; }
+        public System.Guid OperationUserId { get; set; }
         public string Note { get; set; }
     }
 }

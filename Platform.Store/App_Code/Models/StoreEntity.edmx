@@ -615,8 +615,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Use' does not have a primary
             <PropertyRef Name="Operator" />
             <PropertyRef Name="User" />
             <PropertyRef Name="Money" />
-            <PropertyRef Name="ConsumeUserId" />
             <PropertyRef Name="UserId" />
+            <PropertyRef Name="OperationUserId" />
             <PropertyRef Name="Note" />
           </Key>
           <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
@@ -630,8 +630,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Use' does not have a primary
           <Property Name="Operator" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="User" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="Money" Type="numeric" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="ConsumeUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -1427,8 +1427,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
     [Store_Use].[Operator] AS [Operator], 
     [Store_Use].[User] AS [User], 
     [Store_Use].[Money] AS [Money], 
-    [Store_Use].[ConsumeUserId] AS [ConsumeUserId], 
     [Store_Use].[UserId] AS [UserId], 
+    [Store_Use].[OperationUserId] AS [OperationUserId], 
     [Store_Use].[Note] AS [Note]
     FROM [dbo].[Store_Use] AS [Store_Use]</DefiningQuery>
           </EntitySet>
@@ -3230,8 +3230,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <PropertyRef Name="Operator" />
             <PropertyRef Name="User" />
             <PropertyRef Name="Money" />
-            <PropertyRef Name="ConsumeUserId" />
             <PropertyRef Name="UserId" />
+            <PropertyRef Name="OperationUserId" />
             <PropertyRef Name="Note" />
           </Key>
           <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
@@ -3245,8 +3245,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="Operator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="User" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="ConsumeUserId" Type="Guid" Nullable="false" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
           <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
@@ -3833,8 +3833,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <EntityTypeMapping TypeName="StoreModel.Store_Use">
               <MappingFragment StoreEntitySet="Store_Use">
                 <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ConsumeUserId" ColumnName="ConsumeUserId" />
                 <ScalarProperty Name="Money" ColumnName="Money" />
                 <ScalarProperty Name="User" ColumnName="User" />
                 <ScalarProperty Name="Operator" ColumnName="Operator" />
