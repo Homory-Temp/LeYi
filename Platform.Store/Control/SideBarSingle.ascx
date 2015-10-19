@@ -31,7 +31,7 @@
                             <li><a href='<%= "../StoreQuery/In?StoreId={0}".Formatted(StoreId) %>'>入库查询</a></li>
                             <li><a href='<%= "../StoreQuery/Use?StoreId={0}".Formatted(StoreId) %>'>出库查询</a></li>
                             <li><a href='<%= "../StoreQuery/Return?StoreId={0}".Formatted(StoreId) %>'>归还查询</a></li>
-                            <li><a href='<%= "../StoreQuery/Object?StoreId={0}".Formatted(StoreId) %>'>物资查询</a></li>
+                            <li><a href='<%= "../StoreStatistics/Object?StoreId={0}".Formatted(StoreId) %>'>库存查询</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Import?StoreId={0}".Formatted(StoreId) %>'>导入查询</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Move?StoreId={0}".Formatted(StoreId) %>'>分库查询</a></li>
                         </ul>
@@ -39,20 +39,10 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle navbar-link" data-toggle="dropdown">物资条码</a>
                         <ul class="dropdown-menu">
-                            <li><a href='<%= "../StoreAction/Use?StoreId={0}".Formatted(StoreId) %>'>条码打印</a></li>
-                            <li><a href='<%= "../StoreAction/Use?StoreId={0}".Formatted(StoreId) %>'>物资出库</a></li>
-                            <li><a href='<%= "../StoreAction/Return?StoreId={0}".Formatted(StoreId) %>'>物资归还</a></li>
-                            <li><a href='<%= "../StoreAction/Object?StoreId={0}".Formatted(StoreId) %>'>流通查询</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle navbar-link" data-toggle="dropdown">统计报表</a>
-                        <ul class="dropdown-menu">
-                            <li><a href='<%= "../StoreStatistics/In?StoreId={0}".Formatted(StoreId) %>'>入库报表</a></li>
-                            <li><a href='<%= "../StoreStatistics/Use?StoreId={0}".Formatted(StoreId) %>'>出库报表</a></li>
-                            <li><a href='<%= "../StoreStatistics/Return?StoreId={0}".Formatted(StoreId) %>'>借还报表</a></li>
-                            <li><a href='<%= "../StoreStatistics/Object?StoreId={0}".Formatted(StoreId) %>'>库存报表</a></li>
-                            <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href="../StoreImport/Go">导入查询</a></li>
+                            <li><a href='<%= "../StoreScan/Code?StoreId={0}".Formatted(StoreId) %>'>条码打印</a></li>
+                            <li><a href='<%= "../StoreScan/Use?StoreId={0}".Formatted(StoreId) %>'>扫码出库</a></li>
+                            <li><a href='<%= "../StoreScan/Return?StoreId={0}".Formatted(StoreId) %>'>扫码归还</a></li>
+                            <li><a href='<%= "../StoreScan/Flow?StoreId={0}".Formatted(StoreId) %>'>流通查询</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -76,6 +66,7 @@
                 <span id="crumb" runat="server" class="btn btn-info" style="margin-left: 10px;"></span>
                 <span class="btn btn-info" onclick="top.location.href = '../Store/Home';" style="float: right;">仓库切换</span>
                 <span class="btn btn-info" onclick='<%= "top.location.href = \"../StoreAction/Object?StoreId={0}\"".Formatted(StoreId) %>' style="float: right; margin-right: 13px;">物资管理</span>
+                <span class="btn btn-info" onclick='<%= "top.location.href = \"../StoreHome/Home?StoreId={0}\"".Formatted(StoreId) %>' style="float: right; margin-right: 13px;">快速导航</span>
                 <span style="clear: both;"></span>
                 <hr style="color: #2B2B2B; margin-top: 4px;" />
             </div>

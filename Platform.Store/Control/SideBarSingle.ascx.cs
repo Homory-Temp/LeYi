@@ -35,6 +35,18 @@ public partial class Control_SideBar : SingleStoreControl
         }
     }
 
+    public bool NoCrumb
+    {
+        get
+        {
+            return !crumb.Visible;
+        }
+        set
+        {
+            crumb.Visible = !value;
+        }
+    }
+
     protected void storeName_ServerClick(object sender, EventArgs e)
     {
         Response.Redirect("~/StoreHome/Home?StoreId={0}".Formatted(StoreId));
