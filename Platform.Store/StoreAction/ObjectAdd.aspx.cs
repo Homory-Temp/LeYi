@@ -91,7 +91,7 @@ public partial class StoreAction_ObjectAdd : SingleStorePage
     {
         var id = db.Value.GlobalId();
         var img = new[] { p0, p1, p2, p3 }.ToList();
-        var photo = img.Where(o => !o.Src.Contains("/Content/Images/Transparent.png")).Select(o => o.Src).Aggregate("", (a, b) => a += "*" + b, o => o.Substring(1));
+        var photo = img.Count(o => !o.Src.Contains("/Content/Images/Transparent.png")) == 0 ? string.Empty : img.Where(o => !o.Src.Contains("/Content/Images/Transparent.png")).Select(o => o.Src).Aggregate("", (a, b) => a += "*" + b, o => o.Substring(1));
         var obj = new StoreObject
         {
             Id = id,
