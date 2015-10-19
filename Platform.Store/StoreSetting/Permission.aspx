@@ -89,7 +89,7 @@
                     <div class="row">&nbsp;</div>
                     <telerik:RadListView ID="view" runat="server" CssClass="row" OnNeedDataSource="view_NeedDataSource" AllowPaging="true">
                         <ItemTemplate>
-                            <div class="col-md-3 viewPad text-center">
+                            <div class="col-md-4 viewPad text-center">
                                 <span class="btn btn-info dictionaryX"><%# Eval("RealName") %></span>
                                 <input type="button" class="btn btn-danger" value="删" id="remove" runat="server" visible='<%# !OnlyOne %>' match='<%# Eval("Id") %>' onserverclick="remove_ServerClick" />
                             </div>
