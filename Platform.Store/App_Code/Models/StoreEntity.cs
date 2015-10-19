@@ -257,6 +257,29 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class Store_Use
+    {
+        public string Age { get; set; }
+        public string Type { get; set; }
+        public System.Guid Id { get; set; }
+        public int TimeNode { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public string Name { get; set; }
+        public string Unit { get; set; }
+        public decimal Amount { get; set; }
+        public string Operator { get; set; }
+        public string User { get; set; }
+        public decimal Money { get; set; }
+        public System.Guid ConsumeUserId { get; set; }
+        public System.Guid UserId { get; set; }
+        public string Note { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Store_User
     {
         public System.Guid Id { get; set; }

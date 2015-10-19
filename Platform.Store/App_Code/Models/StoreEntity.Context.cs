@@ -59,6 +59,7 @@ namespace Models
         public virtual DbSet<Department> Department { get; set; }
         public virtual DbSet<StoreUsed> StoreUsed { get; set; }
         public virtual DbSet<Store_In> Store_In { get; set; }
+        public virtual DbSet<Store_Use> Store_Use { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {

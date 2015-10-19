@@ -84,7 +84,7 @@ public static class BusinessExtensions
         return controls.Count(o => o.Checked) == 1 ? int.Parse(controls.Single(o => o.Checked).Value) : @default;
     }
 
-    public static void ActionIn(this StoreEntity db, Guid targetId, Guid objectId, string age, string place, string image, Guid? responsibleId, string note, DateTime inTime, Guid operatorId, string code, decimal amount, decimal totalPrice, decimal sourcePerPrice, decimal fee, decimal money)
+    public static void ActionInExt(this StoreEntity db, Guid targetId, Guid objectId, string age, string place, string image, Guid? responsibleId, string note, DateTime inTime, Guid operatorId, string code, decimal amount, decimal totalPrice, decimal sourcePerPrice, decimal fee, decimal money)
     {
         var @in = new StoreIn
         {
@@ -145,6 +145,7 @@ public static class BusinessExtensions
         {
             // To Do
         }
+        db.SaveChanges();
     }
 
     public static CachedUse ActionConsumeExt(this StoreEntity db, CachedUse use, Guid consumerId, string note, DateTime consumeTime, Guid operatorId, string code)

@@ -163,8 +163,7 @@ public partial class StoreAction_In : SingleStorePage
             decimal money = @in.Money.HasValue ? @in.Money.Value : 0M;
             if (@in.ObjectId.HasValue && amount > 0M && money > 0M)
             {
-                db.Value.ActionIn(targetId, @in.ObjectId.Value, t.OrderSource, @in.Place, "", null, @in.Note, @in.TimeNode.ToTime(), CurrentUser, "", amount, money - fee, sourcePerPrice, fee, money);
-                db.Value.SaveChanges();
+                db.Value.ActionInExt(targetId, @in.ObjectId.Value, t.OrderSource, @in.Place, "", null, @in.Note, @in.TimeNode.ToTime(), CurrentUser, "", amount, money - fee, sourcePerPrice, fee, money);
             }
         }
         if (finish)

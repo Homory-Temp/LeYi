@@ -5,24 +5,24 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a40fa783cf5346e89a2243b0e8589b5b" Name="Diagram">
-        <EntityTypeShape EntityType="StoreModel.Store" Width="1.5" PointX="1.5" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreCatalog" Width="1.5" PointX="6.75" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.Store" Width="1.5" PointX="1.5" PointY="42" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreCatalog" Width="1.5" PointX="6.75" PointY="18.875" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreModel.StoreConsume" Width="1.5" PointX="14.25" PointY="29.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreConsumeSingle" Width="1.5" PointX="16.5" PointY="33.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreDictionary" Width="1.5" PointX="3.75" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreFlow" Width="1.5" PointX="3" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreConsumeSingle" Width="1.5" PointX="16.5" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreDictionary" Width="1.5" PointX="3.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreFlow" Width="1.5" PointX="6" PointY="30.125" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreModel.StoreFlowSingle" Width="1.5" PointX="11.25" PointY="30" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreIn" Width="1.5" PointX="11.25" PointY="34.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreInSingle" Width="1.5" PointX="19.5" PointY="32.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreLend" Width="1.5" PointX="6" PointY="29.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreLendSingle" Width="1.5" PointX="16.5" PointY="38.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreIn" Width="1.5" PointX="3" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreInSingle" Width="1.5" PointX="11.25" PointY="34.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreLend" Width="1.5" PointX="6" PointY="34.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreLendSingle" Width="1.5" PointX="8.25" PointY="37" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreModel.StoreObject" Width="1.5" PointX="9" PointY="27.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreOut" Width="1.5" PointX="14.25" PointY="24.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreOutSingle" Width="1.5" PointX="16.5" PointY="29.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreReturn" Width="1.5" PointX="14.25" PointY="34.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreReturnSingle" Width="1.5" PointX="11.25" PointY="26.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreRole" Width="1.5" PointX="1.5" PointY="21.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.StoreTarget" Width="1.5" PointX="3" PointY="34.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreOut" Width="1.5" PointX="14.25" PointY="34.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreOutSingle" Width="1.5" PointX="11.25" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreReturn" Width="1.5" PointX="14.25" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreReturnSingle" Width="1.5" PointX="19.5" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreRole" Width="1.5" PointX="1.5" PointY="37.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreModel.StoreTarget" Width="1.5" PointX="6" PointY="24.125" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreModel.User" Width="1.5" PointX="0.75" PointY="28" IsExpanded="true" />
         <AssociationConnector Association="StoreModel.FK_StoreCatalog_Store" ManuallyRouted="false" />
         <AssociationConnector Association="StoreModel.FK_StoreDictionary_Store" ManuallyRouted="false" />
@@ -67,26 +67,27 @@
         <AssociationConnector Association="StoreModel.FK_StoreLendSingle_StoreIn" />
         <AssociationConnector Association="StoreModel.FK_StoreLendSingle_StoreLend" />
         <EntityTypeShape EntityType="StoreModel.Application" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="StoreModel.DepartmentUser" Width="1.5" PointX="3" PointY="26.25" />
+        <EntityTypeShape EntityType="StoreModel.DepartmentUser" Width="1.5" PointX="3" PointY="24.25" />
         <AssociationConnector Association="StoreModel.FK_DepartmentUser_User" />
         <EntityTypeShape EntityType="StoreModel.UserOnline" Width="1.5" PointX="3" PointY="74" />
         <AssociationConnector Association="StoreModel.FK_UserOnline_User" />
         <EntityTypeShape EntityType="StoreModel.Store_Creator" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="StoreModel.Store_Visitor" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="StoreModel.Store_User" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="StoreModel.Store_Target" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="StoreModel.Store_ObjectThumb" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="StoreModel.StoreStatistics" Width="1.5" PointX="11.25" PointY="42" />
+        <EntityTypeShape EntityType="StoreModel.Store_Target" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="StoreModel.Store_ObjectThumb" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="StoreModel.StoreStatistics" Width="1.5" PointX="11.25" PointY="39" />
         <AssociationConnector Association="StoreModel.FK_StoreStatistics_StoreObject" />
-        <EntityTypeShape EntityType="StoreModel.Store_RecordIn" Width="1.5" PointX="6.75" PointY="6.75" />
-        <EntityTypeShape EntityType="StoreModel.Department" Width="1.5" PointX="1.5" PointY="10.25" />
+        <EntityTypeShape EntityType="StoreModel.Store_RecordIn" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="StoreModel.Department" Width="1.5" PointX="1.5" PointY="46.25" />
         <AssociationConnector Association="StoreModel.FK_Department_DepartmentParent" />
         <AssociationConnector Association="StoreModel.FK_Department_DepartmentTop" />
         <AssociationConnector Association="StoreModel.FK_DepartmentUser_Department" />
         <AssociationConnector Association="StoreModel.FK_DepartmentUser_DepartmentCampus" />
         <AssociationConnector Association="StoreModel.FK_Store_Department" />
-        <EntityTypeShape EntityType="StoreModel.StoreUsed" Width="1.5" PointX="3.75" PointY="7.75" />
+        <EntityTypeShape EntityType="StoreModel.StoreUsed" Width="1.5" PointX="2.75" PointY="7.75" />
         <EntityTypeShape EntityType="StoreModel.Store_In" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="StoreModel.Store_Use" Width="1.5" PointX="8.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
