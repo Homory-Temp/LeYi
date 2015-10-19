@@ -68,22 +68,85 @@
                         </div>
                     </div>
                     <div class="row">
-                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
-                            <LayoutTemplate>
-                                <asp:Panel runat="server" Visible='<%# IsSimple %>'>
-                                    简洁有表头
-                                </asp:Panel>
-                                <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
-                            </LayoutTemplate>
-                            <ItemTemplate>
-                                <asp:Panel runat="server" Visible='<%# IsSimple %>'>
-                                    简洁：<%# Eval("Name") %>
-                                </asp:Panel>
-                                <asp:Panel runat="server" Visible='<%# !IsSimple %>'>
-                                    图文：<%# Eval("Name") %>
-                                </asp:Panel>
-                            </ItemTemplate>
-                        </telerik:RadListView>
+                        <div class="col-md-12" style="color: #2B2B2B;">
+                            <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
+                                <LayoutTemplate>
+                                    <asp:Panel runat="server" Visible='<%# IsSimple %>'>
+                                        <table class="storeTable">
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>物资编号</th>
+                                                <th>名称</th>
+                                                <th>单位</th>
+                                                <th>规格</th>
+                                                <th>库存</th>
+                                                <th>操作</th>
+                                            </tr>
+                                    </asp:Panel>
+                                    <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
+                                    <asp:Panel runat="server" Visible='<%# IsSimple %>'>
+                                        </table>
+                                    </asp:Panel>
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                    <asp:Panel runat="server" Visible='<%# IsSimple %>'>
+                                        <tr>
+                                            <td><%# Eval("Ordinal") %></td>
+                                            <td><%# Eval("Code") %></td>
+                                            <td><%# Eval("Name") %></td>
+                                            <td><%# Eval("Unit") %></td>
+                                            <td><%# Eval("Specification") %></td>
+                                            <td><%# Eval("Amount").ToAmount() %></td>
+                                            <td>
+                                                    <input type="button" class="btn btn-tumblr" value="入" id="in" runat="server" match='<%# Eval("Id") %>' />
+                                                    <input type="button" class="btn btn-tumblr" value="领" id="use" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 %>' />
+                                            </td>
+                                        </tr>
+                                    </asp:Panel>
+                                    <asp:Panel runat="server" Visible='<%# !IsSimple %>'>
+                                        <div class="col-md-3">
+                                            <div class="row" style="border: solid 1px silver; margin: 30px; height: 350px;">
+                                                <div class="col-md-12" style="text-align: center; height: 300px;">
+                                                    <table style="margin: auto; width: 90%;">
+                                                        <tr>
+                                                            <td style="height: 160px; line-height: 160px;">
+                                                                <img style="width: 100%;" src='<%# Eval("Image").Null() ? "../Content/Images/Transparent.png" : Eval("Image").ToString().Split(new char[] { '*' })[0] %>' />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="line-height: 28px; text-align: left;">
+                                                                <%# Eval("Name") %>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="line-height: 28px; text-align: left;">
+                                                                库存：<%# Eval("Amount").ToAmount() %>&nbsp;<%# Eval("Unit") %>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="line-height: 28px; text-align: left;">
+                                                                编号：<%# Eval("Code") %>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="line-height: 28px; text-align: left;">
+                                                                规格：<%# Eval("Specification") %>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-12" style="height: 50px;">
+                                                    <div style="margin: auto; width: 90%; text-align: center;  vertical-align: bottom;">
+                                                        <input type="button" class="btn btn-tumblr" value="入" id="in2" runat="server" match='<%# Eval("Id") %>' />
+                                                        <input type="button" class="btn btn-tumblr" value="领" id="use2" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 %>' />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+                                </ItemTemplate>
+                            </telerik:RadListView>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">&nbsp;</div>

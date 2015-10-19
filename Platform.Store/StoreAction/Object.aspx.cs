@@ -94,8 +94,8 @@ public partial class StoreAction_Object : SingleStorePage
         {
             catalogs.AddRange(db.Value.StoreCatalog.Where(o => o.State < 2 && o.StoreId == StoreId).Select(o => o.Id).ToList());
         }
-        var source = catalogs.Join(db.Value.StoreObject, o => o, o => o.CatalogId, (a, b) => b).Distinct().ToList();
-        view.DataSource = source;
+        var source = catalogs.Join(db.Value.StoreObject, o => o, o => o.CatalogId, (a, b) => b).Distinct().OrderBy(o => o.Ordinal).ToList();
+        view.DataSource = CurrentStore.State == StoreState.食品 ? source.OrderByDescending(o => o.Amount).ThenBy(o => o.Ordinal).ToList() : source.OrderByDescending(o => o.Ordinal).ThenBy(o => o.Amount).ToList();
         pager.Visible = source.Count > pager.PageSize;
     }
 
