@@ -833,22 +833,18 @@ namespace Models
         public int Month { get; set; }
         public int TimeNode { get; set; }
         public System.DateTime Time { get; set; }
-        public decimal StartInAmount { get; set; }
-        public decimal StartInMoney { get; set; }
-        public decimal StartLendAmount { get; set; }
-        public decimal StartLendMoney { get; set; }
-        public decimal StartConsumeAmount { get; set; }
-        public decimal StartConsumeMoney { get; set; }
-        public decimal StartOutAmount { get; set; }
-        public decimal StartOutMoney { get; set; }
-        public decimal EndInAmount { get; set; }
-        public decimal EndInMoney { get; set; }
-        public decimal EndLendAmount { get; set; }
-        public decimal EndLendMoney { get; set; }
-        public decimal EndConsumeAmount { get; set; }
-        public decimal EndConsumeMoney { get; set; }
-        public decimal EndOutAmount { get; set; }
-        public decimal EndOutMoney { get; set; }
+        public decimal StartAmount { get; set; }
+        public decimal StartMoney { get; set; }
+        public decimal InAmount { get; set; }
+        public decimal InMoney { get; set; }
+        public decimal LendAmount { get; set; }
+        public decimal LendMoney { get; set; }
+        public decimal ConsumeAmount { get; set; }
+        public decimal ConsumeMoney { get; set; }
+        public decimal OutAmount { get; set; }
+        public decimal OutMoney { get; set; }
+        public decimal EndAmount { get; set; }
+        public decimal EndMoney { get; set; }
     
         public virtual StoreObject StoreObject { get; set; }
     }

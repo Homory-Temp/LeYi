@@ -336,22 +336,18 @@
           <Property Name="Month" Type="int" Nullable="false" />
           <Property Name="TimeNode" Type="int" Nullable="false" />
           <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="StartInAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="StartInMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="StartLendAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="StartLendMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="StartConsumeAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="StartConsumeMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="StartOutAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="StartOutMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="EndInAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="EndInMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="EndLendAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="EndLendMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="EndConsumeAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="EndConsumeMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="EndOutAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="EndOutMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="InAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="InMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LendAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LendMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ConsumeAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ConsumeMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OutAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OutMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
         <EntityType Name="StoreTarget">
           <Key>
@@ -2837,11 +2833,6 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <Parameter Name="CatalogId" Mode="In" Type="Guid" />
             <Parameter Name="StoreId" Mode="In" Type="Guid" />
           </FunctionImport>
-          <EntitySet Name="StoreStatistics" EntityType="StoreModel.StoreStatistics" />
-          <AssociationSet Name="FK_StoreStatistics_StoreObject" Association="StoreModel.FK_StoreStatistics_StoreObject">
-            <End Role="StoreObject" EntitySet="StoreObject" />
-            <End Role="StoreStatistics" EntitySet="StoreStatistics" />
-          </AssociationSet>
           <EntitySet Name="Store_RecordIn" EntityType="StoreModel.Store_RecordIn" />
           <EntitySet Name="Department" EntityType="StoreModel.Department" />
           <AssociationSet Name="FK_Department_DepartmentParent" Association="StoreModel.FK_Department_DepartmentParent">
@@ -2871,6 +2862,11 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySet Name="Store_In" EntityType="StoreModel.Store_In" />
           <EntitySet Name="Store_Use" EntityType="StoreModel.Store_Use" />
           <EntitySet Name="Store_ST" EntityType="StoreModel.Store_ST" />
+          <EntitySet Name="StoreStatistics" EntityType="StoreModel.StoreStatistics" />
+          <AssociationSet Name="FK_StoreStatistics_StoreObject" Association="StoreModel.FK_StoreStatistics_StoreObject">
+            <End Role="StoreObject" EntitySet="StoreObject" />
+            <End Role="StoreStatistics" EntitySet="StoreStatistics" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -3087,47 +3083,6 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
         <Member Name="入库" Value="1" />
           <Member Name="领用" Value="2" />
         </EnumType>
-        <EntityType Name="StoreStatistics">
-          <Key>
-            <PropertyRef Name="ObjectId" />
-            <PropertyRef Name="Year" />
-            <PropertyRef Name="Month" />
-          </Key>
-          <Property Name="ObjectId" Type="Guid" Nullable="false" />
-          <Property Name="Year" Type="Int32" Nullable="false" />
-          <Property Name="Month" Type="Int32" Nullable="false" />
-          <Property Name="TimeNode" Type="Int32" Nullable="false" />
-          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="StartInAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="StartInMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="StartLendAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="StartLendMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="StartConsumeAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="StartConsumeMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="StartOutAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="StartOutMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="EndInAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="EndInMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="EndLendAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="EndLendMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="EndConsumeAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="EndConsumeMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="EndOutAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="EndOutMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <NavigationProperty Name="StoreObject" Relationship="StoreModel.FK_StoreStatistics_StoreObject" FromRole="StoreStatistics" ToRole="StoreObject" />
-        </EntityType>
-        <Association Name="FK_StoreStatistics_StoreObject">
-          <End Type="StoreModel.StoreObject" Role="StoreObject" Multiplicity="1" />
-          <End Type="StoreModel.StoreStatistics" Role="StoreStatistics" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StoreObject">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StoreStatistics">
-              <PropertyRef Name="ObjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Store_RecordIn">
           <Key>
             <PropertyRef Name="Id" />
@@ -3397,6 +3352,43 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="O_End" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="OM_End" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
         </EntityType>
+        <EntityType Name="StoreStatistics">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="Month" />
+          </Key>
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="Int32" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="StartAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="InAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="InMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="LendAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="LendMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ConsumeAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ConsumeMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OutAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OutMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <NavigationProperty Name="StoreObject" Relationship="StoreModel.FK_StoreStatistics_StoreObject" FromRole="StoreStatistics" ToRole="StoreObject" />
+        </EntityType>
+        <Association Name="FK_StoreStatistics_StoreObject">
+          <End Type="StoreModel.StoreObject" Role="StoreObject" Multiplicity="1" />
+          <End Type="StoreModel.StoreStatistics" Role="StoreStatistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreStatistics">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3865,33 +3857,6 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="CountObjects" FunctionName="StoreModel.Store.CountObjects" />
-          <EntitySetMapping Name="StoreStatistics">
-            <EntityTypeMapping TypeName="StoreModel.StoreStatistics">
-              <MappingFragment StoreEntitySet="StoreStatistics">
-                <ScalarProperty Name="EndOutMoney" ColumnName="EndOutMoney" />
-                <ScalarProperty Name="EndOutAmount" ColumnName="EndOutAmount" />
-                <ScalarProperty Name="EndConsumeMoney" ColumnName="EndConsumeMoney" />
-                <ScalarProperty Name="EndConsumeAmount" ColumnName="EndConsumeAmount" />
-                <ScalarProperty Name="EndLendMoney" ColumnName="EndLendMoney" />
-                <ScalarProperty Name="EndLendAmount" ColumnName="EndLendAmount" />
-                <ScalarProperty Name="EndInMoney" ColumnName="EndInMoney" />
-                <ScalarProperty Name="EndInAmount" ColumnName="EndInAmount" />
-                <ScalarProperty Name="StartOutMoney" ColumnName="StartOutMoney" />
-                <ScalarProperty Name="StartOutAmount" ColumnName="StartOutAmount" />
-                <ScalarProperty Name="StartConsumeMoney" ColumnName="StartConsumeMoney" />
-                <ScalarProperty Name="StartConsumeAmount" ColumnName="StartConsumeAmount" />
-                <ScalarProperty Name="StartLendMoney" ColumnName="StartLendMoney" />
-                <ScalarProperty Name="StartLendAmount" ColumnName="StartLendAmount" />
-                <ScalarProperty Name="StartInMoney" ColumnName="StartInMoney" />
-                <ScalarProperty Name="StartInAmount" ColumnName="StartInAmount" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
-                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Store_RecordIn">
             <EntityTypeMapping TypeName="StoreModel.Store_RecordIn">
               <MappingFragment StoreEntitySet="Store_RecordIn">
@@ -4027,6 +3992,29 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
                 <ScalarProperty Name="Fixed" ColumnName="Fixed" />
                 <ScalarProperty Name="Single" ColumnName="Single" />
                 <ScalarProperty Name="Consumable" ColumnName="Consumable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreStatistics">
+            <EntityTypeMapping TypeName="StoreModel.StoreStatistics">
+              <MappingFragment StoreEntitySet="StoreStatistics">
+                <ScalarProperty Name="EndMoney" ColumnName="EndMoney" />
+                <ScalarProperty Name="EndAmount" ColumnName="EndAmount" />
+                <ScalarProperty Name="OutMoney" ColumnName="OutMoney" />
+                <ScalarProperty Name="OutAmount" ColumnName="OutAmount" />
+                <ScalarProperty Name="ConsumeMoney" ColumnName="ConsumeMoney" />
+                <ScalarProperty Name="ConsumeAmount" ColumnName="ConsumeAmount" />
+                <ScalarProperty Name="LendMoney" ColumnName="LendMoney" />
+                <ScalarProperty Name="LendAmount" ColumnName="LendAmount" />
+                <ScalarProperty Name="InMoney" ColumnName="InMoney" />
+                <ScalarProperty Name="InAmount" ColumnName="InAmount" />
+                <ScalarProperty Name="StartMoney" ColumnName="StartMoney" />
+                <ScalarProperty Name="StartAmount" ColumnName="StartAmount" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
