@@ -227,6 +227,41 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class Store_ST
+    {
+        public bool Consumable { get; set; }
+        public bool Single { get; set; }
+        public bool Fixed { get; set; }
+        public System.Guid CatalogId { get; set; }
+        public string Name { get; set; }
+        public string CatalogPath { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public int Y { get; set; }
+        public int M { get; set; }
+        public int Time { get; set; }
+        public decimal I_Start { get; set; }
+        public decimal IM_Start { get; set; }
+        public decimal L_Start { get; set; }
+        public decimal LM_Start { get; set; }
+        public decimal C_Start { get; set; }
+        public decimal CM_Start { get; set; }
+        public decimal O_Start { get; set; }
+        public decimal OM_Start { get; set; }
+        public decimal I_End { get; set; }
+        public decimal IM_End { get; set; }
+        public decimal L_End { get; set; }
+        public decimal LM_End { get; set; }
+        public decimal C_End { get; set; }
+        public decimal CM_End { get; set; }
+        public decimal O_End { get; set; }
+        public decimal OM_End { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Store_Target
     {
         public System.Guid Id { get; set; }
