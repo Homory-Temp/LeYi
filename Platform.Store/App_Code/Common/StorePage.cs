@@ -58,7 +58,7 @@ public class StorePage : System.Web.UI.Page
     protected override void OnLoad(EventArgs e)
     {
         #region 
-        var doc = XDocument.Load(Server.MapPath("~/Common/配置/Title.xml"));
+        var doc = XDocument.Load(Server.MapPath("../Common/配置/Title.xml"));
         Title = doc.Root.Element("Store").Value;
         if (!string.IsNullOrWhiteSpace("OnlineId".Query()))
         {
