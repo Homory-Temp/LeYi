@@ -259,6 +259,7 @@ namespace Models
     
     public partial class Store_Use
     {
+        public System.Guid CatalogId { get; set; }
         public string Age { get; set; }
         public string Type { get; set; }
         public System.Guid Id { get; set; }

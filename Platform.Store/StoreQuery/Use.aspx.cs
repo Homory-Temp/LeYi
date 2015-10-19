@@ -39,7 +39,7 @@ public partial class StoreQuery_Use : SingleStorePage
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => o.Value.GlobalId()).ToList();
-        var source = catalogs.Join(db.Value.Store_In, o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.TimeNode).ThenBy(o => o.Number).ToList();
+        var source = catalogs.Join(db.Value.Store_Use, o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.TimeNode).ThenBy(o => o.User).ToList();
         view.DataSource = source;
         pager.Visible = source.Count > pager.PageSize;
     }
