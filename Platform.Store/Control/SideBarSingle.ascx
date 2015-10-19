@@ -25,6 +25,14 @@
                         </ul>
                     </li>
                     <li class="dropdown">
+                        <a class="dropdown-toggle navbar-link" data-toggle="dropdown">二维码</a>
+                        <ul class="dropdown-menu">
+                            <li><a href='<%= "../StoreAction/Use?StoreId={0}".Formatted(StoreId) %>'>物资出库</a></li>
+                            <li><a href='<%= "../StoreAction/Return?StoreId={0}".Formatted(StoreId) %>'>物资归还</a></li>
+                            <li><a href='<%= "../StoreAction/Object?StoreId={0}".Formatted(StoreId) %>'>流通查询</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
                         <a class="dropdown-toggle navbar-link" data-toggle="dropdown">日常查询</a>
                         <ul class="dropdown-menu">
                             <li><a href='<%= "../StoreQuery/Target?StoreId={0}".Formatted(StoreId) %>'>购置查询</a></li>
