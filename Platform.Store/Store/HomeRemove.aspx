@@ -38,7 +38,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <div class="row">
-                        <div class="col-md-12 text-center">确认删除仓库“<span id="store" runat="server"></span>”吗？</div>
+                        <div class="col-md-12 text-center" style="color: black; font-size: 18px; font-weight: bold;">确认删除仓库“<span id="store" runat="server"></span>”吗？</div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-center">
