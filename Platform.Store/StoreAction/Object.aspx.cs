@@ -128,4 +128,9 @@ public partial class StoreAction_Object : SingleStorePage
     {
         Response.Redirect("~/StoreAction/ObjectEdit?StoreId={0}&ObjectId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"]));
     }
+
+    protected void delete_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/StoreAction/ObjectRemove?StoreId={0}&ObjectId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"]));
+    }
 }

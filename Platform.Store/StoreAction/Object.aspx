@@ -98,9 +98,10 @@
                                             <td><%# Eval("Specification") %></td>
                                             <td><%# Eval("Amount").ToAmount() %></td>
                                             <td>
-                                                    <input type="button" class="btn btn-tumblr" value="入" id="in" runat="server" match='<%# Eval("Id") %>' onserverclick="in_ServerClick" />
-                                                    <input type="button" class="btn btn-tumblr" value="领" id="use" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 %>' />
-                                                    <input type="button" class="btn btn-tumblr" value="编" id="edit" runat="server" match='<%# Eval("Id") %>' onserverclick="edit_ServerClick" />
+                                                <input type="button" class="btn btn-tumblr" value="入" id="in" runat="server" match='<%# Eval("Id") %>' onserverclick="in_ServerClick" />
+                                                <input type="button" class="btn btn-tumblr" value="领" id="use" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 %>' />
+                                                <input type="button" class="btn btn-tumblr" value="编" id="edit" runat="server" match='<%# Eval("Id") %>' onserverclick="edit_ServerClick" />
+                                                <input type="button" class="btn btn-tumblr" value="删" id="delete" runat="server" match='<%# Eval("Id") %>' onserverclick="delete_ServerClick" visible='<%# (Container.DataItem as Models.StoreObject).StoreIn.Count == 0 %>' />
                                             </td>
                                         </tr>
                                     </asp:Panel>
@@ -113,24 +114,21 @@
                                                     </div>
                                                     <div style="height: 145px;">
                                                         <table style="margin: auto; width: 90%;">
-                                                            <tr style="line-height: 28px; height:28px; text-align: center;">
+                                                            <tr style="line-height: 28px; height: 28px; text-align: center;">
                                                                 <td style="line-height: 55px; height: 55px; text-align: center;">
                                                                     <span class="btn btn-danger"><%# Eval("Name") %></span>
                                                                 </td>
                                                             </tr>
-                                                            <tr style="line-height: 28px; height:28px; text-align: left;">
-                                                                <td style="line-height: 28px; height:28px; text-align: left;">
-                                                                    库存：<%# Eval("Amount").ToAmount() %>&nbsp;<%# Eval("Unit") %>
+                                                            <tr style="line-height: 28px; height: 28px; text-align: left;">
+                                                                <td style="line-height: 28px; height: 28px; text-align: left;">库存：<%# Eval("Amount").ToAmount() %>&nbsp;<%# Eval("Unit") %>
                                                                 </td>
                                                             </tr>
-                                                            <tr style="line-height: 28px; height:28px; text-align: left;">
-                                                                <td style="line-height: 28px; height:28px; text-align: left;">
-                                                                    编号：<%# Eval("Code") %>
+                                                            <tr style="line-height: 28px; height: 28px; text-align: left;">
+                                                                <td style="line-height: 28px; height: 28px; text-align: left;">编号：<%# Eval("Code") %>
                                                                 </td>
                                                             </tr>
-                                                            <tr style="line-height: 28px; height:28px; text-align: left;">
-                                                                <td style="line-height: 28px; height:28px; text-align: left;">
-                                                                    规格：<%# Eval("Specification") %>
+                                                            <tr style="line-height: 28px; height: 28px; text-align: left;">
+                                                                <td style="line-height: 28px; height: 28px; text-align: left;">规格：<%# Eval("Specification") %>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -139,6 +137,7 @@
                                                         <input type="button" class="btn btn-tumblr" value="入" id="in2" runat="server" match='<%# Eval("Id") %>' onserverclick="in_ServerClick" />
                                                         <input type="button" class="btn btn-tumblr" value="领" id="use2" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 %>' />
                                                         <input type="button" class="btn btn-tumblr" value="编" id="edit2" runat="server" match='<%# Eval("Id") %>' onserverclick="edit_ServerClick" />
+                                                        <input type="button" class="btn btn-tumblr" value="删" id="delete2" runat="server" match='<%# Eval("Id") %>' visible='<%# (Container.DataItem as Models.StoreObject).StoreIn.Count == 0 %>' onserverclick="delete_ServerClick" />
                                                     </div>
                                                 </div>
                                             </div>
