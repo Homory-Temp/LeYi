@@ -28,12 +28,12 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资管理 - 物资借领" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资管理 - 物资出库" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-2">
                     <div class="btn btn-tumblr dictionaryX">
-                        借领信息选择
+                        出库信息选择
                     </div>
                 </div>
                 <div class="col-md-10 text-left">
@@ -61,7 +61,7 @@
             <div class="row" id="x1" runat="server">
                 <div class="col-md-2">
                     <div class="btn btn-tumblr dictionaryX">
-                        借领物资选择
+                        出库物资选择
                     </div>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                     &nbsp;
                 </div>
                 <div class="col-md-12 text-center">
-                    <input type="button" class="btn btn-tumblr" id="do_use" runat="server" value="借领" onserverclick="do_use_ServerClick" />
+                    <input type="button" class="btn btn-tumblr" id="do_use" runat="server" value="出库" onserverclick="do_use_ServerClick" />
                 </div>
             </div>
         </telerik:RadAjaxPanel>

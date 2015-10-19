@@ -17,7 +17,7 @@
                         <ul class="dropdown-menu">
                             <li><a href='<%= "../StoreAction/Target?StoreId={0}".Formatted(StoreId) %>'>购置登记</a></li>
                             <li><a href='<%= "../StoreAction/In?StoreId={0}".Formatted(StoreId) %>'>物资入库</a></li>
-                            <li><a href='<%= "../StoreAction/Use?StoreId={0}".Formatted(StoreId) %>'>物资借领</a></li>
+                            <li><a href='<%= "../StoreAction/Use?StoreId={0}".Formatted(StoreId) %>'>物资出库</a></li>
                             <li><a href='<%= "../StoreAction/Return?StoreId={0}".Formatted(StoreId) %>'>物资归还</a></li>
                             <li><a href='<%= "../StoreAction/Object?StoreId={0}".Formatted(StoreId) %>'>物资管理</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreAction/Import?StoreId={0}".Formatted(StoreId) %>'>数据导入</a></li>
@@ -29,7 +29,7 @@
                         <ul class="dropdown-menu">
                             <li><a href='<%= "../StoreQuery/Target?StoreId={0}".Formatted(StoreId) %>'>购置查询</a></li>
                             <li><a href='<%= "../StoreQuery/In?StoreId={0}".Formatted(StoreId) %>'>入库查询</a></li>
-                            <li><a href='<%= "../StoreQuery/Use?StoreId={0}".Formatted(StoreId) %>'>借领查询</a></li>
+                            <li><a href='<%= "../StoreQuery/Use?StoreId={0}".Formatted(StoreId) %>'>出库查询</a></li>
                             <li><a href='<%= "../StoreQuery/Return?StoreId={0}".Formatted(StoreId) %>'>归还查询</a></li>
                             <li><a href='<%= "../StoreQuery/Object?StoreId={0}".Formatted(StoreId) %>'>物资查询</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Import?StoreId={0}".Formatted(StoreId) %>'>导入查询</a></li>
@@ -64,7 +64,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <input type="button" class="btn btn-tumblr" value='<%= CurrentStore.Name %>' />
+                <input id="storeName" runat="server" type="button" class="btn btn-tumblr" onserverclick="storeName_ServerClick" />
                 <span id="crumb" runat="server" class="btn btn-info" style="margin-left: 10px;"></span>
                 <span class="btn btn-info" onclick="top.location.href = '../Store/Home';" style="float: right;">仓库切换</span>
                 <span class="btn btn-info" onclick='<%= "top.location.href = \"../StoreAction/Object?StoreId={0}\"".Formatted(StoreId) %>' style="float: right; margin-right: 13px;">物资管理</span>

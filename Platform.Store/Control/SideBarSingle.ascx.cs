@@ -12,6 +12,7 @@ public partial class Control_SideBar : SingleStoreControl
         if (!IsPostBack)
         {
             u.InnerText = db.Value.GetUserName(CurrentUser);
+            storeName.Value = CurrentStore.Name;
         }
     }
 
@@ -32,5 +33,10 @@ public partial class Control_SideBar : SingleStoreControl
         {
             crumb.InnerText = value;
         }
+    }
+
+    protected void storeName_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/StoreHome/Home?StoreId={0}".Formatted(StoreId));
     }
 }
