@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="InBody.ascx.cs" Inherits="Control_InBody" %>
 
-<td><%# Eval("Number") %></td>
+<td><asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text='<%# Eval("Number") %>' NavigateUrl='<%# "../StoreQuery/Target?StoreId={0}&TargetId={1}".Formatted(StoreId, Eval("TargetId")) %>'></asp:HyperLink></td>
 <td><%# Eval("TimeNode").FromTimeNode() %></td>
 <td><%# Eval("Name") %></td>
 <td><%# Eval("Unit") %></td>

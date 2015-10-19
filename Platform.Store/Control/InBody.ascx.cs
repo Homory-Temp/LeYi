@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Control_InBody : System.Web.UI.UserControl
+public partial class Control_InBody : SingleStoreControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {

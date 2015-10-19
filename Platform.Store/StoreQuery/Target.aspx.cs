@@ -98,6 +98,7 @@ public partial class StoreQuery_Target : SingleStorePage
 
     protected void print_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/StoreQuery/TargetPrint?StoreId={0}&TargetId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"].GlobalId()));
+        var url = "../StoreQuery/TargetPrint?StoreId={0}&TargetId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"].GlobalId());
+        ap.ResponseScripts.Add("window.open('{0}', '_blank');".Formatted(url));
     }
 }
