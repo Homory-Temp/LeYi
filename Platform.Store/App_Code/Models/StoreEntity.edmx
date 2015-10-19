@@ -455,6 +455,47 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Creator' does not have a pri
           <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.Store_In' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Store_In">
+          <Key>
+            <PropertyRef Name="Number" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Specification" />
+            <PropertyRef Name="InId" />
+            <PropertyRef Name="TargetId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Place" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="TimeNode" />
+            <PropertyRef Name="OperationUserId" />
+            <PropertyRef Name="SourcePerPrice" />
+            <PropertyRef Name="SourceAmount" />
+            <PropertyRef Name="SourceMoney" />
+          </Key>
+          <Property Name="Number" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Operator" Type="nvarchar" MaxLength="64" />
+          <Property Name="Responsible" Type="nvarchar" MaxLength="64" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Specification" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TargetId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ResponsibleUserId" Type="uniqueidentifier" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SourcePerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="SourceAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="SourceMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Platform_LY.dbo.Store_ObjectThumb' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Store_ObjectThumb">
           <Key>
@@ -1256,6 +1297,29 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
     [Store_Creator].[Description] AS [Description], 
     [Store_Creator].[PinYin] AS [PinYin]
     FROM [dbo].[Store_Creator] AS [Store_Creator]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Store_In" EntityType="Self.Store_In" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Store_In].[Number] AS [Number], 
+    [Store_In].[Operator] AS [Operator], 
+    [Store_In].[Responsible] AS [Responsible], 
+    [Store_In].[Name] AS [Name], 
+    [Store_In].[CatalogId] AS [CatalogId], 
+    [Store_In].[Unit] AS [Unit], 
+    [Store_In].[Specification] AS [Specification], 
+    [Store_In].[InId] AS [InId], 
+    [Store_In].[TargetId] AS [TargetId], 
+    [Store_In].[ObjectId] AS [ObjectId], 
+    [Store_In].[Age] AS [Age], 
+    [Store_In].[Place] AS [Place], 
+    [Store_In].[ResponsibleUserId] AS [ResponsibleUserId], 
+    [Store_In].[Note] AS [Note], 
+    [Store_In].[TimeNode] AS [TimeNode], 
+    [Store_In].[OperationUserId] AS [OperationUserId], 
+    [Store_In].[SourcePerPrice] AS [SourcePerPrice], 
+    [Store_In].[SourceAmount] AS [SourceAmount], 
+    [Store_In].[SourceMoney] AS [SourceMoney]
+    FROM [dbo].[Store_In] AS [Store_In]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Store_ObjectThumb" EntityType="Self.Store_ObjectThumb" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2660,8 +2724,9 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           </AssociationSet>
           <EntitySet Name="StoreUsed" EntityType="StoreModel.StoreUsed" />
           <FunctionImport Name="GetCatalogPath" ReturnType="Collection(String)">
-            <Parameter Name="CatalogId" Mode="In" Type="Guid" />
+          <Parameter Name="CatalogId" Mode="In" Type="Guid" />
           </FunctionImport>
+          <EntitySet Name="Store_In" EntityType="StoreModel.Store_In" />
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -3059,6 +3124,45 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PeopleId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Store_In">
+          <Key>
+            <PropertyRef Name="Number" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Specification" />
+            <PropertyRef Name="InId" />
+            <PropertyRef Name="TargetId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Place" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="TimeNode" />
+            <PropertyRef Name="OperationUserId" />
+            <PropertyRef Name="SourcePerPrice" />
+            <PropertyRef Name="SourceAmount" />
+            <PropertyRef Name="SourceMoney" />
+          </Key>
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Operator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Responsible" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
+          <Property Name="TargetId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ResponsibleUserId" Type="Guid" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
+          <Property Name="SourcePerPrice" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="SourceAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="SourceMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3615,6 +3719,31 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetCatalogPath" FunctionName="StoreModel.Store.GetCatalogPath" />
+          <EntitySetMapping Name="Store_In">
+            <EntityTypeMapping TypeName="StoreModel.Store_In">
+              <MappingFragment StoreEntitySet="Store_In">
+                <ScalarProperty Name="SourceMoney" ColumnName="SourceMoney" />
+                <ScalarProperty Name="SourceAmount" ColumnName="SourceAmount" />
+                <ScalarProperty Name="SourcePerPrice" ColumnName="SourcePerPrice" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ResponsibleUserId" ColumnName="ResponsibleUserId" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Responsible" ColumnName="Responsible" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

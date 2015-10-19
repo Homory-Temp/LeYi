@@ -13,7 +13,33 @@ public partial class StoreQuery_In : SingleStorePage
     {
         if (!IsPostBack)
         {
-
+            tree.DataSource = db.Value.StoreCatalog.Where(o => o.StoreId == StoreId && o.State < 2).OrderBy(o => o.Ordinal).ToList();
+            tree.DataBind();
+            tree.CheckAllNodes();
         }
+    }
+
+    protected void all_ServerClick(object sender, EventArgs e)
+    {
+        if (_all.Value == "1")
+        {
+            tree.UncheckAllNodes();
+            _all.Value = "0";
+            all.Value = "全部选定";
+        }
+        else
+        {
+            tree.CheckAllNodes();
+            _all.Value = "1";
+            all.Value = "清除选定";
+        }
+        view.Rebind();
+    }
+
+    protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
+    {
+        var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => o.Value.GlobalId()).ToList();
+        var source = catalogs.Join(db.Value.Store_In, o => o, o => o.CatalogId, (a, b) => b).ToList();
+        view.DataSource = source;
     }
 }

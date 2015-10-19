@@ -155,6 +155,34 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class Store_In
+    {
+        public string Number { get; set; }
+        public string Operator { get; set; }
+        public string Responsible { get; set; }
+        public string Name { get; set; }
+        public System.Guid CatalogId { get; set; }
+        public string Unit { get; set; }
+        public string Specification { get; set; }
+        public System.Guid InId { get; set; }
+        public System.Guid TargetId { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public string Age { get; set; }
+        public string Place { get; set; }
+        public Nullable<System.Guid> ResponsibleUserId { get; set; }
+        public string Note { get; set; }
+        public int TimeNode { get; set; }
+        public System.Guid OperationUserId { get; set; }
+        public decimal SourcePerPrice { get; set; }
+        public decimal SourceAmount { get; set; }
+        public decimal SourceMoney { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Store_ObjectThumb
     {
         public System.Guid ObjectId { get; set; }

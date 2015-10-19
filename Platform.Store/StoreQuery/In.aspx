@@ -30,6 +30,33 @@
     <form id="form" runat="server">
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 入库查询" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
+            <div class="row">
+                <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="btn btn-tumblr">物资类别：</span>
+                            &nbsp;&nbsp;
+                            <input type="button" class="btn btn-info" id="all" runat="server" value="清除选定" onserverclick="all_ServerClick" />
+                            <input type="hidden" id="_all" runat="server" value="1" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <telerik:RadTreeView ID="tree" runat="server" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" CheckBoxes="true" CheckChildNodes="true">
+                            </telerik:RadTreeView>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10" style="text-align: left;">
+                    <div class="row">
+                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource">
+                            <ItemTemplate>
+                                <%# Eval("SourceAmount") %>
+                            </ItemTemplate>
+                        </telerik:RadListView>
+                    </div>
+                </div>
+            </div>
         </telerik:RadAjaxPanel>
     </form>
 </body>
