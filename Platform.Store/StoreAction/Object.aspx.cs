@@ -118,4 +118,14 @@ public partial class StoreAction_Object : SingleStorePage
             view.Rebind();
         }
     }
+
+    protected void in_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/StoreAction/In?StoreId={0}".Formatted(StoreId));
+    }
+
+    protected void edit_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/StoreAction/ObjectEdit?StoreId={0}&ObjectId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"]));
+    }
 }

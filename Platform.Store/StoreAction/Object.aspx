@@ -98,47 +98,47 @@
                                             <td><%# Eval("Specification") %></td>
                                             <td><%# Eval("Amount").ToAmount() %></td>
                                             <td>
-                                                    <input type="button" class="btn btn-tumblr" value="入" id="in" runat="server" match='<%# Eval("Id") %>' />
+                                                    <input type="button" class="btn btn-tumblr" value="入" id="in" runat="server" match='<%# Eval("Id") %>' onserverclick="in_ServerClick" />
                                                     <input type="button" class="btn btn-tumblr" value="领" id="use" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 %>' />
+                                                    <input type="button" class="btn btn-tumblr" value="编" id="edit" runat="server" match='<%# Eval("Id") %>' onserverclick="edit_ServerClick" />
                                             </td>
                                         </tr>
                                     </asp:Panel>
                                     <asp:Panel runat="server" Visible='<%# !IsSimple %>'>
                                         <div class="col-md-3">
-                                            <div class="row" style="border: solid 1px silver; margin: 30px; height: 350px;">
-                                                <div class="col-md-12" style="text-align: center; height: 300px;">
-                                                    <table style="margin: auto; width: 90%;">
-                                                        <tr>
-                                                            <td style="height: 160px; line-height: 160px;">
-                                                                <img style="width: 100%;" src='<%# Eval("Image").Null() ? "../Content/Images/Transparent.png" : Eval("Image").ToString().Split(new char[] { '*' })[0] %>' />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="line-height: 28px; text-align: left;">
-                                                                <%# Eval("Name") %>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="line-height: 28px; text-align: left;">
-                                                                库存：<%# Eval("Amount").ToAmount() %>&nbsp;<%# Eval("Unit") %>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="line-height: 28px; text-align: left;">
-                                                                编号：<%# Eval("Code") %>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="line-height: 28px; text-align: left;">
-                                                                规格：<%# Eval("Specification") %>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                                <div class="col-md-12" style="height: 50px;">
-                                                    <div style="margin: auto; width: 90%; text-align: center;  vertical-align: bottom;">
-                                                        <input type="button" class="btn btn-tumblr" value="入" id="in2" runat="server" match='<%# Eval("Id") %>' />
+                                            <div class="row" style="margin: 30px; border: solid 1px silver;">
+                                                <div class="col-md-12" style="width: 100%; height: 100%;">
+                                                    <div style="height: 160px;">
+                                                        <img class="img-responsive" src='<%# Eval("Image").Null() ? "../Content/Images/Transparent.png" : Eval("Image").ToString().Split(new char[] { '*' })[0] %>' />
+                                                    </div>
+                                                    <div style="height: 145px;">
+                                                        <table style="margin: auto; width: 90%;">
+                                                            <tr style="line-height: 28px; height:28px; text-align: center;">
+                                                                <td style="line-height: 55px; height: 55px; text-align: center;">
+                                                                    <span class="btn btn-danger"><%# Eval("Name") %></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="line-height: 28px; height:28px; text-align: left;">
+                                                                <td style="line-height: 28px; height:28px; text-align: left;">
+                                                                    库存：<%# Eval("Amount").ToAmount() %>&nbsp;<%# Eval("Unit") %>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="line-height: 28px; height:28px; text-align: left;">
+                                                                <td style="line-height: 28px; height:28px; text-align: left;">
+                                                                    编号：<%# Eval("Code") %>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="line-height: 28px; height:28px; text-align: left;">
+                                                                <td style="line-height: 28px; height:28px; text-align: left;">
+                                                                    规格：<%# Eval("Specification") %>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div style="height: 55px;">
+                                                        <input type="button" class="btn btn-tumblr" value="入" id="in2" runat="server" match='<%# Eval("Id") %>' onserverclick="in_ServerClick" />
                                                         <input type="button" class="btn btn-tumblr" value="领" id="use2" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 %>' />
+                                                        <input type="button" class="btn btn-tumblr" value="编" id="edit2" runat="server" match='<%# Eval("Id") %>' onserverclick="edit_ServerClick" />
                                                     </div>
                                                 </div>
                                             </div>
