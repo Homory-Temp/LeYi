@@ -129,6 +129,7 @@ public partial class Control_ObjectUseBody : SingleStoreControl
                 act.DataBind();
             }
             act.SelectedIndex = 0;
+            amount.Value = (double)so.Amount;
         }
         else
         {
