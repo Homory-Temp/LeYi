@@ -348,6 +348,8 @@
           <Property Name="ConsumeMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="OutAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="OutMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="RedoAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="RedoMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="EndAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="EndMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
@@ -3313,6 +3315,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="EndAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="EndMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <NavigationProperty Name="StoreObject" Relationship="StoreModel.FK_StoreStatistics_StoreObject" FromRole="StoreStatistics" ToRole="StoreObject" />
+          <Property Name="RedoAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="RedoMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
         </EntityType>
         <Association Name="FK_StoreStatistics_StoreObject">
           <End Type="StoreModel.StoreObject" Role="StoreObject" Multiplicity="1" />
@@ -3952,6 +3956,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySetMapping Name="StoreStatistics">
             <EntityTypeMapping TypeName="StoreModel.StoreStatistics">
               <MappingFragment StoreEntitySet="StoreStatistics">
+                <ScalarProperty Name="RedoMoney" ColumnName="RedoMoney" />
+                <ScalarProperty Name="RedoAmount" ColumnName="RedoAmount" />
                 <ScalarProperty Name="EndMoney" ColumnName="EndMoney" />
                 <ScalarProperty Name="EndAmount" ColumnName="EndAmount" />
                 <ScalarProperty Name="OutMoney" ColumnName="OutMoney" />

@@ -142,7 +142,7 @@ public static class BusinessExtensions
             Note = note
         };
         db.StoreFlow.Add(flow);
-        db.ActionRecord(objectId, inTime, amount, money, 0M, 0M, 0M, 0M, 0M, 0M);
+        db.ActionRecord(objectId, inTime, amount, money, 0M, 0M, 0M, 0M, 0M, 0M, 0M, 0M);
         if (obj.Single)
         {
             // To Do
@@ -237,7 +237,7 @@ public static class BusinessExtensions
                     Note = note
                 };
                 db.StoreFlow.Add(flow);
-                db.ActionRecord(objId, consumeTime, 0M, 0M, 0M, 0M, use.Amount.Value, use.Money, 0M, 0M);
+                db.ActionRecord(objId, consumeTime, 0M, 0M, 0M, 0M, use.Amount.Value, use.Money, 0M, 0M, 0M, 0M);
                 db.SaveChanges();
                 return use;
             }
@@ -250,7 +250,7 @@ public static class BusinessExtensions
         return new CachedUse();
     }
 
-    public static void ActionRecord(this StoreEntity db, Guid objectId, DateTime time, decimal @in, decimal inMoney, decimal lend, decimal lendMoney, decimal consume, decimal consumeMoney, decimal @out, decimal outMoney)
+    public static void ActionRecord(this StoreEntity db, Guid objectId, DateTime time, decimal @in, decimal inMoney, decimal lend, decimal lendMoney, decimal consume, decimal consumeMoney, decimal @out, decimal outMoney, decimal redo, decimal redoMoney)
     {
         var year = time.Year;
         var month = time.Month;
@@ -276,6 +276,8 @@ public static class BusinessExtensions
                 LendMoney = 0,
                 OutAmount = 0,
                 OutMoney = 0,
+                RedoAmount = 0,
+                RedoMoney = 0,
                 EndAmount = last == null ? 0 : last.EndAmount,
                 EndMoney = last == null ? 0 : last.EndMoney
             };
@@ -287,8 +289,10 @@ public static class BusinessExtensions
             ss.LendMoney += lendMoney;
             ss.OutAmount += @out;
             ss.OutMoney += outMoney;
-            ss.EndAmount += @in - consume - @out - lend;
-            ss.EndMoney += inMoney - consumeMoney - outMoney - lendMoney;
+            ss.RedoAmount += redo;
+            ss.RedoMoney += redoMoney;
+            ss.EndAmount += @in - consume - @out - lend - redo;
+            ss.EndMoney += inMoney - consumeMoney - outMoney - lendMoney - redoMoney;
             db.StoreStatistics.Add(ss);
         }
         else
@@ -302,15 +306,17 @@ public static class BusinessExtensions
             current.LendMoney += lendMoney;
             current.OutAmount += @out;
             current.OutMoney += outMoney;
-            current.EndAmount += @in - consume - @out - lend;
-            current.EndMoney += inMoney - consumeMoney - outMoney - lendMoney;
+            current.RedoAmount += redo;
+            current.RedoMoney += redoMoney;
+            current.EndAmount += @in - consume - @out - lend - redo;
+            current.EndMoney += inMoney - consumeMoney - outMoney - lendMoney - redoMoney;
         }
         foreach (var current in db.StoreStatistics.Where(o => o.ObjectId == objectId && o.TimeNode > stamp))
         {
-            current.StartAmount += @in - @out - consume - lend;
-            current.StartMoney += inMoney - outMoney - consumeMoney - lendMoney;
-            current.EndAmount += @in - @out - consume - lend;
-            current.EndMoney += inMoney - outMoney - consumeMoney - lendMoney;
+            current.StartAmount += @in - @out - consume - lend - redo;
+            current.StartMoney += inMoney - outMoney - consumeMoney - lendMoney - redoMoney;
+            current.EndAmount += @in - @out - consume - lend - redo;
+            current.EndMoney += inMoney - outMoney - consumeMoney - lendMoney - redoMoney;
         }
     }
 }

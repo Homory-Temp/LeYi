@@ -843,6 +843,8 @@ namespace Models
         public decimal OutMoney { get; set; }
         public decimal EndAmount { get; set; }
         public decimal EndMoney { get; set; }
+        public decimal RedoAmount { get; set; }
+        public decimal RedoMoney { get; set; }
     
         public virtual StoreObject StoreObject { get; set; }
     }
