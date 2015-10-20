@@ -183,6 +183,30 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class Store_LC
+    {
+        public System.Guid CatalogId { get; set; }
+        public string Age { get; set; }
+        public string Type { get; set; }
+        public System.Guid Id { get; set; }
+        public int TimeNode { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public string Name { get; set; }
+        public string Unit { get; set; }
+        public decimal Amount { get; set; }
+        public string Operator { get; set; }
+        public string User { get; set; }
+        public decimal Money { get; set; }
+        public System.Guid UserId { get; set; }
+        public System.Guid OperationUserId { get; set; }
+        public string Note { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Store_ObjectThumb
     {
         public System.Guid ObjectId { get; set; }
@@ -283,30 +307,6 @@ namespace Models
         public string 操作人 { get; set; }
         public System.DateTime OperationTime { get; set; }
         public int State { get; set; }
-    }
-}
-namespace Models
-{
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class Store_Use
-    {
-        public System.Guid CatalogId { get; set; }
-        public string Age { get; set; }
-        public string Type { get; set; }
-        public System.Guid Id { get; set; }
-        public int TimeNode { get; set; }
-        public System.Guid ObjectId { get; set; }
-        public string Name { get; set; }
-        public string Unit { get; set; }
-        public decimal Amount { get; set; }
-        public string Operator { get; set; }
-        public string User { get; set; }
-        public decimal Money { get; set; }
-        public System.Guid UserId { get; set; }
-        public System.Guid OperationUserId { get; set; }
-        public string Note { get; set; }
     }
 }
 namespace Models
@@ -896,15 +896,48 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StoreUsed
+    public partial class StoreUse
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public StoreUse()
+        {
+            this.StoreUseSingle = new HashSet<StoreUseSingle>();
+        }
+    
         public System.Guid Id { get; set; }
+        public System.Guid UserId { get; set; }
         public int TimeNode { get; set; }
         public System.DateTime Time { get; set; }
+        public System.Guid OperationUserId { get; set; }
+        public System.DateTime OperationTime { get; set; }
         public decimal Amount { get; set; }
         public decimal Money { get; set; }
-        public string Content { get; set; }
-        public System.Guid PeopleId { get; set; }
+        public string UsageTarget { get; set; }
+    
+        public virtual User Operator { get; set; }
+        public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StoreUseSingle> StoreUseSingle { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class StoreUseSingle
+    {
+        public System.Guid Id { get; set; }
+        public System.Guid UseId { get; set; }
+        public int Type { get; set; }
+        public System.Guid InId { get; set; }
+        public Nullable<System.Guid> SingleInId { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public string Note { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Money { get; set; }
+    
+        public virtual StoreUse StoreUse { get; set; }
     }
 }
 namespace Models
@@ -936,6 +969,8 @@ namespace Models
             this.StoreRole = new HashSet<StoreRole>();
             this.DepartmentUser = new HashSet<DepartmentUser>();
             this.UserOnline = new HashSet<UserOnline>();
+            this.StoreUse = new HashSet<StoreUse>();
+            this.StoreUse1 = new HashSet<StoreUse>();
         }
     
         public System.Guid Id { get; set; }
@@ -992,6 +1027,10 @@ namespace Models
         public virtual ICollection<DepartmentUser> DepartmentUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserOnline> UserOnline { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StoreUse> StoreUse { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StoreUse> StoreUse1 { get; set; }
     }
 }
 namespace Models

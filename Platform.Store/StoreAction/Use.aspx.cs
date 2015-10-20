@@ -85,14 +85,19 @@ public partial class StoreAction_Use : SingleStorePage
     protected void do_use_ServerClick(object sender, EventArgs e)
     {
         var gid = DoUse();
-        Response.Redirect("~/StoreQuery/UsePrint?StoreId={0}&UseId={1}".Formatted(StoreId, gid));
+        if (gid != Guid.Empty)
+            Response.Redirect("~/StoreQuery/UsePrint?StoreId={0}&UseId={1}".Formatted(StoreId, gid));
     }
 
     protected Guid DoUse()
     {
-        var gid = db.Value.GlobalId();
+        if (people.SelectedValue == null)
+        {
+            Notify(ap, "请选择借领人", "error");
+            return Guid.Empty;
+        }
+        var tn = time.SelectedDate.HasValue ? time.SelectedDate.Value : DateTime.Today;
         var list = new List<CachedUse>();
-        var tn = (time.SelectedDate.HasValue ? time.SelectedDate.Value : DateTime.Today).ToTimeNode();
         for (var i = 0; i < view_obj.Items.Count; i++)
         {
             var c = view_obj.Items[i].FindControl("ObjectUseBody") as Control_ObjectUseBody;
@@ -100,29 +105,10 @@ public partial class StoreAction_Use : SingleStorePage
             decimal amount = use.Amount.HasValue ? use.Amount.Value : 0M;
             if (use.ObjectId.HasValue && amount > 0M && !use.Type.Null())
             {
-                var result = db.Value.ActionConsumeExt(use, people.SelectedValue.GlobalId(), use.Note, tn.ToTime(), CurrentUser, "");
-                if (result.Amount.Value > 0)
-                {
-                    list.Add(result);
-                }
+                list.Add(use);
             }
         }
-        if (list.Count > 0)
-        {
-            var used = new StoreUsed
-            {
-                Id = gid,
-                TimeNode = tn,
-                Time = time.SelectedDate.HasValue ? time.SelectedDate.Value : DateTime.Today,
-                Amount = list.Sum(o => o.Amount.Value),
-                Money = list.Sum(o => o.Money),
-                Content = list.ToJson(),
-                PeopleId = people.SelectedValue.GlobalId()
-            };
-            db.Value.StoreUsed.Add(used);
-            db.Value.SaveChanges();
-        }
-        return gid;
+        return db.Value.ActionUseExt(list, people.SelectedValue.GlobalId(), tn.ToTime(), CurrentUser);
     }
 
     protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)

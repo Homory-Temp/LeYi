@@ -56,11 +56,12 @@ namespace Models
         public virtual DbSet<Store_ObjectThumb> Store_ObjectThumb { get; set; }
         public virtual DbSet<Store_RecordIn> Store_RecordIn { get; set; }
         public virtual DbSet<Department> Department { get; set; }
-        public virtual DbSet<StoreUsed> StoreUsed { get; set; }
         public virtual DbSet<Store_In> Store_In { get; set; }
-        public virtual DbSet<Store_Use> Store_Use { get; set; }
         public virtual DbSet<StoreStatistics> StoreStatistics { get; set; }
         public virtual DbSet<Store_ST> Store_ST { get; set; }
+        public virtual DbSet<StoreUse> StoreUse { get; set; }
+        public virtual DbSet<StoreUseSingle> StoreUseSingle { get; set; }
+        public virtual DbSet<Store_LC> Store_LC { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {
