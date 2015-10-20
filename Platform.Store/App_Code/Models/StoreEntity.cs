@@ -521,6 +521,8 @@ namespace Models
         public decimal Money { get; set; }
         public decimal SourceAmount { get; set; }
         public decimal SourceMoney { get; set; }
+        public decimal OriginalAmount { get; set; }
+        public decimal OriginalMoney { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StoreConsumeSingle> StoreConsumeSingle { get; set; }

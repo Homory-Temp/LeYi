@@ -31,15 +31,15 @@
             <div class="row text-center">
                 <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource">
                     <ItemTemplate>
-                        <div class="col-md-2 text-center" style="cursor: pointer; margin-top: 50px;">
-                            <div class="row" onclick="top.location.href = '<%# Eval("Url") %>';">
+                        <div class="col-md-3 text-center" style="cursor: pointer; margin-top: 50px;">
+                            <div class="row" style="display: none;" onclick="top.location.href = '<%# Eval("Url") %>';">
                                 <div class="col-md-12">
                                     <img src="../Content/Images/Store.png" />
                                 </div>
                             </div>
                             <div class="row" onclick="top.location.href = '<%# Eval("Url") %>';">
                                 <div class="col-md-12">
-                                    <div class='btn btn-lg <%# Eval("Class") %>'><%# Eval("Name") %></div>
+                                    <div class='btn btn-lg btn-rounded-lg <%# Eval("Class") %>'><%# Eval("Name") %></div>
                                 </div>
                             </div>
                         </div>

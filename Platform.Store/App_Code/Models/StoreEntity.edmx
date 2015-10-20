@@ -176,6 +176,8 @@
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="SourceAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="SourceMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OriginalAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OriginalMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
         <EntityType Name="StoreInSingle">
           <Key>
@@ -1887,6 +1889,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <NavigationProperty Name="StoreLendSingle" Relationship="StoreModel.FK_StoreLendSingle_StoreIn" FromRole="StoreIn" ToRole="StoreLendSingle" />
           <Property Name="SourceAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="SourceMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OriginalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OriginalMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
         </EntityType>
         <EntityType Name="StoreInSingle">
           <Key>
@@ -3483,6 +3487,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySetMapping Name="StoreIn">
             <EntityTypeMapping TypeName="StoreModel.StoreIn">
               <MappingFragment StoreEntitySet="StoreIn">
+                <ScalarProperty Name="OriginalMoney" ColumnName="OriginalMoney" />
+                <ScalarProperty Name="OriginalAmount" ColumnName="OriginalAmount" />
                 <ScalarProperty Name="SourceMoney" ColumnName="SourceMoney" />
                 <ScalarProperty Name="SourceAmount" ColumnName="SourceAmount" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

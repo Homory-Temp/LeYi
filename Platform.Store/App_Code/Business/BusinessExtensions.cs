@@ -103,11 +103,13 @@ public static class BusinessExtensions
             Code = code,
             Amount = amount,
             SourceAmount = amount,
+            OriginalAmount = amount,
             PerPrice = decimal.Divide(totalPrice, amount),
             SourcePerPrice = sourcePerPrice,
             Fee = fee,
             Money = totalPrice + fee,
-            SourceMoney = totalPrice + fee
+            SourceMoney = totalPrice + fee,
+            OriginalMoney = totalPrice + fee
         };
         db.StoreIn.Add(@in);
         var obj = db.StoreObject.Single(o => o.Id == objectId);
