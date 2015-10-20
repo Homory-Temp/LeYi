@@ -74,6 +74,8 @@
                                     <telerik:GridBoundColumn DataField="IM" HeaderText="入库金额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="U" HeaderText="出库数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="UM" HeaderText="出库金额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="R" HeaderText="退换数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="RM" HeaderText="退换金额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="O" HeaderText="报废数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="OM" HeaderText="报废金额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="E" HeaderText="期末数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>

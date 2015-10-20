@@ -18,6 +18,8 @@ public class InMemoryST
     public decimal UM { get; set; }
     public decimal O { get; set; }
     public decimal OM { get; set; }
+    public decimal R { get; set; }
+    public decimal RM { get; set; }
     public decimal E { get; set; }
     public decimal EM { get; set; }
 }

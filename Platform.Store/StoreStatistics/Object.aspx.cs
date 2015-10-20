@@ -80,6 +80,8 @@ public partial class StoreStatistics_Object : SingleStorePage
             obj.IM = g.Sum(o => o.InMoney);
             obj.U = g.Sum(o => o.LendAmount + o.ConsumeAmount);
             obj.UM = g.Sum(o => o.LendMoney + o.ConsumeMoney);
+            obj.R = g.Sum(o => o.RedoAmount);
+            obj.RM = g.Sum(o => o.RedoMoney);
             obj.O = g.Sum(o => o.OutAmount);
             obj.OM = g.Sum(o => o.OutMoney);
             obj.E = g.Last().EndAmount;

@@ -581,6 +581,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_ST' does not have a primary 
             <PropertyRef Name="ConsumeMoney" />
             <PropertyRef Name="OutAmount" />
             <PropertyRef Name="OutMoney" />
+            <PropertyRef Name="RedoAmount" />
+            <PropertyRef Name="RedoMoney" />
             <PropertyRef Name="EndAmount" />
             <PropertyRef Name="EndMoney" />
           </Key>
@@ -604,6 +606,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_ST' does not have a primary 
           <Property Name="ConsumeMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="OutAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="OutMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="RedoAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="RedoMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="EndAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="EndMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
@@ -1462,6 +1466,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
     [Store_ST].[ConsumeMoney] AS [ConsumeMoney], 
     [Store_ST].[OutAmount] AS [OutAmount], 
     [Store_ST].[OutMoney] AS [OutMoney], 
+    [Store_ST].[RedoAmount] AS [RedoAmount], 
+    [Store_ST].[RedoMoney] AS [RedoMoney], 
     [Store_ST].[EndAmount] AS [EndAmount], 
     [Store_ST].[EndMoney] AS [EndMoney]
     FROM [dbo].[Store_ST] AS [Store_ST]</DefiningQuery>
@@ -3353,6 +3359,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <PropertyRef Name="OutMoney" />
             <PropertyRef Name="EndAmount" />
             <PropertyRef Name="EndMoney" />
+            <PropertyRef Name="RedoAmount" />
+            <PropertyRef Name="RedoMoney" />
           </Key>
           <Property Name="Consumable" Type="Boolean" Nullable="false" />
           <Property Name="Single" Type="Boolean" Nullable="false" />
@@ -3376,6 +3384,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="OutMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="EndAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="EndMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="RedoAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="RedoMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3981,6 +3991,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySetMapping Name="Store_ST">
             <EntityTypeMapping TypeName="StoreModel.Store_ST">
               <MappingFragment StoreEntitySet="Store_ST">
+                <ScalarProperty Name="RedoMoney" ColumnName="RedoMoney" />
+                <ScalarProperty Name="RedoAmount" ColumnName="RedoAmount" />
                 <ScalarProperty Name="EndMoney" ColumnName="EndMoney" />
                 <ScalarProperty Name="EndAmount" ColumnName="EndAmount" />
                 <ScalarProperty Name="OutMoney" ColumnName="OutMoney" />
