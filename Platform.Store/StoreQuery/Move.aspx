@@ -1,12 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Object.aspx.cs" Inherits="StoreQuery_Object" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Move.aspx.cs" Inherits="StoreQuery_Move" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
-<%@ Register Src="~/Control/TargetHeader.ascx" TagPrefix="homory" TagName="TargetHeader" %>
-<%@ Register Src="~/Control/TargetBody.ascx" TagPrefix="homory" TagName="TargetBody" %>
-<%@ Register Src="~/Control/ObjectInHeader.ascx" TagPrefix="homory" TagName="ObjectInHeader" %>
-<%@ Register Src="~/Control/ObjectInBody.ascx" TagPrefix="homory" TagName="ObjectInBody" %>
-<%@ Register Src="~/Control/RecordInHeader.ascx" TagPrefix="homory" TagName="RecordInHeader" %>
-<%@ Register Src="~/Control/RecordInBody.ascx" TagPrefix="homory" TagName="RecordInBody" %>
 
 <!DOCTYPE html>
 
@@ -32,7 +26,7 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 物资查询" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 分库查询" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
         </telerik:RadAjaxPanel>
     </form>

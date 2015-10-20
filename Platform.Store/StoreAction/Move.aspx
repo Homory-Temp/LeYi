@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Code.aspx.cs" Inherits="StoreScan_Code" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Move.aspx.cs" Inherits="StoreAction_Move" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
 
@@ -26,7 +26,7 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资条码 - 条码打印" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资管理 - 资产分库" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
         </telerik:RadAjaxPanel>
     </form>
