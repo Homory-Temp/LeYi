@@ -54,7 +54,20 @@
                                 <DatePopupButton runat="server" Visible="false" />
                             </telerik:RadMonthYearPicker>
                             &nbsp;&nbsp;&nbsp;&nbsp;
+                    <telerik:RadComboBox ID="useType" runat="server" AutoPostBack="false" Width="120" AppendDataBoundItems="false" DataTextField="Name" DataValueField="Id">
+                        <Items>
+                            <telerik:RadComboBoxItem Text="出库类型" Value="*" Selected="true" />
+                            <telerik:RadComboBoxItem Text="借用" Value="1" />
+                            <telerik:RadComboBoxItem Text="领用" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <telerik:RadTextBox ID="name" runat="server" Width="120" EmptyMessage="物资名称"></telerik:RadTextBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                     <telerik:RadComboBox ID="age" runat="server" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Id">
+                    </telerik:RadComboBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                    <telerik:RadComboBox ID="peopleX" runat="server" AutoPostBack="false" Width="120" DataTextField="RealName" DataValueField="Id" AppendDataBoundItems="true">
                     </telerik:RadComboBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                     <telerik:RadComboBox ID="people" runat="server" AutoPostBack="false" Width="120" DataTextField="RealName" DataValueField="Id" AppendDataBoundItems="true">

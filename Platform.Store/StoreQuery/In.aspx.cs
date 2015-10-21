@@ -16,7 +16,7 @@ public partial class StoreQuery_In : SingleStorePage
             period.SelectedDate = DateTime.Today;
             people.Items.Clear();
             people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "0", Selected = true });
-            people.DataSource = db.Value.Store_Target.Where(o => o.State < 2 && o.StoreId == StoreId).Select(o => o.OperationUserId).ToList().Join(db.Value.User, o => o, o => o.Id, (o, u) => u).Distinct().ToList();
+            people.DataSource = db.Value.User.Where(o => o.State < 2 && o.Type == 1).ToList();
             people.DataBind();
             tree.DataSource = db.Value.StoreCatalog.Where(o => o.StoreId == StoreId && o.State < 2).OrderBy(o => o.Ordinal).ToList();
             tree.DataBind();

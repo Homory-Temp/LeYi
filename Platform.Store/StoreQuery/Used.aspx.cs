@@ -16,8 +16,12 @@ public partial class StoreQuery_Used : SingleStorePage
             period.SelectedDate = DateTime.Today;
             people.Items.Clear();
             people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "0", Selected = true });
-            people.DataSource = db.Value.Store_Target.Where(o => o.State < 2 && o.StoreId == StoreId).Select(o => o.OperationUserId).ToList().Join(db.Value.User, o => o, o => o.Id, (o, u) => u).Distinct().ToList();
+            people.DataSource = db.Value.User.Where(o => o.State < 2 && o.Type == 1).ToList();
             people.DataBind();
+            peopleX.Items.Clear();
+            peopleX.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "借领人", Value = "0", Selected = true });
+            peopleX.DataSource = db.Value.User.Where(o => o.State < 2 && o.Type == 1).ToList();
+            peopleX.DataBind();
             tree.DataSource = db.Value.StoreCatalog.Where(o => o.StoreId == StoreId && o.State < 2).OrderBy(o => o.Ordinal).ToList();
             tree.DataBind();
             tree.CheckAllNodes();
@@ -56,15 +60,39 @@ public partial class StoreQuery_Used : SingleStorePage
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
+        var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
+        var start = (new DateTime(time.Year, time.Month, 1).AddDays(-1)).ToTimeNode();
+        var end = (new DateTime(time.Year, time.Month, 1).AddMonths(1)).ToTimeNode();
         var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => o.Value.GlobalId()).ToList();
-        var source = catalogs.Join(db.Value.Store_LC, o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.TimeNode).ThenBy(o => o.User).ToList();
+        var source = catalogs.Join(db.Value.Store_LC.Where(o => o.TimeNode > start && o.TimeNode < end), o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.TimeNode).ThenBy(o => o.User).ToList();
+        if (useType.SelectedIndex > 0)
+        {
+            var x = useType.SelectedItem.Text;
+            source = source.Where(o => o.Type == x).ToList();
+        }
+        if (!name.Text.Trim().Null())
+        {
+            source = source.Where(o => o.Name.Equals(name.Text.Trim(), StringComparison.InvariantCultureIgnoreCase)).ToList();
+        }
+        if (!age.Text.Trim().Null() && age.SelectedIndex > 0)
+        {
+            source = source.Where(o => o.Age.Equals(age.Text.Trim(), StringComparison.InvariantCultureIgnoreCase)).ToList();
+        }
+        if (!peopleX.Text.Trim().Null() && peopleX.SelectedIndex > 0)
+        {
+            source = source.Where(o => o.User.Equals(peopleX.Text.Trim(), StringComparison.InvariantCultureIgnoreCase)).ToList();
+        }
+        if (!people.Text.Trim().Null() && people.SelectedIndex > 0)
+        {
+            source = source.Where(o => o.Operator.Equals(people.Text.Trim(), StringComparison.InvariantCultureIgnoreCase)).ToList();
+        }
         view.DataSource = source;
         pager.Visible = source.Count > pager.PageSize;
     }
 
     protected void edit_ServerClick(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/StoreAction/UseSingleEdit?StoreId={0}&LCId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"]));
     }
 
     protected void tree_NodeCheck(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
@@ -79,6 +107,6 @@ public partial class StoreQuery_Used : SingleStorePage
 
     protected void query_ServerClick(object sender, EventArgs e)
     {
-
+        view.Rebind();
     }
 }
