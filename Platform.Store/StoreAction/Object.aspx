@@ -109,13 +109,13 @@
                                         <div class="col-md-3">
                                             <div class="row" style="margin: 30px; border: solid 1px silver;">
                                                 <div class="col-md-12" style="width: 100%; height: 100%;">
-                                                    <div style="height: 160px;">
-                                                        <img class="img-responsive" src='<%# Eval("Image").Null() ? "../Content/Images/Transparent.png" : Eval("Image").ToString().Split(new char[] { '*' })[0] %>' />
+                                                    <div style="height: 160px; text-align: center; cursor: pointer;">
+                                                        <img class="img-responsive" style="height: 158px; margin: auto;" src='<%# Eval("Image").Null() ? "../Content/Images/Transparent.png" : Eval("Image").ToString().Split(new char[] { '*' })[0] %>' />
                                                     </div>
                                                     <div style="height: 145px;">
                                                         <table style="margin: auto; width: 90%;">
                                                             <tr style="line-height: 28px; height: 28px; text-align: center;">
-                                                                <td style="line-height: 55px; height: 55px; text-align: center;">
+                                                                <td style="line-height: 55px; height: 55px; text-align: center; cursor: pointer;">
                                                                     <span class="btn btn-danger"><%# Eval("Name") %></span>
                                                                 </td>
                                                             </tr>

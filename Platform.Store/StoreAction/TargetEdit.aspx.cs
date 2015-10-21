@@ -65,6 +65,7 @@ public partial class StoreAction_TargetEdit : SingleStorePage
             {
                 keep.SelectedIndex = keep.Items.FindItemIndexByValue(target.KeepUserId.Value.ToString());
             }
+            @in.Visible = !target.In;
             ap.ResponseScripts.Add("t_day = '{0}'; t_source = '', t_usage = '{1}'; genNumber();".Formatted(target.Time.ToString("yyyyMMdd"), sx));
         }
     }

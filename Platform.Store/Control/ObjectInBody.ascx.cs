@@ -70,7 +70,7 @@ public partial class Control_ObjectInBody : SingleStoreControl
         var result = new CachedIn();
         result.TargetId = targetId;
         result.CatalogId = catalog.SelectedValue == null ? (Guid?)null : catalog.SelectedValue.GlobalId();
-        result.ObjectId = obj.SelectedValue == null ? (Guid?)null : obj.SelectedValue.GlobalId();
+        result.ObjectId = obj.SelectedValue == null || obj.Text.Null() ? (Guid?)null : obj.SelectedValue.GlobalId();
         result.TimeNode = time.SelectedDate.HasValue ? time.SelectedDate.Value.ToTimeNode() : db.Value.StoreTarget.Single(o => o.Id == targetId).TimeNode;
         result.Amount = amount.Value.HasValue ? (decimal)amount.Value.Value : (decimal?)null;
         result.SourcePerPrice = perPrice.Value.HasValue ? (decimal)perPrice.Value.Value : (decimal?)null;
@@ -94,6 +94,8 @@ public partial class Control_ObjectInBody : SingleStoreControl
         AddChildren(list, catalog);
         obj.DataSource = list.Join(db.Value.StoreObject, o => o, o => o.CatalogId, (a, b) => b).OrderBy(o => o.Ordinal).ToList();
         obj.DataBind();
+        obj.ClearSelection();
+        obj.Text = string.Empty;
     }
 
     protected void AddChildren(List<Guid> list, StoreCatalog catalog)
@@ -107,19 +109,13 @@ public partial class Control_ObjectInBody : SingleStoreControl
 
     protected void obj_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
-        if (obj.SelectedValue != null)
+        if (obj.SelectedValue != null && !obj.Text.Null())
         {
             var id = obj.SelectedValue.GlobalId();
             var so = db.Value.StoreObject.Single(o => o.Id == id);
             unit.Text = so.Unit;
             specification.Text = so.Specification;
             stored.Text = so.Amount.ToAmount();
-        }
-        else
-        {
-            unit.Text = "";
-            specification.Text = "";
-            stored.Text = "";
         }
     }
 }
