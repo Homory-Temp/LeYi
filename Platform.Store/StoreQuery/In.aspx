@@ -65,7 +65,7 @@
                                 <tr>
                                     <homory:InBody runat="server" ID="InBody" />
                                     <td>
-                                        <input type="button" class="btn btn-tumblr" value="编辑" id="edit" runat="server" match='<%# Eval("InId") %>' onserverclick="edit_ServerClick" />
+                                        <input type="button" class="btn btn-tumblr" value="编辑" id="edit" runat="server" match='<%# Eval("InId") %>' visible='<%# RightAdvanced %>' onserverclick="edit_ServerClick" />
                                     </td>
                                 </tr>
                             </ItemTemplate>

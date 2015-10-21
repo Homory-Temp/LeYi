@@ -34,4 +34,73 @@ public class SingleStorePage : StorePage
             return s;
         }
     }
+
+    private string r = null;
+
+    protected string CurrentRight
+    {
+        get
+        {
+            if (r == null)
+            {
+                var sid = CurrentStore.Id;
+                if (db.Value.Store_Visitor.Count(o => o.Id == CurrentUser && StoreId == CurrentStore.Id) == 0)
+                    r = "";
+                else
+                {
+                    r = db.Value.Store_Visitor.Where(o => o.Id == CurrentUser && StoreId == CurrentStore.Id).Select(o => o.Right).ToList().Aggregate("", (a, b) => a += b, o => o);
+                    r = r.ToList().Aggregate("", (a, b) => a += b, o => o);
+                }
+            }
+            return r;
+        }
+    }
+
+    protected bool RightIn
+    {
+        get
+        {
+            return CurrentRight.Contains("1") || CurrentRight.Contains("*");
+        }
+    }
+
+    protected bool RightUse
+    {
+        get
+        {
+            return CurrentRight.Contains("2") || CurrentRight.Contains("*");
+        }
+    }
+
+    protected bool RightReturn
+    {
+        get
+        {
+            return CurrentRight.Contains("3") || CurrentRight.Contains("*");
+        }
+    }
+
+    protected bool RightAdvanced
+    {
+        get
+        {
+            return CurrentRight.Contains("4") || CurrentRight.Contains("*");
+        }
+    }
+
+    protected bool RightReport
+    {
+        get
+        {
+            return CurrentRight.Contains("5") || CurrentRight.Contains("*");
+        }
+    }
+
+    protected bool RightSetting
+    {
+        get
+        {
+            return CurrentRight.Contains("6") || CurrentRight.Contains("*");
+        }
+    }
 }

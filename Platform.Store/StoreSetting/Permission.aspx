@@ -63,11 +63,11 @@
                             &nbsp;&nbsp;
                             <telerik:RadButton ID="r1" runat="server" Text="入库" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox" Value="1"></telerik:RadButton>
                             &nbsp;&nbsp;
-                            <telerik:RadButton ID="r2" runat="server" Text="借领" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox" Value="2"></telerik:RadButton>
+                            <telerik:RadButton ID="r2" runat="server" Text="出库" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox" Value="2"></telerik:RadButton>
                             &nbsp;&nbsp;
                             <telerik:RadButton ID="r3" runat="server" Text="归还" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox" Value="3"></telerik:RadButton>
                             &nbsp;&nbsp;
-                            <telerik:RadButton ID="r4" runat="server" Text="编辑" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox" Value="4"></telerik:RadButton>
+                            <telerik:RadButton ID="r4" runat="server" Text="高级" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox" Value="4"></telerik:RadButton>
                             &nbsp;&nbsp;
                             <telerik:RadButton ID="r5" runat="server" Text="报表" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox" Value="5"></telerik:RadButton>
                             &nbsp;&nbsp;
