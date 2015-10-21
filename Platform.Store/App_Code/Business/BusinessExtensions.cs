@@ -226,7 +226,7 @@ public static class BusinessExtensions
         db.SaveChanges();
     }
 
-    public static Guid ActionUseExt(this StoreEntity db, List<CachedUse> list, Guid userId, DateTime time, Guid operatorId, string code = "")
+    public static Guid ActionUseExt(this StoreEntity db, List<CachedUse> list, Guid userId, DateTime time, Guid operatorId, Guid storeId, string code = "")
     {
         if (list.Count == 0)
         {
@@ -242,6 +242,7 @@ public static class BusinessExtensions
             OperationUserId = operatorId,
             OperationTime = DateTime.Now,
             UsageTarget = list.First().UserTarget,
+            StoreId = storeId,
             Money = 0
         };
         db.StoreUse.Add(su);

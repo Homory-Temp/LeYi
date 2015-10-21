@@ -381,6 +381,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StoreId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TimeNode" Type="int" Nullable="false" />
           <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
@@ -711,6 +712,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Use' does not have a primary
         <EntityType Name="Store_Use">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="StoreId" />
             <PropertyRef Name="UserId" />
             <PropertyRef Name="TimeNode" />
             <PropertyRef Name="Time" />
@@ -720,6 +722,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Use' does not have a primary
             <PropertyRef Name="Money" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StoreId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TimeNode" Type="int" Nullable="false" />
           <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
@@ -1597,6 +1600,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySet Name="Store_Use" EntityType="Self.Store_Use" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Store_Use].[Id] AS [Id], 
+    [Store_Use].[StoreId] AS [StoreId], 
     [Store_Use].[UserId] AS [UserId], 
     [Store_Use].[TimeNode] AS [TimeNode], 
     [Store_Use].[Time] AS [Time], 
@@ -3479,6 +3483,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <NavigationProperty Name="User" Relationship="StoreModel.FK_StoreUse_StoreUse" FromRole="StoreUse" ToRole="User" />
           <Property Name="UsageTarget" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="StoreUseSingle" Relationship="StoreModel.FK_StoreUseSingle_StoreUse" FromRole="StoreUse" ToRole="StoreUseSingle" />
+          <Property Name="StoreId" Type="Guid" Nullable="false" />
         </EntityType>
         <Association Name="FK_StoreUse_Operator">
           <End Type="StoreModel.User" Role="User" Multiplicity="1" />
@@ -3577,6 +3582,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <PropertyRef Name="OperationTime" />
             <PropertyRef Name="UsageTarget" />
             <PropertyRef Name="Money" />
+            <PropertyRef Name="StoreId" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
@@ -3588,6 +3594,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="User" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="Operator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="StoreId" Type="Guid" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4189,6 +4196,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySetMapping Name="StoreUse">
             <EntityTypeMapping TypeName="StoreModel.StoreUse">
               <MappingFragment StoreEntitySet="StoreUse">
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
                 <ScalarProperty Name="UsageTarget" ColumnName="UsageTarget" />
                 <ScalarProperty Name="Money" ColumnName="Money" />
                 <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
@@ -4241,6 +4249,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySetMapping Name="Store_Use">
             <EntityTypeMapping TypeName="StoreModel.Store_Use">
               <MappingFragment StoreEntitySet="Store_Use">
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
                 <ScalarProperty Name="Operator" ColumnName="Operator" />
                 <ScalarProperty Name="User" ColumnName="User" />
                 <ScalarProperty Name="Money" ColumnName="Money" />

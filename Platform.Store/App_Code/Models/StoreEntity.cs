@@ -326,6 +326,7 @@ namespace Models
         public decimal Money { get; set; }
         public string User { get; set; }
         public string Operator { get; set; }
+        public System.Guid StoreId { get; set; }
     }
 }
 namespace Models
@@ -931,6 +932,7 @@ namespace Models
         public System.DateTime OperationTime { get; set; }
         public decimal Money { get; set; }
         public string UsageTarget { get; set; }
+        public System.Guid StoreId { get; set; }
     
         public virtual User Operator { get; set; }
         public virtual User User { get; set; }

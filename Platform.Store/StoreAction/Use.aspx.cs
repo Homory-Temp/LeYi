@@ -110,7 +110,7 @@ public partial class StoreAction_Use : SingleStorePage
                 list.Add(use);
             }
         }
-        return db.Value.ActionUseExt(list, people.SelectedValue.GlobalId(), tn, CurrentUser);
+        return db.Value.ActionUseExt(list, people.SelectedValue.GlobalId(), tn, CurrentUser, StoreId);
     }
 
     protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
