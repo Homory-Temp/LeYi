@@ -63,6 +63,7 @@ namespace Models
         public virtual DbSet<StoreUseSingle> StoreUseSingle { get; set; }
         public virtual DbSet<Store_LC> Store_LC { get; set; }
         public virtual DbSet<Store_Use> Store_Use { get; set; }
+        public virtual DbSet<Store_UseSingle> Store_UseSingle { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {

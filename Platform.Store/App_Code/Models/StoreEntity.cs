@@ -346,6 +346,31 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class Store_UseSingle
+    {
+        public System.Guid Id { get; set; }
+        public System.Guid UseId { get; set; }
+        public int Type { get; set; }
+        public System.Guid InId { get; set; }
+        public Nullable<System.Guid> SingleInId { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public string Note { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Money { get; set; }
+        public Nullable<System.Guid> SingleConsumeId { get; set; }
+        public Nullable<System.Guid> SingleLendId { get; set; }
+        public string CatalogName { get; set; }
+        public string TypeName { get; set; }
+        public string Name { get; set; }
+        public string Unit { get; set; }
+        public string Specification { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Store_Visitor
     {
         public System.Guid Id { get; set; }
