@@ -185,6 +185,9 @@ namespace Models
     
     public partial class Store_LC
     {
+        public decimal PerPrice { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Money { get; set; }
         public System.Guid CatalogId { get; set; }
         public string Age { get; set; }
         public string Type { get; set; }
@@ -193,10 +196,8 @@ namespace Models
         public System.Guid ObjectId { get; set; }
         public string Name { get; set; }
         public string Unit { get; set; }
-        public decimal Amount { get; set; }
         public string Operator { get; set; }
         public string User { get; set; }
-        public decimal Money { get; set; }
         public System.Guid UserId { get; set; }
         public System.Guid OperationUserId { get; set; }
         public string Note { get; set; }

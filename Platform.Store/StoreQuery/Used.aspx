@@ -49,6 +49,22 @@
                 </div>
                 <div class="col-md-10" style="text-align: left;">
                     <div class="row">
+                        <div class="col-md-12 text-center">
+                            <telerik:RadMonthYearPicker ID="period" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="false">
+                                <DatePopupButton runat="server" Visible="false" />
+                            </telerik:RadMonthYearPicker>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                    <telerik:RadComboBox ID="age" runat="server" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Id">
+                    </telerik:RadComboBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                    <telerik:RadComboBox ID="people" runat="server" AutoPostBack="false" Width="120" DataTextField="RealName" DataValueField="Id" AppendDataBoundItems="true">
+                    </telerik:RadComboBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="button" class="btn btn-tumblr" id="query" runat="server" value="查询" onserverclick="query_ServerClick" />
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
                         <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
                             <LayoutTemplate>
                                 <div class="col-md-12">

@@ -517,6 +517,9 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_In' does not have a primary 
 warning 6002: The table/view 'Platform_LY.dbo.Store_LC' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Store_LC">
           <Key>
+            <PropertyRef Name="PerPrice" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Money" />
             <PropertyRef Name="CatalogId" />
             <PropertyRef Name="Age" />
             <PropertyRef Name="Type" />
@@ -525,14 +528,15 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_LC' does not have a primary 
             <PropertyRef Name="ObjectId" />
             <PropertyRef Name="Name" />
             <PropertyRef Name="Unit" />
-            <PropertyRef Name="Amount" />
             <PropertyRef Name="Operator" />
             <PropertyRef Name="User" />
-            <PropertyRef Name="Money" />
             <PropertyRef Name="UserId" />
             <PropertyRef Name="OperationUserId" />
             <PropertyRef Name="Note" />
           </Key>
+          <Property Name="PerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Type" Type="varchar" MaxLength="4" Nullable="false" />
@@ -541,10 +545,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_LC' does not have a primary 
           <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="Amount" Type="numeric" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Operator" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="User" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="Money" Type="numeric" Precision="18" Scale="6" Nullable="false" />
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
@@ -1527,6 +1529,9 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           </EntitySet>
           <EntitySet Name="Store_LC" EntityType="Self.Store_LC" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [Store_LC].[PerPrice] AS [PerPrice], 
+    [Store_LC].[Amount] AS [Amount], 
+    [Store_LC].[Money] AS [Money], 
     [Store_LC].[CatalogId] AS [CatalogId], 
     [Store_LC].[Age] AS [Age], 
     [Store_LC].[Type] AS [Type], 
@@ -1535,10 +1540,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
     [Store_LC].[ObjectId] AS [ObjectId], 
     [Store_LC].[Name] AS [Name], 
     [Store_LC].[Unit] AS [Unit], 
-    [Store_LC].[Amount] AS [Amount], 
     [Store_LC].[Operator] AS [Operator], 
     [Store_LC].[User] AS [User], 
-    [Store_LC].[Money] AS [Money], 
     [Store_LC].[UserId] AS [UserId], 
     [Store_LC].[OperationUserId] AS [OperationUserId], 
     [Store_LC].[Note] AS [Note]
@@ -3043,9 +3046,9 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <End Role="StoreUse" EntitySet="StoreUse" />
             <End Role="StoreUseSingle" EntitySet="StoreUseSingle" />
           </AssociationSet>
-          <EntitySet Name="Store_LC" EntityType="StoreModel.Store_LC" />
           <EntitySet Name="Store_Use" EntityType="StoreModel.Store_Use" />
           <EntitySet Name="Store_UseSingle" EntityType="StoreModel.Store_UseSingle" />
+          <EntitySet Name="Store_LC" EntityType="StoreModel.Store_LC" />
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -3593,40 +3596,6 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Store_LC">
-          <Key>
-            <PropertyRef Name="CatalogId" />
-            <PropertyRef Name="Age" />
-            <PropertyRef Name="Type" />
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="TimeNode" />
-            <PropertyRef Name="ObjectId" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Unit" />
-            <PropertyRef Name="Amount" />
-            <PropertyRef Name="Operator" />
-            <PropertyRef Name="User" />
-            <PropertyRef Name="Money" />
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="OperationUserId" />
-            <PropertyRef Name="Note" />
-          </Key>
-          <Property Name="CatalogId" Type="Guid" Nullable="false" />
-          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="TimeNode" Type="Int32" Nullable="false" />
-          <Property Name="ObjectId" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="Operator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="User" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
-          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Store_Use">
           <Key>
             <PropertyRef Name="Id" />
@@ -3682,6 +3651,42 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Store_LC">
+          <Key>
+            <PropertyRef Name="PerPrice" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Money" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="TimeNode" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Operator" />
+            <PropertyRef Name="User" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="OperationUserId" />
+            <PropertyRef Name="Note" />
+          </Key>
+          <Property Name="PerPrice" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Operator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="User" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4312,27 +4317,6 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Store_LC">
-            <EntityTypeMapping TypeName="StoreModel.Store_LC">
-              <MappingFragment StoreEntitySet="Store_LC">
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Money" ColumnName="Money" />
-                <ScalarProperty Name="User" ColumnName="User" />
-                <ScalarProperty Name="Operator" ColumnName="Operator" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Store_Use">
             <EntityTypeMapping TypeName="StoreModel.Store_Use">
               <MappingFragment StoreEntitySet="Store_Use">
@@ -4369,6 +4353,28 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="UseId" ColumnName="UseId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_LC">
+            <EntityTypeMapping TypeName="StoreModel.Store_LC">
+              <MappingFragment StoreEntitySet="Store_LC">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
