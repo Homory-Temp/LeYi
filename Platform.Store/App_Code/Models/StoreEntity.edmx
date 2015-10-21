@@ -3160,8 +3160,10 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="StoreName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EnumType Name="FlowType">
-        <Member Name="入库" Value="1" />
-          <Member Name="领用" Value="2" />
+          <Member Name="入库" Value="1" />
+          <Member Name="出库" Value="2" />
+          <Member Name="入库修改" Value="3" />
+          <Member Name="出库修改" Value="4" />
         </EnumType>
         <EntityType Name="Store_RecordIn">
           <Key>

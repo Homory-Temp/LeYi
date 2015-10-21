@@ -150,6 +150,82 @@ public static class BusinessExtensions
         db.SaveChanges();
     }
 
+    public static void ActionInEditExt(this StoreEntity db, StoreIn @in, DateTime day, decimal amount, decimal perPrice, decimal money, string place, string note, Guid operatorId)
+    {
+        var obj = db.StoreObject.Single(o => o.Id == @in.ObjectId);
+        var target = db.StoreTarget.Single(o => o.Id == @in.TargetId);
+        if (obj.Single)
+            return;
+        decimal plusAmount = amount - @in.Amount;
+        decimal plusMoney = money - @in.Money;
+        if (day.Year == @in.Time.Year || day.Month == @in.Time.Month)
+        {
+            db.ActionRecord(obj.Id, day, plusAmount, plusMoney, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
+        else
+        {
+            db.ActionRecord(obj.Id, @in.Time, plusAmount, plusMoney, 0, 0, 0, 0, 0, 0, 0, 0);
+            db.ActionRecord(obj.Id, day, amount, money, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
+        if (amount != @in.OriginalAmount || money != @in.OriginalMoney)
+        {
+            if (amount > 0 && money > 0)
+            {
+                @in.Amount = amount;
+                @in.OriginalAmount = amount;
+                @in.SourceAmount = amount;
+                @in.Money = money;
+                @in.OriginalMoney = money;
+                @in.SourceMoney = money;
+                @in.SourcePerPrice = perPrice;
+                @in.PerPrice = decimal.Divide(money, amount);
+                @in.Place = place;
+                @in.Note = note;
+                @in.Time = day;
+                @in.TimeNode = day.ToTimeNode();
+                obj.Amount += plusAmount;
+                obj.Money += plusMoney;
+                target.Paid += plusMoney;
+                var flow = new StoreFlow
+                {
+                    Id = db.GlobalId(),
+                    ObjectId = obj.Id,
+                    UserId = operatorId,
+                    Type = FlowType.入库修改,
+                    TypeName = FlowType.入库修改.ToString(),
+                    TimeNode = day.ToTimeNode(),
+                    Time = day,
+                    Amount = plusAmount,
+                    Money = plusMoney,
+                    Note = note
+                };
+                db.StoreFlow.Add(flow);
+            }
+            else
+            {
+                db.StoreIn.Remove(@in);
+                obj.Amount += plusAmount;
+                obj.Money += plusMoney;
+                target.Paid += plusMoney;
+                var flow = new StoreFlow
+                {
+                    Id = db.GlobalId(),
+                    ObjectId = obj.Id,
+                    UserId = operatorId,
+                    Type = FlowType.入库修改,
+                    TypeName = FlowType.入库修改.ToString(),
+                    TimeNode = day.ToTimeNode(),
+                    Time = day,
+                    Amount = plusAmount,
+                    Money = plusMoney,
+                    Note = note
+                };
+                db.StoreFlow.Add(flow);
+            }
+        }
+        db.SaveChanges();
+    }
+
     public static Guid ActionUseExt(this StoreEntity db, List<CachedUse> list, Guid userId, DateTime time, Guid operatorId)
     {
         var gid = db.GlobalId();

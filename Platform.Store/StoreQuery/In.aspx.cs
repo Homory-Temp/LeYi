@@ -46,7 +46,7 @@ public partial class StoreQuery_In : SingleStorePage
 
     protected void edit_ServerClick(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/StoreAction/InEdit?StoreId={0}&InId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"]));
     }
 
     protected void tree_NodeCheck(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)

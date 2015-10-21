@@ -1067,7 +1067,9 @@ namespace Models
     public enum FlowType : int
     {
         入库 = 1,
-        领用 = 2
+        出库 = 2,
+        入库修改 = 3,
+        出库修改 = 4
     }
 }
 namespace Models

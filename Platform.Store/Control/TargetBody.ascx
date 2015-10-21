@@ -6,7 +6,7 @@
 <td><%# Eval("采购来源") %></td>
 <td><%# Eval("使用对象") %></td>
 <td><%# Eval("应付金额").ToMoney() %></td>
-<td><%# ((decimal?)Eval("校正金额")).HasValue ? ((decimal?)Eval("校正金额")).Value.ToMoney() : Eval("实付金额").ToMoney() %></td>
+<td><%# Eval("实付金额").ToMoney() %></td>
 <td><%# Eval("保管人") %></td>
 <td><%# Eval("经手人") %></td>
 <td style="cursor: pointer;">
