@@ -85,7 +85,9 @@ public partial class StoreAction_Use : SingleStorePage
     protected void do_use_ServerClick(object sender, EventArgs e)
     {
         var gid = DoUse();
-        if (gid != Guid.Empty)
+        if (gid == Guid.Empty)
+            Response.Redirect("~/StoreQuery/Use?StoreId={0}&UseId={1}".Formatted(StoreId, gid));
+        else
             Response.Redirect("~/StoreQuery/UsePrint?StoreId={0}&UseId={1}".Formatted(StoreId, gid));
     }
 
@@ -108,7 +110,7 @@ public partial class StoreAction_Use : SingleStorePage
                 list.Add(use);
             }
         }
-        return db.Value.ActionUseExt(list, people.SelectedValue.GlobalId(), tn.ToTime(), CurrentUser);
+        return db.Value.ActionUseExt(list, people.SelectedValue.GlobalId(), tn, CurrentUser);
     }
 
     protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)

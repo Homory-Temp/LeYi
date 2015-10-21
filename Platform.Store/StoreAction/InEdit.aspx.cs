@@ -28,7 +28,10 @@ public partial class StoreAction_InEdit : SingleStorePage
     {
         var inId = "InId".Query().GlobalId();
         var @in = db.Value.StoreIn.Single(o => o.Id == inId);
-        db.Value.ActionInEditExt(@in, day.SelectedDate.HasValue ? day.SelectedDate.Value : DateTime.Today, amount.PeekValue(0M), perPrce.PeekValue(0M), money.PeekValue(0M), place.Text.Trim(), note.Text.Trim(), CurrentUser);
+        if (@in.StoreConsumeSingle.Count == 0 && @in.StoreLendSingle.Count == 0 && @in.StoreOutSingle.Count == 0)
+        {
+            db.Value.ActionInEditExt(@in, day.SelectedDate.HasValue ? day.SelectedDate.Value : DateTime.Today, amount.PeekValue(0M), perPrce.PeekValue(0M), money.PeekValue(0M), place.Text.Trim(), note.Text.Trim(), CurrentUser);
+        }
         Response.Redirect("../StoreQuery/In?StoreId={0}".Formatted(StoreId));
     }
 

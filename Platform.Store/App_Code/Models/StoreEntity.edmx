@@ -387,7 +387,6 @@
           <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="UsageTarget" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
         <EntityType Name="StoreUser">
@@ -411,6 +410,8 @@
           <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="SingleConsumeId" Type="uniqueidentifier" />
+          <Property Name="SingleLendId" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -704,6 +705,30 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Target' does not have a prim
           <Property Name="操作人" Type="nvarchar" MaxLength="64" />
           <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.Store_Use' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Store_Use">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="TimeNode" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="OperationUserId" />
+            <PropertyRef Name="OperationTime" />
+            <PropertyRef Name="UsageTarget" />
+            <PropertyRef Name="Money" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TimeNode" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UsageTarget" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="User" Type="nvarchar" MaxLength="64" />
+          <Property Name="Operator" Type="nvarchar" MaxLength="64" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Platform_LY.dbo.Store_User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1568,6 +1593,20 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
     [Store_Target].[OperationTime] AS [OperationTime], 
     [Store_Target].[State] AS [State]
     FROM [dbo].[Store_Target] AS [Store_Target]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Store_Use" EntityType="Self.Store_Use" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Store_Use].[Id] AS [Id], 
+    [Store_Use].[UserId] AS [UserId], 
+    [Store_Use].[TimeNode] AS [TimeNode], 
+    [Store_Use].[Time] AS [Time], 
+    [Store_Use].[OperationUserId] AS [OperationUserId], 
+    [Store_Use].[OperationTime] AS [OperationTime], 
+    [Store_Use].[UsageTarget] AS [UsageTarget], 
+    [Store_Use].[Money] AS [Money], 
+    [Store_Use].[User] AS [User], 
+    [Store_Use].[Operator] AS [Operator]
+    FROM [dbo].[Store_Use] AS [Store_Use]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Store_User" EntityType="Self.Store_User" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2947,6 +2986,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <End Role="StoreUseSingle" EntitySet="StoreUseSingle" />
           </AssociationSet>
           <EntitySet Name="Store_LC" EntityType="StoreModel.Store_LC" />
+          <EntitySet Name="Store_Use" EntityType="StoreModel.Store_Use" />
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -3161,9 +3201,10 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
         </EntityType>
         <EnumType Name="FlowType">
           <Member Name="入库" Value="1" />
-          <Member Name="出库" Value="2" />
+          <Member Name="领用出库" Value="2" />
           <Member Name="入库修改" Value="3" />
           <Member Name="出库修改" Value="4" />
+          <Member Name="借用出库" Value="5" />
         </EnumType>
         <EntityType Name="Store_RecordIn">
           <Key>
@@ -3433,7 +3474,6 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="OperationUserId" Type="Guid" Nullable="false" />
           <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <NavigationProperty Name="Operator" Relationship="StoreModel.FK_StoreUse_Operator" FromRole="StoreUse" ToRole="User" />
           <NavigationProperty Name="User" Relationship="StoreModel.FK_StoreUse_StoreUse" FromRole="StoreUse" ToRole="User" />
@@ -3478,6 +3518,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <NavigationProperty Name="StoreUse" Relationship="StoreModel.FK_StoreUseSingle_StoreUse" FromRole="StoreUseSingle" ToRole="StoreUse" />
+          <Property Name="SingleConsumeId" Type="Guid" />
+          <Property Name="SingleLendId" Type="Guid" />
         </EntityType>
         <Association Name="FK_StoreUseSingle_StoreUse">
           <End Type="StoreModel.StoreUse" Role="StoreUse" Multiplicity="1" />
@@ -3524,6 +3566,28 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="OperationUserId" Type="Guid" Nullable="false" />
           <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Store_Use">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="TimeNode" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="OperationUserId" />
+            <PropertyRef Name="OperationTime" />
+            <PropertyRef Name="UsageTarget" />
+            <PropertyRef Name="Money" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UsageTarget" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="User" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Operator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4127,7 +4191,6 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
               <MappingFragment StoreEntitySet="StoreUse">
                 <ScalarProperty Name="UsageTarget" ColumnName="UsageTarget" />
                 <ScalarProperty Name="Money" ColumnName="Money" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
                 <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
@@ -4140,6 +4203,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySetMapping Name="StoreUseSingle">
             <EntityTypeMapping TypeName="StoreModel.StoreUseSingle">
               <MappingFragment StoreEntitySet="StoreUseSingle">
+                <ScalarProperty Name="SingleLendId" ColumnName="SingleLendId" />
+                <ScalarProperty Name="SingleConsumeId" ColumnName="SingleConsumeId" />
                 <ScalarProperty Name="Money" ColumnName="Money" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
@@ -4170,6 +4235,22 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_Use">
+            <EntityTypeMapping TypeName="StoreModel.Store_Use">
+              <MappingFragment StoreEntitySet="Store_Use">
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="UsageTarget" ColumnName="UsageTarget" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

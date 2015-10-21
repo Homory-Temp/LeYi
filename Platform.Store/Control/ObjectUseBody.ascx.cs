@@ -78,7 +78,7 @@ public partial class Control_ObjectUseBody : SingleStoreControl
         var result = new CachedUse();
         result.UserTarget = use;
         result.CatalogId = catalog.SelectedValue == null ? (Guid?)null : catalog.SelectedValue.GlobalId();
-        result.ObjectId = obj.SelectedValue == null ? (Guid?)null : obj.SelectedValue.GlobalId();
+        result.ObjectId = obj.SelectedValue == null || obj.Text.Null() ? (Guid?)null : obj.SelectedValue.GlobalId();
         result.Amount = amount.Value.HasValue ? (decimal)amount.Value.Value : (decimal?)null;
         result.Note = note.Text;
         result.Type = act.SelectedIndex == -1 ? "" : act.SelectedItem.Text;
@@ -98,6 +98,8 @@ public partial class Control_ObjectUseBody : SingleStoreControl
         AddChildren(list, catalog);
         obj.DataSource = list.Join(db.Value.StoreObject, o => o, o => o.CatalogId, (a, b) => b).OrderBy(o => o.Ordinal).ToList();
         obj.DataBind();
+        obj.ClearSelection();
+        obj.Text = string.Empty;
     }
 
     protected void AddChildren(List<Guid> list, StoreCatalog catalog)
@@ -129,15 +131,7 @@ public partial class Control_ObjectUseBody : SingleStoreControl
                 act.DataBind();
             }
             act.SelectedIndex = 0;
-            amount.Value = (double)so.Amount;
-        }
-        else
-        {
-            unit.Text = "";
-            specification.Text = "";
-            stored.Text = "";
-            act.DataSource = null;
-            act.DataBind();
+            //amount.Value = (double)so.Amount;
         }
     }
 }

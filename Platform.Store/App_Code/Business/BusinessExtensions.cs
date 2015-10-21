@@ -226,143 +226,150 @@ public static class BusinessExtensions
         db.SaveChanges();
     }
 
-    public static Guid ActionUseExt(this StoreEntity db, List<CachedUse> list, Guid userId, DateTime time, Guid operatorId)
+    public static Guid ActionUseExt(this StoreEntity db, List<CachedUse> list, Guid userId, DateTime time, Guid operatorId, string code = "")
     {
+        if (list.Count == 0)
+        {
+            return Guid.Empty;
+        }
         var gid = db.GlobalId();
+        var su = new StoreUse
+        {
+            Id = gid,
+            UserId = userId,
+            Time = time,
+            TimeNode = time.ToTimeNode(),
+            OperationUserId = operatorId,
+            OperationTime = DateTime.Now,
+            UsageTarget = list.First().UserTarget,
+            Money = 0
+        };
+        db.StoreUse.Add(su);
+        db.SaveChanges();
+        foreach (var use in list)
+        {
+            decimal _money = 0;
+            var objId = use.ObjectId.Value;
+            var obj = db.StoreObject.Single(o => o.Id == objId);
+            if (!obj.Single)
+            {
+                if (obj.Amount < use.Amount.Value)
+                    use.Amount = obj.Amount;
+                if (use.Type == "领用")
+                {
+                    var consume = new StoreConsume
+                    {
+                        Id = db.GlobalId(),
+                        ObjectId = use.ObjectId.Value,
+                        ConsumeUserId = userId,
+                        Note = use.Note,
+                        TimeNode = time.ToTimeNode(),
+                        Time = time,
+                        OperationUserId = operatorId,
+                        OperationTime = DateTime.Now,
+                        Code = code,
+                        Amount = use.Amount.Value,
+                        Money = 0
+                    };
+                    db.StoreConsume.Add(consume);
+                    var counter = 0;
+                    var left = consume.Amount;
+                    foreach (var @in in obj.StoreIn.Where(o => o.Amount > 0).OrderBy(o => o.TimeNode))
+                    {
+                        counter++;
+                        if (@in.Amount >= left)
+                        {
+                            var @single = new StoreConsumeSingle();
+                            @single.Id = db.GlobalId();
+                            var us = new StoreUseSingle
+                            {
+                                Id = db.GlobalId(),
+                                UseId = gid,
+                                Type = 0,
+                                InId = @in.Id,
+                                SingleInId = null,
+                                ObjectId = obj.Id,
+                                Note = use.Note,
+                                Amount = left,
+                                Money = (decimal.Divide(@in.Money, @in.Amount)) * left,
+                                SingleConsumeId = @single.Id
+                            };
+                            db.StoreUseSingle.Add(us);
+                            consume.Money += (decimal.Divide(@in.Money, @in.Amount)) * left;
+                            @single.InId = @in.Id;
+                            @single.ConsumeId = consume.Id;
+                            @single.Ordinal = counter;
+                            @single.Amount = left;
+                            @single.PerPrice = @in.PerPrice;
+                            @single.SourcePerPrice = @in.SourcePerPrice;
+                            @single.Fee = (decimal.Divide(@in.Fee, @in.Amount)) * left;
+                            @single.Money = (decimal.Divide(@in.Money, @in.Amount)) * left;
+                            @in.Amount -= left;
+                            if (@in.Amount == 0)
+                                @in.Money = 0;
+                            else
+                                @in.Money -= (decimal.Divide(@in.Money, @in.Amount)) * left;
+                            db.StoreConsumeSingle.Add(@single);
+                            break;
+                        }
+                        else
+                        {
+                            left -= @in.Amount;
+                            var @single = new StoreConsumeSingle();
+                            @single.Id = db.GlobalId();
+                            var us = new StoreUseSingle
+                            {
+                                Id = db.GlobalId(),
+                                UseId = gid,
+                                Type = 0,
+                                InId = @in.Id,
+                                SingleInId = null,
+                                ObjectId = obj.Id,
+                                Note = use.Note,
+                                Amount = @in.Amount,
+                                Money = @in.Money,
+                                SingleConsumeId = @single.Id
+                            };
+                            db.StoreUseSingle.Add(us);
+                            consume.Money += @in.Money;
+                            @single.InId = @in.Id;
+                            @single.ConsumeId = consume.Id;
+                            @single.Ordinal = counter;
+                            @single.Amount = @in.Amount;
+                            @single.PerPrice = @in.PerPrice;
+                            @single.SourcePerPrice = @in.SourcePerPrice;
+                            @single.Fee = @in.Fee;
+                            @single.Money = @in.Money;
+                            @in.Amount = 0;
+                            @in.Money = 0;
+                            db.StoreConsumeSingle.Add(@single);
+                        }
+                    }
+                    _money = consume.Money;
+                    su.Money += consume.Money;
+                    obj.Amount -= use.Amount.Value;
+                    obj.Money -= _money;
+                    var flow = new StoreFlow
+                    {
+                        Id = db.GlobalId(),
+                        ObjectId = objId,
+                        UserId = operatorId,
+                        Type = FlowType.领用出库,
+                        TypeName = FlowType.领用出库.ToString(),
+                        TimeNode = time.ToTimeNode(),
+                        Time = time,
+                        Amount = -use.Amount.Value,
+                        Money = -consume.Money,
+                        Note = use.Note
+                    };
+                    db.StoreFlow.Add(flow);
+                    db.ActionRecord(objId, time, 0M, 0M, 0M, 0M, use.Amount.Value, _money, 0M, 0M, 0M, 0M);
+                    db.SaveChanges();
+                }
+            }
+        }
         return gid;
-        //if (list.Count > 0)
-        //{
-        //    var use = new StoreUse
-        //    {
-        //        Id = db.Value.GlobalId(),
-        //        UserId = people.SelectedValue.GlobalId(),
-        //        TimeNode = tn.ToTimeNode(),
-        //        Time = tn,
-        //        OperationUserId = CurrentUser,
-        //        OperationTime = DateTime.Now,
-        //        UsageTarget = list[0].UserTarget,
-        //        Amount = list.Sum(o => o.Amount.Value),
-        //        Money = list.Sum(o => o.Money)
-        //    };
-        //    db.Value.StoreUse.Add(use);
-        //    foreach (var u in list)
-        //    {
-        //        var us = new StoreUseSingle
-        //        {
-        //            Id = db.Value.GlobalId(),
-        //            UseId = gid,
-        //            Type = u.Type == "领用" ? 0 : 1,
-        //            ObjectId = u.ObjectId.Value,
-        //            Note = u.Note,
-        //            Amount = list.Sum(o => o.Amount.Value),
-        //            Money = list.Sum(o => o.Money)
-        //        };
-        //        db.Value.StoreUseSingle.Add(us);
-        //    }
-        //    db.Value.SaveChanges();
-        //}
     }
-
-    //public static CachedUse ActionConsumeExt(this StoreEntity db, CachedUse use, Guid consumerId, string note, DateTime consumeTime, Guid operatorId, string code)
-    //{
-    //    var objId = use.ObjectId.Value;
-    //    var obj = db.StoreObject.Single(o => o.Id == objId);
-    //    if (!obj.Single)
-    //    {
-    //        var l = new List<Guid>();
-    //        if (obj.Amount < use.Amount.Value)
-    //            use.Amount = obj.Amount;
-    //        if (use.Type == "领用")
-    //        {
-    //            var consume = new StoreConsume
-    //            {
-    //                Id = db.GlobalId(),
-    //                ObjectId = use.ObjectId.Value,
-    //                ConsumeUserId = consumerId,
-    //                Note = use.Note,
-    //                TimeNode = consumeTime.ToTimeNode(),
-    //                Time = consumeTime,
-    //                OperationUserId = operatorId,
-    //                OperationTime = DateTime.Now,
-    //                Code = code,
-    //                Amount = use.Amount.Value,
-    //                Money = 0
-    //            };
-    //            db.StoreConsume.Add(consume);
-    //            var counter = 0;
-    //            var left = consume.Amount;
-    //            foreach (var @in in obj.StoreIn.Where(o => o.Amount > 0).OrderBy(o => o.TimeNode))
-    //            {
-    //                counter++;
-    //                if (@in.Amount >= left)
-    //                {
-    //                    var @single = new StoreConsumeSingle();
-    //                    consume.Money += (decimal.Divide(@in.Money, @in.Amount)) * left;
-    //                    @single.Id = db.GlobalId();
-    //                    @single.InId = @in.Id;
-    //                    @single.ConsumeId = consume.Id;
-    //                    @single.Ordinal = counter;
-    //                    @single.Amount = left;
-    //                    @single.PerPrice = @in.PerPrice;
-    //                    @single.SourcePerPrice = @in.SourcePerPrice;
-    //                    @single.Fee = (decimal.Divide(@in.Fee, @in.Amount)) * left;
-    //                    @single.Money = (decimal.Divide(@in.Money, @in.Amount)) * left;
-    //                    @in.Amount -= left;
-    //                    if (@in.Amount == 0)
-    //                        @in.Money = 0;
-    //                    else
-    //                        @in.Money -= (decimal.Divide(@in.Money, @in.Amount)) * left;
-    //                    db.StoreConsumeSingle.Add(@single);
-    //                    break;
-    //                }
-    //                else
-    //                {
-    //                    left -= @in.Amount;
-    //                    var @single = new StoreConsumeSingle();
-    //                    consume.Money += @in.Money;
-    //                    @single.Id = db.GlobalId();
-    //                    @single.InId = @in.Id;
-    //                    @single.ConsumeId = consume.Id;
-    //                    @single.Ordinal = counter;
-    //                    @single.Amount = @in.Amount;
-    //                    @single.PerPrice = @in.PerPrice;
-    //                    @single.SourcePerPrice = @in.SourcePerPrice;
-    //                    @single.Fee = @in.Fee;
-    //                    @single.Money = @in.Money;
-    //                    @in.Amount = 0;
-    //                    @in.Money = 0;
-    //                    db.StoreConsumeSingle.Add(@single);
-    //                }
-    //            }
-    //            use.Money = consume.Money;
-    //            obj.Amount -= use.Amount.Value;
-    //            obj.Money -= use.Money;
-    //            var flow = new StoreFlow
-    //            {
-    //                Id = db.GlobalId(),
-    //                ObjectId = objId,
-    //                UserId = operatorId,
-    //                Type = FlowType.领用,
-    //                TypeName = FlowType.领用.ToString(),
-    //                TimeNode = consumeTime.ToTimeNode(),
-    //                Time = consumeTime,
-    //                Amount = -use.Amount.Value,
-    //                Money = -consume.Money,
-    //                Note = note
-    //            };
-    //            db.StoreFlow.Add(flow);
-    //            db.ActionRecord(objId, consumeTime, 0M, 0M, 0M, 0M, use.Amount.Value, use.Money, 0M, 0M, 0M, 0M);
-    //            db.SaveChanges();
-    //            return use;
-    //        }
-    //        else
-    //        {
-    //            // To Do
-    //            return new CachedUse();
-    //        }
-    //    }
-    //    return new CachedUse();
-    //}
 
     public static void ActionRecord(this StoreEntity db, Guid objectId, DateTime time, decimal @in, decimal inMoney, decimal lend, decimal lendMoney, decimal consume, decimal consumeMoney, decimal @out, decimal outMoney, decimal redo, decimal redoMoney)
     {

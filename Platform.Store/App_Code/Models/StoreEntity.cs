@@ -314,6 +314,25 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class Store_Use
+    {
+        public System.Guid Id { get; set; }
+        public System.Guid UserId { get; set; }
+        public int TimeNode { get; set; }
+        public System.DateTime Time { get; set; }
+        public System.Guid OperationUserId { get; set; }
+        public System.DateTime OperationTime { get; set; }
+        public string UsageTarget { get; set; }
+        public decimal Money { get; set; }
+        public string User { get; set; }
+        public string Operator { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Store_User
     {
         public System.Guid Id { get; set; }
@@ -910,7 +929,6 @@ namespace Models
         public System.DateTime Time { get; set; }
         public System.Guid OperationUserId { get; set; }
         public System.DateTime OperationTime { get; set; }
-        public decimal Amount { get; set; }
         public decimal Money { get; set; }
         public string UsageTarget { get; set; }
     
@@ -936,6 +954,8 @@ namespace Models
         public string Note { get; set; }
         public decimal Amount { get; set; }
         public decimal Money { get; set; }
+        public Nullable<System.Guid> SingleConsumeId { get; set; }
+        public Nullable<System.Guid> SingleLendId { get; set; }
     
         public virtual StoreUse StoreUse { get; set; }
     }
@@ -1067,9 +1087,10 @@ namespace Models
     public enum FlowType : int
     {
         入库 = 1,
-        出库 = 2,
+        领用出库 = 2,
         入库修改 = 3,
-        出库修改 = 4
+        出库修改 = 4,
+        借用出库 = 5
     }
 }
 namespace Models
