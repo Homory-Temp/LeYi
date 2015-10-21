@@ -40,9 +40,10 @@ public partial class StoreHome_Home : SingleStorePage
     protected void view_query_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         var list = new List<HomeItem>();
-        list.Add(new HomeItem { Name = "购置查询", Url = "../StoreQuery/Target?StoreId={0}".Formatted(StoreId) });
+        list.Add(new HomeItem { Name = "入库单查询", Url = "../StoreQuery/Target?StoreId={0}".Formatted(StoreId) });
         list.Add(new HomeItem { Name = "入库查询", Url = "../StoreQuery/In?StoreId={0}".Formatted(StoreId) });
-        list.Add(new HomeItem { Name = "出库查询", Url = "../StoreQuery/Use?StoreId={0}".Formatted(StoreId) });
+        list.Add(new HomeItem { Name = "出库单查询", Url = "../StoreQuery/Use?StoreId={0}".Formatted(StoreId) });
+        list.Add(new HomeItem { Name = "出库查询", Url = "../StoreQuery/Used?StoreId={0}".Formatted(StoreId) });
         list.Add(new HomeItem { Name = "归还查询", Url = "../StoreQuery/Return?StoreId={0}".Formatted(StoreId) });
         list.Add(new HomeItem { Name = "库存查询", Url = "../StoreQuery/Statistics?StoreId={0}".Formatted(StoreId) });
         if (CurrentStore.State == Models.StoreState.固产)

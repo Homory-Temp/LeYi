@@ -27,9 +27,10 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle navbar-link" data-toggle="dropdown">日常查询</a>
                         <ul class="dropdown-menu">
-                            <li><a href='<%= "../StoreQuery/Target?StoreId={0}".Formatted(StoreId) %>'>购置查询</a></li>
+                            <li><a href='<%= "../StoreQuery/Target?StoreId={0}".Formatted(StoreId) %>'>入库单查询</a></li>
                             <li><a href='<%= "../StoreQuery/In?StoreId={0}".Formatted(StoreId) %>'>入库查询</a></li>
-                            <li><a href='<%= "../StoreQuery/Use?StoreId={0}".Formatted(StoreId) %>'>出库查询</a></li>
+                            <li><a href='<%= "../StoreQuery/Use?StoreId={0}".Formatted(StoreId) %>'>出库单查询</a></li>
+                            <li><a href='<%= "../StoreQuery/Used?StoreId={0}".Formatted(StoreId) %>'>出库查询</a></li>
                             <li><a href='<%= "../StoreQuery/Return?StoreId={0}".Formatted(StoreId) %>'>归还查询</a></li>
                             <li><a href='<%= "../StoreQuery/Statistics?StoreId={0}".Formatted(StoreId) %>'>库存查询</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Import?StoreId={0}".Formatted(StoreId) %>'>导入查询</a></li>

@@ -46,7 +46,7 @@
                                             </div>
                                             <div class="row" onclick="top.location.href = '<%# Eval("Url") %>';">
                                                 <div class="col-md-12">
-                                                    <div class='btn btn-lg btn-danger'><%# Eval("Name") %></div>
+                                                    <div class='btn btn-danger dictionaryX'><%# Eval("Name") %></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -73,7 +73,7 @@
                                             </div>
                                             <div class="row" onclick="top.location.href = '<%# Eval("Url") %>';">
                                                 <div class="col-md-12">
-                                                    <div class='btn btn-lg btn-info'><%# Eval("Name") %></div>
+                                                    <div class='btn btn-info dictionaryX'><%# Eval("Name") %></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -103,7 +103,7 @@
                                             </div>
                                             <div class="row" onclick="top.location.href = '<%# Eval("Url") %>';">
                                                 <div class="col-md-12">
-                                                    <div class='btn btn-lg btn-primary'><%# Eval("Name") %></div>
+                                                    <div class='btn btn-primary dictionaryX'><%# Eval("Name") %></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -130,7 +130,7 @@
                                             </div>
                                             <div class="row" onclick="top.location.href = '<%# Eval("Url") %>';">
                                                 <div class="col-md-12">
-                                                    <div class='btn btn-lg btn-warning'><%# Eval("Name") %></div>
+                                                    <div class='btn btn-warning dictionaryX'><%# Eval("Name") %></div>
                                                 </div>
                                             </div>
                                         </div>

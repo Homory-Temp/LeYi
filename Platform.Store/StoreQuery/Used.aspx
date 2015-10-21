@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Use.aspx.cs" Inherits="StoreQuery_Use" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Used.aspx.cs" Inherits="StoreQuery_Used" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
 <%@ Register Src="~/Control/UseHeader.ascx" TagPrefix="homory" TagName="UseHeader" %>
@@ -28,7 +28,7 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 出库单查询" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 出库查询" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
