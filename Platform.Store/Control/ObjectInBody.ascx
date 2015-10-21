@@ -42,6 +42,9 @@
         <telerik:RadNumericTextBox ID="money" runat="server" Width="80" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true" NumberFormat-AllowRounding="false" ToCalc="calc" ClientEvents-OnValueChanged="calcTotal"></telerik:RadNumericTextBox>
     </td>
     <td>
+        <telerik:RadTextBox ID="age" runat="server" Width="100"></telerik:RadTextBox>
+    </td>
+    <td>
         <telerik:RadTextBox ID="place" runat="server" Width="100"></telerik:RadTextBox>
     </td>
     <td>

@@ -9,6 +9,6 @@
 <td><%# Eval("SourceMoney").ToMoney() %></td>
 <td><%# Eval("Age") %></td>
 <td><%# Eval("Place") %></td>
-<td><%# Eval("Responsible") %></td>
+<td style="display: none;"><%# Eval("Responsible") %></td>
 <td><%# Eval("Operator") %></td>
 <td><%# Eval("Note") %></td>

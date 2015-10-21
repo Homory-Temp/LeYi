@@ -9,6 +9,6 @@
 <th>合计</th>
 <th>年龄段</th>
 <th>存放地</th>
-<th>责任人</th>
+<th style="display: none;">责任人</th>
 <th>操作人</th>
 <th>备注</th>

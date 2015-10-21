@@ -27,11 +27,15 @@ public partial class Control_ObjectInBody : SingleStoreControl
             catalog.DataSource = catalogs;
             catalog.DataBind();
             catalog.EmbeddedTree.Nodes[0].Expanded = true;
+            age.ReadOnly = true;
+            age.Text = target.UsageTarget;
         }
         else
         {
             catalog.DataSource = catalogs;
             catalog.DataBind();
+            age.ReadOnly = false;
+            age.Text = string.Empty;
         }
         amount.Value = (double?)@in.Amount;
         perPrice.Value = (double?)@in.SourcePerPrice;
@@ -61,6 +65,7 @@ public partial class Control_ObjectInBody : SingleStoreControl
                 stored.Text = so.Amount.ToAmount();
                 obj.SelectedIndex = obj.FindItemIndexByValue(@in.ObjectId.ToString());
             }
+            age.Text = @in.Age;
         }
     }
 
@@ -76,6 +81,7 @@ public partial class Control_ObjectInBody : SingleStoreControl
         result.SourcePerPrice = perPrice.Value.HasValue ? (decimal)perPrice.Value.Value : (decimal?)null;
         result.Fee = fee.Value.HasValue ? (decimal)fee.Value.Value : (decimal?)null;
         result.Money = money.Value.HasValue ? (decimal)money.Value.Value : (decimal?)null;
+        result.Age = age.Text;
         result.Place = place.Text;
         result.Note = note.Text;
         return result;

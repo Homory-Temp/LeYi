@@ -12,6 +12,7 @@ public class CachedIn
     public decimal? SourcePerPrice { get; set; }
     public decimal? Fee { get; set; }
     public decimal? Money { get; set; }
+    public string Age { get; set; }
     public string Place { get; set; }
     public string Note { get; set; }
     public int? TimeNode { get; set; }

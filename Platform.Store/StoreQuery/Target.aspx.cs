@@ -48,7 +48,7 @@ public partial class StoreQuery_Target : SingleStorePage
         var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
         var start = (new DateTime(time.Year, time.Month, 1).AddDays(-1)).ToTimeNode();
         var end = (new DateTime(time.Year, time.Month, 1).AddMonths(1)).ToTimeNode();
-        List<Store_Target> list = new List<Store_Target>();
+        var list = new List<Store_Target>();
         switch (combo.SelectedValue)
         {
             case "0":

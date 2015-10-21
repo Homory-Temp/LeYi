@@ -11,6 +11,7 @@
     <th>单价</th>
     <th style="display: none;">优惠价</th>
     <th>合计</th>
+    <th>年龄段</th>
     <th>存放地</th>
     <th>备注</th>
 </tr>
