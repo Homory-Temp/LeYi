@@ -77,7 +77,7 @@
                                             <span style="font-weight: bold;">合计：</span><span><%= total.Value %></span>
                                         </telerik:RadCodeBlock>
                                     </td>
-                                    <td colspan="2" style="text-align: left;">
+                                    <td colspan="3" style="text-align: left;">
                                         <telerik:RadCodeBlock runat="server">
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             <span style="font-weight: bold;">借领人：</span><span><%= people.Value %></span>

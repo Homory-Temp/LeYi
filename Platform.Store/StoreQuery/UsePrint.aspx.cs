@@ -29,10 +29,12 @@ public partial class StoreQuery_UsePrint : SingleStorePage
         public string Unit { get; set; }
         public string Type { get; set; }
         public decimal Amount { get; set; }
+        public decimal PerPrice { get; set; }
         public decimal Money { get; set; }
         public string Specification { get; set; }
         public string Note { get; set; }
         public Guid ObjectId { get; set; }
+        public Guid InId { get; set; }
     }
 
     protected void view_record_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
@@ -42,13 +44,13 @@ public partial class StoreQuery_UsePrint : SingleStorePage
         var list = new List<UseRecord>();
         foreach (var us in db.Value.Store_UseSingle.Where(o=>o.UseId == use.Id).ToList())
         {
-            if (list.Count(o => o.ObjectId == us.ObjectId && o.Type == us.TypeName) == 0)
+            if (list.Count(o => o.ObjectId == us.ObjectId && o.Type == us.TypeName && o.InId == us.InId) == 0)
             {
-                list.Add(new UseRecord { ObjectId = us.ObjectId, Name = us.Name, Catalog = us.CatalogName, Type = us.TypeName, Unit = us.Unit, Specification = us.Specification, Amount = us.Amount, Money = us.Money, Note = us.Note });
+                list.Add(new UseRecord { ObjectId = us.ObjectId, Name = us.Name, Catalog = us.CatalogName, Type = us.TypeName, Unit = us.Unit, Specification = us.Specification, Amount = us.Amount, Money = us.Money, Note = us.Note, InId = us.InId, PerPrice = decimal.Divide(us.Money, us.Amount) });
             }
             else
             {
-                var x = list.First(o => o.ObjectId == us.ObjectId && o.Type == us.TypeName);
+                var x = list.First(o => o.ObjectId == us.ObjectId && o.Type == us.TypeName && o.InId == us.InId);
                 x.Amount += us.Amount;
                 x.Money += us.Money;
             }
