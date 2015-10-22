@@ -20,6 +20,11 @@ public partial class StoreQuery_Statistics : SingleStorePage
             ps.SelectedDate = DateTime.Today;
             pe.SelectedDate = DateTime.Today;
             grid.Rebind();
+            if (CurrentStore.State == StoreState.食品)
+            {
+                grid.Columns[grid.Columns.Count - 4].Visible = false;
+                grid.Columns[grid.Columns.Count - 3].Visible = false;
+            }
         }
     }
 
@@ -88,6 +93,10 @@ public partial class StoreQuery_Statistics : SingleStorePage
             obj.EM = g.Last().EndMoney;
             list.Add(obj);
         }
-        grid.DataSource = list;
+        if (!name.Text.Trim().Null())
+        {
+            list = list.Where(o => o.Name == name.Text.Trim()).ToList();
+        }
+        grid.DataSource = list.OrderBy(o => o.CatalogPath).ThenBy(o => o.Name).ToList();
     }
 }

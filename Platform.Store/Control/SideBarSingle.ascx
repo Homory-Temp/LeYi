@@ -18,7 +18,7 @@
                             <li><a href='<%= "../StoreAction/Target?StoreId={0}".Formatted(StoreId) %>'>购置登记</a></li>
                             <li><a href='<%= "../StoreAction/In?StoreId={0}".Formatted(StoreId) %>'>物资入库</a></li>
                             <li><a href='<%= "../StoreAction/Use?StoreId={0}".Formatted(StoreId) %>'>物资出库</a></li>
-                            <li><a href='<%= "../StoreAction/Return?StoreId={0}".Formatted(StoreId) %>'>物资归还</a></li>
+                            <li style='<%= (CurrentStore.State != Models.StoreState.食品 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreAction/Return?StoreId={0}".Formatted(StoreId) %>'>物资归还</a></li>
                             <li><a href='<%= "../StoreAction/Object?StoreId={0}".Formatted(StoreId) %>'>物资管理</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreAction/Import?StoreId={0}".Formatted(StoreId) %>'>资产导入</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreAction/Move?StoreId={0}".Formatted(StoreId) %>'>资产分库</a></li>
@@ -31,13 +31,13 @@
                             <li><a href='<%= "../StoreQuery/In?StoreId={0}".Formatted(StoreId) %>'>入库查询</a></li>
                             <li><a href='<%= "../StoreQuery/Use?StoreId={0}".Formatted(StoreId) %>'>出库单查询</a></li>
                             <li><a href='<%= "../StoreQuery/Used?StoreId={0}".Formatted(StoreId) %>'>出库查询</a></li>
-                            <li><a href='<%= "../StoreQuery/Return?StoreId={0}".Formatted(StoreId) %>'>归还查询</a></li>
+                            <li style='<%= (CurrentStore.State != Models.StoreState.食品 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Return?StoreId={0}".Formatted(StoreId) %>'>归还查询</a></li>
                             <li><a href='<%= "../StoreQuery/Statistics?StoreId={0}".Formatted(StoreId) %>'>库存查询</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Import?StoreId={0}".Formatted(StoreId) %>'>导入查询</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Move?StoreId={0}".Formatted(StoreId) %>'>分库查询</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown" style='<%= (CurrentStore.State != Models.StoreState.食品 ? "display: block;": "display: none;") %>'>
                         <a class="dropdown-toggle navbar-link" data-toggle="dropdown">物资条码</a>
                         <ul class="dropdown-menu">
                             <li><a href='<%= "../StoreScan/Code?StoreId={0}".Formatted(StoreId) %>'>条码打印</a></li>

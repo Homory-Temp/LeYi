@@ -58,6 +58,8 @@
                                 <DatePopupButton runat="server" Visible="false" />
                             </telerik:RadMonthYearPicker>
                             &nbsp;&nbsp;&nbsp;&nbsp;
+                            <telerik:RadTextBox ID="name" runat="server" Width="120" EmptyMessage="物资名称"></telerik:RadTextBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="button" class="btn btn-tumblr dictionary" id="query" runat="server" value="查询" onserverclick="query_ServerClick" />
                         </div>
                     </div>
@@ -69,7 +71,7 @@
                                     <telerik:GridBoundColumn DataField="CatalogPath" HeaderText="物资类别"></telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Name" HeaderText="物资名称"></telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="S" HeaderText="期初数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="SM" HeaderText="期初余额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="SM" HeaderText="期初金额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="I" HeaderText="入库数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="IM" HeaderText="入库金额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="U" HeaderText="出库数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
@@ -81,6 +83,11 @@
                                     <telerik:GridBoundColumn DataField="E" HeaderText="期末数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="EM" HeaderText="期末金额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
                                 </Columns>
+                                <NoRecordsTemplate>
+                                    <div class="row">
+                                        <div class="col-md-12 text-center"><div class="btn btn-warning">暂无记录</div></div>
+                                    </div>
+                                </NoRecordsTemplate>
                             </MasterTableView>
                         </telerik:RadGrid>
                         </div>
