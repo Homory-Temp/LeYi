@@ -37,7 +37,7 @@
             <div class="row">
                 <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource">
                     <ItemTemplate>
-                        <div class="col-md-4 text-center" style="cursor: pointer;" id="area" runat="server" visible='<%# CanVisit((Guid)Eval("Id")) %>'>
+                        <div class="col-md-4 text-center" id="area" runat="server" style='<%# CanVisit((Guid)Eval("Id")) ? "display: block; cursor: pointer;" : "display: none; cursor: pointer;" %>'>
                             <div class="row" onclick="top.location.href = '../StoreHome/Home?StoreId=<%# Eval("Id") %>';">
                                 <div class="col-md-12">
                                     <img src="../Content/Images/Store.png" />
@@ -45,10 +45,10 @@
                             </div>
                             <div class="row" onclick="top.location.href = '../StoreHome/Home?StoreId=<%# Eval("Id") %>';">
                                 <div class="col-md-12">
-                                    <div class="btn btn-lg btn-info" style="width: 150px;" runat="server" visible='<%# CanVisit((Guid)Eval("Id")) %>'><%# Eval("Name") %></div>
+                                    <div class="btn btn-lg btn-info" style="width: 150px;" runat="server"><%# Eval("Name") %></div>
                                 </div>
                             </div>
-                            <div class="row" visible='<%# CanVisit((Guid)Eval("Id")) %>'>
+                            <div class="row" runat="server">
                                 <div class="col-md-12">
                                     <input type="button" class="btn btn-tumblr" id="edit" runat="server" value="编辑" visible='<%# Right_Create %>' onclick=<%# "top.location.href='../Store/HomeEdit?StoreId={0}'; return false;".Formatted(Eval("Id")) %> />
                                     <input type="button" class="btn btn-tumblr" id="remove" runat="server" value="删除" visible='<%# (Models.StoreState)Eval("State") > Models.StoreState.内置 && Right_Create %>' onclick=<%# "top.location.href='../Store/HomeRemove?StoreId={0}'; return false;".Formatted(Eval("Id")) %> />

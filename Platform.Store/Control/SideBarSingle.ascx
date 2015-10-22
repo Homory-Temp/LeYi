@@ -32,6 +32,7 @@
                             <li><a href='<%= "../StoreQuery/Use?StoreId={0}".Formatted(StoreId) %>'>出库单查询</a></li>
                             <li><a href='<%= "../StoreQuery/Used?StoreId={0}".Formatted(StoreId) %>'>出库查询</a></li>
                             <li style='<%= (CurrentStore.State != Models.StoreState.食品 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Return?StoreId={0}".Formatted(StoreId) %>'>归还查询</a></li>
+                            <li style='<%= (CurrentStore.State == Models.StoreState.食品 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/StatisticsMonthly?StoreId={0}".Formatted(StoreId) %>'>月库存查询</a></li>
                             <li><a href='<%= "../StoreQuery/Statistics?StoreId={0}".Formatted(StoreId) %>'>库存查询</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Import?StoreId={0}".Formatted(StoreId) %>'>导入查询</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Move?StoreId={0}".Formatted(StoreId) %>'>分库查询</a></li>
@@ -51,7 +52,7 @@
                         <ul class="dropdown-menu">
                             <li><a href='<%= "../StoreSetting/Catalog?StoreId={0}".Formatted(StoreId) %>'>物资类别</a></li>
                             <li><a href='<%= "../StoreSetting/Dictionary?StoreId={0}".Formatted(StoreId) %>'>基础数据</a></li>
-                            <li><a href='<%= "../StoreSetting/Permission?StoreId={0}".Formatted(StoreId) %>'>权限设置</a></li>
+                            <li style='<%= (RightAdvanced ? "display: block;": "display: none;") %>'><a href='<%= "../StoreSetting/Permission?StoreId={0}".Formatted(StoreId) %>'>权限设置</a></li>
                         </ul>
                     </li>
                 </ul>

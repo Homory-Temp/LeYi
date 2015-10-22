@@ -94,18 +94,6 @@
                             </div>
                         </div>
                     </div>
-                     <div class="row" id="sp" runat="server">
-                        <div class="col-md-4 text-right">特殊仓库：</div>
-                        <div class="col-md-8 text-left">
-                            <telerik:RadComboBox ID="state" runat="server" Width="400">
-                                <Items>
-                                    <telerik:RadComboBoxItem Text="非特殊仓库" Value="1" Selected="true" />
-                                    <telerik:RadComboBoxItem Text="食品进出库" Value="-1" />
-                                    <telerik:RadComboBoxItem Text="固定资产库" Value="-2" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </div>
-                    </div>
                     <div class="row">&nbsp;</div>
                     <div class="row">
                         <div class="col-md-4 text-right">&nbsp;</div>

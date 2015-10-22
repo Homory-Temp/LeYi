@@ -86,7 +86,7 @@
             </div>
             <div class="row">&nbsp;</div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6" id="scan" runat="server">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="panel-primary">

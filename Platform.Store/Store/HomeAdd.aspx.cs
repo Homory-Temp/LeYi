@@ -13,10 +13,7 @@ public partial class Store_HomeAdd : StorePage
     {
         if (!IsPostBack)
         {
-            foreach (var store in db.Value.Store.Where(o => o.State < StoreState.内置))
-                if (state.Items.FindItemByValue(((int)store.State).ToString()) != null)
-                    state.Items.FindItemByValue(((int)store.State).ToString()).Remove();
-            sp.Visible = state.Items.Count > 1;
+
         }
     }
 
@@ -46,7 +43,7 @@ public partial class Store_HomeAdd : StorePage
             DefaultView = view.PeekValue(1),
             DefaultType = new[] { t1x, t2x, t3x }.PeekValue(1),
             Types = "{0}{1}{2}".Formatted(t1.PeekValue(true), t2.PeekValue(true), t3.PeekValue(true)),
-            State = (StoreState)int.Parse(state.SelectedValue)
+            State = StoreState.启用
         };
         db.Value.Store.Add(store);
         var role = new StoreRole

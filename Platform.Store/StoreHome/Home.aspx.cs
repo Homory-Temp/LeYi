@@ -11,7 +11,7 @@ public partial class StoreHome_Home : SingleStorePage
     {
         if (!IsPostBack)
         {
-
+            scan.Visible = CurrentStore.State != Models.StoreState.食品;
         }
     }
 
@@ -27,7 +27,10 @@ public partial class StoreHome_Home : SingleStorePage
         list.Add(new HomeItem { Name = "购置登记", Url = "../StoreAction/Target?StoreId={0}".Formatted(StoreId) });
         list.Add(new HomeItem { Name = "物资入库", Url = "../StoreAction/In?StoreId={0}".Formatted(StoreId) });
         list.Add(new HomeItem { Name = "物资出库", Url = "../StoreAction/Use?StoreId={0}".Formatted(StoreId) });
-        list.Add(new HomeItem { Name = "物资归还", Url = "../StoreAction/Return?StoreId={0}".Formatted(StoreId) });
+        if (CurrentStore.State != Models.StoreState.食品)
+        {
+            list.Add(new HomeItem { Name = "物资归还", Url = "../StoreAction/Return?StoreId={0}".Formatted(StoreId) });
+        }
         list.Add(new HomeItem { Name = "物资管理", Url = "../StoreAction/Object?StoreId={0}".Formatted(StoreId) });
         if (CurrentStore.State == Models.StoreState.固产)
         {
@@ -44,7 +47,14 @@ public partial class StoreHome_Home : SingleStorePage
         list.Add(new HomeItem { Name = "入库查询", Url = "../StoreQuery/In?StoreId={0}".Formatted(StoreId) });
         list.Add(new HomeItem { Name = "出库单查询", Url = "../StoreQuery/Use?StoreId={0}".Formatted(StoreId) });
         list.Add(new HomeItem { Name = "出库查询", Url = "../StoreQuery/Used?StoreId={0}".Formatted(StoreId) });
-        list.Add(new HomeItem { Name = "归还查询", Url = "../StoreQuery/Return?StoreId={0}".Formatted(StoreId) });
+        if (CurrentStore.State != Models.StoreState.食品)
+        {
+            list.Add(new HomeItem { Name = "归还查询", Url = "../StoreQuery/Return?StoreId={0}".Formatted(StoreId) });
+        }
+        else
+        {
+            list.Add(new HomeItem { Name = "月库存查询", Url = "../StoreQuery/StatisticsMonthly?StoreId={0}".Formatted(StoreId) });
+        }
         list.Add(new HomeItem { Name = "库存查询", Url = "../StoreQuery/Statistics?StoreId={0}".Formatted(StoreId) });
         if (CurrentStore.State == Models.StoreState.固产)
         {
@@ -69,7 +79,10 @@ public partial class StoreHome_Home : SingleStorePage
         var list = new List<HomeItem>();
         list.Add(new HomeItem { Name = "物资类别", Url = "../StoreSetting/Catalog?StoreId={0}".Formatted(StoreId) });
         list.Add(new HomeItem { Name = "基础数据", Url = "../StoreSetting/Dictionary?StoreId={0}".Formatted(StoreId) });
-        list.Add(new HomeItem { Name = "权限设置", Url = "../StoreSetting/Permission?StoreId={0}".Formatted(StoreId) });
+        if (RightAdvanced)
+        {
+            list.Add(new HomeItem { Name = "权限设置", Url = "../StoreSetting/Permission?StoreId={0}".Formatted(StoreId) });
+        }
         view_setting.DataSource = list;
     }
 }
