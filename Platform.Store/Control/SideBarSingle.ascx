@@ -27,7 +27,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle navbar-link" data-toggle="dropdown">日常查询</a>
                         <ul class="dropdown-menu">
-                            <li><a href='<%= "../StoreQuery/Target?StoreId={0}".Formatted(StoreId) %>'>入库单查询</a></li>
+                            <li><a href='<%= "../StoreQuery/Target?StoreId={0}".Formatted(StoreId) %>'>购置单查询</a></li>
                             <li><a href='<%= "../StoreQuery/In?StoreId={0}".Formatted(StoreId) %>'>入库查询</a></li>
                             <li><a href='<%= "../StoreQuery/Use?StoreId={0}".Formatted(StoreId) %>'>出库单查询</a></li>
                             <li><a href='<%= "../StoreQuery/Used?StoreId={0}".Formatted(StoreId) %>'>出库查询</a></li>
