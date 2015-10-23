@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="26f01b11d0744825a996cdc0c7e11e75" Name="DepotDiagram">
+        <EntityTypeShape EntityType="DepotModel.Depot" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DepotModel.DepotCatalog" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotDictionary" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotObject" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotRole" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotUserRole" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotObjectCatalog" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotOrder" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotUser" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DepotModel.Application" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DepotModel.UserOnline" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotCreator" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotMember" Width="1.5" PointX="6.75" PointY="8.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

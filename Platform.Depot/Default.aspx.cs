@@ -4,6 +4,6 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Response.Redirect("~/Store/Home", false);
+        Response.Redirect("~/Depot/Home", false);
     }
 }

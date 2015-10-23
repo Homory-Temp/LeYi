@@ -1,0 +1,672 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DepotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="256" />
+          <Property Name="Home" Type="nvarchar" MaxLength="256" />
+          <Property Name="Quit" Type="nvarchar" MaxLength="256" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Depot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="DefaultObjectView" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="DefaultObjectType" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ObjectTypes" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotCatalog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="TopId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotDictionary">
+          <Key>
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotObject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Single" Type="bit" Nullable="false" />
+          <Property Name="Consumable" Type="bit" Nullable="false" />
+          <Property Name="Fixed" Type="bit" Nullable="false" />
+          <Property Name="SerialA" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="SerialB" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="SerialC" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="SerialD" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Specification" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Low" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="High" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ImageA" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageB" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageC" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageD" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotObjectCatalog">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="CatalogId" />
+          </Key>
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TopCatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsVirtual" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Receipt" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="OrderSource" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="UsageTarget" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ToPay" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Paid" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="BrokerageId" Type="uniqueidentifier" />
+          <Property Name="KeeperId" Type="uniqueidentifier" />
+          <Property Name="Done" Type="bit" Nullable="false" />
+          <Property Name="OrderTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="RecordTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Rights" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotUserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="DepotRoleId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotRoleId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserOnline">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotCreator' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotCreator">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CampusId" />
+            <PropertyRef Name="CampusName" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotMember' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotMember">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="RealName" />
+            <PropertyRef Name="Rights" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
+          <Property Name="Rights" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotUser">
+          <Key>
+            <PropertyRef Name="Id" />
+            
+            
+            
+            
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DepotModelStoreContainer">
+          <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Depot" EntityType="Self.Depot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotCatalog" EntityType="Self.DepotCatalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotDictionary" EntityType="Self.DepotDictionary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotObject" EntityType="Self.DepotObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotObjectCatalog" EntityType="Self.DepotObjectCatalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotOrder" EntityType="Self.DepotOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotRole" EntityType="Self.DepotRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotUserRole" EntityType="Self.DepotUserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotCreator" EntityType="Self.DepotCreator" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotCreator].[Id] AS [Id], 
+    [DepotCreator].[Name] AS [Name], 
+    [DepotCreator].[PinYin] AS [PinYin], 
+    [DepotCreator].[State] AS [State], 
+    [DepotCreator].[CampusId] AS [CampusId], 
+    [DepotCreator].[CampusName] AS [CampusName]
+    FROM [dbo].[DepotCreator] AS [DepotCreator]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DepotMember" EntityType="Self.DepotMember" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotMember].[Id] AS [Id], 
+    [DepotMember].[RealName] AS [RealName], 
+    [DepotMember].[PinYin] AS [PinYin], 
+    [DepotMember].[Rights] AS [Rights], 
+    [DepotMember].[DepotId] AS [DepotId], 
+    [DepotMember].[RoleId] AS [RoleId]
+    FROM [dbo].[DepotMember] AS [DepotMember]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DepotUser" EntityType="Self.DepotUser" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotUser].[Id] AS [Id], 
+    [DepotUser].[Name] AS [Name], 
+    [DepotUser].[PinYin] AS [PinYin], 
+    [DepotUser].[State] AS [State], 
+    [DepotUser].[CampusId] AS [CampusId], 
+    [DepotUser].[CampusName] AS [CampusName]
+    FROM [dbo].[DepotUser] AS [DepotUser]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DepotModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Depot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CampusId" Type="Guid" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="DefaultObjectView" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DefaultObjectType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ObjectTypes" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="DepotModel.DepotType" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DepotEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Depot" EntityType="Self.Depot" />
+          <EntitySet Name="DepotCatalog" EntityType="DepotModel.DepotCatalog" />
+          <EntitySet Name="DepotDictionary" EntityType="DepotModel.DepotDictionary" />
+          <EntitySet Name="DepotObject" EntityType="DepotModel.DepotObject" />
+          <EntitySet Name="DepotRole" EntityType="DepotModel.DepotRole" />
+          <EntitySet Name="DepotUserRole" EntityType="DepotModel.DepotUserRole" />
+          <EntitySet Name="DepotObjectCatalog" EntityType="DepotModel.DepotObjectCatalog" />
+          <EntitySet Name="DepotOrder" EntityType="DepotModel.DepotOrder" />
+          <EntitySet Name="DepotUser" EntityType="DepotModel.DepotUser" />
+          <EntitySet Name="Application" EntityType="DepotModel.Application" />
+          <EntitySet Name="UserOnline" EntityType="DepotModel.UserOnline" />
+          <EntitySet Name="DepotCreator" EntityType="DepotModel.DepotCreator" />
+          <EntitySet Name="DepotMember" EntityType="DepotModel.DepotMember" />
+        </EntityContainer>
+        <EnumType Name="State">
+          <Member Name="启用" Value="1" />
+          <Member Name="停用" Value="2" />
+          <Member Name="内置" Value="0" />
+        </EnumType>
+        <EnumType Name="DepotType" IsFlags="true">
+          <Member Name="通用库" Value="1" />
+          <Member Name="易耗品库" Value="2" />
+          <Member Name="固定资产库" Value="4" />
+          <Member Name="可借可领库" Value="8" />
+          <Member Name="对象一级分类库" Value="16" />
+        </EnumType>
+        <EntityType Name="DepotCatalog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="TopId" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DepotDictionary">
+          <Key>
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="DepotModel.DictionaryType" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DepotObject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Single" Type="Boolean" Nullable="false" />
+          <Property Name="Consumable" Type="Boolean" Nullable="false" />
+          <Property Name="Fixed" Type="Boolean" Nullable="false" />
+          <Property Name="SerialA" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialB" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialC" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialD" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Low" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="High" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ImageA" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EnumType Name="DictionaryType">
+          <Member Name="单位" Value="1" />
+          <Member Name="规格" Value="2" />
+          <Member Name="购置来源" Value="3" />
+          <Member Name="使用对象" Value="4" />
+          <Member Name="年龄段" Value="5" />
+          <Member Name="存放地" Value="6" />
+        </EnumType>
+        <EntityType Name="DepotRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Rights" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotUserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="DepotRoleId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="DepotRoleId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotObjectCatalog">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="CatalogId" />
+          </Key>
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="TopCatalogId" Type="Guid" Nullable="false" />
+          <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Receipt" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="OrderSource" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="UsageTarget" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ToPay" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Paid" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="BrokerageId" Type="Guid" />
+          <Property Name="KeeperId" Type="Guid" />
+          <Property Name="Done" Type="Boolean" Nullable="false" />
+          <Property Name="OrderTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="RecordTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperatorId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <Property Name="CampusId" Type="Guid" Nullable="false" />
+          <Property Name="CampusName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Home" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Quit" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserOnline">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="DepotCreator">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CampusId" />
+            <PropertyRef Name="CampusName" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <Property Name="CampusId" Type="Guid" Nullable="false" />
+          <Property Name="CampusName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DepotMember">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="RealName" />
+            <PropertyRef Name="Rights" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RealName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Rights" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DepotModelStoreContainer" CdmEntityContainer="DepotEntities">
+          <EntitySetMapping Name="Depot">
+            <EntityTypeMapping TypeName="DepotModel.Depot">
+              <MappingFragment StoreEntitySet="Depot">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="DefaultObjectView" ColumnName="DefaultObjectView" />
+                <ScalarProperty Name="DefaultObjectType" ColumnName="DefaultObjectType" />
+                <ScalarProperty Name="ObjectTypes" ColumnName="ObjectTypes" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotCatalog">
+            <EntityTypeMapping TypeName="DepotModel.DepotCatalog">
+              <MappingFragment StoreEntitySet="DepotCatalog">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="TopId" ColumnName="TopId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotDictionary">
+            <EntityTypeMapping TypeName="DepotModel.DepotDictionary">
+              <MappingFragment StoreEntitySet="DepotDictionary">
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotObject">
+            <EntityTypeMapping TypeName="DepotModel.DepotObject">
+              <MappingFragment StoreEntitySet="DepotObject">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ImageD" ColumnName="ImageD" />
+                <ScalarProperty Name="ImageC" ColumnName="ImageC" />
+                <ScalarProperty Name="ImageB" ColumnName="ImageB" />
+                <ScalarProperty Name="ImageA" ColumnName="ImageA" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="SerialD" ColumnName="SerialD" />
+                <ScalarProperty Name="SerialC" ColumnName="SerialC" />
+                <ScalarProperty Name="SerialB" ColumnName="SerialB" />
+                <ScalarProperty Name="SerialA" ColumnName="SerialA" />
+                <ScalarProperty Name="Fixed" ColumnName="Fixed" />
+                <ScalarProperty Name="Consumable" ColumnName="Consumable" />
+                <ScalarProperty Name="Single" ColumnName="Single" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotRole">
+            <EntityTypeMapping TypeName="DepotModel.DepotRole">
+              <MappingFragment StoreEntitySet="DepotRole">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Rights" ColumnName="Rights" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotUserRole">
+            <EntityTypeMapping TypeName="DepotModel.DepotUserRole">
+              <MappingFragment StoreEntitySet="DepotUserRole">
+                <ScalarProperty Name="DepotRoleId" ColumnName="DepotRoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotObjectCatalog">
+            <EntityTypeMapping TypeName="DepotModel.DepotObjectCatalog">
+              <MappingFragment StoreEntitySet="DepotObjectCatalog">
+                <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
+                <ScalarProperty Name="TopCatalogId" ColumnName="TopCatalogId" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotOrder">
+            <EntityTypeMapping TypeName="DepotModel.DepotOrder">
+              <MappingFragment StoreEntitySet="DepotOrder">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="RecordTime" ColumnName="RecordTime" />
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="Done" ColumnName="Done" />
+                <ScalarProperty Name="KeeperId" ColumnName="KeeperId" />
+                <ScalarProperty Name="BrokerageId" ColumnName="BrokerageId" />
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
+                <ScalarProperty Name="ToPay" ColumnName="ToPay" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="UsageTarget" ColumnName="UsageTarget" />
+                <ScalarProperty Name="OrderSource" ColumnName="OrderSource" />
+                <ScalarProperty Name="Receipt" ColumnName="Receipt" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotUser">
+            <EntityTypeMapping TypeName="DepotModel.DepotUser">
+              <MappingFragment StoreEntitySet="DepotUser">
+                <ScalarProperty Name="CampusName" ColumnName="CampusName" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Application">
+            <EntityTypeMapping TypeName="DepotModel.Application">
+              <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Quit" ColumnName="Quit" />
+                <ScalarProperty Name="Home" ColumnName="Home" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserOnline">
+            <EntityTypeMapping TypeName="DepotModel.UserOnline">
+              <MappingFragment StoreEntitySet="UserOnline">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotCreator">
+            <EntityTypeMapping TypeName="DepotModel.DepotCreator">
+              <MappingFragment StoreEntitySet="DepotCreator">
+                <ScalarProperty Name="CampusName" ColumnName="CampusName" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotMember">
+            <EntityTypeMapping TypeName="DepotModel.DepotMember">
+              <MappingFragment StoreEntitySet="DepotMember">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Rights" ColumnName="Rights" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
