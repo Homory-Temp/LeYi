@@ -23,7 +23,7 @@ public partial class Depot_HomeAdd : DepotPage
             NotifyError(ap, "请选择默认物资类型");
             return;
         }
-        DataContext.DepotAdd(name.Text.Trim(), DepotUser.CampusId, DepotUser.Id, ordinal.PeekValue(100), view.PeekValue("Simple", false), new[] { t1x, t2x, t3x }.PeekRadioValue(string.Empty), "{0}{1}{2}".Formatted(t1.PeekValue(true).GetFirstChar(), t2.PeekValue(true).GetFirstChar(), t3.PeekValue(true).GetFirstChar()), DepotType.通用库, State.启用);
+        DataContext.DepotAdd(name.Text.Trim(), DepotUser.CampusId, DepotUser.Id, ordinal.PeekValue(100), view.PeekValue("Simple", false).GetFirstChar(), new[] { t1x, t2x, t3x }.PeekRadioValue(string.Empty), "{0}{1}{2}".Formatted(t1.PeekValue(true).GetFirstChar(), t2.PeekValue(true).GetFirstChar(), t3.PeekValue(true).GetFirstChar()), DepotType.通用库, State.启用);
         Response.Redirect("~/Depot/DepotHome");
     }
 

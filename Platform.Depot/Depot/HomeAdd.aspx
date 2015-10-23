@@ -52,8 +52,8 @@
                         <div class="col-md-8 text-left">
                             <telerik:RadComboBox ID="view" runat="server" Width="400">
                                 <Items>
-                                    <telerik:RadComboBoxItem Text="简洁模式" Value="1" Selected="true" />
-                                    <telerik:RadComboBoxItem Text="图文模式" Value="2" />
+                                    <telerik:RadComboBoxItem Text="简洁模式" Value="Simple" Selected="true" />
+                                    <telerik:RadComboBoxItem Text="图文模式" Value="Graphics" />
                                 </Items>
                             </telerik:RadComboBox>
                         </div>
