@@ -1,0 +1,15 @@
+﻿
+html .RadGrid_Default .rgAltRow, html .RadGrid_Default .rgAltRow td {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+html .RadGrid_Default .rgSelectedRow {
+  background-color: #F2F2F2;
+  background-image: none;
+  color: #C0985C;
+}
+
+html .RadGrid_Default .rgSelectedRow td {
+  border-color: transparent;
+}
