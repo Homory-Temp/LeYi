@@ -15,7 +15,8 @@ public partial class Depot_Home : DepotPage
 
     protected bool CanVisit(Guid depotId)
     {
-        return DataContext.DepotMember.Count(o => o.Id == DepotUser.Id && o.DepotId == depotId) > 0;
+        var userId = DepotUser.Id;
+        return DataContext.DepotMember.Count(o => o.Id == userId && o.DepotId == depotId) > 0;
     }
 
     protected void add_ServerClick(object sender, EventArgs e)

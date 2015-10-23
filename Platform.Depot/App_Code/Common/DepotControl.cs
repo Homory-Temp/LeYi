@@ -71,6 +71,8 @@ public class DepotControl : System.Web.UI.UserControl, IDepot
         {
             try
             {
+                if (Session["DepotUser"].None())
+                    throw new Exception();
                 return (DepotUser)Session["DepotUser"];
             }
             catch

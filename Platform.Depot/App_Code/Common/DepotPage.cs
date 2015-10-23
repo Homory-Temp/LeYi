@@ -74,6 +74,8 @@ public class DepotPage : System.Web.UI.Page, IDepot
         {
             try
             {
+                if (Session["DepotUser"].None())
+                    throw new Exception();
                 return (DepotUser)Session["DepotUser"];
             }
             catch
