@@ -35,6 +35,11 @@ public static class DepotCommonExtensions
         return control.SelectedIndex < (ignoreFirst ? 1 : 0) ? @default : control.SelectedValue;
     }
 
+    public static int PeekValue(this RadTreeView control, int @default)
+    {
+        return control.SelectedValue.None() ? @default : int.Parse(control.SelectedValue);
+    }
+
     public static string PeekValue(this RadButton control, bool detectCheckState = false)
     {
         return detectCheckState ? (control.Checked ? control.Value : string.Empty) : control.Value;

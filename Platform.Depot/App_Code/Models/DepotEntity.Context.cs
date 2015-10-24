@@ -12,6 +12,8 @@ namespace Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DepotEntities : DbContext
     {
@@ -38,5 +40,14 @@ namespace Models
         public virtual DbSet<DepotCreator> DepotCreator { get; set; }
         public virtual DbSet<DepotMember> DepotMember { get; set; }
         public virtual DbSet<DepotObjectCatalog> DepotObjectCatalog { get; set; }
+    
+        public virtual ObjectResult<string> ToPinYin(string name)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ToPinYin", nameParameter);
+        }
     }
 }

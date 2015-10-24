@@ -197,6 +197,9 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
+        <Function Name="ToPinYin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="DepotModelStoreContainer">
           <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Depot" EntityType="Self.Depot" Schema="dbo" store:Type="Tables" />
@@ -271,6 +274,9 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <EntitySet Name="DepotCreator" EntityType="DepotModel.DepotCreator" />
           <EntitySet Name="DepotMember" EntityType="DepotModel.DepotMember" />
           <EntitySet Name="DepotObjectCatalog" EntityType="DepotModel.DepotObjectCatalog" />
+          <FunctionImport Name="ToPinYin" ReturnType="Collection(String)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -649,6 +655,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ToPinYin" FunctionName="DepotModel.Store.ToPinYin" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
