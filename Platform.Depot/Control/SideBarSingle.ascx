@@ -5,7 +5,7 @@
 <telerik:RadCodeBlock runat="server">
     <div class="container-fluid">
         <nav class="navbar navbar-info navbar-fixed-top">
-            <div class="navbar-header rootPointer" onclick="top.location.href = '../Store/Home';">
+            <div class="navbar-header rootPointer" onclick="top.location.href = '../Depot/Home';">
                 <img alt="" src="../Common/配置/StoreLogo.png" style="margin: 5px; padding: 0; height: 40px; float: left;" /><span class="navbar-brand">物资管理云平台</span>
             </div>
             <div class="collapse navbar-collapse">
