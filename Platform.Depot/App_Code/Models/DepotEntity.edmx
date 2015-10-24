@@ -93,7 +93,8 @@
           </Key>
           <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="TopCatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="IsLeaf" Type="bit" Nullable="false" />
           <Property Name="IsVirtual" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="DepotOrder">
@@ -263,13 +264,13 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <EntitySet Name="DepotObject" EntityType="DepotModel.DepotObject" />
           <EntitySet Name="DepotRole" EntityType="DepotModel.DepotRole" />
           <EntitySet Name="DepotUserRole" EntityType="DepotModel.DepotUserRole" />
-          <EntitySet Name="DepotObjectCatalog" EntityType="DepotModel.DepotObjectCatalog" />
           <EntitySet Name="DepotOrder" EntityType="DepotModel.DepotOrder" />
           <EntitySet Name="DepotUser" EntityType="DepotModel.DepotUser" />
           <EntitySet Name="Application" EntityType="DepotModel.Application" />
           <EntitySet Name="UserOnline" EntityType="DepotModel.UserOnline" />
           <EntitySet Name="DepotCreator" EntityType="DepotModel.DepotCreator" />
           <EntitySet Name="DepotMember" EntityType="DepotModel.DepotMember" />
+          <EntitySet Name="DepotObjectCatalog" EntityType="DepotModel.DepotObjectCatalog" />
         </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -364,16 +365,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="DepotRoleId" Type="Guid" Nullable="false" />
         </EntityType>
-        <EntityType Name="DepotObjectCatalog">
-          <Key>
-            <PropertyRef Name="ObjectId" />
-            <PropertyRef Name="CatalogId" />
-          </Key>
-          <Property Name="ObjectId" Type="Guid" Nullable="false" />
-          <Property Name="CatalogId" Type="Guid" Nullable="false" />
-          <Property Name="TopCatalogId" Type="Guid" Nullable="false" />
-          <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="DepotOrder">
           <Key>
             <PropertyRef Name="Id" />
@@ -457,6 +448,17 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="Rights" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DepotId" Type="Guid" Nullable="false" />
           <Property Name="RoleId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotObjectCatalog">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="CatalogId" />
+          </Key>
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="IsLeaf" Type="Boolean" Nullable="false" />
+          <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -554,16 +556,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DepotObjectCatalog">
-            <EntityTypeMapping TypeName="DepotModel.DepotObjectCatalog">
-              <MappingFragment StoreEntitySet="DepotObjectCatalog">
-                <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
-                <ScalarProperty Name="TopCatalogId" ColumnName="TopCatalogId" />
-                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
-                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DepotOrder">
             <EntityTypeMapping TypeName="DepotModel.DepotOrder">
               <MappingFragment StoreEntitySet="DepotOrder">
@@ -643,6 +635,17 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
                 <ScalarProperty Name="PinYin" ColumnName="PinYin" />
                 <ScalarProperty Name="RealName" ColumnName="RealName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotObjectCatalog">
+            <EntityTypeMapping TypeName="DepotModel.DepotObjectCatalog">
+              <MappingFragment StoreEntitySet="DepotObjectCatalog">
+                <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
+                <ScalarProperty Name="IsLeaf" ColumnName="IsLeaf" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

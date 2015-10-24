@@ -145,7 +145,8 @@ namespace Models
     {
         public System.Guid ObjectId { get; set; }
         public System.Guid CatalogId { get; set; }
-        public System.Guid TopCatalogId { get; set; }
+        public int Level { get; set; }
+        public bool IsLeaf { get; set; }
         public bool IsVirtual { get; set; }
     }
 }

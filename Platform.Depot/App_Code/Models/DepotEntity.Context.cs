@@ -31,12 +31,12 @@ namespace Models
         public virtual DbSet<DepotObject> DepotObject { get; set; }
         public virtual DbSet<DepotRole> DepotRole { get; set; }
         public virtual DbSet<DepotUserRole> DepotUserRole { get; set; }
-        public virtual DbSet<DepotObjectCatalog> DepotObjectCatalog { get; set; }
         public virtual DbSet<DepotOrder> DepotOrder { get; set; }
         public virtual DbSet<DepotUser> DepotUser { get; set; }
         public virtual DbSet<Application> Application { get; set; }
         public virtual DbSet<UserOnline> UserOnline { get; set; }
         public virtual DbSet<DepotCreator> DepotCreator { get; set; }
         public virtual DbSet<DepotMember> DepotMember { get; set; }
+        public virtual DbSet<DepotObjectCatalog> DepotObjectCatalog { get; set; }
     }
 }
