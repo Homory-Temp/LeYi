@@ -1,12 +1,27 @@
-﻿using Models;
-using System;
+﻿using System;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
-public partial class Depot_HomeAdd : DepotPage
+public partial class Depot_HomeEdit : DepotPage
 {
-    protected void add_ServerClick(object sender, EventArgs e)
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            var id = "DepotId".Query().GlobalId();
+            var item = DataContext.Depot.Single(o => o.Id == id);
+            ordinal.Value = item.Ordinal;
+            name.Text = item.Name;
+            view.SelectedIndex = view.Items.Single(o => o.Value.GetFirstChar() == item.DefaultObjectView).Index;
+            t1x.Visible = t1.Checked = item.ObjectTypes.Contains("C");
+            t2x.Visible = t2.Checked = item.ObjectTypes.Contains("U");
+            t3x.Visible = t3.Checked = item.ObjectTypes.Contains("S");
+            new[] { t1x, t2x, t3x }.ToList().ForEach(o => { if (o.Value.GetFirstChar() == item.DefaultObjectType) o.Checked = true; });
+        }
+    }
+
+    protected void edit_ServerClick(object sender, EventArgs e)
     {
         if (name.Text.None())
         {
@@ -23,7 +38,8 @@ public partial class Depot_HomeAdd : DepotPage
             NotifyError(ap, "请选择默认物资类型");
             return;
         }
-        DataContext.DepotAdd(name.Text.Trim(), DepotUser.CampusId, DepotUser.Id, ordinal.PeekValue(100), view.PeekValue("Simple", false).GetFirstChar(), new[] { t1x, t2x, t3x }.PeekRadioValue(string.Empty), "{0}{1}{2}".Formatted(t1.PeekValue(true).GetFirstChar(), t2.PeekValue(true).GetFirstChar(), t3.PeekValue(true).GetFirstChar()), DepotType.通用库, State.启用);
+        var id = "DepotId".Query().GlobalId();
+        DataContext.DepotEdit(id, name.Text.Trim(), ordinal.PeekValue(100), view.PeekValue("Simple", false).GetFirstChar(), new[] { t1x, t2x, t3x }.PeekRadioValue(string.Empty), "{0}{1}{2}".Formatted(t1.PeekValue(true).GetFirstChar(), t2.PeekValue(true).GetFirstChar(), t3.PeekValue(true).GetFirstChar()));
         Response.Redirect("~/Depot/Home");
     }
 

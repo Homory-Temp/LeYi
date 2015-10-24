@@ -1,9 +1,6 @@
 ﻿using Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Telerik.Web.UI;
 
 public static class DepotDataExtensions
 {
@@ -52,6 +49,26 @@ public static class DepotDataExtensions
             DepotRoleId = depotRole.Id
         };
         db.DepotUserRole.Add(depotUserRole);
+        db.SaveChanges();
+        return depot;
+    }
+
+    public static Depot DepotEdit(this DepotEntities db, Guid id, string name, int ordinal, string defaultObjectView, string defaultObjectType, string objectTypes)
+    {
+        var depot = db.Depot.Single(o => o.Id == id);
+        depot.Name = name;
+        depot.Ordinal = ordinal;
+        depot.DefaultObjectView = defaultObjectView[0].ToString();
+        depot.DefaultObjectType = defaultObjectType[0].ToString();
+        depot.ObjectTypes = objectTypes;
+        db.SaveChanges();
+        return depot;
+    }
+
+    public static Depot DepotRemove(this DepotEntities db, Guid id)
+    {
+        var depot = db.Depot.Single(o => o.Id == id);
+        depot.State = State.停用;
         db.SaveChanges();
         return depot;
     }

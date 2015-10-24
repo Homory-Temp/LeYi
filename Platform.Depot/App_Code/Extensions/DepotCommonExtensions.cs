@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Web;
 using Telerik.Web.UI;
 
 public static class DepotCommonExtensions
@@ -7,6 +8,11 @@ public static class DepotCommonExtensions
     public static string Formatted(this string format, params object[] objects)
     {
         return string.Format(format, objects);
+    }
+
+    public static string Query(this string key, bool decode = false)
+    {
+        return decode ? HttpContext.Current.Server.UrlDecode(HttpContext.Current.Request.QueryString[key]) : HttpContext.Current.Request.QueryString[key];
     }
 
     public static string GetFirstChar(this string value)
