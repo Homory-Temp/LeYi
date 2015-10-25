@@ -94,11 +94,11 @@ public static class DepotDataExtensions
         if (catalogId.HasValue)
         {
             var id = catalogId.Value;
-            return db.DepotCatalog.Where(o => o.DepotId == depotId && o.Id == id && o.State < State.停用).Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).ToList().Join(db.DepotObject.Where(o => o.State < State.停用), o => o, o => o.Id, (oc, o) => o).Distinct();
+            return db.DepotCatalog.Where(o => o.DepotId == depotId && o.Id == id && o.State < State.停用).Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).Distinct().ToList().Join(db.DepotObject.Where(o => o.State < State.停用), o => o, o => o.Id, (oc, o) => o);
         }
         else
         {
-            return db.DepotCatalog.Where(o => o.DepotId == depotId && o.State < State.停用).Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).ToList().Join(db.DepotObject.Where(o => o.State < State.停用), o => o, o => o.Id, (oc, o) => o).Distinct();
+            return db.DepotCatalog.Where(o => o.DepotId == depotId && o.State < State.停用).Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).Distinct().ToList().Join(db.DepotObject.Where(o => o.State < State.停用), o => o, o => o.Id, (oc, o) => o);
         }
     }
 
@@ -138,6 +138,39 @@ public static class DepotDataExtensions
         }
         db.SaveChanges();
         obj.Code = db.ToQR(CodeType.Object, obj.AutoId);
+        db.SaveChanges();
+        db.DepotDictionaryAdd(depotId, DictionaryType.单位, unit);
+        db.DepotDictionaryAdd(depotId, DictionaryType.规格, specification);
+    }
+
+    public static void DepotObjectEdit(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, string a, string b, string c, string d, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal)
+    {
+        var obj = db.DepotObject.Single(o => o.Id == id);
+        obj.Name = name;
+        obj.PinYin = db.ToPinYin(name).Single();
+        obj.SerialA = a;
+        obj.SerialB = b;
+        obj.SerialC = c;
+        obj.SerialD = d;
+        obj.Unit = unit;
+        obj.Specification = specification;
+        obj.Low = low;
+        obj.High = high;
+        obj.ImageA = pa;
+        obj.ImageB = pb;
+        obj.ImageC = pc;
+        obj.ImageD = pd;
+        obj.Note = note;
+        obj.Ordinal = ordinal;
+        var catalogs = db.DepotObjectCatalog.Where(o => o.ObjectId == id).ToList();
+        for (var i = 0; i < catalogs.Count(); i++)
+        {
+            db.DepotObjectCatalog.Remove(catalogs.ElementAt(i));
+        }
+        for (var i = 0; i < catalogIds.Count; i++)
+        {
+            db.DepotObjectCatalog.Add(new DepotObjectCatalog { ObjectId = id, CatalogId = catalogIds[i], IsVirtual = false, Level = i, IsLeaf = i == catalogIds.Count - 1 });
+        }
         db.SaveChanges();
         db.DepotDictionaryAdd(depotId, DictionaryType.单位, unit);
         db.DepotDictionaryAdd(depotId, DictionaryType.规格, specification);

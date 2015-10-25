@@ -115,7 +115,7 @@ public partial class DepotAction_Object : DepotPageSingle
 
     protected void edit_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/ObjectEdit?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+        Response.Redirect("~/DepotAction/ObjectEdit?DepotId={0}&ObjectId={1}&CatalogId={2}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"], CurrentNode.HasValue ? CurrentNode.Value : Guid.Empty));
     }
 
     protected void delete_ServerClick(object sender, EventArgs e)

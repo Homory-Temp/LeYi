@@ -2,9 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-public partial class DepotAction_ObjectAdd : DepotPageSingle
+public partial class DepotAction_ObjectEdit : DepotPageSingle
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -16,17 +19,41 @@ public partial class DepotAction_ObjectAdd : DepotPageSingle
             unit.DataBind();
             specification.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.规格).ToList();
             specification.DataBind();
-            var types = Depot.ObjectTypes;
-            r1.Visible = types.Contains(t1.Value.GetFirstChar());
-            r2.Visible = types.Contains(t2.Value.GetFirstChar());
-            r3.Visible = types.Contains(t3.Value.GetFirstChar());
-            new[] { t1, t2, t3 }.ToList().ForEach(o => { if (o.Value.GetFirstChar() == Depot.DefaultObjectType) o.Checked = true; });
-            if (!"CatalogId".Query().None())
+            var oid = "ObjectId".Query().GlobalId();
+            var obj = DataContext.DepotObject.Single(o => o.Id == oid);
+            var c1 = DataContext.DepotObjectCatalog.SingleOrDefault(o => o.ObjectId == oid && o.IsLeaf == true && o.IsVirtual == false);
+            var c2 = DataContext.DepotObjectCatalog.SingleOrDefault(o => o.ObjectId == oid && o.IsLeaf == true && o.IsVirtual == true);
+            var cv1 = c1 == null ? Guid.Empty.ToString() : c1.CatalogId.ToString();
+            var cv2 = c2 == null ? Guid.Empty.ToString() : c2.CatalogId.ToString();
+            var node = tree.EmbeddedTree.GetAllNodes().First(o => o.Value == cv1 || o.Value == cv2);
+            node.ExpandParentNodes();
+            node.Selected = true;
+            tree.SelectedValue = node.Value;
+            ordinal.Value = obj.Ordinal;
+            name.Text = obj.Name;
+            if (unit.FindItemByText(obj.Unit) == null)
             {
-                var node = tree.EmbeddedTree.GetAllNodes().First(o => o.Value == "CatalogId".Query());
-                node.ExpandParentNodes();
-                tree.SelectedValue = "CatalogId".Query();
+                unit.Items.Add(new Telerik.Web.UI.RadComboBoxItem { Text = obj.Unit, Value = obj.Unit });
             }
+            unit.FindItemByText(obj.Unit).Selected = true;
+            if (specification.FindItemByText(obj.Specification) == null)
+            {
+                specification.Items.Add(new Telerik.Web.UI.RadComboBoxItem { Text = obj.Specification, Value = obj.Specification });
+            }
+            specification.FindItemByText(obj.Specification).Selected = true;
+            var imgs = new string[] { obj.ImageA, obj.ImageB, obj.ImageC, obj.ImageD };
+            for (var i = 0; i < imgs.Length; i++)
+            {
+                if (!imgs[i].None())
+                    new[] { p0, p1, p2, p3 }[i].Src = imgs[i];
+            }
+            var img = new[] { p0, p1, p2, p3 }.ToList();
+            var count = img.Where(o => o.Src.Contains("/Content/Images/Transparent.png")).Count();
+            upload.InitialFileInputsCount = count == 0 ? 0 : 1;
+            clear.Visible = count < 4;
+            imgRow.Visible = count < 4;
+            upload.MaxFileInputsCount = count == 0 ? 0 : count;
+            content.Text = obj.Note;
         }
     }
 
@@ -42,11 +69,6 @@ public partial class DepotAction_ObjectAdd : DepotPageSingle
             NotifyError(ap, "请输入物资名称");
             return;
         }
-        if (new[] { t1, t2, t3 }.Count(o => o.Checked == true) == 0)
-        {
-            NotifyError(ap, "请选择物资类型");
-            return;
-        }
         if (tree.SelectedValue.None())
         {
             NotifyError(ap, "请选择物资类别");
@@ -55,36 +77,11 @@ public partial class DepotAction_ObjectAdd : DepotPageSingle
         Response.Redirect("~/DepotAction/In?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, id));
     }
 
-    protected void goon_ServerClick(object sender, EventArgs e)
-    {
-        if (name.Text.Trim().None())
-        {
-            NotifyError(ap, "请输入物资名称");
-            return;
-        }
-        if (new[] { t1, t2, t3 }.Count(o => o.Checked == true) == 0)
-        {
-            NotifyError(ap, "请选择物资类型");
-            return;
-        }
-        if (tree.SelectedValue.None())
-        {
-            NotifyError(ap, "请选择物资类别");
-        }
-        Save();
-        Response.Redirect(Request.Url.PathAndQuery);
-    }
-
     protected void go_ServerClick(object sender, EventArgs e)
     {
         if (name.Text.Trim().None())
         {
             NotifyError(ap, "请输入物资名称");
-            return;
-        }
-        if (new[] { t1, t2, t3 }.Count(o => o.Checked == true) == 0)
-        {
-            NotifyError(ap, "请选择物资类型");
             return;
         }
         if (tree.SelectedValue.None())
@@ -97,7 +94,7 @@ public partial class DepotAction_ObjectAdd : DepotPageSingle
 
     protected Guid Save()
     {
-        var id = DataContext.GlobalId();
+        var oid = "ObjectId".Query().GlobalId();
         var img = new[] { p0, p1, p2, p3 }.ToList();
         var photo = img.Count(o => !o.Src.Contains("/Content/Images/Transparent.png")) == 0 ? new string[] { } : img.Where(o => !o.Src.Contains("/Content/Images/Transparent.png")).Select(o => o.Src).ToArray();
         var ids = new List<Guid>();
@@ -108,8 +105,8 @@ public partial class DepotAction_ObjectAdd : DepotPageSingle
             node = node.ParentNode;
             ids.Insert(0, node.Value.GlobalId());
         }
-        DataContext.DepotObjectAdd(id, ids, Depot.Id, name.Text.Trim(), t3.Checked, t1.Checked, false, code.Text.Trim(), "", "", "", unit.Text.Trim(), specification.Text.Trim(), low.PeekValue(0.00M), high.PeekValue(0.00M), photo.Length > 0 ? photo[0] : "", photo.Length > 1 ? photo[1] : "", photo.Length > 2 ? photo[2] : "", photo.Length > 3 ? photo[3] : "", content.Text.Trim(), ordinal.PeekValue(100));
-        return id;
+        DataContext.DepotObjectEdit(oid, ids, Depot.Id, name.Text.Trim(), code.Text.Trim(), "", "", "", unit.Text.Trim(), specification.Text.Trim(), low.PeekValue(0.00M), high.PeekValue(0.00M), photo.Length > 0 ? photo[0] : "", photo.Length > 1 ? photo[1] : "", photo.Length > 2 ? photo[2] : "", photo.Length > 3 ? photo[3] : "", content.Text.Trim(), ordinal.PeekValue(100));
+        return oid;
     }
 
     protected void upload_FileUploaded(object sender, Telerik.Web.UI.FileUploadedEventArgs e)
