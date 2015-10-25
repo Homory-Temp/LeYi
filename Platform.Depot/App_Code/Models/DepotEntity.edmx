@@ -83,7 +83,7 @@
           <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
-          <Property Name="AutoId" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
@@ -263,6 +263,18 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
+        <Association Name="FK_DepotCatalog_DepotCatalog">
+          <End Role="DepotCatalog" Type="Self.DepotCatalog" Multiplicity="0..1" />
+          <End Role="DepotCatalog1" Type="Self.DepotCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotCatalog1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="ToPinYin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -344,6 +356,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
     [DepotUser].[CampusName] AS [CampusName]
     FROM [dbo].[DepotUser] AS [DepotUser]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_DepotCatalog_DepotCatalog" Association="Self.FK_DepotCatalog_DepotCatalog">
+            <End Role="DepotCatalog" EntitySet="DepotCatalog" />
+            <End Role="DepotCatalog1" EntitySet="DepotCatalog" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -381,6 +397,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           </FunctionImport>
           <EntitySet Name="DepotInRecord" EntityType="DepotModel.DepotInRecord" />
           <EntitySet Name="DepotCatalogTree" EntityType="DepotModel.DepotCatalogTree" />
+          <AssociationSet Name="FK_DepotCatalog_DepotCatalog" Association="DepotModel.FK_DepotCatalog_DepotCatalog">
+            <End Role="DepotCatalog" EntitySet="DepotCatalog" />
+            <End Role="DepotCatalog1" EntitySet="DepotCatalog" />
+          </AssociationSet>
           <EntitySet Name="DepotObject" EntityType="DepotModel.DepotObject" />
         </EntityContainer>
         <EnumType Name="State">
@@ -394,6 +414,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Member Name="固定资产库" Value="4" />
           <Member Name="可借可领库" Value="8" />
           <Member Name="对象一级分类库" Value="16" />
+          <Member Name="小数数量库" Value="32" />
+          <Member Name="无" Value="0" />
         </EnumType>
         <EntityType Name="DepotCatalog">
           <Key>
@@ -409,6 +431,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="State" Type="DepotModel.State" Nullable="false" />
           <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotCatalogChildren" Relationship="DepotModel.FK_DepotCatalog_DepotCatalog" FromRole="DepotCatalog" ToRole="DepotCatalog1" />
+          <NavigationProperty Name="DepotCatalogParent" Relationship="DepotModel.FK_DepotCatalog_DepotCatalog" FromRole="DepotCatalog1" ToRole="DepotCatalog" />
         </EntityType>
         <EntityType Name="DepotDictionary">
           <Key>
@@ -608,6 +632,18 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" Nullable="false" />
         </EntityType>
+        <Association Name="FK_DepotCatalog_DepotCatalog">
+          <End Type="DepotModel.DepotCatalog" Role="DepotCatalog" Multiplicity="0..1" />
+          <End Type="DepotModel.DepotCatalog" Role="DepotCatalog1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotCatalog1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="DepotObject">
           <Key>
             <PropertyRef Name="Id" />
@@ -633,7 +669,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <Property Name="State" Type="DepotModel.State" Nullable="false" />
-          <Property Name="AutoId" Type="Int32" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
@@ -886,7 +922,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

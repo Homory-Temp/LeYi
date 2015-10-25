@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Linq;
 using System.Web;
 using Telerik.Web.UI;
@@ -9,9 +10,20 @@ public static class DepotCommonExtensions
     {
         return string.Format(format, objects);
     }
+
     public static string EmptyWhenZero(this object value, string prefix = "（", string suffix = "）")
     {
         return (value == null || value.ToString().None() || value.ToString() == "0") ? string.Empty : "{0}{1}{2}".Formatted(prefix, value.ToString(), suffix);
+    }
+
+    public static string WhenZero(this object value, string content = "")
+    {
+        return (value == null || value.ToString().None() || value.ToString() == "0") ? content : value.ToString();
+    }
+
+    public static bool Featured(this Depot depot, DepotType type)
+    {
+        return (depot.Type & type) > DepotType.无;
     }
 
     public static string Query(this string key, bool decode = false)
@@ -22,6 +34,11 @@ public static class DepotCommonExtensions
     public static string ToDay(this object time)
     {
         return DateTime.Parse(time.ToString()).ToString("yyyy-MM-dd");
+    }
+
+    public static string ToAmount(this object amount, bool dotted = false)
+    {
+        return decimal.Parse(amount.ToString()).ToString(dotted ? "F2" : "F0");
     }
 
     public static string ToMoney(this object money)

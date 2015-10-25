@@ -49,6 +49,12 @@ namespace Models
     
     public partial class DepotCatalog
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public DepotCatalog()
+        {
+            this.DepotCatalogChildren = new HashSet<DepotCatalog>();
+        }
+    
         public System.Guid Id { get; set; }
         public Nullable<System.Guid> ParentId { get; set; }
         public System.Guid TopId { get; set; }
@@ -59,6 +65,10 @@ namespace Models
         public State State { get; set; }
         public int AutoId { get; set; }
         public string Code { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepotCatalog> DepotCatalogChildren { get; set; }
+        public virtual DepotCatalog DepotCatalogParent { get; set; }
     }
 }
 namespace Models
@@ -300,7 +310,9 @@ namespace Models
         易耗品库 = 2,
         固定资产库 = 4,
         可借可领库 = 8,
-        对象一级分类库 = 16
+        对象一级分类库 = 16,
+        小数数量库 = 32,
+        无 = 0
     }
 }
 namespace Models

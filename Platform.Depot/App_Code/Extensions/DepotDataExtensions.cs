@@ -94,12 +94,53 @@ public static class DepotDataExtensions
         if (catalogId.HasValue)
         {
             var id = catalogId.Value;
-            return db.DepotCatalog.Where(o => o.DepotId == depotId && o.Id == id && o.State < State.停用).Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).ToList().Join(db.DepotObject.Where(o => o.State < State.停用), o => o, o => o.Id, (oc, o) => o);
+            return db.DepotCatalog.Where(o => o.DepotId == depotId && o.Id == id && o.State < State.停用).Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).ToList().Join(db.DepotObject.Where(o => o.State < State.停用), o => o, o => o.Id, (oc, o) => o).Distinct();
         }
         else
         {
-            return db.DepotCatalog.Where(o => o.DepotId == depotId && o.State < State.停用).Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).ToList().Join(db.DepotObject.Where(o => o.State < State.停用), o => o, o => o.Id, (oc, o) => o);
+            return db.DepotCatalog.Where(o => o.DepotId == depotId && o.State < State.停用).Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).ToList().Join(db.DepotObject.Where(o => o.State < State.停用), o => o, o => o.Id, (oc, o) => o).Distinct();
         }
+    }
+
+    public static void DepotObjectAdd(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, bool single, bool consumable, bool @fixed, string a, string b, string c, string d, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal)
+    {
+        var obj = new DepotObject
+        {
+            Id = id,
+            Name = name,
+            PinYin = db.ToPinYin(name).Single(),
+            Single = single,
+            Consumable = consumable,
+            Fixed = @fixed,
+            SerialA = a,
+            SerialB = b,
+            SerialC = c,
+            SerialD = d,
+            Unit = unit,
+            Specification = specification,
+            Low = low,
+            High = high,
+            ImageA = pa,
+            ImageB = pb,
+            ImageC = pc,
+            ImageD = pd,
+            Note = note,
+            Ordinal = ordinal,
+            State = State.启用,
+            Code = string.Empty,
+            Amount = 0.00M,
+            Money = 0.00M
+        };
+        db.DepotObject.Add(obj);
+        for (var i = 0; i < catalogIds.Count; i++)
+        {
+            db.DepotObjectCatalog.Add(new DepotObjectCatalog { ObjectId = id, CatalogId = catalogIds[i], IsVirtual = false, Level = i, IsLeaf = i == catalogIds.Count - 1 });
+        }
+        db.SaveChanges();
+        obj.Code = db.ToQR(CodeType.Object, obj.AutoId);
+        db.SaveChanges();
+        db.DepotDictionaryAdd(depotId, DictionaryType.单位, unit);
+        db.DepotDictionaryAdd(depotId, DictionaryType.规格, specification);
     }
 
     public static IQueryable<DepotDictionary> DepotDictionaryLoad(this DepotEntities db, Guid depotId, DictionaryType type)

@@ -5,8 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="26f01b11d0744825a996cdc0c7e11e75" Name="DepotDiagram">
-        <EntityTypeShape EntityType="DepotModel.Depot" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DepotModel.DepotCatalog" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DepotModel.Depot" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DepotModel.DepotCatalog" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="DepotModel.DepotDictionary" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="DepotModel.DepotRole" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="DepotModel.DepotUserRole" Width="1.5" PointX="2.75" PointY="4.75" />
@@ -19,6 +19,7 @@
         <EntityTypeShape EntityType="DepotModel.DepotObjectCatalog" Width="1.5" PointX="2.75" PointY="8.75" />
         <EntityTypeShape EntityType="DepotModel.DepotInRecord" Width="1.5" PointX="8.75" PointY="3.75" />
         <EntityTypeShape EntityType="DepotModel.DepotCatalogTree" Width="1.5" PointX="8.75" PointY="9.75" />
+        <AssociationConnector Association="DepotModel.FK_DepotCatalog_DepotCatalog" />
         <EntityTypeShape EntityType="DepotModel.DepotObject" Width="1.5" PointX="10.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>

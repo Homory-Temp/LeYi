@@ -92,11 +92,11 @@
                                     <asp:Panel runat="server" Visible='<%# IsSimple %>'>
                                         <tr>
                                             <td><%# Eval("Ordinal") %></td>
-                                            <td><%# Eval("Code") %></td>
+                                            <td><%# Eval("SerialA").WhenZero("无") %></td>
                                             <td><%# Eval("Name") %></td>
                                             <td><%# Eval("Unit") %></td>
                                             <td><%# Eval("Specification") %></td>
-                                            <td><%# Eval("Amount") %></td>
+                                            <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
                                             <td>
                                                 <input type="button" class="btn btn-tumblr" value="入" id="in" runat="server" match='<%# Eval("Id") %>' onserverclick="in_ServerClick" />
                                                 <input type="button" class="btn btn-tumblr" value="领" id="use" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 %>' onserverclick="use_ServerClick" />
@@ -110,7 +110,7 @@
                                             <div class="row" style="margin: 30px; border: solid 1px silver;">
                                                 <div class="col-md-12" style="width: 100%; height: 100%;">
                                                     <div style="height: 160px; text-align: center; cursor: pointer;">
-                                                        <img class="img-responsive" style="height: 158px; margin: auto;" src='<%# Eval("Image").None() ? "../Content/Images/Transparent.png" : Eval("Image").ToString().Split(new char[] { '*' })[0] %>' />
+                                                        <img class="img-responsive" style="height: 158px; margin: auto;" src='<%# Eval("ImageA").None() ? "../Content/Images/Transparent.png" : Eval("ImageA") %>' />
                                                     </div>
                                                     <div style="height: 145px;">
                                                         <table style="margin: auto; width: 90%;">
@@ -120,11 +120,11 @@
                                                                 </td>
                                                             </tr>
                                                             <tr style="line-height: 28px; height: 28px; text-align: left;">
-                                                                <td style="line-height: 28px; height: 28px; text-align: left;">库存：<%# Eval("Amount") %>&nbsp;<%# Eval("Unit") %>
+                                                                <td style="line-height: 28px; height: 28px; text-align: left;">库存：<%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %>&nbsp;<%# Eval("Unit") %>
                                                                 </td>
                                                             </tr>
                                                             <tr style="line-height: 28px; height: 28px; text-align: left;">
-                                                                <td style="line-height: 28px; height: 28px; text-align: left;">编号：<%# Eval("Code") %>
+                                                                <td style="line-height: 28px; height: 28px; text-align: left;">编号：<%# Eval("SerialA").WhenZero("无") %>
                                                                 </td>
                                                             </tr>
                                                             <tr style="line-height: 28px; height: 28px; text-align: left;">
