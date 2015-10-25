@@ -32,7 +32,7 @@
                 <div class="col-md-6">
                     <div class="panel panel-info">
                         <div class="panel-heading panel">
-                            <div class="panel-title">
+                            <div class="panel-title text-center">
                                 物资管理
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                 <div class="col-md-6">
                     <div class="panel panel-info">
                         <div class="panel-heading panel">
-                            <div class="panel-title">
+                            <div class="panel-title text-center">
                                 日常查询
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                 <div class="col-md-6">
                     <div class="panel panel-info">
                         <div class="panel-heading panel">
-                            <div class="panel-title">
+                            <div class="panel-title text-center">
                                 物资条码
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                 <div class="col-md-6">
                     <div class="panel panel-info">
                         <div class="panel-heading panel">
-                            <div class="panel-title">
+                            <div class="panel-title text-center">
                                 系统设置
                             </div>
                         </div>
