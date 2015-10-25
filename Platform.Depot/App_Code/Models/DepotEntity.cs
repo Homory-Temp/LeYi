@@ -233,6 +233,17 @@ namespace Models
 {
     using System;
     
+    public enum CodeType : int
+    {
+        Catalog = 1,
+        Object = 2,
+        Single = 3
+    }
+}
+namespace Models
+{
+    using System;
+    
     [Flags]
     public enum DepotType : int
     {

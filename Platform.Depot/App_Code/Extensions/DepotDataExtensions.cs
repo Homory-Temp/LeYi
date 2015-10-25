@@ -1,6 +1,7 @@
 ﻿using Models;
 using System;
 using System.Linq;
+using System.Text;
 
 public static class DepotDataExtensions
 {
@@ -16,6 +17,13 @@ public static class DepotDataExtensions
         for (var i = 10; i < 16; i++)
             guidArray[i] = timeArray[i - 10];
         return new Guid(guidArray);
+    }
+
+    public static string ToQR(this DepotEntities db, CodeType type, int autoId)
+    {
+        StringBuilder sb = new StringBuilder(type.ToString().GetFirstChar());
+        sb.Append(autoId.ToString("X").PadLeft(11, '0'));
+        return sb.ToString();
     }
 
     public static void DepotAdd(this DepotEntities db, string name, Guid campusId, Guid userId, int ordinal, string defaultObjectView, string defaultObjectType, string objectTypes)
@@ -68,6 +76,11 @@ public static class DepotDataExtensions
         var depot = db.Depot.Single(o => o.Id == id);
         depot.State = State.停用;
         db.SaveChanges();
+    }
+
+    public static IQueryable<DepotCatalog> DepotCatalogLoad(this DepotEntities db, Guid depotId)
+    {
+        return db.DepotCatalog.Where(o => o.DepotId == depotId && o.State < State.停用).OrderBy(o => o.Ordinal).ThenBy(o => o.Name);
     }
 
     public static IQueryable<DepotDictionary> DepotDictionaryLoad(this DepotEntities db, Guid depotId, DictionaryType type)

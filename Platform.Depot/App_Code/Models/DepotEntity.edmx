@@ -466,6 +466,11 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="IsLeaf" Type="Boolean" Nullable="false" />
           <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EnumType Name="CodeType">
+          <Member Name="Catalog" Value="1" />
+          <Member Name="Object" Value="2" />
+          <Member Name="Single" Value="3" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
