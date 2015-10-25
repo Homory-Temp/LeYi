@@ -58,6 +58,74 @@
           <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="DepotFlow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotFlowX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectOrdinal" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotIn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ResponsibleId" Type="uniqueidentifier" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="AvailableAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotInX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="AvailableAmount" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="DepotObject">
           <Key>
             <PropertyRef Name="Id" />
@@ -131,6 +199,31 @@
           <Property Name="Rights" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotStatistics">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="Month" />
+          </Key>
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Month" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="StartAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="InAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="InMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LendAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LendMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ConsumeAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ConsumeMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OutAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OutMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="RedoAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="RedoMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
         <EntityType Name="DepotUserRole">
           <Key>
@@ -275,6 +368,102 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DepotFlow_DepotObject">
+          <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
+          <End Role="DepotFlow" Type="Self.DepotFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotFlow">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotFlowX_DepotObject">
+          <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
+          <End Role="DepotFlowX" Type="Self.DepotFlowX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotFlowX">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotIn_DepotObject">
+          <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
+          <End Role="DepotIn" Type="Self.DepotIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotIn">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotIn_DepotOrder">
+          <End Role="DepotOrder" Type="Self.DepotOrder" Multiplicity="1" />
+          <End Role="DepotIn" Type="Self.DepotIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotIn">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotInX_DepotIn">
+          <End Role="DepotIn" Type="Self.DepotIn" Multiplicity="1" />
+          <End Role="DepotInX" Type="Self.DepotInX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotInX">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotInX_DepotObject">
+          <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
+          <End Role="DepotInX" Type="Self.DepotInX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotInX">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotInX_DepotOrder">
+          <End Role="DepotOrder" Type="Self.DepotOrder" Multiplicity="1" />
+          <End Role="DepotInX" Type="Self.DepotInX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotInX">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotStatistics_DepotObject">
+          <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
+          <End Role="DepotStatistics" Type="Self.DepotStatistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotStatistics">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="ToPinYin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -283,10 +472,15 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <EntitySet Name="Depot" EntityType="Self.Depot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotCatalog" EntityType="Self.DepotCatalog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotDictionary" EntityType="Self.DepotDictionary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotFlow" EntityType="Self.DepotFlow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotFlowX" EntityType="Self.DepotFlowX" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotIn" EntityType="Self.DepotIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotInX" EntityType="Self.DepotInX" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotObject" EntityType="Self.DepotObject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotObjectCatalog" EntityType="Self.DepotObjectCatalog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotOrder" EntityType="Self.DepotOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotRole" EntityType="Self.DepotRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotStatistics" EntityType="Self.DepotStatistics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotUserRole" EntityType="Self.DepotUserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotCatalogTree" EntityType="Self.DepotCatalogTree" store:Type="Views" store:Schema="dbo">
@@ -360,6 +554,38 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             <End Role="DepotCatalog" EntitySet="DepotCatalog" />
             <End Role="DepotCatalog1" EntitySet="DepotCatalog" />
           </AssociationSet>
+          <AssociationSet Name="FK_DepotFlow_DepotObject" Association="Self.FK_DepotFlow_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotFlow" EntitySet="DepotFlow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotFlowX_DepotObject" Association="Self.FK_DepotFlowX_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotFlowX" EntitySet="DepotFlowX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotIn_DepotObject" Association="Self.FK_DepotIn_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotIn" EntitySet="DepotIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotIn_DepotOrder" Association="Self.FK_DepotIn_DepotOrder">
+            <End Role="DepotOrder" EntitySet="DepotOrder" />
+            <End Role="DepotIn" EntitySet="DepotIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotInX_DepotIn" Association="Self.FK_DepotInX_DepotIn">
+            <End Role="DepotIn" EntitySet="DepotIn" />
+            <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotInX_DepotObject" Association="Self.FK_DepotInX_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotInX_DepotOrder" Association="Self.FK_DepotInX_DepotOrder">
+            <End Role="DepotOrder" EntitySet="DepotOrder" />
+            <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotStatistics_DepotObject" Association="Self.FK_DepotStatistics_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotStatistics" EntitySet="DepotStatistics" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -402,6 +628,43 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             <End Role="DepotCatalog1" EntitySet="DepotCatalog" />
           </AssociationSet>
           <EntitySet Name="DepotObject" EntityType="DepotModel.DepotObject" />
+          <EntitySet Name="DepotFlow" EntityType="DepotModel.DepotFlow" />
+          <EntitySet Name="DepotFlowX" EntityType="DepotModel.DepotFlowX" />
+          <EntitySet Name="DepotIn" EntityType="DepotModel.DepotIn" />
+          <EntitySet Name="DepotInX" EntityType="DepotModel.DepotInX" />
+          <EntitySet Name="DepotStatistics" EntityType="DepotModel.DepotStatistics" />
+          <AssociationSet Name="FK_DepotFlow_DepotObject" Association="DepotModel.FK_DepotFlow_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotFlow" EntitySet="DepotFlow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotFlowX_DepotObject" Association="DepotModel.FK_DepotFlowX_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotFlowX" EntitySet="DepotFlowX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotIn_DepotObject" Association="DepotModel.FK_DepotIn_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotIn" EntitySet="DepotIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotIn_DepotOrder" Association="DepotModel.FK_DepotIn_DepotOrder">
+            <End Role="DepotOrder" EntitySet="DepotOrder" />
+            <End Role="DepotIn" EntitySet="DepotIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotInX_DepotIn" Association="DepotModel.FK_DepotInX_DepotIn">
+            <End Role="DepotIn" EntitySet="DepotIn" />
+            <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotInX_DepotObject" Association="DepotModel.FK_DepotInX_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotInX_DepotOrder" Association="DepotModel.FK_DepotInX_DepotOrder">
+            <End Role="DepotOrder" EntitySet="DepotOrder" />
+            <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotStatistics_DepotObject" Association="DepotModel.FK_DepotStatistics_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotStatistics" EntitySet="DepotStatistics" />
+          </AssociationSet>
         </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -493,6 +756,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="OperatorId" Type="Guid" Nullable="false" />
           <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotIn_DepotOrder" FromRole="DepotOrder" ToRole="DepotIn" />
+          <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotOrder" FromRole="DepotOrder" ToRole="DepotInX" />
         </EntityType>
         <EntityType Name="DepotUser">
           <Key>
@@ -673,7 +938,210 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <NavigationProperty Name="DepotFlow" Relationship="DepotModel.FK_DepotFlow_DepotObject" FromRole="DepotObject" ToRole="DepotFlow" />
+          <NavigationProperty Name="DepotFlowX" Relationship="DepotModel.FK_DepotFlowX_DepotObject" FromRole="DepotObject" ToRole="DepotFlowX" />
+          <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotIn_DepotObject" FromRole="DepotObject" ToRole="DepotIn" />
+          <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotObject" FromRole="DepotObject" ToRole="DepotInX" />
+          <NavigationProperty Name="DepotStatistics" Relationship="DepotModel.FK_DepotStatistics_DepotObject" FromRole="DepotObject" ToRole="DepotStatistics" />
         </EntityType>
+        <EntityType Name="DepotFlow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotFlow_DepotObject" FromRole="DepotFlow" ToRole="DepotObject" />
+        </EntityType>
+        <EntityType Name="DepotFlowX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectOrdinal" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotFlowX_DepotObject" FromRole="DepotFlowX" ToRole="DepotObject" />
+        </EntityType>
+        <EntityType Name="DepotIn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ResponsibleId" Type="Guid" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperatorId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PriceSet" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="AvailableAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotIn_DepotObject" FromRole="DepotIn" ToRole="DepotObject" />
+          <NavigationProperty Name="DepotOrder" Relationship="DepotModel.FK_DepotIn_DepotOrder" FromRole="DepotIn" ToRole="DepotOrder" />
+          <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotIn" FromRole="DepotIn" ToRole="DepotInX" />
+        </EntityType>
+        <EntityType Name="DepotInX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PriceSet" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="AvailableAmount" Type="Int32" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotInX_DepotIn" FromRole="DepotInX" ToRole="DepotIn" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotInX_DepotObject" FromRole="DepotInX" ToRole="DepotObject" />
+          <NavigationProperty Name="DepotOrder" Relationship="DepotModel.FK_DepotInX_DepotOrder" FromRole="DepotInX" ToRole="DepotOrder" />
+        </EntityType>
+        <EntityType Name="DepotStatistics">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="Month" />
+          </Key>
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="StartAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="InAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="InMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="LendAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="LendMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ConsumeAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ConsumeMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OutAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OutMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="RedoAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="RedoMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotStatistics_DepotObject" FromRole="DepotStatistics" ToRole="DepotObject" />
+        </EntityType>
+        <Association Name="FK_DepotFlow_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotFlow" Role="DepotFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotFlow">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotFlowX_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotFlowX" Role="DepotFlowX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotFlowX">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotIn_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotIn" Role="DepotIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotIn">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotIn_DepotOrder">
+          <End Type="DepotModel.DepotOrder" Role="DepotOrder" Multiplicity="1" />
+          <End Type="DepotModel.DepotIn" Role="DepotIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotIn">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotInX_DepotIn">
+          <End Type="DepotModel.DepotIn" Role="DepotIn" Multiplicity="1" />
+          <End Type="DepotModel.DepotInX" Role="DepotInX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotInX">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotInX_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotInX" Role="DepotInX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotInX">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotInX_DepotOrder">
+          <End Type="DepotModel.DepotOrder" Role="DepotOrder" Multiplicity="1" />
+          <End Type="DepotModel.DepotInX" Role="DepotInX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotInX">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotStatistics_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotStatistics" Role="DepotStatistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotStatistics">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -904,6 +1372,102 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
                 <ScalarProperty Name="PinYin" ColumnName="PinYin" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotFlow">
+            <EntityTypeMapping TypeName="DepotModel.DepotFlow">
+              <MappingFragment StoreEntitySet="DepotFlow">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotFlowX">
+            <EntityTypeMapping TypeName="DepotModel.DepotFlowX">
+              <MappingFragment StoreEntitySet="DepotFlowX">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ObjectOrdinal" ColumnName="ObjectOrdinal" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotIn">
+            <EntityTypeMapping TypeName="DepotModel.DepotIn">
+              <MappingFragment StoreEntitySet="DepotIn">
+                <ScalarProperty Name="AvailableAmount" ColumnName="AvailableAmount" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PriceSet" ColumnName="PriceSet" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ResponsibleId" ColumnName="ResponsibleId" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotInX">
+            <EntityTypeMapping TypeName="DepotModel.DepotInX">
+              <MappingFragment StoreEntitySet="DepotInX">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="AvailableAmount" ColumnName="AvailableAmount" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PriceSet" ColumnName="PriceSet" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotStatistics">
+            <EntityTypeMapping TypeName="DepotModel.DepotStatistics">
+              <MappingFragment StoreEntitySet="DepotStatistics">
+                <ScalarProperty Name="EndMoney" ColumnName="EndMoney" />
+                <ScalarProperty Name="EndAmount" ColumnName="EndAmount" />
+                <ScalarProperty Name="RedoMoney" ColumnName="RedoMoney" />
+                <ScalarProperty Name="RedoAmount" ColumnName="RedoAmount" />
+                <ScalarProperty Name="OutMoney" ColumnName="OutMoney" />
+                <ScalarProperty Name="OutAmount" ColumnName="OutAmount" />
+                <ScalarProperty Name="ConsumeMoney" ColumnName="ConsumeMoney" />
+                <ScalarProperty Name="ConsumeAmount" ColumnName="ConsumeAmount" />
+                <ScalarProperty Name="LendMoney" ColumnName="LendMoney" />
+                <ScalarProperty Name="LendAmount" ColumnName="LendAmount" />
+                <ScalarProperty Name="InMoney" ColumnName="InMoney" />
+                <ScalarProperty Name="InAmount" ColumnName="InAmount" />
+                <ScalarProperty Name="StartMoney" ColumnName="StartMoney" />
+                <ScalarProperty Name="StartAmount" ColumnName="StartAmount" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
