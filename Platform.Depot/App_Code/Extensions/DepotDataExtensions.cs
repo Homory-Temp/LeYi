@@ -150,4 +150,32 @@ public static class DepotDataExtensions
         }
         db.SaveChanges();
     }
+
+    public static void DepotOrderAdd(this DepotEntities db, Guid id, Guid depotId, string name, string receipt, string orderSource, string usageTarget, string note, decimal toPay, decimal paid, Guid? brokerageId, Guid? keeperId, DateTime orderTime, Guid operatorId)
+    {
+        var order = new DepotOrder
+        {
+            Id = id,
+            DepotId = depotId,
+            Name = name,
+            Receipt = receipt,
+            OrderSource = orderSource,
+            UsageTarget = usageTarget,
+            Note = note,
+            ToPay = toPay,
+            Paid = paid,
+            BrokerageId = brokerageId,
+            KeeperId = keeperId,
+            Done = false,
+            OrderTime = orderTime,
+            RecordTime = orderTime,
+            OperatorId = operatorId,
+            OperationTime = DateTime.Now,
+            State = State.启用
+        };
+        db.DepotOrder.Add(order);
+        db.SaveChanges();
+        db.DepotDictionaryAdd(depotId, DictionaryType.购置来源, orderSource);
+        db.DepotDictionaryAdd(depotId, DictionaryType.使用对象, usageTarget);
+    }
 }

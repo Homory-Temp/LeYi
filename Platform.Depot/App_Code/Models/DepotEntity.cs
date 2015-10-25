@@ -94,6 +94,33 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotInRecord
+    {
+        public System.Guid Id { get; set; }
+        public System.Guid DepotId { get; set; }
+        public string 购置单号 { get; set; }
+        public string 发票编号 { get; set; }
+        public string 购置来源 { get; set; }
+        public string 使用对象 { get; set; }
+        public string 清单简述 { get; set; }
+        public decimal 应付金额 { get; set; }
+        public decimal 实付金额 { get; set; }
+        public Nullable<System.Guid> BrokerageId { get; set; }
+        public string 经手人 { get; set; }
+        public Nullable<System.Guid> KeeperId { get; set; }
+        public string 保管人 { get; set; }
+        public bool Done { get; set; }
+        public System.DateTime RecordTime { get; set; }
+        public System.Guid OperatorId { get; set; }
+        public string 操作人 { get; set; }
+        public System.DateTime OperationTime { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotMember
     {
         public System.Guid Id { get; set; }
@@ -173,7 +200,7 @@ namespace Models
         public System.DateTime RecordTime { get; set; }
         public System.Guid OperatorId { get; set; }
         public System.DateTime OperationTime { get; set; }
-        public int State { get; set; }
+        public State State { get; set; }
     }
 }
 namespace Models

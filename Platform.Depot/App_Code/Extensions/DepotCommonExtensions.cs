@@ -15,6 +15,16 @@ public static class DepotCommonExtensions
         return decode ? HttpContext.Current.Server.UrlDecode(HttpContext.Current.Request.QueryString[key]) : HttpContext.Current.Request.QueryString[key];
     }
 
+    public static string ToDay(this object time)
+    {
+        return DateTime.Parse(time.ToString()).ToString("yyyy-MM-dd");
+    }
+
+    public static string ToMoney(this object money)
+    {
+        return decimal.Parse(money.ToString()).ToString("F2");
+    }
+
     public static string GetFirstChar(this string value)
     {
         return value.None() ? string.Empty : value[0].ToString();

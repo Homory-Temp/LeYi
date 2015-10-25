@@ -164,6 +164,43 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotCreator' does not have a prim
           <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotInRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotInRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="购置单号" />
+            <PropertyRef Name="发票编号" />
+            <PropertyRef Name="购置来源" />
+            <PropertyRef Name="使用对象" />
+            <PropertyRef Name="清单简述" />
+            <PropertyRef Name="应付金额" />
+            <PropertyRef Name="实付金额" />
+            <PropertyRef Name="Done" />
+            <PropertyRef Name="RecordTime" />
+            <PropertyRef Name="OperatorId" />
+            <PropertyRef Name="OperationTime" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="购置单号" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="发票编号" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="购置来源" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="使用对象" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="清单简述" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="应付金额" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="实付金额" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="BrokerageId" Type="uniqueidentifier" />
+          <Property Name="经手人" Type="nvarchar" MaxLength="64" />
+          <Property Name="KeeperId" Type="uniqueidentifier" />
+          <Property Name="保管人" Type="nvarchar" MaxLength="64" />
+          <Property Name="Done" Type="bit" Nullable="false" />
+          <Property Name="RecordTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="操作人" Type="nvarchar" MaxLength="64" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Platform_LY.dbo.DepotMember' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DepotMember">
           <Key>
@@ -221,6 +258,29 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
     [DepotCreator].[CampusName] AS [CampusName]
     FROM [dbo].[DepotCreator] AS [DepotCreator]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="DepotInRecord" EntityType="Self.DepotInRecord" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [DepotInRecord].[Id] AS [Id],
+              [DepotInRecord].[DepotId] AS [DepotId],
+              [DepotInRecord].[购置单号] AS [购置单号],
+              [DepotInRecord].[发票编号] AS [发票编号],
+              [DepotInRecord].[购置来源] AS [购置来源],
+              [DepotInRecord].[使用对象] AS [使用对象],
+              [DepotInRecord].[清单简述] AS [清单简述],
+              [DepotInRecord].[应付金额] AS [应付金额],
+              [DepotInRecord].[实付金额] AS [实付金额],
+              [DepotInRecord].[BrokerageId] AS [BrokerageId],
+              [DepotInRecord].[经手人] AS [经手人],
+              [DepotInRecord].[KeeperId] AS [KeeperId],
+              [DepotInRecord].[保管人] AS [保管人],
+              [DepotInRecord].[Done] AS [Done],
+              [DepotInRecord].[RecordTime] AS [RecordTime],
+              [DepotInRecord].[OperatorId] AS [OperatorId],
+              [DepotInRecord].[操作人] AS [操作人],
+              [DepotInRecord].[OperationTime] AS [OperationTime]
+              FROM [dbo].[DepotInRecord] AS [DepotInRecord]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="DepotMember" EntityType="Self.DepotMember" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DepotMember].[Id] AS [Id], 
@@ -275,8 +335,9 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <EntitySet Name="DepotMember" EntityType="DepotModel.DepotMember" />
           <EntitySet Name="DepotObjectCatalog" EntityType="DepotModel.DepotObjectCatalog" />
           <FunctionImport Name="ToPinYin" ReturnType="Collection(String)">
-            <Parameter Name="Name" Mode="In" Type="String" />
+          <Parameter Name="Name" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="DepotInRecord" EntityType="DepotModel.DepotInRecord" />
         </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -391,7 +452,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="RecordTime" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="OperatorId" Type="Guid" Nullable="false" />
           <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
         </EntityType>
         <EntityType Name="DepotUser">
           <Key>
@@ -471,6 +532,41 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Member Name="Object" Value="2" />
           <Member Name="Single" Value="3" />
         </EnumType>
+        <EntityType Name="DepotInRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="购置单号" />
+            <PropertyRef Name="发票编号" />
+            <PropertyRef Name="购置来源" />
+            <PropertyRef Name="使用对象" />
+            <PropertyRef Name="清单简述" />
+            <PropertyRef Name="应付金额" />
+            <PropertyRef Name="实付金额" />
+            <PropertyRef Name="Done" />
+            <PropertyRef Name="RecordTime" />
+            <PropertyRef Name="OperatorId" />
+            <PropertyRef Name="OperationTime" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="购置单号" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="发票编号" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="购置来源" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="使用对象" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="清单简述" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="应付金额" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="实付金额" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="BrokerageId" Type="Guid" />
+          <Property Name="经手人" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="KeeperId" Type="Guid" />
+          <Property Name="保管人" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Done" Type="Boolean" Nullable="false" />
+          <Property Name="RecordTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperatorId" Type="Guid" Nullable="false" />
+          <Property Name="操作人" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -661,6 +757,30 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="ToPinYin" FunctionName="DepotModel.Store.ToPinYin" />
+          <EntitySetMapping Name="DepotInRecord">
+            <EntityTypeMapping TypeName="DepotModel.DepotInRecord">
+              <MappingFragment StoreEntitySet="DepotInRecord">
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="操作人" ColumnName="操作人" />
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="RecordTime" ColumnName="RecordTime" />
+                <ScalarProperty Name="Done" ColumnName="Done" />
+                <ScalarProperty Name="保管人" ColumnName="保管人" />
+                <ScalarProperty Name="KeeperId" ColumnName="KeeperId" />
+                <ScalarProperty Name="经手人" ColumnName="经手人" />
+                <ScalarProperty Name="BrokerageId" ColumnName="BrokerageId" />
+                <ScalarProperty Name="实付金额" ColumnName="实付金额" />
+                <ScalarProperty Name="应付金额" ColumnName="应付金额" />
+                <ScalarProperty Name="清单简述" ColumnName="清单简述" />
+                <ScalarProperty Name="使用对象" ColumnName="使用对象" />
+                <ScalarProperty Name="购置来源" ColumnName="购置来源" />
+                <ScalarProperty Name="发票编号" ColumnName="发票编号" />
+                <ScalarProperty Name="购置单号" ColumnName="购置单号" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

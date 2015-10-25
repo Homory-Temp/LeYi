@@ -37,6 +37,30 @@ public class DepotControlSingle : DepotControl, IDepotSingle
         }
     }
 
+    public bool RightRoot
+    {
+        get
+        {
+            return DepotRights.Contains("R") || DepotRights.Contains("*");
+        }
+    }
+
+    public bool RightAction
+    {
+        get
+        {
+            return DepotRights.Contains("A") || DepotRights.Contains("*");
+        }
+    }
+
+    public bool RightQuery
+    {
+        get
+        {
+            return DepotRights.Contains("Q") || DepotRights.Contains("*");
+        }
+    }
+
     protected override void OnLoad(EventArgs e)
     {
         if (string.IsNullOrEmpty(Request.QueryString["DepotId"]))

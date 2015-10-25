@@ -40,6 +40,7 @@ namespace Models
         public virtual DbSet<DepotCreator> DepotCreator { get; set; }
         public virtual DbSet<DepotMember> DepotMember { get; set; }
         public virtual DbSet<DepotObjectCatalog> DepotObjectCatalog { get; set; }
+        public virtual DbSet<DepotInRecord> DepotInRecord { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {
