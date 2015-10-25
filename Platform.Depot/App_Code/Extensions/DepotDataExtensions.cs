@@ -18,7 +18,7 @@ public static class DepotDataExtensions
         return new Guid(guidArray);
     }
 
-    public static void DepotAdd(this DepotEntities db, string name, Guid campusId, Guid userId, int ordinal, string defaultObjectView, string defaultObjectType, string objectTypes, DepotType type, State state)
+    public static void DepotAdd(this DepotEntities db, string name, Guid campusId, Guid userId, int ordinal, string defaultObjectView, string defaultObjectType, string objectTypes)
     {
         var depot = new Depot
         {
@@ -29,8 +29,8 @@ public static class DepotDataExtensions
             DefaultObjectView = defaultObjectView[0].ToString(),
             DefaultObjectType = defaultObjectType[0].ToString(),
             ObjectTypes = objectTypes,
-            Type = type,
-            State = state
+            Type = DepotType.通用库,
+            State = State.启用
         };
         db.Depot.Add(depot);
         var depotRole = new DepotRole
@@ -100,5 +100,41 @@ public static class DepotDataExtensions
             db.DepotDictionary.Remove(dictionary);
             db.SaveChanges();
         }
+    }
+
+    public static IQueryable<DepotUser> DepotUserLoad(this DepotEntities db, Guid campusId)
+    {
+        return db.DepotUser.Where(o => o.CampusId == campusId).OrderBy(o => o.Name);
+    }
+
+    public static IQueryable<DepotRole> DepotRoleLoad(this DepotEntities db, Guid depotId)
+    {
+        return db.DepotRole.Where(o => o.DepotId == depotId && o.State < State.停用).OrderBy(o => o.State).ThenBy(o => o.Ordinal);
+    }
+
+    public static void DepotRoleAddOrUpdate(this DepotEntities db, Guid depotId, Guid id, string name, string rights, int ordinal)
+    {
+        var count = db.DepotRoleLoad(depotId).Count(o => o.Id == id);
+        if (count == 0)
+        {
+            var role = new DepotRole
+            {
+                Id = id,
+                DepotId = depotId,
+                Name = name,
+                Rights = rights,
+                Ordinal = ordinal,
+                State = State.启用
+            };
+            db.DepotRole.Add(role);
+        }
+        else
+        {
+            var role = db.DepotRoleLoad(depotId).Single(o => o.Id == id);
+            role.Name = name;
+            role.Rights = rights;
+            role.Ordinal = ordinal;
+        }
+        db.SaveChanges();
     }
 }
