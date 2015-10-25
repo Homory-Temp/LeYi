@@ -13,6 +13,18 @@ public partial class DepotAction_Object : DepotPageSingle
             tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
             tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
             tree.DataBind();
+            if (!"CatalogId".Query().None())
+            {
+                var cid = "CatalogId".Query();
+                if (tree.GetAllNodes().Count(o => o.Value == cid) == 1)
+                {
+                    var node = tree.GetAllNodes().Single(o => o.Value == cid);
+                    node.Selected = true;
+                    node.ExpandParentNodes();
+                    node.ExpandChildNodes();
+                    tree0.Nodes[0].Selected = false;
+                }
+            }
             if (Depot.DefaultObjectView == "Simple".GetFirstChar())
             {
                 view_simple.Attributes["class"] = "btn btn-warning";
@@ -108,7 +120,7 @@ public partial class DepotAction_Object : DepotPageSingle
 
     protected void delete_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/ObjectRemove?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+        Response.Redirect("~/DepotAction/ObjectRemove?DepotId={0}&ObjectId={1}&CatalogId={2}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"], CurrentNode.HasValue ? CurrentNode.Value : Guid.Empty));
     }
 
     protected void use_ServerClick(object sender, EventArgs e)

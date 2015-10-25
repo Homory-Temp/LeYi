@@ -143,6 +143,18 @@ public static class DepotDataExtensions
         db.DepotDictionaryAdd(depotId, DictionaryType.规格, specification);
     }
 
+    public static void DepotObjectRemove(this DepotEntities db, Guid id)
+    {
+        var obj = db.DepotObject.Single(o => o.Id == id);
+        obj.State = State.停用;
+        var catalogs = db.DepotObjectCatalog.Where(o => o.ObjectId == id).ToList();
+        for (var i = 0; i < catalogs.Count(); i++)
+        {
+            db.DepotObjectCatalog.Remove(catalogs.ElementAt(i));
+        }
+        db.SaveChanges();
+    }
+
     public static IQueryable<DepotDictionary> DepotDictionaryLoad(this DepotEntities db, Guid depotId, DictionaryType type)
     {
         return db.DepotDictionary.Where(o => o.DepotId == depotId && o.Type == type).OrderBy(o => o.Name);
