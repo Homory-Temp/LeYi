@@ -9,6 +9,10 @@ public static class DepotCommonExtensions
     {
         return string.Format(format, objects);
     }
+    public static string EmptyWhenZero(this object value, string prefix = "（", string suffix = "）")
+    {
+        return (value == null || value.ToString().None() || value.ToString() == "0") ? string.Empty : "{0}{1}{2}".Formatted(prefix, value.ToString(), suffix);
+    }
 
     public static string Query(this string key, bool decode = false)
     {

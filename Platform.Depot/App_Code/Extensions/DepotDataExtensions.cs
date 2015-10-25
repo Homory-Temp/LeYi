@@ -1,5 +1,6 @@
 ﻿using Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -81,6 +82,24 @@ public static class DepotDataExtensions
     public static IQueryable<DepotCatalog> DepotCatalogLoad(this DepotEntities db, Guid depotId)
     {
         return db.DepotCatalog.Where(o => o.DepotId == depotId && o.State < State.停用).OrderBy(o => o.Ordinal).ThenBy(o => o.Name);
+    }
+
+    public static IQueryable<DepotCatalogTree> DepotCatalogTreeLoad(this DepotEntities db, Guid depotId)
+    {
+        return db.DepotCatalogTree.Where(o => o.DepotId == depotId).OrderBy(o => o.Ordinal).ThenBy(o => o.Name);
+    }
+
+    public static IEnumerable<DepotObject> DepotObjectLoad(this DepotEntities db, Guid depotId, Guid? catalogId)
+    {
+        if (catalogId.HasValue)
+        {
+            var id = catalogId.Value;
+            return db.DepotCatalog.Where(o => o.DepotId == depotId && o.Id == id && o.State < State.停用).Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).ToList().Join(db.DepotObject.Where(o => o.State < State.停用), o => o, o => o.Id, (oc, o) => o);
+        }
+        else
+        {
+            return db.DepotCatalog.Where(o => o.DepotId == depotId && o.State < State.停用).Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).ToList().Join(db.DepotObject.Where(o => o.State < State.停用), o => o, o => o.Id, (oc, o) => o);
+        }
     }
 
     public static IQueryable<DepotDictionary> DepotDictionaryLoad(this DepotEntities db, Guid depotId, DictionaryType type)

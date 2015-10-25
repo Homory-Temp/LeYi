@@ -30,7 +30,6 @@ namespace Models
         public virtual DbSet<Depot> Depot { get; set; }
         public virtual DbSet<DepotCatalog> DepotCatalog { get; set; }
         public virtual DbSet<DepotDictionary> DepotDictionary { get; set; }
-        public virtual DbSet<DepotObject> DepotObject { get; set; }
         public virtual DbSet<DepotRole> DepotRole { get; set; }
         public virtual DbSet<DepotUserRole> DepotUserRole { get; set; }
         public virtual DbSet<DepotOrder> DepotOrder { get; set; }
@@ -41,6 +40,8 @@ namespace Models
         public virtual DbSet<DepotMember> DepotMember { get; set; }
         public virtual DbSet<DepotObjectCatalog> DepotObjectCatalog { get; set; }
         public virtual DbSet<DepotInRecord> DepotInRecord { get; set; }
+        public virtual DbSet<DepotCatalogTree> DepotCatalogTree { get; set; }
+        public virtual DbSet<DepotObject> DepotObject { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {

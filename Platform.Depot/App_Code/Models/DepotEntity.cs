@@ -66,6 +66,26 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotCatalogTree
+    {
+        public System.Guid Id { get; set; }
+        public Nullable<System.Guid> ParentId { get; set; }
+        public System.Guid TopId { get; set; }
+        public System.Guid DepotId { get; set; }
+        public string Name { get; set; }
+        public string PinYin { get; set; }
+        public int Ordinal { get; set; }
+        public int State { get; set; }
+        public int AutoId { get; set; }
+        public string Code { get; set; }
+        public int Count { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotCreator
     {
         public System.Guid Id { get; set; }
@@ -161,6 +181,8 @@ namespace Models
         public State State { get; set; }
         public int AutoId { get; set; }
         public string Code { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Money { get; set; }
     }
 }
 namespace Models

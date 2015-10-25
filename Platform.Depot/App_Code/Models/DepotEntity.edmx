@@ -85,6 +85,8 @@
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="AutoId" Type="int" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
         <EntityType Name="DepotObjectCatalog">
           <Key>
@@ -145,6 +147,33 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TimeStamp" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotCatalogTree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotCatalogTree">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="TopId" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="PinYin" />
+            <PropertyRef Name="Ordinal" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="AutoId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Count" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="TopId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Platform_LY.dbo.DepotCreator' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -248,6 +277,21 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <EntitySet Name="DepotRole" EntityType="Self.DepotRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotUserRole" EntityType="Self.DepotUserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotCatalogTree" EntityType="Self.DepotCatalogTree" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotCatalogTree].[Id] AS [Id], 
+    [DepotCatalogTree].[ParentId] AS [ParentId], 
+    [DepotCatalogTree].[TopId] AS [TopId], 
+    [DepotCatalogTree].[DepotId] AS [DepotId], 
+    [DepotCatalogTree].[Name] AS [Name], 
+    [DepotCatalogTree].[PinYin] AS [PinYin], 
+    [DepotCatalogTree].[Ordinal] AS [Ordinal], 
+    [DepotCatalogTree].[State] AS [State], 
+    [DepotCatalogTree].[AutoId] AS [AutoId], 
+    [DepotCatalogTree].[Code] AS [Code], 
+    [DepotCatalogTree].[Count] AS [Count]
+    FROM [dbo].[DepotCatalogTree] AS [DepotCatalogTree]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="DepotCreator" EntityType="Self.DepotCreator" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DepotCreator].[Id] AS [Id], 
@@ -259,27 +303,26 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
     FROM [dbo].[DepotCreator] AS [DepotCreator]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="DepotInRecord" EntityType="Self.DepotInRecord" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>
-              SELECT
-              [DepotInRecord].[Id] AS [Id],
-              [DepotInRecord].[DepotId] AS [DepotId],
-              [DepotInRecord].[购置单号] AS [购置单号],
-              [DepotInRecord].[发票编号] AS [发票编号],
-              [DepotInRecord].[购置来源] AS [购置来源],
-              [DepotInRecord].[使用对象] AS [使用对象],
-              [DepotInRecord].[清单简述] AS [清单简述],
-              [DepotInRecord].[应付金额] AS [应付金额],
-              [DepotInRecord].[实付金额] AS [实付金额],
-              [DepotInRecord].[BrokerageId] AS [BrokerageId],
-              [DepotInRecord].[经手人] AS [经手人],
-              [DepotInRecord].[KeeperId] AS [KeeperId],
-              [DepotInRecord].[保管人] AS [保管人],
-              [DepotInRecord].[Done] AS [Done],
-              [DepotInRecord].[RecordTime] AS [RecordTime],
-              [DepotInRecord].[OperatorId] AS [OperatorId],
-              [DepotInRecord].[操作人] AS [操作人],
-              [DepotInRecord].[OperationTime] AS [OperationTime]
-              FROM [dbo].[DepotInRecord] AS [DepotInRecord]</DefiningQuery>
+            <DefiningQuery>SELECT 
+    [DepotInRecord].[Id] AS [Id], 
+    [DepotInRecord].[DepotId] AS [DepotId], 
+    [DepotInRecord].[购置单号] AS [购置单号], 
+    [DepotInRecord].[发票编号] AS [发票编号], 
+    [DepotInRecord].[购置来源] AS [购置来源], 
+    [DepotInRecord].[使用对象] AS [使用对象], 
+    [DepotInRecord].[清单简述] AS [清单简述], 
+    [DepotInRecord].[应付金额] AS [应付金额], 
+    [DepotInRecord].[实付金额] AS [实付金额], 
+    [DepotInRecord].[BrokerageId] AS [BrokerageId], 
+    [DepotInRecord].[经手人] AS [经手人], 
+    [DepotInRecord].[KeeperId] AS [KeeperId], 
+    [DepotInRecord].[保管人] AS [保管人], 
+    [DepotInRecord].[Done] AS [Done], 
+    [DepotInRecord].[RecordTime] AS [RecordTime], 
+    [DepotInRecord].[OperatorId] AS [OperatorId], 
+    [DepotInRecord].[操作人] AS [操作人], 
+    [DepotInRecord].[OperationTime] AS [OperationTime]
+    FROM [dbo].[DepotInRecord] AS [DepotInRecord]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="DepotMember" EntityType="Self.DepotMember" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -324,7 +367,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <EntitySet Name="Depot" EntityType="Self.Depot" />
           <EntitySet Name="DepotCatalog" EntityType="DepotModel.DepotCatalog" />
           <EntitySet Name="DepotDictionary" EntityType="DepotModel.DepotDictionary" />
-          <EntitySet Name="DepotObject" EntityType="DepotModel.DepotObject" />
           <EntitySet Name="DepotRole" EntityType="DepotModel.DepotRole" />
           <EntitySet Name="DepotUserRole" EntityType="DepotModel.DepotUserRole" />
           <EntitySet Name="DepotOrder" EntityType="DepotModel.DepotOrder" />
@@ -338,6 +380,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Parameter Name="Name" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="DepotInRecord" EntityType="DepotModel.DepotInRecord" />
+          <EntitySet Name="DepotCatalogTree" EntityType="DepotModel.DepotCatalogTree" />
+          <EntitySet Name="DepotObject" EntityType="DepotModel.DepotObject" />
         </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -376,34 +420,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="Type" Type="DepotModel.DictionaryType" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="DepotObject">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Single" Type="Boolean" Nullable="false" />
-          <Property Name="Consumable" Type="Boolean" Nullable="false" />
-          <Property Name="Fixed" Type="Boolean" Nullable="false" />
-          <Property Name="SerialA" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="SerialB" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="SerialC" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="SerialD" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Low" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="High" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="ImageA" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ImageB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ImageC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ImageD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Ordinal" Type="Int32" Nullable="false" />
-          <Property Name="State" Type="DepotModel.State" Nullable="false" />
-          <Property Name="AutoId" Type="Int32" Nullable="false" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EnumType Name="DictionaryType">
           <Member Name="单位" Value="1" />
@@ -567,6 +583,61 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="操作人" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
+        <EntityType Name="DepotCatalogTree">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="TopId" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="PinYin" />
+            <PropertyRef Name="Ordinal" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="AutoId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Count" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="TopId" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotObject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Single" Type="Boolean" Nullable="false" />
+          <Property Name="Consumable" Type="Boolean" Nullable="false" />
+          <Property Name="Fixed" Type="Boolean" Nullable="false" />
+          <Property Name="SerialA" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialB" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialC" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialD" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Low" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="High" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ImageA" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -611,35 +682,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DepotObject">
-            <EntityTypeMapping TypeName="DepotModel.DepotObject">
-              <MappingFragment StoreEntitySet="DepotObject">
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="ImageD" ColumnName="ImageD" />
-                <ScalarProperty Name="ImageC" ColumnName="ImageC" />
-                <ScalarProperty Name="ImageB" ColumnName="ImageB" />
-                <ScalarProperty Name="ImageA" ColumnName="ImageA" />
-                <ScalarProperty Name="High" ColumnName="High" />
-                <ScalarProperty Name="Low" ColumnName="Low" />
-                <ScalarProperty Name="Specification" ColumnName="Specification" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="SerialD" ColumnName="SerialD" />
-                <ScalarProperty Name="SerialC" ColumnName="SerialC" />
-                <ScalarProperty Name="SerialB" ColumnName="SerialB" />
-                <ScalarProperty Name="SerialA" ColumnName="SerialA" />
-                <ScalarProperty Name="Fixed" ColumnName="Fixed" />
-                <ScalarProperty Name="Consumable" ColumnName="Consumable" />
-                <ScalarProperty Name="Single" ColumnName="Single" />
-                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -777,6 +819,54 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
                 <ScalarProperty Name="发票编号" ColumnName="发票编号" />
                 <ScalarProperty Name="购置单号" ColumnName="购置单号" />
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotCatalogTree">
+            <EntityTypeMapping TypeName="DepotModel.DepotCatalogTree">
+              <MappingFragment StoreEntitySet="DepotCatalogTree">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="TopId" ColumnName="TopId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotObject">
+            <EntityTypeMapping TypeName="DepotModel.DepotObject">
+              <MappingFragment StoreEntitySet="DepotObject">
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ImageD" ColumnName="ImageD" />
+                <ScalarProperty Name="ImageC" ColumnName="ImageC" />
+                <ScalarProperty Name="ImageB" ColumnName="ImageB" />
+                <ScalarProperty Name="ImageA" ColumnName="ImageA" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="SerialD" ColumnName="SerialD" />
+                <ScalarProperty Name="SerialC" ColumnName="SerialC" />
+                <ScalarProperty Name="SerialB" ColumnName="SerialB" />
+                <ScalarProperty Name="SerialA" ColumnName="SerialA" />
+                <ScalarProperty Name="Fixed" ColumnName="Fixed" />
+                <ScalarProperty Name="Consumable" ColumnName="Consumable" />
+                <ScalarProperty Name="Single" ColumnName="Single" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
