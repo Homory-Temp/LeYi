@@ -70,7 +70,7 @@ public partial class DepotQuery_In : DepotPageSingle
 
     protected void edit_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/StoreAction/OrderEdit?DepotId={0}&OrderId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"].GlobalId()));
+        Response.Redirect("~/DepotAction/OrderEdit?DepotId={0}&OrderId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"].GlobalId()));
     }
 
     protected void in_ServerClick(object sender, EventArgs e)
