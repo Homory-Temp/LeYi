@@ -15,7 +15,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle navbar-link" data-toggle="dropdown">物资管理</a>
                         <ul class="dropdown-menu">
-                            <li><a href='<%= "../DepotAction/Target?DepotId={0}".Formatted(Depot.Id) %>'>购置登记</a></li>
+                            <li><a href='<%= "../DepotAction/Order?DepotId={0}".Formatted(Depot.Id) %>'>购置登记</a></li>
                             <li><a href='<%= "../DepotAction/In?DepotId={0}".Formatted(Depot.Id) %>'>物资入库</a></li>
                             <li><a href='<%= "../DepotAction/Use?DepotId={0}".Formatted(Depot.Id) %>'>物资出库</a></li>
                             <li><a href='<%= "../DepotAction/Return?DepotId={0}".Formatted(Depot.Id) %>'>物资归还</a></li>

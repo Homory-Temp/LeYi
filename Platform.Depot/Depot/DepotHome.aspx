@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Target?DepotId={0}".Formatted(Depot.Id) %>'>购置登记</a>
+                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Order?DepotId={0}".Formatted(Depot.Id) %>'>购置登记</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/In?DepotId={0}".Formatted(Depot.Id) %>'>物资入库</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Use?DepotId={0}".Formatted(Depot.Id) %>'>物资出库</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Return?DepotId={0}".Formatted(Depot.Id) %>'>物资归还</a>
