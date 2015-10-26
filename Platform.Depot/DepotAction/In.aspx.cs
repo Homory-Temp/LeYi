@@ -62,10 +62,12 @@ public partial class DepotAction_In : DepotPageSingle
                 x.Value = list.ToJson();
                 x1.Visible = x2.Visible = x3.Visible = x4.Visible = false;
                 plus.Visible = false;
+                back.Visible = true;
             }
             else
             {
                 plus.Visible = true;
+                back.Visible = false;
             }
         }
     }
@@ -219,5 +221,10 @@ public partial class DepotAction_In : DepotPageSingle
     {
         DoIn(true);
         Response.Redirect("~/DepotQuery/InPrint?DepotId={0}&OrderId={1}".Formatted(Depot.Id, target.SelectedValue));
+    }
+
+    protected void back_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/Object?DepotId={0}".Formatted(Depot.Id));
     }
 }

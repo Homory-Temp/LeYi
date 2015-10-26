@@ -172,7 +172,8 @@
                     </telerik:RadListView>
                 </div>
                 <div class="col-md-4">
-                    <input type="button" class="btn btn-tumblr" id="plus" runat="server" value="+" onserverclick="plus_ServerClick" />
+                    <input type="button" class="btn btn-tumblr" id="plus" runat="server" value="+" title="增加" onserverclick="plus_ServerClick" />
+                    <input type="button" class="btn btn-tumblr" id="back" runat="server" value="<<" title="返回" onserverclick="back_ServerClick" />
                     <input type="hidden" id="counter" runat="server" value="0" />
                     <input type="hidden" id="x" runat="server" value="" />
                 </div>

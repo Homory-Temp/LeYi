@@ -38,6 +38,11 @@ public partial class Control_ObjectIn : DepotControlSingle
             }
             age.Text = @in.Age;
         }
+        if (!"ObjectId".Query().None())
+        {
+            catalog.Enabled = false;
+            obj.Enabled = false;
+        }
     }
 
     public int ItemIndex
