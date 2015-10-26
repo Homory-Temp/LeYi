@@ -53,6 +53,7 @@ public partial class DepotScan_Use : DepotPageSingle
             show = true;
         }
         x1.Visible = x2.Visible = show;
+        Reset();
     }
 
     protected void plus_ServerClick(object sender, EventArgs e)
