@@ -590,6 +590,34 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotUseXRecord
+    {
+        public System.Guid Id { get; set; }
+        public System.Guid CatalogId { get; set; }
+        public int Level { get; set; }
+        public bool IsVirtual { get; set; }
+        public System.Guid UseId { get; set; }
+        public System.Guid InXId { get; set; }
+        public System.DateTime Time { get; set; }
+        public int Type { get; set; }
+        public string Name { get; set; }
+        public string Unit { get; set; }
+        public decimal Amount { get; set; }
+        public decimal PriceSet { get; set; }
+        public decimal Money { get; set; }
+        public string Age { get; set; }
+        public string UserName { get; set; }
+        public string OperatorName { get; set; }
+        public string Note { get; set; }
+        public System.Guid UserId { get; set; }
+        public System.Guid OperatorId { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class UserOnline
     {
         public System.Guid Id { get; set; }

@@ -44,6 +44,7 @@
         <AssociationConnector Association="DepotModel.FK_DepotUseX_DepotInX" />
         <AssociationConnector Association="DepotModel.FK_DepotUseX_DepotObject" />
         <AssociationConnector Association="DepotModel.FK_DepotUseX_DepotUse" />
+        <EntityTypeShape EntityType="DepotModel.DepotUseXRecord" Width="1.5" PointX="14.75" PointY="2.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

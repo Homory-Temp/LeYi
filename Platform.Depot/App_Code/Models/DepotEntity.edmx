@@ -459,6 +459,50 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotUseXRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="UseId" />
+            <PropertyRef Name="InXId" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="PriceSet" />
+            <PropertyRef Name="Money" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="OperatorName" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="OperatorId" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="IsVirtual" Type="bit" Nullable="false" />
+          <Property Name="UseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InXId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="OperatorName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Department_DepartmentParent">
           <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
           <End Role="Department1" Type="Self.Department" Multiplicity="*" />
@@ -762,6 +806,29 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
     [DepotUser].[CampusName] AS [CampusName]
     FROM [dbo].[DepotUser] AS [DepotUser]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="DepotUseXRecord" EntityType="Self.DepotUseXRecord" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotUseXRecord].[Id] AS [Id], 
+    [DepotUseXRecord].[CatalogId] AS [CatalogId], 
+    [DepotUseXRecord].[Level] AS [Level], 
+    [DepotUseXRecord].[IsVirtual] AS [IsVirtual], 
+    [DepotUseXRecord].[UseId] AS [UseId], 
+    [DepotUseXRecord].[InXId] AS [InXId], 
+    [DepotUseXRecord].[Time] AS [Time], 
+    [DepotUseXRecord].[Type] AS [Type], 
+    [DepotUseXRecord].[Name] AS [Name], 
+    [DepotUseXRecord].[Unit] AS [Unit], 
+    [DepotUseXRecord].[Amount] AS [Amount], 
+    [DepotUseXRecord].[PriceSet] AS [PriceSet], 
+    [DepotUseXRecord].[Money] AS [Money], 
+    [DepotUseXRecord].[Age] AS [Age], 
+    [DepotUseXRecord].[UserName] AS [UserName], 
+    [DepotUseXRecord].[OperatorName] AS [OperatorName], 
+    [DepotUseXRecord].[Note] AS [Note], 
+    [DepotUseXRecord].[UserId] AS [UserId], 
+    [DepotUseXRecord].[OperatorId] AS [OperatorId]
+    FROM [dbo].[DepotUseXRecord] AS [DepotUseXRecord]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Department_DepartmentParent" Association="Self.FK_Department_DepartmentParent">
             <End Role="Department" EntitySet="Department" />
             <End Role="Department1" EntitySet="Department" />
@@ -934,6 +1001,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             <Parameter Name="CatalogId" Mode="In" Type="Guid" />
             <Parameter Name="Level" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="DepotUseXRecord" EntityType="DepotModel.DepotUseXRecord" />
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -1605,6 +1673,48 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DepotUseXRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="UseId" />
+            <PropertyRef Name="InXId" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="PriceSet" />
+            <PropertyRef Name="Money" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="OperatorName" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="OperatorId" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
+          <Property Name="UseId" Type="Guid" Nullable="false" />
+          <Property Name="InXId" Type="Guid" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PriceSet" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="OperatorName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="OperatorId" Type="Guid" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2019,6 +2129,31 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="ToCatalog" FunctionName="DepotModel.Store.ToCatalog" />
+          <EntitySetMapping Name="DepotUseXRecord">
+            <EntityTypeMapping TypeName="DepotModel.DepotUseXRecord">
+              <MappingFragment StoreEntitySet="DepotUseXRecord">
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="PriceSet" ColumnName="PriceSet" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="InXId" ColumnName="InXId" />
+                <ScalarProperty Name="UseId" ColumnName="UseId" />
+                <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
