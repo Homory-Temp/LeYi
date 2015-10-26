@@ -1,4 +1,5 @@
 ﻿using Models;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,18 @@ using Telerik.Web.UI;
 
 public static class DepotCommonExtensions
 {
+    private static JsonSerializerSettings jsonSetting = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore, PreserveReferencesHandling = PreserveReferencesHandling.Objects };
+
+    public static string ToJson(this object entity)
+    {
+        return JsonConvert.SerializeObject(entity, jsonSetting);
+    }
+
+    public static T FromJson<T>(this string json)
+    {
+        return JsonConvert.DeserializeObject<T>(json, jsonSetting);
+    }
+
     public static string Formatted(this string format, params object[] objects)
     {
         return string.Format(format, objects);

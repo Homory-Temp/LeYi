@@ -35,9 +35,9 @@
             <script>
                 function calc(sender, args) {
                     var g_in_price;
-                    var id = sender.get_id().replace("amount", "").replace("perPrice", "");
+                    var id = sender.get_id().replace("amount", "").replace("priceSet", "");
                     var g_in_amount = $find(id + "amount").get_value();
-                    var g_in_price = $find(id + "perPrice").get_value();
+                    var g_in_price = $find(id + "priceSet").get_value();
                     $find(id + "money").set_value(g_in_amount * g_in_price);
                 }
                 function calcTotal(sender, args) {
@@ -92,7 +92,7 @@
                                     <th>购置单号</th>
                                     <th>发票编号</th>
                                     <th>购置时间</th>
-                                    <th>采购来源</th>
+                                    <th>购置来源</th>
                                     <th>使用对象</th>
                                     <th>应付金额</th>
                                     <th>实付金额</th>
@@ -109,8 +109,8 @@
                         <tr>
                             <td><%# Eval("购置单号") %></td>
                             <td><%# Eval("发票编号") %></td>
-                            <td><%# Eval("TimeNode").ToDay() %></td>
-                            <td><%# Eval("采购来源") %></td>
+                            <td><%# Eval("OrderTime").ToDay() %></td>
+                            <td><%# Eval("购置来源") %></td>
                             <td><%# Eval("使用对象") %></td>
                             <td><%# Eval("应付金额").ToMoney() %></td>
                             <td><%# Eval("实付金额").ToMoney() %></td>
@@ -136,6 +136,14 @@
                         入库物资选择
                     </div>
                 </div>
+                <div class="col-md-10">
+                    <telerik:RadDatePicker ID="inTime" runat="server" DateInput-Label="入库日期：" DateInput-LabelWidth="65" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="170" AutoPostBack="false">
+                        <DatePopupButton runat="server" Visible="false" />
+                        <Calendar runat="server">
+                            <FastNavigationSettings TodayButtonCaption="今日" OkButtonCaption="确认" CancelButtonCaption="取消"></FastNavigationSettings>
+                        </Calendar>
+                    </telerik:RadDatePicker>
+                </div>
             </div>
             <div class="row" id="x2" runat="server">
                 <div class="col-md-12">
@@ -148,10 +156,8 @@
                                     <th>单位</th>
                                     <th>规格</th>
                                     <th>库存</th>
-                                    <th>入库日期</th>
                                     <th>数量</th>
                                     <th>单价</th>
-                                    <th style="display: none;">优惠价</th>
                                     <th>合计</th>
                                     <th>年龄段</th>
                                     <th>存放地</th>

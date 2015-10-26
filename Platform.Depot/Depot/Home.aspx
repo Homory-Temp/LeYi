@@ -43,7 +43,7 @@
                                     <img src="../Content/Images/Store.png" />
                                 </div>
                             </div>
-                            <div class="row" onclick="top.location.href = '../StoreHome/Home?StoreId=<%# Eval("Id") %>';">
+                            <div class="row" onclick="top.location.href = '../Depot/DepotHome?DepotId=<%# Eval("Id") %>';">
                                 <div class="col-md-12">
                                     <div class="btn btn-lg btn-info" style="width: 150px;" runat="server"><%# Eval("Name") %></div>
                                 </div>

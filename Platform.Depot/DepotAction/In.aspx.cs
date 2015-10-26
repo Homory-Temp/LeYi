@@ -14,6 +14,7 @@ public partial class DepotAction_In : DepotPageSingle
         if (!IsPostBack)
         {
             period.SelectedDate = DateTime.Today;
+            inTime.SelectedDate = DateTime.Today;
             people.Items.Clear();
             people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "0", Selected = true });
             people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
@@ -59,11 +60,11 @@ public partial class DepotAction_In : DepotPageSingle
         var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
         var start = new DateTime(time.Year, time.Month, 1).AddMilliseconds(-1);
         var end = new DateTime(time.Year, time.Month, 1).AddMonths(1);
-        var list = DataContext.DepotInRecord.Where(o => o.DepotId == Depot.Id && o.OrderTime > start && o.OrderTime < end && o.Done == false).OrderByDescending(o => o.OrderTime).ToList();
+        var list = DataContext.DepotOrder.Where(o => o.DepotId == Depot.Id && o.OrderTime > start && o.OrderTime < end && o.Done == false).OrderByDescending(o => o.OrderTime).ToList();
         if (source.SelectedIndex > 0)
-            list = list.Where(o => o.购置来源 == source.SelectedItem.Text).ToList();
+            list = list.Where(o => o.OrderSource == source.SelectedItem.Text).ToList();
         if (usage.SelectedIndex > 0)
-            list = list.Where(o => o.使用对象 == usage.SelectedItem.Text).ToList();
+            list = list.Where(o => o.UsageTarget == usage.SelectedItem.Text).ToList();
         if (people.SelectedIndex > 0)
             list = list.Where(o => o.OperatorId == people.SelectedItem.Value.GlobalId()).ToList();
         target.DataSource = list;
@@ -117,22 +118,22 @@ public partial class DepotAction_In : DepotPageSingle
         else
         {
             var id = target.SelectedValue.GlobalId();
-            view_target.DataSource = DataContext.DepotOrder.Where(o => o.Id == id).ToList();
+            view_target.DataSource = DataContext.DepotInRecord.Where(o => o.Id == id).ToList();
             view_target.Visible = true;
         }
     }
 
     protected void plus_ServerClick(object sender, EventArgs e)
     {
-        //counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
-        //var toRem = view_obj.Items.Select(o => (o.FindControl("ObjectInBody") as Control_ObjectInBody)).Select(o => o.PeekValue()).ToList();
-        //x.Value = toRem.ToJson();
-        //view_obj.Rebind();
+        counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
+        var toRem = view_obj.Items.Select(o => (o.FindControl("ObjectIn") as Control_ObjectIn)).Select(o => o.PeekValue()).ToList();
+        x.Value = toRem.ToJson();
+        view_obj.Rebind();
     }
 
     protected void view_obj_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        //view_obj.DataSource = new int[(int.Parse(counter.Value))];
+        view_obj.DataSource = new int[(int.Parse(counter.Value))];
     }
 
     protected void do_in_ServerClick(object sender, EventArgs e)
@@ -174,16 +175,16 @@ public partial class DepotAction_In : DepotPageSingle
 
     protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
     {
-        //var c = e.Item.FindControl("ObjectInBody") as Control_ObjectInBody;
-        //var list = x.Value.Null() ? new List<CachedIn>() : x.Value.FromJson<List<CachedIn>>();
-        //if (list.Count < c.ItemIndex + 1)
-        //{
-        //    c.LoadDefaults(new CachedIn { TargetId = target.SelectedValue.GlobalId() });
-        //}
-        //else
-        //{
-        //    c.LoadDefaults(list[c.ItemIndex]);
-        //}
+        var c = e.Item.FindControl("ObjectIn") as Control_ObjectIn;
+        var list = x.Value.None() ? new List<InMemoryIn>() : x.Value.FromJson<List<InMemoryIn>>();
+        if (list.Count < c.ItemIndex + 1)
+        {
+            c.LoadDefaults(new InMemoryIn { OrderId = target.SelectedValue.GlobalId(), Time = inTime.SelectedDate.HasValue ? inTime.SelectedDate.Value.Date : DateTime.Today });
+        }
+        else
+        {
+            c.LoadDefaults(list[c.ItemIndex]);
+        }
     }
 
     protected void view_record_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)

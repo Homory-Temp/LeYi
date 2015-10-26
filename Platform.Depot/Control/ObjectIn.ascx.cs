@@ -9,15 +9,15 @@ public partial class Control_ObjectIn : DepotControlSingle
     {
         orderId.Value = @in.OrderId.ToString();
         var order = DataContext.DepotOrder.Single(o => o.Id == @in.OrderId);
-        catalog.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id);
+        catalog.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
         catalog.DataBind();
         age.Text = @in.Age;
         place.Text = @in.Place;
         amount.Value = (double?)@in.Amount;
+        amount.NumberFormat.DecimalDigits = Depot.Featured(DepotType.小数数量库) ? 2 : 0;
         priceSet.Value = (double?)@in.PriceSet;
         money.Value = (double?)@in.Money;
         note.Text = @in.Note;
-        time.SelectedDate = @in.Time;
         if (@in.CatalogId.HasValue && @in.CatalogId.Value != Guid.Empty)
         {
             var catalogId = @in.CatalogId.Value;
@@ -41,6 +41,11 @@ public partial class Control_ObjectIn : DepotControlSingle
         }
     }
 
+    public int ItemIndex
+    {
+        get; set;
+    }
+
     public InMemoryIn PeekValue()
     {
         var oid = orderId.Value.GlobalId();
@@ -48,7 +53,6 @@ public partial class Control_ObjectIn : DepotControlSingle
         result.OrderId = oid;
         result.CatalogId = catalog.SelectedValue == null ? (Guid?)null : catalog.SelectedValue.GlobalId();
         result.ObjectId = obj.SelectedValue == null || obj.Text.None() ? (Guid?)null : obj.SelectedValue.GlobalId();
-        result.Time = time.SelectedDate.HasValue ? time.SelectedDate.Value : DataContext.DepotOrder.Single(o => o.Id == oid).RecordTime;
         result.Amount = amount.Value.HasValue ? (decimal)amount.Value.Value : (decimal?)null;
         result.PriceSet = priceSet.Value.HasValue ? (decimal)priceSet.Value.Value : (decimal?)null;
         result.Money = money.Value.HasValue ? (decimal)money.Value.Value : (decimal?)null;
