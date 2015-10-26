@@ -244,6 +244,20 @@
           <Property Name="EndAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="EndMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
+        <EntityType Name="DepotUse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
         <EntityType Name="DepotUserRole">
           <Key>
             <PropertyRef Name="UserId" />
@@ -251,6 +265,22 @@
           </Key>
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="DepotRoleId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotUseX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InXId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ReturnedAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="UserOnline">
           <Key>
@@ -561,6 +591,54 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DepotUse_Depot">
+          <End Role="Depot" Type="Self.Depot" Multiplicity="1" />
+          <End Role="DepotUse" Type="Self.DepotUse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUse">
+              <PropertyRef Name="DepotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotUseX_DepotInX">
+          <End Role="DepotInX" Type="Self.DepotInX" Multiplicity="1" />
+          <End Role="DepotUseX" Type="Self.DepotUseX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotInX">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUseX">
+              <PropertyRef Name="InXId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotUseX_DepotObject">
+          <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
+          <End Role="DepotUseX" Type="Self.DepotUseX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUseX">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotUseX_DepotUse">
+          <End Role="DepotUse" Type="Self.DepotUse" Multiplicity="1" />
+          <End Role="DepotUseX" Type="Self.DepotUseX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotUse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUseX">
+              <PropertyRef Name="UseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="ToPinYin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -579,7 +657,9 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <EntitySet Name="DepotOrder" EntityType="Self.DepotOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotRole" EntityType="Self.DepotRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotStatistics" EntityType="Self.DepotStatistics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotUse" EntityType="Self.DepotUse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotUserRole" EntityType="Self.DepotUserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotUseX" EntityType="Self.DepotUseX" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotCatalogTree" EntityType="Self.DepotCatalogTree" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -722,6 +802,22 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             <End Role="DepotObject" EntitySet="DepotObject" />
             <End Role="DepotStatistics" EntitySet="DepotStatistics" />
           </AssociationSet>
+          <AssociationSet Name="FK_DepotUse_Depot" Association="Self.FK_DepotUse_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="DepotUse" EntitySet="DepotUse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotUseX_DepotInX" Association="Self.FK_DepotUseX_DepotInX">
+            <End Role="DepotInX" EntitySet="DepotInX" />
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotUseX_DepotObject" Association="Self.FK_DepotUseX_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotUseX_DepotUse" Association="Self.FK_DepotUseX_DepotUse">
+            <End Role="DepotUse" EntitySet="DepotUse" />
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -740,6 +836,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="ObjectTypes" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Type" Type="DepotModel.DepotType" Nullable="false" />
           <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <NavigationProperty Name="DepotUse" Relationship="DepotModel.FK_DepotUse_Depot" FromRole="Depot" ToRole="DepotUse" />
         </EntityType>
         <EntityContainer Name="DepotEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Depot" EntityType="Self.Depot" />
@@ -811,7 +908,25 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             <End Role="Department" EntitySet="Department" />
             <End Role="Department1" EntitySet="Department" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="DepotUse" EntityType="DepotModel.DepotUse" />
+          <AssociationSet Name="FK_DepotUse_Depot" Association="DepotModel.FK_DepotUse_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="DepotUse" EntitySet="DepotUse" />
+          </AssociationSet>
+          <EntitySet Name="DepotUseX" EntityType="DepotModel.DepotUseX" />
+          <AssociationSet Name="FK_DepotUseX_DepotInX" Association="DepotModel.FK_DepotUseX_DepotInX">
+            <End Role="DepotInX" EntitySet="DepotInX" />
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotUseX_DepotObject" Association="DepotModel.FK_DepotUseX_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotUseX_DepotUse" Association="DepotModel.FK_DepotUseX_DepotUse">
+            <End Role="DepotUse" EntitySet="DepotUse" />
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+          </AssociationSet>
+          </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
           <Member Name="停用" Value="2" />
@@ -1091,6 +1206,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotIn_DepotObject" FromRole="DepotObject" ToRole="DepotIn" />
           <NavigationProperty Name="DepotStatistics" Relationship="DepotModel.FK_DepotStatistics_DepotObject" FromRole="DepotObject" ToRole="DepotStatistics" />
           <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotObject" FromRole="DepotObject" ToRole="DepotInX" />
+          <NavigationProperty Name="DepotUseX" Relationship="DepotModel.FK_DepotUseX_DepotObject" FromRole="DepotObject" ToRole="DepotUseX" />
         </EntityType>
         <EntityType Name="DepotFlow">
           <Key>
@@ -1253,6 +1369,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotInX_DepotIn" FromRole="DepotInX" ToRole="DepotIn" />
           <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotInX_DepotObject" FromRole="DepotInX" ToRole="DepotObject" />
           <NavigationProperty Name="DepotOrder" Relationship="DepotModel.FK_DepotInX_DepotOrder" FromRole="DepotInX" ToRole="DepotOrder" />
+          <NavigationProperty Name="DepotUseX" Relationship="DepotModel.FK_DepotUseX_DepotInX" FromRole="DepotInX" ToRole="DepotUseX" />
         </EntityType>
         <Association Name="FK_DepotInX_DepotIn">
           <End Type="DepotModel.DepotIn" Role="DepotIn" Multiplicity="1" />
@@ -1388,6 +1505,93 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             </Principal>
             <Dependent Role="Department1">
               <PropertyRef Name="TopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DepotUse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperatorId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <NavigationProperty Name="Depot" Relationship="DepotModel.FK_DepotUse_Depot" FromRole="DepotUse" ToRole="Depot" />
+          <NavigationProperty Name="DepotUseX" Relationship="DepotModel.FK_DepotUseX_DepotUse" FromRole="DepotUse" ToRole="DepotUseX" />
+        </EntityType>
+        <Association Name="FK_DepotUse_Depot">
+          <End Type="DepotModel.Depot" Role="Depot" Multiplicity="1" />
+          <End Type="DepotModel.DepotUse" Role="DepotUse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUse">
+              <PropertyRef Name="DepotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="UseType">
+          <Member Name="领用" Value="1" />
+          <Member Name="借用" Value="2" />
+        </EnumType>
+        <EntityType Name="DepotUseX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="UseId" Type="Guid" Nullable="false" />
+          <Property Name="InXId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="DepotModel.UseType" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ReturnedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotUseX_DepotInX" FromRole="DepotUseX" ToRole="DepotInX" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotUseX_DepotObject" FromRole="DepotUseX" ToRole="DepotObject" />
+          <NavigationProperty Name="DepotUse" Relationship="DepotModel.FK_DepotUseX_DepotUse" FromRole="DepotUseX" ToRole="DepotUse" />
+        </EntityType>
+        <Association Name="FK_DepotUseX_DepotInX">
+          <End Type="DepotModel.DepotInX" Role="DepotInX" Multiplicity="1" />
+          <End Type="DepotModel.DepotUseX" Role="DepotUseX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotInX">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUseX">
+              <PropertyRef Name="InXId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotUseX_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotUseX" Role="DepotUseX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUseX">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotUseX_DepotUse">
+          <End Type="DepotModel.DepotUse" Role="DepotUse" Multiplicity="1" />
+          <End Type="DepotModel.DepotUseX" Role="DepotUseX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotUse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUseX">
+              <PropertyRef Name="UseId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1768,6 +1972,38 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TopId" ColumnName="TopId" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotUse">
+            <EntityTypeMapping TypeName="DepotModel.DepotUse">
+              <MappingFragment StoreEntitySet="DepotUse">
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotUseX">
+            <EntityTypeMapping TypeName="DepotModel.DepotUseX">
+              <MappingFragment StoreEntitySet="DepotUseX">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ReturnedAmount" ColumnName="ReturnedAmount" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="InXId" ColumnName="InXId" />
+                <ScalarProperty Name="UseId" ColumnName="UseId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

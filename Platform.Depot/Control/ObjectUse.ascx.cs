@@ -1,65 +1,74 @@
 ﻿using Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Control_ObjectIn : DepotControlSingle
+public partial class Control_ObjectUse : DepotControlSingle
 {
-    public void LoadDefaults(InMemoryIn @in)
+    public void LoadDefaults(InMemoryUse use)
     {
         catalog.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
         catalog.DataBind();
-        age.Text = @in.Age;
-        place.Text = @in.Place;
-        amount.Value = (double?)@in.Amount;
+        amount.Value = (double?)use.Amount;
         amount.NumberFormat.DecimalDigits = Depot.Featured(DepotType.小数数量库) ? 2 : 0;
-        priceSet.Value = (double?)@in.PriceSet;
-        money.Value = (double?)@in.Money;
-        note.Text = @in.Note;
-        if (@in.CatalogId.HasValue && @in.CatalogId.Value != Guid.Empty)
+        age.Text = use.Age;
+        place.Text = use.Place;
+        note.Text = use.Note;
+        if (use.CatalogId.HasValue && use.CatalogId.Value != Guid.Empty)
         {
-            var catalogId = @in.CatalogId.Value;
+            var catalogId = use.CatalogId.Value;
             var node = catalog.EmbeddedTree.FindNodeByValue(catalogId.ToString());
             node.Selected = true;
             node.ExpandParentNodes();
             catalog.SelectedValue = catalogId.ToString();
-            var source = DataContext.DepotObjectLoad(Depot.Id, @in.CatalogId);
+            var source = DataContext.DepotObjectLoad(Depot.Id, use.CatalogId);
             obj.DataSource = source.ToList();
             obj.DataBind();
-            if (@in.ObjectId.HasValue && @in.ObjectId.Value != Guid.Empty)
+            if (use.ObjectId.HasValue && use.ObjectId.Value != Guid.Empty)
             {
-                var oid = @in.ObjectId.Value;
+                var oid = use.ObjectId.Value;
                 var so = DataContext.DepotObject.Single(o => o.Id == oid);
                 unit.Text = so.Unit;
                 specification.Text = so.Specification;
                 stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
-                obj.SelectedIndex = obj.FindItemIndexByValue(@in.ObjectId.ToString());
+                obj.SelectedIndex = obj.FindItemIndexByValue(use.ObjectId.ToString());
+                if (so.Consumable)
+                {
+                    act.DataSource = new[] { "领用", "借用" };
+                    act.DataBind();
+                }
+                else
+                {
+                    act.DataSource = new[] { "借用", "领用" };
+                    act.DataBind();
+                }
+                if (use.Type.HasValue)
+                {
+                    act.FindItemByText(use.Type.Value.ToString()).Selected = true;
+                }
             }
         }
-        if (!"ObjectId".Query().None())
-        {
-            catalog.Enabled = false;
-            obj.Enabled = false;
-        }
+    }
+
+    public InMemoryUse PeekValue()
+    {
+        var result = new InMemoryUse();
+        result.Age = age.Text;
+        result.Place = place.Text;
+        result.CatalogId = catalog.SelectedValue.None() ? (Guid?)null : catalog.SelectedValue.GlobalId();
+        result.ObjectId = obj.SelectedValue == null || obj.Text.None() ? (Guid?)null : obj.SelectedValue.GlobalId();
+        result.Amount = amount.Value.HasValue ? (decimal)amount.Value.Value : (decimal?)null;
+        result.Note = note.Text;
+        result.Type = act.SelectedIndex == -1 ? (UseType?)null : (UseType)Enum.Parse(typeof(UseType), act.SelectedItem.Text);
+        return result;
     }
 
     public int ItemIndex
     {
         get; set;
-    }
-
-    public InMemoryIn PeekValue()
-    {
-        var result = new InMemoryIn();
-        result.CatalogId = catalog.SelectedValue.None() ? (Guid?)null : catalog.SelectedValue.GlobalId();
-        result.ObjectId = obj.SelectedValue == null || obj.Text.None() ? (Guid?)null : obj.SelectedValue.GlobalId();
-        result.Amount = amount.Value.HasValue ? (decimal)amount.Value.Value : (decimal?)null;
-        result.PriceSet = priceSet.Value.HasValue ? (decimal)priceSet.Value.Value : (decimal?)null;
-        result.Money = money.Value.HasValue ? (decimal)money.Value.Value : (decimal?)null;
-        result.Age = age.Text;
-        result.Place = place.Text;
-        result.Note = note.Text;
-        return result;
     }
 
     protected void catalog_EntryAdded(object sender, Telerik.Web.UI.DropDownTreeEntryEventArgs e)
@@ -81,6 +90,19 @@ public partial class Control_ObjectIn : DepotControlSingle
             unit.Text = so.Unit;
             specification.Text = so.Specification;
             stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
+            if (so.Consumable)
+            {
+                act.Items.Clear();
+                act.DataSource = new[] { "领用", "借用" };
+                act.DataBind();
+            }
+            else
+            {
+                act.Items.Clear();
+                act.DataSource = new[] { "借用", "领用" };
+                act.DataBind();
+            }
+            act.SelectedIndex = 0;
         }
     }
 }

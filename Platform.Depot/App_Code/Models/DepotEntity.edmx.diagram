@@ -5,22 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="26f01b11d0744825a996cdc0c7e11e75" Name="DepotDiagram">
-        <EntityTypeShape EntityType="DepotModel.Depot" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DepotModel.DepotCatalog" Width="1.5" PointX="7.75" PointY="2.625" />
-        <EntityTypeShape EntityType="DepotModel.DepotDictionary" Width="1.5" PointX="7.75" PointY="6.625" />
-        <EntityTypeShape EntityType="DepotModel.DepotRole" Width="1.5" PointX="9.75" PointY="2.625" />
-        <EntityTypeShape EntityType="DepotModel.DepotUserRole" Width="1.5" PointX="9.75" PointY="5.625" />
+        <EntityTypeShape EntityType="DepotModel.Depot" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DepotModel.DepotCatalog" Width="1.5" PointX="2.75" PointY="13.625" />
+        <EntityTypeShape EntityType="DepotModel.DepotDictionary" Width="1.5" PointX="0.75" PointY="2.625" />
+        <EntityTypeShape EntityType="DepotModel.DepotRole" Width="1.5" PointX="5.75" PointY="2.625" />
+        <EntityTypeShape EntityType="DepotModel.DepotUserRole" Width="1.5" PointX="7.75" PointY="2.625" />
         <EntityTypeShape EntityType="DepotModel.DepotOrder" Width="1.5" PointX="3.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DepotModel.DepotUser" Width="1.5" PointX="10.75" PointY="8.625" />
-        <EntityTypeShape EntityType="DepotModel.Application" Width="1.5" PointX="10.75" PointY="11.625" />
-        <EntityTypeShape EntityType="DepotModel.UserOnline" Width="1.5" PointX="11.75" PointY="2.625" />
-        <EntityTypeShape EntityType="DepotModel.DepotCreator" Width="1.5" PointX="2.75" PointY="13.625" />
-        <EntityTypeShape EntityType="DepotModel.DepotMember" Width="1.5" PointX="11.75" PointY="5.625" />
-        <EntityTypeShape EntityType="DepotModel.DepotObjectCatalog" Width="1.5" PointX="12.75" PointY="8.625" />
-        <EntityTypeShape EntityType="DepotModel.DepotInRecord" Width="1.5" PointX="12.75" PointY="11.625" />
-        <EntityTypeShape EntityType="DepotModel.DepotCatalogTree" Width="1.5" PointX="13.75" PointY="2.625" />
+        <EntityTypeShape EntityType="DepotModel.DepotUser" Width="1.5" PointX="12.75" PointY="2.625" />
+        <EntityTypeShape EntityType="DepotModel.Application" Width="1.5" PointX="12.75" PointY="5.625" />
+        <EntityTypeShape EntityType="DepotModel.UserOnline" Width="1.5" PointX="12.75" PointY="9.625" />
+        <EntityTypeShape EntityType="DepotModel.DepotCreator" Width="1.5" PointX="12.75" PointY="12.625" />
+        <EntityTypeShape EntityType="DepotModel.DepotMember" Width="1.5" PointX="4.75" PointY="15.625" />
+        <EntityTypeShape EntityType="DepotModel.DepotObjectCatalog" Width="1.5" PointX="6.75" PointY="15.625" />
+        <EntityTypeShape EntityType="DepotModel.DepotInRecord" Width="1.5" PointX="8.75" PointY="15.625" />
+        <EntityTypeShape EntityType="DepotModel.DepotCatalogTree" Width="1.5" PointX="10.75" PointY="15.625" />
         <AssociationConnector Association="DepotModel.FK_DepotCatalog_DepotCatalog" />
-        <EntityTypeShape EntityType="DepotModel.DepotObject" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotObject" Width="1.5" PointX="0.75" PointY="8.625" />
         <EntityTypeShape EntityType="DepotModel.DepotIn" Width="1.5" PointX="6" PointY="9.875" />
         <EntityTypeShape EntityType="DepotModel.DepotFlow" Width="1.5" PointX="3" PointY="6.125" />
         <EntityTypeShape EntityType="DepotModel.DepotFlowX" Width="1.5" PointX="3" PointY="9.625" />
@@ -34,10 +34,16 @@
         <AssociationConnector Association="DepotModel.FK_DepotInX_DepotIn" />
         <AssociationConnector Association="DepotModel.FK_DepotInX_DepotObject" />
         <AssociationConnector Association="DepotModel.FK_DepotInX_DepotOrder" />
-        <EntityTypeShape EntityType="DepotModel.DepotInXRecord" Width="1.5" PointX="5.75" PointY="15.625" />
-        <EntityTypeShape EntityType="DepotModel.Department" Width="1.5" PointX="5.75" PointY="2.625" />
+        <EntityTypeShape EntityType="DepotModel.DepotInXRecord" Width="1.5" PointX="12.75" PointY="15.625" />
+        <EntityTypeShape EntityType="DepotModel.Department" Width="1.5" PointX="10.75" PointY="2.625" />
         <AssociationConnector Association="DepotModel.FK_Department_DepartmentParent" />
         <AssociationConnector Association="DepotModel.FK_Department_DepartmentTop" />
+        <EntityTypeShape EntityType="DepotModel.DepotUse" Width="1.5" PointX="8.25" PointY="5.5" />
+        <AssociationConnector Association="DepotModel.FK_DepotUse_Depot" />
+        <EntityTypeShape EntityType="DepotModel.DepotUseX" Width="1.5" PointX="10.5" PointY="10.25" />
+        <AssociationConnector Association="DepotModel.FK_DepotUseX_DepotInX" />
+        <AssociationConnector Association="DepotModel.FK_DepotUseX_DepotObject" />
+        <AssociationConnector Association="DepotModel.FK_DepotUseX_DepotUse" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

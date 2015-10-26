@@ -68,6 +68,12 @@ namespace Models
     
     public partial class Depot
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Depot()
+        {
+            this.DepotUse = new HashSet<DepotUse>();
+        }
+    
         public System.Guid Id { get; set; }
         public string Name { get; set; }
         public System.Guid CampusId { get; set; }
@@ -77,6 +83,9 @@ namespace Models
         public string ObjectTypes { get; set; }
         public DepotType Type { get; set; }
         public State State { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepotUse> DepotUse { get; set; }
     }
 }
 namespace Models
@@ -267,6 +276,12 @@ namespace Models
     
     public partial class DepotInX
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public DepotInX()
+        {
+            this.DepotUseX = new HashSet<DepotUseX>();
+        }
+    
         public System.Guid Id { get; set; }
         public System.Guid InId { get; set; }
         public System.Guid OrderId { get; set; }
@@ -285,6 +300,8 @@ namespace Models
         public virtual DepotIn DepotIn { get; set; }
         public virtual DepotObject DepotObject { get; set; }
         public virtual DepotOrder DepotOrder { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepotUseX> DepotUseX { get; set; }
     }
 }
 namespace Models
@@ -351,6 +368,7 @@ namespace Models
             this.DepotIn = new HashSet<DepotIn>();
             this.DepotStatistics = new HashSet<DepotStatistics>();
             this.DepotInX = new HashSet<DepotInX>();
+            this.DepotUseX = new HashSet<DepotUseX>();
         }
     
         public System.Guid Id { get; set; }
@@ -389,6 +407,8 @@ namespace Models
         public virtual ICollection<DepotStatistics> DepotStatistics { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotInX> DepotInX { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepotUseX> DepotUseX { get; set; }
     }
 }
 namespace Models
@@ -492,6 +512,34 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotUse
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public DepotUse()
+        {
+            this.DepotUseX = new HashSet<DepotUseX>();
+        }
+    
+        public System.Guid Id { get; set; }
+        public System.Guid DepotId { get; set; }
+        public System.Guid UserId { get; set; }
+        public System.DateTime Time { get; set; }
+        public System.Guid OperatorId { get; set; }
+        public System.DateTime OperationTime { get; set; }
+        public string Age { get; set; }
+        public string Place { get; set; }
+        public decimal Money { get; set; }
+    
+        public virtual Depot Depot { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepotUseX> DepotUseX { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotUser
     {
         public System.Guid Id { get; set; }
@@ -511,6 +559,30 @@ namespace Models
     {
         public System.Guid UserId { get; set; }
         public System.Guid DepotRoleId { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class DepotUseX
+    {
+        public System.Guid Id { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public System.Guid UseId { get; set; }
+        public System.Guid InXId { get; set; }
+        public UseType Type { get; set; }
+        public string Age { get; set; }
+        public string Place { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Money { get; set; }
+        public decimal ReturnedAmount { get; set; }
+        public string Note { get; set; }
+    
+        public virtual DepotInX DepotInX { get; set; }
+        public virtual DepotObject DepotObject { get; set; }
+        public virtual DepotUse DepotUse { get; set; }
     }
 }
 namespace Models
@@ -585,5 +657,15 @@ namespace Models
         启用 = 1,
         停用 = 2,
         内置 = 0
+    }
+}
+namespace Models
+{
+    using System;
+    
+    public enum UseType : int
+    {
+        领用 = 1,
+        借用 = 2
     }
 }
