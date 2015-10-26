@@ -58,7 +58,7 @@ public partial class DepotAction_In : DepotPageSingle
                 var catalogId = DataContext.DepotObjectCatalog.Single(o => o.ObjectId == objId && o.IsLeaf == true && o.IsVirtual == isVirtual).CatalogId;
                 counter.Value = "1";
                 var list = new List<InMemoryIn>();
-                list.Add(new InMemoryIn { OrderId = Guid.Empty, Time = inTime.SelectedDate.HasValue ? inTime.SelectedDate.Value.Date : DateTime.Today, CatalogId = catalogId, ObjectId = objId });
+                list.Add(new InMemoryIn { Time = inTime.SelectedDate.HasValue ? inTime.SelectedDate.Value.Date : DateTime.Today, CatalogId = catalogId, ObjectId = objId });
                 x.Value = list.ToJson();
                 x1.Visible = x2.Visible = x3.Visible = x4.Visible = false;
                 plus.Visible = false;
@@ -76,7 +76,6 @@ public partial class DepotAction_In : DepotPageSingle
     {
         target.SelectedIndex = -1;
         target.Text = string.Empty;
-        //counter.Value = "0";
         var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
         var start = new DateTime(time.Year, time.Month, 1).AddMilliseconds(-1);
         var end = new DateTime(time.Year, time.Month, 1).AddMonths(1);
@@ -130,7 +129,7 @@ public partial class DepotAction_In : DepotPageSingle
 
     protected void view_target_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        if (target.SelectedIndex == -1)
+        if (target.SelectedIndex == -1 || target.SelectedValue.None())
         {
             view_target.DataSource = null;
             view_target.Visible = false;
@@ -191,7 +190,7 @@ public partial class DepotAction_In : DepotPageSingle
         var list = x.Value.None() ? new List<InMemoryIn>() : x.Value.FromJson<List<InMemoryIn>>();
         if (list.Count < c.ItemIndex + 1)
         {
-            c.LoadDefaults(new InMemoryIn { OrderId = target.SelectedValue.GlobalId(), Time = inTime.SelectedDate.HasValue ? inTime.SelectedDate.Value.Date : DateTime.Today });
+            c.LoadDefaults(new InMemoryIn { Time = inTime.SelectedDate.HasValue ? inTime.SelectedDate.Value.Date : DateTime.Today });
         }
         else
         {

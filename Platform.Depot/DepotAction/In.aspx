@@ -167,7 +167,7 @@
                             </table>
                         </LayoutTemplate>
                         <ItemTemplate>
-                            <homory:ObjectIn runat="server" ID="ObjectIn" ItemIndex='<%# Container.DataItemIndex %>' TargetId='<%# target.SelectedValue.GlobalId() %>' />
+                            <homory:ObjectIn runat="server" ID="ObjectIn" ItemIndex='<%# Container.DataItemIndex %>' />
                         </ItemTemplate>
                     </telerik:RadListView>
                 </div>

@@ -2,12 +2,9 @@
 
 <tr>
     <td>
-        <input type="hidden" id="orderId" runat="server" />
-        <asp:Label ID="catalog_l" runat="server"></asp:Label>
         <telerik:RadDropDownTree ID="catalog" runat="server" AutoPostBack="true" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" DropDownSettings-CloseDropDownOnSelection="true" OnEntryAdded="catalog_EntryAdded"></telerik:RadDropDownTree>
     </td>
     <td>
-        <asp:Label ID="obj_l" runat="server"></asp:Label>
         <telerik:RadComboBox ID="obj" runat="server" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="false" ShowToggleImage="false" AllowCustomText="true" AutoPostBack="true" OnSelectedIndexChanged="obj_SelectedIndexChanged">
             <ItemTemplate>
                 <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>

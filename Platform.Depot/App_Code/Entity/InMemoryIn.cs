@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 public class InMemoryIn
 {
-    public Guid OrderId { get; set; }
-    public DateTime Time { get; set; }
+   public DateTime Time { get; set; }
     public Guid? CatalogId { get; set; }
     public Guid? ObjectId { get; set; }
     public decimal? Amount { get; set; }
