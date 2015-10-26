@@ -62,6 +62,11 @@ public partial class DepotQuery_InX : DepotPageSingle
             source = source.Where(o => o.Place == place.Text).ToList();
         if (people.SelectedIndex > 0)
             source = source.Where(o => o.Operator == people.SelectedItem.Text).ToList();
+        if (!"OrderId".Query().None())
+        {
+            var oid = "OrderId".Query().GlobalId();
+            source = source.Where(o => o.OrderId == oid).ToList();
+        }
         view.DataSource = source;
         pager.Visible = source.Count > pager.PageSize;
     }
@@ -84,5 +89,10 @@ public partial class DepotQuery_InX : DepotPageSingle
     protected void query_ServerClick(object sender, EventArgs e)
     {
         view.Rebind();
+    }
+
+    protected void redo_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/InRedo?DepotId={0}&InId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
 }

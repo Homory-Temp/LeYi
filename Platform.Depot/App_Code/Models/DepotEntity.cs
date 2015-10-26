@@ -768,7 +768,8 @@ namespace Models
         入库修改 = 2,
         借用出库 = 3,
         领用出库 = 4,
-        归还 = 5
+        归还 = 5,
+        退货 = 6
     }
 }
 namespace Models

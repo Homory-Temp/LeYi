@@ -99,6 +99,7 @@
                             <td>
                                 <input type="button" class="btn btn-tumblr" value="入库" id="in" runat="server" match='<%# Eval("Id") %>' visible='<%# !(bool)Eval("Done") %>' onserverclick="in_ServerClick" />
                                 <input type="button" class="btn btn-tumblr" value="编辑" id="edit" runat="server" match='<%# Eval("Id") %>' onserverclick="edit_ServerClick" />
+                                <input type="button" class="btn btn-tumblr" value="退货" id="back" runat="server" match='<%# Eval("Id") %>' visible='<%# !(bool)Eval("Done") %>' onserverclick="back_ServerClick" />
                                 <input type="button" class="btn btn-tumblr" value="办结" id="done" runat="server" match='<%# Eval("Id") %>' visible='<%# !(bool)Eval("Done") %>' onserverclick="done_ServerClick" />
                                 <input type="button" class="btn btn-tumblr" value="补办" id="redo" runat="server" match='<%# Eval("Id") %>' visible='<%# (bool)Eval("Done") && RightRoot %>' onserverclick="redo_ServerClick" />
                                 <input type="button" class="btn btn-tumblr" value="打印" id="print" runat="server" match='<%# Eval("Id") %>' visible='<%# (bool)Eval("Done") %>' onserverclick="print_ServerClick" />

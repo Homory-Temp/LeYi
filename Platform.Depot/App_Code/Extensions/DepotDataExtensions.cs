@@ -727,6 +727,54 @@ public static class DepotDataExtensions
         db.DepotDictionaryAdd(depotId, DictionaryType.存放地, place);
     }
 
+    public static void DepotActInRedo(this DepotEntities db, Guid depotId, DepotIn @in, decimal backed, Guid operatorId)
+    {
+        var obj = db.DepotObject.Single(o => o.Id == @in.ObjectId);
+        var order = db.DepotOrder.Single(o => o.Id == @in.OrderId);
+        decimal amount = @in.Amount - backed;
+        decimal money = (@in.Amount - backed) * @in.Price;
+        decimal plusAmount = -backed;
+        decimal plusMoney = -backed * @in.Price;
+        db.DepotActStatistics(obj.Id, @in.Time, plusAmount, plusMoney, 0, 0, 0, 0, 0, 0, 0, 0);
+        if (obj.Single)
+        {
+            return;
+        }
+        else
+        {
+            var x = @in.DepotInX.First();
+            if (x.DepotUseX.Count > 0)
+                return;
+            if (amount > 0 && money > 0)
+            {
+                @in.Amount = amount;
+                @in.AvailableAmount = amount;
+                @in.Total = money;
+                @in.Price = decimal.Divide(money, amount);
+                obj.Amount += plusAmount;
+                obj.Money += plusMoney;
+                order.Paid += plusMoney;
+                var flow = new DepotFlow
+                {
+                    Id = db.GlobalId(),
+                    ObjectId = @in.ObjectId,
+                    UserId = operatorId,
+                    Type = FlowType.退货,
+                    TypeName = FlowType.退货.ToString(),
+                    Time = @in.Time,
+                    Amount = plusAmount,
+                    Money = plusMoney,
+                    Note = (new InMemoryRedo { Amount = backed, Name = @in.DepotObject.Name, OrderId = @in.OrderId }).ToJson()
+                };
+                db.DepotFlow.Add(flow);
+                x.Amount = @in.Amount;
+                x.AvailableAmount = @in.Amount;
+                x.Total = @in.Total;
+            }
+        }
+        db.SaveChanges();
+    }
+
     public static void DepotActStatistics(this DepotEntities db, Guid objectId, DateTime time, decimal @in, decimal inMoney, decimal lend, decimal lendMoney, decimal consume, decimal consumeMoney, decimal @out, decimal outMoney, decimal redo, decimal redoMoney)
     {
         var year = time.Year;
