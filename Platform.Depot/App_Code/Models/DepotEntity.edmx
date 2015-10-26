@@ -18,6 +18,25 @@
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="TopId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="Hidden" Type="bit" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuildType" Type="int" Nullable="false" />
+          <Property Name="ClassType" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Depot">
           <Key>
             <PropertyRef Name="Id" />
@@ -347,6 +366,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a pr
             <PropertyRef Name="PriceSet" />
             <PropertyRef Name="Amount" />
             <PropertyRef Name="Total" />
+            <PropertyRef Name="OrderSource" />
+            <PropertyRef Name="UsageTarget" />
           </Key>
           <Property Name="OrderName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Done" Type="bit" Nullable="false" />
@@ -371,6 +392,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a pr
           <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Total" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OrderSource" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="UsageTarget" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Platform_LY.dbo.DepotMember' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -406,6 +429,30 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Department_DepartmentParent">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Department1" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_DepartmentTop">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Department1" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department1">
+              <PropertyRef Name="TopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DepotCatalog_DepotCatalog">
           <End Role="DepotCatalog" Type="Self.DepotCatalog" Multiplicity="0..1" />
           <End Role="DepotCatalog1" Type="Self.DepotCatalog" Multiplicity="*" />
@@ -519,6 +566,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
         </Function>
         <EntityContainer Name="DepotModelStoreContainer">
           <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Depot" EntityType="Self.Depot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotCatalog" EntityType="Self.DepotCatalog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotDictionary" EntityType="Self.DepotDictionary" Schema="dbo" store:Type="Tables" />
@@ -605,7 +653,9 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
     [DepotInXRecord].[OperatorId] AS [OperatorId], 
     [DepotInXRecord].[PriceSet] AS [PriceSet], 
     [DepotInXRecord].[Amount] AS [Amount], 
-    [DepotInXRecord].[Total] AS [Total]
+    [DepotInXRecord].[Total] AS [Total], 
+    [DepotInXRecord].[OrderSource] AS [OrderSource], 
+    [DepotInXRecord].[UsageTarget] AS [UsageTarget]
     FROM [dbo].[DepotInXRecord] AS [DepotInXRecord]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="DepotMember" EntityType="Self.DepotMember" store:Type="Views" store:Schema="dbo">
@@ -628,6 +678,14 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
     [DepotUser].[CampusName] AS [CampusName]
     FROM [dbo].[DepotUser] AS [DepotUser]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_Department_DepartmentParent" Association="Self.FK_Department_DepartmentParent">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Department1" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_DepartmentTop" Association="Self.FK_Department_DepartmentTop">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Department1" EntitySet="Department" />
+          </AssociationSet>
           <AssociationSet Name="FK_DepotCatalog_DepotCatalog" Association="Self.FK_DepotCatalog_DepotCatalog">
             <End Role="DepotCatalog" EntitySet="DepotCatalog" />
             <End Role="DepotCatalog1" EntitySet="DepotCatalog" />
@@ -744,6 +802,15 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             <End Role="DepotInX" EntitySet="DepotInX" />
           </AssociationSet>
           <EntitySet Name="DepotInXRecord" EntityType="DepotModel.DepotInXRecord" />
+          <EntitySet Name="Department" EntityType="DepotModel.Department" />
+          <AssociationSet Name="FK_Department_DepartmentParent" Association="DepotModel.FK_Department_DepartmentParent">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Department1" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_DepartmentTop" Association="DepotModel.FK_Department_DepartmentTop">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Department1" EntitySet="Department" />
+          </AssociationSet>
         </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -1247,6 +1314,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             <PropertyRef Name="Amount" />
             <PropertyRef Name="Total" />
             <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="OrderSource" />
+            <PropertyRef Name="UsageTarget" />
           </Key>
           <Property Name="OrderName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Done" Type="Boolean" Nullable="false" />
@@ -1271,7 +1340,56 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
+          <Property Name="OrderSource" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="UsageTarget" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="TopId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="Hidden" Type="Boolean" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuildType" Type="Int32" Nullable="false" />
+          <Property Name="ClassType" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepartmentChildren" Relationship="DepotModel.FK_Department_DepartmentParent" FromRole="Department" ToRole="Department1" />
+          <NavigationProperty Name="DepartmentParent" Relationship="DepotModel.FK_Department_DepartmentParent" FromRole="Department1" ToRole="Department" />
+          <NavigationProperty Name="DepartmentAll" Relationship="DepotModel.FK_Department_DepartmentTop" FromRole="Department" ToRole="Department1" />
+          <NavigationProperty Name="DepartmentCampus" Relationship="DepotModel.FK_Department_DepartmentTop" FromRole="Department1" ToRole="Department" />
+        </EntityType>
+        <Association Name="FK_Department_DepartmentParent">
+          <End Type="DepotModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="DepotModel.Department" Role="Department1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_DepartmentTop">
+          <End Type="DepotModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="DepotModel.Department" Role="Department1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department1">
+              <PropertyRef Name="TopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1605,6 +1723,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <EntitySetMapping Name="DepotInXRecord">
             <EntityTypeMapping TypeName="DepotModel.DepotInXRecord">
               <MappingFragment StoreEntitySet="DepotInXRecord">
+                <ScalarProperty Name="UsageTarget" ColumnName="UsageTarget" />
+                <ScalarProperty Name="OrderSource" ColumnName="OrderSource" />
                 <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -1628,6 +1748,26 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
                 <ScalarProperty Name="Operator" ColumnName="Operator" />
                 <ScalarProperty Name="Done" ColumnName="Done" />
                 <ScalarProperty Name="OrderName" ColumnName="OrderName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="DepotModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ClassType" ColumnName="ClassType" />
+                <ScalarProperty Name="BuildType" ColumnName="BuildType" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Hidden" ColumnName="Hidden" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TopId" ColumnName="TopId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -29,6 +29,43 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class Department
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Department()
+        {
+            this.DepartmentChildren = new HashSet<Department>();
+            this.DepartmentAll = new HashSet<Department>();
+        }
+    
+        public System.Guid Id { get; set; }
+        public Nullable<System.Guid> ParentId { get; set; }
+        public System.Guid TopId { get; set; }
+        public string Name { get; set; }
+        public string DisplayName { get; set; }
+        public int Level { get; set; }
+        public bool Hidden { get; set; }
+        public int Type { get; set; }
+        public State State { get; set; }
+        public int Ordinal { get; set; }
+        public int AutoId { get; set; }
+        public int BuildType { get; set; }
+        public int ClassType { get; set; }
+        public string Code { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> DepartmentChildren { get; set; }
+        public virtual Department DepartmentParent { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> DepartmentAll { get; set; }
+        public virtual Department DepartmentCampus { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Depot
     {
         public System.Guid Id { get; set; }
@@ -280,6 +317,8 @@ namespace Models
         public decimal Amount { get; set; }
         public decimal Total { get; set; }
         public bool IsVirtual { get; set; }
+        public string OrderSource { get; set; }
+        public string UsageTarget { get; set; }
     }
 }
 namespace Models
