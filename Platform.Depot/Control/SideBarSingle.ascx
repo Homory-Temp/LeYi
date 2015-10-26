@@ -33,6 +33,7 @@
                             <li><a href='<%= "../DepotQuery/UseX?DepotId={0}".Formatted(Depot.Id) %>'>出库查询</a></li>
                             <li><a href='<%= "../DepotQuery/Return?DepotId={0}".Formatted(Depot.Id) %>'>归还查询</a></li>
                             <li><a href='<%= "../DepotQuery/Statistics?DepotId={0}".Formatted(Depot.Id) %>'>库存查询</a></li>
+                            <li><a href='<%= "../DepotQuery/Redo?DepotId={0}".Formatted(Depot.Id) %>'>退货查询</a></li>
                             <li><a href='<%= "../DepotQuery/Import?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: block;": "display: none;") %>'>导入查询</a></li>
                             <li><a href='<%= "../DepotQuery/Move?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: block;": "display: none;") %>'>分库查询</a></li>
                         </ul>
