@@ -394,6 +394,89 @@ public static class DepotDataExtensions
         }
     }
 
+    public static void DepotActInEdit(this DepotEntities db, DepotIn @in, DateTime day, decimal amount, decimal priceSet, decimal money, string place, string note, Guid operatorId)
+    {
+        var obj = db.DepotObject.Single(o => o.Id == @in.ObjectId);
+        var order = db.DepotOrder.Single(o => o.Id == @in.OrderId);
+        decimal plusAmount = amount - @in.Amount;
+        decimal plusMoney = money - @in.Total;
+        if (day.Year == @in.Time.Year && day.Month == @in.Time.Month)
+        {
+            db.DepotActStatistics(obj.Id, day, plusAmount, plusMoney, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
+        else
+        {
+            db.DepotActStatistics(obj.Id, @in.Time, -@in.Amount, -@in.Total, 0, 0, 0, 0, 0, 0, 0, 0);
+            db.DepotActStatistics(obj.Id, day, amount, money, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
+        if (obj.Single)
+        {
+            return;
+        }
+        else
+        {
+            if (amount != @in.Amount || money != @in.Total)
+            {
+                if (amount > 0 && money > 0)
+                {
+                    @in.Amount = amount;
+                    @in.AvailableAmount = amount;
+                    @in.Total = money;
+                    @in.PriceSet = priceSet;
+                    @in.Price = decimal.Divide(money, amount);
+                    @in.Place = place;
+                    @in.Note = note;
+                    @in.Time = day;
+                    obj.Amount += plusAmount;
+                    obj.Money += plusMoney;
+                    order.Paid += plusMoney;
+                    var flow = new DepotFlow
+                    {
+                        Id = db.GlobalId(),
+                        ObjectId = @in.ObjectId,
+                        UserId = operatorId,
+                        Type = FlowType.入库修改,
+                        TypeName = FlowType.入库修改.ToString(),
+                        Time = day,
+                        Amount = plusAmount,
+                        Money = plusMoney,
+                        Note = @in.Note
+                    };
+                    db.DepotFlow.Add(flow);
+                    var x = @in.DepotInX.First();
+                    x.Amount = @in.Amount;
+                    x.AvailableAmount = @in.Amount;
+                    x.Total = @in.Total;
+                    x.PriceSet = @in.PriceSet;
+                    x.Price = @in.Price;
+                    x.Place = @in.Place;
+                }
+                else
+                {
+                    db.DepotInX.Remove(@in.DepotInX.First());
+                    db.DepotIn.Remove(@in);
+                    obj.Amount += plusAmount;
+                    obj.Money += plusMoney;
+                    order.Paid += plusMoney;
+                    var flow = new DepotFlow
+                    {
+                        Id = db.GlobalId(),
+                        ObjectId = @in.ObjectId,
+                        UserId = operatorId,
+                        Type = FlowType.入库修改,
+                        TypeName = FlowType.入库修改.ToString(),
+                        Time = day,
+                        Amount = plusAmount,
+                        Money = plusMoney,
+                        Note = @in.Note
+                    };
+                    db.DepotFlow.Add(flow);
+                }
+            }
+        }
+        db.SaveChanges();
+    }
+
     public static void DepotActStatistics(this DepotEntities db, Guid objectId, DateTime time, decimal @in, decimal inMoney, decimal lend, decimal lendMoney, decimal consume, decimal consumeMoney, decimal @out, decimal outMoney, decimal redo, decimal redoMoney)
     {
         var year = time.Year;
