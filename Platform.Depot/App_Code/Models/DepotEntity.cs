@@ -220,6 +220,7 @@ namespace Models
         public System.Guid OperatorId { get; set; }
         public string 操作人 { get; set; }
         public System.DateTime OperationTime { get; set; }
+        public System.DateTime OrderTime { get; set; }
     }
 }
 namespace Models

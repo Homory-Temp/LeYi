@@ -31,7 +31,6 @@
         <AssociationConnector Association="DepotModel.FK_DepotFlowX_DepotObject" />
         <AssociationConnector Association="DepotModel.FK_DepotIn_DepotObject" />
         <AssociationConnector Association="DepotModel.FK_DepotIn_DepotOrder" />
-        <AssociationConnector Association="DepotModel.FK_DepotInX_DepotIn" />
         <AssociationConnector Association="DepotModel.FK_DepotInX_DepotObject" />
         <AssociationConnector Association="DepotModel.FK_DepotInX_DepotOrder" />
         <AssociationConnector Association="DepotModel.FK_DepotStatistics_DepotObject" />

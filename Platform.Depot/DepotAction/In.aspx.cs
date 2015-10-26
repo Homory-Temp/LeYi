@@ -53,72 +53,72 @@ public partial class DepotAction_In : DepotPageSingle
 
     protected void ReloadOrders()
     {
-        //target.SelectedIndex = -1;
-        //target.Text = string.Empty;
-        //counter.Value = "0";
-        //var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
-        //var start = (new DateTime(time.Year, time.Month, 1).AddDays(-1)).ToTimeNode();
-        //var end = (new DateTime(time.Year, time.Month, 1).AddMonths(1)).ToTimeNode();
-        //List<Store_Target> list = db.Value.Store_Target.Where(o => o.State < 2 && o.StoreId == StoreId && o.TimeNode > start && o.TimeNode < end && o.In == false).OrderByDescending(o => o.TimeNode).ToList();
-        //if (source.SelectedIndex > 0)
-        //    list = list.Where(o => o.采购来源 == source.SelectedItem.Text).ToList();
-        //if (usage.SelectedIndex > 0)
-        //    list = list.Where(o => o.使用对象 == usage.SelectedItem.Text).ToList();
-        //if (people.SelectedIndex > 0)
-        //    list = list.Where(o => o.操作人 == people.SelectedItem.Text).ToList();
-        //target.DataSource = list;
-        //target.DataBind();
-        //x1.Visible = x2.Visible = x3.Visible = x4.Visible = false;
+        target.SelectedIndex = -1;
+        target.Text = string.Empty;
+        counter.Value = "0";
+        var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
+        var start = new DateTime(time.Year, time.Month, 1).AddMilliseconds(-1);
+        var end = new DateTime(time.Year, time.Month, 1).AddMonths(1);
+        var list = DataContext.DepotInRecord.Where(o => o.DepotId == Depot.Id && o. > start && o.OrderTime < end && o.Done == false).OrderByDescending(o => o.OrderTime).ToList();
+        if (source.SelectedIndex > 0)
+            list = list.Where(o => o.OrderSource == source.SelectedItem.Text).ToList();
+        if (usage.SelectedIndex > 0)
+            list = list.Where(o => o.UsageTarget == usage.SelectedItem.Text).ToList();
+        if (people.SelectedIndex > 0)
+            list = list.Where(o => o.OperatorId == people.SelectedItem.Value.GlobalId()).ToList();
+        target.DataSource = list;
+        target.DataBind();
+        x1.Visible = x2.Visible = x3.Visible = x4.Visible = false;
     }
 
     protected void period_SelectedDateChanged(object sender, Telerik.Web.UI.Calendar.SelectedDateChangedEventArgs e)
     {
-        //ReloadTargets();
-        //view_target.Rebind();
-        //view_obj.Rebind();
+        ReloadOrders();
+        view_target.Rebind();
+        view_obj.Rebind();
     }
 
     protected void source_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
-        //ReloadTargets();
-        //view_target.Rebind();
-        //view_obj.Rebind();
+        ReloadOrders();
+        view_target.Rebind();
+        view_obj.Rebind();
     }
 
     protected void usage_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
-        //ReloadTargets();
-        //view_target.Rebind();
-        //view_obj.Rebind();
+        ReloadOrders();
+        view_target.Rebind();
+        view_obj.Rebind();
     }
 
     protected void people_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
-        //ReloadTargets();
-        //view_target.Rebind();
-        //view_obj.Rebind();
+        ReloadOrders();
+        view_target.Rebind();
+        view_obj.Rebind();
     }
 
     protected void target_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
-        //counter.Value = target.SelectedIndex == -1 ? "0" : "1";
-        //x1.Visible = x2.Visible = x3.Visible = x4.Visible = target.SelectedIndex >= 0;
-        //view_target.Rebind();
-        //view_obj.Rebind();
+        counter.Value = target.SelectedIndex == -1 ? "0" : "1";
+        x1.Visible = x2.Visible = x3.Visible = x4.Visible = target.SelectedIndex >= 0;
+        view_target.Rebind();
+        view_obj.Rebind();
     }
 
     protected void view_target_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         if (target.SelectedIndex == -1)
         {
-            //view_target.DataSource = null;
-            //view_target.Visible = false;
+            view_target.DataSource = null;
+            view_target.Visible = false;
         }
         else
         {
-            //var id = target.SelectedValue.GlobalId();
-            //view_target.DataSource = db.Value.Store_Target.Where(o => o.Id == id).ToList();
-            //view_target.Visible = true;
+            var id = target.SelectedValue.GlobalId();
+            view_target.DataSource = DataContext.DepotOrder.Where(o => o.Id == id).ToList();
+            view_target.Visible = true;
         }
     }
 

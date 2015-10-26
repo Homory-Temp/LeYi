@@ -299,6 +299,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInRecord' does not have a pri
             <PropertyRef Name="应付金额" />
             <PropertyRef Name="实付金额" />
             <PropertyRef Name="Done" />
+            <PropertyRef Name="OrderTime" />
             <PropertyRef Name="RecordTime" />
             <PropertyRef Name="OperatorId" />
             <PropertyRef Name="OperationTime" />
@@ -317,6 +318,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInRecord' does not have a pri
           <Property Name="KeeperId" Type="uniqueidentifier" />
           <Property Name="保管人" Type="nvarchar" MaxLength="64" />
           <Property Name="Done" Type="bit" Nullable="false" />
+          <Property Name="OrderTime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="RecordTime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="操作人" Type="nvarchar" MaxLength="64" />
@@ -524,6 +526,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
     [DepotInRecord].[KeeperId] AS [KeeperId], 
     [DepotInRecord].[保管人] AS [保管人], 
     [DepotInRecord].[Done] AS [Done], 
+    [DepotInRecord].[OrderTime] AS [OrderTime], 
     [DepotInRecord].[RecordTime] AS [RecordTime], 
     [DepotInRecord].[OperatorId] AS [OperatorId], 
     [DepotInRecord].[操作人] AS [操作人], 
@@ -852,6 +855,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             <PropertyRef Name="RecordTime" />
             <PropertyRef Name="OperatorId" />
             <PropertyRef Name="OperationTime" />
+            <PropertyRef Name="OrderTime" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="DepotId" Type="Guid" Nullable="false" />
@@ -871,6 +875,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="OperatorId" Type="Guid" Nullable="false" />
           <Property Name="操作人" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OrderTime" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
         <EntityType Name="DepotCatalogTree">
           <Key>
@@ -1306,6 +1311,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <EntitySetMapping Name="DepotInRecord">
             <EntityTypeMapping TypeName="DepotModel.DepotInRecord">
               <MappingFragment StoreEntitySet="DepotInRecord">
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
                 <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
                 <ScalarProperty Name="操作人" ColumnName="操作人" />
                 <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
