@@ -200,20 +200,21 @@ public partial class DepotAction_In : DepotPageSingle
 
     protected void view_record_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        //var targetId = target.SelectedValue == null ? (Guid?)null : target.SelectedValue.GlobalId();
-        //var adjust = 0M;
-        //if (targetId.HasValue)
-        //{
-        //    var id = targetId.Value;
-        //    var source = db.Value.Store_RecordIn.Where(o => o.TargetId == id).OrderByDescending(o => o.入库日期).ToList();
-        //    view_record.DataSource = source;
-        //    adjust = source.Sum(o => o.合计);
-        //    ap.ResponseScripts.Add("set_adj({0});".Formatted(adjust));
-        //}
-        //else
-        //{
-        //    view_record.DataSource = null;
-        //}
+        var orderId = target.SelectedValue.None() ? (Guid?)null : target.SelectedValue.GlobalId();
+        var adjust = 0M;
+        if (orderId.HasValue)
+        {
+            var id = orderId.Value;
+            var isVirtual = Depot.Featured(DepotType.固定资产库);
+            var source = DataContext.DepotInXRecord.Where(o => o.OrderId == id && o.IsVirtual == isVirtual).OrderByDescending(o => o.Time).ToList();
+            view_record.DataSource = source;
+            adjust = source.Sum(o => o.Total);
+            ap.ResponseScripts.Add("set_adj({0});".Formatted(adjust));
+        }
+        else
+        {
+            view_record.DataSource = null;
+        }
     }
 
     protected void done_in_ServerClick(object sender, EventArgs e)

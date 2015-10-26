@@ -209,7 +209,6 @@
                                     <th>入库日期</th>
                                     <th>数量</th>
                                     <th>单价</th>
-                                    <th style="display: none;">优惠价</th>
                                     <th>合计</th>
                                     <th>存放地</th>
                                     <th>备注</th>
@@ -219,17 +218,16 @@
                         </LayoutTemplate>
                         <ItemTemplate>
                             <tr>
-                                <td><%# Eval("类别") %></td>
-                                <td><%# Eval("物资名称") %></td>
-                                <td><%# Eval("单位") %></td>
-                                <td><%# Eval("规格") %></td>
-                                <td><%# Eval("入库日期").ToDay() %></td>
-                                <td><%# Eval("数量").ToAmount() %></td>
-                                <td><%# Eval("单价").ToMoney() %></td>
-                                <td style="display: none;"><%# Eval("优惠价").ToMoney() %></td>
-                                <td><%# Eval("合计").ToMoney() %></td>
-                                <td><%# Eval("存放地") %></td>
-                                <td><%# Eval("备注") %></td>
+                                <td><%# Eval("CatalogName") %></td>
+                                <td><%# Eval("Name") %></td>
+                                <td><%# Eval("Unit") %></td>
+                                <td><%# Eval("Specification") %></td>
+                                <td><%# Eval("Time").ToDay() %></td>
+                                <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
+                                <td><%# Eval("PriceSet").ToMoney() %></td>
+                                <td><%# Eval("Total").ToMoney() %></td>
+                                <td><%# Eval("Place") %></td>
+                                <td><%# Eval("Note") %></td>
                             </tr>
                         </ItemTemplate>
                         <EmptyDataTemplate>

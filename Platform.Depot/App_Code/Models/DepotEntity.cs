@@ -255,6 +255,38 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotInXRecord
+    {
+        public string OrderName { get; set; }
+        public bool Done { get; set; }
+        public string Operator { get; set; }
+        public string Responsible { get; set; }
+        public string Name { get; set; }
+        public System.Guid CatalogId { get; set; }
+        public int Level { get; set; }
+        public string CatalogName { get; set; }
+        public string Unit { get; set; }
+        public string Specification { get; set; }
+        public System.Guid InId { get; set; }
+        public System.Guid OrderId { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public string Age { get; set; }
+        public string Place { get; set; }
+        public Nullable<System.Guid> ResponsibleId { get; set; }
+        public string Note { get; set; }
+        public System.DateTime Time { get; set; }
+        public System.Guid OperatorId { get; set; }
+        public decimal PriceSet { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Total { get; set; }
+        public bool IsVirtual { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotMember
     {
         public System.Guid Id { get; set; }

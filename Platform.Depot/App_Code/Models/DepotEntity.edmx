@@ -325,6 +325,54 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInRecord' does not have a pri
           <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotInXRecord">
+          <Key>
+            <PropertyRef Name="OrderName" />
+            <PropertyRef Name="Done" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Specification" />
+            <PropertyRef Name="InId" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Place" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="OperatorId" />
+            <PropertyRef Name="PriceSet" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Total" />
+          </Key>
+          <Property Name="OrderName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Done" Type="bit" Nullable="false" />
+          <Property Name="Operator" Type="nvarchar" MaxLength="64" />
+          <Property Name="Responsible" Type="nvarchar" MaxLength="64" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="CatalogName" Type="nvarchar(max)" />
+          <Property Name="IsVirtual" Type="bit" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Specification" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ResponsibleId" Type="uniqueidentifier" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Platform_LY.dbo.DepotMember' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DepotMember">
           <Key>
@@ -533,6 +581,33 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
     [DepotInRecord].[OperationTime] AS [OperationTime]
     FROM [dbo].[DepotInRecord] AS [DepotInRecord]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="DepotInXRecord" EntityType="Self.DepotInXRecord" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotInXRecord].[OrderName] AS [OrderName], 
+    [DepotInXRecord].[Done] AS [Done], 
+    [DepotInXRecord].[Operator] AS [Operator], 
+    [DepotInXRecord].[Responsible] AS [Responsible], 
+    [DepotInXRecord].[Name] AS [Name], 
+    [DepotInXRecord].[CatalogId] AS [CatalogId], 
+    [DepotInXRecord].[Level] AS [Level], 
+    [DepotInXRecord].[CatalogName] AS [CatalogName], 
+    [DepotInXRecord].[IsVirtual] AS [IsVirtual], 
+    [DepotInXRecord].[Unit] AS [Unit], 
+    [DepotInXRecord].[Specification] AS [Specification], 
+    [DepotInXRecord].[InId] AS [InId], 
+    [DepotInXRecord].[OrderId] AS [OrderId], 
+    [DepotInXRecord].[ObjectId] AS [ObjectId], 
+    [DepotInXRecord].[Age] AS [Age], 
+    [DepotInXRecord].[Place] AS [Place], 
+    [DepotInXRecord].[ResponsibleId] AS [ResponsibleId], 
+    [DepotInXRecord].[Note] AS [Note], 
+    [DepotInXRecord].[Time] AS [Time], 
+    [DepotInXRecord].[OperatorId] AS [OperatorId], 
+    [DepotInXRecord].[PriceSet] AS [PriceSet], 
+    [DepotInXRecord].[Amount] AS [Amount], 
+    [DepotInXRecord].[Total] AS [Total]
+    FROM [dbo].[DepotInXRecord] AS [DepotInXRecord]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="DepotMember" EntityType="Self.DepotMember" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DepotMember].[Id] AS [Id], 
@@ -668,6 +743,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             <End Role="DepotOrder" EntitySet="DepotOrder" />
             <End Role="DepotInX" EntitySet="DepotInX" />
           </AssociationSet>
+          <EntitySet Name="DepotInXRecord" EntityType="DepotModel.DepotInXRecord" />
         </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -1150,6 +1226,52 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
         <EnumType Name="FlowType">
           <Member Name="入库" Value="1" />
         </EnumType>
+        <EntityType Name="DepotInXRecord">
+          <Key>
+            <PropertyRef Name="OrderName" />
+            <PropertyRef Name="Done" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Specification" />
+            <PropertyRef Name="InId" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Place" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="OperatorId" />
+            <PropertyRef Name="PriceSet" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Total" />
+            <PropertyRef Name="IsVirtual" />
+          </Key>
+          <Property Name="OrderName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Done" Type="Boolean" Nullable="false" />
+          <Property Name="Operator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Responsible" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="CatalogName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ResponsibleId" Type="Guid" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperatorId" Type="Guid" Nullable="false" />
+          <Property Name="PriceSet" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1477,6 +1599,35 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="InId" ColumnName="InId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotInXRecord">
+            <EntityTypeMapping TypeName="DepotModel.DepotInXRecord">
+              <MappingFragment StoreEntitySet="DepotInXRecord">
+                <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PriceSet" ColumnName="PriceSet" />
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ResponsibleId" ColumnName="ResponsibleId" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="CatalogName" ColumnName="CatalogName" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Responsible" ColumnName="Responsible" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="Done" ColumnName="Done" />
+                <ScalarProperty Name="OrderName" ColumnName="OrderName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
