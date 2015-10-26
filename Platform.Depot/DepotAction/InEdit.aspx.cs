@@ -19,6 +19,7 @@ public partial class DepotAction_InEdit : DepotPageSingle
             amount.Value = (double)@in.Amount;
             perPrce.Value = (double)@in.PriceSet;
             money.Value = (double)@in.Total;
+            age.Text = @in.Age;
             place.Text = @in.Place;
             note.Text = @in.Note;
             amount.NumberFormat.DecimalDigits = Depot.Featured(DepotType.小数数量库) ? 2 : 0;
@@ -29,7 +30,7 @@ public partial class DepotAction_InEdit : DepotPageSingle
     {
         var inId = "InId".Query().GlobalId();
         var @in = DataContext.DepotIn.Single(o => o.Id == inId);
-        DataContext.DepotActInEdit(@in, day.SelectedDate.HasValue ? day.SelectedDate.Value : DateTime.Today, amount.PeekValue(0M), perPrce.PeekValue(0M), money.PeekValue(0M), place.Text.Trim(), note.Text.Trim(), DepotUser.Id);
+        DataContext.DepotActInEdit(Depot.Id, @in, day.SelectedDate.HasValue ? day.SelectedDate.Value : DateTime.Today, amount.PeekValue(0M), perPrce.PeekValue(0M), money.PeekValue(0M), age.Text.Trim(), place.Text.Trim(), note.Text.Trim(), DepotUser.Id);
         Response.Redirect("../DepotQuery/InX?DepotId={0}".Formatted(Depot.Id));
     }
 

@@ -48,6 +48,8 @@
                             入库数量或入库合计填0则清除本次入库记录
                             <br />
                             若需变更入库记录所属购置单则数量填0后重新入库
+                            <br />
+                            准固定资产暂不可修改入库数量
                         </div>
                     </div>
                     <div class="row">
@@ -74,6 +76,12 @@
                         <div class="col-md-4 text-right">入库合计：</div>
                         <div class="col-md-8 text-left">
                             <telerik:RadNumericTextBox ID="money" runat="server" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true" Width="400" NumberFormat-AllowRounding="false"></telerik:RadNumericTextBox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">入库年龄段：</div>
+                        <div class="col-md-8 text-left">
+                            <telerik:RadTextBox ID="age" runat="server" Width="400"></telerik:RadTextBox>
                         </div>
                     </div>
                     <div class="row">

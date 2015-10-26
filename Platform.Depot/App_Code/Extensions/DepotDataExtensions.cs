@@ -394,7 +394,7 @@ public static class DepotDataExtensions
         }
     }
 
-    public static void DepotActInEdit(this DepotEntities db, DepotIn @in, DateTime day, decimal amount, decimal priceSet, decimal money, string place, string note, Guid operatorId)
+    public static void DepotActInEdit(this DepotEntities db, Guid depotId, DepotIn @in, DateTime day, decimal amount, decimal priceSet, decimal money, string age, string place, string note, Guid operatorId)
     {
         var obj = db.DepotObject.Single(o => o.Id == @in.ObjectId);
         var order = db.DepotOrder.Single(o => o.Id == @in.OrderId);
@@ -415,6 +415,13 @@ public static class DepotDataExtensions
         }
         else
         {
+            @in.Age = age;
+            @in.Place = place;
+            @in.Note = note;
+            @in.Time = day;
+            var x = @in.DepotInX.First();
+            x.Age = @in.Age;
+            x.Place = @in.Place;
             if (amount != @in.Amount || money != @in.Total)
             {
                 if (amount > 0 && money > 0)
@@ -424,9 +431,6 @@ public static class DepotDataExtensions
                     @in.Total = money;
                     @in.PriceSet = priceSet;
                     @in.Price = decimal.Divide(money, amount);
-                    @in.Place = place;
-                    @in.Note = note;
-                    @in.Time = day;
                     obj.Amount += plusAmount;
                     obj.Money += plusMoney;
                     order.Paid += plusMoney;
@@ -443,17 +447,15 @@ public static class DepotDataExtensions
                         Note = @in.Note
                     };
                     db.DepotFlow.Add(flow);
-                    var x = @in.DepotInX.First();
                     x.Amount = @in.Amount;
                     x.AvailableAmount = @in.Amount;
                     x.Total = @in.Total;
                     x.PriceSet = @in.PriceSet;
                     x.Price = @in.Price;
-                    x.Place = @in.Place;
                 }
                 else
                 {
-                    db.DepotInX.Remove(@in.DepotInX.First());
+                    db.DepotInX.Remove(x);
                     db.DepotIn.Remove(@in);
                     obj.Amount += plusAmount;
                     obj.Money += plusMoney;
@@ -475,6 +477,8 @@ public static class DepotDataExtensions
             }
         }
         db.SaveChanges();
+        db.DepotDictionaryAdd(depotId, DictionaryType.年龄段, age);
+        db.DepotDictionaryAdd(depotId, DictionaryType.存放地, place);
     }
 
     public static void DepotActStatistics(this DepotEntities db, Guid objectId, DateTime time, decimal @in, decimal inMoney, decimal lend, decimal lendMoney, decimal consume, decimal consumeMoney, decimal @out, decimal outMoney, decimal redo, decimal redoMoney)
