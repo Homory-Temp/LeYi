@@ -81,6 +81,7 @@
                                 <div class="col-md-12">
                                     <table class="storeTable text-center">
                                         <tr>
+                                            <th>出库单</th>
                                             <th>借领日期</th>
                                             <th>类型</th>
                                             <th>物资名称</th>
@@ -99,6 +100,9 @@
                             </LayoutTemplate>
                             <ItemTemplate>
                                 <tr>
+                                    <td>
+                                        <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text="出库单" NavigateUrl='<%# "../DepotQuery/UsePrint?DepotId={0}&UseId={1}".Formatted(Depot.Id, Eval("UseId")) %>'></asp:HyperLink></td>
+                                    </td>
                                     <td><%# Eval("Time").ToDay() %></td>
                                     <td><%# Eval("Type") %></td>
                                     <td><%# Eval("Name") %></td>

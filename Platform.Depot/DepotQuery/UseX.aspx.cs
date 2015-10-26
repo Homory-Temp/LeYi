@@ -55,7 +55,8 @@ public partial class DepotQuery_UseX : DepotPageSingle
         var start = new DateTime(time.Year, time.Month, 1).AddMilliseconds(-1);
         var end = new DateTime(time.Year, time.Month, 1).AddMonths(1);
         var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => o.Value.GlobalId()).ToList();
-        var source = catalogs.Join(DataContext.DepotUseXRecord.Where(o => o.Time > start && o.Time < end), o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.Time).ThenBy(o => o.UserName).ToList();
+        var isVirtual = Depot.Featured(DepotType.固定资产库);
+        var source = catalogs.Join(DataContext.DepotUseXRecord.Where(o => o.Time > start && o.Time < end && o.IsVirtual == isVirtual), o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.Time).ThenBy(o => o.UserName).ToList();
         if (useType.SelectedIndex > 0)
         {
             var x = int.Parse(useType.SelectedItem.Value);
