@@ -59,11 +59,11 @@ public partial class DepotAction_In : DepotPageSingle
         var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
         var start = new DateTime(time.Year, time.Month, 1).AddMilliseconds(-1);
         var end = new DateTime(time.Year, time.Month, 1).AddMonths(1);
-        var list = DataContext.DepotInRecord.Where(o => o.DepotId == Depot.Id && o. > start && o.OrderTime < end && o.Done == false).OrderByDescending(o => o.OrderTime).ToList();
+        var list = DataContext.DepotInRecord.Where(o => o.DepotId == Depot.Id && o.OrderTime > start && o.OrderTime < end && o.Done == false).OrderByDescending(o => o.OrderTime).ToList();
         if (source.SelectedIndex > 0)
-            list = list.Where(o => o.OrderSource == source.SelectedItem.Text).ToList();
+            list = list.Where(o => o.购置来源 == source.SelectedItem.Text).ToList();
         if (usage.SelectedIndex > 0)
-            list = list.Where(o => o.UsageTarget == usage.SelectedItem.Text).ToList();
+            list = list.Where(o => o.使用对象 == usage.SelectedItem.Text).ToList();
         if (people.SelectedIndex > 0)
             list = list.Where(o => o.OperatorId == people.SelectedItem.Value.GlobalId()).ToList();
         target.DataSource = list;
