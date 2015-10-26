@@ -639,6 +639,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ToCatalog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CatalogId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Level" Type="int" Mode="In" />
+        </Function>
         <Function Name="ToPinYin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -926,6 +930,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             <End Role="DepotUse" EntitySet="DepotUse" />
             <End Role="DepotUseX" EntitySet="DepotUseX" />
           </AssociationSet>
+          <FunctionImport Name="ToCatalog" ReturnType="Collection(String)">
+            <Parameter Name="CatalogId" Mode="In" Type="Guid" />
+            <Parameter Name="Level" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -2010,6 +2018,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ToCatalog" FunctionName="DepotModel.Store.ToCatalog" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

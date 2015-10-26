@@ -60,5 +60,18 @@ namespace Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ToPinYin", nameParameter);
         }
+    
+        public virtual ObjectResult<string> ToCatalog(Nullable<System.Guid> catalogId, Nullable<int> level)
+        {
+            var catalogIdParameter = catalogId.HasValue ?
+                new ObjectParameter("CatalogId", catalogId) :
+                new ObjectParameter("CatalogId", typeof(System.Guid));
+    
+            var levelParameter = level.HasValue ?
+                new ObjectParameter("Level", level) :
+                new ObjectParameter("Level", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ToCatalog", catalogIdParameter, levelParameter);
+        }
     }
 }
