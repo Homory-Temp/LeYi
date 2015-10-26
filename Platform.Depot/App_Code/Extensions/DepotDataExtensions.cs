@@ -328,7 +328,7 @@ public static class DepotDataExtensions
                         Age = @in.Age,
                         Place = @in.Place,
                         Ordinal = current,
-                        Amount = @in.Amount,
+                        Amount = 1,
                         PriceSet = @in.PriceSet,
                         Price = @in.Price,
                         Total = @in.Price,
@@ -347,7 +347,7 @@ public static class DepotDataExtensions
                         Type = FlowType.入库,
                         TypeName = FlowType.入库.ToString(),
                         Time = inTime,
-                        Amount = @in.Amount,
+                        Amount = 1,
                         Money = @in.Price,
                         Note = @in.Note
                     };
@@ -392,6 +392,85 @@ public static class DepotDataExtensions
             db.DepotDictionaryAdd(depotId, DictionaryType.年龄段, item.Age);
             db.DepotDictionaryAdd(depotId, DictionaryType.存放地, item.Place);
         }
+    }
+
+    public static Guid DepotActUse(this DepotEntities db, Guid depotId, DateTime useTime, Guid operatorId, Guid userId, List<InMemoryUse> list)
+    {
+        if (list == null || list.Count == 0)
+        {
+            return Guid.Empty;
+        }
+        var use = new DepotUse
+        {
+            Id = db.GlobalId(),
+            DepotId = depotId,
+            UserId = userId,
+            Time = useTime,
+            OperatorId = operatorId,
+            OperationTime = DateTime.Now,
+            Age = string.Empty,
+            Place = string.Empty,
+            Money = 0
+        };
+        db.DepotUse.Add(use);
+        foreach (var item in list)
+        {
+            if (!item.ObjectId.HasValue)
+                continue;
+            var objId = item.ObjectId.Value;
+            var obj = db.DepotObject.Single(o => o.Id == objId);
+            if (obj.Single)
+            {
+                if (item.Ordinals.Count == 0 || !item.Type.HasValue)
+                {
+                    continue;
+                }
+                foreach (var index in item.Ordinals)
+                {
+                    var @in = db.DepotInX.Single(o => o.ObjectId == objId && o.Ordinal == index);
+                    var x = new DepotUseX
+                    {
+                        Id = db.GlobalId(),
+                        ObjectId = objId,
+                        UseId = use.Id,
+                        InXId = @in.Id,
+                        Type = item.Type.Value,
+                        Age = item.Age,
+                        Place = item.Place,
+                        Amount = 1,
+                        Money = @in.Price,
+                        ReturnedAmount = 0,
+                        Note = item.Note
+                    };
+                    db.DepotUseX.Add(x);
+                    @in.AvailableAmount = 0;
+                    @in.DepotIn.AvailableAmount -= 1;
+                    obj.Amount -= 1;
+                    var flowx = new DepotFlowX
+                    {
+                        Id = db.GlobalId(),
+                        ObjectId = @in.ObjectId,
+                        ObjectOrdinal = index,
+                        UserId = operatorId,
+                        Type = FlowType.借用出库,
+                        TypeName = FlowType.借用出库.ToString(),
+                        Time = useTime,
+                        Amount = 1,
+                        Money = @in.Price,
+                        Note = item.Note
+                    };
+                    use.Money += @in.Price;
+                    db.DepotFlowX.Add(flowx);
+                    db.DepotActStatistics(@in.ObjectId, useTime, 0, 0, 1, @in.Price, 0, 0, 0, 0, 0, 0);
+                }
+            }
+            else
+            {
+
+            }
+        }
+        db.SaveChanges();
+        return use.Id;
     }
 
     public static void DepotActInEdit(this DepotEntities db, Guid depotId, DepotIn @in, DateTime day, decimal amount, decimal priceSet, decimal money, string age, string place, string note, Guid operatorId)

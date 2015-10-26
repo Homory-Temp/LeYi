@@ -125,6 +125,11 @@ public partial class DepotAction_Object : DepotPageSingle
 
     protected void use_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/Use?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("~/DepotAction/Use?DepotId={0}&ObjectId={1}&UseType=2".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+    }
+
+    protected void usex_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/Use?DepotId={0}&ObjectId={1}&UseType=1".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
 }

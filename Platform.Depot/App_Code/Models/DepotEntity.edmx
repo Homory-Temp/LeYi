@@ -1408,8 +1408,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           </ReferentialConstraint>
         </Association>
         <EnumType Name="FlowType">
-        <Member Name="入库" Value="1" />
+          <Member Name="入库" Value="1" />
           <Member Name="入库修改" Value="2" />
+          <Member Name="借用出库" Value="3" />
+          <Member Name="领用出库" Value="4" />
         </EnumType>
         <EntityType Name="DepotInXRecord">
           <Key>

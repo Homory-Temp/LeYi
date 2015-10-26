@@ -15,13 +15,32 @@ public partial class DepotAction_Use : DepotPageSingle
         {
             time.SelectedDate = DateTime.Today;
             people.Items.Clear();
-            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "0", Selected = true });
+            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "", Selected = true });
             people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
             people.DataBind();
             age.Items.Clear();
             age.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "年龄段", Value = "", Selected = true });
             age.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.年龄段).ToList();
             age.DataBind();
+            counter.Value = "1";
+            if (!"ObjectId".Query().None())
+            {
+                var objId = "ObjectId".Query().GlobalId();
+                var obj = DataContext.DepotObject.Single(o => o.Id == objId);
+                var isVirtual = Depot.Featured(DepotType.固定资产库);
+                var catalogId = DataContext.DepotObjectCatalog.Single(o => o.ObjectId == objId && o.IsLeaf == true && o.IsVirtual == isVirtual).CatalogId;
+                var list = new List<InMemoryIn>();
+                list.Add(new InMemoryIn { Time = time.SelectedDate.HasValue ? time.SelectedDate.Value.Date : DateTime.Today, CatalogId = catalogId, ObjectId = objId });
+                x.Value = list.ToJson();
+                x1.Visible = x2.Visible= false;
+                plus.Visible = false;
+                back.Visible = true;
+            }
+            else
+            {
+                plus.Visible = true;
+                back.Visible = false;
+            }
             Detect();
         }
     }
@@ -29,14 +48,12 @@ public partial class DepotAction_Use : DepotPageSingle
     protected void usage_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
         Detect();
-        x.Value = "";
         view_obj.Rebind();
     }
 
     protected void people_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
         Detect();
-        x.Value = "";
         view_obj.Rebind();
     }
 
@@ -52,7 +69,6 @@ public partial class DepotAction_Use : DepotPageSingle
             show = true;
         }
         x1.Visible = x2.Visible = show;
-        counter.Value = show ? "1" : "0";
     }
 
     protected void plus_ServerClick(object sender, EventArgs e)
@@ -90,13 +106,12 @@ public partial class DepotAction_Use : DepotPageSingle
         {
             var c = view_obj.Items[i].FindControl("ObjectUse") as Control_ObjectUse;
             var use = c.PeekValue();
-            decimal amount = use.Amount.HasValue ? use.Amount.Value : 0M;
-            if (use.ObjectId.HasValue && amount > 0M && !use.Type.HasValue)
+            if (use.ObjectId.HasValue)
             {
                 list.Add(use);
             }
         }
-        return Guid.Empty;
+        return DataContext.DepotActUse(Depot.Id, time.SelectedDate.HasValue ? time.SelectedDate.Value.Date : DateTime.Today, DepotUser.Id, people.SelectedValue.GlobalId(), list);
         //return db.Value.ActionUseExt(list, people.SelectedValue.GlobalId(), tn, CurrentUser, StoreId);
     }
 
@@ -112,5 +127,10 @@ public partial class DepotAction_Use : DepotPageSingle
         {
             c.LoadDefaults(list[c.ItemIndex]);
         }
+    }
+
+    protected void back_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/Object?DepotId={0}".Formatted(Depot.Id));
     }
 }
