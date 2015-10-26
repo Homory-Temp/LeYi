@@ -466,10 +466,105 @@ public static class DepotDataExtensions
             }
             else
             {
-
+                if (!item.Amount.HasValue || item.Amount.Value == 0)
+                {
+                    continue;
+                }
+                if (!item.Type.HasValue)
+                {
+                    continue;
+                }
+                var todo = obj.Amount < item.Amount.Value ? obj.Amount : item.Amount.Value;
+                var totalAmount = 0M;
+                var totalMoney = 0M;
+                foreach (var @in in obj.DepotIn.Where(o => o.ObjectId == objId && o.AvailableAmount > 0).OrderBy(o => o.Time).ToList())
+                {
+                    var xObj = db.DepotInX.Single(o => o.ObjectId == objId && o.InId == @in.Id);
+                    if (@in.AvailableAmount < todo)
+                    {
+                        var x = new DepotUseX
+                        {
+                            Id = db.GlobalId(),
+                            ObjectId = objId,
+                            UseId = use.Id,
+                            InXId = xObj.Id,
+                            Type = item.Type.Value,
+                            Age = item.Age,
+                            Place = item.Place,
+                            Amount = @in.AvailableAmount,
+                            Money = @in.Price * @in.AvailableAmount,
+                            ReturnedAmount = 0,
+                            Note = item.Note
+                        };
+                        db.DepotUseX.Add(x);
+                        todo -= @in.AvailableAmount;
+                        totalAmount += @in.AvailableAmount;
+                        totalMoney += @in.AvailableAmount * @in.Price;
+                        obj.Amount -= @in.AvailableAmount;
+                        obj.Money -= @in.AvailableAmount * @in.Price;
+                        @in.Total -= @in.AvailableAmount * @in.Price;
+                        @in.AvailableAmount = 0;
+                        var inx = @in.DepotInX.Single();
+                        inx.AvailableAmount = @in.AvailableAmount;
+                        inx.Total = @in.Total;
+                    }
+                    else
+                    {
+                        var x = new DepotUseX
+                        {
+                            Id = db.GlobalId(),
+                            ObjectId = objId,
+                            UseId = use.Id,
+                            InXId = xObj.Id,
+                            Type = item.Type.Value,
+                            Age = item.Age,
+                            Place = item.Place,
+                            Amount = todo,
+                            Money = @in.Price * todo,
+                            ReturnedAmount = 0,
+                            Note = item.Note
+                        };
+                        db.DepotUseX.Add(x);
+                        totalAmount += todo;
+                        totalMoney += todo * @in.Price;
+                        obj.Amount -= todo;
+                        obj.Money -= todo * @in.Price;
+                        @in.Total -= todo * @in.Price;
+                        @in.AvailableAmount -= todo;
+                        var inx = @in.DepotInX.Single();
+                        inx.AvailableAmount = @in.AvailableAmount;
+                        inx.Total = @in.Total;
+                        todo = 0;
+                        break;
+                    }
+                }
+                use.Money += totalMoney;
+                var flow = new DepotFlow
+                {
+                    Id = db.GlobalId(),
+                    ObjectId = objId,
+                    UserId = userId,
+                    Type = item.Type.Value == UseType.借用 ? FlowType.借用出库 : FlowType.领用出库,
+                    TypeName = (item.Type.Value == UseType.借用 ? FlowType.借用出库 : FlowType.领用出库).ToString(),
+                    Time = useTime,
+                    Amount = -totalAmount,
+                    Money = -totalMoney,
+                    Note = "出库"
+                };
+                db.DepotFlow.Add(flow);
+                if (item.Type.Value == UseType.借用)
+                    db.DepotActStatistics(objId, useTime, 0, 0, totalAmount, totalMoney, 0, 0, 0, 0, 0, 0);
+                else
+                    db.DepotActStatistics(objId, useTime, 0, 0, 0, 0, totalAmount, totalMoney, 0, 0, 0, 0);
             }
         }
         db.SaveChanges();
+        if (use.DepotUseX.Count == 0)
+        {
+            db.DepotUse.Remove(use);
+            db.SaveChanges();
+            return Guid.Empty;
+        }
         return use.Id;
     }
 

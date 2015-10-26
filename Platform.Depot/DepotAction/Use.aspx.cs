@@ -112,7 +112,6 @@ public partial class DepotAction_Use : DepotPageSingle
             }
         }
         return DataContext.DepotActUse(Depot.Id, time.SelectedDate.HasValue ? time.SelectedDate.Value.Date : DateTime.Today, DepotUser.Id, people.SelectedValue.GlobalId(), list);
-        //return db.Value.ActionUseExt(list, people.SelectedValue.GlobalId(), tn, CurrentUser, StoreId);
     }
 
     protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
