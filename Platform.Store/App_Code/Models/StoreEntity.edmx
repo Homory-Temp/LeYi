@@ -477,6 +477,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_In' does not have a primary 
         <EntityType Name="Store_In">
           <Key>
             <PropertyRef Name="Number" />
+            <PropertyRef Name="Done" />
             <PropertyRef Name="Name" />
             <PropertyRef Name="CatalogId" />
             <PropertyRef Name="Unit" />
@@ -494,6 +495,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_In' does not have a primary 
             <PropertyRef Name="SourceMoney" />
           </Key>
           <Property Name="Number" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Done" Type="bit" Nullable="false" />
           <Property Name="Operator" Type="nvarchar" MaxLength="64" />
           <Property Name="Responsible" Type="nvarchar" MaxLength="64" />
           <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
@@ -1507,6 +1509,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySet Name="Store_In" EntityType="Self.Store_In" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Store_In].[Number] AS [Number], 
+    [Store_In].[Done] AS [Done], 
     [Store_In].[Operator] AS [Operator], 
     [Store_In].[Responsible] AS [Responsible], 
     [Store_In].[Name] AS [Name], 
@@ -3415,6 +3418,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <PropertyRef Name="SourcePerPrice" />
             <PropertyRef Name="SourceAmount" />
             <PropertyRef Name="SourceMoney" />
+            <PropertyRef Name="Done" />
           </Key>
           <Property Name="Number" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="Operator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
@@ -3435,6 +3439,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="SourcePerPrice" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="SourceAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="SourceMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Done" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="StoreStatistics">
           <Key>
@@ -4208,6 +4213,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySetMapping Name="Store_In">
             <EntityTypeMapping TypeName="StoreModel.Store_In">
               <MappingFragment StoreEntitySet="Store_In">
+                <ScalarProperty Name="Done" ColumnName="Done" />
                 <ScalarProperty Name="SourceMoney" ColumnName="SourceMoney" />
                 <ScalarProperty Name="SourceAmount" ColumnName="SourceAmount" />
                 <ScalarProperty Name="SourcePerPrice" ColumnName="SourcePerPrice" />

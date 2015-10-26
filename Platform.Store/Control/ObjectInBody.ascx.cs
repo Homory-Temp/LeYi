@@ -29,6 +29,7 @@ public partial class Control_ObjectInBody : SingleStoreControl
             catalog.EmbeddedTree.Nodes[0].Expanded = true;
             age.ReadOnly = true;
             age.Text = target.UsageTarget;
+            place.Text = "{0}食堂".Formatted(target.UsageTarget.Substring(0, 2));
         }
         else
         {
@@ -41,7 +42,8 @@ public partial class Control_ObjectInBody : SingleStoreControl
         perPrice.Value = (double?)@in.SourcePerPrice;
         fee.Value = (double?)@in.Fee;
         money.Value = (double?)@in.Money;
-        place.Text = @in.Place;
+        if (!@in.Place.Null())
+            place.Text = @in.Place;
         note.Text = @in.Note;
         time.SelectedDate = (@in.TimeNode.HasValue ? @in.TimeNode.Value : target.TimeNode).ToTime();
         if (@in.CatalogId.HasValue && @in.CatalogId.Value != Guid.Empty)

@@ -176,6 +176,7 @@ namespace Models
         public decimal SourcePerPrice { get; set; }
         public decimal SourceAmount { get; set; }
         public decimal SourceMoney { get; set; }
+        public bool Done { get; set; }
     }
 }
 namespace Models
