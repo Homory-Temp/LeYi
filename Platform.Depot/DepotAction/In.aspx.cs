@@ -50,6 +50,23 @@ public partial class DepotAction_In : DepotPageSingle
                 target.DataBind();
                 x1.Visible = x2.Visible = x3.Visible = x4.Visible = false;
             }
+            if (!"ObjectId".Query().None())
+            {
+                var objId = "ObjectId".Query().GlobalId();
+                var obj = DataContext.DepotObject.Single(o => o.Id == objId);
+                var isVirtual = Depot.Featured(DepotType.固定资产库);
+                var catalogId = DataContext.DepotObjectCatalog.Single(o => o.ObjectId == objId && o.IsLeaf == true && o.IsVirtual == isVirtual).CatalogId;
+                counter.Value = "1";
+                var list = new List<InMemoryIn>();
+                list.Add(new InMemoryIn { OrderId = Guid.Empty, Time = inTime.SelectedDate.HasValue ? inTime.SelectedDate.Value.Date : DateTime.Today, CatalogId = catalogId, ObjectId = objId });
+                x.Value = list.ToJson();
+                x1.Visible = x2.Visible = x3.Visible = x4.Visible = false;
+                plus.Visible = false;
+            }
+            else
+            {
+                plus.Visible = true;
+            }
         }
     }
 
@@ -57,7 +74,7 @@ public partial class DepotAction_In : DepotPageSingle
     {
         target.SelectedIndex = -1;
         target.Text = string.Empty;
-        counter.Value = "0";
+        //counter.Value = "0";
         var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
         var start = new DateTime(time.Year, time.Month, 1).AddMilliseconds(-1);
         var end = new DateTime(time.Year, time.Month, 1).AddMonths(1);

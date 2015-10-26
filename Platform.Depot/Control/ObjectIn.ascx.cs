@@ -8,7 +8,6 @@ public partial class Control_ObjectIn : DepotControlSingle
     public void LoadDefaults(InMemoryIn @in)
     {
         orderId.Value = @in.OrderId.ToString();
-        var order = DataContext.DepotOrder.Single(o => o.Id == @in.OrderId);
         catalog.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
         catalog.DataBind();
         age.Text = @in.Age;
@@ -48,7 +47,7 @@ public partial class Control_ObjectIn : DepotControlSingle
 
     public InMemoryIn PeekValue()
     {
-        var oid = orderId.Value.GlobalId();
+        var oid = orderId.Value.None() ? Guid.Empty : orderId.Value.GlobalId();
         var result = new InMemoryIn();
         result.OrderId = oid;
         result.CatalogId = catalog.SelectedValue.None() ? (Guid?)null : catalog.SelectedValue.GlobalId();

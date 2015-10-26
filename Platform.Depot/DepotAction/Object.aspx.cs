@@ -110,7 +110,7 @@ public partial class DepotAction_Object : DepotPageSingle
 
     protected void in_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/In?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("~/DepotAction/In?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
 
     protected void edit_ServerClick(object sender, EventArgs e)
