@@ -20,8 +20,8 @@
                             <li><a href='<%= "../DepotAction/Use?DepotId={0}".Formatted(Depot.Id) %>'>物资出库</a></li>
                             <li><a href='<%= "../DepotAction/Return?DepotId={0}".Formatted(Depot.Id) %>'>物资归还</a></li>
                             <li><a href='<%= "../DepotAction/Object?DepotId={0}".Formatted(Depot.Id) %>'>物资管理</a></li>
-                            <li><a href='<%= "../DepotAction/Import?DepotId={0}".Formatted(Depot.Id) %>'>资产导入</a></li>
-                            <li><a href='<%= "../DepotAction/Move?DepotId={0}".Formatted(Depot.Id) %>'>资产分库</a></li>
+                            <li><a href='<%= "../DepotAction/Import?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: block;": "display: none;") %>'>资产导入</a></li>
+                            <li><a href='<%= "../DepotAction/Move?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: block;": "display: none;") %>'>资产分库</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -33,8 +33,8 @@
                             <li><a href='<%= "../DepotQuery/UseX?DepotId={0}".Formatted(Depot.Id) %>'>出库查询</a></li>
                             <li><a href='<%= "../DepotQuery/Return?DepotId={0}".Formatted(Depot.Id) %>'>归还查询</a></li>
                             <li><a href='<%= "../DepotQuery/Statistics?DepotId={0}".Formatted(Depot.Id) %>'>库存查询</a></li>
-                            <li><a href='<%= "../DepotQuery/Import?DepotId={0}".Formatted(Depot.Id) %>'>导入查询</a></li>
-                            <li><a href='<%= "../DepotQuery/Move?DepotId={0}".Formatted(Depot.Id) %>'>分库查询</a></li>
+                            <li><a href='<%= "../DepotQuery/Import?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: block;": "display: none;") %>'>导入查询</a></li>
+                            <li><a href='<%= "../DepotQuery/Move?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: block;": "display: none;") %>'>分库查询</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -43,7 +43,7 @@
                             <li><a href='<%= "../DepotScan/Code?DepotId={0}".Formatted(Depot.Id) %>'>条码打印</a></li>
                             <li><a href='<%= "../DepotScan/Use?DepotId={0}".Formatted(Depot.Id) %>'>扫码出库</a></li>
                             <li><a href='<%= "../DepotScan/Return?DepotId={0}".Formatted(Depot.Id) %>'>扫码归还</a></li>
-                            <li><a href='<%= "../DepotScan/Flow?DepotId={0}".Formatted(Depot.Id) %>'>流通查询</a></li>
+                            <li><a href='<%= "../DepotScan/Flow?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: block;": "display: none;") %>'>流通查询</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

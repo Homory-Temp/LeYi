@@ -227,4 +227,10 @@ public partial class DepotAction_In : DepotPageSingle
     {
         Response.Redirect("~/DepotAction/Object?DepotId={0}".Formatted(Depot.Id));
     }
+
+    protected void addObj_ServerClick(object sender, EventArgs e)
+    {
+        var url = "../DepotAction/ObjectAdd?DepotId={0}".Formatted(Depot.Id);
+        ap.ResponseScripts.Add("window.open('{0}', '_blank');".Formatted(url));
+    }
 }

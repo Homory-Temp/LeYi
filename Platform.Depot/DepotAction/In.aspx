@@ -136,13 +136,16 @@
                         入库物资选择
                     </div>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <telerik:RadDatePicker ID="inTime" runat="server" DateInput-Label="入库日期：" DateInput-LabelWidth="65" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="170" AutoPostBack="false">
                         <DatePopupButton runat="server" Visible="false" />
                         <Calendar runat="server">
                             <FastNavigationSettings TodayButtonCaption="今日" OkButtonCaption="确认" CancelButtonCaption="取消"></FastNavigationSettings>
                         </Calendar>
                     </telerik:RadDatePicker>
+                </div>
+                <div class="col-md-2 text-right">
+                    <input type="button" class="btn btn-tumblr" id="addObj" runat="server" value="新增物资" title="新增物资" onserverclick="addObj_ServerClick" />
                 </div>
             </div>
             <div class="row" id="x2" runat="server">

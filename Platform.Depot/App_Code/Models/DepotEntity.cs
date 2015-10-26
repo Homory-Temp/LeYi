@@ -533,6 +533,39 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotST
+    {
+        public bool Consumable { get; set; }
+        public bool Single { get; set; }
+        public bool Fixed { get; set; }
+        public System.Guid CatalogId { get; set; }
+        public string Name { get; set; }
+        public string CatalogPath { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public int Y { get; set; }
+        public int M { get; set; }
+        public System.DateTime Time { get; set; }
+        public decimal InAmount { get; set; }
+        public decimal InMoney { get; set; }
+        public decimal StartAmount { get; set; }
+        public decimal StartMoney { get; set; }
+        public decimal LendAmount { get; set; }
+        public decimal LendMoney { get; set; }
+        public decimal ConsumeAmount { get; set; }
+        public decimal ConsumeMoney { get; set; }
+        public decimal OutAmount { get; set; }
+        public decimal OutMoney { get; set; }
+        public decimal RedoAmount { get; set; }
+        public decimal RedoMoney { get; set; }
+        public decimal EndAmount { get; set; }
+        public decimal EndMoney { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotStatistics
     {
         public System.Guid ObjectId { get; set; }

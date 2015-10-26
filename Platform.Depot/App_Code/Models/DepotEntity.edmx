@@ -506,6 +506,59 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotReturnRecord' does not have a
           <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotST">
+          <Key>
+            <PropertyRef Name="Consumable" />
+            <PropertyRef Name="Single" />
+            <PropertyRef Name="Fixed" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Y" />
+            <PropertyRef Name="M" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="InAmount" />
+            <PropertyRef Name="InMoney" />
+            <PropertyRef Name="StartAmount" />
+            <PropertyRef Name="StartMoney" />
+            <PropertyRef Name="LendAmount" />
+            <PropertyRef Name="LendMoney" />
+            <PropertyRef Name="ConsumeAmount" />
+            <PropertyRef Name="ConsumeMoney" />
+            <PropertyRef Name="OutAmount" />
+            <PropertyRef Name="OutMoney" />
+            <PropertyRef Name="RedoAmount" />
+            <PropertyRef Name="RedoMoney" />
+            <PropertyRef Name="EndAmount" />
+            <PropertyRef Name="EndMoney" />
+          </Key>
+          <Property Name="Consumable" Type="bit" Nullable="false" />
+          <Property Name="Single" Type="bit" Nullable="false" />
+          <Property Name="Fixed" Type="bit" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CatalogPath" Type="nvarchar(max)" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Y" Type="int" Nullable="false" />
+          <Property Name="M" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="InAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="InMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LendAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LendMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ConsumeAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ConsumeMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OutAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OutMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="RedoAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="RedoMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DepotUser">
           <Key>
@@ -900,6 +953,34 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
     [DepotReturnRecord].[OperatorId] AS [OperatorId]
     FROM [dbo].[DepotReturnRecord] AS [DepotReturnRecord]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="DepotST" EntityType="Self.DepotST" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotST].[Consumable] AS [Consumable], 
+    [DepotST].[Single] AS [Single], 
+    [DepotST].[Fixed] AS [Fixed], 
+    [DepotST].[CatalogId] AS [CatalogId], 
+    [DepotST].[Name] AS [Name], 
+    [DepotST].[CatalogPath] AS [CatalogPath], 
+    [DepotST].[ObjectId] AS [ObjectId], 
+    [DepotST].[Y] AS [Y], 
+    [DepotST].[M] AS [M], 
+    [DepotST].[Time] AS [Time], 
+    [DepotST].[InAmount] AS [InAmount], 
+    [DepotST].[InMoney] AS [InMoney], 
+    [DepotST].[StartAmount] AS [StartAmount], 
+    [DepotST].[StartMoney] AS [StartMoney], 
+    [DepotST].[LendAmount] AS [LendAmount], 
+    [DepotST].[LendMoney] AS [LendMoney], 
+    [DepotST].[ConsumeAmount] AS [ConsumeAmount], 
+    [DepotST].[ConsumeMoney] AS [ConsumeMoney], 
+    [DepotST].[OutAmount] AS [OutAmount], 
+    [DepotST].[OutMoney] AS [OutMoney], 
+    [DepotST].[RedoAmount] AS [RedoAmount], 
+    [DepotST].[RedoMoney] AS [RedoMoney], 
+    [DepotST].[EndAmount] AS [EndAmount], 
+    [DepotST].[EndMoney] AS [EndMoney]
+    FROM [dbo].[DepotST] AS [DepotST]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="DepotUser" EntityType="Self.DepotUser" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DepotUser].[Id] AS [Id], 
@@ -1117,6 +1198,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <End Role="DepotReturn" EntitySet="DepotReturn" />
           </AssociationSet>
           <EntitySet Name="DepotReturnRecord" EntityType="DepotModel.DepotReturnRecord" />
+          <EntitySet Name="DepotST" EntityType="DepotModel.DepotST" />
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -1908,6 +1990,57 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="OperatorId" Type="Guid" Nullable="false" />
         </EntityType>
+        <EntityType Name="DepotST">
+          <Key>
+            <PropertyRef Name="Consumable" />
+            <PropertyRef Name="Single" />
+            <PropertyRef Name="Fixed" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Y" />
+            <PropertyRef Name="M" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="InAmount" />
+            <PropertyRef Name="InMoney" />
+            <PropertyRef Name="StartAmount" />
+            <PropertyRef Name="StartMoney" />
+            <PropertyRef Name="LendAmount" />
+            <PropertyRef Name="LendMoney" />
+            <PropertyRef Name="ConsumeAmount" />
+            <PropertyRef Name="ConsumeMoney" />
+            <PropertyRef Name="OutAmount" />
+            <PropertyRef Name="OutMoney" />
+            <PropertyRef Name="RedoAmount" />
+            <PropertyRef Name="RedoMoney" />
+            <PropertyRef Name="EndAmount" />
+            <PropertyRef Name="EndMoney" />
+          </Key>
+          <Property Name="Consumable" Type="Boolean" Nullable="false" />
+          <Property Name="Single" Type="Boolean" Nullable="false" />
+          <Property Name="Fixed" Type="Boolean" Nullable="false" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CatalogPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Y" Type="Int32" Nullable="false" />
+          <Property Name="M" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="InAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="InMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="LendAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="LendMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ConsumeAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ConsumeMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OutAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OutMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="RedoAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="RedoMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2387,6 +2520,36 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ReturnNote" ColumnName="ReturnNote" />
                 <ScalarProperty Name="ReturnAmount" ColumnName="ReturnAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotST">
+            <EntityTypeMapping TypeName="DepotModel.DepotST">
+              <MappingFragment StoreEntitySet="DepotST">
+                <ScalarProperty Name="EndMoney" ColumnName="EndMoney" />
+                <ScalarProperty Name="EndAmount" ColumnName="EndAmount" />
+                <ScalarProperty Name="RedoMoney" ColumnName="RedoMoney" />
+                <ScalarProperty Name="RedoAmount" ColumnName="RedoAmount" />
+                <ScalarProperty Name="OutMoney" ColumnName="OutMoney" />
+                <ScalarProperty Name="OutAmount" ColumnName="OutAmount" />
+                <ScalarProperty Name="ConsumeMoney" ColumnName="ConsumeMoney" />
+                <ScalarProperty Name="ConsumeAmount" ColumnName="ConsumeAmount" />
+                <ScalarProperty Name="LendMoney" ColumnName="LendMoney" />
+                <ScalarProperty Name="LendAmount" ColumnName="LendAmount" />
+                <ScalarProperty Name="StartMoney" ColumnName="StartMoney" />
+                <ScalarProperty Name="StartAmount" ColumnName="StartAmount" />
+                <ScalarProperty Name="InMoney" ColumnName="InMoney" />
+                <ScalarProperty Name="InAmount" ColumnName="InAmount" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="M" ColumnName="M" />
+                <ScalarProperty Name="Y" ColumnName="Y" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="CatalogPath" ColumnName="CatalogPath" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Fixed" ColumnName="Fixed" />
+                <ScalarProperty Name="Single" ColumnName="Single" />
+                <ScalarProperty Name="Consumable" ColumnName="Consumable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

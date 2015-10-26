@@ -48,6 +48,7 @@
         <EntityTypeShape EntityType="DepotModel.DepotReturn" Width="1.5" PointX="12.75" PointY="10.625" />
         <AssociationConnector Association="DepotModel.FK_DepotReturn_DepotUseX" />
         <EntityTypeShape EntityType="DepotModel.DepotReturnRecord" Width="1.5" PointX="16.75" PointY="2.625" />
+        <EntityTypeShape EntityType="DepotModel.DepotST" Width="1.5" PointX="5.75" PointY="18.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
