@@ -455,7 +455,7 @@ public static class DepotDataExtensions
                         Type = FlowType.借用出库,
                         TypeName = FlowType.借用出库.ToString(),
                         Time = useTime,
-                        Amount = 1,
+                        Amount = -1,
                         Money = @in.Price,
                         Note = item.Note
                     };
@@ -566,6 +566,78 @@ public static class DepotDataExtensions
             return Guid.Empty;
         }
         return use.Id;
+    }
+
+    public static void DepotActReturn(this DepotEntities db, Guid depotId, DateTime returnTime, Guid operatorId, Guid userId, List<InMemoryReturn> list)
+    {
+        if (list == null || list.Count == 0)
+        {
+            return;
+        }
+        foreach (var item in list)
+        {
+            if (item.Amount == 0)
+                continue;
+            var usexId = item.UseX;
+            var usex = db.DepotUseX.Single(o => o.Id == usexId);
+            var inx = usex.DepotInX;
+            var obj = inx.DepotObject;
+            var @in = inx.DepotIn;
+            var @return = new DepotReturn
+            {
+                Id = db.GlobalId(),
+                UserId = userId,
+                UseXId = item.UseX,
+                Amount = item.Amount,
+                Price = inx.Price,
+                Total = item.Amount * inx.Price,
+                Time = returnTime,
+                Note = item.Note
+            };
+            usex.ReturnedAmount += @return.Amount;
+            db.DepotReturn.Add(@return);
+            obj.Amount += @return.Amount;
+            obj.Money += @return.Total;
+            @in.AvailableAmount += @return.Amount;
+            @in.Total += @in.Price * @return.Amount;
+            inx.AvailableAmount += @return.Amount;
+            @in.Total += @in.Price * @return.Amount;
+            if (obj.Single)
+            {
+                var flowx = new DepotFlowX
+                {
+                    Id = db.GlobalId(),
+                    ObjectId = @in.ObjectId,
+                    ObjectOrdinal = inx.Ordinal,
+                    UserId = operatorId,
+                    Type = FlowType.归还,
+                    TypeName = FlowType.归还.ToString(),
+                    Time = returnTime,
+                    Amount = @return.Amount,
+                    Money = @in.Price,
+                    Note = item.Note
+                };
+                db.DepotFlowX.Add(flowx);
+            }
+            else
+            {
+                var flow = new DepotFlow
+                {
+                    Id = db.GlobalId(),
+                    ObjectId = @in.ObjectId,
+                    UserId = userId,
+                    Type = FlowType.归还,
+                    TypeName = FlowType.归还.ToString(),
+                    Time = returnTime,
+                    Amount = @return.Amount,
+                    Money = @in.Price,
+                    Note = item.Note
+                };
+                db.DepotFlow.Add(flow);
+            }
+            db.DepotActStatistics(@in.ObjectId, returnTime, 0, 0, -@return.Amount, -@return.Total, 0, 0, 0, 0, 0, 0);
+        }
+        db.SaveChanges();
     }
 
     public static void DepotActInEdit(this DepotEntities db, Guid depotId, DepotIn @in, DateTime day, decimal amount, decimal priceSet, decimal money, string age, string place, string note, Guid operatorId)

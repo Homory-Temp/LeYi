@@ -468,6 +468,56 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotReturn
+    {
+        public System.Guid Id { get; set; }
+        public System.Guid UserId { get; set; }
+        public System.Guid UseXId { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Price { get; set; }
+        public decimal Total { get; set; }
+        public System.DateTime Time { get; set; }
+        public string Note { get; set; }
+    
+        public virtual DepotUseX DepotUseX { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class DepotReturnRecord
+    {
+        public decimal ReturnAmount { get; set; }
+        public string ReturnNote { get; set; }
+        public System.Guid Id { get; set; }
+        public System.Guid CatalogId { get; set; }
+        public int Level { get; set; }
+        public bool IsVirtual { get; set; }
+        public System.Guid UseId { get; set; }
+        public System.Guid InXId { get; set; }
+        public System.DateTime Time { get; set; }
+        public int Type { get; set; }
+        public string Name { get; set; }
+        public string Unit { get; set; }
+        public decimal Amount { get; set; }
+        public decimal ReturnedAmount { get; set; }
+        public decimal PriceSet { get; set; }
+        public decimal Money { get; set; }
+        public string Age { get; set; }
+        public string UserName { get; set; }
+        public string OperatorName { get; set; }
+        public string Note { get; set; }
+        public System.Guid UserId { get; set; }
+        public System.Guid OperatorId { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotRole
     {
         public System.Guid Id { get; set; }
@@ -568,6 +618,12 @@ namespace Models
     
     public partial class DepotUseX
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public DepotUseX()
+        {
+            this.DepotReturn = new HashSet<DepotReturn>();
+        }
+    
         public System.Guid Id { get; set; }
         public System.Guid ObjectId { get; set; }
         public System.Guid UseId { get; set; }
@@ -583,6 +639,8 @@ namespace Models
         public virtual DepotInX DepotInX { get; set; }
         public virtual DepotObject DepotObject { get; set; }
         public virtual DepotUse DepotUse { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepotReturn> DepotReturn { get; set; }
     }
 }
 namespace Models
@@ -611,6 +669,7 @@ namespace Models
         public string Note { get; set; }
         public System.Guid UserId { get; set; }
         public System.Guid OperatorId { get; set; }
+        public decimal ReturnedAmount { get; set; }
     }
 }
 namespace Models
@@ -675,7 +734,8 @@ namespace Models
         入库 = 1,
         入库修改 = 2,
         借用出库 = 3,
-        领用出库 = 4
+        领用出库 = 4,
+        归还 = 5
     }
 }
 namespace Models
