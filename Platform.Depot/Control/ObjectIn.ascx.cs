@@ -51,7 +51,7 @@ public partial class Control_ObjectIn : DepotControlSingle
         var oid = orderId.Value.GlobalId();
         var result = new InMemoryIn();
         result.OrderId = oid;
-        result.CatalogId = catalog.SelectedValue == null ? (Guid?)null : catalog.SelectedValue.GlobalId();
+        result.CatalogId = catalog.SelectedValue.None() ? (Guid?)null : catalog.SelectedValue.GlobalId();
         result.ObjectId = obj.SelectedValue == null || obj.Text.None() ? (Guid?)null : obj.SelectedValue.GlobalId();
         result.Amount = amount.Value.HasValue ? (decimal)amount.Value.Value : (decimal?)null;
         result.PriceSet = priceSet.Value.HasValue ? (decimal)priceSet.Value.Value : (decimal?)null;

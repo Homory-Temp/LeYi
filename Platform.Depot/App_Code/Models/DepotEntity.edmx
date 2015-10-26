@@ -122,7 +122,7 @@
           <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Total" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="AvailableAmount" Type="int" Nullable="false" />
+          <Property Name="AvailableAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -634,7 +634,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <EntitySet Name="DepotFlow" EntityType="DepotModel.DepotFlow" />
           <EntitySet Name="DepotFlowX" EntityType="DepotModel.DepotFlowX" />
           <EntitySet Name="DepotIn" EntityType="DepotModel.DepotIn" />
-          <EntitySet Name="DepotInX" EntityType="DepotModel.DepotInX" />
           <EntitySet Name="DepotStatistics" EntityType="DepotModel.DepotStatistics" />
           <AssociationSet Name="FK_DepotFlow_DepotObject" Association="DepotModel.FK_DepotFlow_DepotObject">
             <End Role="DepotObject" EntitySet="DepotObject" />
@@ -652,6 +651,11 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             <End Role="DepotOrder" EntitySet="DepotOrder" />
             <End Role="DepotIn" EntitySet="DepotIn" />
           </AssociationSet>
+          <AssociationSet Name="FK_DepotStatistics_DepotObject" Association="DepotModel.FK_DepotStatistics_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotStatistics" EntitySet="DepotStatistics" />
+          </AssociationSet>
+          <EntitySet Name="DepotInX" EntityType="DepotModel.DepotInX" />
           <AssociationSet Name="FK_DepotInX_DepotIn" Association="DepotModel.FK_DepotInX_DepotIn">
             <End Role="DepotIn" EntitySet="DepotIn" />
             <End Role="DepotInX" EntitySet="DepotInX" />
@@ -663,10 +667,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <AssociationSet Name="FK_DepotInX_DepotOrder" Association="DepotModel.FK_DepotInX_DepotOrder">
             <End Role="DepotOrder" EntitySet="DepotOrder" />
             <End Role="DepotInX" EntitySet="DepotInX" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DepotStatistics_DepotObject" Association="DepotModel.FK_DepotStatistics_DepotObject">
-            <End Role="DepotObject" EntitySet="DepotObject" />
-            <End Role="DepotStatistics" EntitySet="DepotStatistics" />
           </AssociationSet>
         </EntityContainer>
         <EnumType Name="State">
@@ -946,8 +946,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <NavigationProperty Name="DepotFlow" Relationship="DepotModel.FK_DepotFlow_DepotObject" FromRole="DepotObject" ToRole="DepotFlow" />
           <NavigationProperty Name="DepotFlowX" Relationship="DepotModel.FK_DepotFlowX_DepotObject" FromRole="DepotObject" ToRole="DepotFlowX" />
           <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotIn_DepotObject" FromRole="DepotObject" ToRole="DepotIn" />
-          <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotObject" FromRole="DepotObject" ToRole="DepotInX" />
           <NavigationProperty Name="DepotStatistics" Relationship="DepotModel.FK_DepotStatistics_DepotObject" FromRole="DepotObject" ToRole="DepotStatistics" />
+          <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotObject" FromRole="DepotObject" ToRole="DepotInX" />
         </EntityType>
         <EntityType Name="DepotFlow">
           <Key>
@@ -956,7 +956,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="ObjectId" Type="Guid" Nullable="false" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="DepotModel.FlowType" Nullable="false" />
           <Property Name="TypeName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
@@ -972,7 +972,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="ObjectId" Type="Guid" Nullable="false" />
           <Property Name="ObjectOrdinal" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="DepotModel.FlowType" Nullable="false" />
           <Property Name="TypeName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
@@ -1002,28 +1002,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotIn_DepotObject" FromRole="DepotIn" ToRole="DepotObject" />
           <NavigationProperty Name="DepotOrder" Relationship="DepotModel.FK_DepotIn_DepotOrder" FromRole="DepotIn" ToRole="DepotOrder" />
           <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotIn" FromRole="DepotIn" ToRole="DepotInX" />
-        </EntityType>
-        <EntityType Name="DepotInX">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="InId" Type="Guid" Nullable="false" />
-          <Property Name="OrderId" Type="Guid" Nullable="false" />
-          <Property Name="ObjectId" Type="Guid" Nullable="false" />
-          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Ordinal" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="PriceSet" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="AvailableAmount" Type="Int32" Nullable="false" />
-          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotInX_DepotIn" FromRole="DepotInX" ToRole="DepotIn" />
-          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotInX_DepotObject" FromRole="DepotInX" ToRole="DepotObject" />
-          <NavigationProperty Name="DepotOrder" Relationship="DepotModel.FK_DepotInX_DepotOrder" FromRole="DepotInX" ToRole="DepotOrder" />
         </EntityType>
         <EntityType Name="DepotStatistics">
           <Key>
@@ -1099,6 +1077,40 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DepotStatistics_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotStatistics" Role="DepotStatistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotStatistics">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DepotInX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PriceSet" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="AvailableAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotInX_DepotIn" FromRole="DepotInX" ToRole="DepotIn" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotInX_DepotObject" FromRole="DepotInX" ToRole="DepotObject" />
+          <NavigationProperty Name="DepotOrder" Relationship="DepotModel.FK_DepotInX_DepotOrder" FromRole="DepotInX" ToRole="DepotOrder" />
+        </EntityType>
         <Association Name="FK_DepotInX_DepotIn">
           <End Type="DepotModel.DepotIn" Role="DepotIn" Multiplicity="1" />
           <End Type="DepotModel.DepotInX" Role="DepotInX" Multiplicity="*" />
@@ -1135,18 +1147,9 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DepotStatistics_DepotObject">
-          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
-          <End Type="DepotModel.DepotStatistics" Role="DepotStatistics" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DepotObject">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DepotStatistics">
-              <PropertyRef Name="ObjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EnumType Name="FlowType">
+          <Member Name="入库" Value="1" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1433,26 +1436,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DepotInX">
-            <EntityTypeMapping TypeName="DepotModel.DepotInX">
-              <MappingFragment StoreEntitySet="DepotInX">
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
-                <ScalarProperty Name="AvailableAmount" ColumnName="AvailableAmount" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="PriceSet" ColumnName="PriceSet" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
-                <ScalarProperty Name="Place" ColumnName="Place" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="InId" ColumnName="InId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DepotStatistics">
             <EntityTypeMapping TypeName="DepotModel.DepotStatistics">
               <MappingFragment StoreEntitySet="DepotStatistics">
@@ -1474,6 +1457,26 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotInX">
+            <EntityTypeMapping TypeName="DepotModel.DepotInX">
+              <MappingFragment StoreEntitySet="DepotInX">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="AvailableAmount" ColumnName="AvailableAmount" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PriceSet" ColumnName="PriceSet" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

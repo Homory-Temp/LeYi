@@ -129,7 +129,7 @@ namespace Models
         public System.Guid Id { get; set; }
         public System.Guid ObjectId { get; set; }
         public System.Guid UserId { get; set; }
-        public int Type { get; set; }
+        public FlowType Type { get; set; }
         public string TypeName { get; set; }
         public System.DateTime Time { get; set; }
         public decimal Amount { get; set; }
@@ -150,7 +150,7 @@ namespace Models
         public System.Guid ObjectId { get; set; }
         public int ObjectOrdinal { get; set; }
         public System.Guid UserId { get; set; }
-        public int Type { get; set; }
+        public FlowType Type { get; set; }
         public string TypeName { get; set; }
         public System.DateTime Time { get; set; }
         public decimal Amount { get; set; }
@@ -241,7 +241,7 @@ namespace Models
         public decimal PriceSet { get; set; }
         public decimal Price { get; set; }
         public decimal Total { get; set; }
-        public int AvailableAmount { get; set; }
+        public decimal AvailableAmount { get; set; }
         public int AutoId { get; set; }
         public string Code { get; set; }
     
@@ -278,8 +278,8 @@ namespace Models
             this.DepotFlow = new HashSet<DepotFlow>();
             this.DepotFlowX = new HashSet<DepotFlowX>();
             this.DepotIn = new HashSet<DepotIn>();
-            this.DepotInX = new HashSet<DepotInX>();
             this.DepotStatistics = new HashSet<DepotStatistics>();
+            this.DepotInX = new HashSet<DepotInX>();
         }
     
         public System.Guid Id { get; set; }
@@ -315,9 +315,9 @@ namespace Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotIn> DepotIn { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DepotInX> DepotInX { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotStatistics> DepotStatistics { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepotInX> DepotInX { get; set; }
     }
 }
 namespace Models
@@ -493,6 +493,15 @@ namespace Models
         使用对象 = 4,
         年龄段 = 5,
         存放地 = 6
+    }
+}
+namespace Models
+{
+    using System;
+    
+    public enum FlowType : int
+    {
+        入库 = 1
     }
 }
 namespace Models

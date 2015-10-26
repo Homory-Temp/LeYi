@@ -33,6 +33,7 @@ public partial class DepotAction_In : DepotPageSingle
                 var id = value.GlobalId();
                 var t = DataContext.DepotOrder.Single(o => o.Id == id);
                 period.SelectedDate = t.OrderTime;
+                inTime.SelectedDate = t.OrderTime;
                 source.SelectedIndex = source.FindItemIndexByText(t.OrderSource);
                 usage.SelectedIndex = usage.FindItemIndexByText(t.UsageTarget);
                 people.SelectedIndex = people.FindItemIndexByValue(t.OperatorId.ToString());
@@ -138,39 +139,31 @@ public partial class DepotAction_In : DepotPageSingle
 
     protected void do_in_ServerClick(object sender, EventArgs e)
     {
-        //DoIn(false);
-        //Response.Redirect("~/StoreQuery/In?StoreId={0}".Formatted(StoreId));
+        DoIn(false);
+        Response.Redirect("~/DepotQuery/InX?DepotId={0}".Formatted(Depot.Id));
     }
 
     protected void DoIn(bool finish)
     {
-        //for (var i = 0; i < view_obj.Items.Count; i++)
-        //{
-        //    var c = view_obj.Items[i].FindControl("ObjectInBody") as Control_ObjectInBody;
-        //    var @in = c.PeekValue();
-        //    var targetId = @in.TargetId;
-        //    var t = db.Value.StoreTarget.Single(o => o.Id == targetId);
-        //    decimal amount = @in.Amount.HasValue ? @in.Amount.Value : 0M;
-        //    decimal fee = @in.Fee.HasValue ? @in.Fee.Value : 0M;
-        //    decimal sourcePerPrice = @in.SourcePerPrice.HasValue ? @in.SourcePerPrice.Value : 0M;
-        //    decimal money = @in.Money.HasValue ? @in.Money.Value : 0M;
-        //    if (@in.ObjectId.HasValue && amount > 0M && money > 0M)
-        //    {
-        //        db.Value.ActionInExt(targetId, @in.ObjectId.Value, @in.Age, @in.Place, "", null, @in.Note, @in.TimeNode.ToTime(), CurrentUser, "", amount, money - fee, sourcePerPrice, fee, money);
-        //    }
-        //}
-        //if (finish)
-        //{
-        //    var tid = target.SelectedValue.GlobalId();
-        //    var t = db.Value.StoreTarget.Single(o => o.Id == tid);
-        //    t.In = true;
-        //    if (total.Value.HasValue)
-        //    {
-        //        t.Paid = (decimal)total.Value.Value;
-        //        t.AdjustedMoney = (decimal)total.Value.Value;
-        //    }
-        //    db.Value.SaveChanges();
-        //}
+        var list = new List<InMemoryIn>();
+        for (var i = 0; i < view_obj.Items.Count; i++)
+        {
+            var c = view_obj.Items[i].FindControl("ObjectIn") as Control_ObjectIn;
+            var @in = c.PeekValue();
+            list.Add(@in);
+        }
+        DataContext.DepotActIn(Depot.Id, target.SelectedValue.GlobalId(), inTime.SelectedDate.HasValue ? inTime.SelectedDate.Value.Date : DateTime.Today, DepotUser.Id, list);
+        if (finish)
+        {
+            var tid = target.SelectedValue.GlobalId();
+            var t = DataContext.DepotOrder.Single(o => o.Id == tid);
+            t.Done = true;
+            if (total.Value.HasValue)
+            {
+                t.Paid = (decimal)total.Value.Value;
+            }
+            DataContext.SaveChanges();
+        }
     }
 
     protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
@@ -207,7 +200,7 @@ public partial class DepotAction_In : DepotPageSingle
 
     protected void done_in_ServerClick(object sender, EventArgs e)
     {
-        //DoIn(true);
-        //Response.Redirect("~/StoreQuery/TargetPrint?StoreId={0}&TargetId={1}".Formatted(StoreId, target.SelectedValue));
+        DoIn(true);
+        Response.Redirect("~/DepotQuery/InPrint?DepotId={0}&OrderId={1}".Formatted(Depot.Id, target.SelectedValue));
     }
 }

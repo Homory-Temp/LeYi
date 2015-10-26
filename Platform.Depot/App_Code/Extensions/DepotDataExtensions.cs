@@ -283,4 +283,183 @@ public static class DepotDataExtensions
         db.DepotDictionaryAdd(depotId, DictionaryType.购置来源, orderSource);
         db.DepotDictionaryAdd(depotId, DictionaryType.使用对象, usageTarget);
     }
+
+    public static void DepotActIn(this DepotEntities db, Guid depotId, Guid orderId, DateTime inTime, Guid operatorId, List<InMemoryIn> list)
+    {
+        foreach (var item in list)
+        {
+            if (!item.ObjectId.HasValue || !item.Amount.HasValue || item.Amount.Value == 0 || !item.Money.HasValue || item.Money.Value == 0)
+                continue;
+            var objId = item.ObjectId.Value;
+            var obj = db.DepotObject.Single(o => o.Id == objId);
+            var @in = new DepotIn
+            {
+                Id = db.GlobalId(),
+                OrderId = orderId,
+                ObjectId = item.ObjectId.Value,
+                Age = item.Age,
+                Place = item.Place,
+                ResponsibleId = null,
+                Note = item.Note,
+                Time = inTime,
+                OperatorId = operatorId,
+                OperationTime = DateTime.Now,
+                Amount = item.Amount.Value,
+                AvailableAmount = item.Amount.Value,
+                Price = decimal.Divide(item.Money.Value, item.Amount.Value),
+                PriceSet = item.PriceSet.HasValue ? item.PriceSet.Value : 0M,
+                Total = item.Money.Value,
+            };
+            db.DepotIn.Add(@in);
+            obj.Amount += @in.Amount;
+            obj.Money += @in.Total;
+            if (obj.Single)
+            {
+                var current = db.DepotInX.Count(o => o.ObjectId == obj.Id) == 0 ? 0 : db.DepotInX.Where(o => o.ObjectId == obj.Id).Max(o => o.Ordinal);
+                for (var j = 0; j < @in.Amount; j++)
+                {
+                    current++;
+                    var inx = new DepotInX
+                    {
+                        Id = db.GlobalId(),
+                        InId = @in.Id,
+                        OrderId = @in.OrderId,
+                        ObjectId = @in.ObjectId,
+                        Age = @in.Age,
+                        Place = @in.Place,
+                        Ordinal = current,
+                        Amount = @in.Amount,
+                        PriceSet = @in.PriceSet,
+                        Price = @in.Price,
+                        Total = @in.Price,
+                        AvailableAmount = @in.AvailableAmount,
+                        Code = obj.Code
+                    };
+                    db.DepotInX.Add(inx);
+                    db.SaveChanges();
+                    inx.Code = db.ToQR(CodeType.Single, inx.AutoId);
+                    var flowx = new DepotFlowX
+                    {
+                        Id = db.GlobalId(),
+                        ObjectId = @in.ObjectId,
+                        ObjectOrdinal = inx.Ordinal,
+                        UserId = operatorId,
+                        Type = FlowType.入库,
+                        TypeName = FlowType.入库.ToString(),
+                        Time = inTime,
+                        Amount = @in.Amount,
+                        Money = @in.Price,
+                        Note = @in.Note
+                    };
+                    db.DepotFlowX.Add(flowx);
+                }
+            }
+            else
+            {
+                var inx = new DepotInX
+                {
+                    Id = db.GlobalId(),
+                    InId = @in.Id,
+                    OrderId = @in.OrderId,
+                    ObjectId = @in.ObjectId,
+                    Age = @in.Age,
+                    Place = @in.Place,
+                    Ordinal = -1,
+                    Amount = @in.Amount,
+                    PriceSet = @in.PriceSet,
+                    Price = @in.Price,
+                    Total = @in.Total,
+                    AvailableAmount = @in.AvailableAmount,
+                    Code = obj.Code
+                };
+                db.DepotInX.Add(inx);
+                var flow = new DepotFlow
+                {
+                    Id = db.GlobalId(),
+                    ObjectId = @in.ObjectId,
+                    UserId = operatorId,
+                    Type = FlowType.入库,
+                    TypeName = FlowType.入库.ToString(),
+                    Time = inTime,
+                    Amount = @in.Amount,
+                    Money = @in.Total,
+                    Note = @in.Note
+                };
+                db.DepotFlow.Add(flow);
+            }
+            db.DepotActStatistics(@in.ObjectId, inTime, @in.Amount, @in.Total, 0, 0, 0, 0, 0, 0, 0, 0);
+            db.SaveChanges();
+            db.DepotDictionaryAdd(depotId, DictionaryType.年龄段, item.Age);
+            db.DepotDictionaryAdd(depotId, DictionaryType.存放地, item.Place);
+        }
+    }
+
+    public static void DepotActStatistics(this DepotEntities db, Guid objectId, DateTime time, decimal @in, decimal inMoney, decimal lend, decimal lendMoney, decimal consume, decimal consumeMoney, decimal @out, decimal outMoney, decimal redo, decimal redoMoney)
+    {
+        var year = time.Year;
+        var month = time.Month;
+        var stamp = new DateTime(year, month, 1);
+        var exists = db.DepotStatistics.Count(o => o.ObjectId == objectId && o.Year == year && o.Month == month);
+        var last = db.DepotStatistics.Where(o => o.ObjectId == objectId && o.Time < stamp).OrderByDescending(o => o.Time).FirstOrDefault();
+        if (exists == 0)
+        {
+            var ss = new DepotStatistics
+            {
+                ObjectId = objectId,
+                Year = year,
+                Month = month,
+                Time = stamp,
+                StartAmount = last == null ? 0 : last.EndAmount,
+                StartMoney = last == null ? 0 : last.EndMoney,
+                InAmount = 0,
+                InMoney = 0,
+                ConsumeAmount = 0,
+                ConsumeMoney = 0,
+                LendAmount = 0,
+                LendMoney = 0,
+                OutAmount = 0,
+                OutMoney = 0,
+                RedoAmount = 0,
+                RedoMoney = 0,
+                EndAmount = last == null ? 0 : last.EndAmount,
+                EndMoney = last == null ? 0 : last.EndMoney
+            };
+            ss.InAmount += @in;
+            ss.InMoney += inMoney;
+            ss.ConsumeAmount += consume;
+            ss.ConsumeMoney += consumeMoney;
+            ss.LendAmount += lend;
+            ss.LendMoney += lendMoney;
+            ss.OutAmount += @out;
+            ss.OutMoney += outMoney;
+            ss.RedoAmount += redo;
+            ss.RedoMoney += redoMoney;
+            ss.EndAmount += @in - consume - @out - lend - redo;
+            ss.EndMoney += inMoney - consumeMoney - outMoney - lendMoney - redoMoney;
+            db.DepotStatistics.Add(ss);
+        }
+        else
+        {
+            var current = db.DepotStatistics.Single(o => o.ObjectId == objectId && o.Year == year && o.Month == month);
+            current.InAmount += @in;
+            current.InMoney += inMoney;
+            current.ConsumeAmount += consume;
+            current.ConsumeMoney += consumeMoney;
+            current.LendAmount += lend;
+            current.LendMoney += lendMoney;
+            current.OutAmount += @out;
+            current.OutMoney += outMoney;
+            current.RedoAmount += redo;
+            current.RedoMoney += redoMoney;
+            current.EndAmount += @in - consume - @out - lend - redo;
+            current.EndMoney += inMoney - consumeMoney - outMoney - lendMoney - redoMoney;
+        }
+        foreach (var current in db.DepotStatistics.Where(o => o.ObjectId == objectId && o.Time > stamp))
+        {
+            current.StartAmount += @in - @out - consume - lend - redo;
+            current.StartMoney += inMoney - outMoney - consumeMoney - lendMoney - redoMoney;
+            current.EndAmount += @in - @out - consume - lend - redo;
+            current.EndMoney += inMoney - outMoney - consumeMoney - lendMoney - redoMoney;
+        }
+    }
 }

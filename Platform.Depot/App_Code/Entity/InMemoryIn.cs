@@ -7,7 +7,6 @@ public class InMemoryIn
     public DateTime Time { get; set; }
     public Guid? CatalogId { get; set; }
     public Guid? ObjectId { get; set; }
-    public List<int> Ordinals { get; set; }
     public decimal? Amount { get; set; }
     public decimal? PriceSet { get; set; }
     public decimal? Money { get; set; }
