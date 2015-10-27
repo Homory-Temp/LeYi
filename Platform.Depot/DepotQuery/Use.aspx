@@ -34,13 +34,13 @@
                         <DatePopupButton runat="server" Visible="false" />
                     </telerik:RadMonthYearPicker>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="peopleX" runat="server" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true">
+                    <telerik:RadComboBox ID="peopleX" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true">
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="age" runat="server" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name">
+                    <telerik:RadComboBox ID="age" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name">
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="people" runat="server" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true">
+                    <telerik:RadComboBox ID="people" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true">
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="button" class="btn btn-tumblr" id="query" runat="server" value="查询" onserverclick="query_ServerClick" />

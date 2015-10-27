@@ -77,7 +77,7 @@
                     <div class="row">
                         <div class="col-md-4 text-right">购置来源：</div>
                         <div class="col-md-8 text-left">
-                            <telerik:RadComboBox ID="source" runat="server" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Name" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="400" AllowCustomText="true" OnClientSelectedIndexChanged="renewSource" OnClientDropDownClosed="renewSourceX">
+                            <telerik:RadComboBox ID="source" runat="server" MaxHeight="203" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Name" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="400" AllowCustomText="true" OnClientSelectedIndexChanged="renewSource" OnClientDropDownClosed="renewSourceX">
                                 <Items>
                                     <telerik:RadComboBoxItem Text="" Value="" Selected="true" />
                                 </Items>
@@ -90,7 +90,7 @@
                     <div class="row">
                         <div class="col-md-4 text-right">使用对象：</div>
                         <div class="col-md-8 text-left">
-                            <telerik:RadComboBox ID="usage" runat="server" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Name" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="400" AllowCustomText="true" OnClientSelectedIndexChanged="renewUsage">
+                            <telerik:RadComboBox ID="usage" runat="server" MaxHeight="203" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Name" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="400" AllowCustomText="true" OnClientSelectedIndexChanged="renewUsage">
                                 <Items>
                                     <telerik:RadComboBoxItem Text="" Value="" Selected="true" />
                                 </Items>
@@ -133,7 +133,7 @@
                     <div class="row">
                         <div class="col-md-4 text-right">保管人：</div>
                         <div class="col-md-8 text-left">
-                            <telerik:RadComboBox ID="keep" runat="server" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="400" AllowCustomText="true">
+                            <telerik:RadComboBox ID="keep" runat="server" MaxHeight="203" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="400" AllowCustomText="true">
                                 <Items>
                                     <telerik:RadComboBoxItem Text="" Value="" Selected="true" />
                                 </Items>
@@ -146,7 +146,7 @@
                     <div class="row">
                         <div class="col-md-4 text-right">经手人：</div>
                         <div class="col-md-8 text-left">
-                            <telerik:RadComboBox ID="brokerage" runat="server" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="400" AllowCustomText="true">
+                            <telerik:RadComboBox ID="brokerage" runat="server" MaxHeight="203" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="400" AllowCustomText="true">
                                 <Items>
                                     <telerik:RadComboBoxItem Text="" Value="" Selected="true" />
                                 </Items>

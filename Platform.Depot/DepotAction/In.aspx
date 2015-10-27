@@ -71,16 +71,16 @@
                         <DatePopupButton runat="server" Visible="false" />
                     </telerik:RadMonthYearPicker>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="source" runat="server" AutoPostBack="true" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" OnSelectedIndexChanged="source_SelectedIndexChanged">
+                    <telerik:RadComboBox ID="source" runat="server" AutoPostBack="true" MaxHeight="203" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" OnSelectedIndexChanged="source_SelectedIndexChanged">
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="usage" runat="server" AutoPostBack="true" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" OnSelectedIndexChanged="usage_SelectedIndexChanged">
+                    <telerik:RadComboBox ID="usage" runat="server" AutoPostBack="true" MaxHeight="203" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" OnSelectedIndexChanged="usage_SelectedIndexChanged">
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="people" runat="server" AutoPostBack="true" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true" OnSelectedIndexChanged="people_SelectedIndexChanged">
+                    <telerik:RadComboBox ID="people" runat="server" AutoPostBack="true" MaxHeight="203" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true" OnSelectedIndexChanged="people_SelectedIndexChanged">
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="target" runat="server" AutoPostBack="true" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" ShowToggleImage="true" Width="400" AllowCustomText="true" OnSelectedIndexChanged="target_SelectedIndexChanged"></telerik:RadComboBox>
+                    <telerik:RadComboBox ID="target" runat="server" AutoPostBack="true" MaxHeight="203" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" ShowToggleImage="true" Width="400" AllowCustomText="true" OnSelectedIndexChanged="target_SelectedIndexChanged"></telerik:RadComboBox>
                 </div>
             </div>
             <div class="row">

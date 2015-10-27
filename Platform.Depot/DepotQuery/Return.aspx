@@ -52,7 +52,7 @@
                                 <DatePopupButton runat="server" Visible="false" />
                             </telerik:RadMonthYearPicker>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="useType" runat="server" AutoPostBack="false" Width="120" AppendDataBoundItems="false" DataTextField="Name" DataValueField="Id">
+                    <telerik:RadComboBox ID="useType" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" AppendDataBoundItems="false" DataTextField="Name" DataValueField="Id">
                         <Items>
                             <telerik:RadComboBoxItem Text="出库类型" Value="*" Selected="true" />
                             <telerik:RadComboBoxItem Text="借用" Value="2" />
@@ -60,12 +60,12 @@
                         </Items>
                     </telerik:RadComboBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <telerik:RadTextBox ID="name" runat="server" Width="120" EmptyMessage="物资名称"></telerik:RadTextBox>
+                            <telerik:RadTextBox ID="name" runat="server" MaxHeight="203" Width="120" EmptyMessage="物资名称"></telerik:RadTextBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="age" runat="server" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name">
+                    <telerik:RadComboBox ID="age" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name">
                     </telerik:RadComboBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="peopleX" runat="server" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true">
+                    <telerik:RadComboBox ID="peopleX" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true">
                     </telerik:RadComboBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="button" class="btn btn-tumblr" id="query" runat="server" value="查询" onserverclick="query_ServerClick" />
