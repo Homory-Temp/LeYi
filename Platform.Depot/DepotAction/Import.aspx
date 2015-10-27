@@ -45,7 +45,7 @@
                         <telerik:RadButton ID="im_do" runat="server" Text="预览要导入的固定资产数据" OnClick="im_do_Click"></telerik:RadButton>
                     </div>
                     <div style="margin-left: 50px; margin-top: 20px;">
-                        <telerik:RadGrid ID="grid" runat="server" AutoGenerateColumns="true" Font-Size="12px" AllowPaging="true" PageSize="20" OnNeedDataSource="grid_NeedDataSource">
+                        <telerik:RadGrid ID="grid" runat="server" AutoGenerateColumns="true" Font-Size="12px" AllowPaging="true" PageSize="20" OnNeedDataSource="grid_NeedDataSource" LocalizationPath="../Language">
                         </telerik:RadGrid>
                     </div>
                 </div>
