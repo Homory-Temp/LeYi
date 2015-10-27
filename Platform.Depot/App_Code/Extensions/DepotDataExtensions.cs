@@ -288,7 +288,7 @@ public static class DepotDataExtensions
     {
         foreach (var item in list)
         {
-            if (!item.ObjectId.HasValue || !item.Amount.HasValue || item.Amount.Value == 0 || !item.Money.HasValue || item.Money.Value == 0)
+            if (!item.ObjectId.HasValue || !item.Amount.HasValue || item.Amount.Value == 0)
                 continue;
             var objId = item.ObjectId.Value;
             var obj = db.DepotObject.Single(o => o.Id == objId);
