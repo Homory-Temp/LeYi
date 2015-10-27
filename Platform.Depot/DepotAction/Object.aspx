@@ -19,6 +19,12 @@
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
+    <script>
+        function gox(obj) {
+            var id = $(obj).attr("goid");
+            window.open('../DepotQuery/Object?ObjectId=' + id, '_blank');
+        }
+    </script>
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
@@ -93,7 +99,7 @@
                                         <tr>
                                             <td><%# Eval("Ordinal") %></td>
                                             <td><%# Eval("SerialA").WhenZero("无") %></td>
-                                            <td><%# Eval("Name") %></td>
+                                            <td style="cursor: pointer; color: #3E5A70;" onclick="gox(this);" goid='<%# Eval("Id") %>'><%# Eval("Name") %></td>
                                             <td><%# Eval("Unit") %></td>
                                             <td><%# Eval("Specification") %></td>
                                             <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
@@ -110,14 +116,14 @@
                                         <div class="col-md-3">
                                             <div class="row" style="margin: 30px; border: solid 1px silver;">
                                                 <div class="col-md-12" style="width: 100%; height: 100%;">
-                                                    <div style="height: 160px; text-align: center; cursor: pointer;">
+                                                    <div style="height: 160px; text-align: center; cursor: pointer;" onclick="gox(this);" goid='<%# Eval("Id") %>'>
                                                         <img class="img-responsive" style="height: 158px; margin: auto;" src='<%# Eval("ImageA").None() ? "../Content/Images/Transparent.png" : Eval("ImageA") %>' />
                                                     </div>
                                                     <div style="height: 145px;">
                                                         <table style="margin: auto; width: 90%;">
                                                             <tr style="line-height: 28px; height: 28px; text-align: center;">
                                                                 <td style="line-height: 55px; height: 55px; text-align: center; cursor: pointer;">
-                                                                    <span class="btn btn-danger"><%# Eval("Name") %></span>
+                                                                    <span class="btn btn-danger" onclick="gox(this);" goid='<%# Eval("Id") %>'><%# Eval("Name") %></span>
                                                                 </td>
                                                             </tr>
                                                             <tr style="line-height: 28px; height: 28px; text-align: left;">
