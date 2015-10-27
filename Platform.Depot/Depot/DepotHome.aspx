@@ -42,8 +42,8 @@
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Use?DepotId={0}".Formatted(Depot.Id) %>'>物资出库</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Return?DepotId={0}".Formatted(Depot.Id) %>'>物资归还</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Object?DepotId={0}".Formatted(Depot.Id) %>'>物资管理</a>
-                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Import?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: initial;": "display: none;") %>'>资产导入</a>
-                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Move?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: initial;": "display: none;") %>'>资产分库</a>
+                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Import?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产导入</a>
+                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Move?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产分库</a>
                         </div>
                     </div>
                 </div>
@@ -62,8 +62,6 @@
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotQuery/Return?DepotId={0}".Formatted(Depot.Id) %>'>归还查询</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotQuery/Statistics?DepotId={0}".Formatted(Depot.Id) %>'>库存查询</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotQuery/Redo?DepotId={0}".Formatted(Depot.Id) %>'>退货查询</a>
-                            <a class="btn btn-info dictionaryX" href='<%= "../DepotQuery/Import?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: initial;": "display: none;") %>'>导入查询</a>
-                            <a class="btn btn-info dictionaryX" href='<%= "../DepotQuery/Move?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: initial;": "display: none;") %>'>分库查询</a>
                         </div>
                     </div>
                 </div>
@@ -83,7 +81,7 @@
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Code?DepotId={0}".Formatted(Depot.Id) %>'>条码打印</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Use?DepotId={0}".Formatted(Depot.Id) %>'>扫码出库</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Return?DepotId={0}".Formatted(Depot.Id) %>'>扫码归还</a>
-                            <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Flow?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: initial;": "display: none;") %>'>流通查询</a>
+                            <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Flow?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>流通查询</a>
                         </div>
                     </div>
                 </div>
