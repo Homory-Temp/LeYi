@@ -65,7 +65,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                        <telerik:RadGrid ID="grid" runat="server" AutoGenerateColumns="false" OnNeedDataSource="grid_NeedDataSource">
+                        <telerik:RadGrid ID="grid" runat="server" AutoGenerateColumns="false" OnNeedDataSource="grid_NeedDataSource" AllowPaging="true" PageSize="15">
                             <MasterTableView>
                                 <Columns>
                                     <telerik:GridBoundColumn DataField="CatalogPath" HeaderText="物资类别"></telerik:GridBoundColumn>
