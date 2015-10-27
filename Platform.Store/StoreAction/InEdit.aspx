@@ -29,10 +29,16 @@
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资管理 - 入库编辑" />
         <telerik:RadCodeBlock runat="server">
             <script>
+                function accMul(arg1, arg2) {
+                    var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+                    try { m += s1.split(".")[1].length } catch (e) { }
+                    try { m += s2.split(".")[1].length } catch (e) { }
+                    return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+                }
                 function calc(sender, args) {
                     var a = $find('<%= amount.ClientID %>').get_value();
                     var p = $find('<%= perPrce.ClientID %>').get_value();
-                    $find('<%= money.ClientID %>').set_value(a * p);
+                    $find('<%= money.ClientID %>').set_value(accMul(a, p));
                 }
             </script>
         </telerik:RadCodeBlock>

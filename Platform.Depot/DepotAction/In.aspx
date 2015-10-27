@@ -33,12 +33,18 @@
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资管理 - 物资入库" />
         <telerik:RadCodeBlock runat="server">
             <script>
+                function accMul(arg1, arg2) {
+                    var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+                    try { m += s1.split(".")[1].length } catch (e) { }
+                    try { m += s2.split(".")[1].length } catch (e) { }
+                    return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+                }
                 function calc(sender, args) {
                     var g_in_price;
                     var id = sender.get_id().replace("amount", "").replace("priceSet", "");
                     var g_in_amount = $find(id + "amount").get_value();
                     var g_in_price = $find(id + "priceSet").get_value();
-                    $find(id + "money").set_value(g_in_amount * g_in_price);
+                    $find(id + "money").set_value(accMul(g_in_amount, g_in_price));
                 }
                 function calcTotal(sender, args) {
                     var g_total = 0.00;
