@@ -10,7 +10,7 @@ public class DepotPage : System.Web.UI.Page, IDepot
 
     protected override void OnLoad(EventArgs e)
     {
-        var doc = XDocument.Load(Server.MapPath("../Common/配置/Title.xml"));
+        var doc = XDocument.Load(Server.MapPath("~/Common/配置/Title.xml"));
         Title = doc.Root.Element("Depot").Value;
         if (!string.IsNullOrWhiteSpace(Request.QueryString["OnlineId"]))
         {

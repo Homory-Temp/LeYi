@@ -69,15 +69,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\Models\Model.Context.cs" />
-    <Compile Include="App_Code\Models\Model.cs" />
-    <Compile Include="App_Code\Models\Model.Designer.cs">
-      <DependentUpon>Model.edmx</DependentUpon>
+    <Compile Include="App_Code\Entity\InMemoryIn.cs" />
+    <Compile Include="App_Code\Entity\InMemoryRedo.cs" />
+    <Compile Include="App_Code\Entity\InMemoryReturn.cs" />
+    <Compile Include="App_Code\Entity\InMemoryST.cs" />
+    <Compile Include="App_Code\Entity\InMemoryUse.cs" />
+    <Compile Include="App_Code\Extensions\DepotCommonExtensions.cs" />
+    <Compile Include="App_Code\Extensions\DepotDataExtensions.cs" />
+    <Compile Include="App_Code\Models\DepotEntity.Context.cs" />
+    <Compile Include="App_Code\Models\DepotEntity.cs" />
+    <Compile Include="App_Code\Models\DepotEntity.Designer.cs">
+      <DependentUpon>DepotEntity.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="App_Code\Models\ModelEntity.cs" />
-    <Compile Include="App_Code\Models\ModelFunction.cs" />
     <Compile Include="App_Code\ToModels\pcodelist.cs">
       <DependentUpon>ToModels.tt</DependentUpon>
     </Compile>
@@ -118,17 +123,17 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="App_Code\Models\Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="App_Code\Models\Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
-    </None>
     <EntityDeploy Include="App_Code\ToModels\ToModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ToModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="App_Code\Models\DepotEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DepotEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App_Code\Models\DepotEntity.edmx.diagram">
+      <DependentUpon>DepotEntity.edmx</DependentUpon>
+    </None>
     <None Include="App_Code\ToModels\ToModels.edmx.diagram">
       <DependentUpon>ToModels.edmx</DependentUpon>
     </None>

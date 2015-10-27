@@ -1,5 +1,6 @@
 ﻿using Models;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using Windows.MMS.Picture.Import.App_Code.ToModels;
@@ -8,7 +9,7 @@ namespace Windows.MMS.Picture.Import
 {
     class Program
     {
-        private static StorageEntity db = new StorageEntity();
+        private static DepotEntities db = new DepotEntities();
         private static LibEntities dbx = new LibEntities();
 
         static void Main(string[] args)
@@ -21,75 +22,43 @@ namespace Windows.MMS.Picture.Import
                     error = false;
                     Guid 学校Id = Guid.Parse(ConfigurationManager.AppSettings["学校Guid"]);
                     Guid 图片库用户Id = Guid.Parse(ConfigurationManager.AppSettings["图片库管理员Guid"]);
-                    Guid 图片库Id;
-                    Guid 图片库总分类Id;
-                    var sid = ConfigurationManager.AppSettings["图片库Guid"];
-                    if (string.IsNullOrWhiteSpace(sid))
-                    {
-                        Console.WriteLine("图片库未创建，正在创建中");
-                        图片库Id = db.GlobalId();
-                        图片库总分类Id = db.GlobalId();
-                        db.StorageAdd(学校Id, "图片库", 1, 图片库Id, 图片库总分类Id);
-                        db.SaveChanges();
-                        Console.WriteLine("图片库和默认总分类创建成功");
-                        db.InitializePermission(图片库用户Id, 图片库Id);
-                        db.SaveChanges();
-                        Console.WriteLine("图片库默认权限分配成功");
-                    }
-                    else
-                    {
-                        图片库Id = Guid.Parse(sid);
-                        图片库总分类Id = Guid.Parse(ConfigurationManager.AppSettings["图片库总分类Guid"]);
-                    }
-                    Console.WriteLine("图片库购置单检测中");
-                    var 图片库购置单编号 = ConfigurationManager.AppSettings["图片库购置单编号"];
-                    Guid 图片库购置单Id;
-                    if (db.StorageTarget.Count(o => o.Number == 图片库购置单编号) == 0)
-                    {
-                        Console.WriteLine("图片库购置单未获取，正在创建");
-                        图片库购置单Id = db.StorageTargetAdd(图片库Id, 图片库购置单编号, 图片库购置单编号, "导入", "无锡市实验幼儿园", "图片", 0.00M, 0.00M, 图片库用户Id, 图片库用户Id, 图片库用户Id, DateTime.Now, DateTime.Today);
-                        db.SaveChanges();
-                        Console.WriteLine("图片库购置单创建成功");
-                    }
-                    else
-                    {
-                        图片库购置单Id = db.StorageTarget.Single(o => o.Number == 图片库购置单编号).Id;
-                        Console.WriteLine("图片库购置单已获取");
-                    }
+                    Guid 图片库Id = Guid.Parse(ConfigurationManager.AppSettings["图片库Guid"]);
+                    Guid 购置单Id = db.GlobalId();
+                    db.DepotOrderAdd(购置单Id, 图片库Id, "图片库导入_{0}".Formatted(DateTime.Now.ToString("yyyyMMddHHmmss")), "导入", "导入", "导入", "导入", 0M, 0M, null, null, DateTime.Now, 图片库用户Id);
                     Console.WriteLine("图片库开始导入分类");
                     int i0 = 0;
                     foreach (var c in dbx.pcodelist.Where(o => o.type == "P" && o.parent == 0).OrderBy(o => o.id))
                     {
                         i0++;
                         Guid id;
-                        if (db.StorageCatalog.Count(o => o.StorageId == 图片库Id && o.Code == c.code && o.State < State.删除) == 0)
+                        if (db.DepotCatalog.Count(o => o.DepotId == 图片库Id && o.Code == c.code && o.State <  State.停用) == 0)
                         {
-                            id = db.StorageCatalogAdd(图片库Id, 图片库总分类Id, c.name, i0, c.code);
+                            id = db.DepotCatalogAdd(图片库Id, null, Guid.Empty, c.name, i0, c.code);
                         }
                         else
                         {
-                            id = db.StorageCatalog.Single(o => o.StorageId == 图片库Id && o.Code == c.code && o.State < State.删除).Id;
+                            id = db.DepotCatalog.Single(o => o.DepotId == 图片库Id && o.Code == c.code && o.State < State.停用).Id;
                         }
                         int j0 = 0;
                         foreach (var cc in dbx.pcodelist.Where(o => o.type == "P" && o.parent == c.id).OrderBy(o => o.id))
                         {
                             j0++;
                             Guid idx;
-                            if (db.StorageCatalog.Count(o => o.StorageId == 图片库Id && o.Code == cc.code && o.State < State.删除) == 0)
+                            if (db.DepotCatalog.Count(o => o.DepotId == 图片库Id && o.Code == cc.code && o.State < State.停用) == 0)
                             {
-                                idx = db.StorageCatalogAdd(图片库Id, id, cc.name, j0, cc.code);
+                                idx = db.DepotCatalogAdd(图片库Id, id, id, cc.name, j0, cc.code);
                             }
                             else
                             {
-                                idx = db.StorageCatalog.Single(o => o.StorageId == 图片库Id && o.Code == cc.code && o.State < State.删除).Id;
+                                idx = db.DepotCatalog.Single(o => o.DepotId == 图片库Id && o.Code == cc.code && o.State < State.停用).Id;
                             }
                             int k0 = 0;
                             foreach (var ccc in dbx.pcodelist.Where(o => o.type == "P" && o.parent == cc.id).OrderBy(o => o.id))
                             {
                                 k0++;
-                                if (db.StorageCatalog.Count(o => o.StorageId == 图片库Id && o.Code == ccc.code && o.State < State.删除) == 0)
+                                if (db.DepotCatalog.Count(o => o.DepotId == 图片库Id && o.Code == ccc.code && o.State < State.停用) == 0)
                                 {
-                                    db.StorageCatalogAdd(图片库Id, idx, ccc.name, k0, ccc.code);
+                                    db.DepotCatalogAdd(图片库Id, idx, id, ccc.name, k0, ccc.code);
                                 }
                             }
                         }
@@ -114,8 +83,7 @@ namespace Windows.MMS.Picture.Import
                         }
                         int pid = wz.pid;
                         var pimg = dbx.P_picimg.SingleOrDefault(o => o.pid == pid);
-                        Image image;
-                        image = new Image();
+                        string a = "", b = "", c = "", d = "";
                         if (!(pimg == null || (pimg.pic1 == null && pimg.pic2 == null && pimg.pic3 == null && pimg.pic4 == null)))
                         {
                             if (pimg.pic1 != null)
@@ -123,40 +91,54 @@ namespace Windows.MMS.Picture.Import
                                 var p1 = ToPic(pimg.pic1);
                                 var pgid = Guid.NewGuid();
                                 p1.Save(ConfigurationManager.AppSettings["图片库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-                                image.Images.Add("~/Upload/{0}.png".Formatted(pgid));
+                                a = "../Common/物资/图片/{0}.png".Formatted(pgid);
                             }
                             if (pimg.pic2 != null)
                             {
                                 var p2 = ToPic(pimg.pic2);
                                 var pgid = Guid.NewGuid();
                                 p2.Save(ConfigurationManager.AppSettings["图片库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-                                image.Images.Add("~/Upload/{0}.png".Formatted(pgid));
+                                b = "../Common/物资/图片/{0}.png".Formatted(pgid);
                             }
                             if (pimg.pic3 != null)
                             {
                                 var p3 = ToPic(pimg.pic3);
                                 var pgid = Guid.NewGuid();
                                 p3.Save(ConfigurationManager.AppSettings["图片库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-                                image.Images.Add("~/Upload/{0}.png".Formatted(pgid));
+                                c = "../Common/物资/图片/{0}.png".Formatted(pgid);
                             }
                             if (pimg.pic4 != null)
                             {
                                 var p4 = ToPic(pimg.pic4);
                                 var pgid = Guid.NewGuid();
                                 p4.Save(ConfigurationManager.AppSettings["图片库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-                                image.Images.Add("~/Upload/{0}.png".Formatted(pgid));
+                                d = "../Common/物资/图片/{0}.png".Formatted(pgid);
                             }
                         }
-                        if (db.StorageObject.Count(o => o.StorageId == 图片库Id && o.Code == wz.code && o.State < State.删除) == 0)
+                        var catalogs = db.DepotCatalogLoad(图片库Id).Select(o => o.Id).Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (x, y) => y.ObjectId).Join(db.DepotObject, o => o, o => o.Id, (x, y) => y).ToList();
+                        if (catalogs.Count(o => o.SerialD == wz.code && o.State < State.停用) == 0)
                         {
                             var cc = wz.classcode.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
-                            var cco = db.StorageCatalog.SingleOrDefault(o => o.Code == cc);
+                            var cco = db.DepotCatalogLoad(图片库Id).SingleOrDefault(o => o.Code == cc);
                             if (cco == null)
                                 continue;
-                            var picid = db.StorageObjectAdd(图片库Id, cco.Id, wz.name ?? "", "张", wz.gg, false, false, false, "", 0, 0, image, 图片库用户Id, ordinal, DateTime.Now, wz.xh, wz.classcode);
-                            db.SaveChanges();
-                            db.SetIn(picid, 图片库购置单Id, Age(wz.syfw.HasValue ? wz.syfw.Value : 0), "图片库", null, 图片库用户Id, 1, 0.00M, 0.00M, "");
-                            db.SaveChanges();
+                            var picid = db.GlobalId();
+
+                            var gids = new List<Guid>();
+                            gids.Add(cco.Id);
+                            var xcco = cco.DepotCatalogParent;
+                            while (xcco != null)
+                            {
+                                gids.Add(xcco.Id);
+                                xcco = xcco.DepotCatalogParent;
+                            }
+
+                            db.DepotObjectAdd(picid, gids, 图片库Id, wz.name, true, false, false, "", wz.classcode, wz.gg, wz.code, "张", wz.xh, 0, 0, a, b, c, d, "", ordinal);
+
+                            var @in = new InMemoryIn { Age = Age(wz.syfw.HasValue ? wz.syfw.Value : 0), Place = "图片库", Amount = 1, CatalogId = cco.Id, Money = 0, Note = "", ObjectId = picid, PriceSet = 0, Time = DateTime.Today };
+                            var list = new List<InMemoryIn>();
+                            list.Add(@in);
+                            db.DepotActIn(图片库Id, 购置单Id, DateTime.Today, 图片库用户Id, list);
                         }
                     }
                     Console.WriteLine("图片库物资导入成功");
