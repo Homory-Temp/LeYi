@@ -81,7 +81,7 @@
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Code?DepotId={0}".Formatted(Depot.Id) %>'>条码打印</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Use?DepotId={0}".Formatted(Depot.Id) %>'>扫码出库</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Return?DepotId={0}".Formatted(Depot.Id) %>'>扫码归还</a>
-                            <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Flow?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>流通查询</a>
+                            <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Flow?DepotId={0}".Formatted(Depot.Id) %>'>流通查询</a>
                         </div>
                     </div>
                 </div>

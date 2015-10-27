@@ -42,7 +42,7 @@
                             <li><a href='<%= "../DepotScan/Code?DepotId={0}".Formatted(Depot.Id) %>'>条码打印</a></li>
                             <li><a href='<%= "../DepotScan/Use?DepotId={0}".Formatted(Depot.Id) %>'>扫码出库</a></li>
                             <li><a href='<%= "../DepotScan/Return?DepotId={0}".Formatted(Depot.Id) %>'>扫码归还</a></li>
-                            <li><a href='<%= "../DepotScan/Flow?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: block;": "display: none;") %>'>流通查询</a></li>
+                            <li><a href='<%= "../DepotScan/Flow?DepotId={0}".Formatted(Depot.Id) %>'>流通查询</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
