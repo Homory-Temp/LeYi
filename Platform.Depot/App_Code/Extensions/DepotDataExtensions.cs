@@ -20,6 +20,27 @@ public static class DepotDataExtensions
         return new Guid(guidArray);
     }
 
+    public static Guid DepotCatalogAdd(this DepotEntities db, Guid depotId, Guid? parent, Guid top, string name, int ordinal, string code)
+    {
+        var pinYin = db.ToPinYin(name).Single();
+        var newId = db.GlobalId();
+        var catalog = new DepotCatalog
+        {
+            Id = newId,
+            ParentId = parent,
+            TopId = parent.HasValue ? top : newId,
+            DepotId = depotId,
+            Name = name,
+            PinYin = pinYin,
+            Ordinal = ordinal,
+            State = State.启用,
+            Code = code
+        };
+        db.DepotCatalog.Add(catalog);
+        db.SaveChanges();
+        return newId;
+    }
+
     public static string ToQR(this DepotEntities db, CodeType type, int autoId)
     {
         StringBuilder sb = new StringBuilder(type.ToString().GetFirstChar());
