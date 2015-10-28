@@ -80,7 +80,7 @@ public partial class DepotAction_Return : DepotPageSingle
             }
         }
         var userId = people.SelectedValue.GlobalId();
-        DataContext.DepotActReturn(Depot.Id, time.SelectedDate.HasValue ? time.SelectedDate.Value.Date : DateTime.Today, DepotUser.Id, userId, list);
+        DataContext.DepotActReturn(Depot.Id, time.SelectedDate.HasValue ? time.SelectedDate.Value.Date : DateTime.Today, DepotUser.Id, list);
         Response.Redirect("~/DepotQuery/Return?DepotId={0}".Formatted(Depot.Id));
     }
 }

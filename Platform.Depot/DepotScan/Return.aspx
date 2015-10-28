@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Return.aspx.cs" Inherits="DepotScan_Return" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
-<%@ Register Src="~/Control/ObjectUse.ascx" TagPrefix="homory" TagName="ObjectUse" %>
+<%@ Register Src="~/Control/ObjectReturn.ascx" TagPrefix="homory" TagName="ObjectReturn" %>
 
 <!DOCTYPE html>
 
@@ -71,15 +71,12 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <telerik:RadListView ID="view_obj" runat="server" OnNeedDataSource="view_obj_NeedDataSource" ItemPlaceholderID="useHolder">
+                    <telerik:RadListView ID="view_obj" runat="server" OnNeedDataSource="view_obj_NeedDataSource" ItemPlaceholderID="useHolder" OnItemDataBound="view_obj_ItemDataBound">
                         <LayoutTemplate>
                             <table class="storeTable text-center">
                                 <tr>
                                     <th>借用日期</th>
                                     <th>物资名称</th>
-                                    <th>借用数量</th>
-                                    <th>待归还数</th>
-                                    <th>单价</th>
                                     <th>合计</th>
                                     <th>归还数</th>
                                     <th>报废数</th>
@@ -89,39 +86,7 @@
                             </table>
                         </LayoutTemplate>
                         <ItemTemplate>
-                            <tr>
-                                <td style="display: none;">
-                                    <asp:Label runat="server" ID="id" Text='<%# Eval("Id") %>'></asp:Label>
-                                    <asp:Label runat="server" ID="code" Text='<%# Gen(Container.DataItem as Models.DepotUseXRecord) %>'></asp:Label>
-                                </td>
-                                <td>
-                                    <%# Eval("Time").ToDay() %>
-                                </td>
-                                <td>
-                                    <%# Eval("Name") %>
-                                </td>
-                                <td>
-                                    <%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.固定资产库)) %>
-                                </td>
-                                <td>
-                                    <%# ((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")).ToAmount(Depot.Featured(Models.DepotType.固定资产库)) %>
-                                </td>
-                                <td>
-                                    <%# Eval("PriceSet").ToMoney() %>
-                                </td>
-                                <td>
-                                    <%# Eval("Money").ToMoney() %>
-                                </td>
-                                <td>
-                                    <telerik:RadNumericTextBox ID="amount" runat="server" Width="120" MaxValue='<%# (double)((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")) %>' NumberFormat-DecimalDigits='<%# Depot.Featured(Models.DepotType.小数数量库) ? 2 : 0 %>' DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
-                                </td>
-                                <td>
-                                    <telerik:RadNumericTextBox ID="outAmount" runat="server" Width="120" MaxValue='<%# (double)((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")) %>' NumberFormat-DecimalDigits='<%# Depot.Featured(Models.DepotType.小数数量库) ? 2 : 0 %>' DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="note" runat="server" Width="100"></telerik:RadTextBox>
-                                </td>
-                            </tr>
+                            <homory:ObjectReturn runat="server" ID="ObjectReturn" ItemIndex='<%# Container.DataItemIndex %>' />
                         </ItemTemplate>
                         <EmptyDataTemplate>
                                 <div class="col-md-12 text-center">

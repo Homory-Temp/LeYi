@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
@@ -15,11 +12,9 @@ public partial class DepotScan_Return : DepotPageSingle
         if (!IsPostBack)
         {
             time.SelectedDate = DateTime.Today;
-            people.Items.Clear();
-            people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
-            people.DataBind();
-            counter.Value = "1";
+            counter.Value = "0";
             Detect();
+            Reset();
         }
     }
 
@@ -29,41 +24,15 @@ public partial class DepotScan_Return : DepotPageSingle
         view_obj.Rebind();
     }
 
-    protected void people_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
-    {
-        Detect();
-        view_obj.Rebind();
-    }
-
     protected void Detect()
     {
-        var show = true;
-        if (people.SelectedValue.None())
-        {
-            show = false;
-        }
-        else
-        {
-            show = true;
-        }
-        x1.Visible = x2.Visible = show;
         Reset();
     }
 
     protected void view_obj_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        if (people.SelectedValue.None())
-        {
-            view_obj.DataSource = null;
-            do_return.Visible = false;
-        }
-        else
-        {
-            var userId = people.SelectedValue.GlobalId();
-            var source = DataContext.DepotUseXRecord.Where(o => o.UserId == userId && o.Type == 2 && o.Amount > o.ReturnedAmount).ToList();
-            view_obj.DataSource = source;
-            do_return.Visible = source.Count > 0;
-        }
+        view_obj.DataSource = new int[(int.Parse(counter.Value))];
+        do_return.Visible = (int.Parse(counter.Value)) > 0;
     }
 
     protected string Gen(DepotUseXRecord r)
@@ -75,19 +44,15 @@ public partial class DepotScan_Return : DepotPageSingle
     protected void do_return_ServerClick(object sender, EventArgs e)
     {
         var list = new List<InMemoryReturn>();
-        foreach (var item in view_obj.Items)
+        for (var i = 0; i < view_obj.Items.Count; i++)
         {
-            var r = new InMemoryReturn(); 
-            r.UseX = (item.FindControl("id") as Label).Text.GlobalId();
-            r.Amount = (item.FindControl("amount") as RadNumericTextBox).PeekValue(0M);
-            r.OutAmount = (item.FindControl("outAmount") as RadNumericTextBox).PeekValue(0M);
-            r.Note = (item.FindControl("note") as RadTextBox).Text;
-            if (r.Amount > 0)
+            var c = view_obj.Items[i].FindControl("ObjectReturn") as Control_ObjectReturn;
+            var r = c.PeekValue();
+            if (r.Amount.HasValue && r.Amount.Value > 0)
             {
                 list.Add(r);
             }
         }
-        //var userId = people.SelectedValue.GlobalId();
         DataContext.DepotActReturn(Depot.Id, time.SelectedDate.HasValue ? time.SelectedDate.Value.Date : DateTime.Today, DepotUser.Id, list);
         Response.Redirect("~/DepotQuery/Return?DepotId={0}".Formatted(Depot.Id));
     }
@@ -100,22 +65,47 @@ public partial class DepotScan_Return : DepotPageSingle
 
     protected void scanAdd_ServerClick(object sender, EventArgs e)
     {
+        var list = x.Value.None() ? new List<InMemoryReturn>() : x.Value.FromJson<List<InMemoryReturn>>();
         var code = scan.Text.Trim();
-        foreach (var item in view_obj.Items)
+        if (code.StartsWith("O"))
         {
-            var c = (item.FindControl("code") as Label).Text;
-            if (c.Equals(code, StringComparison.InvariantCultureIgnoreCase))
-            {
-                var t = (item.FindControl("amount") as RadNumericTextBox);
-                if (t.Value.HasValue)
-                {
-                    if (t.Value + 1 <= t.MaxValue)
-                        t.Value += 1;
-                }
-                else
-                    t.Value = 1;
-            }
+            Reset();
+            return;
         }
+        else if (code.StartsWith("S"))
+        {
+            var inx = DataContext.DepotInX.FirstOrDefault(o => o.Code == code);
+            if (inx == null)
+            {
+                Reset();
+                return;
+            }
+            var obj = inx.DepotObject;
+            var isVirtual = Depot.Featured(DepotType.固定资产库);
+            var catalogId = DataContext.DepotObjectCatalog.Single(o => o.ObjectId == obj.Id && o.IsVirtual == isVirtual && o.IsLeaf == true).CatalogId;
+            var usex = inx.DepotUseX.FirstOrDefault(o => o.ReturnedAmount == 0);
+            if (usex == null)
+                return;
+            var @return = new InMemoryReturn { Amount = 1, Code = code, Note = "", OutAmount = null, UseX = usex.Id };
+            list.Add(@return);
+        }
+        x.Value = list.ToJson();
+        counter.Value = list.Count.ToString();
+        view_obj.Rebind();
         Reset();
+    }
+
+    protected void view_obj_ItemDataBound(object sender, RadListViewItemEventArgs e)
+    {
+        var c = e.Item.FindControl("ObjectReturn") as Control_ObjectReturn;
+        var list = x.Value.None() ? new List<InMemoryReturn>() : x.Value.FromJson<List<InMemoryReturn>>();
+        if (list.Count < c.ItemIndex + 1)
+        {
+            c.LoadDefaults(new InMemoryReturn { });
+        }
+        else
+        {
+            c.LoadDefaults(list[c.ItemIndex]);
+        }
     }
 }

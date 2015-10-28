@@ -701,10 +701,12 @@ public static class DepotDataExtensions
         var @out = new List<InMemoryOut>();
         foreach (var item in list)
         {
-            if (item.Amount == 0)
+            if (!item.Amount.HasValue || item.Amount.Value == 0)
                 continue;
             var usexId = item.UseX;
-            var usex = db.DepotUseX.Single(o => o.Id == usexId);
+            var usex = db.DepotUseX.SingleOrDefault(o => o.Id == usexId && o.ReturnedAmount < o.Amount);
+            if (usex == null)
+                continue;
             var inx = usex.DepotInX;
             var obj = inx.DepotObject;
             var @in = inx.DepotIn;
@@ -713,9 +715,9 @@ public static class DepotDataExtensions
                 Id = db.GlobalId(),
                 UserId = usex.DepotUse.Id,
                 UseXId = item.UseX,
-                Amount = item.Amount,
+                Amount = item.Amount.Value,
                 Price = inx.Price,
-                Total = item.Amount * inx.Price,
+                Total = item.Amount.Value * inx.Price,
                 Time = returnTime,
                 Note = item.Note
             };
@@ -744,11 +746,11 @@ public static class DepotDataExtensions
                     Note = item.Note
                 };
                 db.DepotFlowX.Add(flowx);
-                if (item.OutAmount > 0)
+                if (item.OutAmount.HasValue && item.OutAmount.Value > 0)
                 {
                     var nl = new List<int>();
                     nl.Add(inx.Ordinal);
-                    @out.Add(new InMemoryOut { Amount = item.OutAmount, ObjectId = @in.ObjectId, Ordinals = nl, Reason = "报废", CatalogId = catalog });
+                    @out.Add(new InMemoryOut { Amount = item.OutAmount.Value, ObjectId = @in.ObjectId, Ordinals = nl, Reason = "报废", CatalogId = catalog });
                 }
             }
             else
