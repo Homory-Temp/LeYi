@@ -23,6 +23,20 @@
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
     <![endif]-->
+    <script>
+        function printDepot() {
+            bdhtml = window.document.body.innerHTML;
+            sprnstr = "<!-- Start Printing -->";
+            eprnstr = "<!-- End Printing -->";
+            prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 23);
+            prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
+            prnhtml = "<body>" + prnhtml + "</body>";
+            window.document.body.innerHTML = prnhtml;
+            window.print();
+            window.document.body.innerHTML = bdhtml;
+            return false;
+        }
+    </script>
 </head>
 <body>
     <form id="form" runat="server">
@@ -65,6 +79,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
+                            <!-- Start Printing -->
                         <telerik:RadGrid ID="grid" runat="server" AutoGenerateColumns="false" OnNeedDataSource="grid_NeedDataSource" AllowPaging="true" PageSize="15">
                             <MasterTableView>
                                 <Columns>
@@ -90,8 +105,14 @@
                                 </NoRecordsTemplate>
                             </MasterTableView>
                         </telerik:RadGrid>
+                            <!-- End Printing -->
                         </div>
                     </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <input type="button" class="btn btn-tumblr" id="print" value="打印" onclick="printDepot();" />
+                </div>
+            </div>
                 </div>
             </div>
         </telerik:RadAjaxPanel>

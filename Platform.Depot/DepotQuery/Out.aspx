@@ -23,6 +23,20 @@
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
     <![endif]-->
+    <script>
+        function printDepot() {
+            bdhtml = window.document.body.innerHTML;
+            sprnstr = "<!-- Start Printing -->";
+            eprnstr = "<!-- End Printing -->";
+            prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 23);
+            prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
+            prnhtml = "<body>" + prnhtml + "</body>";
+            window.document.body.innerHTML = prnhtml;
+            window.print();
+            window.document.body.innerHTML = bdhtml;
+            return false;
+        }
+    </script>
 </head>
 <body>
     <form id="form" runat="server">
@@ -72,6 +86,7 @@
                     </div>
                     <div class="row">&nbsp;</div>
                     <div class="row">
+                        <!-- Start Printing -->
                         <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
                             <LayoutTemplate>
                                 <div class="col-md-12">
@@ -106,7 +121,13 @@
                                 </div>
                             </EmptyDataTemplate>
                         </telerik:RadListView>
+                        <!-- End Printing -->
                     </div>
+            <%--<div class="row">
+                <div class="col-md-12 text-center">
+                    <input type="button" class="btn btn-tumblr" id="print" value="打印" onclick="printDepot();" />
+                </div>
+            </div>--%>
                     <div class="row">
                         <div class="col-md-3">&nbsp;</div>
                         <div class="col-md-6 text-center">

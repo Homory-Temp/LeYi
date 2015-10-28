@@ -90,8 +90,9 @@ public partial class DepotQuery_UseX : DepotPageSingle
         {
             source = source.Where(o => o.Type == 2 && o.ReturnedAmount < o.Amount).ToList();
         }
-        view.DataSource = source.OrderByDescending(o => o.Time).ToList(); ;
-        pager.Visible = source.Count > pager.PageSize;
+        view.DataSource = source.OrderByDescending(o => o.Time).ToList();
+        ___total.Value = source.Sum(o => o.Money).ToMoney();
+        //pager.Visible = source.Count > pager.PageSize;
     }
 
     protected void tree_NodeCheck(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)

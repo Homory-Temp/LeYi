@@ -80,7 +80,8 @@ public partial class DepotQuery_InX : DepotPageSingle
             source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
         }
         view.DataSource = source.OrderByDescending(o => o.Time).ToList();
-        pager.Visible = source.Count > pager.PageSize;
+        ___total.Value = source.Sum(o => o.Total).ToMoney();
+        //pager.Visible = source.Count > pager.PageSize;
     }
 
     protected void edit_ServerClick(object sender, EventArgs e)

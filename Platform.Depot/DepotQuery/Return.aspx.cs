@@ -78,8 +78,9 @@ public partial class DepotQuery_Return : DepotPageSingle
         {
             source = source.Where(o => o.UserName.Equals(peopleX.Text.Trim(), StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
-        view.DataSource = source;
-        pager.Visible = source.Count > pager.PageSize;
+        view.DataSource = source.OrderByDescending(o => o.Time).ToList();
+        ___total.Value = source.Sum(o => o.Money).ToMoney();
+        //pager.Visible = source.Count > pager.PageSize;
     }
 
     protected void tree_NodeCheck(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
