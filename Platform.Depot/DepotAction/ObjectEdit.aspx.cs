@@ -21,11 +21,8 @@ public partial class DepotAction_ObjectEdit : DepotPageSingle
             specification.DataBind();
             var oid = "ObjectId".Query().GlobalId();
             var obj = DataContext.DepotObject.Single(o => o.Id == oid);
-            var c1 = DataContext.DepotObjectCatalog.SingleOrDefault(o => o.ObjectId == oid && o.IsLeaf == true && o.IsVirtual == false);
-            var c2 = DataContext.DepotObjectCatalog.SingleOrDefault(o => o.ObjectId == oid && o.IsLeaf == true && o.IsVirtual == true);
-            var cv1 = c1 == null ? Guid.Empty.ToString() : c1.CatalogId.ToString();
-            var cv2 = c2 == null ? Guid.Empty.ToString() : c2.CatalogId.ToString();
-            var node = tree.EmbeddedTree.GetAllNodes().First(o => o.Value == cv1 || o.Value == cv2);
+            var cid = "CatalogId".Query();
+            var node = tree.EmbeddedTree.GetAllNodes().First(o => o.Value == cid);
             node.ExpandParentNodes();
             node.Selected = true;
             tree.SelectedValue = node.Value;
