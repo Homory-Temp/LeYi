@@ -168,7 +168,6 @@
                 </telerik:RadGrid>
             </div>
             <div class="row">&nbsp;</div>
-            <div class="row">&nbsp;</div>
         </telerik:RadAjaxPanel>
     </form>
 </body>

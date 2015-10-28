@@ -72,6 +72,7 @@ namespace Models
         public Depot()
         {
             this.DepotUse = new HashSet<DepotUse>();
+            this.DepotSetting = new HashSet<DepotSetting>();
         }
     
         public System.Guid Id { get; set; }
@@ -86,6 +87,8 @@ namespace Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotUse> DepotUse { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepotSetting> DepotSetting { get; set; }
     }
 }
 namespace Models
@@ -526,6 +529,21 @@ namespace Models
         public string Rights { get; set; }
         public int Ordinal { get; set; }
         public State State { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class DepotSetting
+    {
+        public System.Guid Id { get; set; }
+        public System.Guid DepotId { get; set; }
+        public string Key { get; set; }
+        public string Value { get; set; }
+    
+        public virtual Depot Depot { get; set; }
     }
 }
 namespace Models

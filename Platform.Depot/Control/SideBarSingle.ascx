@@ -51,6 +51,7 @@
                             <li><a href='<%= "../DepotSetting/Catalog?DepotId={0}".Formatted(Depot.Id) %>'>物资类别</a></li>
                             <li><a href='<%= "../DepotSetting/Dictionary?DepotId={0}".Formatted(Depot.Id) %>'>基础数据</a></li>
                             <li><a href='<%= "../DepotSetting/Permission?DepotId={0}".Formatted(Depot.Id) %>'>权限设置</a></li>
+                            <li><a href='<%= "../DepotSetting/Period?DepotId={0}".Formatted(Depot.Id) %>'>借还时限</a></li>
                         </ul>
                     </li>
                 </ul>

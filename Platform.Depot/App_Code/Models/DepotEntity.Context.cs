@@ -55,6 +55,7 @@ namespace Models
         public virtual DbSet<DepotReturn> DepotReturn { get; set; }
         public virtual DbSet<DepotReturnRecord> DepotReturnRecord { get; set; }
         public virtual DbSet<DepotST> DepotST { get; set; }
+        public virtual DbSet<DepotSetting> DepotSetting { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {

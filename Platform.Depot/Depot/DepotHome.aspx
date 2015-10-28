@@ -96,6 +96,7 @@
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotSetting/Catalog?DepotId={0}".Formatted(Depot.Id) %>'>物资类别</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotSetting/Dictionary?DepotId={0}".Formatted(Depot.Id) %>'>基础数据</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotSetting/Permission?DepotId={0}".Formatted(Depot.Id) %>'>权限设置</a>
+                            <a class="btn btn-info dictionaryX" href='<%= "../DepotSetting/Period?DepotId={0}".Formatted(Depot.Id) %>'>借还时限</a>
                         </div>
                     </div>
                 </div>

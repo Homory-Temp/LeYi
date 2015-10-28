@@ -232,6 +232,15 @@
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="DepotSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="DepotStatistics">
           <Key>
             <PropertyRef Name="ObjectId" />
@@ -755,6 +764,18 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DepotSetting_Depot">
+          <End Role="Depot" Type="Self.Depot" Multiplicity="1" />
+          <End Role="DepotSetting" Type="Self.DepotSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotSetting">
+              <PropertyRef Name="DepotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DepotStatistics_DepotObject">
           <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
           <End Role="DepotStatistics" Type="Self.DepotStatistics" Multiplicity="*" />
@@ -837,6 +858,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySet Name="DepotOrder" EntityType="Self.DepotOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotReturn" EntityType="Self.DepotReturn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotRole" EntityType="Self.DepotRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotSetting" EntityType="Self.DepotSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotStatistics" EntityType="Self.DepotStatistics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotUse" EntityType="Self.DepotUse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotUserRole" EntityType="Self.DepotUserRole" Schema="dbo" store:Type="Tables" />
@@ -1062,6 +1084,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <End Role="DepotUseX" EntitySet="DepotUseX" />
             <End Role="DepotReturn" EntitySet="DepotReturn" />
           </AssociationSet>
+          <AssociationSet Name="FK_DepotSetting_Depot" Association="Self.FK_DepotSetting_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="DepotSetting" EntitySet="DepotSetting" />
+          </AssociationSet>
           <AssociationSet Name="FK_DepotStatistics_DepotObject" Association="Self.FK_DepotStatistics_DepotObject">
             <End Role="DepotObject" EntitySet="DepotObject" />
             <End Role="DepotStatistics" EntitySet="DepotStatistics" />
@@ -1101,6 +1127,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="Type" Type="DepotModel.DepotType" Nullable="false" />
           <Property Name="State" Type="DepotModel.State" Nullable="false" />
           <NavigationProperty Name="DepotUse" Relationship="DepotModel.FK_DepotUse_Depot" FromRole="Depot" ToRole="DepotUse" />
+          <NavigationProperty Name="DepotSetting" Relationship="DepotModel.FK_DepotSetting_Depot" FromRole="Depot" ToRole="DepotSetting" />
         </EntityType>
         <EntityContainer Name="DepotEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Depot" EntityType="Self.Depot" />
@@ -1202,6 +1229,11 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           </AssociationSet>
           <EntitySet Name="DepotReturnRecord" EntityType="DepotModel.DepotReturnRecord" />
           <EntitySet Name="DepotST" EntityType="DepotModel.DepotST" />
+          <EntitySet Name="DepotSetting" EntityType="DepotModel.DepotSetting" />
+          <AssociationSet Name="FK_DepotSetting_Depot" Association="DepotModel.FK_DepotSetting_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="DepotSetting" EntitySet="DepotSetting" />
+          </AssociationSet>
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -2047,6 +2079,28 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="EndAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="EndMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
         </EntityType>
+        <EntityType Name="DepotSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Depot" Relationship="DepotModel.FK_DepotSetting_Depot" FromRole="DepotSetting" ToRole="Depot" />
+        </EntityType>
+        <Association Name="FK_DepotSetting_Depot">
+          <End Type="DepotModel.Depot" Role="Depot" Multiplicity="1" />
+          <End Type="DepotModel.DepotSetting" Role="DepotSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotSetting">
+              <PropertyRef Name="DepotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2557,6 +2611,16 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
                 <ScalarProperty Name="Fixed" ColumnName="Fixed" />
                 <ScalarProperty Name="Single" ColumnName="Single" />
                 <ScalarProperty Name="Consumable" ColumnName="Consumable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotSetting">
+            <EntityTypeMapping TypeName="DepotModel.DepotSetting">
+              <MappingFragment StoreEntitySet="DepotSetting">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
