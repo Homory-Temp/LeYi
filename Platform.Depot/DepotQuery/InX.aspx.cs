@@ -67,7 +67,11 @@ public partial class DepotQuery_InX : DepotPageSingle
             var oid = "OrderId".Query().GlobalId();
             source = source.Where(o => o.OrderId == oid).ToList();
         }
-        view.DataSource = source;
+        if (!toSearch.Text.Trim().None())
+        {
+            source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+        }
+        view.DataSource = source.OrderByDescending(o => o.Time).ToList();
         pager.Visible = source.Count > pager.PageSize;
     }
 

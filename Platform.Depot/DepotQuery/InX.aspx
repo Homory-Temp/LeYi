@@ -52,6 +52,8 @@
                                 <DatePopupButton runat="server" Visible="false" />
                             </telerik:RadMonthYearPicker>
                             &nbsp;&nbsp;&nbsp;&nbsp;
+                    <telerik:RadTextBox ID="toSearch" runat="server" EmptyMessage="物资名称"></telerik:RadTextBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                     <telerik:RadComboBox ID="age" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name">
                     </telerik:RadComboBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
