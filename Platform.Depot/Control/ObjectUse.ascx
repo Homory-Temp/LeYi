@@ -26,7 +26,7 @@
     </td>
     <td>
         <telerik:RadNumericTextBox ID="amount" runat="server" Width="120" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
-        <telerik:RadComboBox ID="ordinalList" runat="server" Width="120" Visible="false" AllowCustomText="false" CheckBoxes="true"></telerik:RadComboBox>
+        <telerik:RadComboBox ID="ordinalList" runat="server" Width="120" Visible="false" AllowCustomText="false" CheckBoxes="true" LocalizationPath="~/Language"></telerik:RadComboBox>
     </td>
     <td style="display: none;">
         <telerik:RadTextBox ID="age" runat="server" Width="100"></telerik:RadTextBox>
