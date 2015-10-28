@@ -148,4 +148,9 @@ public partial class DepotAction_Object : DepotPageSingle
     {
         view.Rebind();
     }
+
+    protected void out_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/Out?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+    }
 }

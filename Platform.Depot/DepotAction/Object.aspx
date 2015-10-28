@@ -114,6 +114,7 @@
                                                 <input type="button" class="btn btn-tumblr" value="入" id="in" runat="server" match='<%# Eval("Id") %>' onserverclick="in_ServerClick" />
                                                 <input type="button" class="btn btn-tumblr" value="借" id="usex" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 && !((bool)Eval("Consumable")) %>' onserverclick="usex_ServerClick" />
                                                 <input type="button" class="btn btn-tumblr" value="领" id="use" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 && !((bool)Eval("Single")) %>' onserverclick="use_ServerClick" />
+                                                <input type="button" class="btn btn-tumblr" value="废" id="out" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 %>' onserverclick="out_ServerClick" />
                                                 <input type="button" class="btn btn-tumblr" value="编" id="edit" runat="server" match='<%# Eval("Id") %>' onserverclick="edit_ServerClick" />
                                                 <input type="button" class="btn btn-tumblr" value="删" id="delete" runat="server" match='<%# Eval("Id") %>' onserverclick="delete_ServerClick" visible='<%# (Container.DataItem as Models.DepotObject).Amount == 0 %>' />
                                             </td>
@@ -145,6 +146,7 @@
                                                         <input type="button" class="btn btn-tumblr" value="入" id="in2" runat="server" match='<%# Eval("Id") %>' onserverclick="in_ServerClick" />
                                                         <input type="button" class="btn btn-tumblr" value="借" id="use2x" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 && !((bool)Eval("Consumable")) %>' onserverclick="usex_ServerClick" />
                                                         <input type="button" class="btn btn-tumblr" value="领" id="use2" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 && !((bool)Eval("Single")) %>' onserverclick="use_ServerClick" />
+                                                        <input type="button" class="btn btn-tumblr" value="废" id="out2" runat="server" match='<%# Eval("Id") %>' visible='<%# (decimal)Eval("Amount") > 0 %>' onserverclick="out_ServerClick" />
                                                         <input type="button" class="btn btn-tumblr" value="编" id="edit2" runat="server" match='<%# Eval("Id") %>' onserverclick="edit_ServerClick" />
                                                         <input type="button" class="btn btn-tumblr" value="删" id="delete2" runat="server" match='<%# Eval("Id") %>' visible='<%# (Container.DataItem as Models.DepotObject).Amount == 0 %>' onserverclick="delete_ServerClick" />
                                                     </div>
