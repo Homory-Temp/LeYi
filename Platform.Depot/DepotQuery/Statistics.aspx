@@ -26,7 +26,7 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="统计报表 - 库存报表" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 库存查询" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">

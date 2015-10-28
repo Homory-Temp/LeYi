@@ -484,6 +484,52 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotMember' does not have a prima
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotOutRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotOutRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Reason" />
+            <PropertyRef Name="ToAmount" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="PreservedA" />
+            <PropertyRef Name="PreservedB" />
+            <PropertyRef Name="PreservedC" />
+            <PropertyRef Name="PreservedD" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ToAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PreservedA" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreservedB" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreservedC" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreservedD" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="IsVirtual" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Platform_LY.dbo.DepotReturnRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DepotReturnRecord">
           <Key>
@@ -971,6 +1017,30 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
     [DepotMember].[RoleId] AS [RoleId]
     FROM [dbo].[DepotMember] AS [DepotMember]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="DepotOutRecord" EntityType="Self.DepotOutRecord" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotOutRecord].[Id] AS [Id], 
+    [DepotOutRecord].[DepotId] AS [DepotId], 
+    [DepotOutRecord].[ObjectId] AS [ObjectId], 
+    [DepotOutRecord].[UserId] AS [UserId], 
+    [DepotOutRecord].[Code] AS [Code], 
+    [DepotOutRecord].[Reason] AS [Reason], 
+    [DepotOutRecord].[ToAmount] AS [ToAmount], 
+    [DepotOutRecord].[Amount] AS [Amount], 
+    [DepotOutRecord].[PreservedA] AS [PreservedA], 
+    [DepotOutRecord].[PreservedB] AS [PreservedB], 
+    [DepotOutRecord].[PreservedC] AS [PreservedC], 
+    [DepotOutRecord].[PreservedD] AS [PreservedD], 
+    [DepotOutRecord].[Time] AS [Time], 
+    [DepotOutRecord].[State] AS [State], 
+    [DepotOutRecord].[CatalogId] AS [CatalogId], 
+    [DepotOutRecord].[Level] AS [Level], 
+    [DepotOutRecord].[IsVirtual] AS [IsVirtual], 
+    [DepotOutRecord].[Name] AS [Name], 
+    [DepotOutRecord].[Unit] AS [Unit], 
+    [DepotOutRecord].[UserName] AS [UserName]
+    FROM [dbo].[DepotOutRecord] AS [DepotOutRecord]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="DepotReturnRecord" EntityType="Self.DepotReturnRecord" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DepotReturnRecord].[ReturnAmount] AS [ReturnAmount], 
@@ -1255,6 +1325,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <End Role="DepotSetting" EntitySet="DepotSetting" />
           </AssociationSet>
           <EntitySet Name="DepotToOut" EntityType="DepotModel.DepotToOut" />
+          <EntitySet Name="DepotOutRecord" EntityType="DepotModel.DepotOutRecord" />
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -2141,6 +2212,50 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="State" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="DepotOutRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Reason" />
+            <PropertyRef Name="ToAmount" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="PreservedA" />
+            <PropertyRef Name="PreservedB" />
+            <PropertyRef Name="PreservedC" />
+            <PropertyRef Name="PreservedD" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ToAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PreservedA" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreservedB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreservedC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreservedD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2667,6 +2782,32 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotToOut">
             <EntityTypeMapping TypeName="DepotModel.DepotToOut">
               <MappingFragment StoreEntitySet="DepotToOut">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="PreservedD" ColumnName="PreservedD" />
+                <ScalarProperty Name="PreservedC" ColumnName="PreservedC" />
+                <ScalarProperty Name="PreservedB" ColumnName="PreservedB" />
+                <ScalarProperty Name="PreservedA" ColumnName="PreservedA" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ToAmount" ColumnName="ToAmount" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotOutRecord">
+            <EntityTypeMapping TypeName="DepotModel.DepotOutRecord">
+              <MappingFragment StoreEntitySet="DepotOutRecord">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="PreservedD" ColumnName="PreservedD" />
