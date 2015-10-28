@@ -139,7 +139,7 @@ public partial class DepotAction_Use : DepotPageSingle
         var list = x.Value.None() ? new List<InMemoryUse>() : x.Value.FromJson<List<InMemoryUse>>();
         if (list.Count < c.ItemIndex + 1)
         {
-            c.LoadDefaults(new InMemoryUse { Age = age.Text });
+            c.LoadDefaults(new InMemoryUse { Age = age.Text, Ordinals = new List<int>() });
         }
         else
         {

@@ -116,7 +116,7 @@ public partial class DepotAction_Out : DepotPageSingle
         var list = x.Value.None() ? new List<InMemoryOut>() : x.Value.FromJson<List<InMemoryOut>>();
         if (list.Count < c.ItemIndex + 1)
         {
-            c.LoadDefaults(new InMemoryOut());
+            c.LoadDefaults(new InMemoryOut { Ordinals = new List<int>() });
         }
         else
         {
