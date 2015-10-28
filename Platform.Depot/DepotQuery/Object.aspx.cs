@@ -23,7 +23,16 @@ public partial class DepotQuery_Object : DepotPageSingle
                 name.InnerText = obj.Name;
                 unit.InnerText = obj.Unit;
                 sp.InnerText = obj.Specification;
-                no.InnerText = obj.Amount.ToAmount(true);
+                no.InnerText = obj.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
+                note.InnerText = obj.Note;
+                var query = obj.DepotUseX.Where(o => o.ReturnedAmount < o.Amount);
+                var noOut = query.Count() > 0 ? query.Sum(o => o.Amount - o.ReturnedAmount) : 0;
+                total.InnerText = (obj.Amount + noOut).ToAmount(Depot.Featured(DepotType.小数数量库));
+                var di = obj.DepotInX.OrderByDescending(o => o.AutoId).FirstOrDefault();
+                if (di != null)
+                {
+                    age.InnerText = di.Age;
+                }
                 pa.Src = obj.ImageA.None() ? "../Content/Images/Transparent.png" : obj.ImageA;
                 pb.Src = obj.ImageA.None() ? "../Content/Images/Transparent.png" : obj.ImageB;
                 pc.Src = obj.ImageA.None() ? "../Content/Images/Transparent.png" : obj.ImageC;
@@ -31,6 +40,7 @@ public partial class DepotQuery_Object : DepotPageSingle
             }
         }
     }
+
     public class Placed
     {
         public Guid Id { get; set; }
@@ -99,5 +109,11 @@ public partial class DepotQuery_Object : DepotPageSingle
         }
         DataContext.SaveChanges();
         grid.Rebind();
+    }
+
+    protected void gridX_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+    {
+        var id = "ObjectId".Query().GlobalId();
+        gridX.DataSource = DataContext.DepotUseXRecord.Where(o => o.ObjectId == id).OrderByDescending(o => o.Time).ToList();
     }
 }

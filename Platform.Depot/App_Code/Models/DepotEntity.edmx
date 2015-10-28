@@ -580,6 +580,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
         <EntityType Name="DepotUseXRecord">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="ObjectId" />
             <PropertyRef Name="CatalogId" />
             <PropertyRef Name="Level" />
             <PropertyRef Name="IsVirtual" />
@@ -601,6 +602,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <PropertyRef Name="OperatorId" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Level" Type="int" Nullable="false" />
           <Property Name="IsVirtual" Type="bit" Nullable="false" />
@@ -994,6 +996,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySet Name="DepotUseXRecord" EntityType="Self.DepotUseXRecord" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DepotUseXRecord].[Id] AS [Id], 
+    [DepotUseXRecord].[ObjectId] AS [ObjectId], 
     [DepotUseXRecord].[CatalogId] AS [CatalogId], 
     [DepotUseXRecord].[Level] AS [Level], 
     [DepotUseXRecord].[IsVirtual] AS [IsVirtual], 
@@ -1895,6 +1898,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <PropertyRef Name="UserId" />
             <PropertyRef Name="OperatorId" />
             <PropertyRef Name="ReturnedAmount" />
+            <PropertyRef Name="ObjectId" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="CatalogId" Type="Guid" Nullable="false" />
@@ -1916,6 +1920,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="OperatorId" Type="Guid" Nullable="false" />
           <Property Name="ReturnedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="DepotReturn">
           <Key>
@@ -2459,6 +2464,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotUseXRecord">
             <EntityTypeMapping TypeName="DepotModel.DepotUseXRecord">
               <MappingFragment StoreEntitySet="DepotUseXRecord">
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
                 <ScalarProperty Name="ReturnedAmount" ColumnName="ReturnedAmount" />
                 <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />

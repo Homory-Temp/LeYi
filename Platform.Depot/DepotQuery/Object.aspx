@@ -55,17 +55,32 @@
             <div class="row">
                 <div class="col-md-4 text-center">
                     <div class="btn btn-info">
-                        库存：<span id="no" runat="server"></span>&nbsp;<span id="unit" runat="server"></span>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
-                    <div class="btn btn-info">
-                        编号：<span id="sn" runat="server"></span>
+                        在库库存：<span id="no" runat="server"></span>&nbsp;<span id="unit" runat="server"></span>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="btn btn-info">
                         规格：<span id="sp" runat="server"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="btn btn-info">
+                        总库存：<span id="total" runat="server"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="btn btn-info">
+                        年龄段：<span id="age" runat="server"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="btn btn-info">
+                        备注：<span id="note" runat="server"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="btn btn-info">
+                        规格：<span id="Span4" runat="server"></span>
                     </div>
                 </div>
             </div>
@@ -98,7 +113,7 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn HeaderText="条码" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true">
                                 <ItemTemplate>
-                                    <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text='<%# Eval("Code") %>' NavigateUrl='<%# "../DepotScan/Flow?DepotId={0}&Code={1}".Formatted(Depot.Id, Eval("OrderId")) %>'></asp:HyperLink>
+                                    <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text='<%# Eval("Code") %>' NavigateUrl='<%# "../DepotScan/Flow?DepotId={0}&Code={1}".Formatted(Depot.Id, Eval("Code")) %>'></asp:HyperLink>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn HeaderText="存放地" DataField="Place" SortExpression="Place" UniqueName="Place">
@@ -110,6 +125,15 @@
                                     </telerik:RadTextBox>
                                 </EditItemTemplate>
                             </telerik:GridTemplateColumn>
+                        </Columns>
+                    </MasterTableView>
+                </telerik:RadGrid>
+            </div>
+            <div class="row">
+                <telerik:RadGrid ID="gridX" runat="server" CssClass="col-md-12 text-center" AutoGenerateColumns="true" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="gridX_NeedDataSource">
+                    <MasterTableView CommandItemDisplay="None" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <Columns>
                         </Columns>
                     </MasterTableView>
                 </telerik:RadGrid>

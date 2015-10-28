@@ -703,6 +703,7 @@ namespace Models
         public System.Guid UserId { get; set; }
         public System.Guid OperatorId { get; set; }
         public decimal ReturnedAmount { get; set; }
+        public System.Guid ObjectId { get; set; }
     }
 }
 namespace Models

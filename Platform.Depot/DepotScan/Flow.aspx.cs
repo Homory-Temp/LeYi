@@ -17,7 +17,7 @@ public partial class DepotScan_Flow : DepotPageSingle
             if (!"Code".Query().None())
             {
                 scan.Text = "Code".Query().Trim();
-                grid.Rebind();
+                scanFlow_ServerClick(null, null);
             }
         }
     }
