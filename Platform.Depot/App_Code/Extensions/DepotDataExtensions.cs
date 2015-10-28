@@ -630,6 +630,11 @@ public static class DepotDataExtensions
         return use.Id;
     }
 
+    public static void DepotActOut(this DepotEntities db, Guid depotId, DateTime outTime, Guid operatorId, Guid userId, List<InMemoryOut> list)
+    {
+
+    }
+
     public static void DepotActReturn(this DepotEntities db, Guid depotId, DateTime returnTime, Guid operatorId, Guid userId, List<InMemoryReturn> list)
     {
         if (list == null || list.Count == 0)

@@ -107,7 +107,7 @@ public partial class DepotAction_Out : DepotPageSingle
                 list.Add(@out);
             }
         }
-        // return DataContext.DepotActUse(Depot.Id, time.SelectedDate.HasValue ? time.SelectedDate.Value.Date : DateTime.Today, DepotUser.Id, people.SelectedValue.GlobalId(), list);
+        DataContext.DepotActOut(Depot.Id, time.SelectedDate.HasValue ? time.SelectedDate.Value.Date : DateTime.Today, DepotUser.Id, people.SelectedValue.GlobalId(), list);
     }
 
     protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
