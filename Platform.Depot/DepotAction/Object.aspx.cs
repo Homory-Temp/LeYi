@@ -88,7 +88,7 @@ public partial class DepotAction_Object : DepotPageSingle
         {
             source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
         }
-        view.DataSource = source.OrderBy(o => o.Ordinal).ThenByDescending(o => o.Amount).ToList();
+        view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
         pager.Visible = source.Count() > pager.PageSize;
     }
 
