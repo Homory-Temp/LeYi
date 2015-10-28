@@ -75,7 +75,7 @@ public partial class DepotScan_Out : DepotPageSingle
         Response.Redirect("~/DepotQuery/Out?DepotId={0}".Formatted(Depot.Id));
     }
 
-    protected Guid DoOut()
+    protected void DoOut()
     {
         if (people.SelectedValue == null)
         {
