@@ -123,11 +123,23 @@
                                                     <div style="height: 160px; text-align: center; cursor: pointer;" onclick="gox(this);" goid='<%# Eval("Id") %>'>
                                                         <img class="img-responsive" style="height: 158px; margin: auto;" src='<%# Eval("ImageA").None() ? "../Content/Images/Transparent.png" : Eval("ImageA") %>' />
                                                     </div>
-                                                    <div style="height: 61px;">
+                                                    <div style="height: 145px;">
                                                         <table style="margin: auto; width: 90%;">
-                                                            <tr style="line-height: 55px; height: 55px; text-align: center;">
+                                                            <tr style="line-height: 28px; height: 28px; text-align: center;">
                                                                 <td style="line-height: 55px; height: 55px; text-align: center; cursor: pointer;">
                                                                     <span class="btn btn-danger" onclick="gox(this);" goid='<%# Eval("Id") %>'><%# Eval("Name") %></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="line-height: 28px; height: 28px; text-align: left;">
+                                                                <td style="line-height: 28px; height: 28px; text-align: left;">库存：<%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %>&nbsp;<%# Eval("Unit") %>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="line-height: 28px; height: 28px; text-align: left;">
+                                                                <td style="line-height: 28px; height: 28px; text-align: left;">编号：<%# Eval("SerialA").WhenZero("无") %>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="line-height: 28px; height: 28px; text-align: left;">
+                                                                <td style="line-height: 28px; height: 28px; text-align: left;">规格：<%# Eval("Specification") %>
                                                                 </td>
                                                             </tr>
                                                         </table>
