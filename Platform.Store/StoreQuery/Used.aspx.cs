@@ -95,7 +95,8 @@ public partial class StoreQuery_Used : SingleStorePage
             source = source.Where(o => o.Operator.Equals(people.Text.Trim(), StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
         view.DataSource = source;
-        pager.Visible = source.Count > pager.PageSize;
+        ___total.Value = source.Sum(o => o.Money).ToMoney();
+        //pager.Visible = source.Count > pager.PageSize;
     }
 
     protected void edit_ServerClick(object sender, EventArgs e)

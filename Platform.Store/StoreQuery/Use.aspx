@@ -23,6 +23,20 @@
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
     <![endif]-->
+    <script>
+        function printDepot() {
+            bdhtml = window.document.body.innerHTML;
+            sprnstr = "<!-- Start Printing -->";
+            eprnstr = "<!-- End Printing -->";
+            prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 23);
+            prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
+            prnhtml = "<body>" + prnhtml + "</body>";
+            window.document.body.innerHTML = prnhtml;
+            window.print();
+            window.document.body.innerHTML = bdhtml;
+            return false;
+        }
+    </script>
 </head>
 <body>
     <form id="form" runat="server">
@@ -52,6 +66,8 @@
             </div>
             <div class="row">&nbsp;</div>
             <div class="row">
+                <input type="hidden" id="___total" runat="server" />
+                <!-- Start Printing -->
                 <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
                     <LayoutTemplate>
                         <div class="col-md-12">
@@ -65,6 +81,9 @@
                                     <th>操作</th>
                                 </tr>
                                 <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
+                                <tr>
+                                    <td colspan="6">总计：<%# ___total.Value %></td>
+                                </tr>
                             </table>
                         </div>
                     </LayoutTemplate>
@@ -87,8 +106,14 @@
                         </div>
                     </EmptyDataTemplate>
                 </telerik:RadListView>
+                <!-- End Printing -->
             </div>
             <div class="row">
+                <div class="col-md-12 text-center">
+                    <input type="button" class="btn btn-tumblr" id="print" value="打印" onclick="printDepot();" />
+                </div>
+            </div>
+            <%--<div class="row">
                 <div class="col-md-4">&nbsp;</div>
                 <div class="col-md-4 text-center">
                     <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="10">
@@ -100,7 +125,7 @@
                     </telerik:RadDataPager>
                 </div>
                 <div class="col-md-4">&nbsp;</div>
-            </div>
+            </div>--%>
         </telerik:RadAjaxPanel>
     </form>
 </body>

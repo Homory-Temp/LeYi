@@ -64,7 +64,8 @@ public partial class StoreQuery_Use : SingleStorePage
         if (peopleX.SelectedIndex > 0)
             list = list.Where(o => o.User == peopleX.SelectedItem.Text).ToList();
         view.DataSource = list;
-        pager.Visible = list.Count > pager.PageSize;
+        ___total.Value = list.Sum(o => o.Money).ToMoney();
+        //pager.Visible = list.Count > pager.PageSize;
     }
 
     protected void edit_ServerClick(object sender, EventArgs e)
