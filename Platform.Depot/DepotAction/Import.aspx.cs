@@ -104,7 +104,7 @@ public partial class DepotAction_Import : DepotPageSingle
                         var l = new List<Guid>();
                         l.Add(一级分类Id);
                         l.Add(二级分类Id);
-                        DataContext.DepotObjectAdd(物资Id, l, Depot.Id, name, true, false, true, "", "", "", "", "", row[9].ToString().Trim(), 0, 0, "", "", "", "", "", 100);
+                        DataContext.DepotObjectAddX(物资Id, l, Depot.Id, name, true, false, true, "", "", "", "", "", row[9].ToString().Trim(), 0, 0, "", "", "", "", "", 100);
                     }
                     else
                     {
