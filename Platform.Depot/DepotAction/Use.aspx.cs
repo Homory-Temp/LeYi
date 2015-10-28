@@ -15,7 +15,7 @@ public partial class DepotAction_Use : DepotPageSingle
         {
             time.SelectedDate = DateTime.Today;
             people.Items.Clear();
-            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "", Selected = true });
+            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "借领人", Value = "", Selected = true });
             people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
             people.DataBind();
             age.Items.Clear();
