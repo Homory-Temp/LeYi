@@ -18,10 +18,35 @@ public partial class DepotQuery_Out  : DepotPageSingle
             peopleX.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "报废申请人", Value = "0", Selected = true });
             peopleX.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
             peopleX.DataBind();
+            tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
+            tree.DataBind();
+            tree.CheckAllNodes();
         }
     }
 
+    protected void all_ServerClick(object sender, EventArgs e)
+    {
+        if (_all.Value == "1")
+        {
+            tree.UncheckAllNodes();
+            _all.Value = "0";
+            all.Value = "全部选定";
+        }
+        else
+        {
+            tree.CheckAllNodes();
+            _all.Value = "1";
+            all.Value = "清除选定";
+        }
+        view.Rebind();
+    }
+
     protected void query_ServerClick(object sender, EventArgs e)
+    {
+        view.Rebind();
+    }
+
+    protected void tree_NodeCheck(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
     {
         view.Rebind();
     }
@@ -31,7 +56,8 @@ public partial class DepotQuery_Out  : DepotPageSingle
         var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
         var start = new DateTime(time.Year, time.Month, 1).AddMilliseconds(-1);
         var end = new DateTime(time.Year, time.Month, 1).AddMonths(1);
-        var list = DataContext.DepotOutRecord.Where(o => o.DepotId == Depot.Id && o.Time > start && o.Time < end).OrderByDescending(o => o.Time).ToList();
+        var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => o.Value.GlobalId()).ToList();
+        var list = catalogs.Join(DataContext.DepotOutRecord.Where(o => o.Time > start && o.Time < end), o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.Time).ThenBy(o => o.UserName).ToList();
         if (peopleX.SelectedIndex > 0)
         {
             var ou = peopleX.SelectedItem.Value.GlobalId();
