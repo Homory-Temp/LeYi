@@ -19,6 +19,7 @@
                             <li><a href='<%= "../DepotAction/In?DepotId={0}".Formatted(Depot.Id) %>'>物资入库</a></li>
                             <li><a href='<%= "../DepotAction/Use?DepotId={0}".Formatted(Depot.Id) %>'>物资出库</a></li>
                             <li><a href='<%= "../DepotAction/Return?DepotId={0}".Formatted(Depot.Id) %>'>物资归还</a></li>
+                            <li><a href='<%= "../DepotAction/Out?DepotId={0}".Formatted(Depot.Id) %>'>物资报废</a></li>
                             <li><a href='<%= "../DepotAction/Object?DepotId={0}".Formatted(Depot.Id) %>'>物资管理</a></li>
                             <li><a href='<%= "../DepotAction/Import?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: block;": "display: none;") %>'>资产导入</a></li>
                             <li><a href='<%= "../DepotAction/Move?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: block;": "display: none;") %>'>资产分库</a></li>
