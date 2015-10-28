@@ -34,9 +34,13 @@ public partial class DepotQuery_Object : DepotPageSingle
                     age.InnerText = di.Age;
                 }
                 pa.Src = obj.ImageA.None() ? "../Content/Images/Transparent.png" : obj.ImageA;
-                pb.Src = obj.ImageA.None() ? "../Content/Images/Transparent.png" : obj.ImageB;
-                pc.Src = obj.ImageA.None() ? "../Content/Images/Transparent.png" : obj.ImageC;
-                pd.Src = obj.ImageA.None() ? "../Content/Images/Transparent.png" : obj.ImageD;
+                da.Visible = !obj.ImageA.None();
+                pb.Src = obj.ImageB.None() ? "../Content/Images/Transparent.png" : obj.ImageB;
+                db.Visible = !obj.ImageB.None();
+                pc.Src = obj.ImageC.None() ? "../Content/Images/Transparent.png" : obj.ImageC;
+                dc.Visible = !obj.ImageC.None();
+                pd.Src = obj.ImageD.None() ? "../Content/Images/Transparent.png" : obj.ImageD;
+                dd.Visible = !obj.ImageD.None();
             }
         }
     }

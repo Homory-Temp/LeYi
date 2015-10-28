@@ -41,82 +41,120 @@
         <telerik:RadScriptManager ID="sm" runat="server"></telerik:RadScriptManager>
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container" LoadingPanelID="loading">
             <div class="row">
-                <div class="col-md-12">
-                    <input type="button" class="btn btn-tumblr" value="物资详情" />
+                <div class="col-md-3">
+                    <span class="btn btn-tumblr">物资详情</span>
+                </div>
+                <div class="col-md-6 text-center">
+                    <span class="btn btn-danger" id="name" runat="server"></span>
+                </div>
+                <div class="col-md-3">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
                     <hr style="color: #2B2B2B; margin-top: 4px;" />
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <span class="btn btn-danger" id="name" runat="server"></span>
+                <div class="col-md-12">
+                    <table class="storeTable">
+                        <tr>
+                            <td style="width: 16%;">
+                                <span class="btn btn-info dictionaryX">在库库存：</span>
+                            </td>
+                            <td style="width: 17%;">
+                                <span id="no" runat="server"></span>&nbsp;<span id="unit" runat="server"></span>
+                            </td>
+                            <td style="width: 16%;">
+                                <span class="btn btn-info dictionaryX">总库存：</span>
+                            </td>
+                            <td style="width: 17%;">
+                                <span id="total" runat="server"></span>
+                            </td>
+                            <td style="width: 16%;">
+                                <span class="btn btn-info dictionaryX">年龄段：</span>
+                            </td>
+                            <td style="width: 17%;">
+                                <span id="age" runat="server"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 16%;">
+                                <span class="btn btn-info dictionaryX">规格：</span>
+                            </td>
+                            <td colspan="5">
+                                <span id="sp" runat="server"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 16%;">
+                                <span class="btn btn-info dictionaryX">备注：</span>
+                            </td>
+                            <td colspan="5">
+                                <span id="note" runat="server"></span>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class="row">&nbsp;</div>
             <div class="row">
-                <div class="col-md-4 text-center">
-                    <div class="btn btn-info">
-                        在库库存：<span id="no" runat="server"></span>&nbsp;<span id="unit" runat="server"></span>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
-                    <div class="btn btn-info">
-                        规格：<span id="sp" runat="server"></span>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
-                    <div class="btn btn-info">
-                        总库存：<span id="total" runat="server"></span>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
-                    <div class="btn btn-info">
-                        年龄段：<span id="age" runat="server"></span>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
-                    <div class="btn btn-info">
-                        备注：<span id="note" runat="server"></span>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
-                    <div class="btn btn-info">
-                        规格：<span id="Span4" runat="server"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">&nbsp;</div>
-            <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-6" id="da" runat="server">
                     <img class="img-responsive" onclick="showPic(this);" style="width: 100%; cursor: pointer;" id="pa" runat="server" />
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6" id="db" runat="server">
                     <img class="img-responsive" onclick="showPic(this);" style="width: 100%; cursor: pointer;" id="pb" runat="server" />
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6" id="dc" runat="server">
                     <img class="img-responsive" onclick="showPic(this);" style="width: 100%; cursor: pointer;" id="pc" runat="server" />
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6" id="dd" runat="server">
                     <img class="img-responsive" onclick="showPic(this);" style="width: 100%; cursor: pointer;" id="pd" runat="server" />
                 </div>
             </div>
             <div class="row">&nbsp;</div>
+            <div class="row"><span class="btn btn-info dictionaryX">借出记录</span></div>
+            <div class="row">
+                <telerik:RadGrid ID="gridX" runat="server" CssClass="col-md-12 text-center" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="gridX_NeedDataSource">
+                    <MasterTableView CommandItemDisplay="None" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="全部在库">
+                        <HeaderStyle HorizontalAlign="Center" />
+                        <Columns>
+                            <telerik:GridTemplateColumn HeaderText="借用人" ItemStyle-Width="33%">
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%# Eval("UserName") %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn HeaderText="借用数量" ItemStyle-Width="33%">
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn HeaderText="待还数量" ItemStyle-Width="33%">
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%# ((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")).ToAmount(Depot.Featured(Models.DepotType.小数数量库))%>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                        </Columns>
+                    </MasterTableView>
+                </telerik:RadGrid>
+            </div>
+            <div class="row"><span class="btn btn-info dictionaryX">存放地</span></div>
             <div class="row">
                 <telerik:RadGrid ID="grid" runat="server" CssClass="col-md-12 text-center" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="grid_NeedDataSource" OnBatchEditCommand="grid_BatchEditCommand">
                     <MasterTableView EditMode="Batch" DataKeyNames="Id,Fixed,Ordinal" CommandItemDisplay="Top" CommandItemSettings-ShowAddNewRecordButton="false" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
                         <BatchEditingSettings EditType="Row" OpenEditingEvent="DblClick" />
                         <HeaderStyle HorizontalAlign="Center" />
                         <Columns>
-                            <telerik:GridTemplateColumn HeaderText="编号" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true">
+                            <telerik:GridTemplateColumn HeaderText="编号" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true" ItemStyle-Width="33%">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Ordinal") %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="条码" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true">
+                            <telerik:GridTemplateColumn HeaderText="条码" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true" ItemStyle-Width="33%">
                                 <ItemTemplate>
                                     <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text='<%# Eval("Code") %>' NavigateUrl='<%# "../DepotScan/Flow?DepotId={0}&Code={1}".Formatted(Depot.Id, Eval("Code")) %>'></asp:HyperLink>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="存放地" DataField="Place" SortExpression="Place" UniqueName="Place">
+                            <telerik:GridTemplateColumn HeaderText="存放地" DataField="Place" SortExpression="Place" UniqueName="Place" ItemStyle-Width="33%">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Place") %>'></asp:Label>
                                 </ItemTemplate>
@@ -129,15 +167,8 @@
                     </MasterTableView>
                 </telerik:RadGrid>
             </div>
-            <div class="row">
-                <telerik:RadGrid ID="gridX" runat="server" CssClass="col-md-12 text-center" AutoGenerateColumns="true" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="gridX_NeedDataSource">
-                    <MasterTableView CommandItemDisplay="None" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
-                        <HeaderStyle HorizontalAlign="Center" />
-                        <Columns>
-                        </Columns>
-                    </MasterTableView>
-                </telerik:RadGrid>
-            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">&nbsp;</div>
         </telerik:RadAjaxPanel>
     </form>
 </body>
