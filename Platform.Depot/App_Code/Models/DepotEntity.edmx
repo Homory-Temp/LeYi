@@ -485,6 +485,64 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotMember' does not have a prima
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotObjectX' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotObjectX">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="PinYin" />
+            <PropertyRef Name="Single" />
+            <PropertyRef Name="Consumable" />
+            <PropertyRef Name="Fixed" />
+            <PropertyRef Name="SerialA" />
+            <PropertyRef Name="SerialB" />
+            <PropertyRef Name="SerialC" />
+            <PropertyRef Name="SerialD" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Specification" />
+            <PropertyRef Name="Low" />
+            <PropertyRef Name="High" />
+            <PropertyRef Name="ImageA" />
+            <PropertyRef Name="ImageB" />
+            <PropertyRef Name="ImageC" />
+            <PropertyRef Name="ImageD" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="Ordinal" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="AutoId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Money" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Single" Type="bit" Nullable="false" />
+          <Property Name="Consumable" Type="bit" Nullable="false" />
+          <Property Name="Fixed" Type="bit" Nullable="false" />
+          <Property Name="SerialA" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="SerialB" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="SerialC" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="SerialD" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Specification" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Low" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="High" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ImageA" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageB" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageC" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageD" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" />
+          <Property Name="DepotName" Type="nvarchar" MaxLength="64" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Platform_LY.dbo.DepotOutRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DepotOutRecord">
           <Key>
@@ -1018,6 +1076,37 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
     [DepotMember].[RoleId] AS [RoleId]
     FROM [dbo].[DepotMember] AS [DepotMember]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="DepotObjectX" EntityType="Self.DepotObjectX" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotObjectX].[Id] AS [Id], 
+    [DepotObjectX].[Name] AS [Name], 
+    [DepotObjectX].[PinYin] AS [PinYin], 
+    [DepotObjectX].[Single] AS [Single], 
+    [DepotObjectX].[Consumable] AS [Consumable], 
+    [DepotObjectX].[Fixed] AS [Fixed], 
+    [DepotObjectX].[SerialA] AS [SerialA], 
+    [DepotObjectX].[SerialB] AS [SerialB], 
+    [DepotObjectX].[SerialC] AS [SerialC], 
+    [DepotObjectX].[SerialD] AS [SerialD], 
+    [DepotObjectX].[Unit] AS [Unit], 
+    [DepotObjectX].[Specification] AS [Specification], 
+    [DepotObjectX].[Low] AS [Low], 
+    [DepotObjectX].[High] AS [High], 
+    [DepotObjectX].[ImageA] AS [ImageA], 
+    [DepotObjectX].[ImageB] AS [ImageB], 
+    [DepotObjectX].[ImageC] AS [ImageC], 
+    [DepotObjectX].[ImageD] AS [ImageD], 
+    [DepotObjectX].[Note] AS [Note], 
+    [DepotObjectX].[Ordinal] AS [Ordinal], 
+    [DepotObjectX].[State] AS [State], 
+    [DepotObjectX].[AutoId] AS [AutoId], 
+    [DepotObjectX].[Code] AS [Code], 
+    [DepotObjectX].[Amount] AS [Amount], 
+    [DepotObjectX].[Money] AS [Money], 
+    [DepotObjectX].[DepotId] AS [DepotId], 
+    [DepotObjectX].[DepotName] AS [DepotName]
+    FROM [dbo].[DepotObjectX] AS [DepotObjectX]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="DepotOutRecord" EntityType="Self.DepotOutRecord" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DepotOutRecord].[Id] AS [Id], 
@@ -1327,6 +1416,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           </AssociationSet>
           <EntitySet Name="DepotToOut" EntityType="DepotModel.DepotToOut" />
           <EntitySet Name="DepotOutRecord" EntityType="DepotModel.DepotOutRecord" />
+          <EntitySet Name="DepotObjectX" EntityType="DepotModel.DepotObjectX" />
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -2258,6 +2348,62 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="DepotObjectX">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="PinYin" />
+            <PropertyRef Name="Single" />
+            <PropertyRef Name="Consumable" />
+            <PropertyRef Name="Fixed" />
+            <PropertyRef Name="SerialA" />
+            <PropertyRef Name="SerialB" />
+            <PropertyRef Name="SerialC" />
+            <PropertyRef Name="SerialD" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Specification" />
+            <PropertyRef Name="Low" />
+            <PropertyRef Name="High" />
+            <PropertyRef Name="ImageA" />
+            <PropertyRef Name="ImageB" />
+            <PropertyRef Name="ImageC" />
+            <PropertyRef Name="ImageD" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="Ordinal" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="AutoId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Money" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Single" Type="Boolean" Nullable="false" />
+          <Property Name="Consumable" Type="Boolean" Nullable="false" />
+          <Property Name="Fixed" Type="Boolean" Nullable="false" />
+          <Property Name="SerialA" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialB" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialC" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialD" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Low" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="High" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ImageA" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="DepotId" Type="Guid" />
+          <Property Name="DepotName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2824,6 +2970,39 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotObjectX">
+            <EntityTypeMapping TypeName="DepotModel.DepotObjectX">
+              <MappingFragment StoreEntitySet="DepotObjectX">
+                <ScalarProperty Name="DepotName" ColumnName="DepotName" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ImageD" ColumnName="ImageD" />
+                <ScalarProperty Name="ImageC" ColumnName="ImageC" />
+                <ScalarProperty Name="ImageB" ColumnName="ImageB" />
+                <ScalarProperty Name="ImageA" ColumnName="ImageA" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="SerialD" ColumnName="SerialD" />
+                <ScalarProperty Name="SerialC" ColumnName="SerialC" />
+                <ScalarProperty Name="SerialB" ColumnName="SerialB" />
+                <ScalarProperty Name="SerialA" ColumnName="SerialA" />
+                <ScalarProperty Name="Fixed" ColumnName="Fixed" />
+                <ScalarProperty Name="Consumable" ColumnName="Consumable" />
+                <ScalarProperty Name="Single" ColumnName="Single" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

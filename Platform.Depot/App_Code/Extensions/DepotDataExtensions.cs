@@ -123,6 +123,19 @@ public static class DepotDataExtensions
         }
     }
 
+    public static IEnumerable<DepotObjectX> DepotObjectXLoad(this DepotEntities db, Guid depotId, Guid? catalogId)
+    {
+        if (catalogId.HasValue)
+        {
+            var id = catalogId.Value;
+            return db.DepotCatalog.Where(o => o.DepotId == depotId && o.Id == id && o.State < State.停用).Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).Distinct().ToList().Join(db.DepotObjectX, o => o, o => o.Id, (oc, o) => o);
+        }
+        else
+        {
+            return db.DepotCatalog.Where(o => o.DepotId == depotId && o.State < State.停用).Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).Distinct().ToList().Join(db.DepotObjectX, o => o, o => o.Id, (oc, o) => o);
+        }
+    }
+
     public static void DepotObjectAdd(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, bool single, bool consumable, bool @fixed, string a, string b, string c, string d, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal)
     {
         var obj = new DepotObject

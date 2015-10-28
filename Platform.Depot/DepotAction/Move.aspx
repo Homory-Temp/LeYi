@@ -27,6 +27,9 @@
         .depotm {
             margin-top: 4px;
         }
+        .depoth {
+            height: 41px;
+        }
     </style>
 </head>
 <body>
@@ -61,11 +64,10 @@
                 </div>
                 <div class="col-md-10" style="text-align: left;">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-12">
                             <span class="btn btn-tumblr">物资：</span>
                             <input id="all" runat="server" type="button" class="btn btn-info" value="全选" onserverclick="all_ServerClick" />
-                        </div>
-                        <div class="col-md-6 text-center">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <telerik:RadTextBox ID="toSearch" runat="server" Width="200" EmptyMessage="输入要检索的物资名称"></telerik:RadTextBox>
                             &nbsp;&nbsp;
                             <telerik:RadComboBox ID="combo" runat="server" MaxHeight="203" AutoPostBack="false" Width="120">
@@ -77,14 +79,19 @@
                             </telerik:RadComboBox>
                             &nbsp;&nbsp;
                             <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <telerik:RadComboBox ID="target" runat="server" MaxHeight="203" AutoPostBack="false" Width="200" EmptyMessage="选择目标仓库" DataTextField="Name" DataValueField="Id">
+                            </telerik:RadComboBox>
+                            &nbsp;&nbsp;
+                            <input id="move" runat="server" type="button" class="btn btn-info" value="分库" onserverclick="move_ServerClick" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
-                        <div class="col-md-3 text-right">&nbsp;</div>
                     </div>
                     <div class="row">&nbsp;</div>
                     <div class="row">
                         <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
                             <ItemTemplate>
-                                <span class="col-md-2 depotm"><span class="btn btn-info" title='<%# "规格：{0}".Formatted(Eval("Specification")) %>'><asp:CheckBox ID="check" runat="server" Text='<%# "&nbsp;{0}".Formatted(Eval("Name")) %>' /></span></span>
+                                <span class="col-md-3 depotm"><span class='<%# "btn btn-{0}".Formatted(Eval("DepotId") == null ? "info" : "warning") %>' title='<%# "{2}\r\n名称：{1}\r\n规格：{0}".Formatted(Eval("Specification"), Eval("Name"), Eval("DepotName") == null ? "" : "分库：{0}".Formatted(Eval("DepotName"))) %>'><asp:CheckBox ID="check" runat="server" AutoPostBack="false" OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Name")) %>' /></span></span>
                             </ItemTemplate>
                         </telerik:RadListView>
                     </div>

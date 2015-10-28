@@ -434,6 +434,42 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotObjectX
+    {
+        public System.Guid Id { get; set; }
+        public string Name { get; set; }
+        public string PinYin { get; set; }
+        public bool Single { get; set; }
+        public bool Consumable { get; set; }
+        public bool Fixed { get; set; }
+        public string SerialA { get; set; }
+        public string SerialB { get; set; }
+        public string SerialC { get; set; }
+        public string SerialD { get; set; }
+        public string Unit { get; set; }
+        public string Specification { get; set; }
+        public decimal Low { get; set; }
+        public decimal High { get; set; }
+        public string ImageA { get; set; }
+        public string ImageB { get; set; }
+        public string ImageC { get; set; }
+        public string ImageD { get; set; }
+        public string Note { get; set; }
+        public int Ordinal { get; set; }
+        public int State { get; set; }
+        public int AutoId { get; set; }
+        public string Code { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Money { get; set; }
+        public Nullable<System.Guid> DepotId { get; set; }
+        public string DepotName { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

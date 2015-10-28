@@ -53,6 +53,7 @@
         <AssociationConnector Association="DepotModel.FK_DepotSetting_Depot" />
         <EntityTypeShape EntityType="DepotModel.DepotToOut" Width="1.5" PointX="16.75" PointY="14.625" />
         <EntityTypeShape EntityType="DepotModel.DepotOutRecord" Width="1.5" PointX="13.75" PointY="18.625" />
+        <EntityTypeShape EntityType="DepotModel.DepotObjectX" Width="1.5" PointX="15.75" PointY="19.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

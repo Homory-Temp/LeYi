@@ -14,18 +14,8 @@ public partial class DepotAction_Move : DepotPageSingle
             tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
             tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
             tree.DataBind();
-            if (!"CatalogId".Query().None())
-            {
-                var cid = "CatalogId".Query();
-                if (tree.GetAllNodes().Count(o => o.Value == cid) == 1)
-                {
-                    var node = tree.GetAllNodes().Single(o => o.Value == cid);
-                    node.Selected = true;
-                    node.ExpandParentNodes();
-                    node.ExpandChildNodes();
-                    tree0.Nodes[0].Selected = false;
-                }
-            }
+            target.DataSource = DataContext.Depot.Where(o => o.State < State.停用).ToList().Where(o => !o.Featured(DepotType.固定资产库)).OrderBy(o => o.Ordinal).ToList();
+            target.DataBind();
         }
     }
 
@@ -56,7 +46,7 @@ public partial class DepotAction_Move : DepotPageSingle
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         var node = CurrentNode;
-        var source = DataContext.DepotObjectLoad(Depot.Id, node.HasValue ? node.Value.GlobalId() : (Guid?)null);
+        var source = DataContext.DepotObjectXLoad(Depot.Id, node.HasValue ? node.Value.GlobalId() : (Guid?)null);
         if (!toSearch.Text.None())
         {
             source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
@@ -88,5 +78,55 @@ public partial class DepotAction_Move : DepotPageSingle
         {
             cbs.ForEach(o => o.Checked = true);
         }
+    }
+
+    public static Guid DepotCatalogXAdd(DepotEntities db, Guid depotId, string name)
+    {
+        var pinYin = db.ToPinYin(name).Single();
+        var newId = db.GlobalId();
+        var catalog = new DepotCatalog
+        {
+            Id = newId,
+            ParentId = null,
+            TopId = newId,
+            DepotId = depotId,
+            Name = "未分类",
+            PinYin = "WFL",
+            Ordinal = int.MaxValue,
+            State = State.启用,
+            Code = "*Homory:Null*"
+        };
+        db.DepotCatalog.Add(catalog);
+        db.SaveChanges();
+        return newId;
+    }
+
+    protected void move_ServerClick(object sender, EventArgs e)
+    {
+        var cbs = view.Items.Select(o => o.FindControl("check") as CheckBox).ToList();
+        if (!target.SelectedValue.None() && cbs.Any(o => o.Checked == true))
+        {
+            var depotId = target.SelectedValue.GlobalId();
+            var depot = DataContext.Depot.Single(o => o.Id == depotId);
+            var catalogObj = DataContext.DepotCatalog.SingleOrDefault(o => o.DepotId == depotId && o.State == State.启用 && o.ParentId == null && o.Code == "*Homory:Null*");
+            Guid catalog;
+            if (catalogObj == null)
+            {
+                catalog = DepotCatalogXAdd(DataContext, depotId, "未分类");
+            }
+            else
+            {
+                catalog = catalogObj.Id;
+            }
+            var list = cbs.Where(o => o.Checked == true).Select(o => o.Attributes["OBJ"].GlobalId()).ToList();
+            foreach(var item in list)
+            {
+                var obj = DataContext.DepotObject.Single(o => o.Id == item);
+                obj.DepotId = depotId;
+                DataContext.DepotObjectCatalog.Add(new DepotObjectCatalog { ObjectId = item, CatalogId = catalog, IsVirtual = false, Level = 0, IsLeaf = true });
+            }
+            DataContext.SaveChanges();
+        }
+        view.Rebind();
     }
 }
