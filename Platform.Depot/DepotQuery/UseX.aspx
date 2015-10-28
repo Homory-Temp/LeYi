@@ -60,6 +60,8 @@
                         </Items>
                     </telerik:RadComboBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
+                    <telerik:RadButton ID="returnType" runat="server" Text="待归还" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox"></telerik:RadButton>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <telerik:RadTextBox ID="name" runat="server" Width="120" EmptyMessage="物资名称"></telerik:RadTextBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                     <telerik:RadComboBox ID="age" runat="server" AutoPostBack="false" MaxHeight="203" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name">
@@ -86,11 +88,12 @@
                                             <th>类型</th>
                                             <th>物资名称</th>
                                             <th>单位</th>
-                                            <th>数量</th>
+                                            <th>出库数量</th>
+                                            <th>待还数量</th>
+                                            <th>借领人</th>
                                             <th>单价</th>
                                             <th>合计</th>
                                             <th>年龄段</th>
-                                            <th>借领人</th>
                                             <th>操作人</th>
                                             <th>备注</th>
                                         </tr>
@@ -108,10 +111,11 @@
                                     <td><%# Eval("Name") %></td>
                                     <td><%# Eval("Unit") %></td>
                                     <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
+                                    <td><%# ((Models.UseType)Eval("Type")) == Models.UseType.借用 ? ((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")).ToAmount(Depot.Featured(Models.DepotType.小数数量库)) : "" %></td>
+                                    <td><%# Eval("UserName") %></td>
                                     <td><%# decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount")).ToMoney() %></td>
                                     <td><%# Eval("Money").ToMoney() %></td>
                                     <td><%# Eval("Age") %></td>
-                                    <td><%# Eval("UserName") %></td>
                                     <td><%# Eval("OperatorName") %></td>
                                     <td><%# Eval("Note") %></td>
                                 </tr>

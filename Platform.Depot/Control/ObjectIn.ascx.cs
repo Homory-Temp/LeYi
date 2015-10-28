@@ -81,6 +81,13 @@ public partial class Control_ObjectIn : DepotControlSingle
             unit.Text = so.Unit;
             specification.Text = so.Specification;
             stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
+            var last = so.DepotInX.OrderByDescending(o => o.AutoId).FirstOrDefault();
+            if (last != null)
+            {
+                priceSet.Value = (double)last.PriceSet;
+                age.Text = last.Age;
+                place.Text = last.Place;
+            }
         }
     }
 }

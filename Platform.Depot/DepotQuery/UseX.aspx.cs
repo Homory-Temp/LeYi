@@ -78,6 +78,10 @@ public partial class DepotQuery_UseX : DepotPageSingle
         {
             source = source.Where(o => o.OperatorName.Equals(people.Text.Trim(), StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
+        if (returnType.Checked)
+        {
+            source = source.Where(o => o.Type == 2 && o.ReturnedAmount < o.Amount).ToList();
+        }
         view.DataSource = source.OrderByDescending(o => o.Time).ToList(); ;
         pager.Visible = source.Count > pager.PageSize;
     }
