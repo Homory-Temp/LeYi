@@ -18,10 +18,6 @@ public partial class DepotScan_Out : DepotPageSingle
             people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "", Selected = true });
             people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
             people.DataBind();
-            age.Items.Clear();
-            age.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "年龄段", Value = "", Selected = true });
-            age.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.年龄段).ToList();
-            age.DataBind();
             counter.Value = "0";
             plus.Visible = false;
             Detect();

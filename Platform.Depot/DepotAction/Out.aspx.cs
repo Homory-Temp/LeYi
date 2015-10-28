@@ -18,10 +18,6 @@ public partial class DepotAction_Out : DepotPageSingle
             people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "报废申请人", Value = "", Selected = true });
             people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
             people.DataBind();
-            age.Items.Clear();
-            age.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "年龄段", Value = "", Selected = true });
-            age.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.年龄段).ToList();
-            age.DataBind();
             counter.Value = "1";
             if (!"ObjectId".Query().None())
             {

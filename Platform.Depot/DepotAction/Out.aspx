@@ -36,9 +36,6 @@
                     </div>
                 </div>
                 <div class="col-md-10 text-left">
-                    <telerik:RadComboBox ID="age" runat="server" MaxHeight="203" AutoPostBack="true" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" OnSelectedIndexChanged="usage_SelectedIndexChanged">
-                    </telerik:RadComboBox>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <telerik:RadComboBox ID="people" runat="server" MaxHeight="203" EmptyMessage="报废申请人" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="240" AllowCustomText="true" AutoPostBack="true" OnSelectedIndexChanged="people_SelectedIndexChanged">
                         <Items>
                             <telerik:RadComboBoxItem Text="" Value="" Selected="true" />
