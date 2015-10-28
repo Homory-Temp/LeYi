@@ -613,6 +613,29 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotToOut
+    {
+        public int Id { get; set; }
+        public System.Guid DepotId { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public System.Guid UserId { get; set; }
+        public string Code { get; set; }
+        public string Reason { get; set; }
+        public decimal ToAmount { get; set; }
+        public decimal Amount { get; set; }
+        public string PreservedA { get; set; }
+        public string PreservedB { get; set; }
+        public string PreservedC { get; set; }
+        public string PreservedD { get; set; }
+        public System.DateTime Time { get; set; }
+        public int State { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotUse
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

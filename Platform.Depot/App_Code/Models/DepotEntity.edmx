@@ -266,6 +266,25 @@
           <Property Name="EndAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="EndMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
+        <EntityType Name="DepotToOut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ToAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PreservedA" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreservedB" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreservedC" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreservedD" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="DepotUse">
           <Key>
             <PropertyRef Name="Id" />
@@ -860,6 +879,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySet Name="DepotRole" EntityType="Self.DepotRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotSetting" EntityType="Self.DepotSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotStatistics" EntityType="Self.DepotStatistics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotToOut" EntityType="Self.DepotToOut" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotUse" EntityType="Self.DepotUse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotUserRole" EntityType="Self.DepotUserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotUseX" EntityType="Self.DepotUseX" Schema="dbo" store:Type="Tables" />
@@ -1234,6 +1254,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <End Role="Depot" EntitySet="Depot" />
             <End Role="DepotSetting" EntitySet="DepotSetting" />
           </AssociationSet>
+          <EntitySet Name="DepotToOut" EntityType="DepotModel.DepotToOut" />
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -2101,6 +2122,25 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DepotToOut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ToAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PreservedA" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreservedB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreservedC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreservedD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2619,6 +2659,26 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
               <MappingFragment StoreEntitySet="DepotSetting">
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotToOut">
+            <EntityTypeMapping TypeName="DepotModel.DepotToOut">
+              <MappingFragment StoreEntitySet="DepotToOut">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="PreservedD" ColumnName="PreservedD" />
+                <ScalarProperty Name="PreservedC" ColumnName="PreservedC" />
+                <ScalarProperty Name="PreservedB" ColumnName="PreservedB" />
+                <ScalarProperty Name="PreservedA" ColumnName="PreservedA" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ToAmount" ColumnName="ToAmount" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

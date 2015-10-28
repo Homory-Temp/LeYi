@@ -106,7 +106,7 @@
                     <div class="row">
                         <div class="col-md-3">&nbsp;</div>
                         <div class="col-md-6 text-center">
-                            <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="10" OnPageIndexChanged="pager_PageIndexChanged">
+                            <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="9" OnPageIndexChanged="pager_PageIndexChanged">
                                 <Fields>
                                     <telerik:RadDataPagerButtonField FieldType="FirstPrev"></telerik:RadDataPagerButtonField>
                                     <telerik:RadDataPagerButtonField FieldType="Numeric"></telerik:RadDataPagerButtonField>
