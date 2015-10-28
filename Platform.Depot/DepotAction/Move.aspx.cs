@@ -1,9 +1,6 @@
 ﻿using Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
@@ -11,98 +8,150 @@ public partial class DepotAction_Move : DepotPageSingle
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        SideBarSingle.Crumb = "物资管理 - {0}".Formatted(Depot.Featured(DepotType.固定资产库) ? "资产分库" : "批量调拨");
         if (!IsPostBack)
         {
-            period.SelectedDate = DateTime.Today;
-            people.Items.Clear();
-            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "0", Selected = true });
-            people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
-            people.DataBind();
-            source.Items.Clear();
-            source.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "购置来源", Value = "", Selected = true });
-            source.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.购置来源).ToList();
-            source.DataBind();
-            usage.Items.Clear();
-            usage.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "使用对象", Value = "", Selected = true });
-            usage.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.使用对象).ToList();
-            usage.DataBind();
-            var id = Depot.Id;
-            target.DataSource = DataContext.DepotOrder.Where(o => o.State < State.停用 && o.DepotId == id && o.Done == false).OrderByDescending(o => o.OrderTime).ToList();
-            target.DataBind();
-            depots.DataSource = DataContext.Depot.Where(o => o.State < State.停用).ToList().Where(o => !o.Featured(DepotType.固定资产库)).ToList();
-            depots.DataBind();
+            tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
+            tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
+            tree.DataBind();
+            if (!"CatalogId".Query().None())
+            {
+                var cid = "CatalogId".Query();
+                if (tree.GetAllNodes().Count(o => o.Value == cid) == 1)
+                {
+                    var node = tree.GetAllNodes().Single(o => o.Value == cid);
+                    node.Selected = true;
+                    node.ExpandParentNodes();
+                    node.ExpandChildNodes();
+                    tree0.Nodes[0].Selected = false;
+                }
+            }
+            if (Depot.DefaultObjectView == "Simple".GetFirstChar())
+            {
+                view_simple.Attributes["class"] = "btn btn-warning";
+                view_photo.Attributes["class"] = "btn btn-info";
+            }
+            else
+            {
+                view_simple.Attributes["class"] = "btn btn-info";
+                view_photo.Attributes["class"] = "btn btn-warning";
+            }
         }
     }
 
-    protected void ReloadOrders()
+    protected string CountTotal(DepotObject obj)
     {
-        target.SelectedIndex = -1;
-        target.Text = string.Empty;
-        var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
-        var start = new DateTime(time.Year, time.Month, 1).AddMilliseconds(-1);
-        var end = new DateTime(time.Year, time.Month, 1).AddMonths(1);
-        var list = DataContext.DepotOrder.Where(o => o.DepotId == Depot.Id && o.OrderTime > start && o.OrderTime < end && o.Done == false).OrderByDescending(o => o.OrderTime).ToList();
-        if (source.SelectedIndex > 0)
-            list = list.Where(o => o.OrderSource == source.SelectedItem.Text).ToList();
-        if (usage.SelectedIndex > 0)
-            list = list.Where(o => o.UsageTarget == usage.SelectedItem.Text).ToList();
-        if (people.SelectedIndex > 0)
-            list = list.Where(o => o.OperatorId == people.SelectedItem.Value.GlobalId()).ToList();
-        target.DataSource = list;
-        target.DataBind();
+        var query = obj.DepotUseX.Where(o => o.ReturnedAmount < o.Amount);
+        var noOut = query.Count() > 0 ? query.Sum(o => o.Amount - o.ReturnedAmount) : 0;
+        return (obj.Amount + noOut).ToAmount(Depot.Featured(DepotType.小数数量库));
     }
 
-    protected void period_SelectedDateChanged(object sender, Telerik.Web.UI.Calendar.SelectedDateChangedEventArgs e)
+    protected bool IsSimple
     {
-        ReloadOrders();
-        view_target.Rebind();
-    }
-
-    protected void source_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
-    {
-        ReloadOrders();
-        view_target.Rebind();
-    }
-
-    protected void usage_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
-    {
-        ReloadOrders();
-        view_target.Rebind();
-    }
-
-    protected void people_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
-    {
-        ReloadOrders();
-        view_target.Rebind();
-    }
-
-    protected void target_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
-    {
-        view_target.Rebind();
-    }
-
-    protected void view_target_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
-    {
-        if (target.SelectedIndex == -1 || target.SelectedValue.None())
+        get
         {
-            view_target.DataSource = null;
-            view_target.Visible = false;
+            return view_photo.Attributes["class"] != "btn btn-warning";
         }
-        else
+    }
+
+    protected Guid? CurrentNode
+    {
+        get
         {
-            var id = target.SelectedValue.GlobalId();
-            view_target.DataSource = DataContext.DepotInRecord.Where(o => o.Id == id).ToList();
-            view_target.Visible = true;
+            return tree.SelectedNode == null ? (Guid?)null : tree.SelectedValue.GlobalId();
         }
     }
 
-    protected void depots_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
+    protected void manage_ServerClick(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/DepotSetting/Catalog?DepotId={0}".Formatted(Depot.Id));
     }
 
-    protected void do_move_ServerClick(object sender, EventArgs e)
+    protected void add_ServerClick(object sender, EventArgs e)
     {
+        Response.Redirect("~/DepotAction/ObjectAdd?DepotId={0}&CatalogId={1}".Formatted(Depot.Id, CurrentNode));
+    }
 
+    protected void tree0_NodeClick(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
+    {
+        if (tree.SelectedNode != null)
+            tree.SelectedNode.Selected = false;
+        view.Rebind();
+    }
+
+    protected void tree_NodeClick(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
+    {
+        if (tree0.SelectedNode != null)
+            tree0.SelectedNode.Selected = false;
+        tree.GetAllNodes().Where(o => o.ParentNode == e.Node.ParentNode).ToList().ForEach(o => o.Expanded = false);
+        e.Node.Expanded = true;
+        view.Rebind();
+    }
+
+    protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
+    {
+        var node = CurrentNode;
+        var source = DataContext.DepotObjectLoad(Depot.Id, node.HasValue ? node.Value.GlobalId() : (Guid?)null);
+        if (!toSearch.Text.None())
+        {
+            source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+        }
+        view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
+        pager.Visible = source.Count() > pager.PageSize;
+    }
+
+    protected void view_simple_ServerClick(object sender, EventArgs e)
+    {
+        if (view_simple.Attributes["class"] == "btn btn-info")
+        {
+            view_simple.Attributes["class"] = "btn btn-warning";
+            view_photo.Attributes["class"] = "btn btn-info";
+            view.Rebind();
+        }
+    }
+
+    protected void view_photo_ServerClick(object sender, EventArgs e)
+    {
+        if (view_photo.Attributes["class"] == "btn btn-info")
+        {
+            view_simple.Attributes["class"] = "btn btn-info";
+            view_photo.Attributes["class"] = "btn btn-warning";
+            view.Rebind();
+        }
+    }
+
+    protected void in_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/In?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+    }
+
+    protected void edit_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/ObjectEdit?DepotId={0}&ObjectId={1}&CatalogId={2}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"], CurrentNode.HasValue ? CurrentNode.Value : Guid.Empty));
+    }
+
+    protected void delete_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/ObjectRemove?DepotId={0}&ObjectId={1}&CatalogId={2}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"], CurrentNode.HasValue ? CurrentNode.Value : Guid.Empty));
+    }
+
+    protected void use_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/Use?DepotId={0}&ObjectId={1}&UseType=2".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+    }
+
+    protected void usex_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/Use?DepotId={0}&ObjectId={1}&UseType=1".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+    }
+
+    protected void search_ServerClick(object sender, EventArgs e)
+    {
+        view.Rebind();
+    }
+
+    protected void out_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/Out?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
 }
