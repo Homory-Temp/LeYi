@@ -103,6 +103,11 @@
                     <input type="button" class="btn btn-tumblr" id="do_use" runat="server" value="出库" onserverclick="do_use_ServerClick" />
                 </div>
             </div>
+            <div class="row" id="x3" runat="server" visible="false">
+                <div class="col-md-12 text-center">
+                    <div class="btn btn-danger">该用户存在指定期限内未归还的物品，请先归还。</div>
+                </div>
+            </div>
         </telerik:RadAjaxPanel>
     </form>
 </body>
