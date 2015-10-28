@@ -21,8 +21,9 @@
                             <li><a href='<%= "../DepotAction/Return?DepotId={0}".Formatted(Depot.Id) %>'>物资归还</a></li>
                             <li><a href='<%= "../DepotAction/Out?DepotId={0}".Formatted(Depot.Id) %>'>物资报废</a></li>
                             <li><a href='<%= "../DepotAction/Object?DepotId={0}".Formatted(Depot.Id) %>'>物资管理</a></li>
+                            <li><a href='<%= "../DepotAction/Batch?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: none;": "display: ;") %>'>批量调拨</a></li>
                             <li><a href='<%= "../DepotAction/Import?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产导入</a></li>
-                            <li><a href='<%= "../DepotAction/Move?DepotId={0}".Formatted(Depot.Id) %>'><%= (Depot.Featured(Models.DepotType.固定资产库) ? "资产分库" : "批量调拨") %></a></li>
+                            <li><a href='<%= "../DepotAction/Move?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产分库</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

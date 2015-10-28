@@ -43,8 +43,9 @@
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Return?DepotId={0}".Formatted(Depot.Id) %>'>物资归还</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Out?DepotId={0}".Formatted(Depot.Id) %>'>物资报废</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Object?DepotId={0}".Formatted(Depot.Id) %>'>物资管理</a>
+                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Batch?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: none;": "display: ;") %>'>批量调拨</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Import?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产导入</a>
-                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Move?DepotId={0}".Formatted(Depot.Id) %>'><%= (Depot.Featured(Models.DepotType.固定资产库) ? "资产分库" : "批量调拨") %></a>
+                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Move?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产分库</a>
                         </div>
                     </div>
                 </div>
