@@ -257,6 +257,8 @@ public static class DepotDataExtensions
 
     public static void DepotDictionaryAdd(this DepotEntities db, Guid depotId, DictionaryType type, string name)
     {
+        if (name.None())
+            return;
         var count = db.DepotDictionaryLoad(depotId, type).Count(o => o.Name == name);
         if (count == 0)
         {
