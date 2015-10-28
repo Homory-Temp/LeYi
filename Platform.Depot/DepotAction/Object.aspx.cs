@@ -84,6 +84,10 @@ public partial class DepotAction_Object : DepotPageSingle
     {
         var node = CurrentNode;
         var source = DataContext.DepotObjectLoad(Depot.Id, node.HasValue ? node.Value.GlobalId() : (Guid?)null);
+        if (!toSearch.Text.None())
+        {
+            source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+        }
         view.DataSource = source.OrderBy(o => o.Ordinal).ThenByDescending(o => o.Amount).ToList();
         pager.Visible = source.Count() > pager.PageSize;
     }
@@ -131,5 +135,10 @@ public partial class DepotAction_Object : DepotPageSingle
     protected void usex_ServerClick(object sender, EventArgs e)
     {
         Response.Redirect("~/DepotAction/Use?DepotId={0}&ObjectId={1}&UseType=1".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+    }
+
+    protected void search_ServerClick(object sender, EventArgs e)
+    {
+        view.Rebind();
     }
 }
