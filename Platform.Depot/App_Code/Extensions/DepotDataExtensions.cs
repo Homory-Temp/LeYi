@@ -394,7 +394,7 @@ public static class DepotDataExtensions
                         PriceSet = @in.PriceSet,
                         Price = @in.Price,
                         Total = @in.Price,
-                        AvailableAmount = @in.AvailableAmount,
+                        AvailableAmount = 1,
                         Code = obj.Code
                     };
                     db.DepotInX.Add(inx);
