@@ -90,7 +90,8 @@
                                                 <th>名称</th>
                                                 <th>单位</th>
                                                 <th>规格</th>
-                                                <th>库存</th>
+                                                <th>总数</th>
+                                                <th>在库</th>
                                                 <th>操作</th>
                                             </tr>
                                     </asp:Panel>
@@ -107,6 +108,7 @@
                                             <td style="cursor: pointer; color: #3E5A70;" onclick="gox(this);" goid='<%# Eval("Id") %>' did='<%# Depot.Id %>'><%# Eval("Name") %></td>
                                             <td><%# Eval("Unit") %></td>
                                             <td><%# Eval("Specification") %></td>
+                                            <td>CountTotal(Container.DataItem as Models.DepotObject)</td>
                                             <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
                                             <td>
                                                 <input type="button" class="btn btn-tumblr" value="入" id="in" runat="server" match='<%# Eval("Id") %>' onserverclick="in_ServerClick" />
