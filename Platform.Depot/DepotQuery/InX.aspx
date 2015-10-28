@@ -48,9 +48,13 @@
                 <div class="col-md-10" style="text-align: left;">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <telerik:RadMonthYearPicker ID="period" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="false">
+                    <telerik:RadDatePicker ID="periodx" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
+                        <DatePopupButton runat="server" Visible="false" />
+                    </telerik:RadDatePicker>
+                    &nbsp;&nbsp;-&nbsp;&nbsp;
+                            <telerik:RadDatePicker ID="period" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
                                 <DatePopupButton runat="server" Visible="false" />
-                            </telerik:RadMonthYearPicker>
+                            </telerik:RadDatePicker>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                     <telerik:RadTextBox ID="toSearch" runat="server" EmptyMessage="物资名称"></telerik:RadTextBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;

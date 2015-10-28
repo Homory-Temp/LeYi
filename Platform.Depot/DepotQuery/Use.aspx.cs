@@ -14,6 +14,7 @@ public partial class DepotQuery_Use : DepotPageSingle
         if (!IsPostBack)
         {
             period.SelectedDate = DateTime.Today;
+            periodx.SelectedDate = DateTime.Today;
             people.Items.Clear();
             people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "0", Selected = true });
             people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
@@ -36,9 +37,16 @@ public partial class DepotQuery_Use : DepotPageSingle
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
+        var timex = periodx.SelectedDate.HasValue ? periodx.SelectedDate.Value : DateTime.Today;
         var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
-        var start = new DateTime(time.Year, time.Month, 1).AddMilliseconds(-1);
-        var end = new DateTime(time.Year, time.Month, 1).AddMonths(1);
+        if (timex > time)
+        {
+            var time_t = timex;
+            timex = time;
+            time = time_t;
+        }
+        var start = timex.AddMilliseconds(-1);
+        var end = time.AddDays(1);
         var list = DataContext.DepotUse.Where(o => o.DepotId == Depot.Id && o.Time > start && o.Time < end).OrderByDescending(o => o.Time).ToList();
         if (age.SelectedIndex > 0)
             list = list.Where(o => o.Age == age.SelectedItem.Text).ToList();

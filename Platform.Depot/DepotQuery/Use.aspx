@@ -30,9 +30,13 @@
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <telerik:RadMonthYearPicker ID="period" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="false">
+                    <telerik:RadDatePicker ID="periodx" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
                         <DatePopupButton runat="server" Visible="false" />
-                    </telerik:RadMonthYearPicker>
+                    </telerik:RadDatePicker>
+                    &nbsp;&nbsp;-&nbsp;&nbsp;
+                    <telerik:RadDatePicker ID="period" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
+                        <DatePopupButton runat="server" Visible="false" />
+                    </telerik:RadDatePicker>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <telerik:RadComboBox ID="peopleX" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true">
                     </telerik:RadComboBox>

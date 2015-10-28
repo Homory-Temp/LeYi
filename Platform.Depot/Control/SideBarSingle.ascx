@@ -34,7 +34,7 @@
                             <li><a href='<%= "../DepotQuery/UseX?DepotId={0}".Formatted(Depot.Id) %>'>出库查询</a></li>
                             <li><a href='<%= "../DepotQuery/Return?DepotId={0}".Formatted(Depot.Id) %>'>归还查询</a></li>
                             <li><a href='<%= "../DepotQuery/Out?DepotId={0}".Formatted(Depot.Id) %>'>报废查询</a></li>
-                            <li><a href='<%= "../DepotQuery/Statistics?DepotId={0}".Formatted(Depot.Id) %>'>库存查询</a></li>
+                            <li><a href='<%= "../DepotQuery/Statistics?DepotId={0}".Formatted(Depot.Id) %>'>汇总统计</a></li>
                             <li><a href='<%= "../DepotQuery/Redo?DepotId={0}".Formatted(Depot.Id) %>'>退货查询</a></li>
                         </ul>
                     </li>

@@ -14,6 +14,7 @@ public partial class DepotQuery_UseX : DepotPageSingle
         if (!IsPostBack)
         {
             period.SelectedDate = DateTime.Today;
+            periodx.SelectedDate = DateTime.Today;
             people.Items.Clear();
             people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "0", Selected = true });
             people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
@@ -51,9 +52,16 @@ public partial class DepotQuery_UseX : DepotPageSingle
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
+        var timex = periodx.SelectedDate.HasValue ? periodx.SelectedDate.Value : DateTime.Today;
         var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
-        var start = new DateTime(time.Year, time.Month, 1).AddMilliseconds(-1);
-        var end = new DateTime(time.Year, time.Month, 1).AddMonths(1);
+        if (timex > time)
+        {
+            var time_t = timex;
+            timex = time;
+            time = time_t;
+        }
+        var start = timex.AddMilliseconds(-1);
+        var end = time.AddDays(1);
         var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => o.Value.GlobalId()).ToList();
         var isVirtual = Depot.Featured(DepotType.固定资产库);
         var source = catalogs.Join(DataContext.DepotUseXRecord.Where(o => o.Time > start && o.Time < end && o.IsVirtual == isVirtual), o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.Time).ThenBy(o => o.UserName).ToList();
