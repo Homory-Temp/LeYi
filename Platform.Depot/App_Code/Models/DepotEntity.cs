@@ -399,6 +399,7 @@ namespace Models
         public string Code { get; set; }
         public decimal Amount { get; set; }
         public decimal Money { get; set; }
+        public Nullable<System.Guid> DepotId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotFlow> DepotFlow { get; set; }

@@ -174,6 +174,7 @@
           <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="DepotObjectCatalog">
           <Key>
@@ -1607,6 +1608,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <NavigationProperty Name="DepotStatistics" Relationship="DepotModel.FK_DepotStatistics_DepotObject" FromRole="DepotObject" ToRole="DepotStatistics" />
           <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotObject" FromRole="DepotObject" ToRole="DepotInX" />
           <NavigationProperty Name="DepotUseX" Relationship="DepotModel.FK_DepotUseX_DepotObject" FromRole="DepotObject" ToRole="DepotUseX" />
+          <Property Name="DepotId" Type="Guid" />
         </EntityType>
         <EntityType Name="DepotFlow">
           <Key>
@@ -2462,6 +2464,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotObject">
             <EntityTypeMapping TypeName="DepotModel.DepotObject">
               <MappingFragment StoreEntitySet="DepotObject">
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
                 <ScalarProperty Name="Money" ColumnName="Money" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="Code" ColumnName="Code" />

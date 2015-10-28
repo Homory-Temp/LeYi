@@ -26,31 +26,6 @@ public partial class DepotAction_Move : DepotPageSingle
                     tree0.Nodes[0].Selected = false;
                 }
             }
-            if (Depot.DefaultObjectView == "Simple".GetFirstChar())
-            {
-                view_simple.Attributes["class"] = "btn btn-warning";
-                view_photo.Attributes["class"] = "btn btn-info";
-            }
-            else
-            {
-                view_simple.Attributes["class"] = "btn btn-info";
-                view_photo.Attributes["class"] = "btn btn-warning";
-            }
-        }
-    }
-
-    protected string CountTotal(DepotObject obj)
-    {
-        var query = obj.DepotUseX.Where(o => o.ReturnedAmount < o.Amount);
-        var noOut = query.Count() > 0 ? query.Sum(o => o.Amount - o.ReturnedAmount) : 0;
-        return (obj.Amount + noOut).ToAmount(Depot.Featured(DepotType.小数数量库));
-    }
-
-    protected bool IsSimple
-    {
-        get
-        {
-            return view_photo.Attributes["class"] != "btn btn-warning";
         }
     }
 
@@ -60,16 +35,6 @@ public partial class DepotAction_Move : DepotPageSingle
         {
             return tree.SelectedNode == null ? (Guid?)null : tree.SelectedValue.GlobalId();
         }
-    }
-
-    protected void manage_ServerClick(object sender, EventArgs e)
-    {
-        Response.Redirect("~/DepotSetting/Catalog?DepotId={0}".Formatted(Depot.Id));
-    }
-
-    protected void add_ServerClick(object sender, EventArgs e)
-    {
-        Response.Redirect("~/DepotAction/ObjectAdd?DepotId={0}&CatalogId={1}".Formatted(Depot.Id, CurrentNode));
     }
 
     protected void tree0_NodeClick(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
@@ -97,61 +62,10 @@ public partial class DepotAction_Move : DepotPageSingle
             source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
         }
         view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
-        pager.Visible = source.Count() > pager.PageSize;
-    }
-
-    protected void view_simple_ServerClick(object sender, EventArgs e)
-    {
-        if (view_simple.Attributes["class"] == "btn btn-info")
-        {
-            view_simple.Attributes["class"] = "btn btn-warning";
-            view_photo.Attributes["class"] = "btn btn-info";
-            view.Rebind();
-        }
-    }
-
-    protected void view_photo_ServerClick(object sender, EventArgs e)
-    {
-        if (view_photo.Attributes["class"] == "btn btn-info")
-        {
-            view_simple.Attributes["class"] = "btn btn-info";
-            view_photo.Attributes["class"] = "btn btn-warning";
-            view.Rebind();
-        }
-    }
-
-    protected void in_ServerClick(object sender, EventArgs e)
-    {
-        Response.Redirect("~/DepotAction/In?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
-    }
-
-    protected void edit_ServerClick(object sender, EventArgs e)
-    {
-        Response.Redirect("~/DepotAction/ObjectEdit?DepotId={0}&ObjectId={1}&CatalogId={2}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"], CurrentNode.HasValue ? CurrentNode.Value : Guid.Empty));
-    }
-
-    protected void delete_ServerClick(object sender, EventArgs e)
-    {
-        Response.Redirect("~/DepotAction/ObjectRemove?DepotId={0}&ObjectId={1}&CatalogId={2}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"], CurrentNode.HasValue ? CurrentNode.Value : Guid.Empty));
-    }
-
-    protected void use_ServerClick(object sender, EventArgs e)
-    {
-        Response.Redirect("~/DepotAction/Use?DepotId={0}&ObjectId={1}&UseType=2".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
-    }
-
-    protected void usex_ServerClick(object sender, EventArgs e)
-    {
-        Response.Redirect("~/DepotAction/Use?DepotId={0}&ObjectId={1}&UseType=1".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
 
     protected void search_ServerClick(object sender, EventArgs e)
     {
         view.Rebind();
-    }
-
-    protected void out_ServerClick(object sender, EventArgs e)
-    {
-        Response.Redirect("~/DepotAction/Out?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
 }
