@@ -47,12 +47,31 @@ public partial class DepotScan_Use : DepotPageSingle
         if (people.SelectedValue.None())
         {
             show = false;
+            x1.Visible = x2.Visible = x3.Visible = false;
         }
         else
         {
-            show = true;
+            var uid = people.SelectedValue.GlobalId();
+            var record = DataContext.DepotUseXRecord.Where(o => o.UserId == uid && o.ReturnedAmount < o.Amount && o.Type == 2).OrderBy(o => o.Time).FirstOrDefault();
+            if (record == null)
+                show = true;
+            else
+            {
+                var period = Depot.DepotSetting.SingleOrDefault(o => o.Key == "PeriodTime");
+                var time = period == null ? 0 : int.Parse(period.Value);
+                if (time > 0 && record.Time.AddMonths(time) < DateTime.Now)
+                {
+                    var ids = Depot.DepotSetting.Where(o => o.Key == "PeriodUser").ToList().Select(o => Guid.Parse(o.Value)).ToList();
+                    show = ids.Contains(uid);
+                }
+                else
+                {
+                    show = true;
+                }
+            }
+            x1.Visible = x2.Visible = show;
+            x3.Visible = !show;
         }
-        x1.Visible = x2.Visible = show;
         Reset();
     }
 
