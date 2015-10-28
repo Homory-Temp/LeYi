@@ -692,12 +692,13 @@ public static class DepotDataExtensions
         }
     }
 
-    public static void DepotActReturn(this DepotEntities db, Guid depotId, DateTime returnTime, Guid operatorId, Guid userId, List<InMemoryReturn> list)
+    public static void DepotActReturn(this DepotEntities db, Guid depotId, DateTime returnTime, Guid operatorId, List<InMemoryReturn> list)
     {
         if (list == null || list.Count == 0)
         {
             return;
         }
+        var @out = new List<InMemoryOut>();
         foreach (var item in list)
         {
             if (item.Amount == 0)
@@ -710,7 +711,7 @@ public static class DepotDataExtensions
             var @return = new DepotReturn
             {
                 Id = db.GlobalId(),
-                UserId = userId,
+                UserId = usex.DepotUse.Id,
                 UseXId = item.UseX,
                 Amount = item.Amount,
                 Price = inx.Price,
@@ -718,6 +719,7 @@ public static class DepotDataExtensions
                 Time = returnTime,
                 Note = item.Note
             };
+            var catalog = db.DepotObjectCatalog.Where(o => o.ObjectId == obj.Id && o.IsLeaf == true).ToList().Join(db.DepotCatalog.Where(o => o.DepotId == depotId), o => o.CatalogId, o => o.Id, (a, b) => a.CatalogId).FirstOrDefault();
             usex.ReturnedAmount += @return.Amount;
             db.DepotReturn.Add(@return);
             obj.Amount += @return.Amount;
@@ -742,6 +744,12 @@ public static class DepotDataExtensions
                     Note = item.Note
                 };
                 db.DepotFlowX.Add(flowx);
+                if (item.OutAmount > 0)
+                {
+                    var nl = new List<int>();
+                    nl.Add(inx.Ordinal);
+                    @out.Add(new InMemoryOut { Amount = item.OutAmount, ObjectId = @in.ObjectId, Ordinals = nl, Reason = "报废", CatalogId = catalog });
+                }
             }
             else
             {
@@ -749,7 +757,7 @@ public static class DepotDataExtensions
                 {
                     Id = db.GlobalId(),
                     ObjectId = @in.ObjectId,
-                    UserId = userId,
+                    UserId = usex.DepotUse.Id,
                     Type = FlowType.归还,
                     TypeName = FlowType.归还.ToString(),
                     Time = returnTime,
@@ -758,10 +766,22 @@ public static class DepotDataExtensions
                     Note = item.Note
                 };
                 db.DepotFlow.Add(flow);
+                if (item.OutAmount > 0)
+                {
+                    var nl = new List<int>();
+                    @out.Add(new InMemoryOut { Amount = item.OutAmount, ObjectId = @in.ObjectId, Ordinals = nl, Reason = "报废", CatalogId = catalog });
+                }
             }
             db.DepotActStatistics(@in.ObjectId, returnTime, 0, 0, -@return.Amount, -@return.Total, 0, 0, 0, 0, 0, 0);
         }
         db.SaveChanges();
+        try
+        {
+            db.DepotActOut(depotId, returnTime, operatorId, operatorId, @out);
+        }
+        catch
+        {
+        }
     }
 
     public static void DepotActInEdit(this DepotEntities db, Guid depotId, DepotIn @in, DateTime day, decimal amount, decimal priceSet, decimal money, string age, string place, string note, Guid operatorId)
