@@ -632,7 +632,60 @@ public static class DepotDataExtensions
 
     public static void DepotActOut(this DepotEntities db, Guid depotId, DateTime outTime, Guid operatorId, Guid userId, List<InMemoryOut> list)
     {
-
+        foreach (var @out in list)
+        {
+            if (!@out.ObjectId.HasValue)
+            {
+                continue;
+            }
+            var objId = @out.ObjectId.Value;
+            var obj = db.DepotObject.Single(o => o.Id == objId);
+            if (obj.Single)
+            {
+                foreach (var s in @out.Ordinals)
+                {
+                    var xi = db.DepotInX.SingleOrDefault(o => o.ObjectId == objId && o.Ordinal == s);
+                    if (xi == null)
+                        continue;
+                    var to = new DepotToOut
+                    {
+                        DepotId = depotId,
+                        ObjectId = objId,
+                        UserId = userId,
+                        Code = xi.Code,
+                        Reason = @out.Reason,
+                        ToAmount = 1,
+                        Amount = 0,
+                        PreservedD = operatorId.ToString(),
+                        Time = outTime,
+                        PreservedC = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                        State = 2
+                    };
+                    db.DepotToOut.Add(to);
+                }
+            }
+            else
+            {
+                if (!@out.Amount.HasValue || @out.Amount.Value == 0)
+                    continue;
+                var to = new DepotToOut
+                {
+                    DepotId = depotId,
+                    ObjectId = objId,
+                    UserId = userId,
+                    Code = obj.Code,
+                    Reason = @out.Reason,
+                    ToAmount = @out.Amount.Value,
+                    Amount = 0,
+                    PreservedD = operatorId.ToString(),
+                    Time = outTime,
+                    PreservedC = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    State = 2
+                };
+                db.DepotToOut.Add(to);
+            }
+            db.SaveChanges();
+        }
     }
 
     public static void DepotActReturn(this DepotEntities db, Guid depotId, DateTime returnTime, Guid operatorId, Guid userId, List<InMemoryReturn> list)
