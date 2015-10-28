@@ -237,7 +237,7 @@ public static class DepotDataExtensions
         obj.ImageD = pd;
         obj.Note = note;
         obj.Ordinal = ordinal;
-        var catalogs = db.DepotObjectCatalog.Where(o => o.ObjectId == id).ToList();
+        var catalogs = db.DepotObjectCatalog.Where(o => o.ObjectId == id && o.IsVirtual == false).ToList();
         for (var i = 0; i < catalogs.Count(); i++)
         {
             db.DepotObjectCatalog.Remove(catalogs.ElementAt(i));
