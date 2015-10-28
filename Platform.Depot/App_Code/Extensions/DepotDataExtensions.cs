@@ -656,9 +656,11 @@ public static class DepotDataExtensions
                         Reason = @out.Reason,
                         ToAmount = 1,
                         Amount = 0,
+                        PreservedA = "",
+                        PreservedB = "",
+                        PreservedC = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                         PreservedD = operatorId.ToString(),
                         Time = outTime,
-                        PreservedC = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                         State = 2
                     };
                     db.DepotToOut.Add(to);
@@ -677,9 +679,11 @@ public static class DepotDataExtensions
                     Reason = @out.Reason,
                     ToAmount = @out.Amount.Value,
                     Amount = 0,
+                    PreservedA = "",
+                    PreservedB = "",
+                    PreservedC = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                     PreservedD = operatorId.ToString(),
                     Time = outTime,
-                    PreservedC = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                     State = 2
                 };
                 db.DepotToOut.Add(to);
