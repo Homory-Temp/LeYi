@@ -96,6 +96,11 @@
                                     <asp:Label runat="server" Text='<%# Eval("Ordinal") %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn HeaderText="条码" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true">
+                                <ItemTemplate>
+                                    <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text='<%# Eval("Code") %>' NavigateUrl='<%# "../DepotScan/Flow?DepotId={0}&Code={1}".Formatted(Depot.Id, Eval("OrderId")) %>'></asp:HyperLink>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn HeaderText="存放地" DataField="Place" SortExpression="Place" UniqueName="Place">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Place") %>'></asp:Label>

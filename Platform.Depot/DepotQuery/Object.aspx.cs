@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
-public partial class DepotQuery_Object : DepotPage
+public partial class DepotQuery_Object : DepotPageSingle
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -37,6 +37,7 @@ public partial class DepotQuery_Object : DepotPage
         public bool Fixed { get; set; }
         public int Ordinal { get; set; }
         public string Place { get; set; }
+        public string Code { get; set; }
     }
 
     protected void grid_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
@@ -51,12 +52,12 @@ public partial class DepotQuery_Object : DepotPage
         var obj = DataContext.DepotObject.Single(o => o.Id == objId);
         if (obj.Fixed)
         {
-            var source = DataContext.DepotInX.Where(o => (o.AvailableAmount > 0) && o.ObjectId == obj.Id).ToList().Select(o => new Placed { Id = o.Id, Ordinal = o.Ordinal, Fixed = true, Place = o.Place }).OrderBy(o => o.Ordinal).ToList();
+            var source = DataContext.DepotInX.Where(o => (o.AvailableAmount > 0) && o.ObjectId == obj.Id).ToList().Select(o => new Placed { Id = o.Id, Ordinal = o.Ordinal, Fixed = true, Place = o.Place, Code = o.Code }).OrderBy(o => o.Ordinal).ToList();
             grid.DataSource = source;
         }
         else
         {
-            var source = DataContext.DepotInX.Where(o => (o.AvailableAmount > 0) && o.ObjectId == obj.Id).OrderByDescending(o => o.AvailableAmount).ToList().Select(o => new Placed { Id = o.Id, Ordinal = 0, Fixed = false, Place = o.Place }).ToList();
+            var source = DataContext.DepotInX.Where(o => (o.AvailableAmount > 0) && o.ObjectId == obj.Id).OrderByDescending(o => o.AvailableAmount).ToList().Select(o => new Placed { Id = o.Id, Ordinal = 0, Fixed = false, Place = o.Place, Code = o.Code }).ToList();
             for (var i = 0; i < source.Count; i++)
             {
                 source[i].Ordinal = i + 1;
