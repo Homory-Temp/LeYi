@@ -133,7 +133,7 @@ namespace Windows.MMS.Picture.Import
                                 xcco = xcco.DepotCatalogParent;
                             }
 
-                            db.DepotObjectAdd(picid, gids, 图片库Id, wz.name, true, false, false, "", wz.classcode, wz.gg, wz.code, "张", wz.xh, 0, 0, a, b, c, d, "", ordinal);
+                            db.DepotObjectAdd(picid, gids, 图片库Id, wz.name, true, false, false, "", wz.classcode, wz.gg, wz.code, "张", wz.xh, 0, 0, a, b, c, d, wz.xh, ordinal);
 
                             var @in = new InMemoryIn { Age = Age(wz.syfw.HasValue ? wz.syfw.Value : 0), Place = "图片库", Amount = 1, CatalogId = cco.Id, Money = 0, Note = "", ObjectId = picid, PriceSet = 0, Time = DateTime.Today };
                             var list = new List<InMemoryIn>();
