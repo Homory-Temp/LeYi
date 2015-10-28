@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class InMemoryUse
 {
+    public InMemoryUse()
+    {
+        Ordinals = new List<int>();
+    }
+
     public Guid? CatalogId { get; set; }
     public Guid? ObjectId { get; set; }
     public decimal? Amount { get; set; }
