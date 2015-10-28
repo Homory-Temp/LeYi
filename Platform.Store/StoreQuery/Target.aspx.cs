@@ -14,6 +14,7 @@ public partial class StoreQuery_Target : SingleStorePage
         if (!IsPostBack)
         {
             period.SelectedDate = DateTime.Today;
+            periodx.SelectedDate = DateTime.Today;
             people.Items.Clear();
             people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "0", Selected = true });
             people.DataSource = db.Value.Store_Target.Where(o => o.State < 2 && o.StoreId == StoreId).Select(o => o.OperationUserId).ToList().Join(db.Value.User, o => o, o => o.Id, (o, u) => u).Distinct().ToList();
@@ -45,9 +46,16 @@ public partial class StoreQuery_Target : SingleStorePage
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
+        var timex = periodx.SelectedDate.HasValue ? periodx.SelectedDate.Value : DateTime.Today;
         var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
-        var start = (new DateTime(time.Year, time.Month, 1).AddDays(-1)).ToTimeNode();
-        var end = (new DateTime(time.Year, time.Month, 1).AddMonths(1)).ToTimeNode();
+        if (timex > time)
+        {
+            var time_t = timex;
+            timex = time;
+            time = time_t;
+        }
+        var start = timex.AddMilliseconds(-1).ToTimeNode();
+        var end = time.AddDays(1).ToTimeNode();
         var list = new List<Store_Target>();
         switch (combo.SelectedValue)
         {
