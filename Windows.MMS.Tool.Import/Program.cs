@@ -69,77 +69,83 @@ namespace Windows.MMS.Tool.Import
                     #region 导入物资
                     foreach (var wz in dbx.T_toolinfo)
                     {
-                        if (wz.classcode == null)
-                            continue;
-                        var classcode = wz.classcode.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-                        int ordinal;
                         try
                         {
-                            ordinal = classcode.Length == 1 ? 99 : int.Parse(classcode[1]);
+                            if (wz.classcode == null)
+                                continue;
+                            var classcode = wz.classcode.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                            int ordinal;
+                            try
+                            {
+                                ordinal = classcode.Length == 1 ? 99 : int.Parse(classcode[1]);
+                            }
+                            catch
+                            {
+                                ordinal = 99;
+                            }
+                            int pid = wz.tid;
+                            var pimg = dbx.T_toolimg.SingleOrDefault(o => o.tid == pid);
+                            string a = "", b = "", c = "", d = "";
+                            if (!(pimg == null || (pimg.pic1 == null && pimg.pic2 == null && pimg.pic3 == null && pimg.pic4 == null)))
+                            {
+                                if (pimg.pic1 != null)
+                                {
+                                    var p1 = ToPic(pimg.pic1);
+                                    var pgid = Guid.NewGuid();
+                                    p1.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
+                                    a = "../Common/物资/图片/{0}.png".Formatted(pgid);
+                                }
+                                if (pimg.pic2 != null)
+                                {
+                                    var p2 = ToPic(pimg.pic2);
+                                    var pgid = Guid.NewGuid();
+                                    p2.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
+                                    b = "../Common/物资/图片/{0}.png".Formatted(pgid);
+                                }
+                                if (pimg.pic3 != null)
+                                {
+                                    var p3 = ToPic(pimg.pic3);
+                                    var pgid = Guid.NewGuid();
+                                    p3.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
+                                    c = "../Common/物资/图片/{0}.png".Formatted(pgid);
+                                }
+                                if (pimg.pic4 != null)
+                                {
+                                    var p4 = ToPic(pimg.pic4);
+                                    var pgid = Guid.NewGuid();
+                                    p4.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
+                                    d = "../Common/物资/图片/{0}.png".Formatted(pgid);
+                                }
+                            }
+                            var catalogs = db.DepotCatalogLoad(教玩具库Id).Select(o => o.Id).Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (x, y) => y.ObjectId).Join(db.DepotObject, o => o, o => o.Id, (x, y) => y).ToList();
+                            if (catalogs.Count(o => o.SerialD == wz.code && o.State < State.停用) == 0)
+                            {
+                                var cc = wz.classcode.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                                var cco = db.DepotCatalogLoad(教玩具库Id).SingleOrDefault(o => o.Code == cc);
+                                if (cco == null)
+                                    continue;
+
+                                var picid = db.GlobalId();
+
+                                var gids = new List<Guid>();
+                                gids.Add(cco.Id);
+                                var xcco = cco.DepotCatalogParent;
+                                while (xcco != null)
+                                {
+                                    gids.Add(xcco.Id);
+                                    xcco = xcco.DepotCatalogParent;
+                                }
+
+                                db.DepotObjectAdd(picid, gids, 教玩具库Id, wz.name, false, false, false, "", wz.classcode, wz.gg ?? "", wz.code, "件", wz.gg ?? "", 0, 0, a, b, c, d, wz.xh ?? "", ordinal);
+
+                                var @in = new InMemoryIn { Age = Age(wz.syfw.HasValue ? wz.syfw.Value : 0), Place = "教玩具库", Amount = wz.num.HasValue ? wz.num.Value : 0, CatalogId = cco.Id, Money = 0, Note = "", ObjectId = picid, PriceSet = 0, Time = DateTime.Today };
+                                var list = new List<InMemoryIn>();
+                                list.Add(@in);
+                                db.DepotActIn(教玩具库Id, 购置单Id, DateTime.Today, 教玩具库用户Id, list);
+                            }
                         }
                         catch
                         {
-                            ordinal = 99;
-                        }
-                        int pid = wz.tid;
-                        var pimg = dbx.T_toolimg.SingleOrDefault(o => o.tid == pid);
-                        string a = "", b = "", c = "", d = "";
-                        if (!(pimg == null || (pimg.pic1 == null && pimg.pic2 == null && pimg.pic3 == null && pimg.pic4 == null)))
-                        {
-                            if (pimg.pic1 != null)
-                            {
-                                var p1 = ToPic(pimg.pic1);
-                                var pgid = Guid.NewGuid();
-                                p1.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-                                a = "../Common/物资/图片/{0}.png".Formatted(pgid);
-                            }
-                            if (pimg.pic2 != null)
-                            {
-                                var p2 = ToPic(pimg.pic2);
-                                var pgid = Guid.NewGuid();
-                                p2.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-                                b = "../Common/物资/图片/{0}.png".Formatted(pgid);
-                            }
-                            if (pimg.pic3 != null)
-                            {
-                                var p3 = ToPic(pimg.pic3);
-                                var pgid = Guid.NewGuid();
-                                p3.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-                                c = "../Common/物资/图片/{0}.png".Formatted(pgid);
-                            }
-                            if (pimg.pic4 != null)
-                            {
-                                var p4 = ToPic(pimg.pic4);
-                                var pgid = Guid.NewGuid();
-                                p4.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-                                d = "../Common/物资/图片/{0}.png".Formatted(pgid);
-                            }
-                        }
-                        var catalogs = db.DepotCatalogLoad(教玩具库Id).Select(o => o.Id).Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (x, y) => y.ObjectId).Join(db.DepotObject, o => o, o => o.Id, (x, y) => y).ToList();
-                        if (catalogs.Count(o => o.SerialD == wz.code && o.State < State.停用) == 0)
-                        {
-                            var cc = wz.classcode.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
-                            var cco = db.DepotCatalogLoad(教玩具库Id).SingleOrDefault(o => o.Code == cc);
-                            if (cco == null)
-                                continue;
-
-                            var picid = db.GlobalId();
-
-                            var gids = new List<Guid>();
-                            gids.Add(cco.Id);
-                            var xcco = cco.DepotCatalogParent;
-                            while (xcco != null)
-                            {
-                                gids.Add(xcco.Id);
-                                xcco = xcco.DepotCatalogParent;
-                            }
-
-                            db.DepotObjectAdd(picid, gids, 教玩具库Id, wz.name, false, false, false, "", wz.classcode, wz.gg, wz.code, "件", wz.gg, 0, 0, a, b, c, d, wz.xh, ordinal);
-
-                            var @in = new InMemoryIn { Age = Age(wz.syfw.HasValue ? wz.syfw.Value : 0), Place = "教玩具库", Amount = wz.num.HasValue ? wz.num.Value : 0, CatalogId = cco.Id, Money = 0, Note = "", ObjectId = picid, PriceSet = 0, Time = DateTime.Today };
-                            var list = new List<InMemoryIn>();
-                            list.Add(@in);
-                            db.DepotActIn(教玩具库Id, 购置单Id, DateTime.Today, 教玩具库用户Id, list);
                         }
                     }
                     Console.WriteLine("教玩具库物资导入成功");
@@ -156,169 +162,6 @@ namespace Windows.MMS.Tool.Import
             }
             Console.ReadLine();
         }
-
-        //static void Main(string[] args)
-        //{
-        //    var error = true;
-        //    while (error)
-        //    {
-        //        try
-        //        {
-        //            error = false;
-        //            Guid 学校Id = Guid.Parse(ConfigurationManager.AppSettings["学校Guid"]);
-        //            Guid 教玩具库用户Id = Guid.Parse(ConfigurationManager.AppSettings["教玩具库管理员Guid"]);
-        //            Guid 教玩具库Id;
-        //            Guid 教玩具库总分类Id;
-        //            var sid = ConfigurationManager.AppSettings["教玩具库Guid"];
-        //            if (string.IsNullOrWhiteSpace(sid))
-        //            {
-        //                Console.WriteLine("教玩具库未创建，正在创建中");
-        //                教玩具库Id = db.GlobalId();
-        //                教玩具库总分类Id = db.GlobalId();
-        //                db.StorageAdd(学校Id, "教玩具库", 1, 教玩具库Id, 教玩具库总分类Id);
-        //                db.SaveChanges();
-        //                Console.WriteLine("教玩具库和默认总分类创建成功");
-        //                db.InitializePermission(教玩具库用户Id, 教玩具库Id);
-        //                db.SaveChanges();
-        //                Console.WriteLine("教玩具库默认权限分配成功");
-        //            }
-        //            else
-        //            {
-        //                教玩具库Id = Guid.Parse(sid);
-        //                教玩具库总分类Id = Guid.Parse(ConfigurationManager.AppSettings["教玩具库总分类Guid"]);
-        //            }
-        //            Console.WriteLine("教玩具库购置单检测中");
-        //            var 教玩具库购置单编号 = ConfigurationManager.AppSettings["教玩具库购置单编号"];
-        //            Guid 教玩具库购置单Id;
-        //            if (db.StorageTarget.Count(o => o.Number == 教玩具库购置单编号) == 0)
-        //            {
-        //                Console.WriteLine("教玩具库购置单未获取，正在创建");
-        //                教玩具库购置单Id = db.StorageTargetAdd(教玩具库Id, 教玩具库购置单编号, 教玩具库购置单编号, "导入", "无锡市实验幼儿园", "图片", 0.00M, 0.00M, 教玩具库用户Id, 教玩具库用户Id, 教玩具库用户Id, DateTime.Now, DateTime.Today);
-        //                db.SaveChanges();
-        //                Console.WriteLine("教玩具库购置单创建成功");
-        //            }
-        //            else
-        //            {
-        //                教玩具库购置单Id = db.StorageTarget.Single(o => o.Number == 教玩具库购置单编号).Id;
-        //                Console.WriteLine("教玩具库购置单已获取");
-        //            }
-        //            Console.WriteLine("教玩具库开始导入分类");
-        //            int i0 = 0;
-        //            foreach (var c in dbx.pcodelist.Where(o => o.type == "P" && o.parent == 0).OrderBy(o => o.id))
-        //            {
-        //                i0++;
-        //                Guid id;
-        //                if (db.StorageCatalog.Count(o => o.StorageId == 教玩具库Id && o.Code == c.code && o.State < State.删除) == 0)
-        //                {
-        //                    id = db.StorageCatalogAdd(教玩具库Id, 教玩具库总分类Id, c.name, i0, c.code);
-        //                }
-        //                else
-        //                {
-        //                    id = db.StorageCatalog.Single(o => o.StorageId == 教玩具库Id && o.Code == c.code && o.State < State.删除).Id;
-        //                }
-        //                int j0 = 0;
-        //                foreach (var cc in dbx.pcodelist.Where(o => o.type == "P" && o.parent == c.id).OrderBy(o => o.id))
-        //                {
-        //                    j0++;
-        //                    Guid idx;
-        //                    if (db.StorageCatalog.Count(o => o.StorageId == 教玩具库Id && o.Code == cc.code && o.State < State.删除) == 0)
-        //                    {
-        //                        idx = db.StorageCatalogAdd(教玩具库Id, id, cc.name, j0, cc.code);
-        //                    }
-        //                    else
-        //                    {
-        //                        idx = db.StorageCatalog.Single(o => o.StorageId == 教玩具库Id && o.Code == cc.code && o.State < State.删除).Id;
-        //                    }
-        //                    int k0 = 0;
-        //                    foreach (var ccc in dbx.pcodelist.Where(o => o.type == "P" && o.parent == cc.id).OrderBy(o => o.id))
-        //                    {
-        //                        k0++;
-        //                        if (db.StorageCatalog.Count(o => o.StorageId == 教玩具库Id && o.Code == ccc.code && o.State < State.删除) == 0)
-        //                        {
-        //                            db.StorageCatalogAdd(教玩具库Id, idx, ccc.name, k0, ccc.code);
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //            db.SaveChanges();
-        //            Console.WriteLine("教玩具库分类导入成功");
-        //            Console.WriteLine("教玩具库开始导入物资");
-        //            #region 导入物资
-        //            foreach (var wz in dbx.P_picinfo)
-        //            {
-        //                if (wz.classcode == null)
-        //                    continue;
-        //                var classcode = wz.classcode.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-        //                int ordinal;
-        //                try
-        //                {
-        //                    ordinal = classcode.Length == 1 ? 99 : int.Parse(classcode[1]);
-        //                }
-        //                catch
-        //                {
-        //                    ordinal = 99;
-        //                }
-        //                int pid = wz.pid;
-        //                var pimg = dbx.P_picimg.SingleOrDefault(o => o.pid == pid);
-        //                Image image;
-        //                image = new Image();
-        //                if (!(pimg == null || (pimg.pic1 == null && pimg.pic2 == null && pimg.pic3 == null && pimg.pic4 == null)))
-        //                {
-        //                    if (pimg.pic1 != null)
-        //                    {
-        //                        var p1 = ToPic(pimg.pic1);
-        //                        var pgid = Guid.NewGuid();
-        //                        p1.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-        //                        image.Images.Add("~/Upload/{0}.png".Formatted(pgid));
-        //                    }
-        //                    if (pimg.pic2 != null)
-        //                    {
-        //                        var p2 = ToPic(pimg.pic2);
-        //                        var pgid = Guid.NewGuid();
-        //                        p2.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-        //                        image.Images.Add("~/Upload/{0}.png".Formatted(pgid));
-        //                    }
-        //                    if (pimg.pic3 != null)
-        //                    {
-        //                        var p3 = ToPic(pimg.pic3);
-        //                        var pgid = Guid.NewGuid();
-        //                        p3.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-        //                        image.Images.Add("~/Upload/{0}.png".Formatted(pgid));
-        //                    }
-        //                    if (pimg.pic4 != null)
-        //                    {
-        //                        var p4 = ToPic(pimg.pic4);
-        //                        var pgid = Guid.NewGuid();
-        //                        p4.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-        //                        image.Images.Add("~/Upload/{0}.png".Formatted(pgid));
-        //                    }
-        //                }
-        //                if (db.StorageObject.Count(o => o.StorageId == 教玩具库Id && o.Code == wz.code && o.State < State.删除) == 0)
-        //                {
-        //                    var cc = wz.classcode.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
-        //                    var cco = db.StorageCatalog.SingleOrDefault(o => o.Code == cc);
-        //                    if (cco == null)
-        //                        continue;
-        //                    var picid = db.StorageObjectAdd(教玩具库Id, cco.Id, wz.name ?? "", "张", wz.gg, false, true, false, "", 0, 0, image, 教玩具库用户Id, ordinal, DateTime.Now, wz.xh, wz.code);
-        //                    db.SaveChanges();
-        //                    db.SetIn(picid, 教玩具库购置单Id, Age(wz.syfw.HasValue ? wz.syfw.Value : 0), "教玩具库", null, 教玩具库用户Id, 1, 0.00M, 0.00M, "");
-        //                    db.SaveChanges();
-        //                }
-        //            }
-        //            Console.WriteLine("教玩具库物资导入成功");
-        //            #endregion
-        //        }
-        //        catch(Exception ex)
-        //        {
-        //            error = true;
-        //            Console.WriteLine(ex.StackTrace);
-        //            Console.WriteLine(ex.Message);
-        //            Console.WriteLine("教玩具库导入过程中发生错误，输入任意内容重新导入");
-        //            Console.ReadLine();
-        //        }
-        //    }
-        //    Console.ReadLine();
-        //}
 
         static System.Drawing.Image ToPic(byte[] streamByte)
         {
