@@ -61,11 +61,32 @@ public partial class DepotAction_Move : DepotPageSingle
         {
             source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
         }
+        if (combo.SelectedIndex == 1)
+        {
+            source = source.Where(o => o.DepotId != null).ToList();
+        }
+        else if (combo.SelectedIndex == 2)
+        {
+            source = source.Where(o => o.DepotId == null).ToList();
+        }
         view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
     }
 
     protected void search_ServerClick(object sender, EventArgs e)
     {
         view.Rebind();
+    }
+
+    protected void all_ServerClick(object sender, EventArgs e)
+    {
+        var cbs = view.Items.Select(o => o.FindControl("check") as CheckBox).ToList();
+        if (cbs.All(o => o.Checked))
+        {
+            cbs.ForEach(o => o.Checked = false);
+        }
+        else
+        {
+            cbs.ForEach(o => o.Checked = true);
+        }
     }
 }
