@@ -13,6 +13,8 @@ public partial class DepotAction_Order : DepotPageSingle
     {
         if (!IsPostBack)
         {
+            if (Depot.Featured(DepotType.固定资产库))
+                @in.Visible = false;
             day.SelectedDate = DateTime.Today;
             source.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.购置来源).ToList();
             source.DataBind();

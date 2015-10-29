@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ObjectUse.ascx.cs" Inherits="Control_ObjectUse" %>
 
 <tr>
-    <td>
+    <td style="display: none;">
         <telerik:RadDropDownTree ID="catalog" runat="server" AutoPostBack="true" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" DropDownSettings-CloseDropDownOnSelection="true" OnEntryAdded="catalog_EntryAdded"></telerik:RadDropDownTree>
     </td>
     <td>
@@ -15,10 +15,10 @@
         <telerik:RadComboBox ID="act" runat="server" LocalizationPath="~/Language" AutoPostBack="true">
         </telerik:RadComboBox>
     </td>
-    <td>
+    <td style="display: none;">
         <asp:Label ID="unit" runat="server"></asp:Label>
     </td>
-    <td>
+    <td style="display: none;">
         <asp:Label ID="specification" runat="server"></asp:Label>
     </td>
     <td>
@@ -31,10 +31,10 @@
     <td style="display: none;">
         <telerik:RadTextBox ID="age" runat="server" Width="100"></telerik:RadTextBox>
     </td>
-    <td>
+    <td style="display: none;">
         <telerik:RadTextBox ID="place" runat="server" Width="100"></telerik:RadTextBox>
     </td>
-    <td>
+    <td style="display: none;">
         <telerik:RadTextBox ID="note" runat="server" Width="100"></telerik:RadTextBox>
     </td>
 </tr>

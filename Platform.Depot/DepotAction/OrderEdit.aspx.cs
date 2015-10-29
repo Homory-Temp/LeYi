@@ -13,6 +13,8 @@ public partial class DepotAction_OrderEdit : DepotPageSingle
     {
         if (!IsPostBack)
         {
+            if (Depot.Featured(DepotType.固定资产库))
+                @in.Visible = false;
             var orderId = "OrderId".Query().GlobalId();
             var order = DataContext.DepotOrder.Single(o => o.Id == orderId);
             day.SelectedDate = order.RecordTime;
