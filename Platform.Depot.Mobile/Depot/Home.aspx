@@ -28,16 +28,11 @@
     <form id="form" runat="server">
         <homory:SideBar runat="server" ID="SideBar" Crumb="物资管理" />
         <div class="container">
-            <div class="row" id="creating" runat="server">
-                <div class="col-md-12">
-                    <input type="button" class="btn btn-tumblr" id="add" runat="server" value="新增仓库" onserverclick="add_ServerClick" />
-                    <hr style="color: #2B2B2B; margin-top: 4px;" />
-                </div>
-            </div>
             <div class="row">
                 <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource">
                     <ItemTemplate>
-                        <div class="col-md-4 text-center" id="area" runat="server" style='<%# CanVisit((Guid)Eval("Id")) ? "display: block; cursor: pointer;": "display: none; cursor: pointer;" %>'>
+                        <div class="col-md-4 col-xs-6 text-center" id="area" runat="server" style='<%# CanVisit((Guid)Eval("Id")) ? "display: block; cursor: pointer;": "display: none; cursor: pointer;" %>'>
+                            <div class="row">&nbsp;</div>
                             <div class="row" onclick="top.location.href = '../Depot/DepotHome?DepotId=<%# Eval("Id") %>';">
                                 <div class="col-md-12">
                                     <img src="../Content/Images/Store.png" />
@@ -48,16 +43,11 @@
                                     <div class="btn btn-lg btn-info" style="width: 150px;" runat="server"><%# Eval("Name") %></div>
                                 </div>
                             </div>
-                            <div class="row" runat="server">
-                                <div class="col-md-12">
-                                    <input type="button" class="btn btn-tumblr" id="edit" runat="server" value="编辑" visible='<%# RightCreate %>' onclick=<%# "top.location.href='../Depot/HomeEdit?DepotId={0}'; return false;".Formatted(Eval("Id")) %> />
-                                    <input type="button" class="btn btn-tumblr" id="remove" runat="server" value="删除" visible='<%# (Models.State)Eval("State") > Models.State.内置 && RightCreate %>' onclick=<%# "top.location.href='../Depot/HomeRemove?DepotId={0}'; return false;".Formatted(Eval("Id")) %> />
-                                </div>
-                            </div>
                         </div>
                     </ItemTemplate>
                 </telerik:RadListView>
             </div>
+            <div class="row">&nbsp;</div>
         </div>
     </form>
 </body>

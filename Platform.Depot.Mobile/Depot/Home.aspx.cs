@@ -5,14 +5,6 @@ using System.Web.UI.WebControls;
 
 public partial class Depot_Home : DepotPage
 {
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        if (!IsPostBack)
-        {
-            creating.Visible = RightCreate;
-        }
-    }
-
     protected bool CanVisit(Guid depotId)
     {
         var userId = DepotUser.Id;

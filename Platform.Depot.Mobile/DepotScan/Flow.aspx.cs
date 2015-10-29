@@ -40,8 +40,8 @@ public partial class DepotScan_Flow : DepotPageSingle
                 return;
             }
             var obj = inx.DepotObject;
-            grid.DataSource = DataContext.DepotFlow.Where(o => o.ObjectId == obj.Id).ToList();
-            grid.DataBind();
+            view.DataSource = DataContext.DepotFlow.Where(o => o.ObjectId == obj.Id).ToList();
+            view.DataBind();
         }
         else if (code.StartsWith("S"))
         {
@@ -52,8 +52,8 @@ public partial class DepotScan_Flow : DepotPageSingle
                 return;
             }
             var obj = inx.DepotObject;
-            grid.DataSource = DataContext.DepotFlowX.Where(o => o.ObjectId == obj.Id && o.ObjectOrdinal == inx.Ordinal).ToList();
-            grid.DataBind();
+            view.DataSource = DataContext.DepotFlowX.Where(o => o.ObjectId == obj.Id && o.ObjectOrdinal == inx.Ordinal).ToList();
+            view.DataBind();
         }
         Reset();
     }
