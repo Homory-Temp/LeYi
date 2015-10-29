@@ -57,7 +57,7 @@
                     <span style="font-weight: bold;">园区：</span><span id="campus" runat="server"></span>
                 </div>
                 <div class="col-md-4 text-center">
-                    &nbsp;
+                    <span style="font-weight: bold;">用餐对象：</span><span id="___target" runat="server"></span>
                 </div>
                 <div class="col-md-4 text-right">
                     <span style="font-weight: bold;">日期：</span><span id="time" runat="server"></span>

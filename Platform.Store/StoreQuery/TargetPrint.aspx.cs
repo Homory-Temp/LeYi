@@ -21,6 +21,7 @@ public partial class StoreQuery_TargetPrint : SingleStorePage
             total.Value = target.Paid.ToMoney();
             keep.Value = target.KeepUserId.HasValue ? db.Value.GetUserName(target.KeepUserId.Value) : "";
             brokerage.Value = target.BrokerageUserId.HasValue ? db.Value.GetUserName(target.BrokerageUserId.Value) : "";
+            ___target.InnerText = target.UsageTarget;
         }
     }
 

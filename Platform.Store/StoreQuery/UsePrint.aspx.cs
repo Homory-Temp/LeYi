@@ -19,6 +19,7 @@ public partial class StoreQuery_UsePrint : SingleStorePage
             total.Value = use.Money.ToMoney();
             people.Value = db.Value.GetUserName(use.UserId);
             time.InnerText = use.TimeNode.FromTimeNode();
+            ___target.InnerText = use.UsageTarget;
         }
     }
 
