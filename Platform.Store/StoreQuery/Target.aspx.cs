@@ -44,6 +44,12 @@ public partial class StoreQuery_Target : SingleStorePage
         view.Rebind();
     }
 
+    protected bool CanDelete(Store_Target t)
+    {
+        var tar = db.Value.StoreTarget.Single(o => o.Id == t.Id);
+        return tar.StoreIn.Count == 0;
+    } 
+
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         var timex = periodx.SelectedDate.HasValue ? periodx.SelectedDate.Value : DateTime.Today;
@@ -118,5 +124,20 @@ public partial class StoreQuery_Target : SingleStorePage
     {
         var url = "../StoreQuery/TargetPrint?StoreId={0}&TargetId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"].GlobalId());
         ap.ResponseScripts.Add("window.open('{0}', '_blank');".Formatted(url));
+    }
+
+    protected void delx_ServerClick(object sender, EventArgs e)
+    {
+        try
+        {
+            var id = (sender as HtmlInputButton).Attributes["match"].GlobalId();
+            var tar = db.Value.StoreTarget.Single(o => o.Id == id);
+            db.Value.StoreTarget.Remove(tar);
+            db.Value.SaveChanges();
+            view.Rebind();
+            Notify(ap, "购置单删除成功", "success");
+        }
+        catch
+        { }
     }
 }
