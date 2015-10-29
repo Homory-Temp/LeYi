@@ -77,6 +77,7 @@
                             <input type="button" class="btn btn-tumblr dictionary" id="query" runat="server" value="查询" onserverclick="query_ServerClick" />
                         </div>
                     </div>
+                    <div class="row">&nbsp;</div>
                     <div class="row">
                         <div class="col-md-12">
                             <input type="hidden" id="___total" runat="server" />
