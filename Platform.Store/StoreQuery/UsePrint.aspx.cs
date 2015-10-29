@@ -42,7 +42,7 @@ public partial class StoreQuery_UsePrint : SingleStorePage
         var id = "UseId".Query().GlobalId();
         var use = db.Value.StoreUse.Single(o => o.Id == id);
         var list = new List<UseRecord>();
-        foreach (var us in db.Value.Store_UseSingle.Where(o=>o.UseId == use.Id).ToList())
+        foreach (var us in db.Value.Store_UseSingle.Where(o=>o.UseId == use.Id && o.Amount > 0).ToList())
         {
             if (list.Count(o => o.ObjectId == us.ObjectId && o.Type == us.TypeName && o.InId == us.InId) == 0)
             {
