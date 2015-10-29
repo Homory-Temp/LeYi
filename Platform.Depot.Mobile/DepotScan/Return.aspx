@@ -77,10 +77,10 @@
                                 <tr>
                                     <th>借用日期</th>
                                     <th>物资名称</th>
-                                    <th>合计</th>
+                                    <th style="display: none;">合计</th>
                                     <th>归还数</th>
                                     <th>报废数</th>
-                                    <th>备注</th>
+                                    <th style="display: none;">备注</th>
                                 </tr>
                                 <asp:PlaceHolder ID="useHolder" runat="server"></asp:PlaceHolder>
                             </table>

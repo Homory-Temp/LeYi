@@ -75,10 +75,10 @@
                         <LayoutTemplate>
                             <table class="storeTable text-center">
                                 <tr>
-                                    <th>物资类别</th>
+                                    <th style="display: none;">物资类别</th>
                                     <th>物资名称</th>
-                                    <th>单位</th>
-                                    <th>规格</th>
+                                    <th style="display: none;">单位</th>
+                                    <th style="display: none;">规格</th>
                                     <th>库存</th>
                                     <th>数量/编号</th>
                                     <th>报废原因</th>

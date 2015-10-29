@@ -15,7 +15,7 @@ public partial class DepotScan_Out : DepotPageSingle
         {
             time.SelectedDate = DateTime.Today;
             people.Items.Clear();
-            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "", Selected = true });
+            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "报废申请人", Value = "", Selected = true });
             people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
             people.DataBind();
             counter.Value = "0";
@@ -68,7 +68,7 @@ public partial class DepotScan_Out : DepotPageSingle
     protected void do_out_ServerClick(object sender, EventArgs e)
     {
         DoOut();
-        Response.Redirect("~/DepotQuery/Out?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("~/Depot/DepotHome?DepotId={0}".Formatted(Depot.Id));
     }
 
     protected void DoOut()

@@ -11,16 +11,16 @@
     <td>
         <asp:Label runat="server" ID="name"></asp:Label>
     </td>
-    <td>
+    <td style="display: none;">
         <asp:Label runat="server" ID="price"></asp:Label>
     </td>
     <td>
-        <telerik:RadNumericTextBox ID="amount" runat="server" Width="120" MaxValue="1" NumberFormat-DecimalDigits="0" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
+        <telerik:RadNumericTextBox ID="amount" runat="server" Width="100" MaxValue="1" NumberFormat-DecimalDigits="0" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
     </td>
     <td>
-        <telerik:RadNumericTextBox ID="outAmount" runat="server" Width="120" MaxValue="1" NumberFormat-DecimalDigits="0" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
+        <telerik:RadNumericTextBox ID="outAmount" runat="server" Width="100" MaxValue="1" NumberFormat-DecimalDigits="0" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
     </td>
-    <td>
+    <td style="display: none;">
         <telerik:RadTextBox ID="note" runat="server" Width="100"></telerik:RadTextBox>
     </td>
 </tr>

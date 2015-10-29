@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ObjectOut.ascx.cs" Inherits="Control_ObjectOut" %>
 
 <tr>
-    <td>
+    <td style="display: none;">
         <telerik:RadDropDownTree ID="catalog" runat="server" AutoPostBack="true" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" DropDownSettings-CloseDropDownOnSelection="true" OnEntryAdded="catalog_EntryAdded"></telerik:RadDropDownTree>
     </td>
     <td>
@@ -11,18 +11,18 @@
             </ItemTemplate>
         </telerik:RadComboBox>
     </td>
-    <td>
+    <td style="display: none;">
         <asp:Label ID="unit" runat="server"></asp:Label>
     </td>
-    <td>
+    <td style="display: none;">
         <asp:Label ID="specification" runat="server"></asp:Label>
     </td>
     <td>
         <asp:Label ID="stored" runat="server"></asp:Label>
     </td>
     <td>
-        <telerik:RadNumericTextBox ID="amount" runat="server" Width="120" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
-        <telerik:RadComboBox ID="ordinalList" runat="server" MaxHeight="203" Width="120" Visible="false" AllowCustomText="false" CheckBoxes="true" LocalizationPath="~/Language"></telerik:RadComboBox>
+        <telerik:RadNumericTextBox ID="amount" runat="server" Width="100" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
+        <telerik:RadComboBox ID="ordinalList" runat="server" MaxHeight="203" Width="100" Visible="false" AllowCustomText="false" CheckBoxes="true" LocalizationPath="~/Language"></telerik:RadComboBox>
     </td>
     <td>
         <telerik:RadTextBox ID="reason" runat="server" Width="100"></telerik:RadTextBox>
