@@ -12,7 +12,7 @@
         </telerik:RadComboBox>
     </td>
     <td>
-        <telerik:RadComboBox ID="act" runat="server" LocalizationPath="~/Language" AutoPostBack="true">
+        <telerik:RadComboBox ID="act" runat="server" LocalizationPath="~/Language" AutoPostBack="true" Width="100">
         </telerik:RadComboBox>
     </td>
     <td style="display: none;">
@@ -25,8 +25,8 @@
         <asp:Label ID="stored" runat="server"></asp:Label>
     </td>
     <td>
-        <telerik:RadNumericTextBox ID="amount" runat="server" Width="120" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
-        <telerik:RadComboBox ID="ordinalList" runat="server" MaxHeight="203" Width="120" Visible="false" AllowCustomText="false" CheckBoxes="true" LocalizationPath="~/Language"></telerik:RadComboBox>
+        <telerik:RadNumericTextBox ID="amount" runat="server" Width="100" NumberFormat-DecimalDigits="2" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
+        <telerik:RadComboBox ID="ordinalList" runat="server" MaxHeight="203" Width="100" Visible="false" AllowCustomText="false" CheckBoxes="true" LocalizationPath="~/Language"></telerik:RadComboBox>
     </td>
     <td style="display: none;">
         <telerik:RadTextBox ID="age" runat="server" Width="100"></telerik:RadTextBox>

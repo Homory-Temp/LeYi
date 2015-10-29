@@ -90,11 +90,9 @@ public partial class DepotScan_Use : DepotPageSingle
 
     protected void do_use_ServerClick(object sender, EventArgs e)
     {
-        var gid = DoUse();
-        if (gid == Guid.Empty)
-            Response.Redirect("~/DepotQuery/Use?DepotId={0}&UseId={1}".Formatted(Depot.Id, gid));
-        else
-            Response.Redirect("~/DepotQuery/UsePrint?DepotId={0}&UseId={1}".Formatted(Depot.Id, gid));
+         var gid = DoUse();
+        if (gid != Guid.Empty)
+            Response.Redirect("~/Depot/DepotHome?DepotId={0}".Formatted(Depot.Id));
     }
 
     protected Guid DoUse()
