@@ -5,7 +5,7 @@
 <td><%# Eval("Name") %></td>
 <td><%# Eval("Unit") %></td>
 <td><%# Eval("Amount").ToAmount() %></td>
-<td><%# decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount")).ToMoney() %></td>
+<td><%# (decimal)Eval("Amount") == 0 ? "0.00" : decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount")).ToMoney() %></td>
 <td><%# Eval("Money").ToMoney() %></td>
 <td><%# Eval("Age") %></td>
 <td><%# Eval("User") %></td>
