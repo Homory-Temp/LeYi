@@ -18,12 +18,7 @@ public partial class StoreQuery_StatisticsMonthly : SingleStorePage
             tree.DataBind();
             tree.CheckAllNodes();
             px.SelectedDate = DateTime.Today;
-            grid.Rebind();
-            if (CurrentStore.State == StoreState.食品)
-            {
-                grid.Columns[grid.Columns.Count - 4].Visible = false;
-                grid.Columns[grid.Columns.Count - 3].Visible = false;
-            }
+            view.Rebind();
         }
     }
 
@@ -41,20 +36,20 @@ public partial class StoreQuery_StatisticsMonthly : SingleStorePage
             _all.Value = "1";
             all.Value = "清除选定";
         }
-        grid.Rebind();
+        view.Rebind();
     }
 
     protected void tree_NodeCheck(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
     {
-        grid.Rebind();
+        view.Rebind();
     }
 
     protected void query_ServerClick(object sender, EventArgs e)
     {
-        grid.Rebind();
+        view.Rebind();
     }
 
-    protected void grid_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
+    protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         var sv = px.SelectedDate.HasValue ? px.SelectedDate.Value : DateTime.Today;
         var ev = px.SelectedDate.HasValue ? px.SelectedDate.Value : DateTime.Today;
@@ -96,6 +91,7 @@ public partial class StoreQuery_StatisticsMonthly : SingleStorePage
         {
             list = list.Where(o => o.Name == name.Text.Trim()).ToList();
         }
-        grid.DataSource = list.OrderBy(o => o.CatalogPath).ThenBy(o => o.Name).ToList();
+        ___total.Value = list.Sum(o => o.S).ToMoney() + "@" + list.Sum(o => o.SM).ToMoney() + "@" + list.Sum(o => o.I).ToMoney() + "@" + list.Sum(o => o.IM).ToMoney() + "@" + list.Sum(o => o.U).ToMoney() + "@" + list.Sum(o => o.UM).ToMoney() + "@" + list.Sum(o => o.R).ToMoney() + "@" + list.Sum(o => o.RM).ToMoney() + "@" + list.Sum(o => o.E).ToMoney() + "@" + list.Sum(o => o.EM).ToMoney();
+        view.DataSource = list.OrderBy(o => o.CatalogPath).ThenBy(o => o.Name).ToList();
     }
 }
