@@ -42,9 +42,9 @@ public partial class DepotAction_Import : DepotPageSingle
         try
         {
             var book = new Workbook(file.Value);
-            var data = book.Worksheets[0].Cells.ExportDataTableAsString(2, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null && o[0].Value.ToString().Trim() != "").Count(), 26, true);
+            var data = book.Worksheets[0].Cells.ExportDataTableAsString(0, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null && o[0].Value.ToString().Trim() != "").Count(), 12, true);
             var handled = new DataTable();
-            foreach (var index in new int[] { 0, 2, 4, 5, 6, 8, 9, 12, 13, 16, 17 })
+            foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 })
             {
                 handled.Columns.Add(data.Columns[index].ColumnName);
             }
@@ -66,75 +66,80 @@ public partial class DepotAction_Import : DepotPageSingle
 
                 foreach (DataRow row in handled.Rows)
                 {
-                    var 一级分类 = row[3].ToString().Trim();
-                    if (string.IsNullOrEmpty(一级分类))
-                        continue;
+                    try
+                    {
+                        var 一级分类 = row[3].ToString().Trim();
+                        if (string.IsNullOrEmpty(一级分类))
+                            continue;
 
-                    Guid 一级分类Id;
-                    if (DataContext.DepotCatalog.Count(o => o.DepotId == 固定资产库Id && o.Name == 一级分类 && o.State < State.停用 && o.ParentId == null) == 0)
-                    {
-                        一级分类Id = DataContext.DepotCatalogAdd(固定资产库Id, null, Guid.Empty, 一级分类, 100, "");
-                    }
-                    else
-                    {
-                        一级分类Id = DataContext.DepotCatalog.Single(o => o.DepotId == 固定资产库Id && o.Name == 一级分类 && o.State < State.停用 && o.ParentId == null).Id;
-                    }
-
-                    var 二级分类 = row[4].ToString().Trim();
-                    Guid 二级分类Id;
-                    if (DataContext.DepotCatalog.Count(o => o.DepotId == 固定资产库Id && o.Name == 二级分类 && o.State < State.停用 && o.ParentId == 一级分类Id) == 0)
-                    {
-                        二级分类Id = DataContext.DepotCatalogAdd(固定资产库Id, 一级分类Id, 一级分类Id, 二级分类, 100, "");
-                    }
-                    else
-                    {
-                        二级分类Id = DataContext.DepotCatalog.Single(o => o.DepotId == 固定资产库Id && o.Name == 二级分类 && o.State < State.停用 && o.ParentId == 一级分类Id).Id;
-                    }
-
-                    var code = row[0].ToString().Trim().Substring(16);
-                    var name = row[1].ToString().Trim();
-
-                    var catalogs = DataContext.DepotCatalogLoad(固定资产库Id).Select(o => o.Id).Join(DataContext.DepotObjectCatalog, o => o, o => o.CatalogId, (x, y) => y).Join(DataContext.DepotObject, o => o.ObjectId, o => o.Id, (x, y) => new ToImport { DOC = x, DO = y }).ToList();
-
-                    Guid 物资Id;
-
-                    if (catalogs.Count(o => o.DO.Name == name && o.DOC.CatalogId == 二级分类Id &&  o.DO.State < State.停用) == 0)
-                    {
-                        物资Id = DataContext.GlobalId();
-                        var l = new List<Guid>();
-                        l.Add(一级分类Id);
-                        l.Add(二级分类Id);
-                        DataContext.DepotObjectAddX(物资Id, l, Depot.Id, name, true, false, true, "", "", "", "", "", row[9].ToString().Trim(), 0, 0, "", "", "", "", "", 100);
-                    }
-                    else
-                    {
-                        物资Id = catalogs.First(o => o.DO.Name == name && o.DOC.CatalogId == 二级分类Id && o.DO.State < State.停用).DO.Id;
-                    }
-                    if (DataContext.DepotIn.Count(o => o.ObjectId == 物资Id && o.Note == code) == 0)
-                    {
-                        var responsible = row[2].ToString().Trim();
-                        var user = DataContext.DepotUserLoad(Depot.CampusId).FirstOrDefault(o => o.Name == responsible && o.State < State.停用);
-                        decimal amount = 0.00M;
-                        try
+                        Guid 一级分类Id;
+                        if (DataContext.DepotCatalog.Count(o => o.DepotId == 固定资产库Id && o.Name == 一级分类 && o.State < State.停用 && o.ParentId == null) == 0)
                         {
-                            amount = decimal.Parse(row[5].ToString().Trim());
+                            一级分类Id = DataContext.DepotCatalogAdd(固定资产库Id, null, Guid.Empty, 一级分类, 100, "");
                         }
-                        catch
+                        else
                         {
+                            一级分类Id = DataContext.DepotCatalog.Single(o => o.DepotId == 固定资产库Id && o.Name == 一级分类 && o.State < State.停用 && o.ParentId == null).Id;
                         }
-                        decimal price = 0.00M;
-                        try
+
+                        var 二级分类 = row[4].ToString().Trim();
+                        Guid 二级分类Id;
+                        if (DataContext.DepotCatalog.Count(o => o.DepotId == 固定资产库Id && o.Name == 二级分类 && o.State < State.停用 && o.ParentId == 一级分类Id) == 0)
                         {
-                            price = decimal.Parse(row[6].ToString().Trim().Replace(" ", "").Replace(",", "").Replace(",", ""));
+                            二级分类Id = DataContext.DepotCatalogAdd(固定资产库Id, 一级分类Id, 一级分类Id, 二级分类, 100, "");
                         }
-                        catch
+                        else
                         {
+                            二级分类Id = DataContext.DepotCatalog.Single(o => o.DepotId == 固定资产库Id && o.Name == 二级分类 && o.State < State.停用 && o.ParentId == 一级分类Id).Id;
                         }
-                        var @in = new InMemoryIn { Age = "", Place = row[10].ToString().Trim(), Amount = amount, CatalogId = 二级分类Id, Money = price, Note = code, ObjectId = 物资Id, PriceSet = decimal.Divide(price, amount), Time = DateTime.Today };
-                        var list = new List<InMemoryIn>();
-                        list.Add(@in);
-                        DataContext.DepotActIn(固定资产库Id, 固定资产库购置单Id, DateTime.Today, DepotUser.Id, list);
+
+                        var code = row[0].ToString().Trim().Substring(row[0].ToString().Trim().Length - 7);
+                        var name = row[1].ToString().Trim();
+
+                        var catalogs = DataContext.DepotCatalogLoad(固定资产库Id).Select(o => o.Id).Join(DataContext.DepotObjectCatalog, o => o, o => o.CatalogId, (x, y) => y).Join(DataContext.DepotObject, o => o.ObjectId, o => o.Id, (x, y) => new ToImport { DOC = x, DO = y }).ToList();
+
+                        Guid 物资Id;
+
+                        if (catalogs.Count(o => o.DO.Name == name && o.DOC.CatalogId == 二级分类Id && o.DO.State < State.停用) == 0)
+                        {
+                            物资Id = DataContext.GlobalId();
+                            var l = new List<Guid>();
+                            l.Add(一级分类Id);
+                            l.Add(二级分类Id);
+                            DataContext.DepotObjectAddX(物资Id, l, Depot.Id, name, true, false, true, row[8].ToString(), row[9].ToString(), "", "", "", row[10].ToString().Trim(), 0, 0, "", "", "", "", "", 100);
+                        }
+                        else
+                        {
+                            物资Id = catalogs.First(o => o.DO.Name == name && o.DOC.CatalogId == 二级分类Id && o.DO.State < State.停用).DO.Id;
+                        }
+                        if (DataContext.DepotIn.Count(o => o.ObjectId == 物资Id && o.Note == code) == 0)
+                        {
+                            var responsible = row[2].ToString().Trim();
+                            var user = DataContext.DepotUserLoad(Depot.CampusId).FirstOrDefault(o => o.Name == responsible && o.State < State.停用);
+                            decimal amount = 0.00M;
+                            try
+                            {
+                                amount = decimal.Parse(row[5].ToString().Trim());
+                            }
+                            catch
+                            {
+                            }
+                            decimal price = 0.00M;
+                            try
+                            {
+                                price = decimal.Parse(row[6].ToString().Trim().Replace(" ", "").Replace(",", "").Replace(",", ""));
+                            }
+                            catch
+                            {
+                            }
+                            var @in = new InMemoryIn { Age = "", Place = row[11].ToString().Trim(), Amount = amount, CatalogId = 二级分类Id, Money = price, Note = code, ObjectId = 物资Id, PriceSet = decimal.Divide(price, amount), Time = DateTime.Today };
+                            var list = new List<InMemoryIn>();
+                            list.Add(@in);
+                            DataContext.DepotActIn(固定资产库Id, 固定资产库购置单Id, DateTime.Today, DepotUser.Id, list);
+                        }
                     }
+                    catch
+                    { }
                 }
             }
         }
@@ -156,9 +161,9 @@ public partial class DepotAction_Import : DepotPageSingle
         }
         grid.Visible = true;
         var book = new Workbook(file.Value);
-        var data = book.Worksheets[0].Cells.ExportDataTableAsString(2, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null && o[0].Value.ToString().Trim() != "").Count(), 26, true);
+        var data = book.Worksheets[0].Cells.ExportDataTableAsString(0, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null && o[0].Value.ToString().Trim() != "").Count(), 12, true);
         var handled = new DataTable();
-        foreach (var index in new int[] { 0, 2, 4, 5, 6, 8, 9, 12, 13, 16, 17 })
+        foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 })
         {
             handled.Columns.Add(data.Columns[index].ColumnName);
         }
