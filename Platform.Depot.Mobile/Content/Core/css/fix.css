@@ -1,0 +1,59 @@
+﻿html .container .row, html .container-fluid .row {
+    margin-top: 6px;
+    line-height: 36px;
+}
+
+html .rbToggleButton .rbToggleCheckbox, html .rbToggleButton .rbToggleCheckboxChecked {
+    margin-top: 11px;
+}
+
+html .tableSpan {
+    width: 20px;
+}
+
+html .dictionary {
+    width: 100px;
+}
+
+html .dictionaryX {
+    width: 160px;
+}
+
+html .viewPad {
+    margin-top: 4px;
+}
+
+html .RadSearchBox .rsbInner .rsbEmptyMessage {
+    font-size: 14px;
+}
+
+html .storeTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+html .storeTable th, html .storeTable td {
+    border: solid 1px #2B2B2B;
+    text-align: center;
+    color: black;
+    line-height: 50px;
+}
+
+html .storeObjThumb {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+html .storeTablePrint {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+html .storeTablePrint th, html .storeTablePrint td {
+    border: solid 1px #2B2B2B;
+    text-align: center;
+    color: black;
+    line-height: 28px;
+    height: 28px;
+}

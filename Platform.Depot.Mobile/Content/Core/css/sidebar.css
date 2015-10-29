@@ -1,0 +1,7 @@
+﻿body {
+  transition-property: margin, transform;
+  transition-duration: 0.3s, 0.3s;
+  transition-timing-function: ease, ease;
+  transition-delay: 0s, 0s;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}

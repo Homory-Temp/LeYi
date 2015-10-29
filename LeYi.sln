@@ -157,6 +157,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Picture.Import"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Tool.Import", "Windows.MMS.Tool.Import\Windows.MMS.Tool.Import.csproj", "{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Depot.Mobile", "Platform.Depot.Mobile\", "{C456CC0E-CD9C-4485-A777-512EA449CB4E}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.1"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_34986"
+		Debug.AspNetCompiler.PhysicalPath = "Platform.Depot.Mobile\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_34986\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_34986"
+		Release.AspNetCompiler.PhysicalPath = "Platform.Depot.Mobile\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_34986\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "34986"
+		SlnRelativePath = "Platform.Depot.Mobile\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -203,6 +224,10 @@ Global
 		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C456CC0E-CD9C-4485-A777-512EA449CB4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C456CC0E-CD9C-4485-A777-512EA449CB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C456CC0E-CD9C-4485-A777-512EA449CB4E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{C456CC0E-CD9C-4485-A777-512EA449CB4E}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

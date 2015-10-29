@@ -1,0 +1,3033 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DepotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="256" />
+          <Property Name="Home" Type="nvarchar" MaxLength="256" />
+          <Property Name="Quit" Type="nvarchar" MaxLength="256" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="TopId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="Hidden" Type="bit" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuildType" Type="int" Nullable="false" />
+          <Property Name="ClassType" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Depot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="DefaultObjectView" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="DefaultObjectType" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ObjectTypes" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotCatalog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="TopId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotDictionary">
+          <Key>
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotFlow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotFlowX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectOrdinal" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotIn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ResponsibleId" Type="uniqueidentifier" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="AvailableAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotInX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="AvailableAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotObject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Single" Type="bit" Nullable="false" />
+          <Property Name="Consumable" Type="bit" Nullable="false" />
+          <Property Name="Fixed" Type="bit" Nullable="false" />
+          <Property Name="SerialA" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="SerialB" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="SerialC" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="SerialD" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Specification" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Low" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="High" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ImageA" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageB" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageC" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageD" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="DepotObjectCatalog">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="CatalogId" />
+          </Key>
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="IsLeaf" Type="bit" Nullable="false" />
+          <Property Name="IsVirtual" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Receipt" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="OrderSource" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="UsageTarget" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ToPay" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Paid" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="BrokerageId" Type="uniqueidentifier" />
+          <Property Name="KeeperId" Type="uniqueidentifier" />
+          <Property Name="Done" Type="bit" Nullable="false" />
+          <Property Name="OrderTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="RecordTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotReturn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UseXId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Rights" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotStatistics">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="Month" />
+          </Key>
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Month" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="StartAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="InAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="InMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LendAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LendMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ConsumeAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ConsumeMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OutAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OutMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="RedoAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="RedoMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotToOut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ToAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PreservedA" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreservedB" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreservedC" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreservedD" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotUse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotUserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="DepotRoleId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotRoleId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotUseX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InXId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ReturnedAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserOnline">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotCatalogTree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotCatalogTree">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="TopId" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="PinYin" />
+            <PropertyRef Name="Ordinal" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="AutoId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Count" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="TopId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotCreator' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotCreator">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CampusId" />
+            <PropertyRef Name="CampusName" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotInRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotInRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="购置单号" />
+            <PropertyRef Name="发票编号" />
+            <PropertyRef Name="购置来源" />
+            <PropertyRef Name="使用对象" />
+            <PropertyRef Name="清单简述" />
+            <PropertyRef Name="应付金额" />
+            <PropertyRef Name="实付金额" />
+            <PropertyRef Name="Done" />
+            <PropertyRef Name="OrderTime" />
+            <PropertyRef Name="RecordTime" />
+            <PropertyRef Name="OperatorId" />
+            <PropertyRef Name="OperationTime" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="购置单号" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="发票编号" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="购置来源" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="使用对象" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="清单简述" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="应付金额" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="实付金额" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="BrokerageId" Type="uniqueidentifier" />
+          <Property Name="经手人" Type="nvarchar" MaxLength="64" />
+          <Property Name="KeeperId" Type="uniqueidentifier" />
+          <Property Name="保管人" Type="nvarchar" MaxLength="64" />
+          <Property Name="Done" Type="bit" Nullable="false" />
+          <Property Name="OrderTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="RecordTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="操作人" Type="nvarchar" MaxLength="64" />
+          <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotInXRecord">
+          <Key>
+            <PropertyRef Name="OrderName" />
+            <PropertyRef Name="Done" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Specification" />
+            <PropertyRef Name="InId" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Place" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="OperatorId" />
+            <PropertyRef Name="PriceSet" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Total" />
+            <PropertyRef Name="OrderSource" />
+            <PropertyRef Name="UsageTarget" />
+          </Key>
+          <Property Name="OrderName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Done" Type="bit" Nullable="false" />
+          <Property Name="Operator" Type="nvarchar" MaxLength="64" />
+          <Property Name="Responsible" Type="nvarchar" MaxLength="64" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="CatalogName" Type="nvarchar(max)" />
+          <Property Name="IsVirtual" Type="bit" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Specification" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ResponsibleId" Type="uniqueidentifier" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OrderSource" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="UsageTarget" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotMember' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotMember">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="RealName" />
+            <PropertyRef Name="Rights" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
+          <Property Name="Rights" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotObjectX' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotObjectX">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="PinYin" />
+            <PropertyRef Name="Single" />
+            <PropertyRef Name="Consumable" />
+            <PropertyRef Name="Fixed" />
+            <PropertyRef Name="SerialA" />
+            <PropertyRef Name="SerialB" />
+            <PropertyRef Name="SerialC" />
+            <PropertyRef Name="SerialD" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Specification" />
+            <PropertyRef Name="Low" />
+            <PropertyRef Name="High" />
+            <PropertyRef Name="ImageA" />
+            <PropertyRef Name="ImageB" />
+            <PropertyRef Name="ImageC" />
+            <PropertyRef Name="ImageD" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="Ordinal" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="AutoId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Money" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Single" Type="bit" Nullable="false" />
+          <Property Name="Consumable" Type="bit" Nullable="false" />
+          <Property Name="Fixed" Type="bit" Nullable="false" />
+          <Property Name="SerialA" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="SerialB" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="SerialC" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="SerialD" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Specification" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Low" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="High" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ImageA" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageB" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageC" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageD" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" />
+          <Property Name="DepotName" Type="nvarchar" MaxLength="64" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotOutRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotOutRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Reason" />
+            <PropertyRef Name="ToAmount" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="PreservedA" />
+            <PropertyRef Name="PreservedB" />
+            <PropertyRef Name="PreservedC" />
+            <PropertyRef Name="PreservedD" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ToAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PreservedA" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreservedB" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreservedC" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreservedD" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="IsVirtual" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotReturnRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotReturnRecord">
+          <Key>
+            <PropertyRef Name="ReturnAmount" />
+            <PropertyRef Name="ReturnNote" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="UseId" />
+            <PropertyRef Name="InXId" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="ReturnedAmount" />
+            <PropertyRef Name="PriceSet" />
+            <PropertyRef Name="Money" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="OperatorName" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="OperatorId" />
+          </Key>
+          <Property Name="ReturnAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ReturnNote" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="IsVirtual" Type="bit" Nullable="false" />
+          <Property Name="UseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InXId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ReturnedAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="OperatorName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotST">
+          <Key>
+            <PropertyRef Name="Consumable" />
+            <PropertyRef Name="Single" />
+            <PropertyRef Name="Fixed" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Y" />
+            <PropertyRef Name="M" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="InAmount" />
+            <PropertyRef Name="InMoney" />
+            <PropertyRef Name="StartAmount" />
+            <PropertyRef Name="StartMoney" />
+            <PropertyRef Name="LendAmount" />
+            <PropertyRef Name="LendMoney" />
+            <PropertyRef Name="ConsumeAmount" />
+            <PropertyRef Name="ConsumeMoney" />
+            <PropertyRef Name="OutAmount" />
+            <PropertyRef Name="OutMoney" />
+            <PropertyRef Name="RedoAmount" />
+            <PropertyRef Name="RedoMoney" />
+            <PropertyRef Name="EndAmount" />
+            <PropertyRef Name="EndMoney" />
+          </Key>
+          <Property Name="Consumable" Type="bit" Nullable="false" />
+          <Property Name="Single" Type="bit" Nullable="false" />
+          <Property Name="Fixed" Type="bit" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CatalogPath" Type="nvarchar(max)" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Y" Type="int" Nullable="false" />
+          <Property Name="M" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="InAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="InMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StartMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LendAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LendMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ConsumeAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ConsumeMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OutAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="OutMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="RedoAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="RedoMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="EndMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotUser">
+          <Key>
+            <PropertyRef Name="Id" />
+            
+            
+            
+            
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DepotUseXRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="UseId" />
+            <PropertyRef Name="InXId" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="ReturnedAmount" />
+            <PropertyRef Name="PriceSet" />
+            <PropertyRef Name="Money" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="OperatorName" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="OperatorId" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="IsVirtual" Type="bit" Nullable="false" />
+          <Property Name="UseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InXId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ReturnedAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="OperatorName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Department_DepartmentParent">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Department1" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_DepartmentTop">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Department1" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department1">
+              <PropertyRef Name="TopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotCatalog_DepotCatalog">
+          <End Role="DepotCatalog" Type="Self.DepotCatalog" Multiplicity="0..1" />
+          <End Role="DepotCatalog1" Type="Self.DepotCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotCatalog1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotFlow_DepotObject">
+          <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
+          <End Role="DepotFlow" Type="Self.DepotFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotFlow">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotFlowX_DepotObject">
+          <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
+          <End Role="DepotFlowX" Type="Self.DepotFlowX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotFlowX">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotIn_DepotObject">
+          <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
+          <End Role="DepotIn" Type="Self.DepotIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotIn">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotIn_DepotOrder">
+          <End Role="DepotOrder" Type="Self.DepotOrder" Multiplicity="1" />
+          <End Role="DepotIn" Type="Self.DepotIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotIn">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotInX_DepotIn">
+          <End Role="DepotIn" Type="Self.DepotIn" Multiplicity="1" />
+          <End Role="DepotInX" Type="Self.DepotInX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotInX">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotInX_DepotObject">
+          <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
+          <End Role="DepotInX" Type="Self.DepotInX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotInX">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotInX_DepotOrder">
+          <End Role="DepotOrder" Type="Self.DepotOrder" Multiplicity="1" />
+          <End Role="DepotInX" Type="Self.DepotInX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotInX">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotReturn_DepotUseX">
+          <End Role="DepotUseX" Type="Self.DepotUseX" Multiplicity="1" />
+          <End Role="DepotReturn" Type="Self.DepotReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotUseX">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotReturn">
+              <PropertyRef Name="UseXId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotSetting_Depot">
+          <End Role="Depot" Type="Self.Depot" Multiplicity="1" />
+          <End Role="DepotSetting" Type="Self.DepotSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotSetting">
+              <PropertyRef Name="DepotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotStatistics_DepotObject">
+          <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
+          <End Role="DepotStatistics" Type="Self.DepotStatistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotStatistics">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotUse_Depot">
+          <End Role="Depot" Type="Self.Depot" Multiplicity="1" />
+          <End Role="DepotUse" Type="Self.DepotUse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUse">
+              <PropertyRef Name="DepotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotUseX_DepotInX">
+          <End Role="DepotInX" Type="Self.DepotInX" Multiplicity="1" />
+          <End Role="DepotUseX" Type="Self.DepotUseX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotInX">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUseX">
+              <PropertyRef Name="InXId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotUseX_DepotObject">
+          <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
+          <End Role="DepotUseX" Type="Self.DepotUseX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUseX">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotUseX_DepotUse">
+          <End Role="DepotUse" Type="Self.DepotUse" Multiplicity="1" />
+          <End Role="DepotUseX" Type="Self.DepotUseX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotUse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUseX">
+              <PropertyRef Name="UseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ToCatalog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CatalogId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Level" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ToPinYin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="DepotModelStoreContainer">
+          <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Depot" EntityType="Self.Depot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotCatalog" EntityType="Self.DepotCatalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotDictionary" EntityType="Self.DepotDictionary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotFlow" EntityType="Self.DepotFlow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotFlowX" EntityType="Self.DepotFlowX" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotIn" EntityType="Self.DepotIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotInX" EntityType="Self.DepotInX" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotObject" EntityType="Self.DepotObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotObjectCatalog" EntityType="Self.DepotObjectCatalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotOrder" EntityType="Self.DepotOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotReturn" EntityType="Self.DepotReturn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotRole" EntityType="Self.DepotRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotSetting" EntityType="Self.DepotSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotStatistics" EntityType="Self.DepotStatistics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotToOut" EntityType="Self.DepotToOut" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotUse" EntityType="Self.DepotUse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotUserRole" EntityType="Self.DepotUserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotUseX" EntityType="Self.DepotUseX" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotCatalogTree" EntityType="Self.DepotCatalogTree" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotCatalogTree].[Id] AS [Id], 
+    [DepotCatalogTree].[ParentId] AS [ParentId], 
+    [DepotCatalogTree].[TopId] AS [TopId], 
+    [DepotCatalogTree].[DepotId] AS [DepotId], 
+    [DepotCatalogTree].[Name] AS [Name], 
+    [DepotCatalogTree].[PinYin] AS [PinYin], 
+    [DepotCatalogTree].[Ordinal] AS [Ordinal], 
+    [DepotCatalogTree].[State] AS [State], 
+    [DepotCatalogTree].[AutoId] AS [AutoId], 
+    [DepotCatalogTree].[Code] AS [Code], 
+    [DepotCatalogTree].[Count] AS [Count]
+    FROM [dbo].[DepotCatalogTree] AS [DepotCatalogTree]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DepotCreator" EntityType="Self.DepotCreator" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotCreator].[Id] AS [Id], 
+    [DepotCreator].[Name] AS [Name], 
+    [DepotCreator].[PinYin] AS [PinYin], 
+    [DepotCreator].[State] AS [State], 
+    [DepotCreator].[CampusId] AS [CampusId], 
+    [DepotCreator].[CampusName] AS [CampusName]
+    FROM [dbo].[DepotCreator] AS [DepotCreator]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DepotInRecord" EntityType="Self.DepotInRecord" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotInRecord].[Id] AS [Id], 
+    [DepotInRecord].[DepotId] AS [DepotId], 
+    [DepotInRecord].[购置单号] AS [购置单号], 
+    [DepotInRecord].[发票编号] AS [发票编号], 
+    [DepotInRecord].[购置来源] AS [购置来源], 
+    [DepotInRecord].[使用对象] AS [使用对象], 
+    [DepotInRecord].[清单简述] AS [清单简述], 
+    [DepotInRecord].[应付金额] AS [应付金额], 
+    [DepotInRecord].[实付金额] AS [实付金额], 
+    [DepotInRecord].[BrokerageId] AS [BrokerageId], 
+    [DepotInRecord].[经手人] AS [经手人], 
+    [DepotInRecord].[KeeperId] AS [KeeperId], 
+    [DepotInRecord].[保管人] AS [保管人], 
+    [DepotInRecord].[Done] AS [Done], 
+    [DepotInRecord].[OrderTime] AS [OrderTime], 
+    [DepotInRecord].[RecordTime] AS [RecordTime], 
+    [DepotInRecord].[OperatorId] AS [OperatorId], 
+    [DepotInRecord].[操作人] AS [操作人], 
+    [DepotInRecord].[OperationTime] AS [OperationTime]
+    FROM [dbo].[DepotInRecord] AS [DepotInRecord]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DepotInXRecord" EntityType="Self.DepotInXRecord" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotInXRecord].[OrderName] AS [OrderName], 
+    [DepotInXRecord].[Done] AS [Done], 
+    [DepotInXRecord].[Operator] AS [Operator], 
+    [DepotInXRecord].[Responsible] AS [Responsible], 
+    [DepotInXRecord].[Name] AS [Name], 
+    [DepotInXRecord].[CatalogId] AS [CatalogId], 
+    [DepotInXRecord].[Level] AS [Level], 
+    [DepotInXRecord].[CatalogName] AS [CatalogName], 
+    [DepotInXRecord].[IsVirtual] AS [IsVirtual], 
+    [DepotInXRecord].[Unit] AS [Unit], 
+    [DepotInXRecord].[Specification] AS [Specification], 
+    [DepotInXRecord].[InId] AS [InId], 
+    [DepotInXRecord].[OrderId] AS [OrderId], 
+    [DepotInXRecord].[ObjectId] AS [ObjectId], 
+    [DepotInXRecord].[Age] AS [Age], 
+    [DepotInXRecord].[Place] AS [Place], 
+    [DepotInXRecord].[ResponsibleId] AS [ResponsibleId], 
+    [DepotInXRecord].[Note] AS [Note], 
+    [DepotInXRecord].[Time] AS [Time], 
+    [DepotInXRecord].[OperatorId] AS [OperatorId], 
+    [DepotInXRecord].[PriceSet] AS [PriceSet], 
+    [DepotInXRecord].[Amount] AS [Amount], 
+    [DepotInXRecord].[Total] AS [Total], 
+    [DepotInXRecord].[OrderSource] AS [OrderSource], 
+    [DepotInXRecord].[UsageTarget] AS [UsageTarget]
+    FROM [dbo].[DepotInXRecord] AS [DepotInXRecord]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DepotMember" EntityType="Self.DepotMember" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotMember].[Id] AS [Id], 
+    [DepotMember].[RealName] AS [RealName], 
+    [DepotMember].[PinYin] AS [PinYin], 
+    [DepotMember].[Rights] AS [Rights], 
+    [DepotMember].[DepotId] AS [DepotId], 
+    [DepotMember].[RoleId] AS [RoleId]
+    FROM [dbo].[DepotMember] AS [DepotMember]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DepotObjectX" EntityType="Self.DepotObjectX" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotObjectX].[Id] AS [Id], 
+    [DepotObjectX].[Name] AS [Name], 
+    [DepotObjectX].[PinYin] AS [PinYin], 
+    [DepotObjectX].[Single] AS [Single], 
+    [DepotObjectX].[Consumable] AS [Consumable], 
+    [DepotObjectX].[Fixed] AS [Fixed], 
+    [DepotObjectX].[SerialA] AS [SerialA], 
+    [DepotObjectX].[SerialB] AS [SerialB], 
+    [DepotObjectX].[SerialC] AS [SerialC], 
+    [DepotObjectX].[SerialD] AS [SerialD], 
+    [DepotObjectX].[Unit] AS [Unit], 
+    [DepotObjectX].[Specification] AS [Specification], 
+    [DepotObjectX].[Low] AS [Low], 
+    [DepotObjectX].[High] AS [High], 
+    [DepotObjectX].[ImageA] AS [ImageA], 
+    [DepotObjectX].[ImageB] AS [ImageB], 
+    [DepotObjectX].[ImageC] AS [ImageC], 
+    [DepotObjectX].[ImageD] AS [ImageD], 
+    [DepotObjectX].[Note] AS [Note], 
+    [DepotObjectX].[Ordinal] AS [Ordinal], 
+    [DepotObjectX].[State] AS [State], 
+    [DepotObjectX].[AutoId] AS [AutoId], 
+    [DepotObjectX].[Code] AS [Code], 
+    [DepotObjectX].[Amount] AS [Amount], 
+    [DepotObjectX].[Money] AS [Money], 
+    [DepotObjectX].[DepotId] AS [DepotId], 
+    [DepotObjectX].[DepotName] AS [DepotName]
+    FROM [dbo].[DepotObjectX] AS [DepotObjectX]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DepotOutRecord" EntityType="Self.DepotOutRecord" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotOutRecord].[Id] AS [Id], 
+    [DepotOutRecord].[DepotId] AS [DepotId], 
+    [DepotOutRecord].[ObjectId] AS [ObjectId], 
+    [DepotOutRecord].[UserId] AS [UserId], 
+    [DepotOutRecord].[Code] AS [Code], 
+    [DepotOutRecord].[Reason] AS [Reason], 
+    [DepotOutRecord].[ToAmount] AS [ToAmount], 
+    [DepotOutRecord].[Amount] AS [Amount], 
+    [DepotOutRecord].[PreservedA] AS [PreservedA], 
+    [DepotOutRecord].[PreservedB] AS [PreservedB], 
+    [DepotOutRecord].[PreservedC] AS [PreservedC], 
+    [DepotOutRecord].[PreservedD] AS [PreservedD], 
+    [DepotOutRecord].[Time] AS [Time], 
+    [DepotOutRecord].[State] AS [State], 
+    [DepotOutRecord].[CatalogId] AS [CatalogId], 
+    [DepotOutRecord].[Level] AS [Level], 
+    [DepotOutRecord].[IsVirtual] AS [IsVirtual], 
+    [DepotOutRecord].[Name] AS [Name], 
+    [DepotOutRecord].[Unit] AS [Unit], 
+    [DepotOutRecord].[UserName] AS [UserName]
+    FROM [dbo].[DepotOutRecord] AS [DepotOutRecord]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DepotReturnRecord" EntityType="Self.DepotReturnRecord" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotReturnRecord].[ReturnAmount] AS [ReturnAmount], 
+    [DepotReturnRecord].[ReturnNote] AS [ReturnNote], 
+    [DepotReturnRecord].[Id] AS [Id], 
+    [DepotReturnRecord].[CatalogId] AS [CatalogId], 
+    [DepotReturnRecord].[Level] AS [Level], 
+    [DepotReturnRecord].[IsVirtual] AS [IsVirtual], 
+    [DepotReturnRecord].[UseId] AS [UseId], 
+    [DepotReturnRecord].[InXId] AS [InXId], 
+    [DepotReturnRecord].[Time] AS [Time], 
+    [DepotReturnRecord].[Type] AS [Type], 
+    [DepotReturnRecord].[Name] AS [Name], 
+    [DepotReturnRecord].[Unit] AS [Unit], 
+    [DepotReturnRecord].[Amount] AS [Amount], 
+    [DepotReturnRecord].[ReturnedAmount] AS [ReturnedAmount], 
+    [DepotReturnRecord].[PriceSet] AS [PriceSet], 
+    [DepotReturnRecord].[Money] AS [Money], 
+    [DepotReturnRecord].[Age] AS [Age], 
+    [DepotReturnRecord].[UserName] AS [UserName], 
+    [DepotReturnRecord].[OperatorName] AS [OperatorName], 
+    [DepotReturnRecord].[Note] AS [Note], 
+    [DepotReturnRecord].[UserId] AS [UserId], 
+    [DepotReturnRecord].[OperatorId] AS [OperatorId]
+    FROM [dbo].[DepotReturnRecord] AS [DepotReturnRecord]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DepotST" EntityType="Self.DepotST" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotST].[Consumable] AS [Consumable], 
+    [DepotST].[Single] AS [Single], 
+    [DepotST].[Fixed] AS [Fixed], 
+    [DepotST].[CatalogId] AS [CatalogId], 
+    [DepotST].[Name] AS [Name], 
+    [DepotST].[CatalogPath] AS [CatalogPath], 
+    [DepotST].[ObjectId] AS [ObjectId], 
+    [DepotST].[Y] AS [Y], 
+    [DepotST].[M] AS [M], 
+    [DepotST].[Time] AS [Time], 
+    [DepotST].[InAmount] AS [InAmount], 
+    [DepotST].[InMoney] AS [InMoney], 
+    [DepotST].[StartAmount] AS [StartAmount], 
+    [DepotST].[StartMoney] AS [StartMoney], 
+    [DepotST].[LendAmount] AS [LendAmount], 
+    [DepotST].[LendMoney] AS [LendMoney], 
+    [DepotST].[ConsumeAmount] AS [ConsumeAmount], 
+    [DepotST].[ConsumeMoney] AS [ConsumeMoney], 
+    [DepotST].[OutAmount] AS [OutAmount], 
+    [DepotST].[OutMoney] AS [OutMoney], 
+    [DepotST].[RedoAmount] AS [RedoAmount], 
+    [DepotST].[RedoMoney] AS [RedoMoney], 
+    [DepotST].[EndAmount] AS [EndAmount], 
+    [DepotST].[EndMoney] AS [EndMoney]
+    FROM [dbo].[DepotST] AS [DepotST]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DepotUser" EntityType="Self.DepotUser" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotUser].[Id] AS [Id], 
+    [DepotUser].[Name] AS [Name], 
+    [DepotUser].[PinYin] AS [PinYin], 
+    [DepotUser].[State] AS [State], 
+    [DepotUser].[CampusId] AS [CampusId], 
+    [DepotUser].[CampusName] AS [CampusName]
+    FROM [dbo].[DepotUser] AS [DepotUser]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DepotUseXRecord" EntityType="Self.DepotUseXRecord" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotUseXRecord].[Id] AS [Id], 
+    [DepotUseXRecord].[ObjectId] AS [ObjectId], 
+    [DepotUseXRecord].[CatalogId] AS [CatalogId], 
+    [DepotUseXRecord].[Level] AS [Level], 
+    [DepotUseXRecord].[IsVirtual] AS [IsVirtual], 
+    [DepotUseXRecord].[UseId] AS [UseId], 
+    [DepotUseXRecord].[InXId] AS [InXId], 
+    [DepotUseXRecord].[Time] AS [Time], 
+    [DepotUseXRecord].[Type] AS [Type], 
+    [DepotUseXRecord].[Name] AS [Name], 
+    [DepotUseXRecord].[Unit] AS [Unit], 
+    [DepotUseXRecord].[Amount] AS [Amount], 
+    [DepotUseXRecord].[ReturnedAmount] AS [ReturnedAmount], 
+    [DepotUseXRecord].[PriceSet] AS [PriceSet], 
+    [DepotUseXRecord].[Money] AS [Money], 
+    [DepotUseXRecord].[Age] AS [Age], 
+    [DepotUseXRecord].[UserName] AS [UserName], 
+    [DepotUseXRecord].[OperatorName] AS [OperatorName], 
+    [DepotUseXRecord].[Note] AS [Note], 
+    [DepotUseXRecord].[UserId] AS [UserId], 
+    [DepotUseXRecord].[OperatorId] AS [OperatorId]
+    FROM [dbo].[DepotUseXRecord] AS [DepotUseXRecord]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Department_DepartmentParent" Association="Self.FK_Department_DepartmentParent">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Department1" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_DepartmentTop" Association="Self.FK_Department_DepartmentTop">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Department1" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotCatalog_DepotCatalog" Association="Self.FK_DepotCatalog_DepotCatalog">
+            <End Role="DepotCatalog" EntitySet="DepotCatalog" />
+            <End Role="DepotCatalog1" EntitySet="DepotCatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotFlow_DepotObject" Association="Self.FK_DepotFlow_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotFlow" EntitySet="DepotFlow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotFlowX_DepotObject" Association="Self.FK_DepotFlowX_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotFlowX" EntitySet="DepotFlowX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotIn_DepotObject" Association="Self.FK_DepotIn_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotIn" EntitySet="DepotIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotIn_DepotOrder" Association="Self.FK_DepotIn_DepotOrder">
+            <End Role="DepotOrder" EntitySet="DepotOrder" />
+            <End Role="DepotIn" EntitySet="DepotIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotInX_DepotIn" Association="Self.FK_DepotInX_DepotIn">
+            <End Role="DepotIn" EntitySet="DepotIn" />
+            <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotInX_DepotObject" Association="Self.FK_DepotInX_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotInX_DepotOrder" Association="Self.FK_DepotInX_DepotOrder">
+            <End Role="DepotOrder" EntitySet="DepotOrder" />
+            <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotReturn_DepotUseX" Association="Self.FK_DepotReturn_DepotUseX">
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+            <End Role="DepotReturn" EntitySet="DepotReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotSetting_Depot" Association="Self.FK_DepotSetting_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="DepotSetting" EntitySet="DepotSetting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotStatistics_DepotObject" Association="Self.FK_DepotStatistics_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotStatistics" EntitySet="DepotStatistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotUse_Depot" Association="Self.FK_DepotUse_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="DepotUse" EntitySet="DepotUse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotUseX_DepotInX" Association="Self.FK_DepotUseX_DepotInX">
+            <End Role="DepotInX" EntitySet="DepotInX" />
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotUseX_DepotObject" Association="Self.FK_DepotUseX_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotUseX_DepotUse" Association="Self.FK_DepotUseX_DepotUse">
+            <End Role="DepotUse" EntitySet="DepotUse" />
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DepotModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Depot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CampusId" Type="Guid" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="DefaultObjectView" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DefaultObjectType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ObjectTypes" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="DepotModel.DepotType" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <NavigationProperty Name="DepotUse" Relationship="DepotModel.FK_DepotUse_Depot" FromRole="Depot" ToRole="DepotUse" />
+          <NavigationProperty Name="DepotSetting" Relationship="DepotModel.FK_DepotSetting_Depot" FromRole="Depot" ToRole="DepotSetting" />
+        </EntityType>
+        <EntityContainer Name="DepotEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Depot" EntityType="Self.Depot" />
+          <EntitySet Name="DepotCatalog" EntityType="DepotModel.DepotCatalog" />
+          <EntitySet Name="DepotDictionary" EntityType="DepotModel.DepotDictionary" />
+          <EntitySet Name="DepotRole" EntityType="DepotModel.DepotRole" />
+          <EntitySet Name="DepotUserRole" EntityType="DepotModel.DepotUserRole" />
+          <EntitySet Name="DepotOrder" EntityType="DepotModel.DepotOrder" />
+          <EntitySet Name="DepotUser" EntityType="DepotModel.DepotUser" />
+          <EntitySet Name="Application" EntityType="DepotModel.Application" />
+          <EntitySet Name="UserOnline" EntityType="DepotModel.UserOnline" />
+          <EntitySet Name="DepotCreator" EntityType="DepotModel.DepotCreator" />
+          <EntitySet Name="DepotMember" EntityType="DepotModel.DepotMember" />
+          <EntitySet Name="DepotObjectCatalog" EntityType="DepotModel.DepotObjectCatalog" />
+          <FunctionImport Name="ToPinYin" ReturnType="Collection(String)">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="DepotInRecord" EntityType="DepotModel.DepotInRecord" />
+          <EntitySet Name="DepotCatalogTree" EntityType="DepotModel.DepotCatalogTree" />
+          <AssociationSet Name="FK_DepotCatalog_DepotCatalog" Association="DepotModel.FK_DepotCatalog_DepotCatalog">
+            <End Role="DepotCatalog" EntitySet="DepotCatalog" />
+            <End Role="DepotCatalog1" EntitySet="DepotCatalog" />
+          </AssociationSet>
+          <EntitySet Name="DepotObject" EntityType="DepotModel.DepotObject" />
+          <EntitySet Name="DepotFlow" EntityType="DepotModel.DepotFlow" />
+          <EntitySet Name="DepotFlowX" EntityType="DepotModel.DepotFlowX" />
+          <EntitySet Name="DepotIn" EntityType="DepotModel.DepotIn" />
+          <EntitySet Name="DepotStatistics" EntityType="DepotModel.DepotStatistics" />
+          <AssociationSet Name="FK_DepotFlow_DepotObject" Association="DepotModel.FK_DepotFlow_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotFlow" EntitySet="DepotFlow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotFlowX_DepotObject" Association="DepotModel.FK_DepotFlowX_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotFlowX" EntitySet="DepotFlowX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotIn_DepotObject" Association="DepotModel.FK_DepotIn_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotIn" EntitySet="DepotIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotIn_DepotOrder" Association="DepotModel.FK_DepotIn_DepotOrder">
+            <End Role="DepotOrder" EntitySet="DepotOrder" />
+            <End Role="DepotIn" EntitySet="DepotIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotStatistics_DepotObject" Association="DepotModel.FK_DepotStatistics_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotStatistics" EntitySet="DepotStatistics" />
+          </AssociationSet>
+          <EntitySet Name="DepotInX" EntityType="DepotModel.DepotInX" />
+          <AssociationSet Name="FK_DepotInX_DepotIn" Association="DepotModel.FK_DepotInX_DepotIn">
+            <End Role="DepotIn" EntitySet="DepotIn" />
+            <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotInX_DepotObject" Association="DepotModel.FK_DepotInX_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotInX_DepotOrder" Association="DepotModel.FK_DepotInX_DepotOrder">
+            <End Role="DepotOrder" EntitySet="DepotOrder" />
+            <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <EntitySet Name="DepotInXRecord" EntityType="DepotModel.DepotInXRecord" />
+          <EntitySet Name="Department" EntityType="DepotModel.Department" />
+          <AssociationSet Name="FK_Department_DepartmentParent" Association="DepotModel.FK_Department_DepartmentParent">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Department1" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_DepartmentTop" Association="DepotModel.FK_Department_DepartmentTop">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Department1" EntitySet="Department" />
+          </AssociationSet>
+          <EntitySet Name="DepotUse" EntityType="DepotModel.DepotUse" />
+          <AssociationSet Name="FK_DepotUse_Depot" Association="DepotModel.FK_DepotUse_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="DepotUse" EntitySet="DepotUse" />
+          </AssociationSet>
+          <EntitySet Name="DepotUseX" EntityType="DepotModel.DepotUseX" />
+          <AssociationSet Name="FK_DepotUseX_DepotInX" Association="DepotModel.FK_DepotUseX_DepotInX">
+            <End Role="DepotInX" EntitySet="DepotInX" />
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotUseX_DepotObject" Association="DepotModel.FK_DepotUseX_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotUseX_DepotUse" Association="DepotModel.FK_DepotUseX_DepotUse">
+            <End Role="DepotUse" EntitySet="DepotUse" />
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+          </AssociationSet>
+          <FunctionImport Name="ToCatalog" ReturnType="Collection(String)">
+            <Parameter Name="CatalogId" Mode="In" Type="Guid" />
+            <Parameter Name="Level" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="DepotUseXRecord" EntityType="DepotModel.DepotUseXRecord" />
+          <EntitySet Name="DepotReturn" EntityType="DepotModel.DepotReturn" />
+          <AssociationSet Name="FK_DepotReturn_DepotUseX" Association="DepotModel.FK_DepotReturn_DepotUseX">
+            <End Role="DepotUseX" EntitySet="DepotUseX" />
+            <End Role="DepotReturn" EntitySet="DepotReturn" />
+          </AssociationSet>
+          <EntitySet Name="DepotReturnRecord" EntityType="DepotModel.DepotReturnRecord" />
+          <EntitySet Name="DepotST" EntityType="DepotModel.DepotST" />
+          <EntitySet Name="DepotSetting" EntityType="DepotModel.DepotSetting" />
+          <AssociationSet Name="FK_DepotSetting_Depot" Association="DepotModel.FK_DepotSetting_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="DepotSetting" EntitySet="DepotSetting" />
+          </AssociationSet>
+          <EntitySet Name="DepotToOut" EntityType="DepotModel.DepotToOut" />
+          <EntitySet Name="DepotOutRecord" EntityType="DepotModel.DepotOutRecord" />
+          <EntitySet Name="DepotObjectX" EntityType="DepotModel.DepotObjectX" />
+          </EntityContainer>
+        <EnumType Name="State">
+          <Member Name="启用" Value="1" />
+          <Member Name="停用" Value="2" />
+          <Member Name="内置" Value="0" />
+        </EnumType>
+        <EnumType Name="DepotType" IsFlags="true">
+          <Member Name="通用库" Value="1" />
+          <Member Name="易耗品库" Value="2" />
+          <Member Name="固定资产库" Value="4" />
+          <Member Name="可借可领库" Value="8" />
+          <Member Name="对象一级分类库" Value="16" />
+          <Member Name="小数数量库" Value="32" />
+          <Member Name="无" Value="0" />
+        </EnumType>
+        <EntityType Name="DepotCatalog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="TopId" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotCatalogChildren" Relationship="DepotModel.FK_DepotCatalog_DepotCatalog" FromRole="DepotCatalog" ToRole="DepotCatalog1" />
+          <NavigationProperty Name="DepotCatalogParent" Relationship="DepotModel.FK_DepotCatalog_DepotCatalog" FromRole="DepotCatalog1" ToRole="DepotCatalog" />
+        </EntityType>
+        <EntityType Name="DepotDictionary">
+          <Key>
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="DepotModel.DictionaryType" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EnumType Name="DictionaryType">
+          <Member Name="单位" Value="1" />
+          <Member Name="规格" Value="2" />
+          <Member Name="购置来源" Value="3" />
+          <Member Name="使用对象" Value="4" />
+          <Member Name="年龄段" Value="5" />
+          <Member Name="存放地" Value="6" />
+        </EnumType>
+        <EntityType Name="DepotRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Rights" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotUserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="DepotRoleId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="DepotRoleId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Receipt" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="OrderSource" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="UsageTarget" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ToPay" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Paid" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="BrokerageId" Type="Guid" />
+          <Property Name="KeeperId" Type="Guid" />
+          <Property Name="Done" Type="Boolean" Nullable="false" />
+          <Property Name="OrderTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="RecordTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperatorId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotIn_DepotOrder" FromRole="DepotOrder" ToRole="DepotIn" />
+          <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotOrder" FromRole="DepotOrder" ToRole="DepotInX" />
+        </EntityType>
+        <EntityType Name="DepotUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <Property Name="CampusId" Type="Guid" Nullable="false" />
+          <Property Name="CampusName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Home" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Quit" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserOnline">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="DepotCreator">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CampusId" />
+            <PropertyRef Name="CampusName" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <Property Name="CampusId" Type="Guid" Nullable="false" />
+          <Property Name="CampusName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DepotMember">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="RealName" />
+            <PropertyRef Name="Rights" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RealName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Rights" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotObjectCatalog">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="CatalogId" />
+          </Key>
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="IsLeaf" Type="Boolean" Nullable="false" />
+          <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EnumType Name="CodeType">
+          <Member Name="Catalog" Value="1" />
+          <Member Name="Object" Value="2" />
+          <Member Name="Single" Value="3" />
+        </EnumType>
+        <EntityType Name="DepotInRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="购置单号" />
+            <PropertyRef Name="发票编号" />
+            <PropertyRef Name="购置来源" />
+            <PropertyRef Name="使用对象" />
+            <PropertyRef Name="清单简述" />
+            <PropertyRef Name="应付金额" />
+            <PropertyRef Name="实付金额" />
+            <PropertyRef Name="Done" />
+            <PropertyRef Name="RecordTime" />
+            <PropertyRef Name="OperatorId" />
+            <PropertyRef Name="OperationTime" />
+            <PropertyRef Name="OrderTime" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="购置单号" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="发票编号" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="购置来源" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="使用对象" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="清单简述" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="应付金额" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="实付金额" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="BrokerageId" Type="Guid" />
+          <Property Name="经手人" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="KeeperId" Type="Guid" />
+          <Property Name="保管人" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Done" Type="Boolean" Nullable="false" />
+          <Property Name="RecordTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperatorId" Type="Guid" Nullable="false" />
+          <Property Name="操作人" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OrderTime" Type="DateTime" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="DepotCatalogTree">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="TopId" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="PinYin" />
+            <PropertyRef Name="Ordinal" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="AutoId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Count" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="TopId" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DepotCatalog_DepotCatalog">
+          <End Type="DepotModel.DepotCatalog" Role="DepotCatalog" Multiplicity="0..1" />
+          <End Type="DepotModel.DepotCatalog" Role="DepotCatalog1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotCatalog1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DepotObject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Single" Type="Boolean" Nullable="false" />
+          <Property Name="Consumable" Type="Boolean" Nullable="false" />
+          <Property Name="Fixed" Type="Boolean" Nullable="false" />
+          <Property Name="SerialA" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialB" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialC" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialD" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Low" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="High" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ImageA" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <NavigationProperty Name="DepotFlow" Relationship="DepotModel.FK_DepotFlow_DepotObject" FromRole="DepotObject" ToRole="DepotFlow" />
+          <NavigationProperty Name="DepotFlowX" Relationship="DepotModel.FK_DepotFlowX_DepotObject" FromRole="DepotObject" ToRole="DepotFlowX" />
+          <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotIn_DepotObject" FromRole="DepotObject" ToRole="DepotIn" />
+          <NavigationProperty Name="DepotStatistics" Relationship="DepotModel.FK_DepotStatistics_DepotObject" FromRole="DepotObject" ToRole="DepotStatistics" />
+          <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotObject" FromRole="DepotObject" ToRole="DepotInX" />
+          <NavigationProperty Name="DepotUseX" Relationship="DepotModel.FK_DepotUseX_DepotObject" FromRole="DepotObject" ToRole="DepotUseX" />
+          <Property Name="DepotId" Type="Guid" />
+        </EntityType>
+        <EntityType Name="DepotFlow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="DepotModel.FlowType" Nullable="false" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotFlow_DepotObject" FromRole="DepotFlow" ToRole="DepotObject" />
+        </EntityType>
+        <EntityType Name="DepotFlowX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectOrdinal" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="DepotModel.FlowType" Nullable="false" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotFlowX_DepotObject" FromRole="DepotFlowX" ToRole="DepotObject" />
+        </EntityType>
+        <EntityType Name="DepotIn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ResponsibleId" Type="Guid" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperatorId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PriceSet" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="AvailableAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotIn_DepotObject" FromRole="DepotIn" ToRole="DepotObject" />
+          <NavigationProperty Name="DepotOrder" Relationship="DepotModel.FK_DepotIn_DepotOrder" FromRole="DepotIn" ToRole="DepotOrder" />
+          <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotIn" FromRole="DepotIn" ToRole="DepotInX" />
+        </EntityType>
+        <EntityType Name="DepotStatistics">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="Month" />
+          </Key>
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="StartAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="InAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="InMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="LendAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="LendMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ConsumeAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ConsumeMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OutAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OutMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="RedoAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="RedoMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotStatistics_DepotObject" FromRole="DepotStatistics" ToRole="DepotObject" />
+        </EntityType>
+        <Association Name="FK_DepotFlow_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotFlow" Role="DepotFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotFlow">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotFlowX_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotFlowX" Role="DepotFlowX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotFlowX">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotIn_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotIn" Role="DepotIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotIn">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotIn_DepotOrder">
+          <End Type="DepotModel.DepotOrder" Role="DepotOrder" Multiplicity="1" />
+          <End Type="DepotModel.DepotIn" Role="DepotIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotIn">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotStatistics_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotStatistics" Role="DepotStatistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotStatistics">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DepotInX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PriceSet" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="AvailableAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotInX_DepotIn" FromRole="DepotInX" ToRole="DepotIn" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotInX_DepotObject" FromRole="DepotInX" ToRole="DepotObject" />
+          <NavigationProperty Name="DepotOrder" Relationship="DepotModel.FK_DepotInX_DepotOrder" FromRole="DepotInX" ToRole="DepotOrder" />
+          <NavigationProperty Name="DepotUseX" Relationship="DepotModel.FK_DepotUseX_DepotInX" FromRole="DepotInX" ToRole="DepotUseX" />
+        </EntityType>
+        <Association Name="FK_DepotInX_DepotIn">
+          <End Type="DepotModel.DepotIn" Role="DepotIn" Multiplicity="1" />
+          <End Type="DepotModel.DepotInX" Role="DepotInX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotInX">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotInX_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotInX" Role="DepotInX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotInX">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotInX_DepotOrder">
+          <End Type="DepotModel.DepotOrder" Role="DepotOrder" Multiplicity="1" />
+          <End Type="DepotModel.DepotInX" Role="DepotInX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotInX">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="FlowType">
+          <Member Name="入库" Value="1" />
+          <Member Name="入库修改" Value="2" />
+          <Member Name="借用出库" Value="3" />
+          <Member Name="领用出库" Value="4" />
+          <Member Name="归还" Value="5" />
+          <Member Name="退货" Value="6" />
+        </EnumType>
+        <EntityType Name="DepotInXRecord">
+          <Key>
+            <PropertyRef Name="OrderName" />
+            <PropertyRef Name="Done" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Specification" />
+            <PropertyRef Name="InId" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Place" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="OperatorId" />
+            <PropertyRef Name="PriceSet" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Total" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="OrderSource" />
+            <PropertyRef Name="UsageTarget" />
+          </Key>
+          <Property Name="OrderName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Done" Type="Boolean" Nullable="false" />
+          <Property Name="Operator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Responsible" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="CatalogName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ResponsibleId" Type="Guid" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperatorId" Type="Guid" Nullable="false" />
+          <Property Name="PriceSet" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
+          <Property Name="OrderSource" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="UsageTarget" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="TopId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="Hidden" Type="Boolean" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="DepotModel.State" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuildType" Type="Int32" Nullable="false" />
+          <Property Name="ClassType" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepartmentChildren" Relationship="DepotModel.FK_Department_DepartmentParent" FromRole="Department" ToRole="Department1" />
+          <NavigationProperty Name="DepartmentParent" Relationship="DepotModel.FK_Department_DepartmentParent" FromRole="Department1" ToRole="Department" />
+          <NavigationProperty Name="DepartmentAll" Relationship="DepotModel.FK_Department_DepartmentTop" FromRole="Department" ToRole="Department1" />
+          <NavigationProperty Name="DepartmentCampus" Relationship="DepotModel.FK_Department_DepartmentTop" FromRole="Department1" ToRole="Department" />
+        </EntityType>
+        <Association Name="FK_Department_DepartmentParent">
+          <End Type="DepotModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="DepotModel.Department" Role="Department1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_DepartmentTop">
+          <End Type="DepotModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="DepotModel.Department" Role="Department1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department1">
+              <PropertyRef Name="TopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DepotUse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OperatorId" Type="Guid" Nullable="false" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <NavigationProperty Name="Depot" Relationship="DepotModel.FK_DepotUse_Depot" FromRole="DepotUse" ToRole="Depot" />
+          <NavigationProperty Name="DepotUseX" Relationship="DepotModel.FK_DepotUseX_DepotUse" FromRole="DepotUse" ToRole="DepotUseX" />
+        </EntityType>
+        <Association Name="FK_DepotUse_Depot">
+          <End Type="DepotModel.Depot" Role="Depot" Multiplicity="1" />
+          <End Type="DepotModel.DepotUse" Role="DepotUse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUse">
+              <PropertyRef Name="DepotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="UseType">
+          <Member Name="领用" Value="1" />
+          <Member Name="借用" Value="2" />
+        </EnumType>
+        <EntityType Name="DepotUseX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="UseId" Type="Guid" Nullable="false" />
+          <Property Name="InXId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="DepotModel.UseType" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ReturnedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotUseX_DepotInX" FromRole="DepotUseX" ToRole="DepotInX" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotUseX_DepotObject" FromRole="DepotUseX" ToRole="DepotObject" />
+          <NavigationProperty Name="DepotUse" Relationship="DepotModel.FK_DepotUseX_DepotUse" FromRole="DepotUseX" ToRole="DepotUse" />
+          <NavigationProperty Name="DepotReturn" Relationship="DepotModel.FK_DepotReturn_DepotUseX" FromRole="DepotUseX" ToRole="DepotReturn" />
+        </EntityType>
+        <Association Name="FK_DepotUseX_DepotInX">
+          <End Type="DepotModel.DepotInX" Role="DepotInX" Multiplicity="1" />
+          <End Type="DepotModel.DepotUseX" Role="DepotUseX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotInX">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUseX">
+              <PropertyRef Name="InXId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotUseX_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotUseX" Role="DepotUseX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUseX">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotUseX_DepotUse">
+          <End Type="DepotModel.DepotUse" Role="DepotUse" Multiplicity="1" />
+          <End Type="DepotModel.DepotUseX" Role="DepotUseX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotUse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotUseX">
+              <PropertyRef Name="UseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DepotUseXRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="UseId" />
+            <PropertyRef Name="InXId" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="PriceSet" />
+            <PropertyRef Name="Money" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="OperatorName" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="OperatorId" />
+            <PropertyRef Name="ReturnedAmount" />
+            <PropertyRef Name="ObjectId" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
+          <Property Name="UseId" Type="Guid" Nullable="false" />
+          <Property Name="InXId" Type="Guid" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PriceSet" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="OperatorName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="OperatorId" Type="Guid" Nullable="false" />
+          <Property Name="ReturnedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotReturn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UseXId" Type="Guid" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotUseX" Relationship="DepotModel.FK_DepotReturn_DepotUseX" FromRole="DepotReturn" ToRole="DepotUseX" />
+        </EntityType>
+        <Association Name="FK_DepotReturn_DepotUseX">
+          <End Type="DepotModel.DepotUseX" Role="DepotUseX" Multiplicity="1" />
+          <End Type="DepotModel.DepotReturn" Role="DepotReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotUseX">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotReturn">
+              <PropertyRef Name="UseXId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DepotReturnRecord">
+          <Key>
+            <PropertyRef Name="ReturnAmount" />
+            <PropertyRef Name="ReturnNote" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="UseId" />
+            <PropertyRef Name="InXId" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="ReturnedAmount" />
+            <PropertyRef Name="PriceSet" />
+            <PropertyRef Name="Money" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="OperatorName" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="OperatorId" />
+          </Key>
+          <Property Name="ReturnAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ReturnNote" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
+          <Property Name="UseId" Type="Guid" Nullable="false" />
+          <Property Name="InXId" Type="Guid" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ReturnedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PriceSet" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="OperatorName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="OperatorId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotST">
+          <Key>
+            <PropertyRef Name="Consumable" />
+            <PropertyRef Name="Single" />
+            <PropertyRef Name="Fixed" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Y" />
+            <PropertyRef Name="M" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="InAmount" />
+            <PropertyRef Name="InMoney" />
+            <PropertyRef Name="StartAmount" />
+            <PropertyRef Name="StartMoney" />
+            <PropertyRef Name="LendAmount" />
+            <PropertyRef Name="LendMoney" />
+            <PropertyRef Name="ConsumeAmount" />
+            <PropertyRef Name="ConsumeMoney" />
+            <PropertyRef Name="OutAmount" />
+            <PropertyRef Name="OutMoney" />
+            <PropertyRef Name="RedoAmount" />
+            <PropertyRef Name="RedoMoney" />
+            <PropertyRef Name="EndAmount" />
+            <PropertyRef Name="EndMoney" />
+          </Key>
+          <Property Name="Consumable" Type="Boolean" Nullable="false" />
+          <Property Name="Single" Type="Boolean" Nullable="false" />
+          <Property Name="Fixed" Type="Boolean" Nullable="false" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CatalogPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Y" Type="Int32" Nullable="false" />
+          <Property Name="M" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="InAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="InMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StartMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="LendAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="LendMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ConsumeAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ConsumeMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OutAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="OutMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="RedoAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="RedoMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="EndMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+        </EntityType>
+        <EntityType Name="DepotSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Depot" Relationship="DepotModel.FK_DepotSetting_Depot" FromRole="DepotSetting" ToRole="Depot" />
+        </EntityType>
+        <Association Name="FK_DepotSetting_Depot">
+          <End Type="DepotModel.Depot" Role="Depot" Multiplicity="1" />
+          <End Type="DepotModel.DepotSetting" Role="DepotSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotSetting">
+              <PropertyRef Name="DepotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DepotToOut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ToAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PreservedA" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreservedB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreservedC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreservedD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotOutRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Reason" />
+            <PropertyRef Name="ToAmount" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="PreservedA" />
+            <PropertyRef Name="PreservedB" />
+            <PropertyRef Name="PreservedC" />
+            <PropertyRef Name="PreservedD" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ToAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PreservedA" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreservedB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreservedC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreservedD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DepotObjectX">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="PinYin" />
+            <PropertyRef Name="Single" />
+            <PropertyRef Name="Consumable" />
+            <PropertyRef Name="Fixed" />
+            <PropertyRef Name="SerialA" />
+            <PropertyRef Name="SerialB" />
+            <PropertyRef Name="SerialC" />
+            <PropertyRef Name="SerialD" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Specification" />
+            <PropertyRef Name="Low" />
+            <PropertyRef Name="High" />
+            <PropertyRef Name="ImageA" />
+            <PropertyRef Name="ImageB" />
+            <PropertyRef Name="ImageC" />
+            <PropertyRef Name="ImageD" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="Ordinal" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="AutoId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Money" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Single" Type="Boolean" Nullable="false" />
+          <Property Name="Consumable" Type="Boolean" Nullable="false" />
+          <Property Name="Fixed" Type="Boolean" Nullable="false" />
+          <Property Name="SerialA" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialB" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialC" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SerialD" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Low" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="High" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="ImageA" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="DepotId" Type="Guid" />
+          <Property Name="DepotName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DepotModelStoreContainer" CdmEntityContainer="DepotEntities">
+          <EntitySetMapping Name="Depot">
+            <EntityTypeMapping TypeName="DepotModel.Depot">
+              <MappingFragment StoreEntitySet="Depot">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="DefaultObjectView" ColumnName="DefaultObjectView" />
+                <ScalarProperty Name="DefaultObjectType" ColumnName="DefaultObjectType" />
+                <ScalarProperty Name="ObjectTypes" ColumnName="ObjectTypes" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotCatalog">
+            <EntityTypeMapping TypeName="DepotModel.DepotCatalog">
+              <MappingFragment StoreEntitySet="DepotCatalog">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="TopId" ColumnName="TopId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotDictionary">
+            <EntityTypeMapping TypeName="DepotModel.DepotDictionary">
+              <MappingFragment StoreEntitySet="DepotDictionary">
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotRole">
+            <EntityTypeMapping TypeName="DepotModel.DepotRole">
+              <MappingFragment StoreEntitySet="DepotRole">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Rights" ColumnName="Rights" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotUserRole">
+            <EntityTypeMapping TypeName="DepotModel.DepotUserRole">
+              <MappingFragment StoreEntitySet="DepotUserRole">
+                <ScalarProperty Name="DepotRoleId" ColumnName="DepotRoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotOrder">
+            <EntityTypeMapping TypeName="DepotModel.DepotOrder">
+              <MappingFragment StoreEntitySet="DepotOrder">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="RecordTime" ColumnName="RecordTime" />
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="Done" ColumnName="Done" />
+                <ScalarProperty Name="KeeperId" ColumnName="KeeperId" />
+                <ScalarProperty Name="BrokerageId" ColumnName="BrokerageId" />
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
+                <ScalarProperty Name="ToPay" ColumnName="ToPay" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="UsageTarget" ColumnName="UsageTarget" />
+                <ScalarProperty Name="OrderSource" ColumnName="OrderSource" />
+                <ScalarProperty Name="Receipt" ColumnName="Receipt" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotUser">
+            <EntityTypeMapping TypeName="DepotModel.DepotUser">
+              <MappingFragment StoreEntitySet="DepotUser">
+                <ScalarProperty Name="CampusName" ColumnName="CampusName" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Application">
+            <EntityTypeMapping TypeName="DepotModel.Application">
+              <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Quit" ColumnName="Quit" />
+                <ScalarProperty Name="Home" ColumnName="Home" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserOnline">
+            <EntityTypeMapping TypeName="DepotModel.UserOnline">
+              <MappingFragment StoreEntitySet="UserOnline">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotCreator">
+            <EntityTypeMapping TypeName="DepotModel.DepotCreator">
+              <MappingFragment StoreEntitySet="DepotCreator">
+                <ScalarProperty Name="CampusName" ColumnName="CampusName" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotMember">
+            <EntityTypeMapping TypeName="DepotModel.DepotMember">
+              <MappingFragment StoreEntitySet="DepotMember">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Rights" ColumnName="Rights" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotObjectCatalog">
+            <EntityTypeMapping TypeName="DepotModel.DepotObjectCatalog">
+              <MappingFragment StoreEntitySet="DepotObjectCatalog">
+                <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
+                <ScalarProperty Name="IsLeaf" ColumnName="IsLeaf" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ToPinYin" FunctionName="DepotModel.Store.ToPinYin" />
+          <EntitySetMapping Name="DepotInRecord">
+            <EntityTypeMapping TypeName="DepotModel.DepotInRecord">
+              <MappingFragment StoreEntitySet="DepotInRecord">
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="操作人" ColumnName="操作人" />
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="RecordTime" ColumnName="RecordTime" />
+                <ScalarProperty Name="Done" ColumnName="Done" />
+                <ScalarProperty Name="保管人" ColumnName="保管人" />
+                <ScalarProperty Name="KeeperId" ColumnName="KeeperId" />
+                <ScalarProperty Name="经手人" ColumnName="经手人" />
+                <ScalarProperty Name="BrokerageId" ColumnName="BrokerageId" />
+                <ScalarProperty Name="实付金额" ColumnName="实付金额" />
+                <ScalarProperty Name="应付金额" ColumnName="应付金额" />
+                <ScalarProperty Name="清单简述" ColumnName="清单简述" />
+                <ScalarProperty Name="使用对象" ColumnName="使用对象" />
+                <ScalarProperty Name="购置来源" ColumnName="购置来源" />
+                <ScalarProperty Name="发票编号" ColumnName="发票编号" />
+                <ScalarProperty Name="购置单号" ColumnName="购置单号" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotCatalogTree">
+            <EntityTypeMapping TypeName="DepotModel.DepotCatalogTree">
+              <MappingFragment StoreEntitySet="DepotCatalogTree">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="TopId" ColumnName="TopId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotObject">
+            <EntityTypeMapping TypeName="DepotModel.DepotObject">
+              <MappingFragment StoreEntitySet="DepotObject">
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ImageD" ColumnName="ImageD" />
+                <ScalarProperty Name="ImageC" ColumnName="ImageC" />
+                <ScalarProperty Name="ImageB" ColumnName="ImageB" />
+                <ScalarProperty Name="ImageA" ColumnName="ImageA" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="SerialD" ColumnName="SerialD" />
+                <ScalarProperty Name="SerialC" ColumnName="SerialC" />
+                <ScalarProperty Name="SerialB" ColumnName="SerialB" />
+                <ScalarProperty Name="SerialA" ColumnName="SerialA" />
+                <ScalarProperty Name="Fixed" ColumnName="Fixed" />
+                <ScalarProperty Name="Consumable" ColumnName="Consumable" />
+                <ScalarProperty Name="Single" ColumnName="Single" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotFlow">
+            <EntityTypeMapping TypeName="DepotModel.DepotFlow">
+              <MappingFragment StoreEntitySet="DepotFlow">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotFlowX">
+            <EntityTypeMapping TypeName="DepotModel.DepotFlowX">
+              <MappingFragment StoreEntitySet="DepotFlowX">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ObjectOrdinal" ColumnName="ObjectOrdinal" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotIn">
+            <EntityTypeMapping TypeName="DepotModel.DepotIn">
+              <MappingFragment StoreEntitySet="DepotIn">
+                <ScalarProperty Name="AvailableAmount" ColumnName="AvailableAmount" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PriceSet" ColumnName="PriceSet" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ResponsibleId" ColumnName="ResponsibleId" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotStatistics">
+            <EntityTypeMapping TypeName="DepotModel.DepotStatistics">
+              <MappingFragment StoreEntitySet="DepotStatistics">
+                <ScalarProperty Name="EndMoney" ColumnName="EndMoney" />
+                <ScalarProperty Name="EndAmount" ColumnName="EndAmount" />
+                <ScalarProperty Name="RedoMoney" ColumnName="RedoMoney" />
+                <ScalarProperty Name="RedoAmount" ColumnName="RedoAmount" />
+                <ScalarProperty Name="OutMoney" ColumnName="OutMoney" />
+                <ScalarProperty Name="OutAmount" ColumnName="OutAmount" />
+                <ScalarProperty Name="ConsumeMoney" ColumnName="ConsumeMoney" />
+                <ScalarProperty Name="ConsumeAmount" ColumnName="ConsumeAmount" />
+                <ScalarProperty Name="LendMoney" ColumnName="LendMoney" />
+                <ScalarProperty Name="LendAmount" ColumnName="LendAmount" />
+                <ScalarProperty Name="InMoney" ColumnName="InMoney" />
+                <ScalarProperty Name="InAmount" ColumnName="InAmount" />
+                <ScalarProperty Name="StartMoney" ColumnName="StartMoney" />
+                <ScalarProperty Name="StartAmount" ColumnName="StartAmount" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotInX">
+            <EntityTypeMapping TypeName="DepotModel.DepotInX">
+              <MappingFragment StoreEntitySet="DepotInX">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="AvailableAmount" ColumnName="AvailableAmount" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PriceSet" ColumnName="PriceSet" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotInXRecord">
+            <EntityTypeMapping TypeName="DepotModel.DepotInXRecord">
+              <MappingFragment StoreEntitySet="DepotInXRecord">
+                <ScalarProperty Name="UsageTarget" ColumnName="UsageTarget" />
+                <ScalarProperty Name="OrderSource" ColumnName="OrderSource" />
+                <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PriceSet" ColumnName="PriceSet" />
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ResponsibleId" ColumnName="ResponsibleId" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="CatalogName" ColumnName="CatalogName" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Responsible" ColumnName="Responsible" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="Done" ColumnName="Done" />
+                <ScalarProperty Name="OrderName" ColumnName="OrderName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="DepotModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ClassType" ColumnName="ClassType" />
+                <ScalarProperty Name="BuildType" ColumnName="BuildType" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Hidden" ColumnName="Hidden" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TopId" ColumnName="TopId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotUse">
+            <EntityTypeMapping TypeName="DepotModel.DepotUse">
+              <MappingFragment StoreEntitySet="DepotUse">
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotUseX">
+            <EntityTypeMapping TypeName="DepotModel.DepotUseX">
+              <MappingFragment StoreEntitySet="DepotUseX">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ReturnedAmount" ColumnName="ReturnedAmount" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="InXId" ColumnName="InXId" />
+                <ScalarProperty Name="UseId" ColumnName="UseId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ToCatalog" FunctionName="DepotModel.Store.ToCatalog" />
+          <EntitySetMapping Name="DepotUseXRecord">
+            <EntityTypeMapping TypeName="DepotModel.DepotUseXRecord">
+              <MappingFragment StoreEntitySet="DepotUseXRecord">
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="ReturnedAmount" ColumnName="ReturnedAmount" />
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="PriceSet" ColumnName="PriceSet" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="InXId" ColumnName="InXId" />
+                <ScalarProperty Name="UseId" ColumnName="UseId" />
+                <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotReturn">
+            <EntityTypeMapping TypeName="DepotModel.DepotReturn">
+              <MappingFragment StoreEntitySet="DepotReturn">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="UseXId" ColumnName="UseXId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotReturnRecord">
+            <EntityTypeMapping TypeName="DepotModel.DepotReturnRecord">
+              <MappingFragment StoreEntitySet="DepotReturnRecord">
+                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="PriceSet" ColumnName="PriceSet" />
+                <ScalarProperty Name="ReturnedAmount" ColumnName="ReturnedAmount" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="InXId" ColumnName="InXId" />
+                <ScalarProperty Name="UseId" ColumnName="UseId" />
+                <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReturnNote" ColumnName="ReturnNote" />
+                <ScalarProperty Name="ReturnAmount" ColumnName="ReturnAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotST">
+            <EntityTypeMapping TypeName="DepotModel.DepotST">
+              <MappingFragment StoreEntitySet="DepotST">
+                <ScalarProperty Name="EndMoney" ColumnName="EndMoney" />
+                <ScalarProperty Name="EndAmount" ColumnName="EndAmount" />
+                <ScalarProperty Name="RedoMoney" ColumnName="RedoMoney" />
+                <ScalarProperty Name="RedoAmount" ColumnName="RedoAmount" />
+                <ScalarProperty Name="OutMoney" ColumnName="OutMoney" />
+                <ScalarProperty Name="OutAmount" ColumnName="OutAmount" />
+                <ScalarProperty Name="ConsumeMoney" ColumnName="ConsumeMoney" />
+                <ScalarProperty Name="ConsumeAmount" ColumnName="ConsumeAmount" />
+                <ScalarProperty Name="LendMoney" ColumnName="LendMoney" />
+                <ScalarProperty Name="LendAmount" ColumnName="LendAmount" />
+                <ScalarProperty Name="StartMoney" ColumnName="StartMoney" />
+                <ScalarProperty Name="StartAmount" ColumnName="StartAmount" />
+                <ScalarProperty Name="InMoney" ColumnName="InMoney" />
+                <ScalarProperty Name="InAmount" ColumnName="InAmount" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="M" ColumnName="M" />
+                <ScalarProperty Name="Y" ColumnName="Y" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="CatalogPath" ColumnName="CatalogPath" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Fixed" ColumnName="Fixed" />
+                <ScalarProperty Name="Single" ColumnName="Single" />
+                <ScalarProperty Name="Consumable" ColumnName="Consumable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotSetting">
+            <EntityTypeMapping TypeName="DepotModel.DepotSetting">
+              <MappingFragment StoreEntitySet="DepotSetting">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotToOut">
+            <EntityTypeMapping TypeName="DepotModel.DepotToOut">
+              <MappingFragment StoreEntitySet="DepotToOut">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="PreservedD" ColumnName="PreservedD" />
+                <ScalarProperty Name="PreservedC" ColumnName="PreservedC" />
+                <ScalarProperty Name="PreservedB" ColumnName="PreservedB" />
+                <ScalarProperty Name="PreservedA" ColumnName="PreservedA" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ToAmount" ColumnName="ToAmount" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotOutRecord">
+            <EntityTypeMapping TypeName="DepotModel.DepotOutRecord">
+              <MappingFragment StoreEntitySet="DepotOutRecord">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="PreservedD" ColumnName="PreservedD" />
+                <ScalarProperty Name="PreservedC" ColumnName="PreservedC" />
+                <ScalarProperty Name="PreservedB" ColumnName="PreservedB" />
+                <ScalarProperty Name="PreservedA" ColumnName="PreservedA" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ToAmount" ColumnName="ToAmount" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotObjectX">
+            <EntityTypeMapping TypeName="DepotModel.DepotObjectX">
+              <MappingFragment StoreEntitySet="DepotObjectX">
+                <ScalarProperty Name="DepotName" ColumnName="DepotName" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ImageD" ColumnName="ImageD" />
+                <ScalarProperty Name="ImageC" ColumnName="ImageC" />
+                <ScalarProperty Name="ImageB" ColumnName="ImageB" />
+                <ScalarProperty Name="ImageA" ColumnName="ImageA" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="SerialD" ColumnName="SerialD" />
+                <ScalarProperty Name="SerialC" ColumnName="SerialC" />
+                <ScalarProperty Name="SerialB" ColumnName="SerialB" />
+                <ScalarProperty Name="SerialA" ColumnName="SerialA" />
+                <ScalarProperty Name="Fixed" ColumnName="Fixed" />
+                <ScalarProperty Name="Consumable" ColumnName="Consumable" />
+                <ScalarProperty Name="Single" ColumnName="Single" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
