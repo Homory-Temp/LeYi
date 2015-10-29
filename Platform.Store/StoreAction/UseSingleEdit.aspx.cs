@@ -27,7 +27,7 @@ public partial class StoreAction_UseSingleEdit : SingleStorePage
     protected void go_ServerClick(object sender, EventArgs e)
     {
         Adjust();
-        Response.Redirect("../StoreQuery/Use?StoreId={0}".Formatted(StoreId));
+        Response.Redirect("../StoreQuery/Used?StoreId={0}".Formatted(StoreId));
     }
 
     protected void cancel_ServerClick(object sender, EventArgs e)
