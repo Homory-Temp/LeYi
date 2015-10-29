@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Statistics.aspx.cs" Inherits="StoreQuery_Statistics" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="StatisticsDaily.aspx.cs" Inherits="StoreQuery_StatisticsDaily" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
 
@@ -40,7 +40,7 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 库存查询" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 汇总统计" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
@@ -63,14 +63,14 @@
                     <div class="row">
                         <div class="col-md-12">
                             <span class="btn btn-info">期初：</span>
-                            <telerik:RadMonthYearPicker ID="ps" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="false">
+                            <telerik:RadDatePicker ID="periodx" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
                                 <DatePopupButton runat="server" Visible="false" />
-                            </telerik:RadMonthYearPicker>
+                            </telerik:RadDatePicker>
                             &nbsp;&nbsp;
                             <span class="btn btn-info">期末：</span>
-                            <telerik:RadMonthYearPicker ID="pe" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="false">
+                            <telerik:RadDatePicker ID="period" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
                                 <DatePopupButton runat="server" Visible="false" />
-                            </telerik:RadMonthYearPicker>
+                            </telerik:RadDatePicker>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <telerik:RadTextBox ID="name" runat="server" Width="120" EmptyMessage="物资名称"></telerik:RadTextBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -89,14 +89,10 @@
                                             <tr>
                                                 <th>物资类别</th>
                                                 <th>物资名称</th>
-                                                <th>期初数量</th>
-                                                <th>期初金额</th>
                                                 <th>入库数量</th>
                                                 <th>入库金额</th>
                                                 <th>出库数量</th>
                                                 <th>出库金额</th>
-                                                <th>期末数量</th>
-                                                <th>期末金额</th>
                                             </tr>
                                             <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
                                             <tr>
@@ -105,10 +101,6 @@
                                                 <td><%# ___total.Value.Split(new[] { '@' })[1] %></td>
                                                 <td><%# ___total.Value.Split(new[] { '@' })[2] %></td>
                                                 <td><%# ___total.Value.Split(new[] { '@' })[3] %></td>
-                                                <td><%# ___total.Value.Split(new[] { '@' })[4] %></td>
-                                                <td><%# ___total.Value.Split(new[] { '@' })[5] %></td>
-                                                <td><%# ___total.Value.Split(new[] { '@' })[8] %></td>
-                                                <td><%# ___total.Value.Split(new[] { '@' })[9] %></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -117,14 +109,10 @@
                                     <tr>
                                         <td><%# Eval("CatalogPath") %></td>
                                         <td><%# Eval("Name") %></td>
-                                        <td><%# Eval("S").ToMoney() %></td>
-                                        <td><%# Eval("SM").ToMoney() %></td>
                                         <td><%# Eval("I").ToMoney() %></td>
                                         <td><%# Eval("IM").ToMoney() %></td>
                                         <td><%# Eval("U").ToMoney() %></td>
                                         <td><%# Eval("UM").ToMoney() %></td>
-                                        <td><%# Eval("E").ToMoney() %></td>
-                                        <td><%# Eval("EM").ToMoney() %></td>
                                     </tr>
                                 </ItemTemplate>
                                 <EmptyDataTemplate>

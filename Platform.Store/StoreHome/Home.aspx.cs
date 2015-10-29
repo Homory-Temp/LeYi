@@ -54,8 +54,9 @@ public partial class StoreHome_Home : SingleStorePage
         else
         {
             list.Add(new HomeItem { Name = "月库存查询", Url = "../StoreQuery/StatisticsMonthly?StoreId={0}".Formatted(StoreId) });
+            list.Add(new HomeItem { Name = "汇总统计", Url = "../StoreQuery/StatisticsDaily?StoreId={0}".Formatted(StoreId) });
         }
-        list.Add(new HomeItem { Name = "汇总统计", Url = "../StoreQuery/Statistics?StoreId={0}".Formatted(StoreId) });
+        list.Add(new HomeItem { Name = "库存查询", Url = "../StoreQuery/Statistics?StoreId={0}".Formatted(StoreId) });
         if (CurrentStore.State == Models.StoreState.固产)
         {
             list.Add(new HomeItem { Name = "导入查询", Url = "../StoreQuery/Import?StoreId={0}".Formatted(StoreId) });
