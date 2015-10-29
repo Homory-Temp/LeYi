@@ -24,11 +24,11 @@
 	    <script src="../Content/Homory/js/respond.min.js"></script>
     <![endif]-->
     <style>
-        .depotm {
-            margin-top: 4px;
-        }
-        .depoth {
-            height: 41px;
+        .depot {
+            margin-left: 10px;
+            float: left;
+            text-decoration: none;
+            font-weight: normal;
         }
     </style>
 </head>
@@ -80,11 +80,33 @@
                     </div>
                     <div class="row">&nbsp;</div>
                     <div class="row">
-                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
-                            <ItemTemplate>
-                                <span class="col-md-3 depotm"><span class="btn btn-info" title='<%# "名称：{1}\r\n规格：{0}".Formatted(Eval("Specification"), Eval("Name")) %>'><asp:CheckBox ID="check" runat="server" AutoPostBack="false" OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Name")) %>' /></span></span>
-                            </ItemTemplate>
-                        </telerik:RadListView>
+                        <div class="col-md-12">
+                            <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
+                                <LayoutTemplate>
+                                    <table class="storeTable">
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>名称</th>
+                                            <th>单位</th>
+                                            <th>规格</th>
+                                            <th>在库数量</th>
+                                        </tr>
+                                        <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
+                                    </table>
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                    <tr>
+                                        <td><%# Eval("Ordinal") %></td>
+                                        <td>
+                                            <asp:CheckBox ID="check" runat="server" CssClass="depot" AutoPostBack="false" OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Name")) %>' />
+                                        </td>
+                                        <td><%# Eval("Unit") %></td>
+                                        <td><%# Eval("Specification") %></td>
+                                        <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
+                                    </tr>
+                                </ItemTemplate>
+                            </telerik:RadListView>
+                        </div>
                     </div>
                     <div class="row">&nbsp;</div>
                 </div>

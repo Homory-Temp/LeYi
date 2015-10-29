@@ -73,27 +73,6 @@ public partial class DepotAction_Batch : DepotPageSingle
         }
     }
 
-    public static Guid DepotCatalogXAdd(DepotEntities db, Guid depotId, string name)
-    {
-        var pinYin = db.ToPinYin(name).Single();
-        var newId = db.GlobalId();
-        var catalog = new DepotCatalog
-        {
-            Id = newId,
-            ParentId = null,
-            TopId = newId,
-            DepotId = depotId,
-            Name = "未分类",
-            PinYin = "WFL",
-            Ordinal = int.MaxValue,
-            State = State.启用,
-            Code = "*Homory:Null*"
-        };
-        db.DepotCatalog.Add(catalog);
-        db.SaveChanges();
-        return newId;
-    }
-
     public static void DepotObjectEdit(DepotEntities db, Guid id, List<Guid> catalogIds)
     {
         var obj = db.DepotObject.Single(o => o.Id == id);
