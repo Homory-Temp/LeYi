@@ -9,7 +9,7 @@ public partial class DepotAction_Batch : DepotPageSingle
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        SideBarSingle.Crumb = "物资管理 - {0}".Formatted(Depot.Featured(DepotType.固定资产库) ? "资产分库" : "批量调拨");
+        SideBarSingle.Crumb = "物资管理 - {0}".Formatted(Depot.Featured(DepotType.固定资产库) ? "资产分库" : "批量转移");
         if (!IsPostBack)
         {
             tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
