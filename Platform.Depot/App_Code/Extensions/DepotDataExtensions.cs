@@ -728,7 +728,7 @@ public static class DepotDataExtensions
             var @return = new DepotReturn
             {
                 Id = db.GlobalId(),
-                UserId = usex.DepotUse.Id,
+                UserId = usex.DepotUse.UserId,
                 UseXId = item.UseX,
                 Amount = item.Amount.Value,
                 Price = inx.Price,
@@ -752,7 +752,7 @@ public static class DepotDataExtensions
                     Id = db.GlobalId(),
                     ObjectId = @in.ObjectId,
                     ObjectOrdinal = inx.Ordinal,
-                    UserId = operatorId,
+                    UserId = usex.DepotUse.UserId,
                     Type = FlowType.归还,
                     TypeName = FlowType.归还.ToString(),
                     Time = returnTime,
@@ -774,7 +774,7 @@ public static class DepotDataExtensions
                 {
                     Id = db.GlobalId(),
                     ObjectId = @in.ObjectId,
-                    UserId = usex.DepotUse.Id,
+                    UserId = usex.DepotUse.UserId,
                     Type = FlowType.归还,
                     TypeName = FlowType.归还.ToString(),
                     Time = returnTime,

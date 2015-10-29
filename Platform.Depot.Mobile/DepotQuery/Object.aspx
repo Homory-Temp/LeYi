@@ -59,19 +59,19 @@
                     <table class="storeTable">
                         <tr>
                             <td style="width: 16%;">
-                                <span class="btn btn-info dictionaryX">在库库存：</span>
+                                <span>在库库存：</span>
                             </td>
                             <td style="width: 17%;">
                                 <span id="no" runat="server"></span>&nbsp;<span id="unit" runat="server"></span>
                             </td>
                             <td style="width: 16%;">
-                                <span class="btn btn-info dictionaryX">总库存：</span>
+                                <span>总库存：</span>
                             </td>
                             <td style="width: 17%;">
                                 <span id="total" runat="server"></span>
                             </td>
                             <td style="width: 16%;">
-                                <span class="btn btn-info dictionaryX">年龄段：</span>
+                                <span>年龄段：</span>
                             </td>
                             <td style="width: 17%;">
                                 <span id="age" runat="server"></span>
@@ -79,7 +79,7 @@
                         </tr>
                         <tr>
                             <td style="width: 16%;">
-                                <span class="btn btn-info dictionaryX">规格：</span>
+                                <span>规格：</span>
                             </td>
                             <td colspan="5">
                                 <span id="sp" runat="server"></span>
@@ -87,7 +87,7 @@
                         </tr>
                         <tr>
                             <td style="width: 16%;">
-                                <span class="btn btn-info dictionaryX">备注：</span>
+                                <span>备注：</span>
                             </td>
                             <td colspan="5">
                                 <span id="note" runat="server"></span>
