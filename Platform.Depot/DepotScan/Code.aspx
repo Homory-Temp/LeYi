@@ -78,6 +78,8 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <input id="coding" runat="server" type="button" class="btn btn-info" value="生成条码" onserverclick="coding_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input id="coded" runat="server" type="button" class="btn btn-info" value="条码列表" onserverclick="coded_ServerClick" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
                     </div>
                     <div class="row">&nbsp;</div>
@@ -96,21 +98,21 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td style="width: 30%;">
-                                            <asp:CheckBox ID="check" runat="server" CssClass="depot" AutoPostBack="true" OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Name")) %>' OnCheckedChanged="check_CheckedChanged" />
+                                            <asp:CheckBox ID="check" runat="server" CssClass="depot" AutoPostBack="true" CC='<%# Eval("Code") %>' OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Name")) %>' OnCheckedChanged="check_CheckedChanged" />
                                         </td>
                                         <td style="width: 70%;">
                                             <asp:Panel ID="single" runat="server" Visible='<%# (bool)Eval("Single") %>'>
                                                 <telerik:RadListView ID="viewx" runat="server" DataSource='<%# Ordinals((Guid)Eval("Id")) %>'>
                                                     <ItemTemplate>
                                                         <div style="float: left; width: 200px;">
-                                                            <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="false" OBJ='<%# Eval("ObjectId") %>' ORD='<%# Eval("Ordinal") %>' Text='<%# "&nbsp;{1}&nbsp;-&nbsp;{0}".Formatted(Eval("Ordinal"), Eval("Code")) %>' />
+                                                            <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="false" CC='<%# Eval("Code") %>' OBJ='<%# Eval("ObjectId") %>' ORD='<%# Eval("Ordinal") %>' Text='<%# "&nbsp;{1}&nbsp;-&nbsp;{0}".Formatted(Eval("Ordinal"), Eval("Code")) %>' />
                                                         </div>
                                                     </ItemTemplate>
                                                 </telerik:RadListView>
                                             </asp:Panel>
                                             <asp:Panel ID="multiple" runat="server" Visible='<%# !(bool)Eval("Single") %>'>
                                                 <div style="float: left; width: 200px;">
-                                                    <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="false" OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Code")) %>' />
+                                                    <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="false" CC='<%# Eval("Code") %>' OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Code")) %>' />
                                                 </div>
                                             </asp:Panel>
                                         </td>

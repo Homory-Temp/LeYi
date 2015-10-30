@@ -145,6 +145,21 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotCode
+    {
+        public System.Guid DepotId { get; set; }
+        public System.Guid BatchId { get; set; }
+        public int BatchOrdinial { get; set; }
+        public System.DateTime Time { get; set; }
+        public int State { get; set; }
+        public string CodeJson { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotCreator
     {
         public System.Guid Id { get; set; }

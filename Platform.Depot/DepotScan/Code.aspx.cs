@@ -107,7 +107,49 @@ public partial class DepotAction_Code : DepotPageSingle
 
     protected void coding_ServerClick(object sender, EventArgs e)
     {
-
+        var codes = new List<string>();
+        view.Items.ForEach(o =>
+        {
+            var inner = o.FindControl("viewx") as RadListView;
+            if (inner.Items.Count > 0)
+            {
+                inner.Items.ForEach(i =>
+                {
+                    var cbi = i.FindControl("checkx") as CheckBox;
+                    if (cbi.Checked)
+                    {
+                        codes.Add(cbi.Attributes["CC"]);
+                    }
+                });
+            }
+            else
+            {
+                var cb = o.FindControl("checkx") as CheckBox;
+                if (cb.Checked)
+                {
+                    codes.Add(cb.Attributes["CC"]);
+                }
+            }
+        });
+        var bid = DataContext.GlobalId();
+        var bo = 0;
+        var bt = DateTime.Now;
+        for (var i = 0; i <= codes.Count / 300; i++)
+        {
+            bo++;
+            var dc = new DepotCode
+            {
+                DepotId = Depot.Id,
+                BatchId = bid,
+                BatchOrdinial = bo,
+                CodeJson = codes.Skip(i * 300).Take(300).ToList().ToJson(),
+                Time = bt,
+                State = 2
+            };
+            DataContext.DepotCode.Add(dc);
+        }
+        DataContext.SaveChanges();
+        Response.Redirect("~/DepotScan/CodeList?DepotId={0}".Formatted(Depot.Id));
     }
 
     protected void check_CheckedChanged(object sender, EventArgs e)
@@ -118,5 +160,10 @@ public partial class DepotAction_Code : DepotPageSingle
         cb.Checked = control.Checked;
         var cbs = view.Items.Select(o => o.FindControl("checkx") as CheckBox).ToList();
         cbs.ForEach(o => o.Checked = control.Checked);
+    }
+
+    protected void coded_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotScan/CodeList?DepotId={0}".Formatted(Depot.Id));
     }
 }
