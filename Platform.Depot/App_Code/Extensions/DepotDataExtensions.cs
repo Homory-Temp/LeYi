@@ -904,7 +904,7 @@ public static class DepotDataExtensions
         else
         {
             var x = @in.DepotInX.First();
-            if (x.DepotUseX.Count > 0)
+            if (x.DepotUseX.Count(o => o.InXId == x.Id) > 0)
                 return;
             if (amount > 0 && money > 0)
             {
