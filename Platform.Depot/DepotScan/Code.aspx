@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Code.aspx.cs" Inherits="DepotScan_Code" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Code.aspx.cs" Inherits="DepotAction_Code" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
 
@@ -23,6 +23,18 @@
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .depot {
+            margin-left: 10px;
+            float: left;
+            text-decoration: none;
+            font-weight: normal;
+        }
+        .depotx label {
+            text-decoration: none;
+            font-weight: normal;
+        }
+    </style>
 </head>
 <body>
     <form id="form" runat="server">
@@ -32,90 +44,82 @@
                 <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
                     <div class="row">
                         <div class="col-md-12">
-                            <span class="btn btn-tumblr">物资类别：</span>
-                            &nbsp;&nbsp;
-                            <input type="button" class="btn btn-info" id="all" runat="server" value="清除选定" onserverclick="all_ServerClick" />
-                            <input type="hidden" id="_all" runat="server" value="1" />
+                            <span class="btn btn-tumblr">类别：</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <telerik:RadTreeView ID="tree" runat="server" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" CheckBoxes="true" CheckChildNodes="true" OnNodeCheck="tree_NodeCheck">
+                            <telerik:RadTreeView ID="tree0" runat="server" OnNodeClick="tree0_NodeClick" ShowLineImages="false">
+                                <Nodes>
+                                    <telerik:RadTreeNode Value="0" Selected="true"></telerik:RadTreeNode>
+                                </Nodes>
+                            </telerik:RadTreeView>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <telerik:RadTreeView ID="tree" runat="server" OnNodeClick="tree_NodeClick" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId">
+                                <NodeTemplate>
+                                    <%# Eval("Name") %><%# Eval("Count").EmptyWhenZero() %>
+                                </NodeTemplate>
                             </telerik:RadTreeView>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-10" style="text-align: left;">
                     <div class="row">
-                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
-                            <ItemTemplate>
-                                <asp:Panel runat="server" Visible='<%# (Container.DataItem as CodeObject).Single %>'>
-                                    <div style="float: left; margin: 5px; border: solid 1px #2B2B2B; color: black;">
-                                        <div style="width: 410px; height: 46px; line-height: 46px; font-size: 21px; vertical-align: middle; font-weight: bold;">
-                                            <img src="../Common/配置/StoreLogo.png" style="height: 40px;" />
-                                            乐翼教育云物资 <%# ((Container.DataItem as CodeObject).Fixed ? "固定资产标签" : "准固定资产标签") %>
-                                        </div>
-                                        <div style="width: 240px; height: 180px; float: left; text-align: left; font-size: 16px; padding-left: 20px;">
-                                            <div style="margin-top: 20px;">
-                                                <label style="font-weight: normal;">物资名称</label>：<%# Eval("Name") %>
-                                            </div>
-                                            <div style="margin-top: 0;">
-                                                <label style="font-weight: normal;">规格型号</label>：<%# "{0}".Formatted((Container.DataItem as CodeObject).Specification) %>
-                                            </div>
-                                            <div style="margin-top: 0;">
-                                                <label style="font-weight: normal;">存放地　</label>
-                                                ：<%# (Container.DataItem as CodeObject).Place %>
-                                            </div>
-                                        </div>
-                                        <div style="width: 150px; height: 180px; float: left; text-align: center;">
-                                            <telerik:RadBarcode runat="server" Type="QRCode" Text='<%# Eval("Code") %>' OutputType="EmbeddedPNG" Width="150">
-                                                <QRCodeSettings Mode="Alphanumeric" ErrorCorrectionLevel="M" ECI="None" Version="0" AutoIncreaseVersion="true" DotSize="5" />
-                                            </telerik:RadBarcode>
-                                            <%# Eval("Code") %>
-                                        </div>
-                                    </div>
-                                </asp:Panel>
-                                <asp:Panel runat="server" Visible='<%# !(Container.DataItem as CodeObject).Single %>'>
-                                    <div style="float: left; margin: 5px; border: solid 1px #2B2B2B; color: black;">
-                                        <div style="width: 410px; height: 46px; line-height: 46px; font-size: 21px; vertical-align: middle; font-weight: bold;">
-                                            <img src="../Common/配置/StoreLogo.png" style="height: 40px;" />
-                                            乐翼教育云物资 物资标签
-                                        </div>
-                                        <div style="width: 240px; height: 180px; float: left; text-align: left; font-size: 16px; padding-left: 20px;">
-                                            <div style="margin-top: 20px;">
-                                                <label style="font-weight: normal;">物资名称</label>：<%# Eval("Name") %>
-                                            </div>
-                                            <div style="margin-top: 0;">
-                                                <label style="font-weight: normal;">规格型号</label>：<%# "{0}".Formatted((Container.DataItem as CodeObject).Specification) %>
-                                            </div>
-                                            <div style="margin-top: 0;">
-                                                <label style="font-weight: normal;">物资分类</label>：<%# (Container.DataItem as CodeObject).CatalogPath %>
-                                            </div>
-                                        </div>
-                                        <div style="width: 150px; height: 180px; float: left; text-align: center;">
-                                            <telerik:RadBarcode runat="server" Type="QRCode" Text='<%# Eval("Code") %>' OutputType="EmbeddedPNG" Width="150">
-                                                <QRCodeSettings Mode="Alphanumeric" ErrorCorrectionLevel="M" ECI="None" Version="0" AutoIncreaseVersion="true" DotSize="5" />
-                                            </telerik:RadBarcode>
-                                            <%# Eval("Code") %>
-                                        </div>
-                                    </div>
-                                </asp:Panel>
-                            </ItemTemplate>
-                        </telerik:RadListView>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">&nbsp;</div>
-                        <div class="col-md-6 text-center">
-                            <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="9" OnPageIndexChanged="pager_PageIndexChanged">
-                                <Fields>
-                                    <telerik:RadDataPagerButtonField FieldType="FirstPrev"></telerik:RadDataPagerButtonField>
-                                    <telerik:RadDataPagerButtonField FieldType="Numeric"></telerik:RadDataPagerButtonField>
-                                    <telerik:RadDataPagerButtonField FieldType="NextLast"></telerik:RadDataPagerButtonField>
-                                </Fields>
-                            </telerik:RadDataPager>
+                        <div class="col-md-12">
+                            <span class="btn btn-tumblr">物资：</span>
+                            <input id="all" runat="server" type="button" class="btn btn-info" value="全选" onserverclick="all_ServerClick" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <telerik:RadTextBox ID="toSearch" runat="server" Width="200" EmptyMessage="输入要检索的物资名称"></telerik:RadTextBox>
+                            &nbsp;&nbsp;
+                            <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input id="coding" runat="server" type="button" class="btn btn-info" value="生成条码" onserverclick="coding_ServerClick" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
-                        <div class="col-md-3">&nbsp;</div>
                     </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row depotx">
+                        <div class="col-md-12">
+                            <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
+                                <LayoutTemplate>
+                                    <table class="storeTablePrint">
+                                        <tr>
+                                            <th style="width: 30%;">名称</th>
+                                            <th style="width: 70%;">条码</th>
+                                        </tr>
+                                        <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
+                                    </table>
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                    <tr>
+                                        <td style="width: 30%;">
+                                            <asp:CheckBox ID="check" runat="server" CssClass="depot" AutoPostBack="true" OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Name")) %>' OnCheckedChanged="check_CheckedChanged" />
+                                        </td>
+                                        <td style="width: 70%;">
+                                            <asp:Panel ID="single" runat="server" Visible='<%# (bool)Eval("Single") %>'>
+                                                <telerik:RadListView ID="viewx" runat="server" DataSource='<%# Ordinals((Guid)Eval("Id")) %>'>
+                                                    <ItemTemplate>
+                                                        <div style="float: left; width: 200px;">
+                                                            <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="false" OBJ='<%# Eval("ObjectId") %>' ORD='<%# Eval("Ordinal") %>' Text='<%# "&nbsp;{1}&nbsp;-&nbsp;{0}".Formatted(Eval("Ordinal"), Eval("Code")) %>' />
+                                                        </div>
+                                                    </ItemTemplate>
+                                                </telerik:RadListView>
+                                            </asp:Panel>
+                                            <asp:Panel ID="multiple" runat="server" Visible='<%# !(bool)Eval("Single") %>'>
+                                                <div style="float: left; width: 200px;">
+                                                    <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="false" OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Code")) %>' />
+                                                </div>
+                                            </asp:Panel>
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                            </telerik:RadListView>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
                 </div>
             </div>
         </telerik:RadAjaxPanel>

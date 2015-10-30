@@ -2,84 +2,121 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using Telerik.Web.UI;
 
-public partial class DepotScan_Code : DepotPageSingle
+public partial class DepotAction_Code : DepotPageSingle
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
+            tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
             tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
             tree.DataBind();
-            tree.CheckAllNodes();
         }
     }
 
-    protected void all_ServerClick(object sender, EventArgs e)
+    protected Guid? CurrentNode
     {
-        if (_all.Value == "1")
+        get
         {
-            tree.UncheckAllNodes();
-            _all.Value = "0";
-            all.Value = "全部选定";
+            return tree.SelectedNode == null ? (Guid?)null : tree.SelectedValue.GlobalId();
         }
-        else
-        {
-            tree.CheckAllNodes();
-            _all.Value = "1";
-            all.Value = "清除选定";
-        }
+    }
+
+    protected void tree0_NodeClick(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
+    {
+        if (tree.SelectedNode != null)
+            tree.SelectedNode.Selected = false;
         view.Rebind();
     }
 
-    public class CodeObject
+    protected void tree_NodeClick(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
     {
-        public DepotObjectCatalog ObjectCatalog { get; set; }
-        public DepotInX InX { get; set; }
-        public string CatalogPath { get; set; }
-        public bool Single { get; set; }
-        public bool Fixed { get; set; }
-        public string Name { get; set; }
-        public string Unit { get; set; }
-        public string Specification { get; set; }
-        public string Place { get; set; }
-        public bool Consumable { get; set; }
-        public string Code { get; set; }
+        if (tree0.SelectedNode != null)
+            tree0.SelectedNode.Selected = false;
+        tree.GetAllNodes().Where(o => o.ParentNode == e.Node.ParentNode).ToList().ForEach(o => o.Expanded = false);
+        e.Node.Expanded = true;
+        view.Rebind();
     }
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => o.Value.GlobalId()).ToList();
-        var isVirtual = Depot.Featured(DepotType.固定资产库);
-        var source = catalogs.Join(DataContext.DepotObjectCatalog.Where(o => o.IsVirtual == isVirtual && o.IsLeaf == true), o => o, o => o.CatalogId, (a, b) => b).ToList().Join(DataContext.DepotInX, o => o.ObjectId, o => o.ObjectId, (a, b) => new { DOC = a, DIX = b }).ToList().Select(o => new CodeObject { InX=o.DIX, ObjectCatalog = o.DOC }).ToList();
-        source.ForEach(o =>
+        var node = CurrentNode;
+        var source = DataContext.DepotObjectLoad(Depot.Id, node.HasValue ? node.Value.GlobalId() : (Guid?)null);
+        if (!toSearch.Text.None())
         {
-            var obj = o.InX.DepotObject;
-            o.CatalogPath = DataContext.ToCatalog(o.ObjectCatalog.CatalogId, o.ObjectCatalog.Level).Single();
-            o.Name = obj.Name;
-            o.Unit = obj.Unit;
-            o.Specification = obj.Specification;
-            o.Single = obj.Single;
-            o.Fixed = obj.Fixed;
-            o.Place = o.InX.Place;
-            o.Consumable = obj.Consumable;
-            o.Code = o.InX.Code;
-        });
-        view.DataSource = source;
-        pager.Visible = source.Count > pager.PageSize;
+            source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+        }
+        source = source.Where(o => o.DepotInX.Count > 0 || o.Single == false);
+        view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
     }
 
-    protected void tree_NodeCheck(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
+    protected void search_ServerClick(object sender, EventArgs e)
     {
         view.Rebind();
     }
 
-    protected void pager_PageIndexChanged(object sender, Telerik.Web.UI.RadDataPagerPageIndexChangeEventArgs e)
+    protected void all_ServerClick(object sender, EventArgs e)
     {
-        view.Rebind();
+        var cbs = view.Items.Select(o => o.FindControl("check") as CheckBox).ToList();
+        if (cbs.All(o => o.Checked))
+        {
+            cbs.ForEach(o =>
+            {
+                o.Checked = false;
+                check_CheckedChanged(o, null);
+            });
+        }
+        else
+        {
+            cbs.ForEach(o =>
+            {
+                o.Checked = true;
+                check_CheckedChanged(o, null);
+            });
+        }
+    }
+
+    public static void DepotObjectEdit(DepotEntities db, Guid id, List<Guid> catalogIds)
+    {
+        var obj = db.DepotObject.Single(o => o.Id == id);
+        var catalogs = db.DepotObjectCatalog.Where(o => o.ObjectId == id && o.IsVirtual == false).ToList();
+        for (var i = 0; i < catalogs.Count(); i++)
+        {
+            db.DepotObjectCatalog.Remove(catalogs.ElementAt(i));
+        }
+        for (var i = 0; i < catalogIds.Count; i++)
+        {
+            db.DepotObjectCatalog.Add(new DepotObjectCatalog { ObjectId = id, CatalogId = catalogIds[i], IsVirtual = false, Level = i, IsLeaf = i == catalogIds.Count - 1 });
+        }
+    }
+
+    public class X
+    {
+        public int Ordinal { get; set; }
+        public string Code { get; set; }
+    }
+
+    protected List<DepotInX> Ordinals(Guid objId)
+    {
+        return DataContext.DepotInX.Where(o => o.ObjectId == objId).OrderBy(o => o.Ordinal).ToList();
+    }
+
+    protected void coding_ServerClick(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void check_CheckedChanged(object sender, EventArgs e)
+    {
+        var control = sender as CheckBox;
+        var view = control.NamingContainer.FindControl("viewx") as RadListView;
+        var cb = control.NamingContainer.FindControl("checkx") as CheckBox;
+        cb.Checked = control.Checked;
+        var cbs = view.Items.Select(o => o.FindControl("checkx") as CheckBox).ToList();
+        cbs.ForEach(o => o.Checked = control.Checked);
     }
 }
