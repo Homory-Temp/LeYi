@@ -5,7 +5,7 @@ using System.IO;
 using System.ServiceProcess;
 using System.Timers;
 
-namespace LY.Service.ResourceCount
+namespace LY.Service.QRCode
 {
     public partial class HomoryResourceCountService : ServiceBase
     {

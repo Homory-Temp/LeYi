@@ -8,7 +8,7 @@ namespace LY.Service.QRCode
         {
             var servicesToRun = new ServiceBase[] 
             { 
-                new HomoryResourceCountService() 
+                new HomoryQRCodeService() 
             };
             ServiceBase.Run(servicesToRun);
         }

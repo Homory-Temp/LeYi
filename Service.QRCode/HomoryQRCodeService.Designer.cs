@@ -1,6 +1,6 @@
 ﻿namespace LY.Service.QRCode
 {
-    partial class HomoryResourceCountService
+    partial class HomoryQRCodeService
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             // 
-            // HomoryResourceCountService
+            // HomoryQRCodeService
             // 
-            this.ServiceName = "LYResourceCountService";
+            this.ServiceName = "LYQRCodeService";
 
         }
 

@@ -182,6 +182,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Picture.Import"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Tool.Import", "Windows.MMS.Tool.Import\Windows.MMS.Tool.Import.csproj", "{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.QRCode", "Service.QRCode\Service.QRCode.csproj", "{B057919F-3054-4A05-BB8F-0AE03A26D53A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -232,6 +234,10 @@ Global
 		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B057919F-3054-4A05-BB8F-0AE03A26D53A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B057919F-3054-4A05-BB8F-0AE03A26D53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B057919F-3054-4A05-BB8F-0AE03A26D53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B057919F-3054-4A05-BB8F-0AE03A26D53A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
