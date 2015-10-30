@@ -217,4 +217,10 @@ public partial class StoreAction_In : SingleStorePage
         DoIn(true);
         Response.Redirect("~/StoreQuery/TargetPrint?StoreId={0}&TargetId={1}".Formatted(StoreId, target.SelectedValue));
     }
+
+    protected void addObj_ServerClick(object sender, EventArgs e)
+    {
+        var url = "../StoreAction/ObjectAdd?StoreId={0}".Formatted(CurrentStore.Id);
+        ap.ResponseScripts.Add("window.open('{0}', '_blank');".Formatted(url));
+    }
 }

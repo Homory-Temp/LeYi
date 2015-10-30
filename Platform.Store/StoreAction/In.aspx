@@ -122,6 +122,12 @@
                         入库物资选择
                     </div>
                 </div>
+                <div class="col-md-8">
+                    &nbsp;
+                </div>
+                <div class="col-md-2 text-right">
+                    <input type="button" class="btn btn-tumblr" id="addObj" runat="server" value="新增物资" title="新增物资" onserverclick="addObj_ServerClick" />
+                </div>
             </div>
             <div class="row" id="x2" runat="server">
                 <div class="col-md-12">
