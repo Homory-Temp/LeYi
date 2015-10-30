@@ -16,6 +16,11 @@ public partial class Control_SideBar : SingleStoreControl
         }
     }
 
+    protected bool HasWarn()
+    {
+        return db.Value.StoreObject.Count(o => ((o.Amount < o.Low && o.Low > 0) || (o.Amount > o.High && o.High > 0)) && o.State < 2) > 0;
+    }
+
     protected void qb_ServerClick(object sender, EventArgs e)
     {
         Session.Clear();

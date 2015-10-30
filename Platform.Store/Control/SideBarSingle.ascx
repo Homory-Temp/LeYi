@@ -32,9 +32,9 @@
                             <li><a href='<%= "../StoreQuery/Use?StoreId={0}".Formatted(StoreId) %>'>出库单查询</a></li>
                             <li><a href='<%= "../StoreQuery/Used?StoreId={0}".Formatted(StoreId) %>'>出库查询</a></li>
                             <li style='<%= (CurrentStore.State != Models.StoreState.食品 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Return?StoreId={0}".Formatted(StoreId) %>'>归还查询</a></li>
-                            <li style='<%= (CurrentStore.State == Models.StoreState.食品 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/StatisticsMonthly?StoreId={0}".Formatted(StoreId) %>'>月库存查询</a></li>
+                            <%--<li style='<%= (CurrentStore.State == Models.StoreState.食品 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/StatisticsMonthly?StoreId={0}".Formatted(StoreId) %>'>月库存查询</a></li>--%>
                             <li style='<%= (CurrentStore.State == Models.StoreState.食品 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/StatisticsDaily?StoreId={0}".Formatted(StoreId) %>'>汇总统计</a></li>
-                            <li><a href='<%= "../StoreQuery/Statistics?StoreId={0}".Formatted(StoreId) %>'>库存统计</a></li>
+                            <li><a href='<%= "../StoreQuery/Statistics?StoreId={0}".Formatted(StoreId) %>'>月库存查询</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Import?StoreId={0}".Formatted(StoreId) %>'>导入查询</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Move?StoreId={0}".Formatted(StoreId) %>'>分库查询</a></li>
                         </ul>
@@ -69,7 +69,7 @@
                 <span id="crumb" runat="server" class="btn btn-info" style="margin-left: 10px;"></span>
                 <span class="btn btn-info" onclick="top.location.href = '../Store/Home';" style="float: right;">仓库切换</span>
                 <span class="btn btn-info" onclick='<%= "top.location.href = \"../StoreAction/Object?StoreId={0}\"".Formatted(StoreId) %>' style="float: right; margin-right: 13px;">物资管理</span>
-                <span class="btn btn-info" onclick='<%= "top.location.href = \"../StoreHome/Warn?StoreId={0}\"".Formatted(StoreId) %>' style="float: right; margin-right: 13px;">库存预警</span>
+                <span class='<%= HasWarn() ? "btn btn-warning" : "btn btn-info" %>' onclick='<%= "top.location.href = \"../StoreHome/Warn?StoreId={0}\"".Formatted(StoreId) %>' style="float: right; margin-right: 13px;">库存预警</span>
                 <span class="btn btn-info" onclick='<%= "top.location.href = \"../StoreHome/Home?StoreId={0}\"".Formatted(StoreId) %>' style="float: right; margin-right: 13px;">快速导航</span>
                 <span style="clear: both;"></span>
                 <hr style="color: #2B2B2B; margin-top: 4px;" />

@@ -46,7 +46,7 @@ public partial class StoreAction_UseSingleEdit : SingleStorePage
             var @in = cs.StoreIn;
             var perPrice = @in.PerPrice;
             var fee = @in.Fee / @in.OriginalAmount;
-            var plusAmount = cs.Amount - amount.PeekValue(lc.Amount);
+            var plusAmount = cs.Amount - amount.PeekValue(lc.Amount);//20
             var plusFee = fee * plusAmount;
             var plusMoney = perPrice * plusAmount + plusFee;
             cs.Amount -= plusAmount;

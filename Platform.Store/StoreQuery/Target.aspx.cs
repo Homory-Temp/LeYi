@@ -107,6 +107,15 @@ public partial class StoreQuery_Target : SingleStorePage
         var id = (sender as HtmlInputButton).Attributes["match"].GlobalId();
         var target = db.Value.StoreTarget.Single(o => o.Id == id);
         target.In = true;
+
+        var money = target.StoreIn.Where(o => o.SourceAmount > 0).Sum(o => o.SourceMoney);
+        target.Paid = money;
+        target.AdjustedMoney = money;
+
+        db.Value.SaveChanges();
+
+
+
         db.Value.SaveChanges();
         Response.Redirect("~/StoreQuery/TargetPrint?StoreId={0}&TargetId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"].GlobalId()));
     }
