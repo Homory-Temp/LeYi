@@ -117,7 +117,7 @@
                                 <tr>
                                     <homory:UseBody runat="server" ID="UseBody" />
                                     <td>
-                                        <input type="button" class="btn btn-tumblr" value="编辑" id="edit" runat="server" match='<%# Eval("Id") %>' matchx='<%# Eval("Type") %>' onserverclick="edit_ServerClick" />
+                                        <input type="button" class="btn btn-tumblr" value="编辑" id="edit" runat="server" visible='<%# RightAdvanced %>' match='<%# Eval("Id") %>' matchx='<%# Eval("Type") %>' onserverclick="edit_ServerClick" />
                                     </td>
                                 </tr>
                             </ItemTemplate>

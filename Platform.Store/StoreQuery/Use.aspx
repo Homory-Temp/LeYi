@@ -95,7 +95,7 @@
                             <td><%# Eval("Money").ToMoney() %></td>
                             <td><%# Eval("Operator") %></td>
                             <td>
-                                <input type="button" class="btn btn-tumblr" value="编辑" id="edit" runat="server" match='<%# Eval("Id") %>' onserverclick="edit_ServerClick" />
+                                <input type="button" class="btn btn-tumblr" value="编辑" id="edit" runat="server" match='<%# Eval("Id") %>' visible='<%# RightAdvanced %>' onserverclick="edit_ServerClick" />
                                 <input type="button" class="btn btn-tumblr" value="打印" id="print" runat="server" match='<%# Eval("Id") %>' onserverclick="print_ServerClick" />
                             </td>
                         </tr>
