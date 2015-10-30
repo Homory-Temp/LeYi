@@ -74,7 +74,7 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <telerik:RadDropDownTree ID="catalog" runat="server" AutoPostBack="false" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" DropDownSettings-CloseDropDownOnSelection="true" Width="300"></telerik:RadDropDownTree>
                             &nbsp;&nbsp;
-                            <input id="move" runat="server" type="button" class="btn btn-info" value="调拨" onserverclick="move_ServerClick" />
+                            <input id="move" runat="server" type="button" class="btn btn-info" value="转移" onserverclick="move_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
                     </div>
