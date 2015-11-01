@@ -73,6 +73,11 @@ public partial class DepotAction_Return : DepotPageSingle
             var r = new InMemoryReturn(); 
             r.UseX = (item.FindControl("id") as Label).Text.GlobalId();
             r.Amount = (item.FindControl("amount") as RadNumericTextBox).PeekValue(0M);
+            r.OutAmount = (item.FindControl("outAmount") as RadNumericTextBox).PeekValue(0M);
+            if (r.OutAmount > r.Amount)
+            {
+                r.OutAmount = r.Amount;
+            }
             r.Note = (item.FindControl("note") as RadTextBox).Text;
             if (r.Amount > 0)
             {

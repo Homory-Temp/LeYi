@@ -74,6 +74,7 @@
                                     <th>单价</th>
                                     <th>合计</th>
                                     <th>归还数</th>
+                                    <th>报废数</th>
                                     <th>备注</th>
                                 </tr>
                                 <asp:PlaceHolder ID="useHolder" runat="server"></asp:PlaceHolder>
@@ -104,6 +105,9 @@
                                 </td>
                                 <td>
                                     <telerik:RadNumericTextBox ID="amount" runat="server" Width="120" MaxValue='<%# (double)((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")) %>' NumberFormat-DecimalDigits='<%# Depot.Featured(Models.DepotType.小数数量库) ? 2 : 0 %>' DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
+                                </td>
+                                <td>
+                                    <telerik:RadNumericTextBox ID="outAmount" runat="server" Width="120" NumberFormat-DecimalDigits="0" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
                                 </td>
                                 <td>
                                     <telerik:RadTextBox ID="note" runat="server" Width="100"></telerik:RadTextBox>
