@@ -96,6 +96,7 @@
                                             <th>序号</th>
                                             <th>名称</th>
                                             <th>单位</th>
+                                            <th>品牌</th>
                                             <th>规格</th>
                                             <th>在库数量</th>
                                             <th>所属分库</th>
@@ -110,6 +111,7 @@
                                             <asp:CheckBox ID="check" runat="server" AutoPostBack="false" CssClass="depot" OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Name")) %>' />
                                         </td>
                                         <td><%# Eval("Unit") %></td>
+                                        <td><%# Eval("Brand") %></td>
                                         <td><%# Eval("Specification") %></td>
                                         <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
                                         <td>

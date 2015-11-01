@@ -29,6 +29,7 @@ public partial class Control_ObjectUse : DepotControlSingle
                 var oid = use.ObjectId.Value;
                 var so = DataContext.DepotObject.Single(o => o.Id == oid);
                 unit.Text = so.Unit;
+                brand.Text = so.Brand;
                 specification.Text = so.Specification;
                 stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
                 obj.SelectedIndex = obj.FindItemIndexByValue(use.ObjectId.ToString());
@@ -113,6 +114,7 @@ public partial class Control_ObjectUse : DepotControlSingle
             var id = obj.SelectedValue.GlobalId();
             var so = DataContext.DepotObject.Single(o => o.Id == id);
             unit.Text = so.Unit;
+            brand.Text = so.Brand;
             specification.Text = so.Specification;
             stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
             if (so.Consumable)

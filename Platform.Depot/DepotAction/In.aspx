@@ -163,6 +163,7 @@
                                     <th>物资类别</th>
                                     <th>物资名称</th>
                                     <th>单位</th>
+                                    <th>品牌</th>
                                     <th>规格</th>
                                     <th>库存</th>
                                     <th>数量</th>
@@ -214,6 +215,7 @@
                                     <th>物资类别</th>
                                     <th>物资名称</th>
                                     <th>单位</th>
+                                    <th>品牌</th>
                                     <th>规格</th>
                                     <th>入库日期</th>
                                     <th>数量</th>
@@ -230,6 +232,7 @@
                                 <td><%# Eval("CatalogName") %></td>
                                 <td><%# Eval("Name") %></td>
                                 <td><%# Eval("Unit") %></td>
+                                <td><%# Eval("Brand") %></td>
                                 <td><%# Eval("Specification") %></td>
                                 <td><%# Eval("Time").ToDay() %></td>
                                 <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>

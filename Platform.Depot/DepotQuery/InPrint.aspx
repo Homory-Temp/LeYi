@@ -72,6 +72,7 @@
                                     <th>单价</th>
                                     <th>总价</th>
                                     <th>供应商</th>
+                                    <th>品牌</th>
                                     <th>规格</th>
                                     <th>备注</th>
                                 </tr>
@@ -106,6 +107,7 @@
                                 <td><%# Eval("PriceSet").ToMoney() %></td>
                                 <td><%# Eval("Total").ToMoney() %></td>
                                 <td><%# Eval("OrderSource") %></td>
+                                <td><%# Eval("Brand") %></td>
                                 <td><%# Eval("Specification") %></td>
                                 <td><%# Eval("Note") %></td>
                             </tr>

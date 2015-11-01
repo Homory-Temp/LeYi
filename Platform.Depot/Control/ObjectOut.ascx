@@ -15,6 +15,9 @@
         <asp:Label ID="unit" runat="server"></asp:Label>
     </td>
     <td>
+        <asp:Label ID="brand" runat="server"></asp:Label>
+    </td>
+    <td>
         <asp:Label ID="specification" runat="server"></asp:Label>
     </td>
     <td>
