@@ -441,6 +441,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a pr
             <PropertyRef Name="IsVirtual" />
             <PropertyRef Name="Unit" />
             <PropertyRef Name="Specification" />
+            <PropertyRef Name="Brand" />
             <PropertyRef Name="InId" />
             <PropertyRef Name="OrderId" />
             <PropertyRef Name="ObjectId" />
@@ -466,6 +467,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a pr
           <Property Name="IsVirtual" Type="bit" Nullable="false" />
           <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Specification" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
@@ -1065,6 +1067,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
     [DepotInXRecord].[IsVirtual] AS [IsVirtual], 
     [DepotInXRecord].[Unit] AS [Unit], 
     [DepotInXRecord].[Specification] AS [Specification], 
+    [DepotInXRecord].[Brand] AS [Brand], 
     [DepotInXRecord].[InId] AS [InId], 
     [DepotInXRecord].[OrderId] AS [OrderId], 
     [DepotInXRecord].[ObjectId] AS [ObjectId], 
@@ -1949,6 +1952,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <PropertyRef Name="IsVirtual" />
             <PropertyRef Name="OrderSource" />
             <PropertyRef Name="UsageTarget" />
+            <PropertyRef Name="Brand" />
           </Key>
           <Property Name="OrderName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Done" Type="Boolean" Nullable="false" />
@@ -1975,6 +1979,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
           <Property Name="OrderSource" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="UsageTarget" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -2771,6 +2776,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotInXRecord">
             <EntityTypeMapping TypeName="DepotModel.DepotInXRecord">
               <MappingFragment StoreEntitySet="DepotInXRecord">
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="UsageTarget" ColumnName="UsageTarget" />
                 <ScalarProperty Name="OrderSource" ColumnName="OrderSource" />
                 <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />

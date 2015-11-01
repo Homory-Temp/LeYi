@@ -355,6 +355,7 @@ namespace Models
         public bool IsVirtual { get; set; }
         public string OrderSource { get; set; }
         public string UsageTarget { get; set; }
+        public string Brand { get; set; }
     }
 }
 namespace Models

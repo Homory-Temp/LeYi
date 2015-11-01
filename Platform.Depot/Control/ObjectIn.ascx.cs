@@ -37,6 +37,12 @@ public partial class Control_ObjectIn : DepotControlSingle
                 obj.SelectedIndex = obj.FindItemIndexByValue(@in.ObjectId.ToString());
             }
         }
+        if (@in.ResponsibleId.HasValue)
+        {
+            var item = people.FindItemByValue(@in.ResponsibleId.Value.ToString());
+            if (item != null)
+                item.Selected = true;
+        }
         if (!"ObjectId".Query().None())
         {
             catalog.Enabled = false;
@@ -96,9 +102,12 @@ public partial class Control_ObjectIn : DepotControlSingle
 
     protected void people_Load(object sender, EventArgs e)
     {
-        people.Items.Clear();
-        people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "", Value = "", Selected = true });
-        people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
-        people.DataBind();
+        if (!IsPostBack)
+        {
+            people.Items.Clear();
+            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "", Value = "", Selected = true });
+            people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
+            people.DataBind();
+        }
     }
 }
