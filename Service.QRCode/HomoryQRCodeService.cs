@@ -113,6 +113,20 @@ namespace LY.Service.QRCode
                     }
                     Log("ToQRCount", list.Count.ToString());
                     QRS(list);
+                    con = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["Entities"].ConnectionString);
+                    con.Open();
+                    foreach (var @do in list)
+                    {
+                        com = new System.Data.SqlClient.SqlCommand("UPDATE DepotCode SET [State] = 1 WHERE BatchId = '{0}'".Formatted(@do.BatchId), con);
+                        com.ExecuteNonQuery();
+                    }
+                    try
+                    {
+                        con.Close();
+                    }
+                    catch
+                    {
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -215,17 +229,54 @@ namespace LY.Service.QRCode
                     g.DrawString(qrcode, new Font(二维码文字字体, 二维码文字字号), B, 二维码文字左边距, 二维码文字上边距);
                     var content = "";
                     var sb = new StringBuilder();
-                    content = "资产名称：{0}".Formatted("测试物资");
+                    var info = string.Empty;
+
+                    try
+                    {
+                        var con = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["Entities"].ConnectionString);
+                        var com = new System.Data.SqlClient.SqlCommand("EXEC [dbo].[GetQRInfo] @QR = N'{0}'".Formatted(qrcode), con);
+                        con.Open();
+                        var reader = com.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            info = reader.GetString(0);
+                        }
+                        try
+                        {
+                            reader.Close();
+                        }
+                        catch
+                        {
+                        }
+                        try
+                        {
+                            con.Close();
+                        }
+                        catch
+                        {
+                        }
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+
+                    var infos = info.Split(new string[] { "@@@" }, StringSplitOptions.None);
+
+                    content = "资产名称：{0}".Formatted(infos[0]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
-                    content = "规格型号：{0} {1}".Formatted("A4", "盒装");
+                    content = "规格型号：{0}{1}{2}".Formatted(infos[1], infos[1].None() ? "" : " ", infos[2]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
-                    content = "资产编号：{0}".Formatted("1234567");
-                    Cut(sb, content, 内容每行字数, 内容空字符数);
-                    content = "存放地　：{0}".Formatted("教室A");
-                    Cut(sb, content, 内容每行字数, 内容空字符数);
-                    content = "责任人　：{0}".Formatted("凌俊伟");
-                    Cut(sb, content, 内容每行字数, 内容空字符数);
-                    content = "物资分类：{0}".Formatted("贵重品-计算机");
+                    if (infos[3] == "1")
+                    {
+                        content = "资产编号：{0}".Formatted(infos[4].Length > 7 ? infos[4].Substring(infos[4].Length - 7) : infos[4]);
+                        Cut(sb, content, 内容每行字数, 内容空字符数);
+                    }
+                    //content = "存放地　：{0}".Formatted("教室A");
+                    //Cut(sb, content, 内容每行字数, 内容空字符数);
+                    //content = "责任人　：{0}".Formatted("凌俊伟");
+                    //Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "物资分类：{0}".Formatted(infos[5]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
                     g.DrawString(sb.ToString(), new Font(内容字体, 内容字号), B, 左侧左边距, 左侧上边距);
                     image.Save("{0}/{1}.png".Formatted(path, qrcode), ImageFormat.Png);
