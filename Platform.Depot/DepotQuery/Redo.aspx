@@ -23,52 +23,126 @@
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
     <![endif]-->
+    <script>
+        function printDepot() {
+            bdhtml = window.document.body.innerHTML;
+            sprnstr = "<!-- Start Printing -->";
+            eprnstr = "<!-- End Printing -->";
+            prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 23);
+            prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
+            prnhtml = "<body>" + prnhtml + "</body>";
+            window.document.body.innerHTML = prnhtml;
+            window.print();
+            window.document.body.innerHTML = bdhtml;
+            return false;
+        }
+    </script>
 </head>
 <body>
     <form id="form" runat="server">
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 退货查询" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
-                <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
-                    <LayoutTemplate>
+                <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
+                    <div class="row">
                         <div class="col-md-12">
-                            <table class="storeTable text-center">
-                                <tr>
-                                    <th>购置单</th>
-                                    <th>物资名称</th>
-                                    <th>退货数量</th>
-                                </tr>
-                                <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
-                            </table>
+                            <span class="btn btn-tumblr">物资类别：</span>
+                            &nbsp;&nbsp;
+                            <input type="button" class="btn btn-info" id="all" runat="server" value="清除选定" onserverclick="all_ServerClick" />
+                            <input type="hidden" id="_all" runat="server" value="1" />
                         </div>
-                    </LayoutTemplate>
-                    <ItemTemplate>
-                        <tr>
-                            <td>
-                                <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text="购置单" NavigateUrl='<%# "../DepotQuery/InPrint?DepotId={0}&OrderId={1}".Formatted(Depot.Id, Eval("OrderId")) %>'></asp:HyperLink></td>
-                            <td><%# Eval("Name") %></td>
-                            <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
-                        </tr>
-                    </ItemTemplate>
-                    <EmptyDataTemplate>
-                        <div class="col-md-12 text-center">
-                            <div class="btn btn-warning">暂无记录</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <telerik:RadTreeView ID="tree" runat="server" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" CheckBoxes="true" CheckChildNodes="true" OnNodeCheck="tree_NodeCheck">
+                            </telerik:RadTreeView>
                         </div>
-                    </EmptyDataTemplate>
-                </telerik:RadListView>
-            </div>
-            <div class="row">
-                <div class="col-md-3">&nbsp;</div>
-                <div class="col-md-6 text-center">
-                    <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="10">
-                        <Fields>
-                            <telerik:RadDataPagerButtonField FieldType="FirstPrev"></telerik:RadDataPagerButtonField>
-                            <telerik:RadDataPagerButtonField FieldType="Numeric"></telerik:RadDataPagerButtonField>
-                            <telerik:RadDataPagerButtonField FieldType="NextLast"></telerik:RadDataPagerButtonField>
-                        </Fields>
-                    </telerik:RadDataPager>
+                    </div>
                 </div>
-                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-10" style="text-align: left;">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                    <telerik:RadDatePicker ID="periodx" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
+                        <DatePopupButton runat="server" Visible="false" />
+                    </telerik:RadDatePicker>
+                    &nbsp;&nbsp;-&nbsp;&nbsp;
+                            <telerik:RadDatePicker ID="period" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
+                                <DatePopupButton runat="server" Visible="false" />
+                            </telerik:RadDatePicker>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                    <telerik:RadTextBox ID="toSearch" runat="server" EmptyMessage="物资名称"></telerik:RadTextBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                    <telerik:RadComboBox ID="people" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true">
+                    </telerik:RadComboBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="button" class="btn btn-tumblr" id="query" runat="server" value="查询" onserverclick="query_ServerClick" />
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <input type="hidden" id="___total" runat="server" />
+                        <!-- Start Printing -->
+                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
+                            <LayoutTemplate>
+                                <div class="col-md-12">
+                                    <table class="storeTable text-center">
+                                        <tr>
+                                            <th>退货日期</th>
+                                            <th>物资名称</th>
+                                            <th>单位</th>
+                                            <th>数量</th>
+                                            <th>单价</th>
+                                            <th>合计</th>
+                                            <th>操作人</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
+                                        <tr>
+                                            <td colspan="12">总计：<%# ___total.Value %></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </LayoutTemplate>
+                            <ItemTemplate>
+                                <tr>
+                                    <td><%# Eval("Time").ToDay() %></td>
+                                    <td><%# Eval("Name") %></td>
+                                    <td><%# Eval("Unit") %></td>
+                                    <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
+                                    <td><%# ((decimal)Eval("Amount") == 0 ? 0 : decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount"))).ToMoney() %></td>
+                                    <td><%# Eval("Money").ToMoney() %></td>
+                                    <td><%# Eval("Operator") %></td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                            <EmptyDataTemplate>
+                                <div class="col-md-12 text-center">
+                                    <div class="btn btn-warning">暂无记录</div>
+                                </div>
+                            </EmptyDataTemplate>
+                        </telerik:RadListView>
+                        <!-- End Printing -->
+                    </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <input type="button" class="btn btn-tumblr" id="print" value="打印" onclick="printDepot();" />
+                </div>
+            </div>
+                    <%--<div class="row">
+                        <div class="col-md-3">&nbsp;</div>
+                        <div class="col-md-6 text-center">
+                            <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="10" OnPageIndexChanged="pager_PageIndexChanged">
+                                <Fields>
+                                    <telerik:RadDataPagerButtonField FieldType="FirstPrev"></telerik:RadDataPagerButtonField>
+                                    <telerik:RadDataPagerButtonField FieldType="Numeric"></telerik:RadDataPagerButtonField>
+                                    <telerik:RadDataPagerButtonField FieldType="NextLast"></telerik:RadDataPagerButtonField>
+                                </Fields>
+                            </telerik:RadDataPager>
+                        </div>
+                        <div class="col-md-3">&nbsp;</div>
+                    </div>--%>
+                </div>
             </div>
         </telerik:RadAjaxPanel>
     </form>
