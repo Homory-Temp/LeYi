@@ -223,7 +223,7 @@
           <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="DepotRedoX">
+        <EntityType Name="DepotRedo">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -231,7 +231,7 @@
           <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="InXId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
@@ -906,26 +906,26 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DepotRedoX_DepotInX">
-          <End Role="DepotInX" Type="Self.DepotInX" Multiplicity="1" />
-          <End Role="DepotRedoX" Type="Self.DepotRedoX" Multiplicity="*" />
+        <Association Name="FK_DepotRedo_DepotIn">
+          <End Role="DepotIn" Type="Self.DepotIn" Multiplicity="1" />
+          <End Role="DepotRedo" Type="Self.DepotRedo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DepotInX">
+            <Principal Role="DepotIn">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="DepotRedoX">
-              <PropertyRef Name="InXId" />
+            <Dependent Role="DepotRedo">
+              <PropertyRef Name="InId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DepotRedoX_DepotObject">
+        <Association Name="FK_DepotRedo_DepotObject">
           <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
-          <End Role="DepotRedoX" Type="Self.DepotRedoX" Multiplicity="*" />
+          <End Role="DepotRedo" Type="Self.DepotRedo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DepotObject">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="DepotRedoX">
+            <Dependent Role="DepotRedo">
               <PropertyRef Name="ObjectId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1035,7 +1035,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySet Name="DepotObject" EntityType="Self.DepotObject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotObjectCatalog" EntityType="Self.DepotObjectCatalog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotOrder" EntityType="Self.DepotOrder" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DepotRedoX" EntityType="Self.DepotRedoX" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotRedo" EntityType="Self.DepotRedo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotReturn" EntityType="Self.DepotReturn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotRole" EntityType="Self.DepotRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotSetting" EntityType="Self.DepotSetting" Schema="dbo" store:Type="Tables" />
@@ -1317,13 +1317,13 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <End Role="DepotOrder" EntitySet="DepotOrder" />
             <End Role="DepotInX" EntitySet="DepotInX" />
           </AssociationSet>
-          <AssociationSet Name="FK_DepotRedoX_DepotInX" Association="Self.FK_DepotRedoX_DepotInX">
-            <End Role="DepotInX" EntitySet="DepotInX" />
-            <End Role="DepotRedoX" EntitySet="DepotRedoX" />
+          <AssociationSet Name="FK_DepotRedo_DepotIn" Association="Self.FK_DepotRedo_DepotIn">
+            <End Role="DepotIn" EntitySet="DepotIn" />
+            <End Role="DepotRedo" EntitySet="DepotRedo" />
           </AssociationSet>
-          <AssociationSet Name="FK_DepotRedoX_DepotObject" Association="Self.FK_DepotRedoX_DepotObject">
+          <AssociationSet Name="FK_DepotRedo_DepotObject" Association="Self.FK_DepotRedo_DepotObject">
             <End Role="DepotObject" EntitySet="DepotObject" />
-            <End Role="DepotRedoX" EntitySet="DepotRedoX" />
+            <End Role="DepotRedo" EntitySet="DepotRedo" />
           </AssociationSet>
           <AssociationSet Name="FK_DepotReturn_DepotUseX" Association="Self.FK_DepotReturn_DepotUseX">
             <End Role="DepotUseX" EntitySet="DepotUseX" />
@@ -1483,14 +1483,14 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySet Name="DepotOutRecord" EntityType="DepotModel.DepotOutRecord" />
           <EntitySet Name="DepotObjectX" EntityType="DepotModel.DepotObjectX" />
           <EntitySet Name="DepotCode" EntityType="DepotModel.DepotCode" />
-          <EntitySet Name="DepotRedoX" EntityType="DepotModel.DepotRedoX" />
-          <AssociationSet Name="FK_DepotRedoX_DepotInX" Association="DepotModel.FK_DepotRedoX_DepotInX">
-            <End Role="DepotInX" EntitySet="DepotInX" />
-            <End Role="DepotRedoX" EntitySet="DepotRedoX" />
+          <EntitySet Name="DepotRedo" EntityType="DepotModel.DepotRedo" />
+          <AssociationSet Name="FK_DepotRedo_DepotIn" Association="DepotModel.FK_DepotRedo_DepotIn">
+            <End Role="DepotIn" EntitySet="DepotIn" />
+            <End Role="DepotRedo" EntitySet="DepotRedo" />
           </AssociationSet>
-          <AssociationSet Name="FK_DepotRedoX_DepotObject" Association="DepotModel.FK_DepotRedoX_DepotObject">
+          <AssociationSet Name="FK_DepotRedo_DepotObject" Association="DepotModel.FK_DepotRedo_DepotObject">
             <End Role="DepotObject" EntitySet="DepotObject" />
-            <End Role="DepotRedoX" EntitySet="DepotRedoX" />
+            <End Role="DepotRedo" EntitySet="DepotRedo" />
           </AssociationSet>
           </EntityContainer>
         <EnumType Name="State">
@@ -1776,7 +1776,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="FixedNumber" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Brand" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Extension" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DepotRedoX" Relationship="DepotModel.FK_DepotRedoX_DepotObject" FromRole="DepotObject" ToRole="DepotRedoX" />
+          <NavigationProperty Name="DepotRedo" Relationship="DepotModel.FK_DepotRedo_DepotObject" FromRole="DepotObject" ToRole="DepotRedo" />
         </EntityType>
         <EntityType Name="DepotFlow">
           <Key>
@@ -1831,6 +1831,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotIn_DepotObject" FromRole="DepotIn" ToRole="DepotObject" />
           <NavigationProperty Name="DepotOrder" Relationship="DepotModel.FK_DepotIn_DepotOrder" FromRole="DepotIn" ToRole="DepotOrder" />
           <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotIn" FromRole="DepotIn" ToRole="DepotInX" />
+          <NavigationProperty Name="DepotRedo" Relationship="DepotModel.FK_DepotRedo_DepotIn" FromRole="DepotIn" ToRole="DepotRedo" />
         </EntityType>
         <EntityType Name="DepotStatistics">
           <Key>
@@ -1941,7 +1942,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <NavigationProperty Name="DepotOrder" Relationship="DepotModel.FK_DepotInX_DepotOrder" FromRole="DepotInX" ToRole="DepotOrder" />
           <NavigationProperty Name="DepotUseX" Relationship="DepotModel.FK_DepotUseX_DepotInX" FromRole="DepotInX" ToRole="DepotUseX" />
           <Property Name="ResponsibleId" Type="Guid" />
-          <NavigationProperty Name="DepotRedoX" Relationship="DepotModel.FK_DepotRedoX_DepotInX" FromRole="DepotInX" ToRole="DepotRedoX" />
         </EntityType>
         <Association Name="FK_DepotInX_DepotIn">
           <End Type="DepotModel.DepotIn" Role="DepotIn" Multiplicity="1" />
@@ -2499,7 +2499,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="State" Type="Int32" Nullable="false" />
           <Property Name="CodeJson" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="DepotRedoX">
+        <EntityType Name="DepotRedo">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -2507,39 +2507,39 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="DepotId" Type="Guid" Nullable="false" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="ObjectId" Type="Guid" Nullable="false" />
-          <Property Name="InXId" Type="Guid" Nullable="false" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotRedoX_DepotInX" FromRole="DepotRedoX" ToRole="DepotInX" />
-          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotRedoX_DepotObject" FromRole="DepotRedoX" ToRole="DepotObject" />
+          <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotRedo_DepotIn" FromRole="DepotRedo" ToRole="DepotIn" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotRedo_DepotObject" FromRole="DepotRedo" ToRole="DepotObject" />
         </EntityType>
-        <Association Name="FK_DepotRedoX_DepotInX">
-          <End Type="DepotModel.DepotInX" Role="DepotInX" Multiplicity="1" />
-          <End Type="DepotModel.DepotRedoX" Role="DepotRedoX" Multiplicity="*" />
+        <Association Name="FK_DepotRedo_DepotIn">
+          <End Type="DepotModel.DepotIn" Role="DepotIn" Multiplicity="1" />
+          <End Type="DepotModel.DepotRedo" Role="DepotRedo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DepotInX">
+            <Principal Role="DepotIn">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="DepotRedoX">
-              <PropertyRef Name="InXId" />
+            <Dependent Role="DepotRedo">
+              <PropertyRef Name="InId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DepotRedoX_DepotObject">
+        <Association Name="FK_DepotRedo_DepotObject">
           <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
-          <End Type="DepotModel.DepotRedoX" Role="DepotRedoX" Multiplicity="*" />
+          <End Type="DepotModel.DepotRedo" Role="DepotRedo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DepotObject">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="DepotRedoX">
+            <Dependent Role="DepotRedo">
               <PropertyRef Name="ObjectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -3156,14 +3156,14 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DepotRedoX">
-            <EntityTypeMapping TypeName="DepotModel.DepotRedoX">
-              <MappingFragment StoreEntitySet="DepotRedoX">
+          <EntitySetMapping Name="DepotRedo">
+            <EntityTypeMapping TypeName="DepotModel.DepotRedo">
+              <MappingFragment StoreEntitySet="DepotRedo">
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="Money" ColumnName="Money" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="InXId" ColumnName="InXId" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
                 <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />

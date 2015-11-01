@@ -235,6 +235,7 @@ namespace Models
         public DepotIn()
         {
             this.DepotInX = new HashSet<DepotInX>();
+            this.DepotRedo = new HashSet<DepotRedo>();
         }
     
         public System.Guid Id { get; set; }
@@ -257,6 +258,8 @@ namespace Models
         public virtual DepotOrder DepotOrder { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotInX> DepotInX { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepotRedo> DepotRedo { get; set; }
     }
 }
 namespace Models
@@ -298,7 +301,6 @@ namespace Models
         public DepotInX()
         {
             this.DepotUseX = new HashSet<DepotUseX>();
-            this.DepotRedoX = new HashSet<DepotRedoX>();
         }
     
         public System.Guid Id { get; set; }
@@ -322,8 +324,6 @@ namespace Models
         public virtual DepotOrder DepotOrder { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotUseX> DepotUseX { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DepotRedoX> DepotRedoX { get; set; }
     }
 }
 namespace Models
@@ -392,7 +392,7 @@ namespace Models
             this.DepotStatistics = new HashSet<DepotStatistics>();
             this.DepotInX = new HashSet<DepotInX>();
             this.DepotUseX = new HashSet<DepotUseX>();
-            this.DepotRedoX = new HashSet<DepotRedoX>();
+            this.DepotRedo = new HashSet<DepotRedo>();
         }
     
         public System.Guid Id { get; set; }
@@ -435,7 +435,7 @@ namespace Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotUseX> DepotUseX { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DepotRedoX> DepotRedoX { get; set; }
+        public virtual ICollection<DepotRedo> DepotRedo { get; set; }
     }
 }
 namespace Models
@@ -560,19 +560,19 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DepotRedoX
+    public partial class DepotRedo
     {
         public System.Guid Id { get; set; }
         public System.Guid DepotId { get; set; }
         public System.Guid UserId { get; set; }
         public System.Guid ObjectId { get; set; }
-        public System.Guid InXId { get; set; }
+        public System.Guid InId { get; set; }
         public decimal Amount { get; set; }
         public decimal Money { get; set; }
         public System.DateTime Time { get; set; }
         public string Note { get; set; }
     
-        public virtual DepotInX DepotInX { get; set; }
+        public virtual DepotIn DepotIn { get; set; }
         public virtual DepotObject DepotObject { get; set; }
     }
 }

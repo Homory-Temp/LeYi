@@ -895,6 +895,8 @@ public static class DepotDataExtensions
 
     public static void DepotActInRedo(this DepotEntities db, Guid depotId, DepotIn @in, decimal backed, Guid operatorId)
     {
+        if (backed == 0)
+            return;
         var obj = db.DepotObject.Single(o => o.Id == @in.ObjectId);
         var order = db.DepotOrder.Single(o => o.Id == @in.OrderId);
         decimal amount = @in.Amount - backed;
@@ -904,19 +906,70 @@ public static class DepotDataExtensions
         db.DepotActStatistics(obj.Id, @in.Time, plusAmount, plusMoney, 0, 0, 0, 0, 0, 0, 0, 0);
         if (obj.Single)
         {
-            return;
+            if (amount >= 0 && money >= 0)
+            {
+                foreach (var inx in @in.DepotInX)
+                {
+                    if (inx.DepotUseX.Count > 0)
+                        return;
+                }
+                @in.Amount = amount;
+                @in.AvailableAmount = amount;
+                @in.Total = money;
+                @in.Price = decimal.Divide(money, amount);
+                obj.Amount += plusAmount;
+                obj.Money += plusMoney;
+                order.Paid += plusMoney;
+                var dr = new DepotRedo
+                {
+                    Id = db.GlobalId(),
+                    DepotId = depotId,
+                    UserId = operatorId,
+                    ObjectId = obj.Id,
+                    InId = @in.Id,
+                    Amount = backed,
+                    Money = backed * @in.Price,
+                    Time = DateTime.Now,
+                    Note = ""
+                };
+                db.DepotRedo.Add(dr);
+                var left = backed;
+                foreach (var inx in @in.DepotInX.OrderByDescending(o => o.Ordinal).ToList())
+                {
+                    inx.Amount = 0;
+                    inx.AvailableAmount = 0;
+                    inx.Total = 0;
+                    var flowx = new DepotFlowX
+                    {
+                        Id = db.GlobalId(),
+                        ObjectId = @in.ObjectId,
+                        ObjectOrdinal = inx.Ordinal,
+                        UserId = operatorId,
+                        Type = FlowType.退货,
+                        TypeName = FlowType.退货.ToString(),
+                        Time = @in.Time,
+                        Amount = plusAmount,
+                        Money = plusMoney,
+                        Note = ""
+                    };
+                    db.DepotFlowX.Add(flowx);
+                    left--;
+                    if (left == 0)
+                        break;
+                }
+            }
         }
         else
         {
             var x = @in.DepotInX.First();
             if (x.DepotUseX.Count(o => o.InXId == x.Id) > 0)
                 return;
-            if (amount > 0 && money > 0)
+            if (amount >= 0 && money >= 0)
             {
                 @in.Amount = amount;
                 @in.AvailableAmount = amount;
                 @in.Total = money;
-                @in.Price = decimal.Divide(money, amount);
+                @in.Price = amount == 0 ? 0 : decimal.Divide(money, amount);
                 obj.Amount += plusAmount;
                 obj.Money += plusMoney;
                 order.Paid += plusMoney;
@@ -930,12 +983,25 @@ public static class DepotDataExtensions
                     Time = @in.Time,
                     Amount = plusAmount,
                     Money = plusMoney,
-                    Note = (new InMemoryRedo { Amount = backed, Name = @in.DepotObject.Name, OrderId = @in.OrderId }).ToJson()
+                    Note = ""
                 };
                 db.DepotFlow.Add(flow);
                 x.Amount = @in.Amount;
                 x.AvailableAmount = @in.Amount;
                 x.Total = @in.Total;
+                var dr = new DepotRedo
+                {
+                    Id = db.GlobalId(),
+                    DepotId = depotId,
+                    UserId = operatorId,
+                    ObjectId = obj.Id,
+                    InId = @in.Id,
+                    Amount = backed,
+                    Money = backed * @in.Price,
+                    Time = DateTime.Now,
+                    Note = ""
+                };
+                db.DepotRedo.Add(dr);
             }
         }
         db.SaveChanges();
