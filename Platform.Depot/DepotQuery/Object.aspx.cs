@@ -25,13 +25,22 @@ public partial class DepotQuery_Object : DepotPageSingle
                 sp.InnerText = obj.Specification;
                 no.InnerText = obj.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
                 note.InnerText = obj.Note;
+                brand.InnerText = obj.Brand;
                 var query = obj.DepotUseX.Where(o => o.ReturnedAmount < o.Amount);
                 var noOut = query.Count() > 0 ? query.Sum(o => o.Amount - o.ReturnedAmount) : 0;
                 total.InnerText = (obj.Amount + noOut).ToAmount(Depot.Featured(DepotType.小数数量库));
-                var di = obj.DepotInX.OrderByDescending(o => o.AutoId).FirstOrDefault();
-                if (di != null)
+                if (Depot.Featured(DepotType.幼儿园))
                 {
-                    age.InnerText = di.Age;
+                    var di = obj.DepotInX.OrderByDescending(o => o.AutoId).FirstOrDefault();
+                    if (di != null)
+                    {
+                        age.InnerText = di.Age;
+                    }
+                    xRow.Visible = true;
+                }
+                else
+                {
+                    xRow.Visible = false;
                 }
                 pa.Src = obj.ImageA.None() ? "../Content/Images/Transparent.png" : obj.ImageA;
                 da.Visible = !obj.ImageA.None();
