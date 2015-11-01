@@ -106,6 +106,11 @@
             </div>
             <div class="row">&nbsp;</div>
             <div class="row">
+                <div class="col-md-12 text-center">
+                    <input type="button" class="btn btn-info" id="do_up" runat="server" value="上传图片" onserverclick="do_up_ServerClick" />
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6" id="da" runat="server">
                     <img class="img-responsive" onclick="showPic(this);" style="width: 100%; cursor: pointer;" id="pa" runat="server" />
                 </div>

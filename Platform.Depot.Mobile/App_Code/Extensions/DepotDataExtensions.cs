@@ -254,6 +254,16 @@ public static class DepotDataExtensions
         db.DepotDictionaryAdd(depotId, DictionaryType.品牌, brand);
     }
 
+    public static void DepotObjectEditX(this DepotEntities db, Guid id, string pa, string pb, string pc, string pd)
+    {
+        var obj = db.DepotObject.Single(o => o.Id == id);
+        obj.ImageA = pa;
+        obj.ImageB = pb;
+        obj.ImageC = pc;
+        obj.ImageD = pd;
+        db.SaveChanges();
+    }
+
     public static void DepotObjectRemove(this DepotEntities db, Guid id)
     {
         var obj = db.DepotObject.Single(o => o.Id == id);

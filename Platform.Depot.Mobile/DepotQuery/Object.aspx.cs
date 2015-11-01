@@ -129,4 +129,9 @@ public partial class DepotQuery_Object : DepotPageSingle
         var id = "ObjectId".Query().GlobalId();
         gridX.DataSource = DataContext.DepotUseXRecord.Where(o => o.ObjectId == id).OrderByDescending(o => o.Time).ToList();
     }
+
+    protected void do_up_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/ObjectImage?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, "ObjectId".Query()));
+    }
 }
