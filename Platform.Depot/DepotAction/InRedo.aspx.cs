@@ -31,6 +31,6 @@ public partial class DepotAction_InRedo : DepotPageSingle
 
     protected void cancel_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("../DepotQuery/Redo?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("../DepotQuery/InX?DepotId={0}".Formatted(Depot.Id));
     }
 }
