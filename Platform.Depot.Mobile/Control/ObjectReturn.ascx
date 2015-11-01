@@ -2,7 +2,7 @@
 
 <tr>
     <td style="display: none;">
-        <asp:Label runat="server" ID="id"></asp:Label>
+        <asp:Label runat="server" ID="xid"></asp:Label>
         <asp:Label runat="server" ID="code"></asp:Label>
     </td>
     <td>

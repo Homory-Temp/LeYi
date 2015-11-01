@@ -145,6 +145,21 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotCode
+    {
+        public System.Guid DepotId { get; set; }
+        public System.Guid BatchId { get; set; }
+        public int BatchOrdinial { get; set; }
+        public System.DateTime Time { get; set; }
+        public int State { get; set; }
+        public string CodeJson { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotCreator
     {
         public System.Guid Id { get; set; }
@@ -299,6 +314,7 @@ namespace Models
         public decimal AvailableAmount { get; set; }
         public int AutoId { get; set; }
         public string Code { get; set; }
+        public Nullable<System.Guid> ResponsibleId { get; set; }
     
         public virtual DepotIn DepotIn { get; set; }
         public virtual DepotObject DepotObject { get; set; }
@@ -339,6 +355,7 @@ namespace Models
         public bool IsVirtual { get; set; }
         public string OrderSource { get; set; }
         public string UsageTarget { get; set; }
+        public string Brand { get; set; }
     }
 }
 namespace Models
@@ -380,10 +397,6 @@ namespace Models
         public bool Single { get; set; }
         public bool Consumable { get; set; }
         public bool Fixed { get; set; }
-        public string SerialA { get; set; }
-        public string SerialB { get; set; }
-        public string SerialC { get; set; }
-        public string SerialD { get; set; }
         public string Unit { get; set; }
         public string Specification { get; set; }
         public decimal Low { get; set; }
@@ -400,6 +413,10 @@ namespace Models
         public decimal Amount { get; set; }
         public decimal Money { get; set; }
         public Nullable<System.Guid> DepotId { get; set; }
+        public string FixedCard { get; set; }
+        public string FixedNumber { get; set; }
+        public string Brand { get; set; }
+        public string Extension { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotFlow> DepotFlow { get; set; }
@@ -442,10 +459,6 @@ namespace Models
         public bool Single { get; set; }
         public bool Consumable { get; set; }
         public bool Fixed { get; set; }
-        public string SerialA { get; set; }
-        public string SerialB { get; set; }
-        public string SerialC { get; set; }
-        public string SerialD { get; set; }
         public string Unit { get; set; }
         public string Specification { get; set; }
         public decimal Low { get; set; }
@@ -463,6 +476,10 @@ namespace Models
         public decimal Money { get; set; }
         public Nullable<System.Guid> DepotId { get; set; }
         public string DepotName { get; set; }
+        public string FixedCard { get; set; }
+        public string FixedNumber { get; set; }
+        public string Brand { get; set; }
+        public string Extension { get; set; }
     }
 }
 namespace Models
@@ -849,7 +866,8 @@ namespace Models
         可借可领库 = 8,
         对象一级分类库 = 16,
         小数数量库 = 32,
-        无 = 0
+        无 = 0,
+        幼儿园 = 64
     }
 }
 namespace Models
@@ -863,7 +881,8 @@ namespace Models
         购置来源 = 3,
         使用对象 = 4,
         年龄段 = 5,
-        存放地 = 6
+        存放地 = 6,
+        品牌 = 7
     }
 }
 namespace Models

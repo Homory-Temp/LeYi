@@ -136,7 +136,7 @@ public static class DepotDataExtensions
         }
     }
 
-    public static void DepotObjectAdd(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, bool single, bool consumable, bool @fixed, string a, string b, string c, string d, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal)
+    public static void DepotObjectAdd(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, bool single, bool consumable, bool @fixed, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal)
     {
         var obj = new DepotObject
         {
@@ -146,10 +146,10 @@ public static class DepotDataExtensions
             Single = single,
             Consumable = consumable,
             Fixed = @fixed,
-            SerialA = a,
-            SerialB = b,
-            SerialC = c,
-            SerialD = d,
+            FixedCard = fixedCard,
+            FixedNumber = fixedNumber,
+            Brand = brand,
+            Extension = extension,
             Unit = unit,
             Specification = specification,
             Low = low,
@@ -175,9 +175,10 @@ public static class DepotDataExtensions
         db.SaveChanges();
         db.DepotDictionaryAdd(depotId, DictionaryType.单位, unit);
         db.DepotDictionaryAdd(depotId, DictionaryType.规格, specification);
+        db.DepotDictionaryAdd(depotId, DictionaryType.品牌, brand);
     }
 
-    public static void DepotObjectAddX(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, bool single, bool consumable, bool @fixed, string a, string b, string c, string d, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal)
+    public static void DepotObjectAddX(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, bool single, bool consumable, bool @fixed, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal)
     {
         var obj = new DepotObject
         {
@@ -187,10 +188,10 @@ public static class DepotDataExtensions
             Single = single,
             Consumable = consumable,
             Fixed = @fixed,
-            SerialA = a,
-            SerialB = b,
-            SerialC = c,
-            SerialD = d,
+            FixedCard = fixedCard,
+            FixedNumber = fixedNumber,
+            Brand = brand,
+            Extension = extension,
             Unit = unit,
             Specification = specification,
             Low = low,
@@ -216,17 +217,18 @@ public static class DepotDataExtensions
         db.SaveChanges();
         db.DepotDictionaryAdd(depotId, DictionaryType.单位, unit);
         db.DepotDictionaryAdd(depotId, DictionaryType.规格, specification);
+        db.DepotDictionaryAdd(depotId, DictionaryType.品牌, brand);
     }
 
-    public static void DepotObjectEdit(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, string a, string b, string c, string d, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal)
+    public static void DepotObjectEdit(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal)
     {
         var obj = db.DepotObject.Single(o => o.Id == id);
         obj.Name = name;
         obj.PinYin = db.ToPinYin(name).Single();
-        obj.SerialA = a;
-        obj.SerialB = b;
-        obj.SerialC = c;
-        obj.SerialD = d;
+        obj.FixedCard = fixedCard;
+        obj.FixedNumber = fixedNumber;
+        obj.Brand = brand;
+        obj.Extension = extension;
         obj.Unit = unit;
         obj.Specification = specification;
         obj.Low = low;
@@ -249,6 +251,7 @@ public static class DepotDataExtensions
         db.SaveChanges();
         db.DepotDictionaryAdd(depotId, DictionaryType.单位, unit);
         db.DepotDictionaryAdd(depotId, DictionaryType.规格, specification);
+        db.DepotDictionaryAdd(depotId, DictionaryType.品牌, brand);
     }
 
     public static void DepotObjectRemove(this DepotEntities db, Guid id)
