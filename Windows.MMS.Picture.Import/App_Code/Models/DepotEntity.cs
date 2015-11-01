@@ -72,6 +72,7 @@ namespace Models
         public Depot()
         {
             this.DepotUse = new HashSet<DepotUse>();
+            this.DepotSetting = new HashSet<DepotSetting>();
         }
     
         public System.Guid Id { get; set; }
@@ -86,6 +87,8 @@ namespace Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotUse> DepotUse { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepotSetting> DepotSetting { get; set; }
     }
 }
 namespace Models
@@ -135,6 +138,21 @@ namespace Models
         public int AutoId { get; set; }
         public string Code { get; set; }
         public int Count { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class DepotCode
+    {
+        public System.Guid DepotId { get; set; }
+        public System.Guid BatchId { get; set; }
+        public int BatchOrdinial { get; set; }
+        public System.DateTime Time { get; set; }
+        public int State { get; set; }
+        public string CodeJson { get; set; }
     }
 }
 namespace Models
@@ -377,10 +395,6 @@ namespace Models
         public bool Single { get; set; }
         public bool Consumable { get; set; }
         public bool Fixed { get; set; }
-        public string SerialA { get; set; }
-        public string SerialB { get; set; }
-        public string SerialC { get; set; }
-        public string SerialD { get; set; }
         public string Unit { get; set; }
         public string Specification { get; set; }
         public decimal Low { get; set; }
@@ -396,6 +410,11 @@ namespace Models
         public string Code { get; set; }
         public decimal Amount { get; set; }
         public decimal Money { get; set; }
+        public Nullable<System.Guid> DepotId { get; set; }
+        public string FixedCard { get; set; }
+        public string FixedNumber { get; set; }
+        public string Brand { get; set; }
+        public string Extension { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotFlow> DepotFlow { get; set; }
@@ -423,6 +442,42 @@ namespace Models
         public int Level { get; set; }
         public bool IsLeaf { get; set; }
         public bool IsVirtual { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class DepotObjectX
+    {
+        public System.Guid Id { get; set; }
+        public string Name { get; set; }
+        public string PinYin { get; set; }
+        public bool Single { get; set; }
+        public bool Consumable { get; set; }
+        public bool Fixed { get; set; }
+        public string Unit { get; set; }
+        public string Specification { get; set; }
+        public decimal Low { get; set; }
+        public decimal High { get; set; }
+        public string ImageA { get; set; }
+        public string ImageB { get; set; }
+        public string ImageC { get; set; }
+        public string ImageD { get; set; }
+        public string Note { get; set; }
+        public int Ordinal { get; set; }
+        public int State { get; set; }
+        public int AutoId { get; set; }
+        public string Code { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Money { get; set; }
+        public Nullable<System.Guid> DepotId { get; set; }
+        public string DepotName { get; set; }
+        public string FixedCard { get; set; }
+        public string FixedNumber { get; set; }
+        public string Brand { get; set; }
+        public string Extension { get; set; }
     }
 }
 namespace Models
@@ -461,6 +516,35 @@ namespace Models
         public virtual ICollection<DepotIn> DepotIn { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotInX> DepotInX { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class DepotOutRecord
+    {
+        public int Id { get; set; }
+        public System.Guid DepotId { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public System.Guid UserId { get; set; }
+        public string Code { get; set; }
+        public string Reason { get; set; }
+        public decimal ToAmount { get; set; }
+        public decimal Amount { get; set; }
+        public string PreservedA { get; set; }
+        public string PreservedB { get; set; }
+        public string PreservedC { get; set; }
+        public string PreservedD { get; set; }
+        public System.DateTime Time { get; set; }
+        public int State { get; set; }
+        public System.Guid CatalogId { get; set; }
+        public int Level { get; set; }
+        public bool IsVirtual { get; set; }
+        public string Name { get; set; }
+        public string Unit { get; set; }
+        public string UserName { get; set; }
     }
 }
 namespace Models
@@ -533,6 +617,21 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotSetting
+    {
+        public System.Guid Id { get; set; }
+        public System.Guid DepotId { get; set; }
+        public string Key { get; set; }
+        public string Value { get; set; }
+    
+        public virtual Depot Depot { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotST
     {
         public bool Consumable { get; set; }
@@ -588,6 +687,29 @@ namespace Models
         public decimal EndMoney { get; set; }
     
         public virtual DepotObject DepotObject { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class DepotToOut
+    {
+        public int Id { get; set; }
+        public System.Guid DepotId { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public System.Guid UserId { get; set; }
+        public string Code { get; set; }
+        public string Reason { get; set; }
+        public decimal ToAmount { get; set; }
+        public decimal Amount { get; set; }
+        public string PreservedA { get; set; }
+        public string PreservedB { get; set; }
+        public string PreservedC { get; set; }
+        public string PreservedD { get; set; }
+        public System.DateTime Time { get; set; }
+        public int State { get; set; }
     }
 }
 namespace Models
@@ -703,6 +825,7 @@ namespace Models
         public System.Guid UserId { get; set; }
         public System.Guid OperatorId { get; set; }
         public decimal ReturnedAmount { get; set; }
+        public System.Guid ObjectId { get; set; }
     }
 }
 namespace Models
@@ -741,7 +864,8 @@ namespace Models
         可借可领库 = 8,
         对象一级分类库 = 16,
         小数数量库 = 32,
-        无 = 0
+        无 = 0,
+        幼儿园 = 64
     }
 }
 namespace Models
@@ -755,7 +879,8 @@ namespace Models
         购置来源 = 3,
         使用对象 = 4,
         年龄段 = 5,
-        存放地 = 6
+        存放地 = 6,
+        品牌 = 7
     }
 }
 namespace Models

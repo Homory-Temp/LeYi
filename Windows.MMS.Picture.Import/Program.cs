@@ -118,7 +118,7 @@ namespace Windows.MMS.Picture.Import
                                 }
                             }
                             var catalogs = db.DepotCatalogLoad(图片库Id).Select(o => o.Id).Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (x, y) => y.ObjectId).Join(db.DepotObject, o => o, o => o.Id, (x, y) => y).ToList();
-                            if (catalogs.Count(o => o.SerialD == wz.code && o.State < State.停用) == 0)
+                            if (catalogs.Count(o => o.Extension == wz.code && o.State < State.停用) == 0)
                             {
                                 var cc = wz.classcode.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
                                 var cco = db.DepotCatalogLoad(图片库Id).SingleOrDefault(o => o.Code == cc);
@@ -135,7 +135,7 @@ namespace Windows.MMS.Picture.Import
                                     xcco = xcco.DepotCatalogParent;
                                 }
 
-                                db.DepotObjectAdd(picid, gids, 图片库Id, wz.name, true, false, false, "", wz.classcode, wz.gg ?? "", wz.code, "张", wz.gg ?? "", 0, 0, a, b, c, d, wz.xh ?? "", ordinal);
+                                db.DepotObjectAdd(picid, gids, 图片库Id, wz.name, true, false, false, "", "", "", wz.code, "张", wz.gg ?? "", 0, 0, a, b, c, d, wz.xh ?? "", ordinal);
 
                                 var @in = new InMemoryIn { Age = Age(wz.syfw.HasValue ? wz.syfw.Value : 0), Place = "图片库", Amount = 1, CatalogId = cco.Id, Money = 0, Note = "", ObjectId = picid, PriceSet = 0, Time = DateTime.Today };
                                 var list = new List<InMemoryIn>();

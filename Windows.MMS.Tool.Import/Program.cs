@@ -118,7 +118,7 @@ namespace Windows.MMS.Tool.Import
                                 }
                             }
                             var catalogs = db.DepotCatalogLoad(教玩具库Id).Select(o => o.Id).Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (x, y) => y.ObjectId).Join(db.DepotObject, o => o, o => o.Id, (x, y) => y).ToList();
-                            if (catalogs.Count(o => o.SerialD == wz.code && o.State < State.停用) == 0)
+                            if (catalogs.Count(o => o.Extension == wz.code && o.State < State.停用) == 0)
                             {
                                 var cc = wz.classcode.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[0];
                                 var cco = db.DepotCatalogLoad(教玩具库Id).SingleOrDefault(o => o.Code == cc);
@@ -136,7 +136,7 @@ namespace Windows.MMS.Tool.Import
                                     xcco = xcco.DepotCatalogParent;
                                 }
 
-                                db.DepotObjectAdd(picid, gids, 教玩具库Id, wz.name, false, false, false, "", wz.classcode, wz.gg ?? "", wz.code, "件", wz.gg ?? "", 0, 0, a, b, c, d, wz.xh ?? "", ordinal);
+                                db.DepotObjectAdd(picid, gids, 教玩具库Id, wz.name, false, false, false, "", "", "", wz.code, "件", wz.gg ?? "", 0, 0, a, b, c, d, wz.xh ?? "", ordinal);
 
                                 var @in = new InMemoryIn { Age = Age(wz.syfw.HasValue ? wz.syfw.Value : 0), Place = "教玩具库", Amount = wz.num.HasValue ? wz.num.Value : 0, CatalogId = cco.Id, Money = 0, Note = "", ObjectId = picid, PriceSet = 0, Time = DateTime.Today };
                                 var list = new List<InMemoryIn>();
