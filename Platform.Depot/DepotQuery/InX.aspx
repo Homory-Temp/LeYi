@@ -128,7 +128,7 @@
                                     <td><%# Eval("Operator") %></td>
                                     <td><%# Eval("Note") %></td>
                                     <td>
-                                        <input type="button" class="btn btn-tumblr" value="退货" id="redo" runat="server" match='<%# Eval("InId") %>' onserverclick="redo_ServerClick" />
+                                        <input type="button" class="btn btn-tumblr" value="退货" id="redo" runat="server" match='<%# Eval("InId") %>' visible='<%# CanRedo((Guid)Eval("InId")) %>' onserverclick="redo_ServerClick" />
                                         <input type="button" class="btn btn-tumblr" value="编辑" id="edit" runat="server" match='<%# Eval("InId") %>' visible='<%# RightRoot || (!(bool)Eval("Done")) %>' onserverclick="edit_ServerClick" />
                                     </td>
                                 </tr>

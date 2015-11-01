@@ -34,6 +34,17 @@ public partial class DepotQuery_InX : DepotPageSingle
         }
     }
 
+    protected bool CanRedo(Guid inId)
+    {
+        var @in = DataContext.DepotIn.Single(o => o.Id == inId);
+        foreach(var inx in @in.DepotInX)
+        {
+            if (inx.DepotUseX.Count > 0)
+                return false;
+        }
+        return true;
+    }
+
     protected void all_ServerClick(object sender, EventArgs e)
     {
         if (_all.Value == "1")
