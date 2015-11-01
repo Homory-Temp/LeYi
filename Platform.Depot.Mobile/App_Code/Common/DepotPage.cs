@@ -12,7 +12,7 @@ public class DepotPage : System.Web.UI.Page, IDepot
     {
         var doc = XDocument.Load(Server.MapPath("~/Common/配置/Title.xml"));
         Title = doc.Root.Element("Depot").Value;
-        if (Session["DepotUser"].None())
+        if (Session["DepotUserMobile"].None())
         {
             Response.Redirect("~/Default");
             return;
@@ -35,7 +35,7 @@ public class DepotPage : System.Web.UI.Page, IDepot
     {
         get
         {
-            return Session["DepotUser"] != null;
+            return Session["DepotUserMobile"] != null;
         }
     }
 
@@ -45,9 +45,9 @@ public class DepotPage : System.Web.UI.Page, IDepot
         {
             try
             {
-                if (Session["DepotUser"].None())
+                if (Session["DepotUserMobile"].None())
                     throw new Exception();
-                return (DepotUser)Session["DepotUser"];
+                return (DepotUser)Session["DepotUserMobile"];
             }
             catch
             {

@@ -9,7 +9,7 @@ public class DepotControl : System.Web.UI.UserControl, IDepot
 
     protected override void OnLoad(EventArgs e)
     {
-        if (Session["DepotUser"].None())
+        if (Session["DepotUserMobile"].None())
         {
             Response.Redirect("~/Default");
             return;
@@ -32,7 +32,7 @@ public class DepotControl : System.Web.UI.UserControl, IDepot
     {
         get
         {
-            return Session["DepotUser"] != null;
+            return Session["DepotUserMobile"] != null;
         }
     }
 
@@ -42,9 +42,9 @@ public class DepotControl : System.Web.UI.UserControl, IDepot
         {
             try
             {
-                if (Session["DepotUser"].None())
+                if (Session["DepotUserMobile"].None())
                     throw new Exception();
-                return (DepotUser)Session["DepotUser"];
+                return (DepotUser)Session["DepotUserMobile"];
             }
             catch
             {
