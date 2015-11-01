@@ -42,9 +42,9 @@ public partial class DepotAction_Import : DepotPageSingle
         try
         {
             var book = new Workbook(file.Value);
-            var data = book.Worksheets[0].Cells.ExportDataTableAsString(0, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null && o[0].Value.ToString().Trim() != "").Count(), 12, true);
+            var data = book.Worksheets[0].Cells.ExportDataTableAsString(0, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null && o[0].Value.ToString().Trim() != "").Count(), 15, true);
             var handled = new DataTable();
-            foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 })
+            foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 })
             {
                 handled.Columns.Add(data.Columns[index].ColumnName);
             }
@@ -68,7 +68,7 @@ public partial class DepotAction_Import : DepotPageSingle
                 {
                     try
                     {
-                        var 一级分类 = row[3].ToString().Trim();
+                        var 一级分类 = row[4].ToString().Trim();
                         if (string.IsNullOrEmpty(一级分类))
                             continue;
 
@@ -82,7 +82,7 @@ public partial class DepotAction_Import : DepotPageSingle
                             一级分类Id = DataContext.DepotCatalog.Single(o => o.DepotId == 固定资产库Id && o.Name == 一级分类 && o.State < State.停用 && o.ParentId == null).Id;
                         }
 
-                        var 二级分类 = row[4].ToString().Trim();
+                        var 二级分类 = row[5].ToString().Trim();
                         Guid 二级分类Id;
                         if (DataContext.DepotCatalog.Count(o => o.DepotId == 固定资产库Id && o.Name == 二级分类 && o.State < State.停用 && o.ParentId == 一级分类Id) == 0)
                         {
@@ -94,7 +94,7 @@ public partial class DepotAction_Import : DepotPageSingle
                         }
 
                         var code = row[0].ToString().Trim().Substring(row[0].ToString().Trim().Length - 7);
-                        var name = row[1].ToString().Trim();
+                        var name = row[2].ToString().Trim();
 
                         var catalogs = DataContext.DepotCatalogLoad(固定资产库Id).Select(o => o.Id).Join(DataContext.DepotObjectCatalog, o => o, o => o.CatalogId, (x, y) => y).Join(DataContext.DepotObject, o => o.ObjectId, o => o.Id, (x, y) => new ToImport { DOC = x, DO = y }).ToList();
 
@@ -106,7 +106,7 @@ public partial class DepotAction_Import : DepotPageSingle
                             var l = new List<Guid>();
                             l.Add(一级分类Id);
                             l.Add(二级分类Id);
-                            DataContext.DepotObjectAddX(物资Id, l, Depot.Id, name, true, false, true, row[8].ToString(), row[9].ToString(), "", "", "", row[10].ToString().Trim(), 0, 0, "", "", "", "", "", 100);
+                            DataContext.DepotObjectAddX(物资Id, l, Depot.Id, name, row[14].ToString().Contains("是"), false, true, row[0].ToString(), row[1].ToString(), row[12].ToString(), "", "", row[11].ToString().Trim(), 0, 0, "", "", "", "", "", 100);
                         }
                         else
                         {
@@ -114,12 +114,12 @@ public partial class DepotAction_Import : DepotPageSingle
                         }
                         if (DataContext.DepotIn.Count(o => o.ObjectId == 物资Id && o.Note == code) == 0)
                         {
-                            var responsible = row[2].ToString().Trim();
+                            var responsible = row[3].ToString().Trim();
                             var user = DataContext.DepotUserLoad(Depot.CampusId).FirstOrDefault(o => o.Name == responsible && o.State < State.停用);
                             decimal amount = 0.00M;
                             try
                             {
-                                amount = decimal.Parse(row[5].ToString().Trim());
+                                amount = decimal.Parse(row[6].ToString().Trim());
                             }
                             catch
                             {
@@ -127,12 +127,12 @@ public partial class DepotAction_Import : DepotPageSingle
                             decimal price = 0.00M;
                             try
                             {
-                                price = decimal.Parse(row[6].ToString().Trim().Replace(" ", "").Replace(",", "").Replace(",", ""));
+                                price = decimal.Parse(row[7].ToString().Trim().Replace(" ", "").Replace(",", "").Replace(",", ""));
                             }
                             catch
                             {
                             }
-                            var @in = new InMemoryIn { Age = "", Place = row[11].ToString().Trim(), Amount = amount, CatalogId = 二级分类Id, Money = price, Note = code, ObjectId = 物资Id, PriceSet = decimal.Divide(price, amount), Time = DateTime.Today };
+                            var @in = new InMemoryIn { Age = "", Place = row[13].ToString().Trim(), Amount = amount, CatalogId = 二级分类Id, Money = price, Note = code, ObjectId = 物资Id, PriceSet = decimal.Divide(price, amount), Time = DateTime.Today };
                             var list = new List<InMemoryIn>();
                             list.Add(@in);
                             DataContext.DepotActIn(固定资产库Id, 固定资产库购置单Id, DateTime.Today, DepotUser.Id, list);
@@ -163,7 +163,7 @@ public partial class DepotAction_Import : DepotPageSingle
         var book = new Workbook(file.Value);
         var data = book.Worksheets[0].Cells.ExportDataTableAsString(0, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null && o[0].Value.ToString().Trim() != "").Count(), 12, true);
         var handled = new DataTable();
-        foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 })
+        foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 })
         {
             handled.Columns.Add(data.Columns[index].ColumnName);
         }

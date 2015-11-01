@@ -1,16 +1,23 @@
-﻿using System;
+﻿using ICSharpCode.SharpZipLib.Zip;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.ServiceProcess;
+using System.Text;
+using System.Linq;
 using System.Timers;
+using Telerik.Web.UI;
+using SysImage = System.Drawing.Image;
+using System.Drawing.Imaging;
 
 namespace LY.Service.QRCode
 {
     public partial class HomoryQRCodeService : ServiceBase
     {
-		private Timer _timer;
+        private Timer _timer;
 
         public HomoryQRCodeService()
         {
@@ -19,42 +26,42 @@ namespace LY.Service.QRCode
 
         protected override void OnStart(string[] args)
         {
-			try
-			{
-				Log("Service", "Start");
-				QR();
-				_timer = new Timer(double.Parse(ConfigurationManager.AppSettings["CodeInterval"]) * 1000)
-				{
-					AutoReset = true
-				};
-				_timer.Elapsed += timer_Elapsed;
-				_timer.Start();
-			}
-			catch (Exception exception)
-			{
-				Log("Error", exception.StackTrace.ToString(CultureInfo.InvariantCulture));
-			}
+            try
+            {
+                Log("Service", "Start");
+                QR();
+                _timer = new Timer(double.Parse(ConfigurationManager.AppSettings["CodeInterval"]) * 1000)
+                {
+                    AutoReset = true
+                };
+                _timer.Elapsed += timer_Elapsed;
+                _timer.Start();
+            }
+            catch (Exception exception)
+            {
+                Log("Error", exception.StackTrace.ToString(CultureInfo.InvariantCulture));
+            }
         }
 
-		private void timer_Elapsed(object sender, ElapsedEventArgs e)
-		{
-			QR();
-		}
+        private void timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            QR();
+        }
 
         protected override void OnStop()
         {
-			_timer.Stop();
-			_timer.Close();
-			Log("Service", "Stop");
+            _timer.Stop();
+            _timer.Close();
+            Log("Service", "Stop");
         }
 
-		protected void Log(string key, string content)
-		{
-			var path = string.Format(ConfigurationManager.AppSettings["CodeLog"], DateTime.Today.ToString("yyyyMMdd"));
-			var line = string.Format("Time: {0}; Key: {1}; Content: {2}.{3}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), key,
-				content, Environment.NewLine);
-			File.AppendAllText(path, line);
-		}
+        protected void Log(string key, string content)
+        {
+            var path = string.Format(ConfigurationManager.AppSettings["CodeLog"], DateTime.Today.ToString("yyyyMMdd"));
+            var line = string.Format("Time: {0}; Key: {1}; Content: {2}.{3}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), key,
+                content, Environment.NewLine);
+            File.AppendAllText(path, line);
+        }
 
         public class DepotCode
         {
@@ -105,6 +112,7 @@ namespace LY.Service.QRCode
                     {
                     }
                     Log("ToQRCount", list.Count.ToString());
+                    QRS(list);
                 }
                 catch (Exception ex)
                 {
@@ -114,6 +122,117 @@ namespace LY.Service.QRCode
             catch (Exception exception)
             {
                 Log("Error", exception.StackTrace.ToString(CultureInfo.InvariantCulture));
+            }
+        }
+
+        protected StringBuilder Cut(StringBuilder sb, string content, int count, int blank)
+        {
+            if (content.Length <= count)
+            {
+                sb.Append(content);
+                sb.Append("\r\n");
+            }
+            else
+            {
+                sb.Append(content.Substring(0, count));
+                sb.Append("\r\n");
+                content = content.Substring(count);
+                int total = count - blank;
+                for (var j = 0; j < (int)Math.Ceiling(content.Length / (double)total); j++)
+                {
+                    for (var k = 0; k < blank; k++)
+                        sb.Append("　");
+                    sb.Append(content.Substring(j * total).Length >= total ? content.Substring(j * total, total) : content.Substring(j * total));
+                    sb.Append("\r\n");
+                }
+            }
+            return sb;
+        }
+
+        private void QRS(List<DepotCode> list)
+        {
+            #region 图片参数
+            var 图片宽度 = 600;
+            var 图片高度 = 图片宽度 / 2;
+            var 边框旁白 = 5;
+            var 边框宽度 = 2;
+            var 图标上边距 = 边框旁白 + 边框宽度 + 8;
+            var 图标左边距 = 边框旁白 + 边框宽度 + 33;
+            var 图标宽度 = 60;
+            var 图标高度 = 40;
+            var 标题字体 = "SimHei";
+            var 标题字号 = 20;
+            var 标题上边距 = 边框旁白 + 边框宽度 + 17;
+            var 标题左边距 = 图标左边距 + 图标宽度 + 16;
+            var 右侧宽度 = 200;
+            var 左侧宽度 = 图片宽度 - 2 * (边框旁白 + 边框宽度) - 右侧宽度;
+            var 二维码边长 = 右侧宽度;
+            var 二维码上边距 = 边框旁白 + 边框宽度 + 图标高度 + 7;
+            var 二维码左边距 = 图片宽度 - (边框旁白 + 边框宽度) - 右侧宽度;
+            var 二维码文字字体 = "Arial";
+            var 二维码文字字号 = 16;
+            var 二维码文字上边距 = 二维码上边距 + 二维码边长;
+            var 二维码文字左边距 = 图片宽度 - (边框旁白 + 边框宽度) - 右侧宽度 + 21;
+            var 左侧左边距 = 边框旁白 + 边框宽度 + 12;
+            var 左侧上边距 = 边框旁白 + 边框宽度 + 图标高度 + 27;
+            var 内容字体 = "SimSun";
+            var 内容字号 = 18;
+            var 内容每行字数 = 16;
+            var 内容空字符数 = 5;
+            var W = new SolidBrush(Color.White);
+            var B = new SolidBrush(Color.Black);
+            var BasePath = ConfigurationManager.AppSettings["CodePath"];
+            var Logo = ConfigurationManager.AppSettings["CodeLogo"];
+            var Title = ConfigurationManager.AppSettings["CodeTitle"];
+            #endregion
+            foreach (var group in list.GroupBy(o => o.BatchId))
+            {
+                var fold_id = group.Key;
+                var path = string.Format("{0}\\临时\\{1}", BasePath, fold_id);
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                var codes = group.SelectMany(o => o.CodeJson.FromJson<List<string>>()).ToList();
+                foreach (var qrcode in codes)
+                {
+                    SysImage icon = Bitmap.FromFile(Logo);
+                    Bitmap image = new Bitmap(图片宽度, 图片高度);
+                    Graphics g = Graphics.FromImage(image);
+                    g.FillRectangle(W, 0, 0, 图片宽度, 图片高度);
+                    g.DrawRectangle(new Pen(B, 边框宽度), 边框旁白, 边框旁白, 图片宽度 - 2 * 边框旁白, 图片高度 - 2 * 边框旁白);
+                    g.DrawImage(icon, 图标左边距, 图标上边距, 图标宽度, 图标高度);
+                    string title = "{0} 资产标签".Formatted(Title);
+                    g.DrawString(title, new Font(标题字体, 标题字号), B, 标题左边距, 标题上边距);
+                    g.Save();
+                    RadBarcode code = new RadBarcode { Type = BarcodeType.QRCode, Text = qrcode, OutputType = BarcodeOutputType.EmbeddedPNG };
+                    code.QRCodeSettings.Mode = Telerik.Web.UI.Barcode.Modes.CodeMode.Alphanumeric;
+                    code.QRCodeSettings.ErrorCorrectionLevel = Telerik.Web.UI.Barcode.Modes.ErrorCorrectionLevel.M;
+                    code.QRCodeSettings.ECI = Telerik.Web.UI.Barcode.Modes.ECIMode.None;
+                    code.QRCodeSettings.AutoIncreaseVersion = true;
+                    code.QRCodeSettings.Version = 0;
+                    code.QRCodeSettings.DotSize = 5;
+                    SysImage qr = code.GetImage();
+                    g.DrawImage(qr, 二维码左边距, 二维码上边距, 二维码边长, 二维码边长);
+                    g.DrawString(qrcode, new Font(二维码文字字体, 二维码文字字号), B, 二维码文字左边距, 二维码文字上边距);
+                    var content = "";
+                    var sb = new StringBuilder();
+                    content = "资产名称：{0}".Formatted("测试物资");
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "规格型号：{0} {1}".Formatted("A4", "盒装");
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "资产编号：{0}".Formatted("1234567");
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "存放地　：{0}".Formatted("教室A");
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "责任人　：{0}".Formatted("凌俊伟");
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "物资分类：{0}".Formatted("贵重品-计算机");
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                    g.DrawString(sb.ToString(), new Font(内容字体, 内容字号), B, 左侧左边距, 左侧上边距);
+                    image.Save("{0}/{1}.png".Formatted(path, qrcode), ImageFormat.Png);
+                    g.Dispose();
+                    image.Dispose();
+                }
+        (new FastZip()).CreateZip(string.Format("{0}\\打包\\{1}.zip".Formatted(BasePath, fold_id)), string.Format("{0}\\临时\\{1}", BasePath, fold_id), false, ".png");
             }
         }
     }
