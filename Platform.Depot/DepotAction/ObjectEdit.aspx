@@ -50,12 +50,6 @@
                             <telerik:RadTextBox ID="name" runat="server" Width="400"></telerik:RadTextBox>
                         </div>
                     </div>
-                    <div class="row" id="sp" runat="server">
-                        <div class="col-md-4 text-right">物资编号：</div>
-                        <div class="col-md-8 text-left">
-                            <telerik:RadTextBox ID="code" runat="server" Width="400" EmptyMessage="用于该仓库内的物资与其他系统对接"></telerik:RadTextBox>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-4 text-right">物资类别：</div>
                         <div class="col-md-8 text-left">
@@ -66,6 +60,19 @@
                         <div class="col-md-4 text-right">单位：</div>
                         <div class="col-md-8 text-left">
                             <telerik:RadComboBox ID="unit" runat="server" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Name" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="400" AllowCustomText="true">
+                                <Items>
+                                    <telerik:RadComboBoxItem Text="" Value="" Selected="true" />
+                                </Items>
+                                <ItemTemplate>
+                                    <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
+                                </ItemTemplate>
+                            </telerik:RadComboBox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">品牌：</div>
+                        <div class="col-md-8 text-left">
+                            <telerik:RadComboBox ID="brand" runat="server" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Name" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="400" AllowCustomText="true">
                                 <Items>
                                     <telerik:RadComboBoxItem Text="" Value="" Selected="true" />
                                 </Items>

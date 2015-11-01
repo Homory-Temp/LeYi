@@ -86,9 +86,9 @@
                                         <table class="storeTable">
                                             <tr>
                                                 <th>序号</th>
-                                                <th>物资编号</th>
                                                 <th>名称</th>
                                                 <th>单位</th>
+                                                <th>品牌</th>
                                                 <th>规格</th>
                                                 <th>总数</th>
                                                 <th>在库</th>
@@ -104,9 +104,9 @@
                                     <asp:Panel runat="server" Visible='<%# IsSimple %>'>
                                         <tr>
                                             <td><%# Eval("Ordinal") %></td>
-                                            <td><%# Eval("SerialA").WhenZero("无") %></td>
                                             <td style="cursor: pointer; color: #3E5A70;" onclick="gox(this);" goid='<%# Eval("Id") %>' did='<%# Depot.Id %>'><%# Eval("Name") %></td>
                                             <td><%# Eval("Unit") %></td>
+                                            <td><%# Eval("Brand") %></td>
                                             <td><%# Eval("Specification") %></td>
                                             <td><%# CountTotal(Container.DataItem as Models.DepotObject) %></td>
                                             <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>

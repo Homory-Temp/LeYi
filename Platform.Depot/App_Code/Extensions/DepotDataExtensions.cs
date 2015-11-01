@@ -175,6 +175,7 @@ public static class DepotDataExtensions
         db.SaveChanges();
         db.DepotDictionaryAdd(depotId, DictionaryType.单位, unit);
         db.DepotDictionaryAdd(depotId, DictionaryType.规格, specification);
+        db.DepotDictionaryAdd(depotId, DictionaryType.品牌, brand);
     }
 
     public static void DepotObjectAddX(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, bool single, bool consumable, bool @fixed, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal)
@@ -216,6 +217,7 @@ public static class DepotDataExtensions
         db.SaveChanges();
         db.DepotDictionaryAdd(depotId, DictionaryType.单位, unit);
         db.DepotDictionaryAdd(depotId, DictionaryType.规格, specification);
+        db.DepotDictionaryAdd(depotId, DictionaryType.品牌, brand);
     }
 
     public static void DepotObjectEdit(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal)
@@ -249,6 +251,7 @@ public static class DepotDataExtensions
         db.SaveChanges();
         db.DepotDictionaryAdd(depotId, DictionaryType.单位, unit);
         db.DepotDictionaryAdd(depotId, DictionaryType.规格, specification);
+        db.DepotDictionaryAdd(depotId, DictionaryType.品牌, brand);
     }
 
     public static void DepotObjectRemove(this DepotEntities db, Guid id)

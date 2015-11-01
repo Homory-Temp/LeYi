@@ -19,6 +19,8 @@ public partial class DepotAction_ObjectEdit : DepotPageSingle
             unit.DataBind();
             specification.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.规格).ToList();
             specification.DataBind();
+            brand.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.品牌).ToList();
+            brand.DataBind();
             var oid = "ObjectId".Query().GlobalId();
             var obj = DataContext.DepotObject.Single(o => o.Id == oid);
             var cid = "CatalogId".Query();
@@ -102,7 +104,7 @@ public partial class DepotAction_ObjectEdit : DepotPageSingle
             node = node.ParentNode;
             ids.Insert(0, node.Value.GlobalId());
         }
-        DataContext.DepotObjectEdit(oid, ids, Depot.Id, name.Text.Trim(), code.Text.Trim(), "", "", "", unit.Text.Trim(), specification.Text.Trim(), low.PeekValue(0.00M), high.PeekValue(0.00M), photo.Length > 0 ? photo[0] : "", photo.Length > 1 ? photo[1] : "", photo.Length > 2 ? photo[2] : "", photo.Length > 3 ? photo[3] : "", content.Text.Trim(), ordinal.PeekValue(100));
+        DataContext.DepotObjectEdit(oid, ids, Depot.Id, name.Text.Trim(), "", "", brand.Text.Trim(), "", unit.Text.Trim(), specification.Text.Trim(), low.PeekValue(0.00M), high.PeekValue(0.00M), photo.Length > 0 ? photo[0] : "", photo.Length > 1 ? photo[1] : "", photo.Length > 2 ? photo[2] : "", photo.Length > 3 ? photo[3] : "", content.Text.Trim(), ordinal.PeekValue(100));
         return oid;
     }
 
