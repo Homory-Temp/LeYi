@@ -168,10 +168,10 @@
           <Property Name="Single" Type="bit" Nullable="false" />
           <Property Name="Consumable" Type="bit" Nullable="false" />
           <Property Name="Fixed" Type="bit" Nullable="false" />
-          <Property Name="SerialA" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="SerialB" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="SerialC" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="SerialD" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FixedCard" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FixedNumber" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Specification" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Low" Type="decimal" Precision="18" Scale="6" Nullable="false" />
@@ -507,10 +507,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotObjectX' does not have a prim
             <PropertyRef Name="Single" />
             <PropertyRef Name="Consumable" />
             <PropertyRef Name="Fixed" />
-            <PropertyRef Name="SerialA" />
-            <PropertyRef Name="SerialB" />
-            <PropertyRef Name="SerialC" />
-            <PropertyRef Name="SerialD" />
+            <PropertyRef Name="FixedCard" />
+            <PropertyRef Name="FixedNumber" />
+            <PropertyRef Name="Brand" />
+            <PropertyRef Name="Extension" />
             <PropertyRef Name="Unit" />
             <PropertyRef Name="Specification" />
             <PropertyRef Name="Low" />
@@ -533,10 +533,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotObjectX' does not have a prim
           <Property Name="Single" Type="bit" Nullable="false" />
           <Property Name="Consumable" Type="bit" Nullable="false" />
           <Property Name="Fixed" Type="bit" Nullable="false" />
-          <Property Name="SerialA" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="SerialB" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="SerialC" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="SerialD" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FixedCard" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FixedNumber" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Specification" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Low" Type="decimal" Precision="18" Scale="6" Nullable="false" />
@@ -1098,10 +1098,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
     [DepotObjectX].[Single] AS [Single], 
     [DepotObjectX].[Consumable] AS [Consumable], 
     [DepotObjectX].[Fixed] AS [Fixed], 
-    [DepotObjectX].[SerialA] AS [SerialA], 
-    [DepotObjectX].[SerialB] AS [SerialB], 
-    [DepotObjectX].[SerialC] AS [SerialC], 
-    [DepotObjectX].[SerialD] AS [SerialD], 
+    [DepotObjectX].[FixedCard] AS [FixedCard], 
+    [DepotObjectX].[FixedNumber] AS [FixedNumber], 
+    [DepotObjectX].[Brand] AS [Brand], 
+    [DepotObjectX].[Extension] AS [Extension], 
     [DepotObjectX].[Unit] AS [Unit], 
     [DepotObjectX].[Specification] AS [Specification], 
     [DepotObjectX].[Low] AS [Low], 
@@ -1446,6 +1446,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Member Name="对象一级分类库" Value="16" />
           <Member Name="小数数量库" Value="32" />
           <Member Name="无" Value="0" />
+          <Member Name="幼儿园" Value="64" />
         </EnumType>
         <EntityType Name="DepotCatalog">
           <Key>
@@ -1482,6 +1483,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Member Name="使用对象" Value="4" />
           <Member Name="年龄段" Value="5" />
           <Member Name="存放地" Value="6" />
+          <Member Name="品牌" Value="7" />
         </EnumType>
         <EntityType Name="DepotRole">
           <Key>
@@ -1688,10 +1690,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="Single" Type="Boolean" Nullable="false" />
           <Property Name="Consumable" Type="Boolean" Nullable="false" />
           <Property Name="Fixed" Type="Boolean" Nullable="false" />
-          <Property Name="SerialA" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="SerialB" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="SerialC" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="SerialD" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Low" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
@@ -1714,6 +1712,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotObject" FromRole="DepotObject" ToRole="DepotInX" />
           <NavigationProperty Name="DepotUseX" Relationship="DepotModel.FK_DepotUseX_DepotObject" FromRole="DepotObject" ToRole="DepotUseX" />
           <Property Name="DepotId" Type="Guid" />
+          <Property Name="FixedCard" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FixedNumber" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Extension" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DepotFlow">
           <Key>
@@ -2371,10 +2373,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <PropertyRef Name="Single" />
             <PropertyRef Name="Consumable" />
             <PropertyRef Name="Fixed" />
-            <PropertyRef Name="SerialA" />
-            <PropertyRef Name="SerialB" />
-            <PropertyRef Name="SerialC" />
-            <PropertyRef Name="SerialD" />
             <PropertyRef Name="Unit" />
             <PropertyRef Name="Specification" />
             <PropertyRef Name="Low" />
@@ -2390,6 +2388,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <PropertyRef Name="Code" />
             <PropertyRef Name="Amount" />
             <PropertyRef Name="Money" />
+            <PropertyRef Name="FixedCard" />
+            <PropertyRef Name="FixedNumber" />
+            <PropertyRef Name="Brand" />
+            <PropertyRef Name="Extension" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
@@ -2397,10 +2399,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="Single" Type="Boolean" Nullable="false" />
           <Property Name="Consumable" Type="Boolean" Nullable="false" />
           <Property Name="Fixed" Type="Boolean" Nullable="false" />
-          <Property Name="SerialA" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="SerialB" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="SerialC" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="SerialD" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Low" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
@@ -2418,6 +2416,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="DepotId" Type="Guid" />
           <Property Name="DepotName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="FixedCard" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FixedNumber" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Extension" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DepotCode">
           <Key>
@@ -2638,6 +2640,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotObject">
             <EntityTypeMapping TypeName="DepotModel.DepotObject">
               <MappingFragment StoreEntitySet="DepotObject">
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="FixedNumber" ColumnName="FixedNumber" />
+                <ScalarProperty Name="FixedCard" ColumnName="FixedCard" />
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
                 <ScalarProperty Name="Money" ColumnName="Money" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -2654,10 +2660,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
                 <ScalarProperty Name="Low" ColumnName="Low" />
                 <ScalarProperty Name="Specification" ColumnName="Specification" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="SerialD" ColumnName="SerialD" />
-                <ScalarProperty Name="SerialC" ColumnName="SerialC" />
-                <ScalarProperty Name="SerialB" ColumnName="SerialB" />
-                <ScalarProperty Name="SerialA" ColumnName="SerialA" />
                 <ScalarProperty Name="Fixed" ColumnName="Fixed" />
                 <ScalarProperty Name="Consumable" ColumnName="Consumable" />
                 <ScalarProperty Name="Single" ColumnName="Single" />
@@ -3005,6 +3007,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotObjectX">
             <EntityTypeMapping TypeName="DepotModel.DepotObjectX">
               <MappingFragment StoreEntitySet="DepotObjectX">
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="FixedNumber" ColumnName="FixedNumber" />
+                <ScalarProperty Name="FixedCard" ColumnName="FixedCard" />
                 <ScalarProperty Name="DepotName" ColumnName="DepotName" />
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
                 <ScalarProperty Name="Money" ColumnName="Money" />
@@ -3022,10 +3028,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
                 <ScalarProperty Name="Low" ColumnName="Low" />
                 <ScalarProperty Name="Specification" ColumnName="Specification" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="SerialD" ColumnName="SerialD" />
-                <ScalarProperty Name="SerialC" ColumnName="SerialC" />
-                <ScalarProperty Name="SerialB" ColumnName="SerialB" />
-                <ScalarProperty Name="SerialA" ColumnName="SerialA" />
                 <ScalarProperty Name="Fixed" ColumnName="Fixed" />
                 <ScalarProperty Name="Consumable" ColumnName="Consumable" />
                 <ScalarProperty Name="Single" ColumnName="Single" />

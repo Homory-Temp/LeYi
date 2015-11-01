@@ -39,6 +39,7 @@
                         <telerik:RadTreeView ID="tree" runat="server" OnNodeClick="tree_NodeClick">
                             <Nodes>
                                 <telerik:RadTreeNode Text="单位" Value="1" Selected="true"></telerik:RadTreeNode>
+                                <telerik:RadTreeNode Text="品牌" Value="7"></telerik:RadTreeNode>
                                 <telerik:RadTreeNode Text="规格" Value="2"></telerik:RadTreeNode>
                                 <telerik:RadTreeNode Text="购置来源" Value="3"></telerik:RadTreeNode>
                                 <telerik:RadTreeNode Text="使用对象" Value="4"></telerik:RadTreeNode>
