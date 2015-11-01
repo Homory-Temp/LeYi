@@ -68,7 +68,7 @@
                                 <span class="btn btn-info dictionaryX">总库存：</span>
                             </td>
                             <td style="width: 35%;">
-                                <span id="total" runat="server"></span>
+                                <span id="total" runat="server"></span>&nbsp;<span id="unitx" runat="server"></span>
                             </td>
                         </tr>
                         <tr>

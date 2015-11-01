@@ -26,7 +26,7 @@ public partial class _Default : System.Web.UI.Page
             return;
         }
         var id = ___id.Value.GlobalId();
-        Session["DepotUser"] = DataContext.DepotUser.Single(o => o.Id == id);
+        Session["DepotUserMobile"] = DataContext.DepotUser.Single(o => o.Id == id);
         Response.Redirect("~/Depot/Home");
     }
 

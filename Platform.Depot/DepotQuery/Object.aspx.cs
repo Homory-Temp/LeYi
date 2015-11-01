@@ -21,7 +21,7 @@ public partial class DepotQuery_Object : DepotPageSingle
                 var objId = value.GlobalId();
                 var obj = DataContext.DepotObject.Single(o => o.Id == objId);
                 name.InnerText = obj.Name;
-                unit.InnerText = obj.Unit;
+                unit.InnerText = unitx.InnerText = obj.Unit;
                 sp.InnerText = obj.Specification;
                 no.InnerText = obj.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
                 note.InnerText = obj.Note;
