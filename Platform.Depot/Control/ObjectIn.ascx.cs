@@ -9,6 +9,10 @@ public partial class Control_ObjectIn : DepotControlSingle
     {
         catalog.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
         catalog.DataBind();
+        people.Items.Clear();
+        people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "", Value = "", Selected = true });
+        people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
+        people.DataBind();
         age.Text = @in.Age;
         place.Text = @in.Place;
         amount.Value = (double?)@in.Amount;
@@ -41,7 +45,9 @@ public partial class Control_ObjectIn : DepotControlSingle
         {
             var item = people.FindItemByValue(@in.ResponsibleId.Value.ToString());
             if (item != null)
+            {
                 item.Selected = true;
+            }
         }
         if (!"ObjectId".Query().None())
         {
@@ -97,17 +103,6 @@ public partial class Control_ObjectIn : DepotControlSingle
                 age.Text = last.Age;
                 place.Text = last.Place;
             }
-        }
-    }
-
-    protected void people_Load(object sender, EventArgs e)
-    {
-        if (!IsPostBack)
-        {
-            people.Items.Clear();
-            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "", Value = "", Selected = true });
-            people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
-            people.DataBind();
         }
     }
 }

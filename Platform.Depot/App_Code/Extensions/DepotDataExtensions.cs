@@ -379,7 +379,7 @@ public static class DepotDataExtensions
                 ObjectId = item.ObjectId.Value,
                 Age = item.Age,
                 Place = item.Place,
-                ResponsibleId = null,
+                ResponsibleId = item.ResponsibleId,
                 Note = item.Note,
                 Time = inTime,
                 OperatorId = operatorId,
@@ -414,7 +414,7 @@ public static class DepotDataExtensions
                         Total = @in.Price,
                         AvailableAmount = 1,
                         Code = obj.Code,
-                        ResponsibleId = @in.ResponsibleId
+                        ResponsibleId = item.ResponsibleId
                     };
                     db.DepotInX.Add(inx);
                     db.SaveChanges();
@@ -452,7 +452,7 @@ public static class DepotDataExtensions
                     Total = @in.Total,
                     AvailableAmount = @in.AvailableAmount,
                     Code = obj.Code,
-                    ResponsibleId = @in.ResponsibleId
+                    ResponsibleId = item.ResponsibleId
                 };
                 db.DepotInX.Add(inx);
                 var flow = new DepotFlow

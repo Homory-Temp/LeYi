@@ -39,7 +39,7 @@
         <telerik:RadTextBox ID="place" runat="server" Width="100"></telerik:RadTextBox>
     </td>
     <td>
-        <telerik:RadComboBox ID="people" runat="server" MaxHeight="203" EmptyMessage="可选" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="100" AllowCustomText="true" AutoPostBack="false" OnLoad="people_Load">
+        <telerik:RadComboBox ID="people" runat="server" MaxHeight="203" EmptyMessage="可选" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="100" AllowCustomText="true" AutoPostBack="true">
             <ItemTemplate>
                 <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
             </ItemTemplate>
