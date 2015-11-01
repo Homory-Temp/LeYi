@@ -113,7 +113,7 @@
                                             <th>借领人</th>
                                             <th>单价</th>
                                             <th>合计</th>
-                                            <th>年龄段</th>
+                                            <th style='<%# (Depot.Featured(Models.DepotType.幼儿园) ? "display: ;": "display: none;") %>'>年龄段</th>
                                             <th>操作人</th>
                                             <th>备注</th>
                                         </tr>
@@ -138,7 +138,7 @@
                                     <td><%# Eval("UserName") %></td>
                                     <td><%# decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount")).ToMoney() %></td>
                                     <td><%# Eval("Money").ToMoney() %></td>
-                                    <td><%# Eval("Age") %></td>
+                                    <td style='<%# (Depot.Featured(Models.DepotType.幼儿园) ? "display: ;": "display: none;") %>'><%# Eval("Age") %></td>
                                     <td><%# Eval("OperatorName") %></td>
                                     <td><%# Eval("Note") %></td>
                                 </tr>

@@ -14,7 +14,7 @@ public partial class DepotQuery_UseX : DepotPageSingle
         if (!IsPostBack)
         {
             period.SelectedDate = DateTime.Today;
-            periodx.SelectedDate = DateTime.Today;
+            periodx.SelectedDate = DateTime.Today.AddMonths(-1);
             people.Items.Clear();
             people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "0", Selected = true });
             people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
@@ -30,6 +30,7 @@ public partial class DepotQuery_UseX : DepotPageSingle
             age.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "年龄段", Value = "", Selected = true });
             age.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.年龄段).ToList();
             age.DataBind();
+            age.Visible = Depot.Featured(DepotType.幼儿园);
         }
     }
 

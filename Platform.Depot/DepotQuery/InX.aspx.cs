@@ -13,7 +13,7 @@ public partial class DepotQuery_InX : DepotPageSingle
     {
         if (!IsPostBack)
         {
-            periodx.SelectedDate = DateTime.Today;
+            periodx.SelectedDate = DateTime.Today.AddMonths(-1);
             period.SelectedDate = DateTime.Today;
             people.Items.Clear();
             people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "0", Selected = true });
@@ -26,6 +26,7 @@ public partial class DepotQuery_InX : DepotPageSingle
             age.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "年龄段", Value = "", Selected = true });
             age.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.年龄段).ToList();
             age.DataBind();
+            age.Visible = Depot.Featured(DepotType.幼儿园);
             place.Items.Clear();
             place.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "存放地", Value = "", Selected = true });
             place.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.存放地).ToList();

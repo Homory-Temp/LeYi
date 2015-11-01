@@ -12,7 +12,7 @@ public partial class DepotQuery_In : DepotPageSingle
         if (!IsPostBack)
         {
             period.SelectedDate = DateTime.Today;
-            periodx.SelectedDate = DateTime.Today;
+            periodx.SelectedDate = DateTime.Today.AddMonths(-1);
             people.Items.Clear();
             people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "0", Selected = true });
             people.DataSource = DataContext.DepotUserLoad(DepotUser.CampusId).ToList();

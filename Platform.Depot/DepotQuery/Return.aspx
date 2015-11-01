@@ -40,7 +40,7 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 出库查询" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 归还查询" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
@@ -104,7 +104,7 @@
                                             <th>数量</th>
                                             <th>单价</th>
                                             <th>合计</th>
-                                            <th>年龄段</th>
+                                            <th style='<%# (Depot.Featured(Models.DepotType.幼儿园) ? "display: ;": "display: none;") %>'>年龄段</th>
                                             <th>借领人</th>
                                             <th>备注</th>
                                         </tr>
@@ -123,7 +123,7 @@
                                     <td><%# Eval("ReturnAmount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
                                     <td><%# decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount")).ToMoney() %></td>
                                     <td><%# (decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount")) * (decimal)Eval("ReturnAmount")).ToMoney() %></td>
-                                    <td><%# Eval("Age") %></td>
+                                    <td style='<%# (Depot.Featured(Models.DepotType.幼儿园) ? "display: ;": "display: none;") %>'><%# Eval("Age") %></td>
                                     <td><%# Eval("UserName") %></td>
                                     <td><%# Eval("ReturnNote") %></td>
                                 </tr>
