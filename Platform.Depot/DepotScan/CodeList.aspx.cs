@@ -23,7 +23,8 @@ public partial class DepotAction_CodeList : DepotPageSingle
 
     protected void down_ServerClick(object sender, EventArgs e)
     {
-
+        var script = "window.open('../Common/物资/条码/打包/{0}.zip','_blank');".Formatted((sender as HtmlInputButton).Attributes["match"]);
+        ap.ResponseScripts.Add(script);
     }
 
     protected void del_ServerClick(object sender, EventArgs e)
