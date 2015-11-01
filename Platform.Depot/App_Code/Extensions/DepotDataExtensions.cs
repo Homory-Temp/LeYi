@@ -413,7 +413,8 @@ public static class DepotDataExtensions
                         Price = @in.Price,
                         Total = @in.Price,
                         AvailableAmount = 1,
-                        Code = obj.Code
+                        Code = obj.Code,
+                        ResponsibleId = @in.ResponsibleId
                     };
                     db.DepotInX.Add(inx);
                     db.SaveChanges();
@@ -450,7 +451,8 @@ public static class DepotDataExtensions
                     Price = @in.Price,
                     Total = @in.Total,
                     AvailableAmount = @in.AvailableAmount,
-                    Code = obj.Code
+                    Code = obj.Code,
+                    ResponsibleId = @in.ResponsibleId
                 };
                 db.DepotInX.Add(inx);
                 var flow = new DepotFlow

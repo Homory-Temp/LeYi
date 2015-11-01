@@ -12,4 +12,5 @@ public class InMemoryIn
     public string Age { get; set; }
     public string Place { get; set; }
     public string Note { get; set; }
+    public Guid? ResponsibleId { get; set; }
 }

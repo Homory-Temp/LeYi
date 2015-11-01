@@ -157,6 +157,7 @@
           <Property Name="AvailableAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ResponsibleId" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="DepotObject">
           <Key>
@@ -1879,6 +1880,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotInX_DepotObject" FromRole="DepotInX" ToRole="DepotObject" />
           <NavigationProperty Name="DepotOrder" Relationship="DepotModel.FK_DepotInX_DepotOrder" FromRole="DepotInX" ToRole="DepotOrder" />
           <NavigationProperty Name="DepotUseX" Relationship="DepotModel.FK_DepotUseX_DepotInX" FromRole="DepotInX" ToRole="DepotUseX" />
+          <Property Name="ResponsibleId" Type="Guid" />
         </EntityType>
         <Association Name="FK_DepotInX_DepotIn">
           <End Type="DepotModel.DepotIn" Role="DepotIn" Multiplicity="1" />
@@ -2748,6 +2750,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotInX">
             <EntityTypeMapping TypeName="DepotModel.DepotInX">
               <MappingFragment StoreEntitySet="DepotInX">
+                <ScalarProperty Name="ResponsibleId" ColumnName="ResponsibleId" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="AutoId" ColumnName="AutoId" />
                 <ScalarProperty Name="AvailableAmount" ColumnName="AvailableAmount" />

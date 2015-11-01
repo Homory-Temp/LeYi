@@ -39,6 +39,13 @@
         <telerik:RadTextBox ID="place" runat="server" Width="100"></telerik:RadTextBox>
     </td>
     <td>
+        <telerik:RadComboBox ID="people" runat="server" MaxHeight="203" EmptyMessage="可选" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="100" AllowCustomText="true" AutoPostBack="false" OnLoad="people_Load">
+            <ItemTemplate>
+                <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
+            </ItemTemplate>
+        </telerik:RadComboBox>
+    </td>
+    <td>
         <telerik:RadTextBox ID="note" runat="server" Width="100"></telerik:RadTextBox>
     </td>
 </tr>

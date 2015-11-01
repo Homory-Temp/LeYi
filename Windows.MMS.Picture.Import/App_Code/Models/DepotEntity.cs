@@ -314,6 +314,7 @@ namespace Models
         public decimal AvailableAmount { get; set; }
         public int AutoId { get; set; }
         public string Code { get; set; }
+        public Nullable<System.Guid> ResponsibleId { get; set; }
     
         public virtual DepotIn DepotIn { get; set; }
         public virtual DepotObject DepotObject { get; set; }

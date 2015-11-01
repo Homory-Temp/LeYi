@@ -60,6 +60,7 @@ public partial class Control_ObjectIn : DepotControlSingle
         result.Age = age.Text;
         result.Place = place.Text;
         result.Note = note.Text;
+        result.ResponsibleId = people.SelectedValue.None() ? (Guid?)null : people.SelectedValue.GlobalId();
         return result;
     }
 
@@ -91,5 +92,13 @@ public partial class Control_ObjectIn : DepotControlSingle
                 place.Text = last.Place;
             }
         }
+    }
+
+    protected void people_Load(object sender, EventArgs e)
+    {
+        people.Items.Clear();
+        people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "", Value = "", Selected = true });
+        people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
+        people.DataBind();
     }
 }

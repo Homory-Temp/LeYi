@@ -116,6 +116,7 @@ public partial class DepotAction_Import : DepotPageSingle
                         {
                             var responsible = row[3].ToString().Trim();
                             var user = DataContext.DepotUserLoad(Depot.CampusId).FirstOrDefault(o => o.Name == responsible && o.State < State.停用);
+                            var responsibleId = user == null ? (Guid?)null : user.Id;
                             decimal amount = 0.00M;
                             try
                             {
@@ -132,7 +133,7 @@ public partial class DepotAction_Import : DepotPageSingle
                             catch
                             {
                             }
-                            var @in = new InMemoryIn { Age = "", Place = row[13].ToString().Trim(), Amount = amount, CatalogId = 二级分类Id, Money = price, Note = code, ObjectId = 物资Id, PriceSet = decimal.Divide(price, amount), Time = DateTime.Today };
+                            var @in = new InMemoryIn { Age = "", Place = row[13].ToString().Trim(), Amount = amount, CatalogId = 二级分类Id, Money = price, Note = code, ObjectId = 物资Id, PriceSet = decimal.Divide(price, amount), Time = DateTime.Today, ResponsibleId = responsibleId };
                             var list = new List<InMemoryIn>();
                             list.Add(@in);
                             DataContext.DepotActIn(固定资产库Id, 固定资产库购置单Id, DateTime.Today, DepotUser.Id, list);

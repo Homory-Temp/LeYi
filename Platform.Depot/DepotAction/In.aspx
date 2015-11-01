@@ -171,6 +171,7 @@
                                     <th>合计</th>
                                     <th style='<%# (Depot.Featured(Models.DepotType.幼儿园) ? "display: ;": "display: none;") %>'>年龄段</th>
                                     <th>存放地</th>
+                                    <th>责任人</th>
                                     <th>备注</th>
                                 </tr>
                                 <asp:PlaceHolder ID="inHolder" runat="server"></asp:PlaceHolder>

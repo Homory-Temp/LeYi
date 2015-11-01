@@ -7,7 +7,7 @@ public partial class Control_ObjectReturn : DepotControlSingle
 {
     public void LoadDefaults(InMemoryReturn @return)
     {
-        id.Text = @return.UseX.ToString();
+        xid.Text = @return.UseX.ToString();
         var usex = DataContext.DepotUseXRecord.FirstOrDefault(o => o.Id == @return.UseX);
         code.Text = @return.Code;
         time.Text = usex.Time.ToString("yyyy-MM-dd");
@@ -22,7 +22,7 @@ public partial class Control_ObjectReturn : DepotControlSingle
         result.Amount = amount.Value.HasValue ? (decimal)amount.Value.Value : (decimal?)null;
         result.OutAmount = outAmount.Value.HasValue ? (decimal)outAmount.Value.Value : (decimal?)null;
         result.Note = note.Text;
-        result.UseX = id.Text.GlobalId();
+        result.UseX = xid.Text.GlobalId();
         return result;
     }
 
