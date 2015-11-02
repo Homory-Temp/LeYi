@@ -85,6 +85,7 @@
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Use?DepotId={0}".Formatted(Depot.Id) %>'>扫码出库</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Return?DepotId={0}".Formatted(Depot.Id) %>'>扫码归还</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Out?DepotId={0}".Formatted(Depot.Id) %>'>扫码报废</a>
+                            <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Check?DepotId={0}".Formatted(Depot.Id) %>'>物资盘库</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/Flow?DepotId={0}".Formatted(Depot.Id) %>'>流通查询</a>
                         </div>
                     </div>

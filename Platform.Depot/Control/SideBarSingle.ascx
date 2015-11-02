@@ -46,6 +46,7 @@
                             <li><a href='<%= "../DepotScan/Use?DepotId={0}".Formatted(Depot.Id) %>'>扫码出库</a></li>
                             <li><a href='<%= "../DepotScan/Return?DepotId={0}".Formatted(Depot.Id) %>'>扫码归还</a></li>
                             <li><a href='<%= "../DepotScan/Out?DepotId={0}".Formatted(Depot.Id) %>'>扫码报废</a></li>
+                            <li><a href='<%= "../DepotScan/Check?DepotId={0}".Formatted(Depot.Id) %>'>物资盘库</a></li>
                             <li><a href='<%= "../DepotScan/Flow?DepotId={0}".Formatted(Depot.Id) %>'>流通查询</a></li>
                         </ul>
                     </li>
