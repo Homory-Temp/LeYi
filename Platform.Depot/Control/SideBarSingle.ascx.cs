@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 public partial class Control_SideBarSingle : DepotControlSingle
 {
@@ -16,6 +17,11 @@ public partial class Control_SideBarSingle : DepotControlSingle
         Session.Clear();
         var link = "{0}Go/Board".Formatted(Application["Sso"]);
         Response.Redirect(link);
+    }
+
+    protected bool HasWarn()
+    {
+        return DataContext.DepotObject.Count(o => ((o.Amount < o.Low && o.Low > 0) || (o.Amount > o.High && o.High > 0)) && o.State < Models.State.停用) > 0;
     }
 
     public string Crumb
