@@ -94,11 +94,10 @@
                                             <th>单价</th>
                                             <th>合计</th>
                                             <th>操作人</th>
-                                            <th>操作</th>
                                         </tr>
                                         <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
                                         <tr>
-                                            <td colspan="12">总计：<%# ___total.Value %></td>
+                                            <td colspan="7">总计：<%# ___total.Value %></td>
                                         </tr>
                                     </table>
                                 </div>

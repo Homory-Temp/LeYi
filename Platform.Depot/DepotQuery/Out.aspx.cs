@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using Telerik.Web.UI;
 
 public partial class DepotQuery_Out  : DepotPageSingle
 {
@@ -65,7 +66,7 @@ public partial class DepotQuery_Out  : DepotPageSingle
         var start = timex.AddMilliseconds(-1);
         var end = time.AddDays(1);
         var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => o.Value.GlobalId()).ToList();
-        var list = catalogs.Join(DataContext.DepotOutRecord.Where(o => o.Time > start && o.Time < end), o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.Time).ThenBy(o => o.UserName).ToList();
+        var list = catalogs.Join(DataContext.DepotOutRecord.Where(o => o.Time > start && o.Time < end), o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.State).ThenByDescending(o => o.Time).ThenBy(o => o.UserName).ToList();
         if (peopleX.SelectedIndex > 0)
         {
             var ou = peopleX.SelectedItem.Value.GlobalId();
@@ -78,5 +79,27 @@ public partial class DepotQuery_Out  : DepotPageSingle
         }
         view.DataSource = list;
         pager.Visible = list.Count > pager.PageSize;
+    }
+
+    protected void go_out_ServerClick(object sender, EventArgs e)
+    {
+        var btn = (sender as HtmlInputButton);
+        var id = int.Parse(btn.Attributes["match"]);
+        var nc = btn.NamingContainer.FindControl("amount") as RadNumericTextBox;
+        var amount = nc.PeekValue(-1);
+        var dto = DataContext.DepotToOut.Single(o => o.Id == id);
+        if (amount == 0)
+        {
+            dto.State = 1;
+            dto.Amount = amount;
+        }
+        else if (amount > 0)
+        {
+            dto.State = 3;
+            dto.Amount = amount;
+        }
+        DataContext.SaveChanges();
+        DataContext.DoOut(id);
+        view.Rebind();
     }
 }

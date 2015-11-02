@@ -1044,6 +1044,9 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="DoOut" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="ToCatalog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CatalogId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="Level" Type="int" Mode="In" />
@@ -1540,6 +1543,9 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <End Role="DepotRedo" EntitySet="DepotRedo" />
           </AssociationSet>
           <EntitySet Name="DepotRedoRecord" EntityType="DepotModel.DepotRedoRecord" />
+          <FunctionImport Name="DoOut">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -2034,6 +2040,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Member Name="领用出库" Value="4" />
           <Member Name="归还" Value="5" />
           <Member Name="退货" Value="6" />
+          <Member Name="报废" Value="7" />
         </EnumType>
         <EntityType Name="DepotInXRecord">
           <Key>
@@ -3266,6 +3273,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DoOut" FunctionName="DepotModel.Store.DoOut" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

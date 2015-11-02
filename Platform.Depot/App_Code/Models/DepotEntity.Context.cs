@@ -84,5 +84,14 @@ namespace Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ToCatalog", catalogIdParameter, levelParameter);
         }
+    
+        public virtual int DoOut(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DoOut", idParameter);
+        }
     }
 }

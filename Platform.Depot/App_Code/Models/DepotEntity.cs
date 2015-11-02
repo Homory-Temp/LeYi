@@ -945,7 +945,8 @@ namespace Models
         借用出库 = 3,
         领用出库 = 4,
         归还 = 5,
-        退货 = 6
+        退货 = 6,
+        报废 = 7
     }
 }
 namespace Models

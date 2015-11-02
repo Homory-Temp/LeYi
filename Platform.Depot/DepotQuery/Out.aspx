@@ -99,6 +99,7 @@
                                             <th>申请数量</th>
                                             <th>审批通过数量</th>
                                             <th>审批状态</th>
+                                            <th style='<%# (RightRoot ? "display: ;": "display: none;") %>'>操作</th>
                                         </tr>
                                         <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
                                     </table>
@@ -113,6 +114,10 @@
                                     <td><%# Eval("ToAmount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
                                     <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
                                     <td><%# Eval("State").ToString() == "1" ? "已审" : "未审" %></td>
+                                    <td style='<%# (RightRoot ? "display: ;": "display: none;") %>'>
+                                        <telerik:RadNumericTextBox ID="amount" runat="server" EmptyMessage="报废数" Visible='<%# Eval("State").ToString() == "2" %>' MinValue="0" MaxValue='<%# (double)((decimal)Eval("ToAmount")) %>' Width="120" NumberFormat-DecimalDigits="0" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
+                                        <input type="button" class="btn btn-tumblr" value="确认" id="go_out" visible='<%# Eval("State").ToString() == "2" %>' match='<%# Eval("Id") %>' runat="server" onserverclick="go_out_ServerClick" />
+                                    </td>
                                 </tr>
                             </ItemTemplate>
                             <EmptyDataTemplate>
