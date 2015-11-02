@@ -94,12 +94,6 @@ public partial class DepotAction_Check : DepotPageSingle
         }
     }
 
-    public class X
-    {
-        public int Ordinal { get; set; }
-        public string Code { get; set; }
-    }
-
     protected List<DepotInX> Ordinals(Guid objId)
     {
         return DataContext.DepotInX.Where(o => o.ObjectId == objId).OrderBy(o => o.Ordinal).ToList();
@@ -107,7 +101,7 @@ public partial class DepotAction_Check : DepotPageSingle
 
     protected void coding_ServerClick(object sender, EventArgs e)
     {
-        var codes = new List<string>();
+        var codes = new List<InMemoryCheck>();
         view.Items.ForEach(o =>
         {
             var inner = o.FindControl("viewx") as RadListView;
@@ -118,17 +112,9 @@ public partial class DepotAction_Check : DepotPageSingle
                     var cbi = i.FindControl("checkx") as CheckBox;
                     if (cbi.Checked)
                     {
-                        codes.Add(cbi.Attributes["CC"]);
+                        codes.Add(new InMemoryCheck { Code = cbi.Attributes["CC"], In = false, Name = "", Ordinal = 0, Place = "" });
                     }
                 });
-            }
-            else
-            {
-                var cb = o.FindControl("checkx") as CheckBox;
-                if (cb.Checked)
-                {
-                    codes.Add(cb.Attributes["CC"]);
-                }
             }
         });
         var bid = DataContext.GlobalId();
@@ -137,19 +123,19 @@ public partial class DepotAction_Check : DepotPageSingle
         for (var i = 0; i <= codes.Count / 300; i++)
         {
             bo++;
-            var dc = new DepotCode
+            var dc = new DepotCheck
             {
                 DepotId = Depot.Id,
                 BatchId = bid,
-                BatchOrdinial = bo,
+                BatchOrdinal = bo,
                 CodeJson = codes.Skip(i * 300).Take(300).ToList().ToJson(),
                 Time = bt,
-                State = 2
+                State = 1
             };
-            DataContext.DepotCode.Add(dc);
+            DataContext.DepotCheck.Add(dc);
         }
         DataContext.SaveChanges();
-        Response.Redirect("~/DepotScan/CodeList?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("~/DepotScan/CheckList?DepotId={0}".Formatted(Depot.Id));
     }
 
     protected void check_CheckedChanged(object sender, EventArgs e)
@@ -164,6 +150,6 @@ public partial class DepotAction_Check : DepotPageSingle
 
     protected void coded_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotScan/CodeList?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("~/DepotScan/CheckList?DepotId={0}".Formatted(Depot.Id));
     }
 }
