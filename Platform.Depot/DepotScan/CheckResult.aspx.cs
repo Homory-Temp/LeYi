@@ -6,7 +6,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
-public partial class DepotAction_CheckList : DepotPageSingle
+public partial class DepotAction_CheckResult : DepotPageSingle
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -18,13 +18,16 @@ public partial class DepotAction_CheckList : DepotPageSingle
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        view.DataSource = DataContext.DepotCheck.Where(o => o.DepotId == Depot.Id && o.State  == 1).OrderByDescending(o => o.Time).ToList();
+        var batchId = "BatchId".Query().GlobalId();
+        view.DataSource = DataContext.DepotCheckX.Where(o => o.State  == 1 && o.BatchId == batchId).OrderByDescending(o => o.Time).ToList();
     }
 
     protected void del_ServerClick(object sender, EventArgs e)
     {
         var bid = (sender as HtmlInputButton).Attributes["match"].GlobalId();
-        foreach (var item in DataContext.DepotCheck.Where(o => o.BatchId == bid).ToList())
+        var time = DateTime.Parse((sender as HtmlInputButton).Attributes["matchx"]);
+        var item = DataContext.DepotCheckX.Where(o => o.BatchId == bid).ToList().SingleOrDefault(o =>  o.Time.ToString("yyyy-MM-dd HH:mm:ss") == time.ToString("yyyy-MM-dd HH:mm:ss"));
+        if (item != null)
         {
             item.State = 2;
         }

@@ -60,6 +60,7 @@
         <AssociationConnector Association="DepotModel.FK_DepotRedo_DepotObject" />
         <EntityTypeShape EntityType="DepotModel.DepotRedoRecord" Width="1.5" PointX="19.75" PointY="3.75" />
         <EntityTypeShape EntityType="DepotModel.DepotCheck" Width="1.5" PointX="19.75" PointY="8.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotCheckX" Width="1.5" PointX="19.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

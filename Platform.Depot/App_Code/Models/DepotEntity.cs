@@ -160,6 +160,19 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotCheckX
+    {
+        public System.Guid BatchId { get; set; }
+        public System.DateTime Time { get; set; }
+        public string CodeJson { get; set; }
+        public int State { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotCode
     {
         public System.Guid DepotId { get; set; }

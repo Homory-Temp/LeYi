@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CheckList.aspx.cs" Inherits="DepotAction_CheckList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CheckResult.aspx.cs" Inherits="DepotAction_CheckResult" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
 
@@ -39,7 +39,7 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资条码 - 盘库生成列表" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资条码 - 盘库记录列表" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-12">
@@ -47,8 +47,8 @@
                         <LayoutTemplate>
                             <table class="storeTable">
                                 <tr>
-                                    <th>盘库生成时间</th>
-                                    <th>盘库记录</th>
+                                    <th>盘库时间</th>
+                                    <th>盘库详情</th>
                                     <th>操作</th>
                                 </tr>
                                 <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
@@ -60,12 +60,10 @@
                                     <%#  ((DateTime)Eval("Time")).ToString("yyyy-MM-dd HH:mm:ss") %>
                                 </td>
                                 <td>
-                                    <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text="查看" NavigateUrl='<%# "../DepotScan/CheckResult?DepotId={0}&BatchId={1}".Formatted(Depot.Id, Eval("BatchId")) %>'></asp:HyperLink>
+                                    <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text="查看" NavigateUrl='<%# "../DepotScan/CheckResultX?DepotId={0}&BatchId={1}&Time={2}".Formatted(Depot.Id, Eval("BatchId"), DateTime.Parse(Eval("Time").ToString()).Ticks) %>'></asp:HyperLink>
                                 </td>
                                 <td>
-                                    <input type="button" class="btn btn-tumblr" value="查看" id="view" runat="server" match='<%# Eval("BatchId") %>' onserverclick="view_ServerClick" />
-                                    <input type="button" class="btn btn-tumblr" value="盘库" id="start" runat="server" match='<%# Eval("BatchId") %>' onserverclick="start_ServerClick" />
-                                    <input type="button" class="btn btn-tumblr" value="删除" id="del" runat="server" visible='<%# RightRoot %>' match='<%# Eval("BatchId") %>' onserverclick="del_ServerClick" />
+                                    <input type="button" class="btn btn-tumblr" value="删除" id="del" runat="server" visible='<%# RightRoot %>' matchx='<%# Eval("Time").ToString() %>' match='<%# Eval("BatchId") %>' onserverclick="del_ServerClick" />
                                 </td>
                             </tr>
                         </ItemTemplate>
