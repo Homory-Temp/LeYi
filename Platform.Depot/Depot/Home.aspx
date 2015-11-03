@@ -51,7 +51,7 @@
                             <div class="row" runat="server">
                                 <div class="col-md-12">
                                     <input type="button" class="btn btn-tumblr" id="edit" runat="server" value="编辑" visible='<%# RightCreate %>' onclick=<%# "top.location.href='../Depot/HomeEdit?DepotId={0}'; return false;".Formatted(Eval("Id")) %> />
-                                    <input type="button" class="btn btn-tumblr" id="remove" runat="server" value="删除" visible='<%# (Models.State)Eval("State") > Models.State.内置 && RightCreate %>' onclick=<%# "top.location.href='../Depot/HomeRemove?DepotId={0}'; return false;".Formatted(Eval("Id")) %> />
+                                    <input type="button" class="btn btn-tumblr" id="remove" runat="server" value="删除" visible='<%# (Models.State)Eval("State") > Models.State.内置 && RightCreate && (((Models.DepotType)Eval("Type") & Models.DepotType.固定资产库) == Models.DepotType.无) %>' onclick=<%# "top.location.href='../Depot/HomeRemove?DepotId={0}'; return false;".Formatted(Eval("Id")) %> />
                                 </div>
                             </div>
                         </div>
