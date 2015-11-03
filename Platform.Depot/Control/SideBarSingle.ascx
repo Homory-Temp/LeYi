@@ -72,7 +72,7 @@
                 <input id="storeName" runat="server" type="button" class="btn btn-tumblr" onserverclick="storeName_ServerClick" />
                 <span id="crumb" runat="server" class="btn btn-info" style="margin-left: 10px;"></span>
                 <span class="btn btn-info" onclick="top.location.href = '../Depot/Home';" style="float: right;">仓库切换</span>
-                <span class="btn btn-info" onclick='<%= "top.location.href = \"../DepotAction/Object?DepotId={0}\"".Formatted(Depot.Id) %>' style="float: right; margin-right: 13px;">物资管理</span>
+                <%--<span class="btn btn-info" onclick='<%= "top.location.href = \"../DepotAction/Object?DepotId={0}\"".Formatted(Depot.Id) %>' style="float: right; margin-right: 13px;">物资管理</span>--%>
                 <span class='<%= HasWarn() ? "btn btn-warning" : "btn btn-info" %>' onclick='<%= "top.location.href = \"../Depot/Warn?DepotId={0}\"".Formatted(Depot.Id) %>' style="float: right; margin-right: 13px;">库存预警</span>
                 <span class="btn btn-info" onclick='<%= "top.location.href = \"../Depot/DepotHome?DepotId={0}\"".Formatted(Depot.Id) %>' style="float: right; margin-right: 13px;">快速导航</span>
                 <span style="clear: both;"></span>

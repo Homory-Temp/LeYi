@@ -122,7 +122,7 @@
                                     </asp:Panel>
                                     <asp:Panel runat="server" Visible='<%# !IsSimple %>'>
                                         <div class="col-md-3">
-                                            <div class="row" style="margin: 30px; border: solid 1px silver;">
+                                            <div class="row" style="margin: 30px 0; border: solid 1px silver;">
                                                 <div class="col-md-12" style="width: 100%; height: 100%;">
                                                     <div style="height: 160px; text-align: center; cursor: pointer;" onclick="gox(this);" goid='<%# Eval("Id") %>' did='<%# Depot.Id %>'>
                                                         <img class="img-responsive" style="height: 158px; margin: auto;" src='<%# Eval("ImageA").None() ? "../Content/Images/Transparent.png" : Eval("ImageA") %>' />
