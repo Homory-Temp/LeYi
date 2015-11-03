@@ -15,7 +15,7 @@ public partial class DepotScan_Out : DepotPageSingle
         {
             time.SelectedDate = DateTime.Today;
             people.Items.Clear();
-            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "报废申请人", Value = "", Selected = true });
+            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "", Value = "", Selected = true });
             people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
             people.DataBind();
             counter.Value = "0";

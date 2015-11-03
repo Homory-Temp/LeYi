@@ -80,7 +80,7 @@
                     </div>
                     <div class="row">&nbsp;</div>
                     <div class="row">
-                        <input type="hidden" id="___total" runat="server" />
+                        <input type="hidden" id="___total" runat="server" value="@@@@@@" />
                         <!-- Start Printing -->
                         <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
                             <LayoutTemplate>
@@ -97,7 +97,7 @@
                                         </tr>
                                         <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
                                         <tr>
-                                            <td colspan="7">总计：<%# ___total.Value %></td>
+                                            <td colspan="7">总数：<%# ___total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[0] %>&nbsp;&nbsp;&nbsp;&nbsp;总计：<%# ___total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[1] %></td>
                                         </tr>
                                     </table>
                                 </div>

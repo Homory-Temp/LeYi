@@ -68,7 +68,7 @@ public partial class DepotQuery_Redo : DepotPageSingle
             source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
         }
         view.DataSource = source.OrderByDescending(o => o.Time).ToList();
-        ___total.Value = source.Sum(o => o.Money).ToMoney();
+        ___total.Value = source.Sum(o => o.Amount).ToAmount(Depot.Featured(DepotType.小数数量库)) + "@@@" + source.Sum(o => o.Money).ToMoney();
         //pager.Visible = source.Count > pager.PageSize;
     }
 

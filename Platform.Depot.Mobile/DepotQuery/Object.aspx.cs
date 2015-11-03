@@ -134,4 +134,9 @@ public partial class DepotQuery_Object : DepotPageSingle
     {
         Response.Redirect("~/DepotAction/ObjectImage?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, "ObjectId".Query()));
     }
+
+    protected void back_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotScan/Object?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, "ObjectId".Query()));
+    }
 }

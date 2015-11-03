@@ -47,7 +47,9 @@
                 <div class="col-md-6 text-center">
                     <span class="btn btn-danger" id="name" runat="server"></span>
                 </div>
-                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-3 text-right">
+                    <input type="button" class="btn btn-info" id="back" runat="server" value="返回" onserverclick="back_ServerClick" />
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">

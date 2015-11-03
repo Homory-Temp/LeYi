@@ -62,10 +62,10 @@
                 <div class="col-md-10" style="text-align: left;">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                    <telerik:RadDatePicker ID="periodx" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
-                        <DatePopupButton runat="server" Visible="false" />
-                    </telerik:RadDatePicker>
-                    &nbsp;&nbsp;-&nbsp;&nbsp;
+                            <telerik:RadDatePicker ID="periodx" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
+                                <DatePopupButton runat="server" Visible="false" />
+                            </telerik:RadDatePicker>
+                            &nbsp;&nbsp;-&nbsp;&nbsp;
                             <telerik:RadDatePicker ID="period" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
                                 <DatePopupButton runat="server" Visible="false" />
                             </telerik:RadDatePicker>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="row">&nbsp;</div>
                     <div class="row">
-                        <input type="hidden" id="___total" runat="server" />
+                        <input type="hidden" id="___total" runat="server" value="@@@@@@" />
                         <!-- Start Printing -->
                         <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
                             <LayoutTemplate>
@@ -108,7 +108,7 @@
                                         </tr>
                                         <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
                                         <tr>
-                                            <td colspan="12">总计：<%# ___total.Value %></td>
+                                            <td colspan="12">总数：<%# ___total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[0] %>&nbsp;&nbsp;&nbsp;&nbsp;总计：<%# ___total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[1] %></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -141,11 +141,11 @@
                         </telerik:RadListView>
                         <!-- End Printing -->
                     </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <input type="button" class="btn btn-tumblr" id="print" value="打印" onclick="printDepot();" />
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <input type="button" class="btn btn-tumblr" id="print" value="打印" onclick="printDepot();" />
+                        </div>
+                    </div>
                     <%--<div class="row">
                         <div class="col-md-3">&nbsp;</div>
                         <div class="col-md-6 text-center">
