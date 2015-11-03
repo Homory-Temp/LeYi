@@ -87,9 +87,9 @@
                                     <th>操作</th>
                                 </tr>
                                 <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
-                                <tr>
+                                <%--<tr>
                                     <td colspan="12">总计：<%# ___total.Value %></td>
-                                </tr>
+                                </tr>--%>
                             </table>
                         </div>
                     </LayoutTemplate>
@@ -117,7 +117,7 @@
                     <input type="button" class="btn btn-tumblr" id="print" value="打印" onclick="printDepot();" />
                 </div>
             </div>
-            <%--<div class="row">
+            <div class="row">
                 <div class="col-md-4">&nbsp;</div>
                 <div class="col-md-4 text-center">
                     <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="10">
@@ -129,7 +129,7 @@
                     </telerik:RadDataPager>
                 </div>
                 <div class="col-md-4">&nbsp;</div>
-            </div>--%>
+            </div>
         </telerik:RadAjaxPanel>
     </form>
 </body>

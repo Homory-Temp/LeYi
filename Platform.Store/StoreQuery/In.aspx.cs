@@ -80,9 +80,13 @@ public partial class StoreQuery_In : SingleStorePage
             source = source.Where(o => o.Place == place.Text).ToList();
         if (people.SelectedIndex > 0)
             source = source.Where(o => o.Operator == people.SelectedItem.Text).ToList();
+        if (!name.Text.Null())
+        {
+            source = source.Where(o => o.Name.ToLower() == name.Text.Trim().ToLower()).ToList();
+        }
         view.DataSource = source;
         ___total.Value = source.Sum(o => o.SourceMoney).ToMoney();
-        //pager.Visible = source.Count > pager.PageSize;
+        pager.Visible = source.Count > pager.PageSize;
     }
 
     protected void edit_ServerClick(object sender, EventArgs e)

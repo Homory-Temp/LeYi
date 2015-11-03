@@ -89,7 +89,7 @@ public partial class StoreQuery_Target : SingleStorePage
             list = list.Where(o => o.操作人 == people.SelectedItem.Text).ToList();
         view.DataSource = list;
         ___total.Value = list.Sum(o => o.实付金额).ToMoney();
-        //pager.Visible = list.Count > pager.PageSize;
+        pager.Visible = list.Count > pager.PageSize;
     }
 
     protected void edit_ServerClick(object sender, EventArgs e)
