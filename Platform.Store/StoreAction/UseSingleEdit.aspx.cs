@@ -94,6 +94,10 @@ public partial class StoreAction_UseSingleEdit : SingleStorePage
                 currentX.EndAmount += plusAmount;
                 currentX.EndMoney += plusMoney;
             }
+            if (cs.Amount == 0)
+            {
+                db.Value.StoreConsumeSingle.Remove(cs);
+            }
             db.Value.SaveChanges();
         }
     }

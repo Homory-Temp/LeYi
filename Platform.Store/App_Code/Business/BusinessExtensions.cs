@@ -292,11 +292,11 @@ public static class BusinessExtensions
                                 ObjectId = obj.Id,
                                 Note = use.Note,
                                 Amount = left,
-                                Money = (decimal.Divide(@in.Money, @in.Amount)) * left,
+                                Money = (decimal.Divide(@in.SourceMoney, @in.SourceAmount)) * left,
                                 SingleConsumeId = @single.Id
                             };
                             db.StoreUseSingle.Add(us);
-                            consume.Money += (decimal.Divide(@in.Money, @in.Amount)) * left;
+                            consume.Money += (decimal.Divide(@in.SourceMoney, @in.SourceAmount)) * left;
                             @single.InId = @in.Id;
                             @single.ConsumeId = consume.Id;
                             @single.Ordinal = counter;
@@ -304,12 +304,12 @@ public static class BusinessExtensions
                             @single.PerPrice = @in.PerPrice;
                             @single.SourcePerPrice = @in.SourcePerPrice;
                             @single.Fee = (decimal.Divide(@in.Fee, @in.Amount)) * left;
-                            @single.Money = (decimal.Divide(@in.Money, @in.Amount)) * left;
+                            @single.Money = (decimal.Divide(@in.SourceMoney, @in.SourceAmount)) * left;
                             @in.Amount -= left;
                             if (@in.Amount == 0)
                                 @in.Money = 0;
                             else
-                                @in.Money -= (decimal.Divide(@in.Money, @in.Amount)) * left;
+                                @in.Money -= (decimal.Divide(@in.SourceMoney, @in.SourceAmount)) * left;
                             db.StoreConsumeSingle.Add(@single);
                             break;
                         }
