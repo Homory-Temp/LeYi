@@ -145,6 +145,34 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotCheck
+    {
+        public System.Guid DepotId { get; set; }
+        public System.Guid BatchId { get; set; }
+        public int BatchOrdinal { get; set; }
+        public string CodeJson { get; set; }
+        public System.DateTime Time { get; set; }
+        public int State { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class DepotCheckX
+    {
+        public System.Guid BatchId { get; set; }
+        public System.DateTime Time { get; set; }
+        public string CodeJson { get; set; }
+        public int State { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotCode
     {
         public System.Guid DepotId { get; set; }
@@ -235,6 +263,7 @@ namespace Models
         public DepotIn()
         {
             this.DepotInX = new HashSet<DepotInX>();
+            this.DepotRedo = new HashSet<DepotRedo>();
         }
     
         public System.Guid Id { get; set; }
@@ -257,6 +286,8 @@ namespace Models
         public virtual DepotOrder DepotOrder { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotInX> DepotInX { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepotRedo> DepotRedo { get; set; }
     }
 }
 namespace Models
@@ -389,6 +420,7 @@ namespace Models
             this.DepotStatistics = new HashSet<DepotStatistics>();
             this.DepotInX = new HashSet<DepotInX>();
             this.DepotUseX = new HashSet<DepotUseX>();
+            this.DepotRedo = new HashSet<DepotRedo>();
         }
     
         public System.Guid Id { get; set; }
@@ -430,6 +462,8 @@ namespace Models
         public virtual ICollection<DepotInX> DepotInX { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotUseX> DepotUseX { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepotRedo> DepotRedo { get; set; }
     }
 }
 namespace Models
@@ -547,6 +581,49 @@ namespace Models
         public string Name { get; set; }
         public string Unit { get; set; }
         public string UserName { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class DepotRedo
+    {
+        public System.Guid Id { get; set; }
+        public System.Guid DepotId { get; set; }
+        public System.Guid UserId { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public System.Guid InId { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Money { get; set; }
+        public System.DateTime Time { get; set; }
+        public string Note { get; set; }
+    
+        public virtual DepotIn DepotIn { get; set; }
+        public virtual DepotObject DepotObject { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class DepotRedoRecord
+    {
+        public string Operator { get; set; }
+        public string Name { get; set; }
+        public System.Guid CatalogId { get; set; }
+        public int Level { get; set; }
+        public string CatalogName { get; set; }
+        public bool IsVirtual { get; set; }
+        public string Unit { get; set; }
+        public System.Guid InId { get; set; }
+        public System.Guid OrderId { get; set; }
+        public System.Guid ObjectId { get; set; }
+        public System.DateTime Time { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Money { get; set; }
     }
 }
 namespace Models
@@ -896,7 +973,8 @@ namespace Models
         借用出库 = 3,
         领用出库 = 4,
         归还 = 5,
-        退货 = 6
+        退货 = 6,
+        报废 = 7
     }
 }
 namespace Models

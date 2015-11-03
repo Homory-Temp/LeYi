@@ -60,6 +60,10 @@ namespace Models
         public virtual DbSet<DepotOutRecord> DepotOutRecord { get; set; }
         public virtual DbSet<DepotObjectX> DepotObjectX { get; set; }
         public virtual DbSet<DepotCode> DepotCode { get; set; }
+        public virtual DbSet<DepotRedo> DepotRedo { get; set; }
+        public virtual DbSet<DepotRedoRecord> DepotRedoRecord { get; set; }
+        public virtual DbSet<DepotCheck> DepotCheck { get; set; }
+        public virtual DbSet<DepotCheckX> DepotCheckX { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {
@@ -81,6 +85,15 @@ namespace Models
                 new ObjectParameter("Level", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ToCatalog", catalogIdParameter, levelParameter);
+        }
+    
+        public virtual int DoOut(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DoOut", idParameter);
         }
     }
 }
