@@ -13,7 +13,6 @@ public partial class DepotQuery_UsePrint : DepotPageSingle
             var id = "UseId".Query().GlobalId();
             var use = DataContext.DepotUse.Single(o => o.Id == id);
             campus.InnerText = DataContext.Department.Single(o => o.Id == Depot.CampusId).Name;
-            total.Value = use.Money.ToMoney();
             people.Value = DataContext.DepotUser.Single(o => o.Id == use.UserId).Name;
             time.InnerText = use.Time.ToDay();
         }
@@ -24,6 +23,7 @@ public partial class DepotQuery_UsePrint : DepotPageSingle
         public string Name { get; set; }
         public string Catalog { get; set; }
         public string Unit { get; set; }
+        public string Brand { get; set; }
         public UseType Type { get; set; }
         public decimal Amount { get; set; }
         public decimal PerPrice { get; set; }
@@ -40,14 +40,18 @@ public partial class DepotQuery_UsePrint : DepotPageSingle
         var use = DataContext.DepotUse.Single(o => o.Id == id);
         var list = new List<UseRecord>();
         var isVirtual = Depot.Featured(DepotType.固定资产库);
+        var amount = 0M;
+        var money = 0M;
         foreach (var us in DataContext.DepotUseX.Where(o => o.UseId == use.Id).ToList())
         {
+            amount += us.Amount;
+            money += us.Money;
             if (list.Count(o => o.ObjectId == us.ObjectId && o.Type == us.Type && o.InId == us.InXId) == 0)
             {
                 var objId = us.ObjectId;
                 var obj = DataContext.DepotObject.Single(o => o.Id == objId);
                 var catalog = DataContext.DepotObjectCatalog.Single(o => o.ObjectId == objId && o.IsLeaf == true && o.IsVirtual == isVirtual);
-                list.Add(new UseRecord { ObjectId = us.ObjectId, Name = obj.Name, Catalog = DataContext.ToCatalog(catalog.CatalogId, catalog.Level).Single(), Type = us.Type, Unit = obj.Unit, Specification = obj.Specification, Amount = us.Amount, Money = us.Money, Note = us.Note, InId = us.InXId, PerPrice = decimal.Divide(us.Money, us.Amount) });
+                list.Add(new UseRecord { ObjectId = us.ObjectId, Name = obj.Name, Brand = obj.Brand, Catalog = DataContext.ToCatalog(catalog.CatalogId, catalog.Level).Single(), Type = us.Type, Unit = obj.Unit, Specification = obj.Specification, Amount = us.Amount, Money = us.Money, Note = us.Note, InId = us.InXId, PerPrice = decimal.Divide(us.Money, us.Amount) });
             }
             else
             {
@@ -56,6 +60,7 @@ public partial class DepotQuery_UsePrint : DepotPageSingle
                 x.Money += us.Money;
             }
         }
+        total.Value = amount.ToAmount(Depot.Featured(DepotType.小数数量库)) + "@@@" + money.ToMoney();
         view_record.DataSource = list.OrderBy(o => o.Name).ThenBy(o => o.Type);
     }
 

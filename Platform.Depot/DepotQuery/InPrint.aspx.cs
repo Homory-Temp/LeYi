@@ -15,7 +15,6 @@ public partial class DepotQuery_InPrint : DepotPageSingle
             campus.InnerText = DataContext.Department.Single(o => o.Id == campusId).Name;
             time.InnerText = ord.RecordTime.ToDay();
             order.Value = ord.购置来源;
-            total.Value = ord.应付金额.ToMoney();
             keep.Value = ord.保管人;
             brokerage.Value = ord.经手人;
         }
@@ -24,7 +23,10 @@ public partial class DepotQuery_InPrint : DepotPageSingle
     protected void view_record_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         var orderId = "OrderId".Query().GlobalId();
-        view_record.DataSource = DataContext.DepotInXRecord.Where(o => o.OrderId == orderId).OrderByDescending(o => o.Time).ToList();
+        var ord = DataContext.DepotInRecord.Single(o => o.Id == orderId);
+        var source = DataContext.DepotInXRecord.Where(o => o.OrderId == orderId).OrderByDescending(o => o.Time).ToList();
+        view_record.DataSource = source;
+        total.Value = source.Sum(o => o.Amount).ToAmount(Depot.Featured(DepotType.小数数量库)) + "@@@" + ord.应付金额.ToMoney();
     }
 
     protected void go_ServerClick(object sender, EventArgs e)

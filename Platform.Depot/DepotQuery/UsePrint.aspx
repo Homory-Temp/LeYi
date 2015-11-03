@@ -80,10 +80,12 @@
                                 <tr>
                                     <td colspan="6">
                                         <telerik:RadCodeBlock runat="server">
-                                            <span style="font-weight: bold;">合计：</span><span><%= total.Value %></span>
+                                            <span style="font-weight: bold;">总数：</span><span><%= total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[0] %></span>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span style="font-weight: bold;">总计：</span><span><%= total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[1] %></span>
                                         </telerik:RadCodeBlock>
                                     </td>
-                                    <td colspan="3" style="text-align: left;">
+                                    <td colspan="4">
                                         <telerik:RadCodeBlock runat="server">
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             <span style="font-weight: bold;">借领人：</span><span><%= people.Value %></span>
@@ -107,7 +109,7 @@
                             </tr>
                         </ItemTemplate>
                     </telerik:RadListView>
-                    <input id="total" runat="server" type="hidden" />
+                    <input id="total" runat="server" type="hidden" value="@@@@@@" />
                     <input id="people" runat="server" type="hidden" />
                 </div>
             </div>

@@ -78,9 +78,11 @@
                                 </tr>
                                 <asp:PlaceHolder ID="recordHolder" runat="server"></asp:PlaceHolder>
                                 <tr>
-                                    <td colspan="5">
+                                    <td colspan="6">
                                         <telerik:RadCodeBlock runat="server">
-                                            <span style="font-weight: bold;">合计：</span><span><%= total.Value %></span>
+                                            <span style="font-weight: bold;">总数：</span><span><%= total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[0] %></span>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span style="font-weight: bold;">总计：</span><span><%= total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[1] %></span>
                                         </telerik:RadCodeBlock>
                                     </td>
                                     <td colspan="2" style="text-align: left;">
