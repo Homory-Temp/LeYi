@@ -105,14 +105,16 @@ public partial class DepotAction_Check : DepotPageSingle
         view.Items.ForEach(o =>
         {
             var inner = o.FindControl("viewx") as RadListView;
+            var h = o.FindControl("h") as HtmlInputHidden;
             if (inner.Items.Count > 0)
             {
                 inner.Items.ForEach(i =>
                 {
                     var cbi = i.FindControl("checkx") as CheckBox;
+                    var lbl = i.FindControl("lbl") as Label;
                     if (cbi.Checked)
                     {
-                        codes.Add(new InMemoryCheck { Code = cbi.Attributes["CC"], In = false, Name = "", Ordinal = 0, Place = "" });
+                        codes.Add(new InMemoryCheck { Code = cbi.Attributes["CC"], In = false, Name = h.Value, Ordinal = int.Parse(cbi.Attributes["ORD"]), Place = lbl.Text });
                     }
                 });
             }
@@ -120,7 +122,7 @@ public partial class DepotAction_Check : DepotPageSingle
         var bid = DataContext.GlobalId();
         var bo = 0;
         var bt = DateTime.Now;
-        for (var i = 0; i <= codes.Count / 300; i++)
+        for (var i = 0; i <= codes.Count / 40; i++)
         {
             bo++;
             var dc = new DepotCheck
@@ -128,7 +130,7 @@ public partial class DepotAction_Check : DepotPageSingle
                 DepotId = Depot.Id,
                 BatchId = bid,
                 BatchOrdinal = bo,
-                CodeJson = codes.Skip(i * 300).Take(300).ToList().ToJson(),
+                CodeJson = codes.Skip(i * 100).Take(100).ToList().ToJson(),
                 Time = bt,
                 State = 1
             };

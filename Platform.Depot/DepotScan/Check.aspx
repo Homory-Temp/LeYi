@@ -101,6 +101,7 @@
                                     <tr>
                                         <td style="width: 30%;">
                                             <asp:CheckBox ID="check" runat="server" CssClass="depot" AutoPostBack="true" CC='<%# Eval("Code") %>' OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Name")) %>' OnCheckedChanged="check_CheckedChanged" />
+                                            <input type="hidden" id="h" runat="server" value='<%# Eval("Name") %>' />
                                         </td>
                                         <td style="width: 70%;">
                                             <asp:Panel ID="single" runat="server" Visible='<%# (bool)Eval("Single") %>'>
@@ -109,7 +110,7 @@
                                                         <div style='<%# (Eval("Place").ToString().ToLower().Contains(toSearchx.Text.Trim().ToLower()) ? "display: ; float: left; width: 50%; text-align: left;": "display: none; float: left; width: 50%; text-align: left;") %>'>
                                                             <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="false" CC='<%# Eval("Code") %>' OBJ='<%# Eval("ObjectId") %>' ORD='<%# Eval("Ordinal") %>' Text='<%# "&nbsp;{1}&nbsp;-&nbsp;{0}".Formatted(Eval("Ordinal"), Eval("Code")) %>' />
                                                             &nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <asp:Label Text='<%# Eval("Place") %>' runat="server"></asp:Label>
+                                                            <asp:Label ID="lbl" Text='<%# Eval("Place") %>' runat="server"></asp:Label>
                                                         </div>
                                                     </ItemTemplate>
                                                 </telerik:RadListView>
