@@ -8,21 +8,21 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
-    <script src="../Content/jQuery/jquery.min.js"></script>
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../assets/css/style-responsive.css" rel="stylesheet" />
-    <link href="../assets/css/style.css" rel="stylesheet" />
-    <link href="../Content/Core/css/common.css" rel="stylesheet" />
-    <link href="../Content/Core/css/fix.css" rel="stylesheet" />
-    <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../Content/Homory/js/common.js"></script>
-    <script src="../Content/Homory/js/notify.min.js"></script>
+    <script src="Content/jQuery/jquery.min.js"></script>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/style-responsive.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="Content/Core/css/common.css" rel="stylesheet" />
+    <link href="Content/Core/css/fix.css" rel="stylesheet" />
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="Content/Homory/js/common.js"></script>
+    <script src="Content/Homory/js/notify.min.js"></script>
     <!--[if lt IE 9]>
-	    <script src="../Content/Homory/js/html5shiv.js"></script>
-	    <script src="../Content/Homory/js/respond.min.js"></script>
+	    <script src="Content/Homory/js/html5shiv.js"></script>
+	    <script src="Content/Homory/js/respond.min.js"></script>
     <![endif]-->
 </head>
-<body style="background: url( '../Images/quc_index_bg.jpg')  no-repeat 50%">
+<body style="background: url( 'Images/quc_index_bg.jpg')  no-repeat 50%">
     <form id="form" runat="server" style="width: 100%;">
         <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
         <telerik:RadAjaxLoadingPanel ID="loading" runat="server" InitialDelayTime="1000">
@@ -33,13 +33,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <img class="img-responsive" src="../Common/配置/SsoLogo.png" />
+                        <img class="img-responsive" src="Common/配置/SsoLogo.png" />
                     </div>
                 </div>
                 <div class="row">&nbsp;</div>
                 <div class="row">&nbsp;</div>
                 <div class="row">
-                    <div class="col-md-12" style="background: url('../Images/bdbg11.png') repeat-x; height: 442px">
+                    <div class="col-md-12" style="background: url('Images/bdbg11.png') repeat-x; height: 442px">
                         <div class="panel panel-default" style="border: none; background-color: transparent; box-shadow: none;">
                             <div class="panel panel-info" style="background-color: transparent; margin-top: 30px;">
                                 <div class="panel-heading">
