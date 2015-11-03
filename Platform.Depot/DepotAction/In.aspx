@@ -33,6 +33,13 @@
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资管理 - 物资入库" />
         <telerik:RadCodeBlock runat="server">
             <script>
+                function accAdd(arg1, arg2) {
+                    var r1, r2, m;
+                    try { r1 = arg1.toString().split(".")[1].length } catch (e) { r1 = 0 }
+                    try { r2 = arg2.toString().split(".")[1].length } catch (e) { r2 = 0 }
+                    m = Math.pow(10, Math.max(r1, r2));
+                    return (arg1 * m + arg2 * m) / m;
+                }
                 function accMul(arg1, arg2) {
                     var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
                     try { m += s1.split(".")[1].length } catch (e) { }
@@ -52,7 +59,7 @@
                     for (var j = 0; j < ccs.length; j++) {
                         var v = $find(ccs[j].id).get_value();
                         if (v)
-                            g_total += v;
+                            g_total = accAdd(g_total, v);
                     }
                     $find('<%= total.ClientID %>').set_value(g_total + adjust);
                 }
