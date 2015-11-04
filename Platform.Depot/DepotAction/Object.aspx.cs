@@ -126,7 +126,10 @@ public partial class DepotAction_Object : DepotPageSingle
 
     protected void edit_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/ObjectEdit?DepotId={0}&ObjectId={1}&CatalogId={2}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"], CurrentNode.HasValue ? CurrentNode.Value : Guid.Empty));
+        var objId = (sender as HtmlInputButton).Attributes["match"].GlobalId();
+        var isVirtual = Depot.Featured(DepotType.固定资产库);
+        var catalogId = DataContext.DepotObjectCatalog.Single(o => o.ObjectId == objId && o.IsLeaf == true && o.IsVirtual == isVirtual).CatalogId;
+        Response.Redirect("~/DepotAction/ObjectEdit?DepotId={0}&ObjectId={1}&CatalogId={2}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"], catalogId));
     }
 
     protected void delete_ServerClick(object sender, EventArgs e)
