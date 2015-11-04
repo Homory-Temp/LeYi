@@ -55,7 +55,9 @@
                                         <ItemTemplate>
                                             <tr>
                                                 <td class="col-mxd-3"><%# GetCatalog(Eval("Id")) %></td>
-                                                <td class="col-mxd-3"><%# Eval("Name") %></td>
+                                                <td class="col-mxd-3">
+                                                    <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text='<%# Eval("Name") %>' NavigateUrl='<%# "../DepotQuery/Object?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, Eval("Id")) %>'></asp:HyperLink>
+                                                </td>
                                                 <td class="col-mxd-3"><%# Eval("Unit") %></td>
                                                 <td class="col-mxd-3"><%# Eval("Low").ToAmount() %></td>
                                                 <td class="col-mxd-3"><%# Eval("Amount").ToAmount() %></td>
@@ -95,7 +97,9 @@
                                         <ItemTemplate>
                                             <tr>
                                                 <td class="col-mxd-3"><%# GetCatalog(Eval("Id")) %></td>
-                                                <td class="col-mxd-3"><%# Eval("Name") %></td>
+                                                <td class="col-mxd-3">
+                                                    <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text='<%# Eval("Name") %>' NavigateUrl='<%# "../DepotQuery/Object?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, Eval("Id")) %>'></asp:HyperLink>
+                                                </td>
                                                 <td class="col-mxd-3"><%# Eval("Unit") %></td>
                                                 <td class="col-mxd-3"><%# Eval("High").ToAmount() %></td>
                                                 <td class="col-mxd-3"><%# Eval("Amount").ToAmount() %></td>
