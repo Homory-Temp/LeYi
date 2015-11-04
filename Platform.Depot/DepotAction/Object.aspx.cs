@@ -95,6 +95,10 @@ public partial class DepotAction_Object : DepotPageSingle
         {
             source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
         }
+        if (only.Checked)
+        {
+            source = source.Where(o => o.Fixed == true).ToList();
+        }
         view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
         pager.Visible = source.Count() > pager.PageSize;
     }

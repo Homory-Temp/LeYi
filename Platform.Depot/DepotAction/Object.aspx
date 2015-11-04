@@ -69,7 +69,10 @@
                             <input id="add" runat="server" type="button" class="btn btn-info" value="新增" onserverclick="add_ServerClick" />
                         </div>
                         <div class="col-md-6 text-center">
-                            <telerik:RadTextBox ID="toSearch" runat="server" Width="250" EmptyMessage="输入要检索的物资名称"></telerik:RadTextBox>
+                            <telerik:RadTextBox ID="toSearch" runat="server" Width="200" EmptyMessage="输入要检索的物资名称"></telerik:RadTextBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <telerik:RadButton ID="only" runat="server" Text="仅固定资产" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox"></telerik:RadButton>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
                         </div>
                         <div class="col-md-3 text-right">
@@ -104,7 +107,7 @@
                                     <asp:Panel runat="server" Visible='<%# IsSimple %>'>
                                         <tr>
                                             <td><%# Eval("Ordinal") %></td>
-                                            <td style="cursor: pointer; color: #3E5A70;" onclick="gox(this);" goid='<%# Eval("Id") %>' did='<%# Depot.Id %>'><%# Eval("Name") %></td>
+                                            <td style="cursor: pointer; color: #3E5A70;" onclick="gox(this);" goid='<%# Eval("Id") %>' did='<%# Depot.Id %>'><%# (bool)Eval("Fixed") ? "[固] " : "" %><%# Eval("Name") %></td>
                                             <td><%# Eval("Unit") %></td>
                                             <td><%# Eval("Brand") %></td>
                                             <td><%# Eval("Specification") %></td>
@@ -131,7 +134,7 @@
                                                         <table style="margin: auto; width: 90%;">
                                                             <tr style="line-height: 57px; height: 57px; text-align: center;">
                                                                 <td colspan="2" style="line-height: 55px; height: 55px; text-align: center; cursor: pointer;">
-                                                                    <span class="btn btn-danger" onclick="gox(this);" goid='<%# Eval("Id") %>' did='<%# Depot.Id %>'><%# Eval("Name") %></span>
+                                                                    <span class="btn btn-danger" onclick="gox(this);" goid='<%# Eval("Id") %>' did='<%# Depot.Id %>'><%# (bool)Eval("Fixed") ? "[固] " : "" %><%# Eval("Name") %></span>
                                                                 </td>
                                                             </tr>
                                                             <tr style="line-height: 28px; height: 28px; text-align: center;">
