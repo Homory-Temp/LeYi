@@ -64,4 +64,19 @@ public partial class DepotAction_CheckList : DepotPageSingle
         var bid = (sender as HtmlInputButton).Attributes["match"].GlobalId();
         Response.Redirect("~/DepotScan/CheckDo?DepotId={0}&BatchId={1}".Formatted(Depot.Id, bid));
     }
+
+    protected void copy_ServerClick(object sender, EventArgs e)
+    {
+        var bid = (sender as HtmlInputButton).Attributes["match"].GlobalId();
+        var bidx = DataContext.GlobalId();
+        foreach (var item in DataContext.DepotCheck.Where(o => o.BatchId == bid).ToList())
+        {
+            var jsons = item.CodeJson.FromJson<List<InMemoryCheck>>();
+            jsons.ForEach(o => { o.In = false; });
+            var itemx = new DepotCheck { BatchId = bidx, BatchOrdinal = item.BatchOrdinal, CodeJson = jsons.ToJson(), DepotId = item.DepotId, Name = item.Name, State = 1, Time = DateTime.Now };
+            DataContext.DepotCheck.Add(itemx);
+        }
+        DataContext.SaveChanges();
+        view.Rebind();
+    }
 }

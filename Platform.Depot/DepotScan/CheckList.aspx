@@ -77,6 +77,7 @@
                                 <td>
                                     <input type="button" class="btn btn-tumblr" value="盘库" id="start" runat="server" match='<%# Eval("BatchId") %>' onserverclick="start_ServerClick" />
                                     <input type="button" class="btn btn-tumblr" value="查看" id="view" runat="server" match='<%# Eval("BatchId") %>' onserverclick="view_ServerClick" />
+                                    <input type="button" class="btn btn-tumblr" value="复制" id="copy" runat="server" visible='<%# RightRoot %>' match='<%# Eval("BatchId") %>' onserverclick="copy_ServerClick" />
                                     <input type="button" class="btn btn-tumblr" value="删除" id="del" runat="server" visible='<%# RightRoot %>' match='<%# Eval("BatchId") %>' onserverclick="del_ServerClick" />
                                 </td>
                             </tr>
