@@ -21,6 +21,9 @@ public partial class DepotAction_CheckList : DepotPageSingle
         public string Name { get; set; }
         public Guid BatchId { get; set; }
         public DateTime Time { get; set; }
+        public string ToDo { get; set; }
+        public string Done { get; set; }
+        public string Total { get; set; }
     }
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
@@ -29,7 +32,12 @@ public partial class DepotAction_CheckList : DepotPageSingle
         var items = new List<CheckListItem>();
         foreach (var group in source.GroupBy(o => o.BatchId))
         {
-            items.Add(new CheckListItem { Name = group.First().Name, BatchId = group.First().BatchId, Time = group.First().Time });
+            var checks = new List<InMemoryCheck>();
+            foreach (var item in group)
+            {
+                checks.AddRange(item.CodeJson.FromJson<List<InMemoryCheck>>());
+            }
+            items.Add(new CheckListItem { Name = group.First().Name, BatchId = group.First().BatchId, Time = group.First().Time, Total = checks.Count().ToString("F0"), Done = checks.Count(o=>o.In==true).ToString("F0"), ToDo = checks.Count(o => o.In == false).ToString("F0") });
         }
         view.DataSource = items;
     }

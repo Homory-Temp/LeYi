@@ -49,6 +49,9 @@
                                 <tr>
                                     <th>盘库任务</th>
                                     <th>盘库任务生成时间</th>
+                                    <th>总数</th>
+                                    <th>已盘数</th>
+                                    <th>未盘数</th>
                                     <th>操作</th>
                                 </tr>
                                 <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
@@ -61,6 +64,15 @@
                                 </td>
                                 <td>
                                     <%#  ((DateTime)Eval("Time")).ToString("yyyy-MM-dd HH:mm:ss") %>
+                                </td>
+                                <td>
+                                    <%# Eval("Total") %>
+                                </td>
+                                <td>
+                                    <%# Eval("Done") %>
+                                </td>
+                                <td>
+                                    <%# Eval("ToDo") %>
                                 </td>
                                 <td>
                                     <input type="button" class="btn btn-tumblr" value="盘库" id="start" runat="server" match='<%# Eval("BatchId") %>' onserverclick="start_ServerClick" />

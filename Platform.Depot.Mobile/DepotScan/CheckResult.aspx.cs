@@ -63,12 +63,12 @@ public partial class DepotScan_CheckResult : DepotPageSingle
     {
         var id = "BatchId".Query().GlobalId();
         var items = DataContext.DepotCheck.Where(o => o.State == 1 && o.BatchId == id).ToList();
-        name.InnerText = items[0].Name;
         var checks = new List<InMemoryCheck>();
         foreach (var item in items)
         {
             checks.AddRange(item.CodeJson.FromJson<List<InMemoryCheck>>());
         }
+        name.InnerText = "{0} 总数：{1} 已盘：{2} 未盘：{3}".Formatted(items[0].Name, checks.Count, checks.Count(o => o.In == true), checks.Count(o => o.In == false));
         view.DataSource = checks;
         h.Value = checks.ToJson();
     }

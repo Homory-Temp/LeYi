@@ -45,7 +45,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <label id="name" runat="server" class="btn btn-tumblr"></label>
+                    <label id="name" runat="server" class="btn btn-info"></label>
                 </div>
             </div>
             <div class="row">

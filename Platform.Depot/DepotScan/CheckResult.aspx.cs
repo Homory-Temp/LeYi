@@ -13,43 +13,10 @@ public partial class DepotScan_CheckResult : DepotPageSingle
     {
         if (!IsPostBack)
         {
-            Reset();
-            if (!"Code".Query().None())
-            {
-                scan.Text = "Code".Query().Trim();
-                scanFlow_ServerClick(null, null);
-            }
+
         }
     }
 
-    protected void Reset()
-    {
-        scan.Text = "";
-        scan.Focus();
-    }
-
-    protected void scanFlow_ServerClick(object sender, EventArgs e)
-    {
-        var code = scan.Text.Trim();
-        var x = h.Value.None() ? new List<InMemoryCheck>() : h.Value.FromJson<List<InMemoryCheck>>();
-        x.SingleOrDefault(o => o.Code == code).In = true;
-        h.Value = x.ToJson();
-        var id = "BatchId".Query().GlobalId();
-        var items = DataContext.DepotCheck.Where(o => o.State == 1 && o.BatchId == id).ToList();
-        foreach (var item in items)
-        {
-            var obj = item.CodeJson.FromJson<List<InMemoryCheck>>();
-            if (obj.Count(o => o.Code == code) > 0)
-            {
-                obj.First(o => o.Code == code).In = true;
-            }
-            item.CodeJson = obj.ToJson();
-            break;
-        }
-        DataContext.SaveChanges();
-        view.Rebind();
-        Reset();
-    }
 
     protected List<InMemoryCheck> Codes
     {
@@ -63,12 +30,12 @@ public partial class DepotScan_CheckResult : DepotPageSingle
     {
         var id = "BatchId".Query().GlobalId();
         var items = DataContext.DepotCheck.Where(o => o.State == 1 && o.BatchId == id).ToList();
-        name.InnerText = items[0].Name;
         var checks = new List<InMemoryCheck>();
         foreach (var item in items)
         {
             checks.AddRange(item.CodeJson.FromJson<List<InMemoryCheck>>());
         }
+        name.InnerText = "{0} 总数：{1} 已盘：{2} 未盘：{3}".Formatted(items[0].Name, checks.Count, checks.Count(o => o.In == true), checks.Count(o => o.In == false));
         view.DataSource = checks;
         h.Value = checks.ToJson();
     }
