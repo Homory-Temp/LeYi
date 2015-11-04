@@ -62,8 +62,8 @@ public partial class DepotQuery_Use : DepotPageSingle
             list = list.Where(o => o.UserId == ou).ToList();
         }
         view.DataSource = list;
-        ___total.Value = list.Sum(o => o.Money).ToMoney();
-        //pager.Visible = list.Count > pager.PageSize;
+        //___total.Value = list.Sum(o => o.Money).ToMoney();
+        pager.Visible = list.Count > pager.PageSize;
     }
 
     protected string UserName(Guid id)

@@ -66,7 +66,7 @@
             </div>
             <div class="row">&nbsp;</div>
             <div class="row">
-                <input type="hidden" id="___total" runat="server" />
+                <%--<input type="hidden" id="___total" runat="server" />--%>
                 <!-- Start Printing -->
                 <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
                     <LayoutTemplate>
@@ -80,9 +80,9 @@
                                     <th>操作</th>
                                 </tr>
                                 <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
-                                        <tr>
+                                        <%--<tr>
                                             <td colspan="5">总计：<%# ___total.Value %></td>
-                                        </tr>
+                                        </tr>--%>
                             </table>
                         </div>
                     </LayoutTemplate>
@@ -110,7 +110,7 @@
                     <input type="button" class="btn btn-tumblr" id="print" value="打印" onclick="printDepot();" />
                 </div>
             </div>
-            <%--<div class="row">
+            <div class="row">
                 <div class="col-md-3">&nbsp;</div>
                 <div class="col-md-6 text-center">
                     <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="10">
@@ -122,7 +122,7 @@
                     </telerik:RadDataPager>
                 </div>
                 <div class="col-md-3">&nbsp;</div>
-            </div>--%>
+            </div>
         </telerik:RadAjaxPanel>
     </form>
 </body>

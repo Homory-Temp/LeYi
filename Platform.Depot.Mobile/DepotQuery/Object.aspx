@@ -133,17 +133,17 @@
                         <BatchEditingSettings EditType="Row" OpenEditingEvent="DblClick" />
                         <HeaderStyle HorizontalAlign="Center" />
                         <Columns>
-                            <telerik:GridTemplateColumn HeaderText="编号" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true" ItemStyle-Width="33%">
+                            <telerik:GridTemplateColumn HeaderText="编号" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true" ItemStyle-Width="25%">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Ordinal") %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="条码" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true" ItemStyle-Width="33%">
+                            <telerik:GridTemplateColumn HeaderText="条码" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true" ItemStyle-Width="25%">
                                 <ItemTemplate>
                                     <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text='<%# Eval("Code") %>' NavigateUrl='<%# "../DepotScan/Flow?DepotId={0}&Code={1}".Formatted(Depot.Id, Eval("Code")) %>'></asp:HyperLink>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="存放地" DataField="Place" SortExpression="Place" UniqueName="Place" ItemStyle-Width="33%">
+                            <telerik:GridTemplateColumn HeaderText="存放地" DataField="Place" SortExpression="Place" UniqueName="Place" ItemStyle-Width="30%">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Place") %>'></asp:Label>
                                 </ItemTemplate>
@@ -152,6 +152,7 @@
                                     </telerik:RadTextBox>
                                 </EditItemTemplate>
                             </telerik:GridTemplateColumn>
+                            <telerik:GridButtonColumn HeaderText="编辑" CommandName="Edit" ItemStyle-Width="20%" Text="编辑" ButtonType="LinkButton"></telerik:GridButtonColumn>
                         </Columns>
                     </MasterTableView>
                 </telerik:RadGrid>

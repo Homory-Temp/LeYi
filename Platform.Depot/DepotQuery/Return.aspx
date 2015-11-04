@@ -91,7 +91,7 @@
                     </div>
                     <div class="row">&nbsp;</div>
                     <div class="row">
-                        <input type="hidden" id="___total" runat="server" value="@@@@@@" />
+                        <%--<input type="hidden" id="___total" runat="server" value="@@@@@@" />--%>
                         <!-- Start Printing -->
                         <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
                             <LayoutTemplate>
@@ -109,9 +109,9 @@
                                             <th>备注</th>
                                         </tr>
                                         <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
-                                        <tr>
+                                        <%--<tr>
                                             <td colspan="9">总数：<%# ___total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[0] %>&nbsp;&nbsp;&nbsp;&nbsp;总计：<%# ___total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[1] %></td>
-                                        </tr>
+                                        </tr>--%>
                                     </table>
                                 </div>
                             </LayoutTemplate>
@@ -141,7 +141,7 @@
                     <input type="button" class="btn btn-tumblr" id="print" value="打印" onclick="printDepot();" />
                 </div>
             </div>
-                    <%--<div class="row">
+                    <div class="row">
                         <div class="col-md-3">&nbsp;</div>
                         <div class="col-md-6 text-center">
                             <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="10" OnPageIndexChanged="pager_PageIndexChanged">
@@ -153,7 +153,7 @@
                             </telerik:RadDataPager>
                         </div>
                         <div class="col-md-3">&nbsp;</div>
-                    </div>--%>
+                    </div>
                 </div>
             </div>
         </telerik:RadAjaxPanel>
