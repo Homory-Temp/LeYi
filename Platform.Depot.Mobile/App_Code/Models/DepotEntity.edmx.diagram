@@ -54,13 +54,12 @@
         <EntityTypeShape EntityType="DepotModel.DepotToOut" Width="1.5" PointX="17.75" PointY="7.75" />
         <EntityTypeShape EntityType="DepotModel.DepotOutRecord" Width="1.5" PointX="9.75" PointY="17.75" />
         <EntityTypeShape EntityType="DepotModel.DepotObjectX" Width="1.5" PointX="17.75" PointY="12.75" />
-        <EntityTypeShape EntityType="DepotModel.DepotCode" Width="1.5" PointX="19.75" PointY="0.75" />
         <EntityTypeShape EntityType="DepotModel.DepotRedo" Width="1.5" PointX="11.25" PointY="10.875" />
         <AssociationConnector Association="DepotModel.FK_DepotRedo_DepotIn" />
         <AssociationConnector Association="DepotModel.FK_DepotRedo_DepotObject" />
-        <EntityTypeShape EntityType="DepotModel.DepotRedoRecord" Width="1.5" PointX="19.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DepotModel.DepotCheck" Width="1.5" PointX="19.75" PointY="8.75" />
-        <EntityTypeShape EntityType="DepotModel.DepotCheckX" Width="1.5" PointX="19.75" PointY="11.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotRedoRecord" Width="1.5" PointX="19.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotCheck" Width="1.5" PointX="19.75" PointY="5.75" />
+        <EntityTypeShape EntityType="DepotModel.DepotCode" Width="1.5" PointX="19.75" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

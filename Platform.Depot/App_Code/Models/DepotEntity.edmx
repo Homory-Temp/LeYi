@@ -75,18 +75,9 @@
           <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="BatchId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="BatchOrdinal" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="CodeJson" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="State" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DepotCheckX">
-          <Key>
-            <PropertyRef Name="BatchId" />
-            <PropertyRef Name="Time" />
-          </Key>
-          <Property Name="BatchId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="CodeJson" Type="nvarchar(max)" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DepotCode">
@@ -98,6 +89,7 @@
           <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="BatchId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="BatchOrdinial" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="CodeJson" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
@@ -1083,7 +1075,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySet Name="Depot" EntityType="Self.Depot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotCatalog" EntityType="Self.DepotCatalog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotCheck" EntityType="Self.DepotCheck" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DepotCheckX" EntityType="Self.DepotCheckX" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotCode" EntityType="Self.DepotCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotDictionary" EntityType="Self.DepotDictionary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotFlow" EntityType="Self.DepotFlow" Schema="dbo" store:Type="Tables" />
@@ -1557,7 +1548,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySet Name="DepotToOut" EntityType="DepotModel.DepotToOut" />
           <EntitySet Name="DepotOutRecord" EntityType="DepotModel.DepotOutRecord" />
           <EntitySet Name="DepotObjectX" EntityType="DepotModel.DepotObjectX" />
-          <EntitySet Name="DepotCode" EntityType="DepotModel.DepotCode" />
           <EntitySet Name="DepotRedo" EntityType="DepotModel.DepotRedo" />
           <AssociationSet Name="FK_DepotRedo_DepotIn" Association="DepotModel.FK_DepotRedo_DepotIn">
             <End Role="DepotIn" EntitySet="DepotIn" />
@@ -1572,7 +1562,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="DepotCheck" EntityType="DepotModel.DepotCheck" />
-          <EntitySet Name="DepotCheckX" EntityType="DepotModel.DepotCheckX" />
+          <EntitySet Name="DepotCode" EntityType="DepotModel.DepotCode" />
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -2568,19 +2558,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="Brand" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Extension" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="DepotCode">
-          <Key>
-            <PropertyRef Name="DepotId" />
-            <PropertyRef Name="BatchId" />
-            <PropertyRef Name="BatchOrdinial" />
-          </Key>
-          <Property Name="DepotId" Type="Guid" Nullable="false" />
-          <Property Name="BatchId" Type="Guid" Nullable="false" />
-          <Property Name="BatchOrdinial" Type="Int32" Nullable="false" />
-          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="State" Type="Int32" Nullable="false" />
-          <Property Name="CodeJson" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="DepotRedo">
           <Key>
             <PropertyRef Name="Id" />
@@ -2658,18 +2635,23 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="DepotId" Type="Guid" Nullable="false" />
           <Property Name="BatchId" Type="Guid" Nullable="false" />
           <Property Name="BatchOrdinal" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="CodeJson" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="State" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="DepotCheckX">
+        <EntityType Name="DepotCode">
           <Key>
+            <PropertyRef Name="DepotId" />
             <PropertyRef Name="BatchId" />
-            <PropertyRef Name="Time" />
+            <PropertyRef Name="BatchOrdinial" />
           </Key>
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
           <Property Name="BatchId" Type="Guid" Nullable="false" />
-          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="BatchOrdinial" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="CodeJson" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="State" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
@@ -3277,18 +3259,6 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DepotCode">
-            <EntityTypeMapping TypeName="DepotModel.DepotCode">
-              <MappingFragment StoreEntitySet="DepotCode">
-                <ScalarProperty Name="CodeJson" ColumnName="CodeJson" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
-                <ScalarProperty Name="BatchOrdinial" ColumnName="BatchOrdinial" />
-                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
-                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DepotRedo">
             <EntityTypeMapping TypeName="DepotModel.DepotRedo">
               <MappingFragment StoreEntitySet="DepotRedo">
@@ -3330,19 +3300,23 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="CodeJson" ColumnName="CodeJson" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="BatchOrdinal" ColumnName="BatchOrdinal" />
                 <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DepotCheckX">
-            <EntityTypeMapping TypeName="DepotModel.DepotCheckX">
-              <MappingFragment StoreEntitySet="DepotCheckX">
+          <EntitySetMapping Name="DepotCode">
+            <EntityTypeMapping TypeName="DepotModel.DepotCode">
+              <MappingFragment StoreEntitySet="DepotCode">
                 <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="CodeJson" ColumnName="CodeJson" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="CodeJson" ColumnName="CodeJson" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BatchOrdinial" ColumnName="BatchOrdinial" />
                 <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

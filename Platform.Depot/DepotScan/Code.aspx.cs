@@ -107,6 +107,11 @@ public partial class DepotAction_Code : DepotPageSingle
 
     protected void coding_ServerClick(object sender, EventArgs e)
     {
+        if (cName.Text.Trim().None())
+        {
+            NotifyError(ap, "请输入条码生成任务的名称");
+            return;
+        }
         var codes = new List<string>();
         view.Items.ForEach(o =>
         {
@@ -131,6 +136,11 @@ public partial class DepotAction_Code : DepotPageSingle
                 }
             }
         });
+        if (codes.Count == 0)
+        {
+            NotifyError(ap, "请选择要生成条码的物资");
+            return;
+        }
         var bid = DataContext.GlobalId();
         var bo = 0;
         var bt = DateTime.Now;
@@ -142,6 +152,7 @@ public partial class DepotAction_Code : DepotPageSingle
                 DepotId = Depot.Id,
                 BatchId = bid,
                 BatchOrdinial = bo,
+                Name = cName.Text.Trim(),
                 CodeJson = codes.Skip(i * 300).Take(300).ToList().ToJson(),
                 Time = bt,
                 State = 2

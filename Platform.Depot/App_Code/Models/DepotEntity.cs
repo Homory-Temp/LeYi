@@ -150,21 +150,9 @@ namespace Models
         public System.Guid DepotId { get; set; }
         public System.Guid BatchId { get; set; }
         public int BatchOrdinal { get; set; }
+        public string Name { get; set; }
         public string CodeJson { get; set; }
         public System.DateTime Time { get; set; }
-        public int State { get; set; }
-    }
-}
-namespace Models
-{
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class DepotCheckX
-    {
-        public System.Guid BatchId { get; set; }
-        public System.DateTime Time { get; set; }
-        public string CodeJson { get; set; }
         public int State { get; set; }
     }
 }
@@ -178,9 +166,10 @@ namespace Models
         public System.Guid DepotId { get; set; }
         public System.Guid BatchId { get; set; }
         public int BatchOrdinial { get; set; }
+        public string Name { get; set; }
+        public string CodeJson { get; set; }
         public System.DateTime Time { get; set; }
         public int State { get; set; }
-        public string CodeJson { get; set; }
     }
 }
 namespace Models

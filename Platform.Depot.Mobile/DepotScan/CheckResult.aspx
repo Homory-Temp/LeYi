@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CheckResult.aspx.cs" Inherits="DepotAction_CheckResult" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CheckResult.aspx.cs" Inherits="DepotScan_CheckResult" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
 
@@ -23,52 +23,58 @@
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
     <![endif]-->
-    <style>
-        .depot {
-            margin-left: 10px;
-            float: left;
-            text-decoration: none;
-            font-weight: normal;
-        }
-
-        .depotx label {
-            text-decoration: none;
-            font-weight: normal;
-        }
-    </style>
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资条码 - 盘库记录列表" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资扫描 - 盘库" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
+            <div class="row" style="display: none;">
+                <div class="col-md-2">
+                    <div class="btn btn-tumblr dictionaryX">
+                        盘库扫描
+                    </div>
+                </div>
+                <div class="col-md-8 text-center">
+                    <telerik:RadTextBox runat="server" ID="scan" Width="200" EmptyMessage="请扫描二维码"></telerik:RadTextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="button" class="btn btn-tumblr" id="scanFlow" runat="server" value="盘点" onserverclick="scanFlow_ServerClick" />
+                </div>
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+            </div>
             <div class="row">
-                <div class="col-md-12">
-                    <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
-                        <LayoutTemplate>
-                            <table class="storeTable">
+                <div class="col-md-12 text-center">
+                    <label id="name" runat="server" class="btn btn-tumblr"></label>
+                </div>
+            </div>
+            <div class="row">
+                <input type="hidden" runat="server" id="h" value="" />
+                <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
+                    <LayoutTemplate>
+                        <div class="col-md-12">
+                            <table class="storeTablePrint text-center">
                                 <tr>
-                                    <th>盘库时间</th>
-                                    <th>盘库详情</th>
-                                    <th>操作</th>
+                                    <th>物资名称</th>
+                                    <th>物资条码</th>
+                                    <th>存放地</th>
+                                    <th>状态</th>
                                 </tr>
                                 <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
                             </table>
-                        </LayoutTemplate>
-                        <ItemTemplate>
-                            <tr>
-                                <td>
-                                    <%#  ((DateTime)Eval("Time")).ToString("yyyy-MM-dd HH:mm:ss") %>
-                                </td>
-                                <td>
-                                    <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text="查看" NavigateUrl='<%# "../DepotScan/CheckResultX?DepotId={0}&BatchId={1}&Time={2}".Formatted(Depot.Id, Eval("BatchId"), DateTime.Parse(Eval("Time").ToString()).Ticks) %>'></asp:HyperLink>
-                                </td>
-                                <td>
-                                    <input type="button" class="btn btn-tumblr" value="删除" id="del" runat="server" visible='<%# RightRoot %>' matchx='<%# Eval("Time").ToString() %>' match='<%# Eval("BatchId") %>' onserverclick="del_ServerClick" />
-                                </td>
-                            </tr>
-                        </ItemTemplate>
-                    </telerik:RadListView>
-                </div>
+                        </div>
+                    </LayoutTemplate>
+                    <ItemTemplate>
+                        <tr>
+                            <td><%# Eval("Name") %>-<%# Eval("Ordinal") %></td>
+                            <td><%# Eval("Code") %></td>
+                            <td><%# Eval("Place") %></td>
+                            <td style='<%# Codes.Count(o => o.In == true && o.Code == (string)Eval("Code")) > 0 ? "color: green;" : "color: red;" %>'><%# Codes.Count(o => o.In == true && o.Code == (string)Eval("Code")) > 0 ? "已盘" : "未盘" %></td>
+                        </tr>
+                    </ItemTemplate>
+                    <EmptyDataTemplate>
+                    </EmptyDataTemplate>
+                </telerik:RadListView>
             </div>
         </telerik:RadAjaxPanel>
     </form>

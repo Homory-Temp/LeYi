@@ -76,6 +76,8 @@
                             &nbsp;&nbsp;
                             <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <telerik:RadTextBox ID="cName" runat="server" Width="200" EmptyMessage="输入条码生成任务的名称"></telerik:RadTextBox>
+                            &nbsp;&nbsp;
                             <input id="coding" runat="server" type="button" class="btn btn-info" value="生成条码" onserverclick="coding_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <input id="coded" runat="server" type="button" class="btn btn-info" value="条码列表" onserverclick="coded_ServerClick" />

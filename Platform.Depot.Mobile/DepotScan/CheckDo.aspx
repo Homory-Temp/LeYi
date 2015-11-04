@@ -38,8 +38,6 @@
                     <telerik:RadTextBox runat="server" ID="scan" Width="200" EmptyMessage="请扫描二维码"></telerik:RadTextBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="button" class="btn btn-tumblr" id="scanFlow" runat="server" value="盘点" onserverclick="scanFlow_ServerClick" />
-                    &nbsp;&nbsp;
-                    <input type="button" class="btn btn-tumblr" id="save" runat="server" value="保存" onserverclick="save_ServerClick" />
                 </div>
                 <div class="col-md-2">
                     &nbsp;
@@ -66,7 +64,7 @@
                             <td><%# Eval("Name") %>-<%# Eval("Ordinal") %></td>
                             <td><%# Eval("Code") %></td>
                             <td><%# Eval("Place") %></td>
-                            <td style='<%# Codes.Contains(Eval("Code").ToString()) ? "color: green;" : "color: red;" %>'><%# Codes.Contains(Eval("Code").ToString()) ? "已盘" : "未盘" %></td>
+                            <td style='<%# Codes.Count(o => o.In == true && o.Code == (string)Eval("Code")) > 0 ? "color: green;" : "color: red;" %>'><%# Codes.Count(o => o.In == true && o.Code == (string)Eval("Code")) > 0 ? "已盘" : "未盘" %></td>
                         </tr>
                     </ItemTemplate>
                     <EmptyDataTemplate>

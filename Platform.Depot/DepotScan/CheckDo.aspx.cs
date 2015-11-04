@@ -31,18 +31,31 @@ public partial class DepotScan_CheckDo : DepotPageSingle
     protected void scanFlow_ServerClick(object sender, EventArgs e)
     {
         var code = scan.Text.Trim();
-        var x = h.Value.None() ? new List<string>() : h.Value.FromJson<List<string>>();
-        x.Add(code);
+        var x = h.Value.None() ? new List<InMemoryCheck>() : h.Value.FromJson<List<InMemoryCheck>>();
+        x.SingleOrDefault(o => o.Code == code).In = true;
         h.Value = x.ToJson();
+        var id = "BatchId".Query().GlobalId();
+        var items = DataContext.DepotCheck.Where(o => o.State == 1 && o.BatchId == id).ToList();
+        foreach (var item in items)
+        {
+            var obj = item.CodeJson.FromJson<List<InMemoryCheck>>();
+            if (obj.Count(o => o.Code == code) > 0)
+            {
+                obj.First(o => o.Code == code).In = true;
+            }
+            item.CodeJson = obj.ToJson();
+            break;
+        }
+        DataContext.SaveChanges();
         view.Rebind();
         Reset();
     }
 
-    protected List<string> Codes
+    protected List<InMemoryCheck> Codes
     {
         get
         {
-            return h.Value.None() ? new List<string>() : h.Value.FromJson<List<string>>();
+            return h.Value.None() ? new List<InMemoryCheck>() : h.Value.FromJson<List<InMemoryCheck>>();
         }
     }
 
@@ -56,39 +69,6 @@ public partial class DepotScan_CheckDo : DepotPageSingle
             checks.AddRange(item.CodeJson.FromJson<List<InMemoryCheck>>());
         }
         view.DataSource = checks;
-    }
-
-    protected void save_ServerClick(object sender, EventArgs e)
-    {
-        var id = "BatchId".Query().GlobalId();
-        var items = DataContext.DepotCheck.Where(o => o.State == 1 && o.BatchId == id).ToList();
-        var checks = new List<InMemoryCheck>();
-        foreach (var item in items)
-        {
-            checks.AddRange(item.CodeJson.FromJson<List<InMemoryCheck>>());
-        }
-        var r = "";
-        var codes = Codes;
-        foreach (var ck in checks)
-        {
-            if (codes.Contains(ck.Code))
-            {
-                r += "1";
-            }
-            else
-            {
-                r += "0";
-            }
-        }
-        var dcx = new DepotCheckX
-        {
-            BatchId = "BatchId".Query().GlobalId(),
-            Time = DateTime.Now,
-            CodeJson = r,
-            State = 1
-        };
-        DataContext.DepotCheckX.Add(dcx);
-        DataContext.SaveChanges();
-        Response.Redirect("~/Depot/DepotHome?DepotId={0}".Formatted(Depot.Id));
+        h.Value = checks.ToJson();
     }
 }

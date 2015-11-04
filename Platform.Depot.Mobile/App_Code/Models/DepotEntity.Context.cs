@@ -59,11 +59,10 @@ namespace Models
         public virtual DbSet<DepotToOut> DepotToOut { get; set; }
         public virtual DbSet<DepotOutRecord> DepotOutRecord { get; set; }
         public virtual DbSet<DepotObjectX> DepotObjectX { get; set; }
-        public virtual DbSet<DepotCode> DepotCode { get; set; }
         public virtual DbSet<DepotRedo> DepotRedo { get; set; }
         public virtual DbSet<DepotRedoRecord> DepotRedoRecord { get; set; }
         public virtual DbSet<DepotCheck> DepotCheck { get; set; }
-        public virtual DbSet<DepotCheckX> DepotCheckX { get; set; }
+        public virtual DbSet<DepotCode> DepotCode { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {

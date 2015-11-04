@@ -78,9 +78,11 @@
                             &nbsp;&nbsp;
                             <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input id="coding" runat="server" type="button" class="btn btn-info" value="生成盘库" onserverclick="coding_ServerClick" />
+                            <telerik:RadTextBox ID="cName" runat="server" Width="200" EmptyMessage="输入盘库任务的名称"></telerik:RadTextBox>
+                            &nbsp;&nbsp;
+                            <input id="coding" runat="server" type="button" class="btn btn-info" value="生成盘库任务" onserverclick="coding_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input id="coded" runat="server" type="button" class="btn btn-info" value="盘库列表" onserverclick="coded_ServerClick" />
+                            <input id="coded" runat="server" type="button" class="btn btn-info" value="盘库任务列表" onserverclick="coded_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
                     </div>

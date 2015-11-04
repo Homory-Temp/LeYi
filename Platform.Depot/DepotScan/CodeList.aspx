@@ -47,6 +47,7 @@
                         <LayoutTemplate>
                             <table class="storeTable">
                                 <tr>
+                                    <th>条码生成任务</th>
                                     <th>提交生成时间</th>
                                     <th>生成状态</th>
                                     <th>操作</th>
@@ -56,6 +57,7 @@
                         </LayoutTemplate>
                         <ItemTemplate>
                             <tr>
+                                <td><%# Eval("Name") %></td>
                                 <td>
                                     <%#  ((DateTime)Eval("Time")).ToString("yyyy-MM-dd HH:mm:ss") %>
                                 </td>
