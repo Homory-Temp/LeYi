@@ -36,12 +36,17 @@
             window.document.body.innerHTML = bdhtml;
             return false;
         }
+        ajax_onRequestStart = function (sender, args) {
+            if (args.get_eventTarget().indexOf("Button") >= 0) {
+                args.set_enableAjax(false);
+            }
+        }
     </script>
 </head>
 <body>
     <form id="form" runat="server">
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 汇总统计" />
-        <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
+        <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading" ClientEvents-OnRequestStart="ajax_onRequestStart">
             <div class="row">
                 <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
                     <div class="row">
@@ -77,11 +82,13 @@
                             <input type="button" class="btn btn-tumblr dictionary" id="query" runat="server" value="查询" onserverclick="query_ServerClick" />
                         </div>
                     </div>
+                    <div class="row">&nbsp;</div>
                     <div class="row">
                         <div class="col-md-12">
                             <!-- Start Printing -->
-                        <telerik:RadGrid ID="grid" runat="server" AutoGenerateColumns="false" OnNeedDataSource="grid_NeedDataSource" AllowPaging="true" PageSize="15">
-                            <MasterTableView>
+                        <telerik:RadGrid ID="grid" runat="server" AutoGenerateColumns="false" Culture="zh-CN" OnNeedDataSource="grid_NeedDataSource" AllowPaging="true" PageSize="15" LocalizationPath="~/Language">
+                            <MasterTableView CommandItemDisplay="Top">
+                                <CommandItemSettings ShowAddNewRecordButton="false" ShowRefreshButton="false" ShowExportToExcelButton="true" ExportToExcelText="导出" />
                                 <Columns>
                                     <telerik:GridBoundColumn DataField="CatalogPath" HeaderText="物资类别"></telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Name" HeaderText="物资名称"></telerik:GridBoundColumn>
@@ -104,15 +111,17 @@
                                     </div>
                                 </NoRecordsTemplate>
                             </MasterTableView>
+                            <ExportSettings Excel-Format="ExcelML" FileName="Statistics" ExportOnlyData="true" UseItemStyles="false" IgnorePaging="true" OpenInNewWindow="true"></ExportSettings>
                         </telerik:RadGrid>
                             <!-- End Printing -->
                         </div>
                     </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <input type="button" class="btn btn-tumblr" id="print" value="打印" onclick="printDepot();" />
-                </div>
-            </div>
+                    <%--<div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <input type="button" class="btn btn-tumblr" id="export" value="导出" runat="server" onserverclick="export_ServerClick" />
+                        </div>
+                    </div>--%>
                 </div>
             </div>
         </telerik:RadAjaxPanel>

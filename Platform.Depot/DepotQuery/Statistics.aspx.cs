@@ -78,12 +78,12 @@ public partial class DepotQuery_Statistics : DepotPageSingle
             obj.SM = g.First().StartMoney;
             obj.I = g.Sum(o => o.InAmount);
             obj.IM = g.Sum(o => o.InMoney);
-            obj.U = g.Sum(o => o.LendAmount + o.ConsumeAmount);
-            obj.UM = g.Sum(o => o.LendMoney + o.ConsumeMoney);
+            obj.U = Math.Abs(g.Sum(o => o.LendAmount + o.ConsumeAmount));
+            obj.UM = Math.Abs(g.Sum(o => o.LendMoney + o.ConsumeMoney));
             obj.R = g.Sum(o => o.RedoAmount);
             obj.RM = g.Sum(o => o.RedoMoney);
-            obj.O = g.Sum(o => o.OutAmount);
-            obj.OM = g.Sum(o => o.OutMoney);
+            obj.O = Math.Abs(g.Sum(o => o.OutAmount));
+            obj.OM = Math.Abs(g.Sum(o => o.OutMoney));
             obj.E = g.Last().EndAmount;
             obj.EM = g.Last().EndMoney;
             list.Add(obj);
@@ -93,5 +93,10 @@ public partial class DepotQuery_Statistics : DepotPageSingle
             list = list.Where(o => o.Name == name.Text.Trim()).ToList();
         }
         grid.DataSource = list.OrderBy(o => o.CatalogPath).ThenBy(o => o.Name).ToList();
+    }
+
+    protected void export_ServerClick(object sender, EventArgs e)
+    {
+
     }
 }
