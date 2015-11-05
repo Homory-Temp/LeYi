@@ -1,7 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Return.aspx.cs" Inherits="DepotAction_Return" %>
-
-<%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
-<%@ Register Src="~/Control/ObjectUse.ascx" TagPrefix="homory" TagName="ObjectUse" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ToReturn.aspx.cs" Inherits="DepotExtension_ToReturn" %>
 
 <!DOCTYPE html>
 
@@ -27,37 +24,12 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资管理 - 物资出库" />
+        <telerik:RadScriptManager ID="sm" runat="server"></telerik:RadScriptManager>
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="btn btn-tumblr dictionaryX">
-                        借用对象选择
-                    </div>
-                </div>
-                <div class="col-md-10 text-left">
-                    <telerik:RadComboBox ID="people" runat="server" MaxHeight="203" EmptyMessage="借领人" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="240" AllowCustomText="true" AutoPostBack="true" OnSelectedIndexChanged="people_SelectedIndexChanged">
-                        <Items>
-                            <telerik:RadComboBoxItem Text="" Value="" Selected="true" />
-                        </Items>
-                        <ItemTemplate>
-                            <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
-                        </ItemTemplate>
-                    </telerik:RadComboBox>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadDatePicker ID="time" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="true">
-                        <Calendar runat="server">
-                            <FastNavigationSettings TodayButtonCaption="今日" OkButtonCaption="确定" CancelButtonCaption="取消"></FastNavigationSettings>
-                        </Calendar>
-                        <DatePopupButton runat="server" Visible="false" />
-                    </telerik:RadDatePicker>
-                </div>
-            </div>
-            <div class="row">&nbsp;</div>
             <div class="row" id="x1" runat="server">
                 <div class="col-md-2">
                     <div class="btn btn-tumblr dictionaryX">
-                        归还物资选择
+                        借用记录
                     </div>
                 </div>
             </div>
@@ -73,9 +45,9 @@
                                     <th>待归还数</th>
                                     <th>单价</th>
                                     <th>合计</th>
-                                    <th>归还数</th>
-                                    <th>报废数</th>
-                                    <th>备注</th>
+                                    <th style="display: none;">归还数</th>
+                                    <th style="display: none;">报废数</th>
+                                    <th style="display: none;">备注</th>
                                 </tr>
                                 <asp:PlaceHolder ID="useHolder" runat="server"></asp:PlaceHolder>
                             </table>
@@ -92,10 +64,10 @@
                                     <%# Eval("Name") %>
                                 </td>
                                 <td>
-                                    <%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %>
+                                    <%# Eval("Amount").ToAmount() %>
                                 </td>
                                 <td>
-                                    <%# ((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")).ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %>
+                                    <%# ((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")).ToAmount() %>
                                 </td>
                                 <td>
                                     <%# Eval("PriceSet").ToMoney() %>
@@ -103,13 +75,13 @@
                                 <td>
                                     <%# Eval("Money").ToMoney() %>
                                 </td>
-                                <td>
-                                    <telerik:RadNumericTextBox ID="amount" runat="server" Width="120" MaxValue='<%# (double)((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")) %>' NumberFormat-DecimalDigits='<%# Depot.Featured(Models.DepotType.小数数量库) ? 2 : 0 %>' DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
+                                <td style="display: none;">
+                                    <telerik:RadNumericTextBox ID="amount" runat="server" Width="120" MaxValue='<%# (double)((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")) %>' NumberFormat-DecimalDigits="0" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
                                 </td>
-                                <td>
+                                <td style="display: none;">
                                     <telerik:RadNumericTextBox ID="outAmount" runat="server" Width="120" NumberFormat-DecimalDigits="0" DataType="System.Decimal" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
                                 </td>
-                                <td>
+                                <td style="display: none;">
                                     <telerik:RadTextBox ID="note" runat="server" Width="100"></telerik:RadTextBox>
                                 </td>
                             </tr>
@@ -130,7 +102,7 @@
                     &nbsp;
                 </div>
                 <div class="col-md-12 text-center">
-                    <input type="button" class="btn btn-tumblr" id="do_return" runat="server" value="归还" onserverclick="do_return_ServerClick" />
+                    &nbsp;
                 </div>
             </div>
         </telerik:RadAjaxPanel>
