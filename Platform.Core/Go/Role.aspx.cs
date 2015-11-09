@@ -114,7 +114,14 @@ namespace Go
                 RightName = button.ID,
                 State = state
             };
-			HomoryContext.Value.RoleRight.AddOrUpdate(rr);
+            if (HomoryContext.Value.RoleRight.Count(o => o.RoleId == rr.RoleId && o.RightName == rr.RightName) > 0)
+            {
+                HomoryContext.Value.RoleRight.First(o => o.RoleId == rr.RoleId && o.RightName == rr.RightName).State = rr.State;
+            }
+            else
+            {
+                HomoryContext.Value.RoleRight.Add(rr);
+            }
 			HomoryContext.Value.SaveChanges();
             LogOp(OperationType.编辑);
         }

@@ -2912,6 +2912,7 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewTS' does not have a primary ke
           <Member Name="学习小助手" Value="1" />
           <Member Name="年级_高中" Value="-4" />
           <Member Name="年级_其他" Value="-5" />
+          <Member Name="课程资源" Value="10" />
         </EnumType>
         <EntityType Name="DepartmentUser">
           <Key>

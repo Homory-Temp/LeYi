@@ -328,7 +328,7 @@ public static class BusinessExtensions
                                 ObjectId = obj.Id,
                                 Note = use.Note,
                                 Amount = @in.Amount,
-                                Money = @in.Money,
+                                Money = @in.Amount * (decimal.Divide(@in.SourceMoney, @in.SourceAmount)),
                                 SingleConsumeId = @single.Id
                             };
                             db.StoreUseSingle.Add(us);

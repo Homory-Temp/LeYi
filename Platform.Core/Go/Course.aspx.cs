@@ -6,7 +6,7 @@ using Telerik.Web.UI;
 
 namespace Go
 {
-	public partial class GoCourse : HomoryCorePageWithGrid
+    public partial class GoCourse : HomoryCorePageWithGrid
     {
         private const string Right = "Course";
 
@@ -20,12 +20,7 @@ namespace Go
 
         protected void grid_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-			grid.DataSource = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.课程 && o.State == State.内置 && o.Name != "综合").OrderBy(o => o.Ordinal).ToList();
-        }
-
-        protected void gridX_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
-        {
-			gridX.DataSource = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.课程 && o.State < State.删除 && o.State > State.内置).OrderBy(o => o.Ordinal).ToList();
+            grid.DataSource = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.课程 && o.State < State.删除).OrderBy(o => o.Ordinal).ToList();
         }
 
         protected void gridX_BatchEditCommand(object sender, GridBatchEditingEventArgs e)
@@ -48,13 +43,13 @@ namespace Go
                     case GridBatchEditingCommandType.Update:
                         {
                             var id = Get(values, "Id", Guid.Empty);
-							CourseUpdate(HomoryContext.Value, id, name, state, ordinal);
+                            CourseUpdate(HomoryContext.Value, id, state, ordinal);
                             LogOp(state);
                         }
                         break;
                 }
             }
-			gridX.Rebind();
+            grid.Rebind();
             Notify(panel, "操作成功", "success");
         }
 
@@ -80,12 +75,9 @@ namespace Go
                 }
                 else
                 {
-                    if (ex.State > State.内置)
-                    {
-                        ex.State = state;
-                        ex.Ordinal = ordinal;
-                        db.SaveChanges();
-                    }
+                    ex.State = state;
+                    ex.Ordinal = ordinal;
+                    db.SaveChanges();
                 }
                 return true;
             }
@@ -95,14 +87,11 @@ namespace Go
             }
         }
 
-        public bool CourseUpdate(Entities db, Guid id, string name, State state, int ordinal)
+        public bool CourseUpdate(Entities db, Guid id, State state, int ordinal)
         {
             try
             {
-                if (id == Guid.Parse("6389E2EB-BF1E-4DFD-B214-A43B618A8E35"))
-                    return true;
                 var course = db.Catalog.Single(o => o.Id == id);
-	            course.Name = name;
                 course.State = state;
                 course.Ordinal = ordinal;
                 db.SaveChanges();

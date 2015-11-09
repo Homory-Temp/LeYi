@@ -82,7 +82,7 @@
                         <div class="col-md-12">
                             <input type="hidden" id="___total" runat="server" />
                             <!-- Start Printing -->
-                            <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
+                            <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="false">
                                 <LayoutTemplate>
                                     <div class="col-md-12">
                                         <table class="storeTable text-center">
