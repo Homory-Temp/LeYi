@@ -31,11 +31,7 @@ public partial class DepotQuery_Object : DepotPageSingle
                 total.InnerText = (obj.Amount + noOut).ToAmount(Depot.Featured(DepotType.小数数量库));
                 if (Depot.Featured(DepotType.幼儿园))
                 {
-                    var di = obj.DepotInX.OrderByDescending(o => o.AutoId).FirstOrDefault();
-                    if (di != null)
-                    {
-                        age.InnerText = di.Age;
-                    }
+                    age.InnerText = obj.Age;
                     xRow.Visible = true;
                 }
                 else

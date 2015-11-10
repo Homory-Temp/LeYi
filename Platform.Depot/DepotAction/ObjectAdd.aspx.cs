@@ -14,6 +14,9 @@ public partial class DepotAction_ObjectAdd : DepotPageSingle
             tree.DataBind();
             unit.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.单位).ToList();
             unit.DataBind();
+            age.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.年龄段).ToList();
+            age.DataBind();
+            agex.Visible = Depot.Featured(DepotType.幼儿园);
             specification.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.规格).ToList();
             specification.DataBind();
             brand.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.品牌).ToList();
@@ -110,7 +113,7 @@ public partial class DepotAction_ObjectAdd : DepotPageSingle
             node = node.ParentNode;
             ids.Insert(0, node.Value.GlobalId());
         }
-        DataContext.DepotObjectAdd(id, ids, Depot.Id, name.Text.Trim(), t3.Checked, t1.Checked, false, "", "", brand.Text.Trim(), "", unit.Text.Trim(), specification.Text.Trim(), low.PeekValue(0.00M), high.PeekValue(0.00M), photo.Length > 0 ? photo[0] : "", photo.Length > 1 ? photo[1] : "", photo.Length > 2 ? photo[2] : "", photo.Length > 3 ? photo[3] : "", content.Text.Trim(), ordinal.PeekValue(100));
+        DataContext.DepotObjectAdd(id, ids, Depot.Id, name.Text.Trim(), t3.Checked, t1.Checked, false, "", "", brand.Text.Trim(), "", unit.Text.Trim(), specification.Text.Trim(), low.PeekValue(0.00M), high.PeekValue(0.00M), photo.Length > 0 ? photo[0] : "", photo.Length > 1 ? photo[1] : "", photo.Length > 2 ? photo[2] : "", photo.Length > 3 ? photo[3] : "", content.Text.Trim(), ordinal.PeekValue(100), age.Text.Trim());
         return id;
     }
 

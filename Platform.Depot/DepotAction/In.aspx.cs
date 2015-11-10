@@ -27,9 +27,9 @@ public partial class DepotAction_In : DepotPageSingle
             usage.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "使用对象", Value = "", Selected = true });
             usage.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.使用对象).ToList();
             usage.DataBind();
-            if (!"OrderId".Query().None())
+            if (!"OrderId".Query().None() || !Session["DepotToInOrder"].None())
             {
-                var value = "OrderId".Query();
+                var value = "OrderId".Query().None() ? Session["DepotToInOrder"].ToString() : "OrderId".Query();
                 var id = value.GlobalId();
                 var t = DataContext.DepotOrder.Single(o => o.Id == id);
                 period.SelectedDate = t.OrderTime;
@@ -68,6 +68,15 @@ public partial class DepotAction_In : DepotPageSingle
             {
                 plus.Visible = true;
                 back.Visible = false;
+            }
+            if (Session["DepotToIn"] != null)
+            {
+                var list = Session["DepotToIn"] as List<InMemoryIn>;
+                target.SelectedValue = Session["DepotToInOrder"].ToString();
+                counter.Value = list.Count.ToString();
+                x.Value = list.ToJson();
+                Session.Remove("DepotToIn");
+                Session.Remove("DepotToInOrder");
             }
         }
     }
@@ -230,7 +239,16 @@ public partial class DepotAction_In : DepotPageSingle
 
     protected void addObj_ServerClick(object sender, EventArgs e)
     {
-        var url = "../DepotAction/ObjectAdd?DepotId={0}".Formatted(Depot.Id);
-        ap.ResponseScripts.Add("window.open('{0}', '_blank');".Formatted(url));
+        var list = new List<InMemoryIn>();
+        for (var i = 0; i < view_obj.Items.Count; i++)
+        {
+            var c = view_obj.Items[i].FindControl("ObjectIn") as Control_ObjectIn;
+            var @in = c.PeekValue();
+            list.Add(@in);
+        }
+        Session["DepotToIn"] = list;
+        Session["DepotToInOrder"] = target.SelectedValue;
+        var url = "../DepotAction/ObjectAddX?DepotId={0}".Formatted(Depot.Id);
+        Response.Redirect(url);
     }
 }

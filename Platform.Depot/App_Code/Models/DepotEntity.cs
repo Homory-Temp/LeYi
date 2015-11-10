@@ -438,6 +438,7 @@ namespace Models
         public string FixedNumber { get; set; }
         public string Brand { get; set; }
         public string Extension { get; set; }
+        public string Age { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotFlow> DepotFlow { get; set; }

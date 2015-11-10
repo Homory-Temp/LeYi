@@ -56,6 +56,19 @@
                             <telerik:RadDropDownTree ID="tree" runat="server" Width="400" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" DropDownSettings-CloseDropDownOnSelection="true"></telerik:RadDropDownTree>
                         </div>
                     </div>
+                    <div class="row" id="agex" runat="server">
+                        <div class="col-md-4 text-right">年龄段：</div>
+                        <div class="col-md-8 text-left">
+                            <telerik:RadComboBox ID="age" runat="server" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Name" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="400" AllowCustomText="true">
+                                <Items>
+                                    <telerik:RadComboBoxItem Text="" Value="" Selected="true" />
+                                </Items>
+                                <ItemTemplate>
+                                    <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
+                                </ItemTemplate>
+                            </telerik:RadComboBox>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-4 text-right">单位：</div>
                         <div class="col-md-8 text-left">

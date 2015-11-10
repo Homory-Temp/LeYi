@@ -13,7 +13,6 @@ public partial class Control_ObjectIn : DepotControlSingle
         people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "", Value = "", Selected = true });
         people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
         people.DataBind();
-        age.Text = @in.Age;
         place.Text = @in.Place;
         amount.Value = (double?)@in.Amount;
         amount.NumberFormat.DecimalDigits = Depot.Featured(DepotType.小数数量库) ? 2 : 0;
@@ -35,6 +34,7 @@ public partial class Control_ObjectIn : DepotControlSingle
                 var oid = @in.ObjectId.Value;
                 var so = DataContext.DepotObject.Single(o => o.Id == oid);
                 unit.Text = so.Unit;
+                age.Text = so.Age;
                 brand.Text = so.Brand;
                 specification.Text = so.Specification;
                 stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));

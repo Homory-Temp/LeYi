@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ObjectAdd.aspx.cs" Inherits="DepotAction_ObjectAdd" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ObjectAddX.aspx.cs" Inherits="DepotAction_ObjectAddX" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
 
@@ -195,8 +195,6 @@
                             <input type="button" class="btn btn-tumblr" id="go" runat="server" value="保存" onserverclick="go_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="button" class="btn btn-tumblr" id="goon" runat="server" value="保存并继续" onserverclick="goon_ServerClick" />
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="button" class="btn btn-tumblr" id="in" runat="server" value="保存并入库" onserverclick="in_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="button" class="btn btn-tumblr" id="cancel" runat="server" value="取消" onserverclick="cancel_ServerClick" />
                         </div>

@@ -204,6 +204,7 @@
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="DepotId" Type="uniqueidentifier" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="DepotObjectCatalog">
           <Key>
@@ -1848,6 +1849,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="Brand" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Extension" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DepotRedo" Relationship="DepotModel.FK_DepotRedo_DepotObject" FromRole="DepotObject" ToRole="DepotRedo" />
+          <Property Name="Age" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DepotFlow">
           <Key>
@@ -2860,6 +2862,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotObject">
             <EntityTypeMapping TypeName="DepotModel.DepotObject">
               <MappingFragment StoreEntitySet="DepotObject">
+                <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="FixedNumber" ColumnName="FixedNumber" />
