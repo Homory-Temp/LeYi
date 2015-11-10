@@ -242,7 +242,7 @@
                             </div>
                         </div>
                         <div class="u-rbox sendto" id="sendto">
-                            <div id="addBlog_ownerTabs" class="addBlog-box">
+                            <div id="addBlog_ownerTabs" class="addBlog-box" style="height: 218px;">
                                 <div style="clear: both; height: 10px;"></div>
                                 <div id="addBlog_privacySet" class="ui-renren-privacy ui-widget ui-select">
                                     <telerik:RadAjaxPanel runat="server" ID="publish_main_catalog_panel">
@@ -265,6 +265,10 @@
                                                     <telerik:RadComboBoxItem Text="" Value="" />
                                                 </Items>
                                             </telerik:RadComboBox>
+                                        </asp:Panel>
+                                        <asp:Panel runat="server" ID="publish_cg_panel">
+                                            <h5>目录：</h5>
+                                            <telerik:RadDropDownTree runat="server" ID="publish_cg" Width="140" CheckBoxes="SingleCheck" ExpandNodeOnSingleClick="true" AutoPostBack="True" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" OnEntryAdded="publish_cg_EntryAdded" OnEntryRemoved="publish_cg_EntryRemoved"></telerik:RadDropDownTree>
                                         </asp:Panel>
                                         <asp:Panel ID="sync_assistant" runat="server" Style="margin-top: 6px;">
                                             <asp:CheckBox ID="sync_ass" runat="server" Text="发布至资源小助手" OnCheckedChanged="sync_ass_CheckedChanged" Style="margin: 0 0 0 16px;" AutoPostBack="true" />

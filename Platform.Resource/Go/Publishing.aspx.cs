@@ -213,7 +213,10 @@ namespace Go
                         publish_catalog.DataBind();
 						var catalogValueArticle = r.ResourceCatalog.Where(o => o.Catalog.Type == CatalogType.文章 && o.State == State.启用).Aggregate(string.Empty, (current, catalog) => current + string.Format("{0},", catalog.CatalogId));
 						publish_catalog.SelectedValue = catalogValueArticle;
-						break;
+                        publish_catalog.EmbeddedTree.Nodes[0].Checked = false;
+                        publish_catalog.EmbeddedTree.Nodes[0].Checkable = false;
+                        publish_catalog.EmbeddedTree.Nodes[0].Expanded = true;
+                        break;
 					case ResourceType.视频:
 						publish_catalog.DataSource =
 							HomoryContext.Value.Catalog.Where(o => o.State < State.审核 && o.Type == CatalogType.视频)
@@ -223,7 +226,10 @@ namespace Go
 						publish_catalog.DataBind();
 						var catalogValueMedia = r.ResourceCatalog.Where(o => o.Catalog.Type == CatalogType.视频 && o.State == State.启用).Aggregate(string.Empty, (current, catalog) => current + string.Format("{0},", catalog.CatalogId));
 						publish_catalog.SelectedValue = catalogValueMedia;
-						break;
+                        publish_catalog.EmbeddedTree.Nodes[0].Checked = false;
+                        publish_catalog.EmbeddedTree.Nodes[0].Checkable = false;
+                        publish_catalog.EmbeddedTree.Nodes[0].Expanded = true;
+                        break;
 					default:
 						publish_catalog_panel.Visible = false;
 						break;
@@ -264,6 +270,7 @@ namespace Go
 				publish_grade.SelectedValue = gradeValue;
 				popup_import.NavigateUrl = string.Format("../Popup/PublishImport.aspx?Type={0}", Request.QueryString["Type"]);
 				popup_attachment.NavigateUrl = string.Format("../Popup/PublishAttachment.aspx?Type={0}", Request.QueryString["Type"]);
+                CG();
 				return;
 			}
 			var resource = new Resource
@@ -508,6 +515,7 @@ namespace Go
                 r.CourseId = Guid.Parse(e.Value);
             }
             HomoryContext.Value.SaveChanges();
+            CG();
         }
 
         protected void publish_grade_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
@@ -522,6 +530,28 @@ namespace Go
                 r.GradeId = Guid.Parse(e.Value);
             }
             HomoryContext.Value.SaveChanges();
+            CG();
+        }
+
+        protected void CG()
+        {
+            if (publish_course.SelectedIndex > 0 && publish_grade.SelectedIndex > 0)
+            {
+                var courseId = Guid.Parse(publish_course.SelectedValue);
+                var gradeId = Guid.Parse(publish_grade.SelectedValue);
+                publish_cg.DataSource =
+                    HomoryContext.Value.Catalog.Where(o => o.State < State.审核 && (o.TopId == courseId || o.Id == gradeId))
+                        .OrderBy(o => o.State)
+                        .ThenBy(o => o.Ordinal)
+                        .ToList();
+                publish_cg.DataBind();
+                var catalogValue = CurrentResource.ResourceCatalog.Where(o => o.Catalog.Type == CatalogType.课程资源 && o.State == State.启用).Aggregate(string.Empty, (current, catalog) => current + string.Format("{0},", catalog.CatalogId));
+                publish_cg.SelectedValue = catalogValue;
+                publish_cg.EmbeddedTree.Nodes[0].Checked = false;
+                publish_cg.EmbeddedTree.Nodes[0].Checkable = false;
+                publish_cg.EmbeddedTree.Nodes[0].Expanded = true;
+                publish_cg.EmbeddedTree.Nodes[0].Text = string.Format("{0}{1}", publish_grade.SelectedItem.Text, publish_course.SelectedItem.Text);
+            }
         }
 
         protected void sync_ass_CheckedChanged(object sender, EventArgs e)
@@ -621,6 +651,16 @@ namespace Go
             btnOher.Value = CurrentResource.Author;
             btnMe.Checked = CurrentResource.Author.Equals(CurrentUser.Id.ToString(), StringComparison.OrdinalIgnoreCase);
             btnOher.Checked = !btnMe.Checked;
+        }
+
+        protected void publish_cg_EntryAdded(object sender, DropDownTreeEntryEventArgs e)
+        {
+            CatalogChozen(e, State.启用);
+        }
+
+        protected void publish_cg_EntryRemoved(object sender, DropDownTreeEntryEventArgs e)
+        {
+            CatalogChozen(e, State.删除);
         }
     }
 }
