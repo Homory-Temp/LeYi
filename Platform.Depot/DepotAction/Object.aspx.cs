@@ -41,7 +41,7 @@ public partial class DepotAction_Object : DepotPageSingle
     protected string CountTotal(DepotObject obj)
     {
         var query = obj.DepotUseX.Where(o => o.ReturnedAmount < o.Amount);
-        var noOut = query.Count() > 0 ? query.Sum(o => o.Amount - o.ReturnedAmount) : 0;
+        var noOut = query.Count() > 0 ? query.Where(o => o.Type == UseType.借用).Sum(o => o.Amount - o.ReturnedAmount) : 0;
         return (obj.Amount + noOut).ToAmount(Depot.Featured(DepotType.小数数量库));
     }
 

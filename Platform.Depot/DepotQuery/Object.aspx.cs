@@ -27,7 +27,7 @@ public partial class DepotQuery_Object : DepotPageSingle
                 note.InnerText = obj.Note;
                 brand.InnerText = obj.Brand;
                 var query = obj.DepotUseX.Where(o => o.ReturnedAmount < o.Amount);
-                var noOut = query.Count() > 0 ? query.Sum(o => o.Amount - o.ReturnedAmount) : 0;
+                var noOut = query.Count() > 0 ? query.Where(o => o.Type == UseType.借用).Sum(o => o.Amount - o.ReturnedAmount) : 0;
                 total.InnerText = (obj.Amount + noOut).ToAmount(Depot.Featured(DepotType.小数数量库));
                 if (Depot.Featured(DepotType.幼儿园))
                 {

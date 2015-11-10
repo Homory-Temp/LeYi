@@ -26,7 +26,11 @@ public partial class DepotQuery_InPrint : DepotPageSingle
         var ord = DataContext.DepotInRecord.Single(o => o.Id == orderId);
         var source = DataContext.DepotInXRecord.Where(o => o.OrderId == orderId).OrderByDescending(o => o.Time).ToList();
         view_record.DataSource = source;
-        total.Value = source.Sum(o => o.Amount).ToAmount(Depot.Featured(DepotType.小数数量库)) + "@@@" + ord.应付金额.ToMoney();
+        var s = source.Sum(o => o.Total);
+        var oo = DataContext.DepotOrder.Single(o => o.Id == orderId);
+        oo.Paid = s;
+        DataContext.SaveChanges();
+        total.Value = source.Sum(o => o.Amount).ToAmount(Depot.Featured(DepotType.小数数量库)) + "@@@" + s.ToMoney();
     }
 
     protected void go_ServerClick(object sender, EventArgs e)

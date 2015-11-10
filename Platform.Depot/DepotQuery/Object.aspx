@@ -59,16 +59,16 @@
                     <table class="storeTable">
                         <tr>
                             <td style="width: 15%;">
-                                <span class="btn btn-info dictionaryX">在库库存：</span>
-                            </td>
-                            <td style="width: 35%;">
-                                <span id="no" runat="server"></span>&nbsp;<span id="unit" runat="server"></span>
-                            </td>
-                            <td style="width: 15%;">
                                 <span class="btn btn-info dictionaryX">总库存：</span>
                             </td>
                             <td style="width: 35%;">
                                 <span id="total" runat="server"></span>&nbsp;<span id="unitx" runat="server"></span>
+                            </td>
+                            <td style="width: 15%;">
+                                <span class="btn btn-info dictionaryX">在库库存：</span>
+                            </td>
+                            <td style="width: 35%;">
+                                <span id="no" runat="server"></span>&nbsp;<span id="unit" runat="server"></span>
                             </td>
                         </tr>
                         <tr>
