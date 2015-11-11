@@ -168,7 +168,7 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn HeaderText="待还数量" ItemStyle-Width="33%">
                                 <ItemTemplate>
-                                    <asp:Label runat="server" Text='<%# ((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")).ToAmount(Depot.Featured(Models.DepotType.小数数量库))%>'></asp:Label>
+                                    <asp:Label runat="server" Text='<%# Eval("Type").ToString() == "1" ? "0" : ((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")).ToAmount(Depot.Featured(Models.DepotType.小数数量库))%>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                         </Columns>
