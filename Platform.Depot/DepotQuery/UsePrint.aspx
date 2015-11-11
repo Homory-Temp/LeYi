@@ -101,7 +101,7 @@
                                 <td><%# Eval("Unit") %></td>
                                 <td><%# Eval("Type") %></td>
                                 <td><%# Eval("Amount").ToAmount() %></td>
-                                <td><%# Eval("PerPrice").ToAmount() %></td>
+                                <td><%# Eval("PerPrice").ToMoney() %></td>
                                 <td><%# Eval("Money").ToMoney() %></td>
                                 <td><%# Eval("Brand") %></td>
                                 <td><%# Eval("Specification") %></td>
