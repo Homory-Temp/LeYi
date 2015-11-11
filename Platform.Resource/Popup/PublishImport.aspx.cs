@@ -25,8 +25,8 @@ namespace Popup
 				popup_publish_import_sf_label.InnerText = ResourceType == ResourceType.视频
 					? "( flv, mp4, mpg, mpeg, wmv, avi, rm, rmvb )"
                     : string.Empty;
-				publish_import_upload.MaxFileSize = ResourceType == ResourceType.视频 ? 1048576000 * 2 : 104857600 * 2;
-			}
+				publish_import_upload.MaxFileSize = ResourceType == ResourceType.视频 ? 2147483647 : 104857600 * 2; // 
+            }
 		}
 
 		protected ResourceType ResourceType

@@ -10,13 +10,12 @@ namespace Go
     {
         private const string Right = "Article";
 
-        private static Guid ArticleTopId = Guid.Parse("023caf84-4f7b-4777-abeb-66137b4e71fd");
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 LoadInit();
+                grid.Rebind();
             }
         }
 
@@ -52,15 +51,22 @@ namespace Go
 
         protected void grid_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            var courseId = Guid.Parse(courseList.SelectedValue);
-            var gradeId = Guid.Parse(gradeList.SelectedValue);
-            var parentId = tree.SelectedNode == null ? (Guid?)(null) : Guid.Parse(tree.SelectedNode.Value);
-            grid.DataSource = parentId.HasValue
-                ? HomoryContext.Value.Catalog.Where(o => o.State < State.删除 && o.ParentId == parentId && o.Type == CatalogType.课程资源 && o.TopId == courseId)
-                    .OrderBy(o => o.State)
-                    .ThenBy(o => o.Ordinal)
-                    .ToList()
-                : null;
+            try
+            {
+                var courseId = Guid.Parse(courseList.SelectedValue);
+                var gradeId = Guid.Parse(gradeList.SelectedValue);
+                var parentId = tree.SelectedNode == null ? (Guid?)(null) : Guid.Parse(tree.SelectedNode.Value);
+                grid.DataSource = parentId.HasValue
+                    ? HomoryContext.Value.Catalog.Where(o => o.State < State.删除 && o.ParentId == parentId && o.Type == CatalogType.课程资源 && o.TopId == courseId)
+                        .OrderBy(o => o.State)
+                        .ThenBy(o => o.Ordinal)
+                        .ToList()
+                    : null;
+            }
+            catch
+            {
+                grid.DataSource = null;
+            }
         }
 
         protected void grid_BatchEditCommand(object sender, GridBatchEditingEventArgs e)

@@ -38,7 +38,10 @@
                     <telerik:RadComboBox ID="courseList" runat="server" Label="课程：" OnSelectedIndexChanged="courseList_SelectedIndexChanged" AutoPostBack="true" DataTextField="Name" DataValueField="Id"></telerik:RadComboBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <telerik:RadComboBox ID="gradeList" runat="server" Label="年级：" OnSelectedIndexChanged="gradeList_SelectedIndexChanged" AutoPostBack="true">
                         <Items>
-                            <telerik:RadComboBoxItem Text="高一" Value="85AD57A8-B503-4B83-99B4-9040DADC1B22" Selected="true" />
+                            <telerik:RadComboBoxItem Text="初一" Value="B25DE587-8C11-4B58-A5FE-08D1C78EFA2E" Selected="true" />
+                            <telerik:RadComboBoxItem Text="初二" Value="08DDE587-8CFA-4C95-B63B-08D1C78F124D" />
+                            <telerik:RadComboBoxItem Text="初三" Value="8444E587-8CB6-4D3E-AFBA-08D1C78F2F5B" />
+                            <telerik:RadComboBoxItem Text="高一" Value="85AD57A8-B503-4B83-99B4-9040DADC1B22" />
                             <telerik:RadComboBoxItem Text="高二" Value="AC02A035-24F2-41F5-BA6B-178ED4348009" />
                             <telerik:RadComboBoxItem Text="高三" Value="0E667D0D-0BF5-4D18-9B4D-9096EDBEF969" />
                         </Items>

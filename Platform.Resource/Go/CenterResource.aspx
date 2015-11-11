@@ -65,6 +65,7 @@
         </telerik:RadWindowManager>
         <script>
             var window_publish;
+            var window_push;
 
             function popupPublish() {
                 window_publish = window.radopen(null, "popup_publish");
@@ -75,8 +76,11 @@
                 return false;
             }
             function popupPushX(url) {
-                window.radopen(url, "popup_pushX");
+                window_push = window.radopen(url, "popup_pushX");
                 return false;
+            }
+            function pushPopped() {
+                window_push.close();
             }
         </script>
         <homory:CommonTop runat="server" ID="CommonTop" />
