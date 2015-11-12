@@ -31,9 +31,12 @@
 		</div>
 		<telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <telerik:RadComboBox ID="combo" runat="server" AutoPostBack="true" OnSelectedIndexChanged="combo_SelectedIndexChanged" DataTextField="Name" DataValueField="Id" Label="选择学校：" Width="220px" Filter="Contains" MarkFirstMatch="true" AllowCustomText="true" Height="202px">
                     </telerik:RadComboBox>
+                </div>
+                <div class="col-md-6 text-right">
+                    <div class="btn btn-tumblr" onclick="window.open('../Go/ResourceSplash', '_blank');">资源平台首页展示图设定</div>
                 </div>
             </div>
             <div class="row">&nbsp;</div>
