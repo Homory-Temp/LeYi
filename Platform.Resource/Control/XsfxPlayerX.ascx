@@ -17,7 +17,9 @@
         var a = CKobject.getObjectById('ckplayer_a1');
         return a.getStatus()['time'];//当前播放长度
     }
-
+    function CKStop() {
+        CKobject.getObjectById('ckplayer_a1').videoClear();
+    }
     var flashvars = {
         f: '<%= Video %>',//视频地址
         a: '',//调用时的参数，只有当s>0的时候有效

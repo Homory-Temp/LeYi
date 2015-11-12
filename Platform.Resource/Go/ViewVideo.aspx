@@ -51,7 +51,7 @@
         </telerik:RadScriptManager>
         <telerik:RadWindowManager runat="server" ID="Rwm" Skin="Metro" Localization-OK="确定">
             <Windows>
-                <telerik:RadWindow ID="homory_note_view" runat="server" NavigateUrl="../Go/PlayVideo.aspx" Skin="Metro" ShowContentDuringLoad="False" AutoSize="true" ReloadOnShow="true" KeepInScreenBounds="true" VisibleStatusbar="false" Behaviors="Move,Close" Modal="true" Localization-Close="关闭">
+                <telerik:RadWindow ID="homory_note_view" runat="server" NavigateUrl="../Go/PlayVideo.aspx" Skin="Metro" ShowContentDuringLoad="False" AutoSize="true" ReloadOnShow="true" OnClientBeforeClose="xoff" KeepInScreenBounds="true" VisibleStatusbar="false" Behaviors="Move,Close" Modal="true" Localization-Close="关闭">
                 </telerik:RadWindow>
                 <telerik:RadWindow ID="popup_rate" Title="评分详情" runat="server" AutoSize="True" ShowContentDuringLoad="false" ReloadOnShow="True" KeepInScreenBounds="true" VisibleStatusbar="false" Behaviors="Close" Modal="True" Localization-Close="关闭" EnableEmbeddedScripts="True" EnableEmbeddedBaseStylesheet="True" VisibleTitlebar="True">
                 </telerik:RadWindow>
@@ -59,6 +59,9 @@
             </Windows>
         </telerik:RadWindowManager>
         <script>
+            function xoff() {
+                CKStop();
+            }
             function popup(id) {
                 window.radopen("../Go/PlayVideo.aspx?" + id, "homory_note_view");
                 return false;

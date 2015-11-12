@@ -2,6 +2,9 @@
 
 <script src="../Content/jQuery/jquery.min.js"></script>
     <script>
+        function CKStop() {
+            CKobject.getObjectById('ckplayer_a1').videoClear();
+        }
         function GetUrlParms() {
             var args = new Object();
             var query = location.search.substring(1);//获取查询串   

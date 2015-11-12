@@ -81,6 +81,9 @@
     function ckadjump() {
         alert('这里演示了点击跳过广告按钮后的执行的动作，如果注册会员可以做成直接跳过的效果。');
     }
+    function CKStop() {
+        CKobject.getObjectById('ckplayer_a1').videoClear();
+    }
     //开关灯
     var box = new LightBox();
     function closelights() {//关灯

@@ -159,7 +159,7 @@ namespace Go
         {
             if (catalog.Id == Guid.Empty)
             {
-                var count = HomoryContext.Value.Catalog.Count(o => o.State < State.删除 && o.Type == CatalogType.课程资源 && (o.ParentId == null || (o.ParentId != null && o.ParentId == ArticleTopId)));
+                var count = HomoryContext.Value.Catalog.Count(o => o.State < State.删除 && o.Type == CatalogType.课程资源);
                 return count == 0 ? string.Empty : string.Format(" [{0}]", count);
             }
             else
