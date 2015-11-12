@@ -137,6 +137,35 @@ namespace Go
 
         private Resource _resource;
 
+        private bool? _detected;
+
+        protected bool Detect()
+        {
+            if (!_detected.HasValue)
+            {
+                if (CurrentUser.State == State.内置)
+                {
+                    _detected = true;
+                }
+                else
+                {
+                    foreach (var ur in CurrentUser.UserRole)
+                    {
+                        if (ur.Role.RoleRight.Count(o => o.RightName == "ResourceManage") > 0)
+                        {
+                            _detected = true;
+                            break;
+                        }
+                    }
+                    if (!_detected.HasValue)
+                    {
+                        _detected = false;
+                    }
+                }
+            }
+            return _detected.Value;
+        }
+
         protected static string QueryType(CatalogType type)
         {
             switch (type)

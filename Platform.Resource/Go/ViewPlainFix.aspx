@@ -282,7 +282,7 @@
                                                             <label style="color: #333333; font-weight: bold; font-size: 14px;"><%# Eval("Content") %></label>&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <a target="_self" id="goReply" runat="server" onserverclick="goReply_OnServerClick">
                                                                 <img src="Image/c.gif" style="width: 26px;" /></a>&nbsp;&nbsp;&nbsp;
-                                                            <a target="_self" id="goDelP" runat="server" alt='<%# Eval("Id").ToString() %>' name='<%# Eval("Id").ToString() %>' onserverclick="goDelP_ServerClick" visible='<%# IsOnline &&  ((Homory.Model.ResourceComment)Container.DataItem).User.Id == CurrentUser.Id %>'>
+                                                            <a target="_self" id="goDelP" runat="server" alt='<%# Eval("Id").ToString() %>' name='<%# Eval("Id").ToString() %>' onserverclick="goDelP_ServerClick" visible='<%# IsOnline && (Detect() || ((Homory.Model.ResourceComment)Container.DataItem).User.Id == CurrentUser.Id) %>'>
                                                                 <img src="Image/b.gif" style="width: 26px;" /></a>
                                                         </div>
                                                         <div class="srx-comment-info" style="margin-top: 4px;">

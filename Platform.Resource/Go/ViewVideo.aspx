@@ -320,7 +320,7 @@
                                                             <label style="color: #333333; font-weight: bold; font-size: 14px;"><%# Eval("Content") %></label>&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <a target="_self" id="goReply" runat="server" onserverclick="goReply_OnServerClick">
                                                                 <img src="Image/c__c.gif" style="width: 26px;" onmouseover="this.src = 'Image/c.gif';" onmouseout="this.src = 'Image/c__c.gif';" /></a>&nbsp;&nbsp;&nbsp;
-                                                            <a target="_self" id="goDelP" runat="server" alt='<%# Eval("Id").ToString() %>' name='<%# Eval("Id").ToString() %>' onserverclick="goDelP_ServerClick" visible='<%# IsOnline &&  ((Homory.Model.ResourceComment)Container.DataItem).User.Id == CurrentUser.Id %>'>
+                                                            <a target="_self" id="goDelP" runat="server" alt='<%# Eval("Id").ToString() %>' name='<%# Eval("Id").ToString() %>' onserverclick="goDelP_ServerClick" visible='<%# IsOnline && (((Homory.Model.ResourceComment)Container.DataItem).User.Id == CurrentUser.Id || Detect()) %>'>
                                                                 <img src="Image/b__b.gif" style="width: 26px;" onmouseover="this.src = 'Image/b.gif';" onmouseout="this.src = 'Image/b__b.gif';" /></a>
                                                         </div>
                                                         <div class="srx-comment-info">

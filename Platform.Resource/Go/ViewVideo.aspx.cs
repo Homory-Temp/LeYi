@@ -333,7 +333,36 @@ namespace Go
 			}
 		}
 
-		private User _user;
+        private bool? _detected;
+
+        protected bool Detect()
+        {
+            if (!_detected.HasValue)
+            {
+                if (CurrentUser.State == State.内置)
+                {
+                    _detected = true;
+                }
+                else
+                {
+                    foreach (var ur in CurrentUser.UserRole)
+                    {
+                        if (ur.Role.RoleRight.Count(o => o.RightName == "ResourceManage") > 0)
+                        {
+                            _detected = true;
+                            break;
+                        }
+                    }
+                    if (!_detected.HasValue)
+                    {
+                        _detected = false;
+                    }
+                }
+            }
+            return _detected.Value;
+        }
+
+        private User _user;
 
 		protected User TargetUser
 		{
