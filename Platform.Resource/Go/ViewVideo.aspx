@@ -63,7 +63,8 @@
                 CKStop();
             }
             function popup(id) {
-                window.radopen("../Go/PlayVideo.aspx?" + id, "homory_note_view");
+                //window.radopen("../Go/PlayVideo.aspx?" + id, "homory_note_view");
+                window.open("../Go/PlayVideo.aspx?" + id, "_blank");
                 return false;
             }
             function popupRate() {
