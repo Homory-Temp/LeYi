@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define ForceOnline
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -167,9 +169,9 @@ namespace Homory.Model
 			}
 		}
 
-		protected abstract bool ShouldOnline { get; }
+        protected abstract bool ShouldOnline { get; }
 
-		protected override void OnLoad(EventArgs e)
+        protected override void OnLoad(EventArgs e)
 		{
             var doc = XDocument.Load(Server.MapPath("~/Common/配置/Title.xml"));
             this.Title = doc.Root.Element("Resource").Value;
@@ -205,9 +207,13 @@ namespace Homory.Model
 				return;
 			}
 
-			if (!IsOnline && ShouldOnline)
-			{
-				SignOn();
+#if ForceOnline
+            if (!IsOnline)
+#else
+            if (!IsOnline && ShouldOnline)
+#endif
+            {
+                SignOn();
 				return;
 			}
 

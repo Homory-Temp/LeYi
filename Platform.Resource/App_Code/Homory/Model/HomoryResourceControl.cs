@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define ForceOnline
+
+using System;
 using System.Linq;
 
 namespace Homory.Model
@@ -185,7 +187,11 @@ namespace Homory.Model
                 return;
             }
 
+#if ForceOnline
+            if (!IsOnline)
+#else
             if (!IsOnline && ShouldOnline)
+#endif
             {
                 SignOn();
                 return;
