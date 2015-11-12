@@ -247,6 +247,12 @@
                         </div>
                         <div>
                             资源设定：
+						<telerik:RadButton ID="ResourceManage" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
+                            <ToggleStates>
+                                <telerik:RadButtonToggleState Text="√ 资源管理" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 资源管理" Value="False" CssClass="btn btn-primary" />
+                            </ToggleStates>
+                        </telerik:RadButton>
 						<telerik:RadButton ID="Honor" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
                                 <telerik:RadButtonToggleState Text="√ 荣誉分值" Value="True" CssClass="btn btn-info" />
