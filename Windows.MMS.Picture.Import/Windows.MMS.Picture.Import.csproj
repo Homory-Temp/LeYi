@@ -86,6 +86,9 @@
     <Compile Include="App_Code\ToModels\pcodelist.cs">
       <DependentUpon>ToModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\ToModels\P_picbarcode.cs">
+      <DependentUpon>ToModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Code\ToModels\P_piccurr.cs">
       <DependentUpon>ToModels.tt</DependentUpon>
     </Compile>

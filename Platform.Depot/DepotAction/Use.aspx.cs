@@ -22,7 +22,7 @@ public partial class DepotAction_Use : DepotPageSingle
             //age.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "年龄段", Value = "", Selected = true });
             //age.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.年龄段).ToList();
             //age.DataBind();
-            counter.Value = "1";
+            counter.Value = "5";
             if (!"ObjectId".Query().None())
             {
                 var objId = "ObjectId".Query().GlobalId();

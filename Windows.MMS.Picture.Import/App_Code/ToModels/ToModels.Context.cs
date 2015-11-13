@@ -31,5 +31,6 @@ namespace Windows.MMS.Picture.Import.App_Code.ToModels
         public virtual DbSet<pcodelist> pcodelist { get; set; }
         public virtual DbSet<T_toolinfo> T_toolinfo { get; set; }
         public virtual DbSet<T_toolimg> T_toolimg { get; set; }
+        public virtual DbSet<P_picbarcode> P_picbarcode { get; set; }
     }
 }

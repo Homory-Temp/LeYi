@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="libraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="P_picbarcode">
+          <Key>
+            <PropertyRef Name="pid" />
+            <PropertyRef Name="txm" />
+          </Key>
+          <Property Name="pid" Type="int" Nullable="false" />
+          <Property Name="txm" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="opcode" Type="varchar" MaxLength="20" />
+          <Property Name="opdate" Type="datetime" />
+          <Property Name="state" Type="varchar" MaxLength="3" />
+        </EntityType>
         <EntityType Name="P_piccurr">
           <Key>
             <PropertyRef Name="id" />
@@ -110,6 +121,7 @@ warning 6002: The table/view 'library.dbo.T_toolimg' does not have a primary key
           <Property Name="lb" Type="int" />
         </EntityType>
         <EntityContainer Name="libraryModelStoreContainer">
+          <EntitySet Name="P_picbarcode" EntityType="Self.P_picbarcode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="P_piccurr" EntityType="Self.P_piccurr" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="P_picinfo" EntityType="Self.P_picinfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_toolinfo" EntityType="Self.T_toolinfo" Schema="dbo" store:Type="Tables" />
@@ -221,6 +233,7 @@ warning 6002: The table/view 'library.dbo.T_toolimg' does not have a primary key
           <EntitySet Name="pcodelist" EntityType="Self.pcodelist" />
           <EntitySet Name="T_toolinfo" EntityType="libraryModel.T_toolinfo" />
           <EntitySet Name="T_toolimg" EntityType="libraryModel.T_toolimg" />
+          <EntitySet Name="P_picbarcode" EntityType="libraryModel.P_picbarcode" />
         </EntityContainer>
         <EntityType Name="T_toolinfo">
           <Key>
@@ -255,6 +268,17 @@ warning 6002: The table/view 'library.dbo.T_toolimg' does not have a primary key
           <Property Name="pic4" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="opcode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="opdate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="P_picbarcode">
+          <Key>
+            <PropertyRef Name="pid" />
+            <PropertyRef Name="txm" />
+          </Key>
+          <Property Name="pid" Type="Int32" Nullable="false" />
+          <Property Name="txm" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="opcode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="opdate" Type="DateTime" Precision="3" />
+          <Property Name="state" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -358,6 +382,17 @@ warning 6002: The table/view 'library.dbo.T_toolimg' does not have a primary key
                 <ScalarProperty Name="pic2" ColumnName="pic2" />
                 <ScalarProperty Name="pic1" ColumnName="pic1" />
                 <ScalarProperty Name="tid" ColumnName="tid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="P_picbarcode">
+            <EntityTypeMapping TypeName="libraryModel.P_picbarcode">
+              <MappingFragment StoreEntitySet="P_picbarcode">
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="opdate" ColumnName="opdate" />
+                <ScalarProperty Name="opcode" ColumnName="opcode" />
+                <ScalarProperty Name="txm" ColumnName="txm" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

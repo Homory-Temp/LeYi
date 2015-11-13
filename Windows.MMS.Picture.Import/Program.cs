@@ -135,9 +135,9 @@ namespace Windows.MMS.Picture.Import
                                     xcco = xcco.DepotCatalogParent;
                                 }
 
-                                db.DepotObjectAdd(picid, gids, 图片库Id, wz.name, true, false, false, "", "", "", wz.code, "张", wz.gg ?? "", 0, 0, a, b, c, d, wz.xh ?? "", ordinal);
+                                db.DepotObjectAdd(picid, gids, 图片库Id, wz.name, false, false, false, "", "", "", wz.code, "张", wz.gg ?? "", 0, 0, a, b, c, d, wz.xh ?? "", ordinal);
 
-                                var @in = new InMemoryIn { Age = Age(wz.syfw.HasValue ? wz.syfw.Value : 0), Place = "图片库", Amount = 1, CatalogId = cco.Id, Money = 0, Note = "", ObjectId = picid, PriceSet = 0, Time = DateTime.Today };
+                                var @in = new InMemoryIn { Age = Age(wz.syfw.HasValue ? wz.syfw.Value : 0), Place = "图片库", Amount = dbx.P_picbarcode.Count(o => o.pid == pid && (o.state == "0" || o.state == "1")), CatalogId = cco.Id, Money = 0, Note = "", ObjectId = picid, PriceSet = 0, Time = DateTime.Today };
                                 var list = new List<InMemoryIn>();
                                 list.Add(@in);
                                 db.DepotActIn(图片库Id, 购置单Id, DateTime.Today, 图片库用户Id, list);
