@@ -196,8 +196,7 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="button" class="btn btn-tumblr" id="goon" runat="server" value="保存并继续" onserverclick="goon_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="button" class="btn btn-tumblr" id="in" runat="server" value="保存并入库" onserverclick="in_ServerClick" />
-                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="button" class="btn btn-tumblr" style="display: none;" id="in" runat="server" value="保存并入库" onserverclick="in_ServerClick" />
                             <input type="button" class="btn btn-tumblr" id="cancel" runat="server" value="取消" onserverclick="cancel_ServerClick" />
                         </div>
                     </div>

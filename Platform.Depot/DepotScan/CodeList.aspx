@@ -40,7 +40,7 @@
 <body>
     <form id="form" runat="server">
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资条码 - 条码生成列表" />
-        <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
+        <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading" OnAjaxRequest="ap_AjaxRequest">
             <div class="row">
                 <div class="col-md-12">
                     <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
@@ -73,6 +73,16 @@
                     </telerik:RadListView>
                 </div>
             </div>
+            <telerik:RadCodeBlock runat="server">
+                <script>
+                    function refresh() {
+                        $find("<%= ap.ClientID %>").ajaxRequest("");
+                }
+                </script>
+            </telerik:RadCodeBlock>
+            <script>
+                window.setInterval("refresh();", 10000);
+            </script>
         </telerik:RadAjaxPanel>
     </form>
 </body>

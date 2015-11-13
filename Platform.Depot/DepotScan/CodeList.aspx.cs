@@ -51,4 +51,9 @@ public partial class DepotAction_CodeList : DepotPageSingle
         DataContext.SaveChanges();
         view.Rebind();
     }
+
+    protected void ap_AjaxRequest(object sender, AjaxRequestEventArgs e)
+    {
+        view.Rebind();
+    }
 }
