@@ -134,7 +134,7 @@
                                     <td><%# Eval("Name") %></td>
                                     <td><%# Eval("Unit") %></td>
                                     <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
-                                    <td><%# ((Models.UseType)Eval("Type")) == Models.UseType.借用 ? ((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")).ToAmount(Depot.Featured(Models.DepotType.小数数量库)) : "" %></td>
+                                    <td><%# ((Models.UseType)Eval("Type")) == Models.UseType.借用 ? ((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")).ToAmount(Depot.Featured(Models.DepotType.小数数量库)) : "0" %></td>
                                     <td><%# Eval("UserName") %></td>
                                     <td><%# decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount")).ToMoney() %></td>
                                     <td><%# Eval("Money").ToMoney() %></td>
