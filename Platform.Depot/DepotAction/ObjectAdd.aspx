@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="row" id="agex" runat="server">
-                        <div class="col-md-4 text-right">年龄段：</div>
+                        <div class="col-md-4 text-right">适用年龄段：</div>
                         <div class="col-md-8 text-left">
                             <telerik:RadComboBox ID="age" runat="server" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Name" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="400" AllowCustomText="true">
                                 <Items>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 text-right">规格：</div>
+                        <div class="col-md-4 text-right">规格型号：</div>
                         <div class="col-md-8 text-left">
                             <telerik:RadComboBox ID="specification" runat="server" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Name" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="400" AllowCustomText="true">
                                 <Items>
@@ -122,7 +122,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 text-right">类型：</div>
+                        <div class="col-md-4 text-right">物资属性：</div>
                         <div class="col-md-8 text-left">
                             <div>
                                 <table>
