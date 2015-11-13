@@ -66,7 +66,7 @@ public partial class StoreAction_Use : SingleStorePage
             }
         }
         x1.Visible = x2.Visible = show;
-        counter.Value = show ? "1" : "0";
+        counter.Value = show ? "5" : "0";
     }
 
     protected void plus_ServerClick(object sender, EventArgs e)

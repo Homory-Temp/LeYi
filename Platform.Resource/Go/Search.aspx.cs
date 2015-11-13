@@ -22,68 +22,6 @@ namespace Go
                     BindSearch(0);
             }
         }
-        public Object FindAges()
-        {
-
-            var classType = Convert.ToInt32(HomoryContext.Value.Department.Where(o => o.Id == HomoryContext.Value.DepartmentUser.FirstOrDefault(p => p.UserId == CurrentUser.Id).DepartmentId).ToList().Join(HomoryContext.Value.Department, o => o.TopId, x => x.Id, (o, x) => new
-            {
-
-                type = x.ClassType
-
-            }).Select(o => new {
-                classType = o.type
-            }).First().classType);
-
-            var catalog = HomoryContext.Value.Catalog.Where(o => (new CatalogType[] { CatalogType.年级_幼儿园, CatalogType.年级_小学, CatalogType.年级_初中, CatalogType.年级_高中, CatalogType.年级_其他 }.Contains(o.Type)) && o.State < State.审核).ToList();
-
-            switch (classType)
-            {
-                case 1:
-                    return catalog.Where(o => new CatalogType[] { CatalogType.年级_小学, CatalogType.年级_初中, CatalogType.年级_其他 }.Contains(o.Type)).Select(o => new
-                    {
-                        Name = o.Name,
-                        Id = o.Id
-
-                    }).ToList();
-
-                case 2:
-                    return catalog.Where(o => o.Type == CatalogType.年级_幼儿园 || o.Type == CatalogType.年级_其他).Select(o => new
-                    {
-                        Name = o.Name,
-                        Id = o.Id
-
-                    }).ToList();
-
-                case 3:
-                    return catalog.Where(o => o.Type == CatalogType.年级_小学 || o.Type == CatalogType.年级_其他).Select(o => new
-                    {
-                        Name = o.Name,
-                        Id = o.Id
-
-                    }).ToList();
-                case 4:
-                    return catalog.Where(o => o.Type == CatalogType.年级_小学 || o.Type == CatalogType.年级_其他).ToList().Select(o => new
-                    {
-                        Id = o.Id,
-                        Name = o.Name
-
-                    }).ToList();
-                case 6:
-                    return catalog.Where(o => o.Type == CatalogType.年级_高中 || o.Type == CatalogType.年级_其他).ToList().Select(o => new
-                    {
-                        Id = o.Id,
-                        Name = o.Name
-
-                    }).ToList();
-                default:
-                    return catalog.Select(o => new
-                    {
-                        Name = o.Name,
-                        Id = o.Id
-
-                    }).ToList();
-            }
-        }
 
         protected void BindSearch(int isInner) {
 
@@ -102,7 +40,7 @@ namespace Go
             period.DataBind();
             period.Items.Insert(0, new ListItem("全部", Guid.Empty.ToString()));
             //课程
-            courseDDL.DataSource = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.课程).ToList();
+            courseDDL.DataSource = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.课程).OrderBy(o=>o.Ordinal).ToList();
             courseDDL.DataBind();
             courseDDL.Items.Insert(0, new ListItem("全部", Guid.Empty.ToString()));
             courseDDL.SelectedIndex = 0;
@@ -164,15 +102,11 @@ namespace Go
             {
                 search_go.Style[HtmlTextWriterStyle.FontWeight] = "normal";
                 search_go.Style[HtmlTextWriterStyle.FontSize] = "10px";
-                search_go_inner.Style[HtmlTextWriterStyle.FontWeight] = "bold";
-                search_go_inner.Style[HtmlTextWriterStyle.FontSize] = "12px";
                 var xFinal = final.Where(o => o.User.DepartmentUser.FirstOrDefault(p => p.State < State.审核 && (p.Type == DepartmentUserType.借调后部门主职教师 || p.Type == DepartmentUserType.部门主职教师)).TopDepartmentId == CurrentCampus.Id).ToList();
                 return xFinal;
             }
             else
             {
-                search_go_inner.Style[HtmlTextWriterStyle.FontWeight] = "normal";
-                search_go_inner.Style[HtmlTextWriterStyle.FontSize] = "10px";
                 search_go.Style[HtmlTextWriterStyle.FontWeight] = "bold";
                 search_go.Style[HtmlTextWriterStyle.FontSize] = "12px";
                 return final;
@@ -185,7 +119,7 @@ namespace Go
             //搜索框中的搜索值
             var content = search_content.Value.Trim();
 
-            Func<Homory.Model.Resource,bool> FunWhere = o=> o.State < State.审核;
+            //Func<Homory.Model.Resource,bool> FunWhere = o=> o.State < State.审核;
 
             var catalog = Guid.Parse(this.catalogDDL.SelectedValue);
 
@@ -195,56 +129,42 @@ namespace Go
 
             var type = Convert.ToInt32(this.typeDDL.SelectedValue);
 
-            var resourceContent = this.commentList;
+            var source0 = HomoryContext.Value.Resource.Where(o => o.State < State.审核);
 
-            //List<Guid> idList = new List<Guid>();
+            var resourceContent = this.commentList;
 
             if (course != Guid.Empty)
             {
-                FunWhere += o => o.CourseId == course;
-                //source = source.Where(o => o.CourseId == course).ToList();
+                source0 =source0.Where( o => o.CourseId == course);
+           
             }
             if (grade != Guid.Empty)
             {
-                FunWhere += o => o.GradeId == grade;
-                //source = source.Where(o => o.GradeId == grade).ToList();
+                source0 = source0.Where(o => o.GradeId == grade);
+         
             }
 
             if (type != -1)
             {
                 var EnType = (Homory.Model.ResourceType)type;
+                source0 = source0.Where(o => o.Type == EnType);
 
-                FunWhere += o => o.Type == EnType;
-                //source = source.Where(o => o.Type == EnType).ToList();
+               
             }
-            //if (ss.Checked)
-            //{
-            //    FunWhere += o => o.AssistantType == 1;
-            //    source = source.Where(o => o.AssistantType == 1).ToList();
-            //}
 
-            var source1 = HomoryContext.Value.Resource.Where(FunWhere).ToList();
+            var source1 = source0.ToList();
 
 
             List<Guid> catalogIdList = commentList.GetAllNodes().Where(o => o.Checked == true).Select(o => Guid.Parse(o.Value)).ToList();
 
-            catalogIdList.Add(catalog);
+            if (catalog != Guid.Empty)
+            {
+                catalogIdList.Add(catalog);
+            }
 
-            var finalSource = (catalogIdList == null || catalogIdList.Count == 0) || catalogIdList[0] == Guid.Empty ? source1: catalogIdList.Join(HomoryContext.Value.ResourceCatalog.Where(o => o.State < State.审核), a => a, b => b.CatalogId, (a, b) => b).ToList().Join(source1, a => a.ResourceId, b => b.Id, (a, b) => b).ToList();
+            var finalSource = (catalogIdList == null || catalogIdList.Count ==0) ? source1: catalogIdList.Join(HomoryContext.Value.ResourceCatalog.Where(o => o.State < State.审核), a => a, b => b.CatalogId, (a, b) => b).ToList().Join(source1, a => a.ResourceId, b => b.Id, (a, b) => b).ToList();
             //根据搜索值和资源便签进行查询
             var final = finalSource.Where(o => o.Title.Contains(content) || o.ResourceTag.Count(ox => ox.Tag == content) > 0).ToList().OrderByDescending(o => o.Time).ToList();
-            //判断是否是小助手
-            //if (!IsPostBack && !string.IsNullOrEmpty(Request.QueryString["Assistant"]))
-            //{
-            //    ss.Checked = true;
-            //}
-            //当前校区内的资源筛选
-            if (hhhh.Value == "0")
-            {
-
-                final = final.Where(o => o.User.DepartmentUser.FirstOrDefault(p => p.State < State.审核 && (p.Type == DepartmentUserType.借调后部门主职教师 || p.Type == DepartmentUserType.部门主职教师)).TopDepartmentId == CurrentCampus.Id).ToList();
-
-            }
 
             if (s2.Checked)
                 result.DataSource = final.OrderByDescending(o => o.View);
@@ -407,7 +327,7 @@ namespace Go
 
                     var list2 = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.年级_初中).ToList();
 
-                    this.gradeList.DataSource = list1.Union(list2).ToList();
+                    this.gradeList.DataSource = list1.Union(list2).OrderBy(o=>o.Ordinal).ToList();
 
                     this.gradeList.DataBind();
 
@@ -417,7 +337,7 @@ namespace Go
                 }
                 else
                 {
-                    this.gradeList.DataSource = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType).ToList();
+                    this.gradeList.DataSource = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType).OrderBy(o => o.Ordinal).ToList();
 
                     this.gradeList.DataBind();
 
@@ -437,7 +357,74 @@ namespace Go
                 gradeList.SelectedIndex = 0;
             }
         }
+        public Object FindAges()
+        {
 
+            var classType = Convert.ToInt32(HomoryContext.Value.Department.Where(o => o.Id == HomoryContext.Value.DepartmentUser.FirstOrDefault(p => p.UserId == CurrentUser.Id).DepartmentId).ToList().Join(HomoryContext.Value.Department, o => o.TopId, x => x.Id, (o, x) => new
+            {
+
+                type = x.ClassType
+
+            }).Select(o => new {
+                classType = o.type
+            }).First().classType);
+
+            var catalog = HomoryContext.Value.Catalog.Where(o => (new CatalogType[] { CatalogType.年级_幼儿园, CatalogType.年级_小学, CatalogType.年级_初中, CatalogType.年级_高中, CatalogType.年级_其他 }.Contains(o.Type)) && o.State < State.审核).OrderBy(o => o.Ordinal).ToList();
+
+            switch (classType)
+            {
+                case 1:
+                    return catalog.Where(o => new CatalogType[] { CatalogType.年级_小学, CatalogType.年级_初中, CatalogType.年级_其他 }.Contains(o.Type)).Select(o => new
+                    {
+                        Name = o.Name,
+                        Id = o.Id,
+                        Ordinal = o.Ordinal
+
+                    }).OrderBy(o => o.Ordinal).ToList();
+
+                case 2:
+                    return catalog.Where(o => o.Type == CatalogType.年级_幼儿园 || o.Type == CatalogType.年级_其他).Select(o => new
+                    {
+                        Name = o.Name,
+                        Id = o.Id,
+                        Ordinal = o.Ordinal
+
+                    }).OrderBy(o => o.Ordinal).ToList();
+
+                case 3:
+                    return catalog.Where(o => o.Type == CatalogType.年级_小学 || o.Type == CatalogType.年级_其他).Select(o => new
+                    {
+                        Name = o.Name,
+                        Id = o.Id,
+                        Ordinal = o.Ordinal
+
+                    }).OrderBy(o => o.Ordinal).ToList();
+                case 4:
+                    return catalog.Where(o => o.Type == CatalogType.年级_小学 || o.Type == CatalogType.年级_其他).ToList().Select(o => new
+                    {
+                        Id = o.Id,
+                        Name = o.Name,
+                        Ordinal = o.Ordinal
+
+                    }).OrderBy(o => o.Ordinal).ToList();
+                case 6:
+                    return catalog.Where(o => o.Type == CatalogType.年级_高中 || o.Type == CatalogType.年级_其他).ToList().Select(o => new
+                    {
+                        Id = o.Id,
+                        Name = o.Name,
+                        Ordinal = o.Ordinal
+
+                    }).OrderBy(o => o.Ordinal).ToList();
+                default:
+                    return catalog.Select(o => new
+                    {
+                        Name = o.Name,
+                        Id = o.Id,
+                        Ordinal = o.Ordinal
+
+                    }).OrderBy(o => o.Ordinal).ToList();
+            }
+        }
         protected CatalogType ConvertFunc(ClassType type) {
 
             switch (type)

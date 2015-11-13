@@ -35,9 +35,9 @@ public partial class StoreAction_In : SingleStorePage
                 usage.DataSource = s;
             }
             usage.DataBind();
-            if (!"TargetId".Query().Null())
+            if (!"TargetId".Query().Null() || !Session["StoreToInOrder"].Null())
             {
-                var value = "TargetId".Query();
+                var value = "TargetId".Query().Null() ? Session["StoreToInOrder"].ToString() : "TargetId".Query();
                 var id = value.GlobalId();
                 var t = db.Value.Store_Target.Single(o => o.Id == id);
                 period.SelectedDate = t.Time;
@@ -47,7 +47,7 @@ public partial class StoreAction_In : SingleStorePage
                 ReloadTargets();
                 target.Items.FindItemByValue(value).Selected = true;
                 view_target.Rebind();
-                counter.Value = "1";
+                counter.Value = "5";
                 x1.Visible = x2.Visible = x3.Visible = x4.Visible = true;
             }
             else
@@ -55,6 +55,15 @@ public partial class StoreAction_In : SingleStorePage
                 target.DataSource = db.Value.Store_Target.Where(o => o.State < 2 && o.StoreId == StoreId && o.In == false).OrderByDescending(o => o.TimeNode).ToList();
                 target.DataBind();
                 x1.Visible = x2.Visible = x3.Visible = x4.Visible = false;
+            }
+            if (Session["StoreToIn"] != null)
+            {
+                var list = Session["StoreToIn"] as List<CachedIn>;
+                target.SelectedValue = Session["StoreToInOrder"].ToString();
+                counter.Value = list.Count.ToString();
+                x.Value = list.ToJson();
+                Session.Remove("StoreToIn");
+                Session.Remove("StoreToInOrder");
             }
         }
     }
@@ -109,7 +118,7 @@ public partial class StoreAction_In : SingleStorePage
 
     protected void target_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
-        counter.Value = target.SelectedIndex == -1 ? "0" : "1";
+        counter.Value = target.SelectedIndex == -1 ? "0" : "5";
         x1.Visible = x2.Visible = x3.Visible = x4.Visible = target.SelectedIndex >= 0;
         view_target.Rebind();
         view_obj.Rebind();
@@ -220,7 +229,16 @@ public partial class StoreAction_In : SingleStorePage
 
     protected void addObj_ServerClick(object sender, EventArgs e)
     {
-        var url = "../StoreAction/ObjectAdd?StoreId={0}".Formatted(CurrentStore.Id);
-        ap.ResponseScripts.Add("window.open('{0}', '_blank');".Formatted(url));
+        var list = new List<CachedIn>();
+        for (var i = 0; i < view_obj.Items.Count; i++)
+        {
+            var c = view_obj.Items[i].FindControl("ObjectInBody") as Control_ObjectInBody;
+            var @in = c.PeekValue();
+            list.Add(@in);
+        }
+        Session["StoreToIn"] = list;
+        Session["StoreToInOrder"] = target.SelectedValue;
+        var url = "../StoreAction/ObjectAddX?StoreId={0}&CatalogId={1}".Formatted(CurrentStore.Id, usage.SelectedValue);
+        Response.Redirect(url);
     }
 }

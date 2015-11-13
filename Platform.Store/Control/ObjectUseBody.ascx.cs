@@ -54,6 +54,7 @@ public partial class Control_ObjectUseBody : SingleStoreControl
                 specification.Text = so.Specification;
                 stored.Text = so.Amount.ToAmount();
                 obj.SelectedIndex = obj.FindItemIndexByValue(use.ObjectId.ToString());
+                amount.Value = (double)so.Amount;
                 if (so.Consumable)
                 {
                     act.DataSource = new[] { "领用" };
@@ -120,6 +121,7 @@ public partial class Control_ObjectUseBody : SingleStoreControl
             unit.Text = so.Unit;
             specification.Text = so.Specification;
             stored.Text = so.Amount.ToAmount();
+            amount.Value = (double)so.Amount;
             if (so.Consumable)
             {
                 act.DataSource = new[] { "领用" };

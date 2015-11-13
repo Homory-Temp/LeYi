@@ -41,7 +41,7 @@
                         <h1 class="logo"><a class="fixpng" href="../Go/Home" title="互动教育资源管理平台">互动教育资源管理平台</a></h1>
                         <div class="lg-search" style="width: 396px;">
                             <input runat="server" type="text" class="srx-ns-input" id="search_content" value="" data-prevcolor="" style="color: rgb(170, 170, 170);" />
-                            <a class="srx-ns-btn" runat="server" id="search_go_inner" onserverclick="search_go_OnServerClick">检索校内</a>
+                            <%--<a class="srx-ns-btn" runat="server" id="search_go_inner" onserverclick="search_go_OnServerClick">检索校内</a>--%>
                             <a class="srx-ns-btn" runat="server" id="search_go" onserverclick="search_go_OnServerClick" style="border-right: solid 1px silver;">检索全部</a>
                             <input id="hhhh" runat="server" type="hidden" value="1" />
                         </div>
@@ -86,7 +86,7 @@
                                         </tr>
                                         <tr height="10px"></tr>
                                         <tr>
-                                            <td align="right"><span>学段：</span></td>
+                                            <td align="right"><span>校区：</span></td>
                                             <td>
                                                 <p>
                                                 <asp:DropDownList runat="server" id="period" DataTextField="Name" Width="150px" Height="40px"  style="border:1px #ddd solid;" DataValueField="Id" OnSelectedIndexChanged="period_SelectedIndexChanged" AutoPostBack="true">
@@ -132,7 +132,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>
+                                            <td valign="top">
                                                 <div class="xy_pxbar mgt15" style="height: 40px; line-height: 40px;">
                                                     <p>
                                                         <telerik:RadButton Width="80" runat="server" ID="s1" OnClick="itemX_OnClick" Text="最新" Value='1' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 10px;"></telerik:RadButton>

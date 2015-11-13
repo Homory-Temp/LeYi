@@ -40,7 +40,7 @@ public partial class DepotAction_In : DepotPageSingle
                 ReloadOrders();
                 target.Items.FindItemByValue(value).Selected = true;
                 view_target.Rebind();
-                counter.Value = "1";
+                counter.Value = "5";
                 x1.Visible = x2.Visible = x3.Visible = x4.Visible = true;
             }
             else
