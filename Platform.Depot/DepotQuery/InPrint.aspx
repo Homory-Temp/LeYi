@@ -55,7 +55,7 @@
                             <td><span style="font-weight: bold;">园区：</span><span id="campus" runat="server"></span></td>
                             <td colspan="2"><span style="font-weight: bold;">购置单号：</span><span id="orderNo" runat="server"></span></td>
                             <td colspan="3"><span style="font-weight: bold;">发票编号：</span><span id="re" runat="server"></span></td>
-                            <td colspan="2"><span style="font-weight: bold;">入库时间：</span><span id="time" runat="server"></span></td>
+                            <td colspan="2"><span style="font-weight: bold;">入库日期：</span><span id="time" runat="server"></span></td>
                             <td colspan="2"><span style="font-weight: bold;">购置来源：</span><span id="os" runat="server"></span></td>
                             <td colspan="2"><span style="font-weight: bold;">使用对象：</span><span id="ot" runat="server"></span></td>
                         </tr>
