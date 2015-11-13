@@ -46,49 +46,47 @@
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <!-- Start Printing -->
             <div class="row" id="x4" runat="server" style="color: black;">
-                <div class="col-md-12 text-center" style="font-size: 18px; font-weight: bold;">
-                    <span>入库单</span>
-                </div>
-                <div class="col-md-4 text-left">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span style="font-weight: bold;">园区：</span><span id="campus" runat="server"></span>
-                </div>
-                <div class="col-md-4 text-center">
-                    <span style="font-weight: bold;">购置单号：</span><span id="orderNo" runat="server"></span>
-                </div>
-                <div class="col-md-4 text-right">
-                    <span style="font-weight: bold;">日期：</span><span id="time" runat="server"></span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="col-md-12">
-                    <telerik:RadListView ID="view_record" runat="server" OnNeedDataSource="view_record_NeedDataSource" ItemPlaceholderID="recordHolder">
-                        <LayoutTemplate>
-                            <table class="storeTablePrint text-center">
+                <div class="col-md-12 text-center">
+                    <table class="storeTablePrint text-center">
+                        <tr>
+                            <th colspan="12" style="font-size: 18px; font-weight: bold; padding: 10px;"><span>入库单</span></th>
+                        </tr>
+                        <tr>
+                            <td><span style="font-weight: bold;">园区：</span><span id="campus" runat="server"></span></td>
+                            <td colspan="2"><span style="font-weight: bold;">购置单号：</span><span id="orderNo" runat="server"></span></td>
+                            <td colspan="3"><span style="font-weight: bold;">发票编号：</span><span id="re" runat="server"></span></td>
+                            <td colspan="2"><span style="font-weight: bold;">入库时间：</span><span id="time" runat="server"></span></td>
+                            <td colspan="2"><span style="font-weight: bold;">购置来源：</span><span id="os" runat="server"></span></td>
+                            <td colspan="2"><span style="font-weight: bold;">使用对象：</span><span id="ot" runat="server"></span></td>
+                        </tr>
+                        <telerik:RadListView ID="view_record" runat="server" OnNeedDataSource="view_record_NeedDataSource" ItemPlaceholderID="recordHolder">
+                            <LayoutTemplate>
                                 <tr>
                                     <th>品名</th>
                                     <th>类别</th>
                                     <th>单位</th>
                                     <th>数量</th>
-                                    <th>单价</th>
-                                    <th>总价</th>
-                                    <th>供应商</th>
+                                    <th>单价(元)</th>
+                                    <th>总价(元)</th>
                                     <th>品牌</th>
-                                    <th>规格</th>
+                                    <th>规格型号</th>
+                                    <th>存放地点</th>
+                                    <th>适用年龄段</th>
+                                    <th>入库人</th>
                                     <th>备注</th>
                                 </tr>
                                 <asp:PlaceHolder ID="recordHolder" runat="server"></asp:PlaceHolder>
                                 <tr>
-                                    <td colspan="6">
+                                    <td colspan="4" style="text-align: left;">
                                         <telerik:RadCodeBlock runat="server">
-                                            <span style="font-weight: bold;">总数：</span><span><%= total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[0] %></span>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span style="font-weight: bold;">总计：</span><span><%= total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[1] %></span>
+                                            <span style="font-weight: bold;">物资合计：</span>共&nbsp;<span><%= total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[2] %></span>&nbsp;种&nbsp;<span><%= total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[0] %></span>&nbsp;件
                                         </telerik:RadCodeBlock>
                                     </td>
-                                    <td colspan="2" style="text-align: left;">
+                                    <td colspan="4" style="text-align: left;">
                                         <telerik:RadCodeBlock runat="server">
                                             &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span style="font-weight: bold;">保管人：</span><span><%= keep.Value %></span>
+                                            <span style="font-weight: bold;">金额合计：</span>￥<span><%= total.Value.Split(new[] { "@@@" }, StringSplitOptions.None)[1] %></span>
                                         </telerik:RadCodeBlock>
                                     </td>
                                     <td colspan="2" style="text-align: left;">
@@ -97,28 +95,43 @@
                                             <span style="font-weight: bold;">经手人：</span><span><%= brokerage.Value %></span>
                                         </telerik:RadCodeBlock>
                                     </td>
+                                    <td colspan="2" style="text-align: left;">
+                                        <telerik:RadCodeBlock runat="server">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span style="font-weight: bold;">保管人：</span><span><%= keep.Value %></span>
+                                        </telerik:RadCodeBlock>
+                                    </td>
                                 </tr>
-                            </table>
-                        </LayoutTemplate>
-                        <ItemTemplate>
-                            <tr>
-                                <td><%# Eval("Name") %></td>
-                                <td><%# Eval("CatalogName") %></td>
-                                <td><%# Eval("Unit") %></td>
-                                <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
-                                <td><%# Eval("PriceSet").ToMoney() %></td>
-                                <td><%# Eval("Total").ToMoney() %></td>
-                                <td><%# Eval("OrderSource") %></td>
-                                <td><%# Eval("Brand") %></td>
-                                <td><%# Eval("Specification") %></td>
-                                <td><%# Eval("Note") %></td>
-                            </tr>
-                        </ItemTemplate>
-                    </telerik:RadListView>
-                    <input id="order" runat="server" type="hidden" />
-                    <input id="total" runat="server" type="hidden" />
-                    <input id="keep" runat="server" type="hidden" />
-                    <input id="brokerage" runat="server" type="hidden" />
+                                </table>
+                            </LayoutTemplate>
+                            <ItemTemplate>
+                                <tr>
+                                    <td><%# Eval("Name") %></td>
+                                    <td><%# Eval("CatalogName") %></td>
+                                    <td><%# Eval("Unit") %></td>
+                                    <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
+                                    <td><%# Eval("PriceSet").ToMoney() %></td>
+                                    <td><%# Eval("Total").ToMoney() %></td>
+                                    <td><%# Eval("Brand") %></td>
+                                    <td><%# Eval("Specification") %></td>
+                                    <td><%# Eval("Place") %></td>
+                                    <td><%# Eval("Age") %></td>
+                                    <td><%# OpName((Guid)Eval("OperatorId")) %></td>
+                                    <td><%# Eval("Note") %></td>
+                                </tr>
+                            </ItemTemplate>
+                        </telerik:RadListView>
+                        <tr>
+                            <td>
+                                <input id="order" runat="server" type="hidden" /></td>
+                            <td>
+                                <input id="total" runat="server" type="hidden" /></td>
+                            <td>
+                                <input id="keep" runat="server" type="hidden" /></td>
+                            <td>
+                                <input id="brokerage" runat="server" type="hidden" /></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- End Printing -->

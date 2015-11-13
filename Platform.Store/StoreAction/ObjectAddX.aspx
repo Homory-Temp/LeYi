@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 text-right">类型：</div>
+                        <div class="col-md-4 text-right">物资属性：</div>
                         <div class="col-md-8 text-left">
                             <div>
                                 <table>
