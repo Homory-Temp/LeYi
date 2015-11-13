@@ -103,7 +103,7 @@
                     </LayoutTemplate>
                     <ItemTemplate>
                         <tr>
-                            <td><%# Eval("购置单号") %></td>
+                            <td><asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_top" Text='<%# Eval("购置单号") %>' NavigateUrl='<%# "../DepotQuery/InPrint?DepotId={0}&OrderId={1}".Formatted(Depot.Id, Eval("Id")) %>'></asp:HyperLink></td>
                             <td><%# Eval("发票编号") %></td>
                             <td><%# Eval("RecordTime").ToDay() %></td>
                             <td><%# Eval("购置来源") %></td>

@@ -12,9 +12,10 @@ public partial class DepotAction_Code : DepotPageSingle
     {
         if (!IsPostBack)
         {
-            tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
             tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
             tree.DataBind();
+            cName.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            ____v.InnerText = (new List<string>()).ToJson();
         }
     }
 
@@ -26,17 +27,8 @@ public partial class DepotAction_Code : DepotPageSingle
         }
     }
 
-    protected void tree0_NodeClick(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
-    {
-        if (tree.SelectedNode != null)
-            tree.SelectedNode.Selected = false;
-        view.Rebind();
-    }
-
     protected void tree_NodeClick(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
     {
-        if (tree0.SelectedNode != null)
-            tree0.SelectedNode.Selected = false;
         tree.GetAllNodes().Where(o => o.ParentNode == e.Node.ParentNode).ToList().ForEach(o => o.Expanded = false);
         e.Node.Expanded = true;
         view.Rebind();
@@ -45,7 +37,7 @@ public partial class DepotAction_Code : DepotPageSingle
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         var node = CurrentNode;
-        var source = DataContext.DepotObjectLoad(Depot.Id, node.HasValue ? node.Value.GlobalId() : (Guid?)null);
+        var source = node.HasValue ? DataContext.DepotObjectLoad(Depot.Id, node.Value.GlobalId()) : new List<DepotObject>();
         if (!toSearch.Text.None())
         {
             source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
@@ -112,30 +104,7 @@ public partial class DepotAction_Code : DepotPageSingle
             NotifyError(ap, "请输入条码生成任务的名称");
             return;
         }
-        var codes = new List<string>();
-        view.Items.ForEach(o =>
-        {
-            var inner = o.FindControl("viewx") as RadListView;
-            if (inner.Items.Count > 0)
-            {
-                inner.Items.ForEach(i =>
-                {
-                    var cbi = i.FindControl("checkx") as CheckBox;
-                    if (cbi.Checked)
-                    {
-                        codes.Add(cbi.Attributes["CC"]);
-                    }
-                });
-            }
-            else
-            {
-                var cb = o.FindControl("checkx") as CheckBox;
-                if (cb.Checked)
-                {
-                    codes.Add(cb.Attributes["CC"]);
-                }
-            }
-        });
+        var codes = ____v.InnerText.FromJson<List<string>>();
         if (codes.Count == 0)
         {
             NotifyError(ap, "请选择要生成条码的物资");
@@ -169,12 +138,47 @@ public partial class DepotAction_Code : DepotPageSingle
         var view = control.NamingContainer.FindControl("viewx") as RadListView;
         var cb = control.NamingContainer.FindControl("checkx") as CheckBox;
         cb.Checked = control.Checked;
+        checkx_CheckedChanged(cb, null);
         var cbs = view.Items.Select(o => o.FindControl("checkx") as CheckBox).ToList();
-        cbs.ForEach(o => o.Checked = control.Checked);
+        cbs.ForEach(o => { o.Checked = control.Checked; checkx_CheckedChanged(o, null); });
     }
 
     protected void coded_ServerClick(object sender, EventArgs e)
     {
         Response.Redirect("~/DepotScan/CodeList?DepotId={0}".Formatted(Depot.Id));
+    }
+
+    protected void cl_ServerClick(object sender, EventArgs e)
+    {
+        ____v.InnerText = (new List<string>()).ToJson();
+    }
+
+    protected void checkx_CheckedChanged(object sender, EventArgs e)
+    {
+        var ____list = ____v.InnerText.FromJson<List<string>>();
+        if ((sender as CheckBox).Attributes["SM"] == "0")
+            return;
+        if ((sender as CheckBox).Checked)
+        {
+            if (!____list.Contains((sender as CheckBox).Attributes["CC"]))
+            {
+                ____list.Add((sender as CheckBox).Attributes["CC"]);
+            }
+        }
+        else
+        {
+            if (____list.Contains((sender as CheckBox).Attributes["CC"]))
+            {
+                ____list.Remove((sender as CheckBox).Attributes["CC"]);
+            }
+        }
+        st.Value = "已选（{0}）".Formatted(____list.Count);
+        ____v.InnerText = ____list.ToJson();
+    }
+
+    protected bool CD(string code)
+    {
+        var ____list = ____v.InnerText.FromJson<List<string>>();
+        return ____list.Contains(code);
     }
 }

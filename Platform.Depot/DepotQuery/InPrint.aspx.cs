@@ -11,9 +11,11 @@ public partial class DepotQuery_InPrint : DepotPageSingle
         {
             var orderId = "OrderId".Query().GlobalId();
             var ord = DataContext.DepotInRecord.Single(o => o.Id == orderId);
+            var oo = DataContext.DepotOrder.Single(o => o.Id == orderId);
             var campusId = Depot.CampusId;
             campus.InnerText = DataContext.Department.Single(o => o.Id == campusId).Name;
             time.InnerText = ord.RecordTime.ToDay();
+            orderNo.InnerText = oo.Name;
             order.Value = ord.购置来源;
             keep.Value = ord.保管人;
             brokerage.Value = ord.经手人;

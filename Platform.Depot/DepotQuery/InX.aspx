@@ -116,7 +116,7 @@
                             <ItemTemplate>
                                 <tr>
                                     <td>
-                                        <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text='<%# Eval("OrderName") %>' NavigateUrl='<%# "../DepotQuery/InPrint?DepotId={0}&OrderId={1}".Formatted(Depot.Id, Eval("OrderId")) %>'></asp:HyperLink></td>
+                                        <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_top" Text='<%# Eval("OrderName") %>' NavigateUrl='<%# "../DepotQuery/InPrint?DepotId={0}&OrderId={1}".Formatted(Depot.Id, Eval("OrderId")) %>'></asp:HyperLink></td>
                                     <td><%# Eval("Time").ToDay() %></td>
                                     <td><%# Eval("Name") %></td>
                                     <td><%# Eval("Unit") %></td>

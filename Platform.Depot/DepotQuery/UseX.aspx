@@ -127,7 +127,7 @@
                             <ItemTemplate>
                                 <tr>
                                     <td>
-                                        <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text="出库单" NavigateUrl='<%# "../DepotQuery/UsePrint?DepotId={0}&UseId={1}".Formatted(Depot.Id, Eval("UseId")) %>'></asp:HyperLink></td>
+                                        <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_top" Text="出库单" NavigateUrl='<%# "../DepotQuery/UsePrint?DepotId={0}&UseId={1}".Formatted(Depot.Id, Eval("UseId")) %>'></asp:HyperLink></td>
                                     </td>
                                     <td><%# Eval("Time").ToDay() %></td>
                                     <td><%# ((Models.UseType)Eval("Type")).ToString() %></td>

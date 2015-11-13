@@ -40,20 +40,12 @@
     <form id="form" runat="server">
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资条码 - 条码打印" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
+            <label id="____v" runat="server"></label>
             <div class="row">
                 <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
                     <div class="row">
                         <div class="col-md-12">
                             <span class="btn btn-tumblr">类别：</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <telerik:RadTreeView ID="tree0" runat="server" OnNodeClick="tree0_NodeClick" ShowLineImages="false">
-                                <Nodes>
-                                    <telerik:RadTreeNode Value="0" Selected="true"></telerik:RadTreeNode>
-                                </Nodes>
-                            </telerik:RadTreeView>
                         </div>
                     </div>
                     <div class="row">
@@ -71,6 +63,8 @@
                         <div class="col-md-12">
                             <span class="btn btn-tumblr">物资：</span>
                             <input id="all" runat="server" type="button" class="btn btn-info" value="全选" onserverclick="all_ServerClick" />
+                            <input id="st" runat="server" type="button" class="btn btn-info" value="已选（0）" />
+                            <input id="cl" runat="server" type="button" class="btn btn-info" value="清除选择" onserverclick="cl_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <telerik:RadTextBox ID="toSearch" runat="server" Width="200" EmptyMessage="输入要检索的物资名称"></telerik:RadTextBox>
                             &nbsp;&nbsp;
@@ -107,14 +101,14 @@
                                                 <telerik:RadListView ID="viewx" runat="server" DataSource='<%# Ordinals((Guid)Eval("Id")) %>'>
                                                     <ItemTemplate>
                                                         <div style="float: left; width: 200px;">
-                                                            <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="false" CC='<%# Eval("Code") %>' OBJ='<%# Eval("ObjectId") %>' ORD='<%# Eval("Ordinal") %>' Text='<%# "&nbsp;{1}&nbsp;-&nbsp;{0}".Formatted(Eval("Ordinal"), Eval("Code")) %>' />
+                                                            <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="true" OnCheckedChanged="checkx_CheckedChanged" SM="1" CC='<%# Eval("Code") %>' Checked='<%# CD(Eval("Code").ToString()) %>' OBJ='<%# Eval("ObjectId") %>' ORD='<%# Eval("Ordinal") %>' Text='<%# "&nbsp;{1}&nbsp;-&nbsp;{0}".Formatted(Eval("Ordinal"), Eval("Code")) %>' />
                                                         </div>
                                                     </ItemTemplate>
                                                 </telerik:RadListView>
                                             </asp:Panel>
                                             <asp:Panel ID="multiple" runat="server" Visible='<%# !(bool)Eval("Single") %>'>
                                                 <div style="float: left; width: 200px;">
-                                                    <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="false" CC='<%# Eval("Code") %>' OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Code")) %>' />
+                                                    <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="true" OnCheckedChanged="checkx_CheckedChanged" SM='<%# !(bool)Eval("Single") ? "1" : "0" %>' CC='<%# Eval("Code") %>' Checked='<%# CD(Eval("Code").ToString()) %>' OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Code")) %>' />
                                                 </div>
                                             </asp:Panel>
                                         </td>

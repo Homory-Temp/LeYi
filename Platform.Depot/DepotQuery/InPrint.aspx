@@ -54,7 +54,7 @@
                     <span style="font-weight: bold;">园区：</span><span id="campus" runat="server"></span>
                 </div>
                 <div class="col-md-4 text-center">
-                    &nbsp;
+                    <span style="font-weight: bold;">购置单号：</span><span id="orderNo" runat="server"></span>
                 </div>
                 <div class="col-md-4 text-right">
                     <span style="font-weight: bold;">日期：</span><span id="time" runat="server"></span>
