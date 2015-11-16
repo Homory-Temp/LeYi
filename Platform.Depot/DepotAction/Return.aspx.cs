@@ -59,7 +59,7 @@ public partial class DepotAction_Return : DepotPageSingle
         else
         {
             var userId = people.SelectedValue.GlobalId();
-            var source = DataContext.DepotUseXRecord.Where(o => o.UserId == userId && o.Type == 2 && o.Amount > o.ReturnedAmount).ToList();
+            var source = DataContext.DepotCatalog.Where(o => o.DepotId == Depot.Id && o.State < State.停用).Select(o => o.Id).ToList().Join(DataContext.DepotUseXRecord.Where(o => o.UserId == userId && o.Type == 2 && o.Amount > o.ReturnedAmount), o => o, o => o.CatalogId, (a, b) => b).ToList();
             view_obj.DataSource = source;
             do_return.Visible = source.Count > 0;
         }

@@ -108,7 +108,7 @@
                                     <tr>
                                         <td><%# Eval("Ordinal") %></td>
                                         <td>
-                                            <asp:CheckBox ID="check" runat="server" AutoPostBack="false" CssClass="depot" OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Name")) %>' />
+                                            <asp:CheckBox ID="check" runat="server" AutoPostBack="false" Enabled='<%# Eval("DepotId") == null %>' CssClass="depot" OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Name")) %>' />
                                         </td>
                                         <td><%# Eval("Unit") %></td>
                                         <td><%# Eval("Brand") %></td>

@@ -66,7 +66,7 @@
                                 </td>
                                 <td>
                                     <input type="button" class="btn btn-tumblr" value="删除" id="del" runat="server" match='<%# Eval("BatchId") %>' onserverclick="del_ServerClick" />
-                                    <input type="button" class="btn btn-tumblr" value="下载" id="down" runat="server" match='<%# Eval("BatchId") %>' visible='<%# (int)Eval("State") == 1 %>' onserverclick="down_ServerClick" />
+                                    <input type="button" class="btn btn-tumblr" value="下载" id="down" runat="server" match='<%# Eval("BatchId") %>' matchx='<%# Eval("Name") %>' visible='<%# (int)Eval("State") == 1 %>' onserverclick="down_ServerClick" />
                                 </td>
                             </tr>
                         </ItemTemplate>

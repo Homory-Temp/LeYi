@@ -40,7 +40,7 @@
     <form id="form" runat="server">
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资条码 - 条码打印" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
-            <label id="____v" runat="server"></label>
+            <label id="____v" runat="server" style="display: none;"></label>
             <div class="row">
                 <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
                     <div class="row">

@@ -70,13 +70,13 @@ public partial class DepotAction_Move : DepotPageSingle
     protected void all_ServerClick(object sender, EventArgs e)
     {
         var cbs = view.Items.Select(o => o.FindControl("check") as CheckBox).ToList();
-        if (cbs.All(o => o.Checked))
+        if (cbs.Where(o => o.Enabled).All(o => o.Checked))
         {
             cbs.ForEach(o => o.Checked = false);
         }
         else
         {
-            cbs.ForEach(o => o.Checked = true);
+            cbs.ForEach(o => o.Checked = true && o.Enabled);
         }
     }
 

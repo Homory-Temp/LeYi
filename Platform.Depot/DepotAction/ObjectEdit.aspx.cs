@@ -43,11 +43,16 @@ public partial class DepotAction_ObjectEdit : DepotPageSingle
                 specification.Items.Add(new Telerik.Web.UI.RadComboBoxItem { Text = obj.Specification, Value = obj.Specification });
             }
             specification.FindItemByText(obj.Specification).Selected = true;
-            if (age.FindItemByText(obj.Age) == null)
+            try
             {
-                age.Items.Add(new Telerik.Web.UI.RadComboBoxItem { Text = obj.Age, Value = obj.Age });
+                if (age.FindItemByText(obj.Age) == null)
+                {
+                    age.Items.Add(new Telerik.Web.UI.RadComboBoxItem { Text = obj.Age, Value = obj.Age });
+                }
+                age.FindItemByText(obj.Age).Selected = true;
             }
-            age.FindItemByText(obj.Age).Selected = true;
+            catch
+            { }
             var imgs = new string[] { obj.ImageA, obj.ImageB, obj.ImageC, obj.ImageD };
             for (var i = 0; i < imgs.Length; i++)
             {

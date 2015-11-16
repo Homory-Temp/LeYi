@@ -16,19 +16,12 @@ namespace Go
             if (!IsPostBack)
             {
                 search_content.Value = Request.QueryString["Content"];
-                if (string.IsNullOrEmpty(Request.QueryString["Inner"]))
-                    BindSearch(1);
-                else
-                    BindSearch(0);
+                BindSearch();
             }
         }
 
-        protected void BindSearch(int isInner) {
-
-            //判断是否是搜索全部，全部的话给hhhh赋值1，否则是0；
-            hhhh.Value = isInner.ToString();
+        protected void BindSearch() {
             var source = LoadDataSource();
-            total.InnerText = source.Count.ToString();
             var list = new List<ResourceCatalog>();
             var filter = source.Aggregate(list, (catalogs, resource) =>
             {
@@ -36,40 +29,21 @@ namespace Go
                 return catalogs;
             }).Where(o => o.State == State.启用).Select(o => o.CatalogId).Distinct().ToList().Join(HomoryContext.Value.Catalog, o => o, o => o.Id, (o1, o2) => o2).Where(o => o.State < State.审核).OrderBy(o => o.State).ThenBy(o => o.Ordinal).ToList();
             //学段
-            period.DataSource = HomoryContext.Value.Department.Where(o => o.Type == 0 && o.ClassType != 0).ToList();
-            period.DataBind();
-            period.Items.Insert(0, new ListItem("全部", Guid.Empty.ToString()));
+            classAreaRepeater.DataSource = HomoryContext.Value.Department.Where(o => o.Type == 0 && o.ClassType != 0).ToList();
+            classAreaRepeater.DataBind();
             //课程
-            courseDDL.DataSource = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.课程).OrderBy(o=>o.Ordinal).ToList();
-            courseDDL.DataBind();
-            courseDDL.Items.Insert(0, new ListItem("全部", Guid.Empty.ToString()));
-            courseDDL.SelectedIndex = 0;
+            courseRepeater.DataSource = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.课程).OrderBy(o => o.Ordinal).ToList();
+            courseRepeater.DataBind();
             //年级
-            gradeList.DataSource = FindAges();
-            gradeList.DataBind();
-            gradeList.Items.Insert(0, new ListItem("全部", Guid.Empty.ToString()));
-            gradeList.SelectedIndex = 0;
-
+            gradeRepeater.DataSource = FindAges();
+            gradeRepeater.DataBind();
             //栏目
-            catalogDDL.DataSource = filter.Where(o => o.Type == CatalogType.文章 || o.Type == CatalogType.视频).OrderBy(o => o.Ordinal).ToList();
-            catalogDDL.DataBind();
-            catalogDDL.Items.Insert(0, new ListItem("全部", Guid.Empty.ToString()));
-            catalogDDL.SelectedIndex = 0;
-            //类型
-            typeDDL.Items.Add(new ListItem("全部", "-1"));
-            typeDDL.Items.Add(new ListItem("视频", "1"));
-            typeDDL.Items.Add(new ListItem("文章", "2"));
-            typeDDL.Items.Add(new ListItem("课件", "3"));
-            typeDDL.Items.Add(new ListItem("试卷", "4"));
-            typeDDL.SelectedIndex = 0;
+            catalogRepeater.DataSource = filter.Where(o => o.Type == CatalogType.文章 || o.Type == CatalogType.视频).OrderBy(o => o.Ordinal).ToList();
+            catalogRepeater.DataBind();
 
-
-            //if (ss.Checked)
-            //{
-            //    source = source.Where(o => o.AssistantType == 1).ToList();
-            //}
             result.DataSource = source;
             result.DataBind();
+
             total.InnerText = source.Count.ToString();
 
         }
@@ -82,11 +56,6 @@ namespace Go
             var source = HomoryContext.Value.Resource.Where(o => o.State < State.审核).ToList();
             //根据搜索值和资源便签进行查询
             var final = source.Where(o => o.Title.Contains(content) || o.ResourceTag.Count(ox => ox.Tag == content) > 0).ToList().OrderByDescending(o => o.Time).ToList();
-            //判断是否是小助手
-            //if (!IsPostBack && !string.IsNullOrEmpty(Request.QueryString["Assistant"]))
-            //{
-            //    ss.Checked = true;
-            //}
             //根据课程进行资源筛选
             if (!IsPostBack && !string.IsNullOrEmpty(Request.QueryString["Course"]))
             {
@@ -97,83 +66,18 @@ namespace Go
                     final = final.Where(o => o.CourseId != null && o.CourseId == cid).ToList();
                 }
             }
-            //当前校区内的资源筛选
-            if (hhhh.Value == "0")
-            {
-                search_go.Style[HtmlTextWriterStyle.FontWeight] = "normal";
-                search_go.Style[HtmlTextWriterStyle.FontSize] = "10px";
-                var xFinal = final.Where(o => o.User.DepartmentUser.FirstOrDefault(p => p.State < State.审核 && (p.Type == DepartmentUserType.借调后部门主职教师 || p.Type == DepartmentUserType.部门主职教师)).TopDepartmentId == CurrentCampus.Id).ToList();
-                return xFinal;
-            }
-            else
-            {
-                search_go.Style[HtmlTextWriterStyle.FontWeight] = "bold";
-                search_go.Style[HtmlTextWriterStyle.FontSize] = "12px";
-                return final;
-            }
+
+            search_go.Style[HtmlTextWriterStyle.FontWeight] = "bold";
+
+            search_go.Style[HtmlTextWriterStyle.FontSize] = "12px";
+
+            return final;
         }
 
         protected void search_go_OnServerClick(object sender, EventArgs e)
         {
 
-            //搜索框中的搜索值
-            var content = search_content.Value.Trim();
-
-            //Func<Homory.Model.Resource,bool> FunWhere = o=> o.State < State.审核;
-
-            var catalog = Guid.Parse(this.catalogDDL.SelectedValue);
-
-            var course = Guid.Parse(this.courseDDL.SelectedValue);
-
-            var grade = Guid.Parse(this.gradeList.SelectedValue);
-
-            var type = Convert.ToInt32(this.typeDDL.SelectedValue);
-
-            var source0 = HomoryContext.Value.Resource.Where(o => o.State < State.审核);
-
-            var resourceContent = this.commentList;
-
-            if (course != Guid.Empty)
-            {
-                source0 =source0.Where( o => o.CourseId == course);
-           
-            }
-            if (grade != Guid.Empty)
-            {
-                source0 = source0.Where(o => o.GradeId == grade);
-         
-            }
-
-            if (type != -1)
-            {
-                var EnType = (Homory.Model.ResourceType)type;
-                source0 = source0.Where(o => o.Type == EnType);
-
-               
-            }
-
-            var source1 = source0.ToList();
-
-
-            List<Guid> catalogIdList = commentList.GetAllNodes().Where(o => o.Checked == true).Select(o => Guid.Parse(o.Value)).ToList();
-
-            if (catalog != Guid.Empty)
-            {
-                catalogIdList.Add(catalog);
-            }
-
-            var finalSource = (catalogIdList == null || catalogIdList.Count ==0) ? source1: catalogIdList.Join(HomoryContext.Value.ResourceCatalog.Where(o => o.State < State.审核), a => a, b => b.CatalogId, (a, b) => b).ToList().Join(source1, a => a.ResourceId, b => b.Id, (a, b) => b).ToList();
-            //根据搜索值和资源便签进行查询
-            var final = finalSource.Where(o => o.Title.Contains(content) || o.ResourceTag.Count(ox => ox.Tag == content) > 0).ToList().OrderByDescending(o => o.Time).ToList();
-
-            if (s2.Checked)
-                result.DataSource = final.OrderByDescending(o => o.View);
-            else if (s3.Checked)
-                result.DataSource = final.OrderByDescending(o => o.Grade);
-            else if (s1.Checked)
-                result.DataSource = final.OrderByDescending(o => o.Time);
-            total.InnerText = final.Count.ToString();
-
+            BindSearch();
 
         }
 
@@ -181,14 +85,9 @@ namespace Go
         {
             get { return false; }
         }
-
-       
-        protected void itemS_OnClick(object sender, EventArgs e)
-        {
-            var button = ((RadButton)sender);
-            B();
-        }
-
+        /// <summary>
+        /// 最新，最优，最热
+        /// </summary>
         protected void itemX_OnClick(object sender, EventArgs e)
         {
             var button = ((RadButton)sender);
@@ -197,89 +96,30 @@ namespace Go
             {
                 btn.Checked = btn.Value == button.Value;
             }
-            B();
-        }
-
-        private void B(bool reset = false)
-        { 
-
-            var source = LoadDataSource();
-
-            Func<Homory.Model.Resource> FunWhere;
-
-            var catalog = Guid.Parse(this.catalogDDL.SelectedValue);
-
-            var course = Guid.Parse(this.courseDDL.SelectedValue);
-
-            var grade = Guid.Parse(this.gradeList.SelectedValue);
-
-            var type = Convert.ToInt32(this.typeDDL.SelectedValue);
-
-            List<Guid> idList = new List<Guid>();
-
-            if (course != Guid.Empty)
-            {
-                 source = source.Where(o => o.CourseId == course).ToList();
-            }
-            if (grade != Guid.Empty)
-            {
-                source = source.Where(o => o.GradeId == grade).ToList();
-            }
-            if (catalog!=Guid.Empty)
-            {
-                source = source.Where(o => o.ResourceCatalog.Count(p => p.CatalogId == catalog) > 0).ToList();
-            }
-            if (type != -1)
-            {
-                var EnType = (Homory.Model.ResourceType)type;
-
-                source = source.Where(o => o.Type == EnType).ToList();
-            }
-            //if (ss.Checked)
-            //{
-            //    source = source.Where(o => o.AssistantType == 1).ToList();
-            //}
-            if (s2.Checked)
-                result.DataSource = source.OrderByDescending(o => o.View);
-            else if (s3.Checked)
-                result.DataSource = source.OrderByDescending(o => o.Grade);
-            else if (s1.Checked)
-                result.DataSource = source.OrderByDescending(o => o.Time);
-            total.InnerText = source.Count.ToString();
+            reBind();
         }
 
         protected void result_NeedDataSource(object sender, RadListViewNeedDataSourceEventArgs e)
         {
-            B();
+            reBind();
         }
-
-        protected void gradeList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BindCatalogSource();
-        }
-
-        protected void courseDDL_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BindCatalogSource();
-        }
+        /// <summary>
+        /// 课程资源树绑定
+        /// </summary>
         protected void BindCatalogSource() {
 
-            var GradeSelectedItem = this.gradeList.SelectedItem;
-
-            var CourseSelectItem = this.courseDDL.SelectedItem;
-
             commentList.Nodes.Clear();
-
-            var ParentId = Guid.Parse(GradeSelectedItem.Value);
-
-            var TopId = Guid.Parse(CourseSelectItem.Value);
-
-            if (ParentId != Guid.Empty && TopId != Guid.Empty)
+ 
+            if (courseRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Count(o => o.Checked) == 1 && gradeRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Count(o => o.Checked) == 1)
             {
+
+                var ParentId = Guid.Parse(gradeRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Single(o => o.Checked).Value);
+
+                var TopId = Guid.Parse(courseRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Single(o => o.Checked).Value);
 
                 var l1 = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.课程资源 && o.TopId == TopId && o.State < State.停用).ToList();
 
-                var GradeId = Guid.Parse(this.gradeList.SelectedValue);
+                var GradeId = ParentId;
 
                 var catalogType = HomoryContext.Value.Catalog.SingleOrDefault(o => o.Id == GradeId).Type;
 
@@ -295,68 +135,14 @@ namespace Go
 
                 commentList.Nodes[0].Expanded = true;
 
-                SourceLi.Visible = true;
-
             }
             else
             {
-                SourceLi.Visible = false;
-            }
 
-        }
-
-        protected void searchButton_Click(object sender, EventArgs e)
-        {
-
-           
-            var source = LoadDataSource();
-        }
-
-        protected void period_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var Id = Guid.Parse(this.period.SelectedValue);
-
-            if (Id != Guid.Empty)
-            {
-                var type = (ClassType)HomoryContext.Value.Department.SingleOrDefault(o => o.Id == Id).ClassType;
-
-                var CatalogType = ConvertFunc(type);
-                if (CatalogType == CatalogType.年级_其他)
-                {
-                    var list1 = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.年级_小学).ToList();
-
-                    var list2 = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.年级_初中).ToList();
-
-                    this.gradeList.DataSource = list1.Union(list2).OrderBy(o=>o.Ordinal).ToList();
-
-                    this.gradeList.DataBind();
-
-                    gradeList.Items.Insert(0, new ListItem("全部", Guid.Empty.ToString()));
-
-                    gradeList.SelectedIndex = 0;
-                }
-                else
-                {
-                    this.gradeList.DataSource = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType).OrderBy(o => o.Ordinal).ToList();
-
-                    this.gradeList.DataBind();
-
-                    gradeList.Items.Insert(0, new ListItem("全部", Guid.Empty.ToString()));
-
-                    gradeList.SelectedIndex = 0;
-                }
-            }
-            else
-            {
-                this.gradeList.DataSource = FindAges();
-
-                this.gradeList.DataBind();
-
-                gradeList.Items.Insert(0, new ListItem("全部", Guid.Empty.ToString()));
-
-                gradeList.SelectedIndex = 0;
             }
         }
+
+        
         public Object FindAges()
         {
 
@@ -443,6 +229,171 @@ namespace Go
                     return CatalogType.年级_高中;
             }
 
+        }
+        protected void item0_Click(object sender, EventArgs e)
+        {
+            var button = ((RadButton)sender);
+
+            var list = classAreaRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single());
+
+            foreach (var btn in list)
+            {
+                btn.Checked = btn.Value == button.Value;
+            }
+
+            reBindGrade();
+
+            BindCatalogSource();
+
+            reBind();
+
+        }
+        /// <summary>
+        /// 校区选择重新绑定年级
+        /// </summary>
+        protected void reBindGrade() {
+
+            if (classAreaRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Count(o => o.Checked) == 1)
+            {
+                var Id = Guid.Parse(classAreaRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Single(o => o.Checked).Value);
+
+                var type = (ClassType)HomoryContext.Value.Department.SingleOrDefault(o => o.Id == Id).ClassType;
+
+                var CatalogType = ConvertFunc(type);
+
+                if (CatalogType == CatalogType.年级_其他)
+                {
+                    var list1 = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.年级_小学).ToList();
+
+                    var list2 = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.年级_初中).ToList();
+
+                    gradeRepeater.DataSource = list1.Union(list2).OrderBy(o => o.Ordinal).ToList();
+
+                    gradeRepeater.DataBind();
+
+                }
+                else
+                {
+                    gradeRepeater.DataSource = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType).OrderBy(o => o.Ordinal).ToList();
+
+                    gradeRepeater.DataBind();
+
+                }
+            }
+        }
+
+        protected void reBind() {
+            //搜索框中的搜索值
+            var content = search_content.Value.Trim();
+
+            var source = HomoryContext.Value.Resource.Where(o => o.State < State.审核);
+
+            List<Guid> catalogIdList = commentList.GetAllNodes().Where(o => o.Checked == true).Select(o => Guid.Parse(o.Value)).ToList();
+
+            if (gradeRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Count(o => o.Checked) == 1)
+            {
+                var gradeId = Guid.Parse(gradeRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Single(o => o.Checked).Value);
+
+                source = source.Where(o => o.GradeId == gradeId);
+            }
+
+            if (courseRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Count(o => o.Checked) == 1)
+            {
+                var courseId = Guid.Parse(courseRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Single(o => o.Checked).Value);
+
+                source = source.Where(o => o.CourseId == courseId);
+            }
+            if (new RadButton[] { t1, t2, t3, t4 }.Count(o => o.Checked) == 1)
+            {
+                Homory.Model.ResourceType tt = (Homory.Model.ResourceType)int.Parse(new RadButton[] { t1, t2, t3, t4 }.Single(o => o.Checked).Value);
+                source = source.Where(o => o.Type == tt);
+            }
+
+            if (catalogRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Count(o => o.Checked) == 1)
+            {
+                var catalogId = Guid.Parse(catalogRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Single(o => o.Checked).Value);
+
+                catalogIdList.Add(catalogId);
+
+            }
+            
+            var finalSource = (catalogIdList == null || catalogIdList.Count == 0) ? source.ToList() : catalogIdList.Join(HomoryContext.Value.ResourceCatalog.Where(o => o.State < State.审核), a => a, b => b.CatalogId, (a, b) => b).ToList().Join(source, a => a.ResourceId, b => b.Id, (a, b) => b).ToList();
+            //根据搜索值和资源便签进行查询
+
+            var final = (finalSource.Count == 0)? source.Where(o => o.Title.Contains(content) || o.ResourceTag.Count(ox => ox.Tag == content) > 0).ToList().OrderByDescending(o => o.Time).ToList() :finalSource.Where(o => o.Title.Contains(content) || o.ResourceTag.Count(ox => ox.Tag == content) > 0).ToList().OrderByDescending(o => o.Time).ToList();
+
+            if (s2.Checked)
+                result.DataSource = final.OrderByDescending(o => o.View);
+            else if (s3.Checked)
+                result.DataSource = final.OrderByDescending(o => o.Grade);
+            else if (s1.Checked)
+                result.DataSource = final.OrderByDescending(o => o.Time);
+
+            total.InnerText = final.Count.ToString();
+           
+        }
+
+        protected void grade_item_Click(object sender, EventArgs e)
+        {
+            var button = ((RadButton)sender);
+
+            var list = gradeRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single());
+
+            foreach (var btn in list)
+            {
+                btn.Checked = btn.Value == button.Value;
+            }
+
+            BindCatalogSource();
+
+            reBind();
+        }
+
+        protected void course_item_Click(object sender, EventArgs e)
+        {
+            var button = ((RadButton)sender);
+
+            var list = courseRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single());
+
+            foreach (var btn in list)
+            {
+                btn.Checked = btn.Value == button.Value;
+            }
+
+            BindCatalogSource();
+
+            reBind();
+        }
+
+        protected void catalog_item_Click(object sender, EventArgs e)
+        {
+            var button = ((RadButton)sender);
+
+            var list = catalogRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single());
+
+            foreach (var btn in list)
+            {
+                btn.Checked = btn.Value == button.Value;
+            }
+
+            reBind();
+        }
+
+        protected void t_Click(object sender, EventArgs e)
+        {
+            var button = ((RadButton)sender);
+            var list = new RadButton[] { t1, t2, t3, t4 };
+            foreach (var btn in list)
+            {
+                btn.Checked = btn.Value == button.Value;
+            }
+            reBind();
+
+        }
+
+        protected void commentList_NodeCheck(object sender, RadTreeNodeEventArgs e)
+        {
+            reBind();
         }
     }
 }

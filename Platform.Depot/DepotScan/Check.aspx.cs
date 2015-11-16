@@ -15,6 +15,7 @@ public partial class DepotAction_Check : DepotPageSingle
             tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
             tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
             tree.DataBind();
+            cName.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
 
