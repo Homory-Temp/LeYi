@@ -69,7 +69,7 @@
                                             <p>
                                                 <asp:Repeater runat="server" ID="classAreaRepeater">
                                                     <ItemTemplate>
-                                                        <telerik:RadButton Width="80" OnClick="item0_Click" runat="server" ID="period_item"  Text='<%#Eval("Name") %>' Value='<%# Eval("Id")%>' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 10px;">
+                                                        <telerik:RadButton Width="80" OnClick="item0_Click" runat="server" ID="period"  Text='<%#Eval("Name") %>' Value='<%# Eval("Id")%>' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 10px;">
                                                         </telerik:RadButton>
                                                     </ItemTemplate>
                                                 </asp:Repeater>

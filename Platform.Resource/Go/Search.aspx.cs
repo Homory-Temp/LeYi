@@ -290,6 +290,20 @@ namespace Go
 
             List<Guid> catalogIdList = commentList.GetAllNodes().Where(o => o.Checked == true).Select(o => Guid.Parse(o.Value)).ToList();
 
+            if (classAreaRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Count(o => o.Checked) == 1)
+            {
+                var Id = Guid.Parse(classAreaRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Single(o => o.Checked).Value);
+
+                var type = (ClassType)HomoryContext.Value.Department.SingleOrDefault(o => o.Id == Id).ClassType;
+
+                var CatalogType = ConvertFunc(type);
+
+                List<Guid> idList = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType && o.State < State.审核).Select(o => o.Id).ToList();
+
+                source = source.Where(o => o.GradeId != null && idList.Contains(o.GradeId.Value));
+
+            }
+
             if (gradeRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Count(o => o.Checked) == 1)
             {
                 var gradeId = Guid.Parse(gradeRepeater.Controls.OfType<RepeaterItem>().Select(o => o.Controls.OfType<RadButton>().Single()).Single(o => o.Checked).Value);
