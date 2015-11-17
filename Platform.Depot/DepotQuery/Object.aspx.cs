@@ -38,6 +38,16 @@ public partial class DepotQuery_Object : DepotPageSingle
                 {
                     xRow.Visible = false;
                 }
+                if (Depot.Featured(DepotType.固定资产库))
+                {
+                    fNo.InnerText = obj.FixedCard;
+                    fTime.InnerText = obj.Extension;
+                    fRow.Visible = true;
+                }
+                else
+                {
+                    fRow.Visible = false;
+                }
                 pa.Src = obj.ImageA.None() ? "../Content/Images/Transparent.png" : obj.ImageA;
                 da.Visible = !obj.ImageA.None();
                 pb.Src = obj.ImageB.None() ? "../Content/Images/Transparent.png" : obj.ImageB;
