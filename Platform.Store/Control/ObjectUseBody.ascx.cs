@@ -32,7 +32,7 @@ public partial class Control_ObjectUseBody : SingleStoreControl
             catalog.DataSource = catalogs;
             catalog.DataBind();
         }
-        amount.Value = (double?)use.Amount;
+        var ____a = (double?)use.Amount;
         note.Text = use.Note;
         if (use.CatalogId.HasValue && use.CatalogId.Value != Guid.Empty)
         {
@@ -54,7 +54,7 @@ public partial class Control_ObjectUseBody : SingleStoreControl
                 specification.Text = so.Specification;
                 stored.Text = so.Amount.ToAmount();
                 obj.SelectedIndex = obj.FindItemIndexByValue(use.ObjectId.ToString());
-                amount.Value = (double)so.Amount;
+                amount.Value = ____a.HasValue ? ____a.Value : (double)so.Amount;
                 if (so.Consumable)
                 {
                     act.DataSource = new[] { "领用" };
@@ -69,6 +69,10 @@ public partial class Control_ObjectUseBody : SingleStoreControl
                 {
                     act.FindItemByText(use.Type).Selected = true;
                 }
+            }
+            else
+            {
+                amount.Value = ____a;
             }
         }
     }

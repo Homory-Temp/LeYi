@@ -118,6 +118,7 @@ namespace Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotCatalog> DepotCatalogChildren { get; set; }
         public virtual DepotCatalog DepotCatalogParent { get; set; }
+        public virtual DepotPeriod DepotPeriod { get; set; }
     }
 }
 namespace Models
@@ -504,6 +505,7 @@ namespace Models
         public string FixedNumber { get; set; }
         public string Brand { get; set; }
         public string Extension { get; set; }
+        public string Age { get; set; }
     }
 }
 namespace Models
@@ -571,6 +573,21 @@ namespace Models
         public string Name { get; set; }
         public string Unit { get; set; }
         public string UserName { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class DepotPeriod
+    {
+        public System.Guid CatalogId { get; set; }
+        public System.Guid DepotId { get; set; }
+        public string Users { get; set; }
+        public int Time { get; set; }
+    
+        public virtual DepotCatalog DepotCatalog { get; set; }
     }
 }
 namespace Models

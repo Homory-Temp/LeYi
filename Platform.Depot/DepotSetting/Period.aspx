@@ -30,19 +30,29 @@
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-2">
-                    <span class="btn btn-tumblr dictionaryX">时限（按月计数）</span>
+                    <span class="btn btn-tumblr dictionaryX">时限所属类别</span>
                 </div>
                 <div class="col-md-8 text-center" style="margin-top: 1px;">
-                    <telerik:RadNumericTextBox ID="month" runat="server" NumberFormat-DecimalDigits="0" MinValue="0" Width="183" EnabledStyle-HorizontalAlign="Center" DataType="System.Int32" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
-                    &nbsp;&nbsp;
-                    <input type="button" class="btn btn-tumblr" id="save" runat="server" value="保存" title="新增物资" onserverclick="save_ServerClick" />
+                    <telerik:RadComboBox ID="combo" runat="server" DataTextField="Name" DataValueField="Id" Width="250" OnSelectedIndexChanged="combo_SelectedIndexChanged" AutoPostBack="true"></telerik:RadComboBox>
                 </div>
                 <div class="col-md-2">&nbsp;</div>
             </div>
             <div>&nbsp;</div>
             <div class="row">
                 <div class="col-md-2">
-                    <span class="btn btn-tumblr dictionaryX">取消时限用户</span>
+                    <span class="btn btn-tumblr dictionaryX">时限（按天计数）</span>
+                </div>
+                <div class="col-md-8 text-center" style="margin-top: 1px;">
+                    <telerik:RadNumericTextBox ID="day" runat="server" NumberFormat-DecimalDigits="0" MinValue="0" Width="183" EnabledStyle-HorizontalAlign="Center" DataType="System.Int32" AllowOutOfRangeAutoCorrect="true"></telerik:RadNumericTextBox>
+                    &nbsp;&nbsp;
+                    <input type="button" class="btn btn-tumblr" id="save" runat="server" value="保存" onserverclick="save_ServerClick" />
+                </div>
+                <div class="col-md-2">&nbsp;</div>
+            </div>
+            <div>&nbsp;</div>
+            <div class="row">
+                <div class="col-md-2">
+                    <span class="btn btn-tumblr dictionaryX">免除时限用户</span>
                 </div>
                 <div class="col-md-8 text-center" style="margin-top: 1px;">
                     <telerik:RadSearchBox ID="search" runat="server" EmptyMessage="用户姓名或拼音首字母" DataTextField="Name" Width="250" DataValueField="Id" MaxResultCount="10" LocalizationPath="~/Language" ShowLoadingIcon="false" ShowSearchButton="false" OnDataSourceSelect="search_DataSourceSelect" OnSearch="search_Search"></telerik:RadSearchBox>

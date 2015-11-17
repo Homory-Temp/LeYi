@@ -1,5 +1,6 @@
 ﻿using Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -11,8 +12,32 @@ public partial class DepotSetting_Period : DepotPageSingle
         search.DataSource = DataContext.DepotUserLoad(DepotUser.CampusId).ToList();
         if (!IsPostBack)
         {
-            var m = Depot.DepotSetting.SingleOrDefault(o => o.Key == "PeriodTime");
-            month.Value = m == null ? 0 : int.Parse(m.Value);
+            var s = DataContext.DepotCatalog.Where(o => o.DepotId == Depot.Id && o.State < State.停用 && o.ParentId == null).OrderBy(o => o.Ordinal).ToList();
+            combo.DataSource = s;
+            combo.DataBind();
+            if (s.Count > 0)
+            {
+                combo.SelectedIndex = 0;
+                var v = combo.SelectedValue.GlobalId();
+                var d = DataContext.DepotPeriod.SingleOrDefault(o => o.CatalogId == v);
+                if (d == null)
+                {
+                    DataContext.DepotPeriod.Add(new DepotPeriod { CatalogId = v, DepotId = Depot.Id, Users = (new List<Guid>()).ToJson(), Time = 0 });
+                    DataContext.SaveChanges();
+                    day.Value = 0;
+                    view.Rebind();
+                }
+                else
+                {
+                    day.Value = d.Time;
+                    view.Rebind();
+                }
+            }
+            else
+            {
+                day.Enabled = false;
+                search.Enabled = false;
+            }
         }
     }
 
@@ -24,48 +49,64 @@ public partial class DepotSetting_Period : DepotPageSingle
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        var source = Depot.DepotSetting.Where(o => o.Key == "PeriodUser").ToList().Select(o => Guid.Parse(o.Value)).ToList().Join(DataContext.DepotUser, o => o, o => o.Id, (a, b) => b).ToList();
-        view.DataSource = source;
-        pager.Visible = source.Count > pager.PageSize;
+        if (combo.SelectedIndex > -1)
+        {
+            var v = combo.SelectedValue.GlobalId();
+            var d = DataContext.DepotPeriod.SingleOrDefault(o => o.CatalogId == v);
+            if (d == null)
+            {
+                view.DataSource = null;
+                pager.Visible = false;
+                return;
+            }
+            var users = d.Users.FromJson<List<Guid>>();
+            var source = users.Join(DataContext.DepotUser, o => o, o => o.Id, (a, b) => b).ToList();
+            view.DataSource = source;
+            pager.Visible = source.Count > pager.PageSize;
+        }
+        else
+        {
+            view.DataSource = null;
+            pager.Visible = false;
+        }
     }
 
     protected void search_Search(object sender, Telerik.Web.UI.SearchBoxEventArgs e)
     {
         if (e.Value.None())
             return;
-        var ds = new DepotSetting
+        if (combo.SelectedIndex > -1)
         {
-            Id = DataContext.GlobalId(),
-            DepotId = Depot.Id,
-            Key = "PeriodUser",
-            Value = e.Value
-        };
-        DataContext.DepotSetting.Add(ds);
-        DataContext.SaveChanges();
+            var v = combo.SelectedValue.GlobalId();
+            var d = DataContext.DepotPeriod.SingleOrDefault(o => o.CatalogId == v);
+            if (d == null)
+                return;
+            var users = d.Users.FromJson<List<Guid>>();
+            if (!users.Contains(e.Value.GlobalId()))
+            {
+                users.Add(e.Value.GlobalId());
+            }
+            d.Users = users.ToJson();
+            DataContext.SaveChanges();
+        }
         search.Text = string.Empty;
         view.Rebind();
-        NotifyOK(ap, "成功取消选定用户的借还时限");
+        NotifyOK(ap, "成功免除选定用户的借还时限");
     }
 
     protected void save_ServerClick(object sender, EventArgs e)
     {
-        var x = DataContext.DepotSetting.SingleOrDefault(o => o.DepotId == Depot.Id && o.Key == "PeriodTime");
-        if (x == null)
+        if (combo.SelectedIndex > -1)
         {
-            var ds = new DepotSetting
+            var v = combo.SelectedValue.GlobalId();
+            var d = DataContext.DepotPeriod.SingleOrDefault(o => o.CatalogId == v);
+            if (d == null)
             {
-                Id = DataContext.GlobalId(),
-                DepotId = Depot.Id,
-                Key = "PeriodTime",
-                Value = month.PeekValue(0).ToString()
-            };
-            DataContext.DepotSetting.Add(ds);
+                return;
+            }
+            d.Time = day.PeekValue(0);
+            DataContext.SaveChanges();
         }
-        else
-        {
-            x.Value = month.PeekValue(0).ToString();
-        }
-        DataContext.SaveChanges();
         NotifyOK(ap, "时限设置成功");
     }
 
@@ -74,14 +115,41 @@ public partial class DepotSetting_Period : DepotPageSingle
         var content = (sender as HtmlInputButton).Attributes["match"];
         if (!content.None())
         {
-            var x = DataContext.DepotSetting.SingleOrDefault(o => o.DepotId == Depot.Id && o.Key == "PeriodUser" && o.Value == content);
-            if(x!=null)
+
+            if (combo.SelectedIndex > -1)
             {
-                DataContext.DepotSetting.Remove(x);
+                var v = combo.SelectedValue.GlobalId();
+                var d = DataContext.DepotPeriod.SingleOrDefault(o => o.CatalogId == v);
+                if (d == null)
+                    return;
+                var users = d.Users.FromJson<List<Guid>>();
+                if (users.Contains(content.GlobalId()))
+                {
+                    users.Remove(content.GlobalId());
+                }
+                d.Users = users.ToJson();
                 DataContext.SaveChanges();
             }
             view.Rebind();
             NotifyOK(ap, "选定用户借还超时受限");
+        }
+    }
+
+    protected void combo_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
+    {
+        var v = combo.SelectedValue.GlobalId();
+        var d = DataContext.DepotPeriod.SingleOrDefault(o => o.CatalogId == v);
+        if (d == null)
+        {
+            DataContext.DepotPeriod.Add(new DepotPeriod { CatalogId = v, DepotId = Depot.Id, Users = (new List<Guid>()).ToJson(), Time = 0 });
+            DataContext.SaveChanges();
+            day.Value = 0;
+            view.Rebind();
+        }
+        else
+        {
+            day.Value = d.Time;
+            view.Rebind();
         }
     }
 }
