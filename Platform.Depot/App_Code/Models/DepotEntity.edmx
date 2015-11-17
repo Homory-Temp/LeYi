@@ -820,6 +820,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <PropertyRef Name="UserId" />
             <PropertyRef Name="OperatorId" />
           </Key>
+          <Property Name="CatalogName" Type="nvarchar(max)" />
+          <Property Name="Period" Type="int" />
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
@@ -1345,6 +1347,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           </EntitySet>
           <EntitySet Name="DepotUseXRecord" EntityType="Self.DepotUseXRecord" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [DepotUseXRecord].[CatalogName] AS [CatalogName], 
+    [DepotUseXRecord].[Period] AS [Period], 
     [DepotUseXRecord].[Id] AS [Id], 
     [DepotUseXRecord].[ObjectId] AS [ObjectId], 
     [DepotUseXRecord].[CatalogId] AS [CatalogId], 
@@ -2327,6 +2331,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="OperatorId" Type="Guid" Nullable="false" />
           <Property Name="ReturnedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="CatalogName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Period" Type="Int32" />
         </EntityType>
         <EntityType Name="DepotReturn">
           <Key>
@@ -3134,6 +3140,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotUseXRecord">
             <EntityTypeMapping TypeName="DepotModel.DepotUseXRecord">
               <MappingFragment StoreEntitySet="DepotUseXRecord">
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="CatalogName" ColumnName="CatalogName" />
                 <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
                 <ScalarProperty Name="ReturnedAmount" ColumnName="ReturnedAmount" />
                 <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />

@@ -131,9 +131,9 @@
                                         <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_top" Text="出库单" NavigateUrl='<%# "../DepotQuery/UsePrint?DepotId={0}&UseId={1}".Formatted(Depot.Id, Eval("UseId")) %>'></asp:HyperLink></td>
                                     </td>
                                     <td><%# Eval("Time").ToDay() %></td>
-                                    <td>xxxxx</td>
+                                    <td><%# (int)Eval("Period") == 0 ? "不限期" : ((DateTime)Eval("Time")).AddDays((int)Eval("Period")).ToDay() %></td>
                                     <td><%# Eval("Name") %></td>
-                                    <td>xxxxx</td>
+                                    <td><%# Eval("CatalogName") %></td>
                                     <td><%# Eval("Unit") %></td>
                                     <td><%# ((Models.UseType)Eval("Type")).ToString() %></td>
                                     <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>

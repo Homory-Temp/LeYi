@@ -912,6 +912,8 @@ namespace Models
         public System.Guid OperatorId { get; set; }
         public decimal ReturnedAmount { get; set; }
         public System.Guid ObjectId { get; set; }
+        public string CatalogName { get; set; }
+        public Nullable<int> Period { get; set; }
     }
 }
 namespace Models

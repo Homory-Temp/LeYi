@@ -68,21 +68,18 @@ public partial class DepotAction_Use : DepotPageSingle
         else
         {
             var uid = people.SelectedValue.GlobalId();
-            var record = DataContext.DepotUseXRecord.Where(o => o.UserId == uid && o.ReturnedAmount < o.Amount && o.Type == 2).OrderBy(o => o.Time).FirstOrDefault();
-            if (record == null)
-                show = true;
-            else
+            foreach (var r in DataContext.DepotUseXRecord.Where(o => o.UserId == uid && o.ReturnedAmount < o.Amount && o.Type == 2).ToList())
             {
-                var period = Depot.DepotSetting.SingleOrDefault(o => o.Key == "PeriodTime");
-                var time = period == null ? 0 : int.Parse(period.Value);
-                if (time > 0 && record.Time.AddMonths(time) < DateTime.Now)
+                var days__c = DataContext.DepotPeriod.SingleOrDefault(o => o.CatalogId == r.CatalogId);
+                if (days__c == null || days__c.Time == 0)
+                    continue;
+                if (r.Time.AddDays(days__c.Time) < DateTime.Now)
                 {
-                    var ids = Depot.DepotSetting.Where(o => o.Key == "PeriodUser").ToList().Select(o => Guid.Parse(o.Value)).ToList();
-                    show = ids.Contains(uid);
-                }
-                else
-                {
-                    show = true;
+                    var ids = days__c.Users.FromJson<List<Guid>>();
+                    if (ids.Contains(uid))
+                        continue;
+                    show = false;
+                    break;
                 }
             }
             x1.Visible = x2.Visible = show;
