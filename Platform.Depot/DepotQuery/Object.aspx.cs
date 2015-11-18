@@ -38,16 +38,6 @@ public partial class DepotQuery_Object : DepotPageSingle
                 {
                     xRow.Visible = false;
                 }
-                if (Depot.Featured(DepotType.固定资产库))
-                {
-                    fNo.InnerText = obj.FixedCard;
-                    fTime.InnerText = obj.Extension;
-                    fRow.Visible = true;
-                }
-                else
-                {
-                    fRow.Visible = false;
-                }
                 pa.Src = obj.ImageA.None() ? "../Content/Images/Transparent.png" : obj.ImageA;
                 da.Visible = !obj.ImageA.None();
                 pb.Src = obj.ImageB.None() ? "../Content/Images/Transparent.png" : obj.ImageB;
@@ -67,6 +57,7 @@ public partial class DepotQuery_Object : DepotPageSingle
         public int Ordinal { get; set; }
         public string Place { get; set; }
         public string Code { get; set; }
+        public string Number { get; set; }
     }
 
     protected void grid_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
@@ -81,12 +72,12 @@ public partial class DepotQuery_Object : DepotPageSingle
         var obj = DataContext.DepotObject.Single(o => o.Id == objId);
         if (obj.Fixed)
         {
-            var source = DataContext.DepotInX.Where(o => (o.AvailableAmount > 0) && o.ObjectId == obj.Id).ToList().Select(o => new Placed { Id = o.Id, Ordinal = o.Ordinal, Fixed = true, Place = o.Place, Code = o.Code }).OrderBy(o => o.Ordinal).ToList();
+            var source = DataContext.DepotInX.Where(o => /*(o.AvailableAmount > 0) &&*/ o.ObjectId == obj.Id).ToList().Select(o => new Placed { Id = o.Id, Number = o.DepotIn.Note, Ordinal = o.Ordinal, Fixed = true, Place = o.Place, Code = o.Code }).OrderBy(o => o.Ordinal).ToList();
             grid.DataSource = source;
         }
         else
         {
-            var source = DataContext.DepotInX.Where(o => (o.AvailableAmount > 0) && o.ObjectId == obj.Id).OrderByDescending(o => o.AvailableAmount).ToList().Select(o => new Placed { Id = o.Id, Ordinal = 0, Fixed = false, Place = o.Place, Code = o.Code }).ToList();
+            var source = DataContext.DepotInX.Where(o => /*(o.AvailableAmount > 0) &&*/ o.ObjectId == obj.Id).OrderByDescending(o => o.AvailableAmount).ToList().Select(o => new Placed { Id = o.Id, Number = o.DepotIn.Note, Ordinal = 0, Fixed = false, Place = o.Place, Code = o.Code }).ToList();
             for (var i = 0; i < source.Count; i++)
             {
                 source[i].Ordinal = i + 1;
@@ -109,6 +100,9 @@ public partial class DepotQuery_Object : DepotPageSingle
         {
             var values = command.NewValues;
             var place = values["Place"].ToString();
+            var number = values["Number"];
+            if (number.None())
+                continue;
             switch (command.Type)
             {
                 case GridBatchEditingCommandType.Update:
@@ -120,6 +114,7 @@ public partial class DepotQuery_Object : DepotPageSingle
                         if (!obj.Single)
                         {
                             @in.DepotIn.Place = @in.Place;
+                            @in.DepotIn.Note = number.ToString();
                         }
                         DataContext.SaveChanges();
                     }

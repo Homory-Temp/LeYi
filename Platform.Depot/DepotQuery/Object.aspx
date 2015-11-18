@@ -71,20 +71,6 @@
                                 <span id="no" runat="server"></span>&nbsp;<span id="unit" runat="server"></span>
                             </td>
                         </tr>
-                        <tr id="fRow" runat="server">
-                            <td style="width: 15%;">
-                                <span class="btn btn-info dictionaryX">购置时间：</span>
-                            </td>
-                            <td style="width: 35%;">
-                                <span id="fTime" runat="server"></span>&nbsp;<span id="Span2" runat="server"></span>
-                            </td>
-                            <td style="width: 15%;">
-                                <span class="btn btn-info dictionaryX">卡片编号：</span>
-                            </td>
-                            <td style="width: 35%;">
-                                <span id="fNo" runat="server"></span>&nbsp;<span id="Span4" runat="server"></span>
-                            </td>
-                        </tr>
                         <tr>
                             <td style="width: 15%;">
                                 <span class="btn btn-info dictionaryX">品牌：</span>
@@ -144,6 +130,15 @@
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Ordinal") %>'></asp:Label>
                                 </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn HeaderText="卡片编号" DataField="Number" SortExpression="Number" UniqueName="Number" ItemStyle-Width="33%">
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%# Eval("Number") %>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <telerik:RadTextBox ID="Number" runat="server" EnabledStyle-HorizontalAlign="Center" Text='<%# Bind("Number") %>'>
+                                    </telerik:RadTextBox>
+                                </EditItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn HeaderText="条码" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true" ItemStyle-Width="33%">
                                 <ItemTemplate>
