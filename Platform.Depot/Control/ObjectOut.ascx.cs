@@ -19,7 +19,7 @@ public partial class Control_ObjectOut : DepotControlSingle
             node.Selected = true;
             node.ExpandParentNodes();
             catalog.SelectedValue = catalogId.ToString();
-            var source = DataContext.DepotObjectLoad(Depot.Id, @out.CatalogId);
+            var source = DataContext.DepotObjectLoad(Depot.Id, @out.CatalogId).Where(o => o.Amount > 0);
             obj.DataSource = source.ToList();
             obj.DataBind();
             if (@out.ObjectId.HasValue && @out.ObjectId.Value != Guid.Empty)
