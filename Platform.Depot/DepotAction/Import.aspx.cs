@@ -106,7 +106,7 @@ public partial class DepotAction_Import : DepotPageSingle
                             var l = new List<Guid>();
                             l.Add(一级分类Id);
                             l.Add(二级分类Id);
-                            DataContext.DepotObjectAddX(物资Id, l, Depot.Id, name, row[14].ToString().Contains("是"), false, true, row[0].ToString(), row[1].ToString(), row[12].ToString(), row[10].ToString(), "", row[11].ToString().Trim(), 0, 0, "", "", "", "", "", 100);
+                            DataContext.DepotObjectAddX(物资Id, l, Depot.Id, name, row[14].ToString().Contains("是"), false, true, row[0].ToString(), row[1].ToString(), row[12].ToString(), "", "", row[11].ToString().Trim(), 0, 0, "", "", "", "", "", 100);
                         }
                         else
                         {
@@ -136,7 +136,14 @@ public partial class DepotAction_Import : DepotPageSingle
                             var @in = new InMemoryIn { Age = "", Place = row[13].ToString().Trim(), Amount = amount, CatalogId = 二级分类Id, Money = price, Note = code, ObjectId = 物资Id, PriceSet = decimal.Divide(price, amount), Time = DateTime.Today, ResponsibleId = responsibleId };
                             var list = new List<InMemoryIn>();
                             list.Add(@in);
-                            DataContext.DepotActIn(固定资产库Id, 固定资产库购置单Id, DateTime.Today, DepotUser.Id, list);
+                            DateTime ______t = DateTime.Today;
+                            try
+                            {
+                                ______t = DateTime.Parse(row[10].ToString());
+                            }
+                            catch
+                            { }
+                            DataContext.DepotActIn(固定资产库Id, 固定资产库购置单Id, ______t, DepotUser.Id, list);
                         }
                     }
                     catch

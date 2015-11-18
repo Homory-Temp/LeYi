@@ -10,6 +10,7 @@ public partial class DepotQuery_Object : DepotPageSingle
     {
         if (!IsPostBack)
         {
+            grid.Columns[1].Visible = Depot.Featured(DepotType.固定资产库);
             var value = "ObjectId".Query();
             if (value.None())
             {
@@ -58,6 +59,7 @@ public partial class DepotQuery_Object : DepotPageSingle
         public string Place { get; set; }
         public string Code { get; set; }
         public string Number { get; set; }
+        public DateTime Time { get; set; }
     }
 
     protected void grid_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
@@ -72,12 +74,12 @@ public partial class DepotQuery_Object : DepotPageSingle
         var obj = DataContext.DepotObject.Single(o => o.Id == objId);
         if (obj.Fixed)
         {
-            var source = DataContext.DepotInX.Where(o => /*(o.AvailableAmount > 0) &&*/ o.ObjectId == obj.Id).ToList().Select(o => new Placed { Id = o.Id, Number = o.DepotIn.Note, Ordinal = o.Ordinal, Fixed = true, Place = o.Place, Code = o.Code }).OrderBy(o => o.Ordinal).ToList();
+            var source = DataContext.DepotInX.Where(o => /*(o.AvailableAmount > 0) &&*/ o.ObjectId == obj.Id).ToList().Select(o => new Placed { Id = o.Id, Number = o.DepotIn.Note, Time = o.DepotIn.Time, Ordinal = o.Ordinal, Fixed = true, Place = o.Place, Code = o.Code }).OrderBy(o => o.Ordinal).ToList();
             grid.DataSource = source;
         }
         else
         {
-            var source = DataContext.DepotInX.Where(o => /*(o.AvailableAmount > 0) &&*/ o.ObjectId == obj.Id).OrderByDescending(o => o.AvailableAmount).ToList().Select(o => new Placed { Id = o.Id, Number = o.DepotIn.Note, Ordinal = 0, Fixed = false, Place = o.Place, Code = o.Code }).ToList();
+            var source = DataContext.DepotInX.Where(o => /*(o.AvailableAmount > 0) &&*/ o.ObjectId == obj.Id).OrderByDescending(o => o.AvailableAmount).ToList().Select(o => new Placed { Id = o.Id, Number = o.DepotIn.Note, Time = o.DepotIn.Time, Ordinal = 0, Fixed = false, Place = o.Place, Code = o.Code }).ToList();
             for (var i = 0; i < source.Count; i++)
             {
                 source[i].Ordinal = i + 1;
