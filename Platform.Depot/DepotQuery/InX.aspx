@@ -103,7 +103,7 @@
                                             <th style='<%# (Depot.Featured(Models.DepotType.幼儿园) ? "display: ;": "display: none;") %>'>年龄段</th>
                                             <th>存放地</th>
                                             <th>操作人</th>
-                                            <th>备注</th>
+                                            <th><%# Depot.Featured(Models.DepotType.固定资产库) ? "卡片编号" : "备注" %></th>
                                             <th>操作</th>
                                         </tr>
                                         <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>

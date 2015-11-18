@@ -166,8 +166,25 @@ public partial class DepotAction_In : DepotPageSingle
 
     protected void do_in_ServerClick(object sender, EventArgs e)
     {
+        if (Depot.Featured(DepotType.固定资产库) && !CheckDoIn())
+        {
+            NotifyError(ap, "请填写卡片编号");
+            return;
+        }
         DoIn(false);
         Response.Redirect("~/DepotQuery/InX?DepotId={0}".Formatted(Depot.Id));
+    }
+
+    protected bool CheckDoIn()
+    {
+        var list = new List<InMemoryIn>();
+        for (var i = 0; i < view_obj.Items.Count; i++)
+        {
+            var c = view_obj.Items[i].FindControl("ObjectIn") as Control_ObjectIn;
+            var @in = c.PeekValue();
+            list.Add(@in);
+        }
+        return list.Count(o => o.Note.None()) == 0;
     }
 
     protected void DoIn(bool finish)
@@ -228,6 +245,11 @@ public partial class DepotAction_In : DepotPageSingle
 
     protected void done_in_ServerClick(object sender, EventArgs e)
     {
+        if (Depot.Featured(DepotType.固定资产库) && !CheckDoIn())
+        {
+            NotifyError(ap, "请填写卡片编号");
+            return;
+        }
         DoIn(true);
         Response.Redirect("~/DepotQuery/InPrint?DepotId={0}&OrderId={1}".Formatted(Depot.Id, target.SelectedValue));
     }
