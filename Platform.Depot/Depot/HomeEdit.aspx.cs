@@ -10,6 +10,7 @@ public partial class Depot_HomeEdit : DepotPage
         if (!IsPostBack)
         {
             var id = "DepotId".Query().GlobalId();
+            var depot = DataContext.Depot.Single(o => o.Id == id);
             var item = DataContext.Depot.Single(o => o.Id == id);
             ordinal.Value = item.Ordinal;
             name.Text = item.Name;
@@ -18,6 +19,7 @@ public partial class Depot_HomeEdit : DepotPage
             t2x.Visible = t2.Checked = item.ObjectTypes.Contains("U");
             t3x.Visible = t3.Checked = item.ObjectTypes.Contains("S");
             new[] { t1x, t2x, t3x }.ToList().ForEach(o => { if (o.Value.GetFirstChar() == item.DefaultObjectType) o.Checked = true; });
+            het.Visible = !depot.Featured(Models.DepotType.固定资产库);
         }
     }
 

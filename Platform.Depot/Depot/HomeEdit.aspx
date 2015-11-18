@@ -60,7 +60,7 @@
                             </telerik:RadComboBox>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" id="het" runat="server">
                         <div class="col-md-4 text-right">物资类型：</div>
                         <div class="col-md-8 text-left">
                             <div>

@@ -21,11 +21,23 @@ public partial class DepotAction_ObjectAddX : DepotPageSingle
             specification.DataBind();
             brand.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.品牌).ToList();
             brand.DataBind();
-            var types = Depot.ObjectTypes;
-            r1.Visible = types.Contains(t1.Value.GetFirstChar());
-            r2.Visible = types.Contains(t2.Value.GetFirstChar());
-            r3.Visible = types.Contains(t3.Value.GetFirstChar());
-            new[] { t1, t2, t3 }.ToList().ForEach(o => { if (o.Value.GetFirstChar() == Depot.DefaultObjectType) o.Checked = true; });
+            if (Depot.Featured(DepotType.固定资产库))
+            {
+                r1.Visible = r2.Visible = r3.Visible = false;
+                r4.Visible = r5.Visible = true;
+                fc.Visible = ft.Visible = true;
+            }
+            else
+            {
+                var types = Depot.ObjectTypes;
+                r1.Visible = types.Contains(t1.Value.GetFirstChar());
+                r2.Visible = types.Contains(t2.Value.GetFirstChar());
+                r3.Visible = types.Contains(t3.Value.GetFirstChar());
+                new[] { t1, t2, t3 }.ToList().ForEach(o => { if (o.Value.GetFirstChar() == Depot.DefaultObjectType) o.Checked = true; });
+                r4.Visible = false;
+                r5.Visible = false;
+                fc.Visible = ft.Visible = false;
+            }
             if (!"CatalogId".Query().None())
             {
                 var node = tree.EmbeddedTree.GetAllNodes().First(o => o.Value == "CatalogId".Query());
@@ -113,7 +125,14 @@ public partial class DepotAction_ObjectAddX : DepotPageSingle
             node = node.ParentNode;
             ids.Insert(0, node.Value.GlobalId());
         }
-        DataContext.DepotObjectAdd(id, ids, Depot.Id, name.Text.Trim(), t3.Checked, t1.Checked, false, "", "", brand.Text.Trim(), "", unit.Text.Trim(), specification.Text.Trim(), low.PeekValue(0.00M), high.PeekValue(0.00M), photo.Length > 0 ? photo[0] : "", photo.Length > 1 ? photo[1] : "", photo.Length > 2 ? photo[2] : "", photo.Length > 3 ? photo[3] : "", content.Text.Trim(), ordinal.PeekValue(100), age.Text.Trim());
+        if (Depot.Featured(DepotType.固定资产库))
+        {
+            DataContext.DepotObjectAdd(id, ids, Depot.Id, name.Text.Trim(), t4.Checked, false, true, "", "", brand.Text.Trim(), "", unit.Text.Trim(), specification.Text.Trim(), low.PeekValue(0.00M), high.PeekValue(0.00M), photo.Length > 0 ? photo[0] : "", photo.Length > 1 ? photo[1] : "", photo.Length > 2 ? photo[2] : "", photo.Length > 3 ? photo[3] : "", content.Text.Trim(), ordinal.PeekValue(100), age.Text.Trim());
+        }
+        else
+        {
+            DataContext.DepotObjectAdd(id, ids, Depot.Id, name.Text.Trim(), t3.Checked, t1.Checked, false, "", "", brand.Text.Trim(), "", unit.Text.Trim(), specification.Text.Trim(), low.PeekValue(0.00M), high.PeekValue(0.00M), photo.Length > 0 ? photo[0] : "", photo.Length > 1 ? photo[1] : "", photo.Length > 2 ? photo[2] : "", photo.Length > 3 ? photo[3] : "", content.Text.Trim(), ordinal.PeekValue(100), age.Text.Trim());
+        }
         return id;
     }
 

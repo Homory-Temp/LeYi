@@ -63,6 +63,20 @@
                             <telerik:RadTextBox ID="name" runat="server" Width="400"></telerik:RadTextBox>
                         </div>
                     </div>
+                    <div class="row" id="fc" runat="server">
+                        <div class="col-md-4 text-right">卡片编号：</div>
+                        <div class="col-md-8 text-left">
+                            <telerik:RadTextBox ID="fcn" runat="server" Width="400"></telerik:RadTextBox>
+                        </div>
+                    </div>
+                    <div class="row" id="ft" runat="server">
+                        <div class="col-md-4 text-right">购置日期：</div>
+                        <div class="col-md-8 text-left">
+                            <telerik:RadDatePicker ID="ftd" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="400" AutoPostBack="false">
+                                <DatePopupButton runat="server" Visible="false" />
+                            </telerik:RadDatePicker>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-4 text-right">物资类别：</div>
                         <div class="col-md-8 text-left">
@@ -139,6 +153,16 @@
                                     <tr id="r3" runat="server">
                                         <td>
                                             <telerik:RadButton ID="t3" runat="server" GroupName="c" Text="准固定资产（自动拆分）" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox" Value="Single" OnClientClicked="sh"></telerik:RadButton>
+                                        </td>
+                                    </tr>
+                                    <tr id="r4" runat="server">
+                                        <td>
+                                            <telerik:RadButton ID="t4" runat="server" GroupName="c" Text="固定资产（单件拆分）" Checked="true" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox" Value="FS" OnClientClicked="shx"></telerik:RadButton>
+                                        </td>
+                                    </tr>
+                                    <tr id="r5" runat="server">
+                                        <td>
+                                            <telerik:RadButton ID="t5" runat="server" GroupName="c" Text="固定资产（多件不拆分）" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox" Value="FM" OnClientClicked="shx"></telerik:RadButton>
                                         </td>
                                     </tr>
                                 </table>

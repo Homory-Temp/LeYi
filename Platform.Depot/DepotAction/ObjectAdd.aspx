@@ -42,6 +42,17 @@
                         $find("<%= t3.ClientID %>").set_checked(v == "Single");
                 }
 
+                function shx(sender, args) {
+                    var c = sender.get_checked();
+                    if (!c)
+                        sender.set_checked(true);
+                    var v = sender.get_value();
+                    if ($find("<%= t4.ClientID %>"))
+                        $find("<%= t4.ClientID %>").set_checked(v == "FS");
+                    if ($find("<%= t5.ClientID %>"))
+                        $find("<%= t5.ClientID %>").set_checked(v == "FM");
+                }
+
                 function img_up(sender, e) {
                     $find("<%= ap.ClientID %>").ajaxRequest("Upload");
                 }
@@ -61,6 +72,20 @@
                         <div class="col-md-4 text-right">物资名称：</div>
                         <div class="col-md-8 text-left">
                             <telerik:RadTextBox ID="name" runat="server" Width="400"></telerik:RadTextBox>
+                        </div>
+                    </div>
+                    <div class="row" id="fc" runat="server">
+                        <div class="col-md-4 text-right">卡片编号：</div>
+                        <div class="col-md-8 text-left">
+                            <telerik:RadTextBox ID="fcn" runat="server" Width="400"></telerik:RadTextBox>
+                        </div>
+                    </div>
+                    <div class="row" id="ft" runat="server">
+                        <div class="col-md-4 text-right">购置日期：</div>
+                        <div class="col-md-8 text-left">
+                            <telerik:RadDatePicker ID="ftd" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="400" AutoPostBack="false">
+                                <DatePopupButton runat="server" Visible="false" />
+                            </telerik:RadDatePicker>
                         </div>
                     </div>
                     <div class="row">
@@ -139,6 +164,16 @@
                                     <tr id="r3" runat="server">
                                         <td>
                                             <telerik:RadButton ID="t3" runat="server" GroupName="c" Text="准固定资产（自动拆分）" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox" Value="Single" OnClientClicked="sh"></telerik:RadButton>
+                                        </td>
+                                    </tr>
+                                    <tr id="r4" runat="server">
+                                        <td>
+                                            <telerik:RadButton ID="t4" runat="server" GroupName="c" Text="固定资产（单件拆分）" Checked="true" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox" Value="FS" OnClientClicked="shx"></telerik:RadButton>
+                                        </td>
+                                    </tr>
+                                    <tr id="r5" runat="server">
+                                        <td>
+                                            <telerik:RadButton ID="t5" runat="server" GroupName="c" Text="固定资产（多件不拆分）" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox" Value="FM" OnClientClicked="shx"></telerik:RadButton>
                                         </td>
                                     </tr>
                                 </table>
