@@ -80,10 +80,13 @@ public partial class DepotAction_ObjectAdd : DepotPageSingle
             NotifyError(ap, "请输入物资名称");
             return;
         }
-        if (new[] { t1, t2, t3 }.Count(o => o.Checked == true) == 0)
+        if (!Depot.Featured(DepotType.固定资产库))
         {
-            NotifyError(ap, "请选择物资类型");
-            return;
+            if (new[] { t1, t2, t3 }.Count(o => o.Checked == true) == 0)
+            {
+                NotifyError(ap, "请选择物资属性");
+                return;
+            }
         }
         if (tree.SelectedValue.None())
         {
@@ -100,10 +103,13 @@ public partial class DepotAction_ObjectAdd : DepotPageSingle
             NotifyError(ap, "请输入物资名称");
             return;
         }
-        if (new[] { t1, t2, t3 }.Count(o => o.Checked == true) == 0)
+        if (!Depot.Featured(DepotType.固定资产库))
         {
-            NotifyError(ap, "请选择物资类型");
-            return;
+            if (new[] { t1, t2, t3 }.Count(o => o.Checked == true) == 0)
+            {
+                NotifyError(ap, "请选择物资属性");
+                return;
+            }
         }
         if (tree.SelectedValue.None())
         {
