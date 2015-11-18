@@ -15,9 +15,9 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle navbar-link" data-toggle="dropdown">物资管理</a>
                         <ul class="dropdown-menu">
-                            <li><a href='<%= "../DepotAction/Order?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: none;": "display: ;") %>'>购置登记</a></li>
-                            <li><a href='<%= "../DepotAction/ObjectAdd?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: none;": "display: ;") %>'>新增物资</a></li>
-                            <li><a href='<%= "../DepotAction/In?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: none;": "display: ;") %>'>物资入库</a></li>
+                            <li><a href='<%= "../DepotAction/Order?DepotId={0}".Formatted(Depot.Id) %>'>购置登记</a></li>
+                            <li><a href='<%= "../DepotAction/ObjectAdd?DepotId={0}".Formatted(Depot.Id) %>'>新增物资</a></li>
+                            <li><a href='<%= "../DepotAction/In?DepotId={0}".Formatted(Depot.Id) %>'>物资入库</a></li>
                             <li><a href='<%= "../DepotAction/Use?DepotId={0}".Formatted(Depot.Id) %>'>物资出库</a></li>
                             <li><a href='<%= "../DepotAction/Return?DepotId={0}".Formatted(Depot.Id) %>'>物资归还</a></li>
                             <li><a href='<%= "../DepotAction/Out?DepotId={0}".Formatted(Depot.Id) %>'>物资报废</a></li>

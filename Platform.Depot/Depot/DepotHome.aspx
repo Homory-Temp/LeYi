@@ -37,9 +37,9 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Order?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: none;": "display: ;") %>'>购置登记</a>
-                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/ObjectAdd?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: none;": "display: ;") %>'>新增物资</a>
-                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/In?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: none;": "display: ;") %>'>物资入库</a>
+                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Order?DepotId={0}".Formatted(Depot.Id) %>'>购置登记</a>
+                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/ObjectAdd?DepotId={0}".Formatted(Depot.Id) %>'>新增物资</a>
+                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/In?DepotId={0}".Formatted(Depot.Id) %>'>物资入库</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Use?DepotId={0}".Formatted(Depot.Id) %>'>物资出库</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Return?DepotId={0}".Formatted(Depot.Id) %>'>物资归还</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Out?DepotId={0}".Formatted(Depot.Id) %>'>物资报废</a>

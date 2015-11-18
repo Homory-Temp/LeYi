@@ -35,8 +35,6 @@ public partial class DepotAction_Object : DepotPageSingle
                 view_simple.Attributes["class"] = "btn btn-info";
                 view_photo.Attributes["class"] = "btn btn-warning";
             }
-            add.Visible = !Depot.Featured(DepotType.固定资产库);
-            manage.Visible = !Depot.Featured(DepotType.固定资产库);
         }
     }
 
