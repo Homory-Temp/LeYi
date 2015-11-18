@@ -74,20 +74,6 @@
                             <telerik:RadTextBox ID="name" runat="server" Width="400"></telerik:RadTextBox>
                         </div>
                     </div>
-                    <div class="row" id="fc" runat="server">
-                        <div class="col-md-4 text-right">卡片编号：</div>
-                        <div class="col-md-8 text-left">
-                            <telerik:RadTextBox ID="fcn" runat="server" Width="400"></telerik:RadTextBox>
-                        </div>
-                    </div>
-                    <div class="row" id="ft" runat="server">
-                        <div class="col-md-4 text-right">购置日期：</div>
-                        <div class="col-md-8 text-left">
-                            <telerik:RadDatePicker ID="ftd" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="400" AutoPostBack="false">
-                                <DatePopupButton runat="server" Visible="false" />
-                            </telerik:RadDatePicker>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-4 text-right">物资类别：</div>
                         <div class="col-md-8 text-left">

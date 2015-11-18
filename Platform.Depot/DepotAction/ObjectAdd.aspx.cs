@@ -25,7 +25,6 @@ public partial class DepotAction_ObjectAdd : DepotPageSingle
             {
                 r1.Visible = r2.Visible = r3.Visible = false;
                 r4.Visible = r5.Visible = true;
-                fc.Visible = ft.Visible = true;
             }
             else
             {
@@ -36,7 +35,6 @@ public partial class DepotAction_ObjectAdd : DepotPageSingle
                 new[] { t1, t2, t3 }.ToList().ForEach(o => { if (o.Value.GetFirstChar() == Depot.DefaultObjectType) o.Checked = true; });
                 r4.Visible = false;
                 r5.Visible = false;
-                fc.Visible = ft.Visible = false;
             }
             if (!"CatalogId".Query().None())
             {
