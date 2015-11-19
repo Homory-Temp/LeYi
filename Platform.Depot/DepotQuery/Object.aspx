@@ -159,6 +159,11 @@
                                     </telerik:RadTextBox>
                                 </EditItemTemplate>
                             </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn HeaderText="使用状态" DataField="State" SortExpression="State" UniqueName="State" ReadOnly="true">
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%# Eval("State") %>' ToolTip='<%# Eval("StateTime") %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
                         </Columns>
                     </MasterTableView>
                 </telerik:RadGrid>
