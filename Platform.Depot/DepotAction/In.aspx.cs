@@ -184,7 +184,7 @@ public partial class DepotAction_In : DepotPageSingle
             var @in = c.PeekValue();
             list.Add(@in);
         }
-        return list.Count(o => o.Note.None()) == 0;
+        return list.Count(o => o.Note.None() && o.ObjectId.HasValue && o.Amount > 0) == 0;
     }
 
     protected void DoIn(bool finish)
