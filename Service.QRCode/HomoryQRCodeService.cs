@@ -271,6 +271,9 @@ namespace LY.Service.QRCode
                     {
                         content = "资产编号：{0}".Formatted(infos[4].Length > 7 ? infos[4].Substring(infos[4].Length - 7) : infos[4]);
                         Cut(sb, content, 内容每行字数, 内容空字符数);
+                        var time = infos[infos.Length - 1].None() ? "" : DateTime.Parse(infos[infos.Length - 1]).ToString("yyyy-MM-dd");
+                        content = "购置日期：{0}".Formatted(time);
+                        Cut(sb, content, 内容每行字数, 内容空字符数);
                     }
                     //content = "存放地　：{0}".Formatted("教室A");
                     //Cut(sb, content, 内容每行字数, 内容空字符数);
