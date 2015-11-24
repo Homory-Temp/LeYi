@@ -204,6 +204,7 @@
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="DepotId" Type="uniqueidentifier" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="DepotObjectCatalog">
           <Key>
@@ -237,6 +238,15 @@
           <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotPeriod">
+          <Key>
+            <PropertyRef Name="CatalogId" />
+          </Key>
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Users" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DepotRedo">
           <Key>
@@ -481,9 +491,9 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a pr
             <PropertyRef Name="OperatorId" />
             <PropertyRef Name="PriceSet" />
             <PropertyRef Name="Amount" />
-            <PropertyRef Name="Total" />
             <PropertyRef Name="OrderSource" />
             <PropertyRef Name="UsageTarget" />
+            <PropertyRef Name="Total" />
           </Key>
           <Property Name="OrderName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Done" Type="bit" Nullable="false" />
@@ -508,7 +518,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a pr
           <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="Total" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="37" Scale="12" Nullable="false" />
           <Property Name="OrderSource" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="UsageTarget" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
@@ -585,6 +595,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotObjectX' does not have a prim
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="DepotId" Type="uniqueidentifier" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" />
           <Property Name="DepotName" Type="nvarchar" MaxLength="64" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -809,6 +820,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <PropertyRef Name="UserId" />
             <PropertyRef Name="OperatorId" />
           </Key>
+          <Property Name="CatalogName" Type="nvarchar(max)" />
+          <Property Name="Period" Type="int" />
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
@@ -951,6 +964,18 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DepotPeriod_DepotCatalog">
+          <End Role="DepotCatalog" Type="Self.DepotCatalog" Multiplicity="1" />
+          <End Role="DepotPeriod" Type="Self.DepotPeriod" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DepotCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotPeriod">
+              <PropertyRef Name="CatalogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DepotRedo_DepotIn">
           <End Role="DepotIn" Type="Self.DepotIn" Multiplicity="1" />
           <End Role="DepotRedo" Type="Self.DepotRedo" Multiplicity="*" />
@@ -1084,6 +1109,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySet Name="DepotObject" EntityType="Self.DepotObject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotObjectCatalog" EntityType="Self.DepotObjectCatalog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotOrder" EntityType="Self.DepotOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotPeriod" EntityType="Self.DepotPeriod" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotRedo" EntityType="Self.DepotRedo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotReturn" EntityType="Self.DepotReturn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotRole" EntityType="Self.DepotRole" Schema="dbo" store:Type="Tables" />
@@ -1210,6 +1236,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
     [DepotObjectX].[Amount] AS [Amount], 
     [DepotObjectX].[Money] AS [Money], 
     [DepotObjectX].[DepotId] AS [DepotId], 
+    [DepotObjectX].[Age] AS [Age], 
     [DepotObjectX].[DepotName] AS [DepotName]
     FROM [dbo].[DepotObjectX] AS [DepotObjectX]</DefiningQuery>
           </EntitySet>
@@ -1320,6 +1347,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           </EntitySet>
           <EntitySet Name="DepotUseXRecord" EntityType="Self.DepotUseXRecord" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [DepotUseXRecord].[CatalogName] AS [CatalogName], 
+    [DepotUseXRecord].[Period] AS [Period], 
     [DepotUseXRecord].[Id] AS [Id], 
     [DepotUseXRecord].[ObjectId] AS [ObjectId], 
     [DepotUseXRecord].[CatalogId] AS [CatalogId], 
@@ -1382,6 +1411,10 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <AssociationSet Name="FK_DepotInX_DepotOrder" Association="Self.FK_DepotInX_DepotOrder">
             <End Role="DepotOrder" EntitySet="DepotOrder" />
             <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotPeriod_DepotCatalog" Association="Self.FK_DepotPeriod_DepotCatalog">
+            <End Role="DepotCatalog" EntitySet="DepotCatalog" />
+            <End Role="DepotPeriod" EntitySet="DepotPeriod" />
           </AssociationSet>
           <AssociationSet Name="FK_DepotRedo_DepotIn" Association="Self.FK_DepotRedo_DepotIn">
             <End Role="DepotIn" EntitySet="DepotIn" />
@@ -1563,6 +1596,11 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           </FunctionImport>
           <EntitySet Name="DepotCheck" EntityType="DepotModel.DepotCheck" />
           <EntitySet Name="DepotCode" EntityType="DepotModel.DepotCode" />
+          <EntitySet Name="DepotPeriod" EntityType="DepotModel.DepotPeriod" />
+          <AssociationSet Name="FK_DepotPeriod_DepotCatalog" Association="DepotModel.FK_DepotPeriod_DepotCatalog">
+            <End Role="DepotCatalog" EntitySet="DepotCatalog" />
+            <End Role="DepotPeriod" EntitySet="DepotPeriod" />
+          </AssociationSet>
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -1595,6 +1633,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DepotCatalogChildren" Relationship="DepotModel.FK_DepotCatalog_DepotCatalog" FromRole="DepotCatalog" ToRole="DepotCatalog1" />
           <NavigationProperty Name="DepotCatalogParent" Relationship="DepotModel.FK_DepotCatalog_DepotCatalog" FromRole="DepotCatalog1" ToRole="DepotCatalog" />
+          <NavigationProperty Name="DepotPeriod" Relationship="DepotModel.FK_DepotPeriod_DepotCatalog" FromRole="DepotCatalog" ToRole="DepotPeriod" />
         </EntityType>
         <EntityType Name="DepotDictionary">
           <Key>
@@ -1848,6 +1887,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="Brand" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Extension" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DepotRedo" Relationship="DepotModel.FK_DepotRedo_DepotObject" FromRole="DepotObject" ToRole="DepotRedo" />
+          <Property Name="Age" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DepotFlow">
           <Key>
@@ -2105,7 +2145,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="OperatorId" Type="Guid" Nullable="false" />
           <Property Name="PriceSet" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="37" Scale="12" />
           <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
           <Property Name="OrderSource" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="UsageTarget" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
@@ -2291,6 +2331,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="OperatorId" Type="Guid" Nullable="false" />
           <Property Name="ReturnedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="CatalogName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Period" Type="Int32" />
         </EntityType>
         <EntityType Name="DepotReturn">
           <Key>
@@ -2557,6 +2599,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="FixedNumber" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Brand" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Extension" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DepotRedo">
           <Key>
@@ -2654,6 +2697,28 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="State" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="DepotPeriod">
+          <Key>
+            <PropertyRef Name="CatalogId" />
+          </Key>
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Users" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DepotCatalog" Relationship="DepotModel.FK_DepotPeriod_DepotCatalog" FromRole="DepotPeriod" ToRole="DepotCatalog" />
+        </EntityType>
+        <Association Name="FK_DepotPeriod_DepotCatalog">
+          <End Type="DepotModel.DepotCatalog" Role="DepotCatalog" Multiplicity="1" />
+          <End Type="DepotModel.DepotPeriod" Role="DepotPeriod" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DepotCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotPeriod">
+              <PropertyRef Name="CatalogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2860,6 +2925,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotObject">
             <EntityTypeMapping TypeName="DepotModel.DepotObject">
               <MappingFragment StoreEntitySet="DepotObject">
+                <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="FixedNumber" ColumnName="FixedNumber" />
@@ -3074,6 +3140,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotUseXRecord">
             <EntityTypeMapping TypeName="DepotModel.DepotUseXRecord">
               <MappingFragment StoreEntitySet="DepotUseXRecord">
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="CatalogName" ColumnName="CatalogName" />
                 <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
                 <ScalarProperty Name="ReturnedAmount" ColumnName="ReturnedAmount" />
                 <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
@@ -3229,6 +3297,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotObjectX">
             <EntityTypeMapping TypeName="DepotModel.DepotObjectX">
               <MappingFragment StoreEntitySet="DepotObjectX">
+                <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="FixedNumber" ColumnName="FixedNumber" />
@@ -3317,6 +3386,16 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
                 <ScalarProperty Name="BatchOrdinial" ColumnName="BatchOrdinial" />
                 <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotPeriod">
+            <EntityTypeMapping TypeName="DepotModel.DepotPeriod">
+              <MappingFragment StoreEntitySet="DepotPeriod">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Users" ColumnName="Users" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
