@@ -1,6 +1,4 @@
-﻿#define xsfx
-
-using ICSharpCode.SharpZipLib.Zip;
+﻿using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -216,7 +214,11 @@ namespace LY.Service.QRCode
                     g.FillRectangle(W, 0, 0, 图片宽度, 图片高度);
                     g.DrawRectangle(new Pen(B, 边框宽度), 边框旁白, 边框旁白, 图片宽度 - 2 * 边框旁白, 图片高度 - 2 * 边框旁白);
                     g.DrawImage(icon, 图标左边距, 图标上边距, 图标宽度, 图标高度);
+#if xsfx
+                    string title = "{0} 固定资产".Formatted(Title);
+#else
                     string title = "{0} 资产标签".Formatted(Title);
+#endif
                     g.DrawString(title, new Font(标题字体, 标题字号), B, 标题左边距, 标题上边距);
                     g.Save();
                     RadBarcode code = new RadBarcode { Type = BarcodeType.QRCode, Text = qrcode, OutputType = BarcodeOutputType.EmbeddedPNG };
@@ -265,13 +267,25 @@ namespace LY.Service.QRCode
 
                     var infos = info.Split(new string[] { "@@@" }, StringSplitOptions.None);
 
+
+#if xsfx
+                    content = "类别：{0}".Formatted(infos[5].Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries)[0]);
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "名称：{0}".Formatted(infos[0]);
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                    if (infos[3] == "1")
+                    {
+                        //content = "资产编号：{0}".Formatted(infos[4].Length > 7 ? infos[4].Substring(infos[4].Length - 7) : infos[4]);
+                        //Cut(sb, content, 内容每行字数, 内容空字符数);
+                        var time = infos[infos.Length - 1].None() ? "" : DateTime.Parse(infos[infos.Length - 1]).ToString("yyyy-MM-dd");
+                        content = "购置日期：{0}".Formatted(time);
+                        Cut(sb, content, 内容每行字数, 内容空字符数);
+                    }
+#else
                     content = "资产名称：{0}".Formatted(infos[0]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
-#if xsfx
-#else
                     content = "规格型号：{0}{1}{2}".Formatted(infos[1], infos[1].None() ? "" : " ", infos[2]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
-#endif
                     if (infos[3] == "1")
                     {
                         content = "资产编号：{0}".Formatted(infos[4].Length > 7 ? infos[4].Substring(infos[4].Length - 7) : infos[4]);
@@ -280,16 +294,13 @@ namespace LY.Service.QRCode
                         content = "购置日期：{0}".Formatted(time);
                         Cut(sb, content, 内容每行字数, 内容空字符数);
                     }
+                    content = "物资分类：{0}".Formatted(infos[5]);
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+#endif
                     //content = "存放地　：{0}".Formatted("教室A");
                     //Cut(sb, content, 内容每行字数, 内容空字符数);
                     //content = "责任人　：{0}".Formatted("凌俊伟");
                     //Cut(sb, content, 内容每行字数, 内容空字符数);
-#if xsfx
-                    content = "物资分类：{0}".Formatted(infos[5].Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries)[0]);
-#else
-                    content = "物资分类：{0}".Formatted(infos[5]);
-#endif
-                    Cut(sb, content, 内容每行字数, 内容空字符数);
                     g.DrawString(sb.ToString(), new Font(内容字体, 内容字号), B, 左侧左边距, 左侧上边距);
                     image.Save("{0}/{1}.png".Formatted(path, qrcode), ImageFormat.Png);
                     g.Dispose();

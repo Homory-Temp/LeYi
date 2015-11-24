@@ -66,12 +66,12 @@ public partial class StoreAction_Use : SingleStorePage
             }
         }
         x1.Visible = x2.Visible = show;
-        counter.Value = show ? "5" : "0";
+        counter.Value = show ? "10" : "0";
     }
 
     protected void plus_ServerClick(object sender, EventArgs e)
     {
-        counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
+        counter.Value = ((int.Parse(counter.Value)) + 5).ToString();
         var toRem = view_obj.Items.Select(o => (o.FindControl("ObjectUseBody") as Control_ObjectUseBody)).Select(o => o.PeekValue()).ToList();
         x.Value = toRem.ToJson();
         view_obj.Rebind();
