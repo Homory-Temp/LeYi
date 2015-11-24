@@ -1,4 +1,6 @@
-﻿using ICSharpCode.SharpZipLib.Zip;
+﻿#define xsfx
+
+using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -168,7 +170,7 @@ namespace LY.Service.QRCode
             #region 图片参数
             var 图片宽度 = 600;
             var 图片高度 = 图片宽度 / 2;
-            var 边框旁白 = 5;
+            var 边框旁白 = 15;
             var 边框宽度 = 2;
             var 图标上边距 = 边框旁白 + 边框宽度 + 8;
             var 图标左边距 = 边框旁白 + 边框宽度 + 33;
@@ -184,14 +186,14 @@ namespace LY.Service.QRCode
             var 二维码上边距 = 边框旁白 + 边框宽度 + 图标高度 + 7;
             var 二维码左边距 = 图片宽度 - (边框旁白 + 边框宽度) - 右侧宽度;
             var 二维码文字字体 = "Arial";
-            var 二维码文字字号 = 16;
-            var 二维码文字上边距 = 二维码上边距 + 二维码边长;
+            var 二维码文字字号 = 15;
+            var 二维码文字上边距 = 二维码上边距 + 二维码边长 - 15;
             var 二维码文字左边距 = 图片宽度 - (边框旁白 + 边框宽度) - 右侧宽度 + 21;
             var 左侧左边距 = 边框旁白 + 边框宽度 + 12;
             var 左侧上边距 = 边框旁白 + 边框宽度 + 图标高度 + 27;
-            var 内容字体 = "SimSun";
+            var 内容字体 = "SimHei";
             var 内容字号 = 18;
-            var 内容每行字数 = 16;
+            var 内容每行字数 = 15;
             var 内容空字符数 = 5;
             var W = new SolidBrush(Color.White);
             var B = new SolidBrush(Color.Black);
@@ -265,8 +267,11 @@ namespace LY.Service.QRCode
 
                     content = "资产名称：{0}".Formatted(infos[0]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
+#if xsfx
+#else
                     content = "规格型号：{0}{1}{2}".Formatted(infos[1], infos[1].None() ? "" : " ", infos[2]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
+#endif
                     if (infos[3] == "1")
                     {
                         content = "资产编号：{0}".Formatted(infos[4].Length > 7 ? infos[4].Substring(infos[4].Length - 7) : infos[4]);
@@ -279,7 +284,11 @@ namespace LY.Service.QRCode
                     //Cut(sb, content, 内容每行字数, 内容空字符数);
                     //content = "责任人　：{0}".Formatted("凌俊伟");
                     //Cut(sb, content, 内容每行字数, 内容空字符数);
+#if xsfx
+                    content = "物资分类：{0}".Formatted(infos[5].Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries)[0]);
+#else
                     content = "物资分类：{0}".Formatted(infos[5]);
+#endif
                     Cut(sb, content, 内容每行字数, 内容空字符数);
                     g.DrawString(sb.ToString(), new Font(内容字体, 内容字号), B, 左侧左边距, 左侧上边距);
                     image.Save("{0}/{1}.png".Formatted(path, qrcode), ImageFormat.Png);

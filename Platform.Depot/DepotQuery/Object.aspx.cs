@@ -62,7 +62,7 @@ public partial class DepotQuery_Object : DepotPageSingle
         public string Number { get; set; }
         public DateTime Time { get; set; }
         public string State { get; set; }
-        public string StateTime { get; set; }
+        public DateTime StateTime { get; set; }
     }
 
     protected void grid_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
@@ -77,7 +77,7 @@ public partial class DepotQuery_Object : DepotPageSingle
         var obj = DataContext.DepotObject.Single(o => o.Id == objId);
         if (obj.Fixed)
         {
-            var source = DataContext.DepotInX.Where(o => /*(o.AvailableAmount > 0) &&*/ o.ObjectId == obj.Id).ToList().Select(o => new Placed { Id = o.Id, Number = o.DepotIn.Note, Time = o.DepotIn.Time, State = "使用中", Ordinal = o.Ordinal, Fixed = true, Place = o.Place, Code = o.Code }).OrderBy(o => o.Ordinal).ToList();
+            var source = DataContext.DepotInX.Where(o => /*(o.AvailableAmount > 0) &&*/ o.ObjectId == obj.Id).ToList().Select(o => new Placed { Time = o.DepotIn.Time, Id = o.Id, Number = o.DepotIn.Note, StateTime = (DataContext.DepotToOut.SingleOrDefault(ox => ox.State == 1 && ox.Code == o.Code) == null ? o.DepotIn.Time : DataContext.DepotToOut.Single(ox => ox.State == 1 && ox.Code == o.Code).Time), State = (DataContext.DepotToOut.SingleOrDefault(ox => ox.State == 1 && ox.Code == o.Code) == null ? "使用中" : "已报废"), Ordinal = o.Ordinal, Fixed = true, Place = o.Place, Code = o.Code }).OrderBy(o => o.Ordinal).ToList();
             grid.DataSource = source;
         }
         else

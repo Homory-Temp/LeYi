@@ -68,7 +68,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <span class="btn btn-info">期初：</span>
-                            <telerik:RadMonthYearPicker ID="ps" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="false">
+                            <telerik:RadMonthYearPicker ID="ps" runat="server" MinDate="0001-01-01" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="false">
                                 <DatePopupButton runat="server" Visible="false" />
                             </telerik:RadMonthYearPicker>
                             &nbsp;&nbsp;
@@ -85,43 +85,55 @@
                     <div class="row">&nbsp;</div>
                     <div class="row">
                         <div class="col-md-12">
+                            <input type="hidden" id="___total" runat="server" value="@@@@@@@@@@" />
                             <!-- Start Printing -->
-                        <telerik:RadGrid ID="grid" runat="server" AutoGenerateColumns="false" Culture="zh-CN" OnNeedDataSource="grid_NeedDataSource" AllowPaging="true" PageSize="15" LocalizationPath="~/Language">
-                            <MasterTableView CommandItemDisplay="Top">
-                                <CommandItemSettings ShowAddNewRecordButton="false" ShowRefreshButton="false" ShowExportToExcelButton="true" ExportToExcelText="导出" />
-                                <Columns>
-                                    <telerik:GridBoundColumn DataField="CatalogPath" HeaderText="物资类别"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Name" HeaderText="物资名称"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="S" HeaderText="期初数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="SM" HeaderText="期初金额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="I" HeaderText="入库数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="IM" HeaderText="入库金额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="U" HeaderText="出库数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="UM" HeaderText="出库金额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="R" HeaderText="退换数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="RM" HeaderText="退换金额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="O" HeaderText="报废数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="OM" HeaderText="报废金额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="E" HeaderText="期末数量" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="EM" HeaderText="期末金额" DataFormatString="{0:F2}"></telerik:GridBoundColumn>
-                                </Columns>
-                                <NoRecordsTemplate>
-                                    <div class="row">
-                                        <div class="col-md-12 text-center"><div class="btn btn-warning">暂无记录</div></div>
+                            <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="false">
+                                <LayoutTemplate>
+                                    <div class="col-md-12">
+                                        <table class="storeTablePrint text-center">
+                                            <tr>
+                                                <th>物资类别</th>
+                                                <th>物资名称</th>
+                                                <th>期初数量</th>
+                                                <th>期初金额</th>
+                                                <th>入库数量</th>
+                                                <th>入库金额</th>
+                                                <th>出库数量</th>
+                                                <th>出库金额</th>
+                                                <th>报废数量</th>
+                                                <th>报废金额</th>
+                                                <th>期末数量</th>
+                                                <th>期末金额</th>
+                                            </tr>
+                                            <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
+                                            <tr>
+                                                <td colspan="2">总计：</td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[0] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[1] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[2] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[3] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[4] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[5] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[6] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[7] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[8] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[9] %></td>
+                                            </tr>
+                                        </table>
                                     </div>
-                                </NoRecordsTemplate>
-                            </MasterTableView>
-                            <ExportSettings Excel-Format="ExcelML" FileName="Statistics" ExportOnlyData="true" UseItemStyles="false" IgnorePaging="true" OpenInNewWindow="true"></ExportSettings>
-                        </telerik:RadGrid>
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                    <tr><td><%# Eval("CatalogPath") %></td><td><%# Eval("Name") %></td><td><%# Eval("S").ToMoney() %></td><td><%# Eval("SM").ToMoney() %></td><td><%# Eval("I").ToMoney() %></td><td><%# Eval("IM").ToMoney() %></td><td><%# Eval("U").ToMoney() %></td><td><%# Eval("UM").ToMoney() %></td><td><%# Eval("O").ToMoney() %></td><td><%# Eval("OM").ToMoney() %></td><td><%# Eval("E").ToMoney() %></td><td><%# Eval("EM").ToMoney() %></td></tr>
+                                </ItemTemplate>
+                                <EmptyDataTemplate>
+                                    <div class="col-md-12 text-center">
+                                        <div class="btn btn-warning">暂无记录</div>
+                                    </div>
+                                </EmptyDataTemplate>
+                            </telerik:RadListView>
                             <!-- End Printing -->
                         </div>
                     </div>
-                    <%--<div class="row">&nbsp;</div>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <input type="button" class="btn btn-tumblr" id="export" value="导出" runat="server" onserverclick="export_ServerClick" />
-                        </div>
-                    </div>--%>
                 </div>
             </div>
         </telerik:RadAjaxPanel>

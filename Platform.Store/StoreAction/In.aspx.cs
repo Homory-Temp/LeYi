@@ -141,7 +141,7 @@ public partial class StoreAction_In : SingleStorePage
 
     protected void plus_ServerClick(object sender, EventArgs e)
     {
-        counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
+        counter.Value = ((int.Parse(counter.Value)) + 5).ToString();
         var toRem = view_obj.Items.Select(o => (o.FindControl("ObjectInBody") as Control_ObjectInBody)).Select(o => o.PeekValue()).ToList();
         x.Value = toRem.ToJson();
         view_obj.Rebind();

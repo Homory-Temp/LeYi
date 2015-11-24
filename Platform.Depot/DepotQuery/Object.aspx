@@ -128,7 +128,7 @@
                         <Columns>
                             <telerik:GridTemplateColumn HeaderText="编号" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true">
                                 <ItemTemplate>
-                                    <asp:Label runat="server" Text='<%# Eval("Ordinal") %>'></asp:Label>
+                                    <asp:Label runat="server" Text='<%# (int)Eval("Ordinal") == -1 ? (Container.ItemIndex + 1).ToString() : Eval("Ordinal") %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn HeaderText="卡片编号" DataField="Number" SortExpression="Number" UniqueName="Number">
@@ -161,7 +161,7 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn HeaderText="使用状态" DataField="State" SortExpression="State" UniqueName="State" ReadOnly="true">
                                 <ItemTemplate>
-                                    <asp:Label runat="server" Text='<%# Eval("State") %>' ToolTip='<%# Eval("StateTime") %>'></asp:Label>
+                                    <asp:Label runat="server" Text='<%# Eval("State") %>' ToolTip='<%# Eval("State").ToString() == "已报废" ? ((DateTime)Eval("StateTime")).ToString("yyyy-MM-dd") : "" %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                         </Columns>

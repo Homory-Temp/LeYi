@@ -30,56 +30,34 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel-danger">
-                                <div class="panel-heading">
-                                    <div style="text-align: center; width: 100%;">物资管理</div>
-                                </div>
-                                <telerik:RadListView ID="view_action" runat="server" CssClass="panel-body" OnNeedDataSource="view_action_NeedDataSource">
+                    <div class="panel panel-info">
+                        <div class="panel-heading panel">
+                            <div class="panel-title text-center">
+                                物资管理
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <telerik:RadListView ID="view_action" runat="server" CssClass="panel-body" OnNeedDataSource="view_action_NeedDataSource">
                                     <ItemTemplate>
-                                        <div class="col-md-4 text-center" style="cursor: pointer; margin-top: 50px;">
-                                            <div class="row" style="display: none;" onclick="top.location.href = '<%# Eval("Url") %>';">
-                                                <div class="col-md-12">
-                                                    <img src="../Content/Images/Store.png" />
-                                                </div>
-                                            </div>
-                                            <div class="row" onclick="top.location.href = '<%# Eval("Url") %>';">
-                                                <div class="col-md-12">
-                                                    <div class='btn btn-danger dictionaryX'><%# Eval("Name") %></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <a class="btn btn-info dictionaryX" href='<%# Eval("Url") %>'><%# Eval("Name") %></a>
                                     </ItemTemplate>
                                 </telerik:RadListView>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel-info">
-                                <div class="panel-heading">
-                                    <div style="text-align: center; width: 100%;">日常查询</div>
-                                </div>
-                                <telerik:RadListView ID="view_query" runat="server" CssClass="panel-body" OnNeedDataSource="view_query_NeedDataSource">
+                    <div class="panel panel-info">
+                        <div class="panel-heading panel">
+                            <div class="panel-title text-center">
+                                日常查询
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <telerik:RadListView ID="view_query" runat="server" CssClass="panel-body" OnNeedDataSource="view_query_NeedDataSource">
                                     <ItemTemplate>
-                                        <div class="col-md-4 text-center" style="cursor: pointer; margin-top: 50px;">
-                                            <div class="row" style="display: none;" onclick="top.location.href = '<%# Eval("Url") %>';">
-                                                <div class="col-md-12">
-                                                    <img src="../Content/Images/Store.png" />
-                                                </div>
-                                            </div>
-                                            <div class="row" onclick="top.location.href = '<%# Eval("Url") %>';">
-                                                <div class="col-md-12">
-                                                    <div class='btn btn-info dictionaryX'><%# Eval("Name") %></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <a class="btn btn-info dictionaryX" href='<%# Eval("Url") %>'><%# Eval("Name") %></a>
                                     </ItemTemplate>
                                 </telerik:RadListView>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,56 +65,34 @@
             <div class="row">&nbsp;</div>
             <div class="row">
                 <div class="col-md-6" id="scan" runat="server">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel-primary">
-                                <div class="panel-heading">
-                                    <div style="text-align: center; width: 100%;">物资条码</div>
-                                </div>
-                                <telerik:RadListView ID="view_scan" runat="server" CssClass="panel-body" OnNeedDataSource="view_scan_NeedDataSource">
+                    <div class="panel panel-info">
+                        <div class="panel-heading panel">
+                            <div class="panel-title text-center">
+                                物资条码
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <telerik:RadListView ID="view_scan" runat="server" CssClass="panel-body" OnNeedDataSource="view_scan_NeedDataSource">
                                     <ItemTemplate>
-                                        <div class="col-md-4 text-center" style="cursor: pointer; margin-top: 50px;">
-                                            <div class="row" style="display: none;" onclick="top.location.href = '<%# Eval("Url") %>';">
-                                                <div class="col-md-12">
-                                                    <img src="../Content/Images/Store.png" />
-                                                </div>
-                                            </div>
-                                            <div class="row" onclick="top.location.href = '<%# Eval("Url") %>';">
-                                                <div class="col-md-12">
-                                                    <div class='btn btn-primary dictionaryX'><%# Eval("Name") %></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <a class="btn btn-info dictionaryX" href='<%# Eval("Url") %>'><%# Eval("Name") %></a>
                                     </ItemTemplate>
                                 </telerik:RadListView>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel-warning">
-                                <div class="panel-heading">
-                                    <div style="text-align: center; width: 100%;">系统设置</div>
-                                </div>
-                                <telerik:RadListView ID="view_setting" runat="server" CssClass="panel-body" OnNeedDataSource="view_setting_NeedDataSource">
+                    <div class="panel panel-info">
+                        <div class="panel-heading panel">
+                            <div class="panel-title text-center">
+                                系统设置
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <telerik:RadListView ID="view_setting" runat="server" CssClass="panel-body" OnNeedDataSource="view_setting_NeedDataSource">
                                     <ItemTemplate>
-                                        <div class="col-md-4 text-center" style="cursor: pointer; margin-top: 50px;">
-                                            <div class="row" style="display: none;" onclick="top.location.href = '<%# Eval("Url") %>';">
-                                                <div class="col-md-12">
-                                                    <img src="../Content/Images/Store.png" />
-                                                </div>
-                                            </div>
-                                            <div class="row" onclick="top.location.href = '<%# Eval("Url") %>';">
-                                                <div class="col-md-12">
-                                                    <div class='btn btn-warning dictionaryX'><%# Eval("Name") %></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <a class="btn btn-info dictionaryX" href='<%# Eval("Url") %>'><%# Eval("Name") %></a>
                                     </ItemTemplate>
                                 </telerik:RadListView>
-                            </div>
                         </div>
                     </div>
                 </div>

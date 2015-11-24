@@ -19,7 +19,7 @@ public partial class DepotQuery_Statistics : DepotPageSingle
             tree.CheckAllNodes();
             ps.SelectedDate = DateTime.Today;
             pe.SelectedDate = DateTime.Today;
-            grid.Rebind();
+            view.Rebind();
         }
     }
 
@@ -37,31 +37,31 @@ public partial class DepotQuery_Statistics : DepotPageSingle
             _all.Value = "1";
             all.Value = "清除选定";
         }
-        grid.Rebind();
+        view.Rebind();
     }
 
     protected void tree_NodeCheck(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
     {
-        grid.Rebind();
+        view.Rebind();
     }
 
     protected void query_ServerClick(object sender, EventArgs e)
     {
-        grid.Rebind();
+        view.Rebind();
     }
 
-    protected void grid_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
+    protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         var sv = ps.SelectedDate.HasValue ? ps.SelectedDate.Value : DateTime.Today;
         var ev = pe.SelectedDate.HasValue ? pe.SelectedDate.Value : DateTime.Today;
+        if (sv > ev)
+        {
+            var _t = sv;
+            sv = ev;
+            ev = _t;
+        }
         var _s = new DateTime(sv.Year, sv.Month, 1).AddMilliseconds(-1);
         var _e = new DateTime(ev.Year, ev.Month, 1).AddMonths(1);
-        if (_s > _e)
-        {
-            var _t = _s;
-            _s = _e;
-            _e = _t;
-        }
         var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => o.Value.GlobalId()).ToList();
         var source = catalogs.Join(DataContext.DepotST.Where(o => o.Time >= _s && o.Time <= _e), o => o, o => o.CatalogId, (a, b) => b).ToList();
         var list = new List<InMemoryST>();
@@ -92,11 +92,7 @@ public partial class DepotQuery_Statistics : DepotPageSingle
         {
             list = list.Where(o => o.Name == name.Text.Trim()).ToList();
         }
-        grid.DataSource = list.OrderBy(o => o.CatalogPath).ThenBy(o => o.Name).ToList();
-    }
-
-    protected void export_ServerClick(object sender, EventArgs e)
-    {
-
+        ___total.Value = list.Sum(o => o.S).ToMoney() + "@" + list.Sum(o => o.SM).ToMoney() + "@" + list.Sum(o => o.I).ToMoney() + "@" + list.Sum(o => o.IM).ToMoney() + "@" + list.Sum(o => o.U).ToMoney() + "@" + list.Sum(o => o.UM).ToMoney() + "@" + list.Sum(o => o.O).ToMoney() + "@" + list.Sum(o => o.OM).ToMoney() + "@" + list.Sum(o => o.E).ToMoney() + "@" + list.Sum(o => o.EM).ToMoney();
+        view.DataSource = list.OrderBy(o => o.CatalogPath).ThenBy(o => o.Name).ToList();
     }
 }
