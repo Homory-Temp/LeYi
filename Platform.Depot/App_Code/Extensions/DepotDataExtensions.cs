@@ -256,6 +256,41 @@ public static class DepotDataExtensions
         db.DepotDictionaryAdd(depotId, DictionaryType.品牌, brand);
     }
 
+    public static void DepotObjectEditX(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal, string age)
+    {
+        var obj = db.DepotObject.Single(o => o.Id == id);
+        obj.Name = name;
+        obj.PinYin = db.ToPinYin(name).Single();
+        obj.FixedCard = fixedCard;
+        obj.FixedNumber = fixedNumber;
+        obj.Brand = brand;
+        obj.Extension = extension;
+        obj.Unit = unit;
+        obj.Specification = specification;
+        obj.Low = low;
+        obj.High = high;
+        obj.Age = age;
+        obj.ImageA = pa;
+        obj.ImageB = pb;
+        obj.ImageC = pc;
+        obj.ImageD = pd;
+        obj.Note = note;
+        obj.Ordinal = ordinal;
+        var catalogs = db.DepotObjectCatalog.Where(o => o.ObjectId == id && o.IsVirtual == true).ToList();
+        for (var i = 0; i < catalogs.Count(); i++)
+        {
+            db.DepotObjectCatalog.Remove(catalogs.ElementAt(i));
+        }
+        for (var i = 0; i < catalogIds.Count; i++)
+        {
+            db.DepotObjectCatalog.Add(new DepotObjectCatalog { ObjectId = id, CatalogId = catalogIds[i], IsVirtual = true, Level = i, IsLeaf = i == catalogIds.Count - 1 });
+        }
+        db.SaveChanges();
+        db.DepotDictionaryAdd(depotId, DictionaryType.单位, unit);
+        db.DepotDictionaryAdd(depotId, DictionaryType.规格, specification);
+        db.DepotDictionaryAdd(depotId, DictionaryType.品牌, brand);
+    }
+
     public static void DepotObjectRemove(this DepotEntities db, Guid id)
     {
         var obj = db.DepotObject.Single(o => o.Id == id);

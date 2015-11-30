@@ -14,7 +14,7 @@ public partial class DepotAction_Move : DepotPageSingle
             tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
             tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
             tree.DataBind();
-            target.DataSource = DataContext.Depot.Where(o => o.State < State.停用).ToList().Where(o => !o.Featured(DepotType.固定资产库)).OrderBy(o => o.Ordinal).ToList();
+            target.DataSource = DataContext.Depot.Where(o => o.State < State.停用).ToList().Where(o => !o.Featured(DepotType.固定资产库)).OrderBy(o => o.Ordinal).ToList().Where(o => CanVisit(o.Id)).ToList();
             target.DataBind();
         }
     }
@@ -78,6 +78,12 @@ public partial class DepotAction_Move : DepotPageSingle
         {
             cbs.ForEach(o => o.Checked = true && o.Enabled);
         }
+    }
+
+    protected bool CanVisit(Guid depotId)
+    {
+        var userId = DepotUser.Id;
+        return DataContext.DepotMember.Count(o => o.Id == userId && o.DepotId == depotId) > 0;
     }
 
     public static Guid DepotCatalogXAdd(DepotEntities db, Guid depotId, string name)
