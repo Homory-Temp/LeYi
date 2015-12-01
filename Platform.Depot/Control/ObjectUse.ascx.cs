@@ -111,47 +111,61 @@ public partial class Control_ObjectUse : DepotControlSingle
 
     protected void obj_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
-        if (obj.SelectedValue != null && !obj.Text.None())
+        try
         {
-            var id = obj.SelectedValue.GlobalId();
-            var so = DataContext.DepotObject.Single(o => o.Id == id);
-            if (Depot.Featured(DepotType.幼儿园))
-                amount.Value = (double)so.Amount;
-            unit.Text = so.Unit;
-            brand.Text = so.Brand;
-            specification.Text = so.Specification;
-            stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
-            if (so.Consumable)
+            if (obj.SelectedValue != null && !obj.Text.None())
             {
-                act.Items.Clear();
-                act.DataSource = new[] { "领用" };
-                act.DataBind();
+                var id = obj.SelectedValue.GlobalId();
+                var so = DataContext.DepotObject.Single(o => o.Id == id);
+                if (Depot.Featured(DepotType.幼儿园))
+                    amount.Value = (double)so.Amount;
+                unit.Text = so.Unit;
+                brand.Text = so.Brand;
+                specification.Text = so.Specification;
+                stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
+                if (so.Consumable)
+                {
+                    act.Items.Clear();
+                    act.DataSource = new[] { "领用" };
+                    act.DataBind();
+                }
+                else if (so.Single)
+                {
+                    act.Items.Clear();
+                    act.DataSource = new[] { "借用" };
+                    act.DataBind();
+                }
+                else
+                {
+                    act.Items.Clear();
+                    act.DataSource = new[] { "借用", "领用" };
+                    act.DataBind();
+                }
+                if (so.Single)
+                {
+                    amount.Visible = false;
+                    ordinalList.Visible = true;
+                    ordinalList.DataSource = so.DepotInX.ToList().Where(o => o.AvailableAmount == 1).Select(o => o.Ordinal).OrderBy(o => o).ToList();
+                    ordinalList.DataBind();
+                }
+                else
+                {
+                    amount.Visible = true;
+                    ordinalList.Visible = false;
+                }
+                act.SelectedIndex = 0;
             }
-            else if (so.Single)
-            {
-                act.Items.Clear();
-                act.DataSource = new[] { "借用" };
-                act.DataBind();
-            }
-            else
-            {
-                act.Items.Clear();
-                act.DataSource = new[] { "借用", "领用" };
-                act.DataBind();
-            }
-            if (so.Single)
-            {
-                amount.Visible = false;
-                ordinalList.Visible = true;
-                ordinalList.DataSource = so.DepotInX.ToList().Where(o => o.AvailableAmount == 1).Select(o => o.Ordinal).OrderBy(o => o).ToList();
-                ordinalList.DataBind();
-            }
-            else
-            {
-                amount.Visible = true;
-                ordinalList.Visible = false;
-            }
-            act.SelectedIndex = 0;
+        }
+        catch
+        {
+            obj.SelectedIndex = -1;
+            obj.Text = "";
+            unit.Text = "";
+            specification.Text = "";
+            age.Text = "";
+            place.Text = "";
+            stored.Text = "";
+            brand.Text = "";
         }
     }
 }

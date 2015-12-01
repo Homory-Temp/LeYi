@@ -22,9 +22,9 @@ public partial class DepotAction_Use : DepotPageSingle
             //age.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "年龄段", Value = "", Selected = true });
             //age.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.年龄段).ToList();
             //age.DataBind();
-            counter.Value = "5";
             if (!"ObjectId".Query().None())
             {
+                counter.Value = "1";
                 var objId = "ObjectId".Query().GlobalId();
                 var obj = DataContext.DepotObject.Single(o => o.Id == objId);
                 var isVirtual = Depot.Featured(DepotType.固定资产库);
@@ -38,6 +38,7 @@ public partial class DepotAction_Use : DepotPageSingle
             }
             else
             {
+                counter.Value = "5";
                 plus.Visible = true;
                 back.Visible = false;
             }

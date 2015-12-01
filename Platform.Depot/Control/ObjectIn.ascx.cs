@@ -97,21 +97,35 @@ public partial class Control_ObjectIn : DepotControlSingle
 
     protected void obj_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
-        if (obj.SelectedValue != null && !obj.Text.None())
+        try
         {
-            var id = obj.SelectedValue.GlobalId();
-            var so = DataContext.DepotObject.Single(o => o.Id == id);
-            unit.Text = so.Unit;
-            brand.Text = so.Brand;
-            specification.Text = so.Specification;
-            stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
-            var last = so.DepotInX.OrderByDescending(o => o.AutoId).FirstOrDefault();
-            if (last != null)
+            if (obj.SelectedValue != null && !obj.Text.None())
             {
-                priceSet.Value = (double)last.PriceSet;
-                age.Text = last.Age;
-                place.Text = last.Place;
+                var id = obj.SelectedValue.GlobalId();
+                var so = DataContext.DepotObject.Single(o => o.Id == id);
+                unit.Text = so.Unit;
+                brand.Text = so.Brand;
+                specification.Text = so.Specification;
+                stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
+                var last = so.DepotInX.OrderByDescending(o => o.AutoId).FirstOrDefault();
+                if (last != null)
+                {
+                    priceSet.Value = (double)last.PriceSet;
+                    age.Text = last.Age;
+                    place.Text = last.Place;
+                }
             }
+        }
+        catch
+        {
+            obj.SelectedIndex = -1;
+            obj.Text = "";
+            unit.Text = "";
+            specification.Text = "";
+            age.Text = "";
+            place.Text = "";
+            stored.Text = "";
+            brand.Text = "";
         }
     }
 }

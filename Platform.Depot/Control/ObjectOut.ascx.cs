@@ -81,26 +81,40 @@ public partial class Control_ObjectOut : DepotControlSingle
 
     protected void obj_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
-        if (obj.SelectedValue != null && !obj.Text.None())
+        try
         {
-            var id = obj.SelectedValue.GlobalId();
-            var so = DataContext.DepotObject.Single(o => o.Id == id);
-            unit.Text = so.Unit;
-            brand.Text = so.Brand;
-            specification.Text = so.Specification;
-            stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
-            if (so.Single)
+            if (obj.SelectedValue != null && !obj.Text.None())
             {
-                amount.Visible = false;
-                ordinalList.Visible = true;
-                ordinalList.DataSource = so.DepotInX.ToList().Where(o => o.AvailableAmount == 1).Select(o => o.Ordinal).OrderBy(o => o).ToList();
-                ordinalList.DataBind();
+                var id = obj.SelectedValue.GlobalId();
+                var so = DataContext.DepotObject.Single(o => o.Id == id);
+                unit.Text = so.Unit;
+                brand.Text = so.Brand;
+                specification.Text = so.Specification;
+                stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
+                if (so.Single)
+                {
+                    amount.Visible = false;
+                    ordinalList.Visible = true;
+                    ordinalList.DataSource = so.DepotInX.ToList().Where(o => o.AvailableAmount == 1).Select(o => o.Ordinal).OrderBy(o => o).ToList();
+                    ordinalList.DataBind();
+                }
+                else
+                {
+                    amount.Visible = true;
+                    ordinalList.Visible = false;
+                }
             }
-            else
-            {
-                amount.Visible = true;
-                ordinalList.Visible = false;
-            }
+        }
+        catch
+        {
+            obj.SelectedIndex = -1;
+            obj.Text = "";
+            unit.Text = "";
+            specification.Text = "";
+            age.Text = "";
+            place.Text = "";
+            stored.Text = "";
+            brand.Text = "";
         }
     }
 }
