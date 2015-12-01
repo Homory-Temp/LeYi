@@ -37,15 +37,14 @@
                     </div>
                 </div>
                 <div class="row">&nbsp;</div>
-                <div class="row">&nbsp;</div>
                 <div class="row">
                     <div class="col-md-12" style="background: url('Images/bdbg11.png') repeat-x; height: 442px">
                         <div class="panel panel-default" style="border: none; background-color: transparent; box-shadow: none;">
-                            <div class="panel panel-info" style="background-color: transparent; margin-top: 30px;">
+                            <%--<div class="panel panel-info" style="background-color: transparent; margin-top: 30px;">
                                 <div class="panel-heading text-center">
                                     <div class="panel-title" style="font-size: 20px;">用户登录</div>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="panel" style="background-color: transparent; box-shadow: none;">
                                 <div class="panel-body" style="border: none; padding-top: 0; background-color: transparent; text-align: center;">
                                     <input id="___id" runat="server" type="hidden" value="" />
