@@ -123,7 +123,7 @@
                                     </div>
                                 </LayoutTemplate>
                                 <ItemTemplate>
-                                    <tr><td><%# Eval("CatalogPath") %></td><td><%# Eval("Name") %></td><td><%# Eval("S").ToMoney() %></td><td><%# Eval("SM").ToMoney() %></td><td><%# Eval("I").ToMoney() %></td><td><%# Eval("IM").ToMoney() %></td><td><%# Eval("U").ToMoney() %></td><td><%# Eval("UM").ToMoney() %></td><td><%# Eval("O").ToMoney() %></td><td><%# Eval("OM").ToMoney() %></td><td><%# Eval("E").ToMoney() %></td><td><%# Eval("EM").ToMoney() %></td></tr>
+                                    <tr><td><%# Eval("CatalogPath") %></td><td><%# Eval("Name") %></td><td><%# Eval("S").ToAmount() %></td><td><%# Eval("SM").ToMoney() %></td><td><%# Eval("I").ToAmount() %></td><td><%# Eval("IM").ToMoney() %></td><td><%# Eval("U").ToAmount() %></td><td><%# Eval("UM").ToMoney() %></td><td><%# Eval("O").ToAmount() %></td><td><%# Eval("OM").ToMoney() %></td><td><%# Eval("E").ToAmount() %></td><td><%# Eval("EM").ToMoney() %></td></tr>
                                 </ItemTemplate>
                                 <EmptyDataTemplate>
                                     <div class="col-md-12 text-center">

@@ -92,7 +92,7 @@ public partial class DepotQuery_Statistics : DepotPageSingle
         {
             list = list.Where(o => o.Name == name.Text.Trim()).ToList();
         }
-        ___total.Value = list.Sum(o => o.S).ToMoney() + "@" + list.Sum(o => o.SM).ToMoney() + "@" + list.Sum(o => o.I).ToMoney() + "@" + list.Sum(o => o.IM).ToMoney() + "@" + list.Sum(o => o.U).ToMoney() + "@" + list.Sum(o => o.UM).ToMoney() + "@" + list.Sum(o => o.O).ToMoney() + "@" + list.Sum(o => o.OM).ToMoney() + "@" + list.Sum(o => o.E).ToMoney() + "@" + list.Sum(o => o.EM).ToMoney();
+        ___total.Value = list.Sum(o => o.S).ToAmount() + "@" + list.Sum(o => o.SM).ToMoney() + "@" + list.Sum(o => o.I).ToAmount() + "@" + list.Sum(o => o.IM).ToMoney() + "@" + list.Sum(o => o.U).ToAmount() + "@" + list.Sum(o => o.UM).ToMoney() + "@" + list.Sum(o => o.O).ToAmount() + "@" + list.Sum(o => o.OM).ToMoney() + "@" + list.Sum(o => o.E).ToAmount() + "@" + list.Sum(o => o.EM).ToMoney();
         view.DataSource = list.OrderBy(o => o.CatalogPath).ThenBy(o => o.Name).ToList();
     }
 }
