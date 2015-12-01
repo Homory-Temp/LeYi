@@ -102,4 +102,11 @@ public partial class DepotQuery_Out  : DepotPageSingle
         DataContext.DoOut(id);
         view.Rebind();
     }
+
+    protected void fs_ServerClick(object sender, EventArgs e)
+    {
+        var btn = (sender as HtmlInputButton);
+        var url = "../DepotQuery/OutX?DepotId={0}&MainID={1}".Formatted(Depot.Id, btn.Attributes["match"]);
+        Response.Redirect(url);
+    }
 }

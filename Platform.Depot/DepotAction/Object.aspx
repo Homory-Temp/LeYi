@@ -130,7 +130,7 @@
                                                     <div style="height: 160px; text-align: center; cursor: pointer;" onclick="gox(this);" goid='<%# Eval("Id") %>' did='<%# Depot.Id %>'>
                                                         <img class="img-responsive" style="height: 158px; margin: auto;" src='<%# Eval("ImageA").None() ? "../Content/Images/Transparent.png" : Eval("ImageA") %>' />
                                                     </div>
-                                                    <div style="height: 150px;">
+                                                    <div style='<%# (Depot.Featured(Models.DepotType.固定资产库) ? "height: 150px;": "height: 100px;") %>'>
                                                         <table style="margin: auto; width: 90%;">
                                                             <tr style="line-height: 57px; height: 57px; text-align: center;">
                                                                 <td colspan="2" style="line-height: 55px; height: 55px; text-align: center; cursor: pointer;">
@@ -143,11 +143,11 @@
                                                                 <td style="line-height: 28px; height: 28px; text-align: left;">在库：<%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %>
                                                                 </td>
                                                             </tr>
-                                                            <tr style="line-height: 28px; height: 28px; text-align: center;">
+                                                            <tr style='<%# (Depot.Featured(Models.DepotType.固定资产库) ? "line-height: 28px; height: 28px; text-align: center; display: ;": "line-height: 28px; height: 28px; text-align: center; display: none;") %>'>
                                                                 <td colspan="2" style="line-height: 28px; height: 28px; text-align: left;">品牌：<%# Eval("Brand") %>
                                                                 </td>
                                                             </tr>
-                                                            <tr style="line-height: 28px; height: 28px; text-align: center;">
+                                                            <tr style='<%# (Depot.Featured(Models.DepotType.固定资产库) ? "line-height: 28px; height: 28px; text-align: center; display: ;": "line-height: 28px; height: 28px; text-align: center; display: none;") %>'>
                                                                 <td colspan="2" style="line-height: 28px; height: 28px; text-align: left;">规格：<%# Eval("Specification") %>
                                                                 </td>
                                                             </tr>

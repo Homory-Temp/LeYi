@@ -69,7 +69,7 @@ public partial class DepotQuery_Return : DepotPageSingle
         }
         if (!name.Text.Trim().None())
         {
-            source = source.Where(o => o.Name.Equals(name.Text.Trim(), StringComparison.InvariantCultureIgnoreCase)).ToList();
+            source = source.Where(o => o.Name.ToLower().Contains(name.Text.Trim().ToLower())).ToList();
         }
         if (!age.Text.Trim().None() && age.SelectedIndex > 0)
         {
