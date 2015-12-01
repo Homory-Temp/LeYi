@@ -26,18 +26,25 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资扫描 - 盘库" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="扫描盘库" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <telerik:RadTextBox runat="server" ID="scan" Width="200" EmptyMessage="请扫描二维码"></telerik:RadTextBox>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="button" class="btn btn-tumblr" id="scanFlow" runat="server" value="盘点" onserverclick="scanFlow_ServerClick" />
+                </div>
+                <div class="col-md-12 text-center" style="margin-top: 10px;">
+                    <input type="button" class="btn btn-lg btn-tumblr" id="scanFlow" runat="server" value="盘点" onserverclick="scanFlow_ServerClick" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <div id="name" runat="server" class="btn btn-info" style="width: 60%;">
+                    <div id="namex" runat="server" class="btn btn-info" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div id="name" runat="server" class="btn btn-info" style="width: 100%;">
                     </div>
                 </div>
             </div>

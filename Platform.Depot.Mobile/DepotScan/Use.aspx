@@ -35,11 +35,11 @@
                         出库信息选择
                     </div>
                 </div>
-                <div class="col-md-10 text-left">
+                <div class="col-md-12 text-center" style="margin-top: 20px;">
                     <%--<telerik:RadComboBox ID="age" runat="server" AutoPostBack="true" MaxHeight="203" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" OnSelectedIndexChanged="usage_SelectedIndexChanged">
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;--%>
-                    <telerik:RadComboBox ID="people" runat="server" EmptyMessage="借领人" MaxHeight="203" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="240" AllowCustomText="true" AutoPostBack="true" OnSelectedIndexChanged="people_SelectedIndexChanged">
+                    <telerik:RadComboBox ID="people" runat="server" EmptyMessage="借领人" MaxHeight="203" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="120" AllowCustomText="true" AutoPostBack="true" OnSelectedIndexChanged="people_SelectedIndexChanged">
                         <Items>
                             <telerik:RadComboBoxItem Text="" Value="" Selected="true" />
                         </Items>
@@ -47,8 +47,9 @@
                             <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
                         </ItemTemplate>
                     </telerik:RadComboBox>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadDatePicker ID="time" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="true">
+                </div>
+                <div class="col-md-12 text-center" style="margin-top: 20px;">
+                    <telerik:RadDatePicker ID="time" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="true">
                         <Calendar runat="server">
                             <FastNavigationSettings TodayButtonCaption="今日" OkButtonCaption="确定" CancelButtonCaption="取消"></FastNavigationSettings>
                         </Calendar>
@@ -63,9 +64,9 @@
                         出库物资选择
                     </div>
                 </div>
-                <div class="col-md-8 text-center">
-                    <telerik:RadTextBox runat="server" ID="scan" Width="200" EmptyMessage="请扫描二维码"></telerik:RadTextBox>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="col-md-12 text-center" style="margin-top: 20px;">
+                    <telerik:RadTextBox runat="server" ID="scan" Width="120" EmptyMessage="请扫描二维码" MaxLength="12"></telerik:RadTextBox>
+                    &nbsp;&nbsp;
                     <input type="button" class="btn btn-tumblr" id="scanAdd" runat="server" value="添加" title="添加物资" onserverclick="scanAdd_ServerClick" />
                 </div>
                 <div class="col-md-2">
@@ -78,16 +79,7 @@
                         <LayoutTemplate>
                             <table class="storeTable text-center">
                                 <tr>
-                                    <th style="display: none;">物资类别</th>
-                                    <th>物资名称</th>
-                                    <th>出库类型</th>
-                                    <th style="display: none;">单位</th>
-                                    <th style="display: none;">规格</th>
-                                    <th>库存</th>
-                                    <th>数量/编号</th>
-                                    <th style="display: none;">年龄段</th>
-                                    <th style="display: none;">存放地</th>
-                                    <th style="display: none;">备注</th>
+                                    <th>出库信息</th>
                                 </tr>
                                 <asp:PlaceHolder ID="useHolder" runat="server"></asp:PlaceHolder>
                             </table>
@@ -97,15 +89,12 @@
                         </ItemTemplate>
                     </telerik:RadListView>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-12" style="display: none;">
                     <input type="button" class="btn btn-tumblr" id="plus" runat="server" value="+" title="增加" onserverclick="plus_ServerClick" />
                     <input type="hidden" id="counter" runat="server" value="0" />
                     <input type="hidden" id="x" runat="server" value="" />
                 </div>
-                <div class="col-md-4">&nbsp;</div>
-                <div class="col-md-4 text-left">
-                    &nbsp;
-                </div>
+                <div class="col-md-12">&nbsp;</div>
                 <div class="col-md-12 text-center">
                     <input type="button" class="btn btn-tumblr" id="do_use" runat="server" value="出库" onserverclick="do_use_ServerClick" />
                 </div>
@@ -115,6 +104,9 @@
                     <div class="btn btn-danger">该用户存在指定期限内未归还的物品，请先归还。</div>
                 </div>
             </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">&nbsp;</div>
+            <div class="row">&nbsp;</div>
         </telerik:RadAjaxPanel>
     </form>
 </body>

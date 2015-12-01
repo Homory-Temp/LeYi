@@ -69,7 +69,8 @@ public partial class DepotScan_CheckDo : DepotPageSingle
             checks.AddRange(item.CodeJson.FromJson<List<InMemoryCheck>>());
         }
         view.DataSource = checks;
-        name.InnerText = "{0} 总数：{1} 已盘：{2} 未盘：{3}".Formatted(items[0].Name, checks.Count, checks.Count(o => o.In == true), checks.Count(o => o.In == false));
+        name.InnerText = "总数：{0} 已盘：{1} 未盘：{2}".Formatted(checks.Count, checks.Count(o => o.In == true), checks.Count(o => o.In == false));
+        namex.InnerText = items[0].Name;
         h.Value = checks.ToJson();
     }
 }

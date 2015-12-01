@@ -35,8 +35,8 @@
                         报废信息选择
                     </div>
                 </div>
-                <div class="col-md-10 text-left">
-                    <telerik:RadComboBox ID="people" runat="server" EmptyMessage="报废申请人" MaxHeight="203" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="240" AllowCustomText="true" AutoPostBack="true" OnSelectedIndexChanged="people_SelectedIndexChanged">
+                <div class="col-md-12 text-center" style="margin-top: 20px;">
+                    <telerik:RadComboBox ID="people" runat="server" EmptyMessage="报废申请人" MaxHeight="203" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="120" AllowCustomText="true" AutoPostBack="true" OnSelectedIndexChanged="people_SelectedIndexChanged">
                         <Items>
                             <telerik:RadComboBoxItem Text="" Value="" Selected="true" />
                         </Items>
@@ -44,8 +44,9 @@
                             <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
                         </ItemTemplate>
                     </telerik:RadComboBox>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadDatePicker ID="time" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="true">
+                 </div>
+                <div class="col-md-12 text-center" style="margin-top: 20px;">
+                    <telerik:RadDatePicker ID="time" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="true">
                         <Calendar runat="server">
                             <FastNavigationSettings TodayButtonCaption="今日" OkButtonCaption="确定" CancelButtonCaption="取消"></FastNavigationSettings>
                         </Calendar>
@@ -60,8 +61,8 @@
                         报废物资选择
                     </div>
                 </div>
-                <div class="col-md-8 text-center">
-                    <telerik:RadTextBox runat="server" ID="scan" Width="200" EmptyMessage="请扫描二维码"></telerik:RadTextBox>
+                <div class="col-md-12 text-center" style="margin-top: 20px;">
+                    <telerik:RadTextBox runat="server" ID="scan" Width="120" EmptyMessage="请扫描二维码"></telerik:RadTextBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="button" class="btn btn-tumblr" id="scanAdd" runat="server" value="添加" title="添加物资" onserverclick="scanAdd_ServerClick" />
                 </div>
@@ -75,13 +76,7 @@
                         <LayoutTemplate>
                             <table class="storeTable text-center">
                                 <tr>
-                                    <th style="display: none;">物资类别</th>
-                                    <th>物资名称</th>
-                                    <th style="display: none;">单位</th>
-                                    <th style="display: none;">规格</th>
-                                    <th>库存</th>
-                                    <th>数量/编号</th>
-                                    <th>报废原因</th>
+                                    <th>报废信息</th>
                                 </tr>
                                 <asp:PlaceHolder ID="useHolder" runat="server"></asp:PlaceHolder>
                             </table>
@@ -91,19 +86,19 @@
                         </ItemTemplate>
                     </telerik:RadListView>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-12" style="display: none;">
                     <input type="button" class="btn btn-tumblr" id="plus" runat="server" value="+" title="增加" onserverclick="plus_ServerClick" />
                     <input type="hidden" id="counter" runat="server" value="0" />
                     <input type="hidden" id="x" runat="server" value="" />
                 </div>
-                <div class="col-md-4">&nbsp;</div>
-                <div class="col-md-4 text-left">
-                    &nbsp;
-                </div>
+                <div class="col-md-12">&nbsp;</div>
                 <div class="col-md-12 text-center">
                     <input type="button" class="btn btn-tumblr" id="do_out" runat="server" value="报废" onserverclick="do_out_ServerClick" />
                 </div>
             </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">&nbsp;</div>
+            <div class="row">&nbsp;</div>
         </telerik:RadAjaxPanel>
     </form>
 </body>

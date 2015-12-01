@@ -77,10 +77,17 @@ public partial class DepotScan_Use : DepotPageSingle
 
     protected void plus_ServerClick(object sender, EventArgs e)
     {
-        counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
-        var toRem = view_obj.Items.Select(o => (o.FindControl("ObjectUse") as Control_ObjectUse)).Select(o => o.PeekValue()).ToList();
-        x.Value = toRem.ToJson();
-        view_obj.Rebind();
+        try
+        {
+            counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
+            var toRem = view_obj.Items.Select(o => (o.FindControl("ObjectUse") as Control_ObjectUse)).Select(o => o.PeekValue()).ToList();
+            x.Value = toRem.ToJson();
+            view_obj.Rebind();
+        }
+        catch
+        {
+
+        }
     }
 
     protected void view_obj_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
@@ -118,16 +125,21 @@ public partial class DepotScan_Use : DepotPageSingle
 
     protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
     {
-        var c = e.Item.FindControl("ObjectUse") as Control_ObjectUse;
-        var list = x.Value.None() ? new List<InMemoryUse>() : x.Value.FromJson<List<InMemoryUse>>();
-        if (list.Count < c.ItemIndex + 1)
+        try
         {
-            c.LoadDefaults(new InMemoryUse { /*Age = age.Text,*/ Ordinals = new List<int>() });
+            var c = e.Item.FindControl("ObjectUse") as Control_ObjectUse;
+            var list = x.Value.None() ? new List<InMemoryUse>() : x.Value.FromJson<List<InMemoryUse>>();
+            if (list.Count < c.ItemIndex + 1)
+            {
+                c.LoadDefaults(new InMemoryUse { /*Age = age.Text,*/ Ordinals = new List<int>() });
+            }
+            else
+            {
+                c.LoadDefaults(list[c.ItemIndex]);
+            }
         }
-        else
-        {
-            c.LoadDefaults(list[c.ItemIndex]);
-        }
+        catch
+        { }
     }
 
     protected void Reset()

@@ -35,7 +35,7 @@
                         归还日期选择
                     </div>
                 </div>
-                <div class="col-md-10 text-left">
+                <div class="col-md-10 text-center" style="margin-top: 20px;">
                     <%--<telerik:RadComboBox ID="people" runat="server"  MaxHeight="203" EmptyMessage="借领人" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="240" AllowCustomText="true" AutoPostBack="true" OnSelectedIndexChanged="people_SelectedIndexChanged">
                         <Items>
                             <telerik:RadComboBoxItem Text="" Value="" Selected="true" />
@@ -45,7 +45,7 @@
                         </ItemTemplate>
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;--%>
-                    <telerik:RadDatePicker ID="time" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="true">
+                    <telerik:RadDatePicker ID="time" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="true">
                         <Calendar runat="server">
                             <FastNavigationSettings TodayButtonCaption="今日" OkButtonCaption="确定" CancelButtonCaption="取消"></FastNavigationSettings>
                         </Calendar>
@@ -60,9 +60,9 @@
                         归还物资选择
                     </div>
                 </div>
-                <div class="col-md-8 text-center">
-                    <telerik:RadTextBox runat="server" ID="scan" Width="200" EmptyMessage="请扫描二维码"></telerik:RadTextBox>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="col-md-12 text-center" style="margin-top: 20px;">
+                    <telerik:RadTextBox runat="server" ID="scan" Width="120" EmptyMessage="请扫描二维码"></telerik:RadTextBox>
+                    &nbsp;&nbsp;
                     <input type="button" class="btn btn-tumblr" id="scanAdd" runat="server" value="添加" title="添加物资" onserverclick="scanAdd_ServerClick" />
                 </div>
                 <div class="col-md-2">
@@ -75,12 +75,7 @@
                         <LayoutTemplate>
                             <table class="storeTable text-center">
                                 <tr>
-                                    <th>借用日期</th>
-                                    <th>物资名称</th>
-                                    <th style="display: none;">合计</th>
-                                    <th>归还数</th>
-                                    <th>报废数</th>
-                                    <th style="display: none;">备注</th>
+                                    <th>归还信息</th>
                                 </tr>
                                 <asp:PlaceHolder ID="useHolder" runat="server"></asp:PlaceHolder>
                             </table>
@@ -88,25 +83,20 @@
                         <ItemTemplate>
                             <homory:ObjectReturn runat="server" ID="ObjectReturn" ItemIndex='<%# Container.DataItemIndex %>' />
                         </ItemTemplate>
-                        <EmptyDataTemplate>
-                                <div class="col-md-12 text-center">
-                                    <div class="btn btn-warning">无借用记录</div>
-                                </div>
-                        </EmptyDataTemplate>
                     </telerik:RadListView>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-12" style="display: none;">
                     <input type="hidden" id="counter" runat="server" value="0" />
                     <input type="hidden" id="x" runat="server" value="" />
                 </div>
-                <div class="col-md-4">&nbsp;</div>
-                <div class="col-md-4 text-left">
-                    &nbsp;
-                </div>
+                <div class="col-md-12">&nbsp;</div>
                 <div class="col-md-12 text-center">
                     <input type="button" class="btn btn-tumblr" id="do_return" runat="server" value="归还" onserverclick="do_return_ServerClick" />
                 </div>
             </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">&nbsp;</div>
+            <div class="row">&nbsp;</div>
         </telerik:RadAjaxPanel>
     </form>
 </body>

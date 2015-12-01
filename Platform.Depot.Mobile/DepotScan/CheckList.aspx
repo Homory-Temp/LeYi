@@ -39,7 +39,7 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资条码 - 盘库任务列表" />
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="扫描盘库" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-12">
@@ -48,8 +48,6 @@
                             <table class="storeTable">
                                 <tr>
                                     <th>盘库任务</th>
-                                    <th>盘库任务生成时间</th>
-                                    <th>操作</th>
                                 </tr>
                                 <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
                             </table>
@@ -57,13 +55,9 @@
                         <ItemTemplate>
                             <tr>
                                 <td>
-                                    <%# Eval("Name") %>
-                                </td>
-                                <td>
-                                    <%#  ((DateTime)Eval("Time")).ToString("yyyy-MM-dd HH:mm:ss") %>
-                                </td>
-                                <td>
-                                    <input type="button" class="btn btn-tumblr" value="盘库" id="start" runat="server" match='<%# Eval("BatchId") %>' onserverclick="start_ServerClick" />
+                                    <div class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;">名称：</span><%# Eval("Name") %></div>
+                                    <div class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;">时间：</span><%#  ((DateTime)Eval("Time")).ToString("yyyy-MM-dd HH:mm:ss") %></div>
+                                    <div><input type="button" class="btn btn-lg btn-tumblr" value="盘库" id="start" runat="server" match='<%# Eval("BatchId") %>' onserverclick="start_ServerClick" /></div>
                                 </td>
                             </tr>
                         </ItemTemplate>

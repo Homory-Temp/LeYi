@@ -31,7 +31,7 @@
             <div class="row">
                 <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource">
                     <ItemTemplate>
-                        <div class="col-md-4 col-xs-6 text-center" id="area" runat="server" style='<%# CanVisit((Guid)Eval("Id")) ? "display: block; cursor: pointer;": "display: none; cursor: pointer;" %>'>
+                        <div class="col-md-4 col-xs-12 text-center" id="area" runat="server" style='<%# CanVisit((Guid)Eval("Id")) ? "display: block; cursor: pointer;": "display: none; cursor: pointer;" %>'>
                             <div class="row">&nbsp;</div>
                             <div class="row" onclick="top.location.href = '../Depot/DepotHome?DepotId=<%# Eval("Id") %>';">
                                 <div class="col-md-12">
