@@ -62,7 +62,7 @@
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotQuery/InX?DepotId={0}".Formatted(Depot.Id) %>'>入库查询</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotQuery/Use?DepotId={0}".Formatted(Depot.Id) %>'>出库单查询</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotQuery/UseX?DepotId={0}".Formatted(Depot.Id) %>'>出库查询</a>
-                            <a class="btn btn-info dictionaryX" href='<%= "../DepotQuery/Return?DepotId={0}".Formatted(Depot.Id) %>'>归还查询</a>
+                            <%--<a class="btn btn-info dictionaryX" href='<%= "../DepotQuery/Return?DepotId={0}".Formatted(Depot.Id) %>'>归还查询</a>--%>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotQuery/Out?DepotId={0}".Formatted(Depot.Id) %>'>报废查询</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotScan/CheckList?DepotId={0}".Formatted(Depot.Id) %>'>盘库查询</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotQuery/Statistics?DepotId={0}".Formatted(Depot.Id) %>'>汇总统计</a>
