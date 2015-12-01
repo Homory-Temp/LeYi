@@ -111,8 +111,6 @@ public partial class Control_ObjectOut : DepotControlSingle
             obj.Text = "";
             unit.Text = "";
             specification.Text = "";
-            age.Text = "";
-            place.Text = "";
             stored.Text = "";
             brand.Text = "";
         }
