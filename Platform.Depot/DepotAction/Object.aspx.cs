@@ -160,4 +160,9 @@ public partial class DepotAction_Object : DepotPageSingle
     {
         Response.Redirect("~/DepotAction/Out?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
+
+    protected void only_CheckedChanged(object sender, EventArgs e)
+    {
+        view.Rebind();
+    }
 }

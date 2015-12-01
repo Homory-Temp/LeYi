@@ -71,9 +71,9 @@
                         <div class="col-md-6 text-center">
                             <telerik:RadTextBox ID="toSearch" runat="server" Width="200" EmptyMessage="输入要检索的物资名称"></telerik:RadTextBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <telerik:RadButton ID="only" runat="server" Text="仅固定资产" AutoPostBack="false" ButtonType="ToggleButton" ToggleType="CheckBox"></telerik:RadButton>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <telerik:RadButton ID="only" runat="server" Text="仅固定资产" AutoPostBack="true" ButtonType="ToggleButton" ToggleType="CheckBox" OnCheckedChanged="only_CheckedChanged"></telerik:RadButton>
                         </div>
                         <div class="col-md-3 text-right">
                             <input id="view_simple" runat="server" type="button" value="简洁模式" onserverclick="view_simple_ServerClick" />
