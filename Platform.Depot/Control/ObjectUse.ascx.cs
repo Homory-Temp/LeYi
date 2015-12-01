@@ -28,6 +28,8 @@ public partial class Control_ObjectUse : DepotControlSingle
             {
                 var oid = use.ObjectId.Value;
                 var so = DataContext.DepotObject.Single(o => o.Id == oid);
+                if (Depot.Featured(DepotType.幼儿园))
+                    amount.Value = (double)so.Amount;
                 unit.Text = so.Unit;
                 brand.Text = so.Brand;
                 specification.Text = so.Specification;
@@ -113,6 +115,8 @@ public partial class Control_ObjectUse : DepotControlSingle
         {
             var id = obj.SelectedValue.GlobalId();
             var so = DataContext.DepotObject.Single(o => o.Id == id);
+            if (Depot.Featured(DepotType.幼儿园))
+                amount.Value = (double)so.Amount;
             unit.Text = so.Unit;
             brand.Text = so.Brand;
             specification.Text = so.Specification;
