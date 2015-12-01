@@ -238,6 +238,7 @@
           <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="MainID" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="DepotPeriod">
           <Key>
@@ -385,8 +386,39 @@
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TimeStamp" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotCatalogTree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.__DepotOrderContent”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="__DepotOrderContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MainID" Type="varchar" MaxLength="11" />
+          <Property Name="物品名称" Type="varchar" MaxLength="100" />
+          <Property Name="规格" Type="varchar" MaxLength="100" />
+          <Property Name="请购数量" Type="int" />
+          <Property Name="单价" Type="nchar" MaxLength="100" />
+          <Property Name="要求" Type="varchar" MaxLength="50" />
+          <Property Name="用途" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.__DepotOrderFlow”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="__DepotOrderFlow">
+          <Key>
+            <PropertyRef Name="AppD_ID" />
+            <PropertyRef Name="步骤" />
+            <PropertyRef Name="状态" />
+          </Key>
+          <Property Name="AppD_ID" Type="int" Nullable="false" />
+          <Property Name="MainID" Type="varchar" MaxLength="1000" />
+          <Property Name="步骤" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="办理人" Type="varchar" MaxLength="50" />
+          <Property Name="状态" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="意见" Type="varchar" MaxLength="5000" />
+          <Property Name="时间" Type="varchar" MaxLength="16" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotCatalogTree”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotCatalogTree">
           <Key>
             <PropertyRef Name="Id" />
@@ -412,8 +444,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotCatalogTree' does not have a 
           <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Count" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotCreator' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotCreator”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotCreator">
           <Key>
             <PropertyRef Name="Id" />
@@ -429,8 +461,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotCreator' does not have a prim
           <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotInRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotInRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotInRecord">
           <Key>
             <PropertyRef Name="Id" />
@@ -468,8 +500,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInRecord' does not have a pri
           <Property Name="操作人" Type="nvarchar" MaxLength="64" />
           <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotInXRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotInXRecord">
           <Key>
             <PropertyRef Name="OrderName" />
@@ -522,8 +554,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a pr
           <Property Name="OrderSource" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="UsageTarget" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotMember' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotMember”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotMember">
           <Key>
             <PropertyRef Name="Id" />
@@ -539,8 +571,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotMember' does not have a prima
           <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotObjectX' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotObjectX”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotObjectX">
           <Key>
             <PropertyRef Name="Id" />
@@ -598,8 +630,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotObjectX' does not have a prim
           <Property Name="Age" Type="nvarchar" MaxLength="256" />
           <Property Name="DepotName" Type="nvarchar" MaxLength="64" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotOutRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotOutRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotOutRecord">
           <Key>
             <PropertyRef Name="Id" />
@@ -644,8 +676,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotOutRecord' does not have a pr
           <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotRedoRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotRedoRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotRedoRecord">
           <Key>
             <PropertyRef Name="Name" />
@@ -674,8 +706,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotRedoRecord' does not have a p
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotReturnRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotReturnRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotReturnRecord">
           <Key>
             <PropertyRef Name="ReturnAmount" />
@@ -724,8 +756,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotReturnRecord' does not have a
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotST”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotST">
           <Key>
             <PropertyRef Name="Consumable" />
@@ -777,8 +809,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotST' does not have a primary k
           <Property Name="EndAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="EndMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotUser”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -794,8 +826,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotUseXRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotUseXRecord">
           <Key>
             <PropertyRef Name="Id" />
@@ -1120,6 +1152,29 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySet Name="DepotUserRole" EntityType="Self.DepotUserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotUseX" EntityType="Self.DepotUseX" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="__DepotOrderContent" EntityType="Self.__DepotOrderContent" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [__DepotOrderContent].[Id] AS [Id], 
+    [__DepotOrderContent].[MainID] AS [MainID], 
+    [__DepotOrderContent].[物品名称] AS [物品名称], 
+    [__DepotOrderContent].[规格] AS [规格], 
+    [__DepotOrderContent].[请购数量] AS [请购数量], 
+    [__DepotOrderContent].[单价] AS [单价], 
+    [__DepotOrderContent].[要求] AS [要求], 
+    [__DepotOrderContent].[用途] AS [用途]
+    FROM [dbo].[__DepotOrderContent] AS [__DepotOrderContent]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="__DepotOrderFlow" EntityType="Self.__DepotOrderFlow" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [__DepotOrderFlow].[AppD_ID] AS [AppD_ID], 
+    [__DepotOrderFlow].[MainID] AS [MainID], 
+    [__DepotOrderFlow].[步骤] AS [步骤], 
+    [__DepotOrderFlow].[办理人] AS [办理人], 
+    [__DepotOrderFlow].[状态] AS [状态], 
+    [__DepotOrderFlow].[意见] AS [意见], 
+    [__DepotOrderFlow].[时间] AS [时间]
+    FROM [dbo].[__DepotOrderFlow] AS [__DepotOrderFlow]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="DepotCatalogTree" EntityType="Self.DepotCatalogTree" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DepotCatalogTree].[Id] AS [Id], 
@@ -1601,6 +1656,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <End Role="DepotCatalog" EntitySet="DepotCatalog" />
             <End Role="DepotPeriod" EntitySet="DepotPeriod" />
           </AssociationSet>
+          <EntitySet Name="C__DepotOrderFlow" EntityType="DepotModel.C__DepotOrderFlow" />
+          <EntitySet Name="C__DepotOrderContent" EntityType="DepotModel.C__DepotOrderContent" />
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -1697,6 +1754,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="State" Type="DepotModel.State" Nullable="false" />
           <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotIn_DepotOrder" FromRole="DepotOrder" ToRole="DepotIn" />
           <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotOrder" FromRole="DepotOrder" ToRole="DepotInX" />
+          <Property Name="MainID" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DepotUser">
           <Key>
@@ -2719,6 +2777,33 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="C__DepotOrderFlow">
+          <Key>
+            <PropertyRef Name="AppD_ID" />
+            <PropertyRef Name="步骤" />
+            <PropertyRef Name="状态" />
+          </Key>
+          <Property Name="AppD_ID" Type="Int32" Nullable="false" />
+          <Property Name="MainID" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="步骤" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="办理人" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="状态" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="意见" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="时间" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="C__DepotOrderContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MainID" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="物品名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="规格" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="请购数量" Type="Int32" />
+          <Property Name="单价" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="要求" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="用途" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2789,6 +2874,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotOrder">
             <EntityTypeMapping TypeName="DepotModel.DepotOrder">
               <MappingFragment StoreEntitySet="DepotOrder">
+                <ScalarProperty Name="MainID" ColumnName="MainID" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
                 <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
@@ -3396,6 +3482,33 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
                 <ScalarProperty Name="Users" ColumnName="Users" />
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
                 <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__DepotOrderFlow">
+            <EntityTypeMapping TypeName="DepotModel.C__DepotOrderFlow">
+              <MappingFragment StoreEntitySet="__DepotOrderFlow">
+                <ScalarProperty Name="时间" ColumnName="时间" />
+                <ScalarProperty Name="意见" ColumnName="意见" />
+                <ScalarProperty Name="状态" ColumnName="状态" />
+                <ScalarProperty Name="办理人" ColumnName="办理人" />
+                <ScalarProperty Name="步骤" ColumnName="步骤" />
+                <ScalarProperty Name="MainID" ColumnName="MainID" />
+                <ScalarProperty Name="AppD_ID" ColumnName="AppD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__DepotOrderContent">
+            <EntityTypeMapping TypeName="DepotModel.C__DepotOrderContent">
+              <MappingFragment StoreEntitySet="__DepotOrderContent">
+                <ScalarProperty Name="用途" ColumnName="用途" />
+                <ScalarProperty Name="要求" ColumnName="要求" />
+                <ScalarProperty Name="单价" ColumnName="单价" />
+                <ScalarProperty Name="请购数量" ColumnName="请购数量" />
+                <ScalarProperty Name="规格" ColumnName="规格" />
+                <ScalarProperty Name="物品名称" ColumnName="物品名称" />
+                <ScalarProperty Name="MainID" ColumnName="MainID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

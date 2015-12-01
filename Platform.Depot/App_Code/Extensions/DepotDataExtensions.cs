@@ -373,7 +373,7 @@ public static class DepotDataExtensions
         db.SaveChanges();
     }
 
-    public static void DepotOrderAdd(this DepotEntities db, Guid id, Guid depotId, string name, string receipt, string orderSource, string usageTarget, string note, decimal toPay, decimal paid, Guid? brokerageId, Guid? keeperId, DateTime orderTime, Guid operatorId)
+    public static void DepotOrderAdd(this DepotEntities db, Guid id, Guid depotId, string name, string receipt, string orderSource, string usageTarget, string note, decimal toPay, decimal paid, Guid? brokerageId, Guid? keeperId, DateTime orderTime, Guid operatorId, string flowNo)
     {
         var order = new DepotOrder
         {
@@ -393,6 +393,7 @@ public static class DepotDataExtensions
             RecordTime = orderTime,
             OperatorId = operatorId,
             OperationTime = DateTime.Now,
+            MainID = flowNo,
             State = State.启用
         };
         db.DepotOrder.Add(order);

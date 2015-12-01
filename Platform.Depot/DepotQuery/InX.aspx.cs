@@ -75,7 +75,7 @@ public partial class DepotQuery_InX : DepotPageSingle
         var start = timex.AddMilliseconds(-1);
         var end = time.AddDays(1);
         var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => o.Value.GlobalId()).ToList();
-        var source = catalogs.Join(DataContext.DepotInXRecord.Where(o => o.Time > start && o.Time < end), o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.Time).ThenBy(o => o.OrderName).ToList();
+        var source = catalogs.Join(DataContext.DepotInXRecord.Where(o => o.Time > start && o.Time < end && o.Amount > 0), o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.Time).ThenBy(o => o.OrderName).ToList();
         if (age.SelectedIndex > 0 && !age.Text.None())
             source = source.Where(o => o.Age == age.Text).ToList();
         if (place.SelectedIndex > 0 && !place.Text.None())

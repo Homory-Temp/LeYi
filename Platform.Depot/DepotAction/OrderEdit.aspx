@@ -156,6 +156,12 @@
                             </telerik:RadComboBox>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">流程编号：</div>
+                        <div class="col-md-8 text-left">
+                            <telerik:RadTextBox ID="fno" runat="server" Width="400"></telerik:RadTextBox>
+                        </div>
+                    </div>
                     <div class="row">&nbsp;</div>
                     <div class="row">
                         <div class="col-md-4 text-right">&nbsp;</div>

@@ -126,6 +126,7 @@
                                 <input type="button" class="btn btn-tumblr" value="办结" id="done" runat="server" match='<%# Eval("Id") %>' visible='<%# !(bool)Eval("Done") %>' onserverclick="done_ServerClick" />
                                 <input type="button" class="btn btn-tumblr" value="补办" id="redo" runat="server" match='<%# Eval("Id") %>' visible='<%# (bool)Eval("Done") && RightRoot %>' onserverclick="redo_ServerClick" />
                                 <input type="button" class="btn btn-tumblr" value="打印" id="print" runat="server" match='<%# Eval("Id") %>' visible='<%# (bool)Eval("Done") %>' onserverclick="print_ServerClick" />
+                                <input type="button" class="btn btn-tumblr" value="流程" id="fs" runat="server" match='<%# Eval("Id") %>' onserverclick="fs_ServerClick" />
                             </td>
                         </tr>
                     </ItemTemplate>

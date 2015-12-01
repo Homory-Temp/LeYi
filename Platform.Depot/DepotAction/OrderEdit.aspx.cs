@@ -17,6 +17,7 @@ public partial class DepotAction_OrderEdit : DepotPageSingle
                 @in.Visible = false;
             var orderId = "OrderId".Query().GlobalId();
             var order = DataContext.DepotOrder.Single(o => o.Id == orderId);
+            fno.Text = order.MainID ?? string.Empty;
             day.SelectedDate = order.RecordTime;
             source.Items.Clear();
             source.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.购置来源).ToList();
@@ -97,6 +98,7 @@ public partial class DepotAction_OrderEdit : DepotPageSingle
         order.BrokerageId = brokerage.SelectedIndex > 0 ? brokerage.SelectedValue.GlobalId() : (Guid?)null;
         order.KeeperId = keep.SelectedIndex > 0 ? keep.SelectedValue.GlobalId() : (Guid?)null;
         order.RecordTime = time;
+        order.MainID = fno.Text.Trim();
         DataContext.SaveChanges();
         DataContext.DepotDictionaryAdd(Depot.Id, DictionaryType.购置来源, source.Text.Trim());
         DataContext.DepotDictionaryAdd(Depot.Id, DictionaryType.使用对象, usage.Text.Trim());

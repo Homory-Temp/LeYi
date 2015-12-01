@@ -70,7 +70,7 @@ public partial class DepotAction_Order : DepotPageSingle
     {
         var id = DataContext.GlobalId();
         var time = day.SelectedDate.HasValue ? day.SelectedDate.Value : DateTime.Today;
-        DataContext.DepotOrderAdd(id, Depot.Id, number.Text.None() ? number.EmptyMessage.Trim() : number.Text.Trim(), receipt.Text.Trim(), source.Text.Trim(), usage.Text.Trim(), content.Text.Trim(), toPay.PeekValue(0.00M), paid.PeekValue(0.00M), (brokerage.SelectedIndex > 0 ? brokerage.SelectedValue.GlobalId() : (Guid?)null), (keep.SelectedIndex > 0 ? keep.SelectedValue.GlobalId() : (Guid?)null), time, DepotUser.Id);
+        DataContext.DepotOrderAdd(id, Depot.Id, number.Text.None() ? number.EmptyMessage.Trim() : number.Text.Trim(), receipt.Text.Trim(), source.Text.Trim(), usage.Text.Trim(), content.Text.Trim(), toPay.PeekValue(0.00M), paid.PeekValue(0.00M), (brokerage.SelectedIndex > 0 ? brokerage.SelectedValue.GlobalId() : (Guid?)null), (keep.SelectedIndex > 0 ? keep.SelectedValue.GlobalId() : (Guid?)null), time, DepotUser.Id, fno.Text.Trim());
         DataContext.SaveChanges();
         return id;
     }
