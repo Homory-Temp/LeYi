@@ -9,6 +9,7 @@ public partial class DepotQuery_InPrint : DepotPageSingle
     {
         if (!IsPostBack)
         {
+            Title = "报废流程";
         }
     }
 

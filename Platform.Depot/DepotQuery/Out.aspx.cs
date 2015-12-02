@@ -107,6 +107,6 @@ public partial class DepotQuery_Out  : DepotPageSingle
     {
         var btn = (sender as HtmlInputButton);
         var url = "../DepotQuery/OutX?DepotId={0}&MainID={1}".Formatted(Depot.Id, btn.Attributes["match"]);
-        Response.Redirect(url);
+        ap.ResponseScripts.Add("pop('{0}');".Formatted(url));
     }
 }
