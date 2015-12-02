@@ -16,17 +16,20 @@ public partial class DepotAction_In : DepotPageSingle
             period.SelectedDate = DateTime.Today;
             inTime.SelectedDate = DateTime.Today;
             people.Items.Clear();
-            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "0", Selected = true });
+            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "", Value = "0", Selected = true });
             people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
             people.DataBind();
+            people.SelectedIndex = -1;
             source.Items.Clear();
-            source.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "购置来源", Value = "", Selected = true });
+            source.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "", Value = "", Selected = true });
             source.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.购置来源).ToList();
             source.DataBind();
+            source.SelectedIndex = -1;
             usage.Items.Clear();
-            usage.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "使用对象", Value = "", Selected = true });
+            usage.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "", Value = "", Selected = true });
             usage.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.使用对象).ToList();
             usage.DataBind();
+            usage.SelectedIndex = -1;
             if (!"OrderId".Query().None() || !Session["DepotToInOrder"].None())
             {
                 var value = "OrderId".Query().None() ? Session["DepotToInOrder"].ToString() : "OrderId".Query();

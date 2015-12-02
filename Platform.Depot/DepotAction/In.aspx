@@ -84,13 +84,13 @@
                         <DatePopupButton runat="server" Visible="false" />
                     </telerik:RadMonthYearPicker>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="source" runat="server" AutoPostBack="true" MaxHeight="203" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" OnSelectedIndexChanged="source_SelectedIndexChanged">
+                    <telerik:RadComboBox ID="source" runat="server" AutoPostBack="true" MaxHeight="203" Width="120" EmptyMessage="购置来源" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" OnSelectedIndexChanged="source_SelectedIndexChanged">
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="usage" runat="server" AutoPostBack="true" MaxHeight="203" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" OnSelectedIndexChanged="usage_SelectedIndexChanged">
+                    <telerik:RadComboBox ID="usage" runat="server" AutoPostBack="true" MaxHeight="203" Width="120" EmptyMessage="使用对象" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" OnSelectedIndexChanged="usage_SelectedIndexChanged">
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="people" runat="server" AutoPostBack="true" MaxHeight="203" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true" OnSelectedIndexChanged="people_SelectedIndexChanged">
+                    <telerik:RadComboBox ID="people" runat="server" AutoPostBack="true" MaxHeight="203" Width="120" EmptyMessage="操作人" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true" OnSelectedIndexChanged="people_SelectedIndexChanged">
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <telerik:RadComboBox ID="target" runat="server" AutoPostBack="true" MaxHeight="203" LocalizationPath="~/Language" EmptyMessage="购置单" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" ShowToggleImage="true" Width="400" AllowCustomText="true" OnSelectedIndexChanged="target_SelectedIndexChanged"></telerik:RadComboBox>
