@@ -175,19 +175,29 @@
                     <MasterTableView CommandItemDisplay="None" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="全部在库">
                         <HeaderStyle HorizontalAlign="Center" BorderColor="Black" />
                         <Columns>
-                            <telerik:GridTemplateColumn HeaderText="借用人" ItemStyle-Width="33%">
+                            <telerik:GridTemplateColumn HeaderText="借用人" ItemStyle-Width="20%">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("UserName") %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="借用数量" ItemStyle-Width="33%">
+                            <telerik:GridTemplateColumn HeaderText="借用数量" ItemStyle-Width="20%">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="待还数量" ItemStyle-Width="33%">
+                            <telerik:GridTemplateColumn HeaderText="借用日期" ItemStyle-Width="20%">
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%# Eval("Time").ToDay() %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn HeaderText="待还数量" ItemStyle-Width="20%">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Type").ToString() == "1" ? "0" : ((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")).ToAmount(Depot.Featured(Models.DepotType.小数数量库))%>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn HeaderText="待还日期" ItemStyle-Width="20%">
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%# (int)Eval("Period") == 0 ? "不限期" : ((DateTime)Eval("Time")).AddDays((int)Eval("Period")).ToDay() %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                         </Columns>
