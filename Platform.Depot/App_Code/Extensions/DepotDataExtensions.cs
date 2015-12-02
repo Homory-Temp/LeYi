@@ -256,7 +256,7 @@ public static class DepotDataExtensions
         db.DepotDictionaryAdd(depotId, DictionaryType.品牌, brand);
     }
 
-    public static void DepotObjectEditX(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal, string age)
+    public static void DepotObjectEditX(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal, string age, bool isVirtual)
     {
         var obj = db.DepotObject.Single(o => o.Id == id);
         obj.Name = name;
@@ -276,14 +276,14 @@ public static class DepotDataExtensions
         obj.ImageD = pd;
         obj.Note = note;
         obj.Ordinal = ordinal;
-        var catalogs = db.DepotObjectCatalog.Where(o => o.ObjectId == id && o.IsVirtual == true).ToList();
+        var catalogs = db.DepotObjectCatalog.Where(o => o.ObjectId == id && o.IsVirtual == isVirtual).ToList();
         for (var i = 0; i < catalogs.Count(); i++)
         {
             db.DepotObjectCatalog.Remove(catalogs.ElementAt(i));
         }
         for (var i = 0; i < catalogIds.Count; i++)
         {
-            db.DepotObjectCatalog.Add(new DepotObjectCatalog { ObjectId = id, CatalogId = catalogIds[i], IsVirtual = true, Level = i, IsLeaf = i == catalogIds.Count - 1 });
+            db.DepotObjectCatalog.Add(new DepotObjectCatalog { ObjectId = id, CatalogId = catalogIds[i], IsVirtual = isVirtual, Level = i, IsLeaf = i == catalogIds.Count - 1 });
         }
         db.SaveChanges();
         db.DepotDictionaryAdd(depotId, DictionaryType.单位, unit);

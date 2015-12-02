@@ -1,6 +1,7 @@
 ﻿using Models;
 using System;
 using System.Linq;
+using System.Text;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
@@ -164,5 +165,22 @@ public partial class DepotAction_Object : DepotPageSingle
     protected void only_CheckedChanged(object sender, EventArgs e)
     {
         view.Rebind();
+    }
+
+    protected string ToLine(string value)
+    {
+        var sb = new StringBuilder();
+        int xno = int.Parse(line_no.Value);
+        for (var i = 0; i < value.Length; i++)
+        {
+            sb.Append(value[i]);
+            if (i % xno == 0 && i > 0)
+            {
+                sb.Append("<br/ >");
+            }
+        }
+        if (sb.ToString().EndsWith("<br />"))
+            sb = sb.Remove(sb.ToString().LastIndexOf("<br />"), 6);
+        return sb.ToString();
     }
 }

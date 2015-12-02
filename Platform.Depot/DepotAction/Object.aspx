@@ -134,7 +134,7 @@
                                                         <table style="margin: auto; width: 90%;">
                                                             <tr style="line-height: 57px; height: 57px; text-align: center;">
                                                                 <td colspan="2" style="line-height: 55px; height: 55px; text-align: center; cursor: pointer;">
-                                                                    <span class="btn btn-danger" onclick="gox(this);" goid='<%# Eval("Id") %>' did='<%# Depot.Id %>'><%# (bool)Eval("Fixed") ? "[固] " : "" %><%# Eval("Name") %></span>
+                                                                    <div class="btn btn-danger" onclick="gox(this);" goid='<%# Eval("Id") %>' did='<%# Depot.Id %>'><%# ToLine(((bool)Eval("Fixed") ? "[固] " : "") + Eval("Name")) %></div>
                                                                 </td>
                                                             </tr>
                                                             <tr style="line-height: 28px; height: 28px; text-align: center;">
@@ -184,6 +184,7 @@
                     </div>
                 </div>
             </div>
+            <input id="line_no" runat="server" value="16" type="hidden" />
         </telerik:RadAjaxPanel>
     </form>
 </body>
