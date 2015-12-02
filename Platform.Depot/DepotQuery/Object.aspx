@@ -68,10 +68,24 @@
                                 <span id="total" runat="server"></span>&nbsp;<span id="unitx" runat="server"></span>
                             </td>
                             <td style="width: 15%;">
-                                <span class="btn btn-info dictionaryX">在库库存：</span>
+                                <span class="btn btn-info dictionaryX">在库数：</span>
                             </td>
                             <td style="width: 35%;">
                                 <span id="no" runat="server"></span>&nbsp;<span id="unit" runat="server"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 15%;">
+                                <span class="btn btn-info dictionaryX">类别：</span>
+                            </td>
+                            <td id="fk1" runat="server" style="width: 35%;">
+                                <span id="cn" runat="server"></span>
+                            </td>
+                            <td id="fk2" runat="server" style="width: 15%;">
+                                <span class="btn btn-info dictionaryX">年龄段</span>
+                            </td>
+                            <td id="fk3" runat="server" style="width: 85%;">
+                                <span id="age" runat="server"></span>
                             </td>
                         </tr>
                         <tr>
@@ -82,18 +96,10 @@
                                 <span id="brand" runat="server"></span>
                             </td>
                             <td style="width: 15%;">
-                                <span class="btn btn-info dictionaryX">规格：</span>
+                                <span class="btn btn-info dictionaryX">规格型号：</span>
                             </td>
                             <td style="width: 35%;">
                                 <span id="sp" runat="server"></span>
-                            </td>
-                        </tr>
-                        <tr id="xRow" runat="server">
-                            <td style="width: 15%;">
-                                <span class="btn btn-info dictionaryX">年龄段</span>
-                            </td>
-                            <td colspan="3" style="width: 85%;">
-                                <span id="age" runat="server"></span>
                             </td>
                         </tr>
                         <tr>

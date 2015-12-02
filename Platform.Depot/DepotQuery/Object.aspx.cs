@@ -30,15 +30,21 @@ public partial class DepotQuery_Object : DepotPageSingle
                 brand.InnerText = obj.Brand;
                 var query = obj.DepotUseX.Where(o => o.ReturnedAmount < o.Amount);
                 var noOut = query.Count() > 0 ? query.Where(o => o.Type == UseType.借用).Sum(o => o.Amount - o.ReturnedAmount) : 0;
+                var isVirtual = Depot.Featured(DepotType.固定资产库);
+                var cid_x = DataContext.DepotObjectCatalog.FirstOrDefault(o => o.ObjectId == objId && o.IsLeaf == true && o.IsVirtual == isVirtual);
+                cn.InnerText = cid_x == null ? "" : DataContext.ToCatalog(cid_x.CatalogId, cid_x.Level).Single();
                 total.InnerText = (obj.Amount + noOut).ToAmount(Depot.Featured(DepotType.小数数量库));
                 if (Depot.Featured(DepotType.幼儿园))
                 {
                     age.InnerText = obj.Age;
-                    xRow.Visible = true;
+                    fk1.ColSpan = 1;
+                    fk2.Visible = fk3.Visible = true;
                 }
                 else
                 {
-                    xRow.Visible = false;
+                    age.InnerText = "";
+                    fk1.ColSpan = 3;
+                    fk2.Visible = fk3.Visible = false;
                 }
                 pa.Src = obj.ImageA.None() ? "../Content/Images/Transparent.png" : obj.ImageA;
                 da.Visible = !obj.ImageA.None();
