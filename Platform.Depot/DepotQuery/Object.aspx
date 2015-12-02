@@ -124,9 +124,9 @@
                 <telerik:RadGrid ID="grid" runat="server" CssClass="col-md-12 text-center" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="grid_NeedDataSource" OnBatchEditCommand="grid_BatchEditCommand">
                     <MasterTableView EditMode="Batch" DataKeyNames="Id,Fixed,Ordinal" CommandItemDisplay="Top" CommandItemSettings-ShowAddNewRecordButton="false" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
                         <BatchEditingSettings EditType="Row" OpenEditingEvent="DblClick" />
-                        <HeaderStyle HorizontalAlign="Center" />
+                        <HeaderStyle HorizontalAlign="Center" BorderColor="Black" />
                         <Columns>
-                            <telerik:GridTemplateColumn HeaderText="编号" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true">
+                            <telerik:GridTemplateColumn HeaderStyle-CssClass="xxx" HeaderText="编号" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# (int)Eval("Ordinal") == -1 ? (Container.ItemIndex + 1).ToString() : Eval("Ordinal") %>'></asp:Label>
                                 </ItemTemplate>
@@ -173,7 +173,7 @@
             <div class="row">
                 <telerik:RadGrid ID="gridX" runat="server" CssClass="col-md-12 text-center" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="gridX_NeedDataSource">
                     <MasterTableView CommandItemDisplay="None" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="全部在库">
-                        <HeaderStyle HorizontalAlign="Center" />
+                        <HeaderStyle HorizontalAlign="Center" BorderColor="Black" />
                         <Columns>
                             <telerik:GridTemplateColumn HeaderText="借用人" ItemStyle-Width="33%">
                                 <ItemTemplate>
@@ -196,6 +196,29 @@
             </div>
             <div class="row">&nbsp;</div>
         </telerik:RadAjaxPanel>
+        <style>
+            html .RadGrid_Bootstrap {
+                border: none;
+            }
+            html .RadGrid_Bootstrap .rgMasterTable {
+                border-top: 1px solid black;
+                border-left: 1px solid black;
+                border-right: 1px solid black;
+            }
+            html .RadGrid_Bootstrap .rgRow > td, html .RadGrid_Bootstrap .rgAltRow > td {
+                border-color: black;
+            }
+            html .RadGrid_Bootstrap .rgHeader, html .RadGrid_Bootstrap th.rgResizeCol, html .RadGrid_Bootstrap .rgHeaderWrapper, html .RadGrid_Bootstrap .rgMultiHeaderRow th.rgHeader {
+                border-bottom: 1px solid black;
+            }
+            html .RadGrid_Bootstrap .rgCommandTable td {
+                border-bottom: 1px solid black;
+                border-left: none;
+            }
+            html .RadGrid_Bootstrap .rgNoRecords td {
+                border-bottom: 1px solid black;
+            }
+        </style>
     </form>
 </body>
 </html>

@@ -133,6 +133,6 @@ public partial class DepotQuery_Object : DepotPageSingle
     protected void gridX_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
     {
         var id = "ObjectId".Query().GlobalId();
-        gridX.DataSource = DataContext.DepotUseXRecord.Where(o => o.ObjectId == id).OrderByDescending(o => o.Time).ToList();
+        gridX.DataSource = DataContext.DepotUseXRecord.Where(o => o.ObjectId == id && o.Amount > o.ReturnedAmount && o.Type == 2).OrderByDescending(o => o.Time).ToList();
     }
 }
