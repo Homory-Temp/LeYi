@@ -17,62 +17,45 @@
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
-    <script>
-        function printTarget() {
-            bdhtml = window.document.body.innerHTML;
-            sprnstr = "<!-- Start Printing -->";
-            eprnstr = "<!-- End Printing -->";
-            prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 23);
-            prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
-            prnhtml = "<body>" + prnhtml + "</body>";
-            window.document.body.innerHTML = prnhtml;
-            window.print();
-            window.document.body.innerHTML = bdhtml;
-            return false;
-        }
-    </script>
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-    <form id="form" runat="server">
+<body style="margin: 0;">
+    <form id="form" runat="server" style="margin: 0;">
         <telerik:RadScriptManager ID="sm" runat="server"></telerik:RadScriptManager>
-        <telerik:RadAjaxLoadingPanel ID="loading" runat="server" InitialDelayTime="1000">
+        <telerik:RadAjaxPanel ID="ap" runat="server">
             <div>&nbsp;</div>
-            <div class="btn btn-lg btn-warning" style="margin-top: 50px;">正在加载 请稍候....</div>
-        </telerik:RadAjaxLoadingPanel>
-        <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
-            <div class="row">&nbsp;</div>
-            <div class="row">&nbsp;</div>
-            <div class="row">&nbsp;</div>
-            <div class="row">&nbsp;</div>
-            <div class="row">&nbsp;</div>
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-4 text-right">购置单号：</div>
-                        <div class="col-md-8 text-left">
+            <div>&nbsp;</div>
+            <div style="width: 100%; text-align: center;">
+                <table style="margin: auto; text-align: left;">
+                    <tr>
+                        <td>购置单号：&nbsp;&nbsp;
+                        </td>
+                        <td>
                             <asp:Label ID="x" runat="server"></asp:Label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 text-right">流程编号：</div>
-                        <div class="col-md-8 text-left">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>流程编号：&nbsp;&nbsp;
+                        </td>
+                        <td>
                             <telerik:RadTextBox ID="name" runat="server" Width="400"></telerik:RadTextBox>
-                        </div>
-                    </div>
-                    <div class="row">&nbsp;</div>
-                    <div class="row">
-                        <div class="col-md-4 text-right">&nbsp;</div>
-                        <div class="col-md-8 text-left">
-                            <input type="button" class="btn btn-tumblr" id="go" runat="server" value="保存" onserverclick="go_ServerClick" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <input type="button" class="btn btn-tumblr" id="go" runat="server" value="保存" style="margin: auto;" onserverclick="go_ServerClick" />
+                        </td>
+                    </tr>
+                </table>
             </div>
         </telerik:RadAjaxPanel>
     </form>

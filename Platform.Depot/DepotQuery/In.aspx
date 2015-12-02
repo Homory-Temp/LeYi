@@ -41,6 +41,18 @@
 <body>
     <form id="form" runat="server">
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 购置单查询" />
+        <telerik:RadWindowManager runat="server" ID="Rwm" Skin="Metro">
+            <Windows>
+                <telerik:RadWindow ID="popup_win" runat="server" Title="请购流程" ReloadOnShow="True" Width="800" Height="450" VisibleStatusbar="false" Behaviors="Move,Close" Modal="True" CenterIfModal="True" Localization-Close="关闭">
+                </telerik:RadWindow>
+            </Windows>
+        </telerik:RadWindowManager>
+        <script>
+            function pop(url) {
+                window.radopen(url, "popup_win");
+                return false;
+            }
+        </script>
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-12 text-center">

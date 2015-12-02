@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" style="margin: 0;">
 <head runat="server">
     <title></title>
     <meta charset="utf-8" />
@@ -17,51 +17,31 @@
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
-    <script>
-        function printTarget() {
-            bdhtml = window.document.body.innerHTML;
-            sprnstr = "<!-- Start Printing -->";
-            eprnstr = "<!-- End Printing -->";
-            prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 23);
-            prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
-            prnhtml = "<body>" + prnhtml + "</body>";
-            window.document.body.innerHTML = prnhtml;
-            window.print();
-            window.document.body.innerHTML = bdhtml;
-            return false;
-        }
-    </script>
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-    <form id="form" runat="server">
+<body style="overflow: auto; margin: 0; padding-top: 10px;">
+    <form id="form" runat="server" style="margin: 0;">
         <telerik:RadScriptManager ID="sm" runat="server"></telerik:RadScriptManager>
-        <telerik:RadAjaxLoadingPanel ID="loading" runat="server" InitialDelayTime="1000">
-            <div>&nbsp;</div>
-            <div class="btn btn-lg btn-warning" style="margin-top: 50px;">正在加载 请稍候....</div>
-        </telerik:RadAjaxLoadingPanel>
-        <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
+        <telerik:RadAjaxPanel ID="ap" runat="server">
             <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="false">
                 <LayoutTemplate>
-                    <div class="col-md-12">
-                        <table class="storeTablePrint text-center">
-                            <tr>
-                                <th colspan="12" style="font-size: 18px; font-weight: bold; padding: 10px; border: none;"><span>请购内容</span></th>
-                            </tr>
-                            <tr>
-                                <th>物资名称</th>
-                                <th>规格</th>
-                                <th>请购数量</th>
-                                <th>单价</th>
-                                <th>要求</th>
-                                <th>用途</th>
-                            </tr>
-                            <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
-                        </table>
-                    </div>
+                    <table class="storeTablePrint text-center" style="margin: 0 auto; width: 90%;">
+                        <tr>
+                            <th colspan="12" style="font-size: 18px; font-weight: bold; padding: 10px; border: none;"><span>请购内容</span></th>
+                        </tr>
+                        <tr>
+                            <th>物资名称</th>
+                            <th>规格</th>
+                            <th>请购数量</th>
+                            <th>单价</th>
+                            <th>要求</th>
+                            <th>用途</th>
+                        </tr>
+                        <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
+                    </table>
                 </LayoutTemplate>
                 <ItemTemplate>
                     <tr>
@@ -73,33 +53,25 @@
                         <td><%# Eval("用途") %></td>
                     </tr>
                 </ItemTemplate>
-                <EmptyDataTemplate>
-                    <div class="col-md-12 text-center">
-                        <div class="btn btn-warning">暂无记录</div>
-                    </div>
-                </EmptyDataTemplate>
             </telerik:RadListView>
         </telerik:RadAjaxPanel>
-        <div class="container-fluid"><div class="row">&nbsp;</div></div>
-        <div class="container-fluid"><div class="row">&nbsp;</div></div>
-        <telerik:RadAjaxPanel ID="apx" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
+            <div>&nbsp;</div>
+        <telerik:RadAjaxPanel ID="apx" runat="server">
             <telerik:RadListView ID="viewx" runat="server" OnNeedDataSource="viewx_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="false">
                 <LayoutTemplate>
-                    <div class="col-md-12">
-                        <table class="storeTablePrint text-center">
-                            <tr>
-                                <th colspan="12" style="font-size: 18px; font-weight: bold; padding: 10px; border: none;"><span>请购流程</span></th>
-                            </tr>
-                            <tr>
-                                <th>办理步骤</th>
-                                <th>办理人</th>
-                                <th>状态</th>
-                                <th>意见</th>
-                                <th>时间</th>
-                            </tr>
-                            <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
-                        </table>
-                    </div>
+                    <table class="storeTablePrint text-center" style="margin: 0 auto; width: 90%;">
+                        <tr>
+                            <th colspan="12" style="font-size: 18px; font-weight: bold; padding: 10px; border: none;"><span>请购流程</span></th>
+                        </tr>
+                        <tr>
+                            <th>办理步骤</th>
+                            <th>办理人</th>
+                            <th>状态</th>
+                            <th>意见</th>
+                            <th>时间</th>
+                        </tr>
+                        <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
+                    </table>
                 </LayoutTemplate>
                 <ItemTemplate>
                     <tr>
@@ -110,11 +82,6 @@
                         <td><%# Eval("时间") %></td>
                     </tr>
                 </ItemTemplate>
-                <EmptyDataTemplate>
-                    <div class="col-md-12 text-center">
-                        <div class="btn btn-warning">暂无记录</div>
-                    </div>
-                </EmptyDataTemplate>
             </telerik:RadListView>
         </telerik:RadAjaxPanel>
     </form>

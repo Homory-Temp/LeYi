@@ -17,6 +17,7 @@ public partial class DepotQuery_InPrint : DepotPageSingle
                 var url = "../DepotQuery/InOrderX?DepotId={0}&OrderId={1}".Formatted(Depot.Id, orderId);
                 Response.Redirect(url);
             }
+            Title = "请购流程";
         }
     }
 
