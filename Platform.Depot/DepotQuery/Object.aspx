@@ -41,13 +41,16 @@
         <telerik:RadScriptManager ID="sm" runat="server"></telerik:RadScriptManager>
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container" LoadingPanelID="loading">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <span class="btn btn-tumblr">物资详情</span>
                 </div>
                 <div class="col-md-6 text-center">
                     <span class="btn btn-danger" id="name" runat="server"></span>
                 </div>
-                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-4 text-right">
+                    <telerik:RadTextBox ID="toSearch" runat="server" Width="120" EmptyMessage="物资名称"></telerik:RadTextBox>
+                            <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">

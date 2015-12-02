@@ -135,4 +135,10 @@ public partial class DepotQuery_Object : DepotPageSingle
         var id = "ObjectId".Query().GlobalId();
         gridX.DataSource = DataContext.DepotUseXRecord.Where(o => o.ObjectId == id && o.Amount > o.ReturnedAmount && o.Type == 2).OrderByDescending(o => o.Time).ToList();
     }
+
+    protected void search_ServerClick(object sender, EventArgs e)
+    {
+        var url = "../DepotAction/Object?DepotId={0}&Search={1}".Formatted(Depot.Id, Server.UrlEncode(toSearch.Text.Trim()));
+        Response.Redirect(url);
+    }
 }
