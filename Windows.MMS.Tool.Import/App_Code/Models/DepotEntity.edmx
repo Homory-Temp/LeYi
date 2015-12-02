@@ -66,6 +66,20 @@
           <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="DepotCheck">
+          <Key>
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="BatchId" />
+            <PropertyRef Name="BatchOrdinal" />
+          </Key>
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BatchId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BatchOrdinal" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CodeJson" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="DepotCode">
           <Key>
             <PropertyRef Name="DepotId" />
@@ -75,6 +89,7 @@
           <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="BatchId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="BatchOrdinial" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="CodeJson" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
@@ -189,6 +204,7 @@
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="DepotId" Type="uniqueidentifier" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="DepotObjectCatalog">
           <Key>
@@ -222,6 +238,30 @@
           <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="MainID" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="DepotPeriod">
+          <Key>
+            <PropertyRef Name="CatalogId" />
+          </Key>
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Users" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepotRedo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="DepotReturn">
           <Key>
@@ -346,8 +386,39 @@
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TimeStamp" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotCatalogTree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.__DepotOrderContent”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="__DepotOrderContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MainID" Type="varchar" MaxLength="11" />
+          <Property Name="物品名称" Type="varchar" MaxLength="100" />
+          <Property Name="规格" Type="varchar" MaxLength="100" />
+          <Property Name="请购数量" Type="int" />
+          <Property Name="单价" Type="nchar" MaxLength="100" />
+          <Property Name="要求" Type="varchar" MaxLength="50" />
+          <Property Name="用途" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.__DepotOrderFlow”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="__DepotOrderFlow">
+          <Key>
+            <PropertyRef Name="AppD_ID" />
+            <PropertyRef Name="步骤" />
+            <PropertyRef Name="状态" />
+          </Key>
+          <Property Name="AppD_ID" Type="int" Nullable="false" />
+          <Property Name="MainID" Type="varchar" MaxLength="1000" />
+          <Property Name="步骤" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="办理人" Type="varchar" MaxLength="50" />
+          <Property Name="状态" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="意见" Type="varchar" MaxLength="5000" />
+          <Property Name="时间" Type="varchar" MaxLength="16" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotCatalogTree”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotCatalogTree">
           <Key>
             <PropertyRef Name="Id" />
@@ -373,8 +444,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotCatalogTree' does not have a 
           <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Count" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotCreator' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotCreator”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotCreator">
           <Key>
             <PropertyRef Name="Id" />
@@ -390,8 +461,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotCreator' does not have a prim
           <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotInRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotInRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotInRecord">
           <Key>
             <PropertyRef Name="Id" />
@@ -429,8 +500,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInRecord' does not have a pri
           <Property Name="操作人" Type="nvarchar" MaxLength="64" />
           <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotInXRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotInXRecord">
           <Key>
             <PropertyRef Name="OrderName" />
@@ -441,6 +512,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a pr
             <PropertyRef Name="IsVirtual" />
             <PropertyRef Name="Unit" />
             <PropertyRef Name="Specification" />
+            <PropertyRef Name="Brand" />
             <PropertyRef Name="InId" />
             <PropertyRef Name="OrderId" />
             <PropertyRef Name="ObjectId" />
@@ -451,9 +523,9 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a pr
             <PropertyRef Name="OperatorId" />
             <PropertyRef Name="PriceSet" />
             <PropertyRef Name="Amount" />
-            <PropertyRef Name="Total" />
             <PropertyRef Name="OrderSource" />
             <PropertyRef Name="UsageTarget" />
+            <PropertyRef Name="Total" />
           </Key>
           <Property Name="OrderName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Done" Type="bit" Nullable="false" />
@@ -466,6 +538,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a pr
           <Property Name="IsVirtual" Type="bit" Nullable="false" />
           <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Specification" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
@@ -477,12 +550,12 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotInXRecord' does not have a pr
           <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="Total" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="37" Scale="12" Nullable="false" />
           <Property Name="OrderSource" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="UsageTarget" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotMember' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotMember”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotMember">
           <Key>
             <PropertyRef Name="Id" />
@@ -498,8 +571,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotMember' does not have a prima
           <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotObjectX' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotObjectX”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotObjectX">
           <Key>
             <PropertyRef Name="Id" />
@@ -554,10 +627,11 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotObjectX' does not have a prim
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="DepotId" Type="uniqueidentifier" />
+          <Property Name="Age" Type="nvarchar" MaxLength="256" />
           <Property Name="DepotName" Type="nvarchar" MaxLength="64" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotOutRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotOutRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotOutRecord">
           <Key>
             <PropertyRef Name="Id" />
@@ -602,8 +676,38 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotOutRecord' does not have a pr
           <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotReturnRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotRedoRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="DepotRedoRecord">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="InId" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Money" />
+          </Key>
+          <Property Name="Operator" Type="nvarchar" MaxLength="64" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="CatalogName" Type="nvarchar(max)" />
+          <Property Name="IsVirtual" Type="bit" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="InId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotReturnRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotReturnRecord">
           <Key>
             <PropertyRef Name="ReturnAmount" />
@@ -652,8 +756,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotReturnRecord' does not have a
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotST”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotST">
           <Key>
             <PropertyRef Name="Consumable" />
@@ -705,8 +809,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotST' does not have a primary k
           <Property Name="EndAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="EndMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotUser”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -722,8 +826,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUser' does not have a primary
           <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotUseXRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotUseXRecord">
           <Key>
             <PropertyRef Name="Id" />
@@ -748,6 +852,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <PropertyRef Name="UserId" />
             <PropertyRef Name="OperatorId" />
           </Key>
+          <Property Name="CatalogName" Type="nvarchar(max)" />
+          <Property Name="Period" Type="int" />
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
@@ -890,6 +996,42 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DepotPeriod_DepotCatalog">
+          <End Role="DepotCatalog" Type="Self.DepotCatalog" Multiplicity="1" />
+          <End Role="DepotPeriod" Type="Self.DepotPeriod" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DepotCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotPeriod">
+              <PropertyRef Name="CatalogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotRedo_DepotIn">
+          <End Role="DepotIn" Type="Self.DepotIn" Multiplicity="1" />
+          <End Role="DepotRedo" Type="Self.DepotRedo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotRedo">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotRedo_DepotObject">
+          <End Role="DepotObject" Type="Self.DepotObject" Multiplicity="1" />
+          <End Role="DepotRedo" Type="Self.DepotRedo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotRedo">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DepotReturn_DepotUseX">
           <End Role="DepotUseX" Type="Self.DepotUseX" Multiplicity="1" />
           <End Role="DepotReturn" Type="Self.DepotReturn" Multiplicity="*" />
@@ -974,6 +1116,9 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="DoOut" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="ToCatalog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CatalogId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="Level" Type="int" Mode="In" />
@@ -986,6 +1131,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Depot" EntityType="Self.Depot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotCatalog" EntityType="Self.DepotCatalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotCheck" EntityType="Self.DepotCheck" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotCode" EntityType="Self.DepotCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotDictionary" EntityType="Self.DepotDictionary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotFlow" EntityType="Self.DepotFlow" Schema="dbo" store:Type="Tables" />
@@ -995,6 +1141,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySet Name="DepotObject" EntityType="Self.DepotObject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotObjectCatalog" EntityType="Self.DepotObjectCatalog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotOrder" EntityType="Self.DepotOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotPeriod" EntityType="Self.DepotPeriod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotRedo" EntityType="Self.DepotRedo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotReturn" EntityType="Self.DepotReturn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotRole" EntityType="Self.DepotRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotSetting" EntityType="Self.DepotSetting" Schema="dbo" store:Type="Tables" />
@@ -1004,6 +1152,29 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySet Name="DepotUserRole" EntityType="Self.DepotUserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotUseX" EntityType="Self.DepotUseX" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="__DepotOrderContent" EntityType="Self.__DepotOrderContent" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [__DepotOrderContent].[Id] AS [Id], 
+    [__DepotOrderContent].[MainID] AS [MainID], 
+    [__DepotOrderContent].[物品名称] AS [物品名称], 
+    [__DepotOrderContent].[规格] AS [规格], 
+    [__DepotOrderContent].[请购数量] AS [请购数量], 
+    [__DepotOrderContent].[单价] AS [单价], 
+    [__DepotOrderContent].[要求] AS [要求], 
+    [__DepotOrderContent].[用途] AS [用途]
+    FROM [dbo].[__DepotOrderContent] AS [__DepotOrderContent]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="__DepotOrderFlow" EntityType="Self.__DepotOrderFlow" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [__DepotOrderFlow].[AppD_ID] AS [AppD_ID], 
+    [__DepotOrderFlow].[MainID] AS [MainID], 
+    [__DepotOrderFlow].[步骤] AS [步骤], 
+    [__DepotOrderFlow].[办理人] AS [办理人], 
+    [__DepotOrderFlow].[状态] AS [状态], 
+    [__DepotOrderFlow].[意见] AS [意见], 
+    [__DepotOrderFlow].[时间] AS [时间]
+    FROM [dbo].[__DepotOrderFlow] AS [__DepotOrderFlow]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="DepotCatalogTree" EntityType="Self.DepotCatalogTree" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DepotCatalogTree].[Id] AS [Id], 
@@ -1065,6 +1236,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
     [DepotInXRecord].[IsVirtual] AS [IsVirtual], 
     [DepotInXRecord].[Unit] AS [Unit], 
     [DepotInXRecord].[Specification] AS [Specification], 
+    [DepotInXRecord].[Brand] AS [Brand], 
     [DepotInXRecord].[InId] AS [InId], 
     [DepotInXRecord].[OrderId] AS [OrderId], 
     [DepotInXRecord].[ObjectId] AS [ObjectId], 
@@ -1119,6 +1291,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
     [DepotObjectX].[Amount] AS [Amount], 
     [DepotObjectX].[Money] AS [Money], 
     [DepotObjectX].[DepotId] AS [DepotId], 
+    [DepotObjectX].[Age] AS [Age], 
     [DepotObjectX].[DepotName] AS [DepotName]
     FROM [dbo].[DepotObjectX] AS [DepotObjectX]</DefiningQuery>
           </EntitySet>
@@ -1145,6 +1318,23 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
     [DepotOutRecord].[Unit] AS [Unit], 
     [DepotOutRecord].[UserName] AS [UserName]
     FROM [dbo].[DepotOutRecord] AS [DepotOutRecord]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DepotRedoRecord" EntityType="Self.DepotRedoRecord" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotRedoRecord].[Operator] AS [Operator], 
+    [DepotRedoRecord].[Name] AS [Name], 
+    [DepotRedoRecord].[CatalogId] AS [CatalogId], 
+    [DepotRedoRecord].[Level] AS [Level], 
+    [DepotRedoRecord].[CatalogName] AS [CatalogName], 
+    [DepotRedoRecord].[IsVirtual] AS [IsVirtual], 
+    [DepotRedoRecord].[Unit] AS [Unit], 
+    [DepotRedoRecord].[InId] AS [InId], 
+    [DepotRedoRecord].[OrderId] AS [OrderId], 
+    [DepotRedoRecord].[ObjectId] AS [ObjectId], 
+    [DepotRedoRecord].[Time] AS [Time], 
+    [DepotRedoRecord].[Amount] AS [Amount], 
+    [DepotRedoRecord].[Money] AS [Money]
+    FROM [dbo].[DepotRedoRecord] AS [DepotRedoRecord]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="DepotReturnRecord" EntityType="Self.DepotReturnRecord" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1212,6 +1402,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           </EntitySet>
           <EntitySet Name="DepotUseXRecord" EntityType="Self.DepotUseXRecord" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [DepotUseXRecord].[CatalogName] AS [CatalogName], 
+    [DepotUseXRecord].[Period] AS [Period], 
     [DepotUseXRecord].[Id] AS [Id], 
     [DepotUseXRecord].[ObjectId] AS [ObjectId], 
     [DepotUseXRecord].[CatalogId] AS [CatalogId], 
@@ -1274,6 +1466,18 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <AssociationSet Name="FK_DepotInX_DepotOrder" Association="Self.FK_DepotInX_DepotOrder">
             <End Role="DepotOrder" EntitySet="DepotOrder" />
             <End Role="DepotInX" EntitySet="DepotInX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotPeriod_DepotCatalog" Association="Self.FK_DepotPeriod_DepotCatalog">
+            <End Role="DepotCatalog" EntitySet="DepotCatalog" />
+            <End Role="DepotPeriod" EntitySet="DepotPeriod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotRedo_DepotIn" Association="Self.FK_DepotRedo_DepotIn">
+            <End Role="DepotIn" EntitySet="DepotIn" />
+            <End Role="DepotRedo" EntitySet="DepotRedo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotRedo_DepotObject" Association="Self.FK_DepotRedo_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotRedo" EntitySet="DepotRedo" />
           </AssociationSet>
           <AssociationSet Name="FK_DepotReturn_DepotUseX" Association="Self.FK_DepotReturn_DepotUseX">
             <End Role="DepotUseX" EntitySet="DepotUseX" />
@@ -1432,7 +1636,28 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySet Name="DepotToOut" EntityType="DepotModel.DepotToOut" />
           <EntitySet Name="DepotOutRecord" EntityType="DepotModel.DepotOutRecord" />
           <EntitySet Name="DepotObjectX" EntityType="DepotModel.DepotObjectX" />
+          <EntitySet Name="DepotRedo" EntityType="DepotModel.DepotRedo" />
+          <AssociationSet Name="FK_DepotRedo_DepotIn" Association="DepotModel.FK_DepotRedo_DepotIn">
+            <End Role="DepotIn" EntitySet="DepotIn" />
+            <End Role="DepotRedo" EntitySet="DepotRedo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepotRedo_DepotObject" Association="DepotModel.FK_DepotRedo_DepotObject">
+            <End Role="DepotObject" EntitySet="DepotObject" />
+            <End Role="DepotRedo" EntitySet="DepotRedo" />
+          </AssociationSet>
+          <EntitySet Name="DepotRedoRecord" EntityType="DepotModel.DepotRedoRecord" />
+          <FunctionImport Name="DoOut">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="DepotCheck" EntityType="DepotModel.DepotCheck" />
           <EntitySet Name="DepotCode" EntityType="DepotModel.DepotCode" />
+          <EntitySet Name="DepotPeriod" EntityType="DepotModel.DepotPeriod" />
+          <AssociationSet Name="FK_DepotPeriod_DepotCatalog" Association="DepotModel.FK_DepotPeriod_DepotCatalog">
+            <End Role="DepotCatalog" EntitySet="DepotCatalog" />
+            <End Role="DepotPeriod" EntitySet="DepotPeriod" />
+          </AssociationSet>
+          <EntitySet Name="C__DepotOrderFlow" EntityType="DepotModel.C__DepotOrderFlow" />
+          <EntitySet Name="C__DepotOrderContent" EntityType="DepotModel.C__DepotOrderContent" />
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -1465,6 +1690,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DepotCatalogChildren" Relationship="DepotModel.FK_DepotCatalog_DepotCatalog" FromRole="DepotCatalog" ToRole="DepotCatalog1" />
           <NavigationProperty Name="DepotCatalogParent" Relationship="DepotModel.FK_DepotCatalog_DepotCatalog" FromRole="DepotCatalog1" ToRole="DepotCatalog" />
+          <NavigationProperty Name="DepotPeriod" Relationship="DepotModel.FK_DepotPeriod_DepotCatalog" FromRole="DepotCatalog" ToRole="DepotPeriod" />
         </EntityType>
         <EntityType Name="DepotDictionary">
           <Key>
@@ -1528,6 +1754,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="State" Type="DepotModel.State" Nullable="false" />
           <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotIn_DepotOrder" FromRole="DepotOrder" ToRole="DepotIn" />
           <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotOrder" FromRole="DepotOrder" ToRole="DepotInX" />
+          <Property Name="MainID" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DepotUser">
           <Key>
@@ -1717,6 +1944,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="FixedNumber" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Brand" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Extension" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotRedo" Relationship="DepotModel.FK_DepotRedo_DepotObject" FromRole="DepotObject" ToRole="DepotRedo" />
+          <Property Name="Age" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DepotFlow">
           <Key>
@@ -1771,6 +2000,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotIn_DepotObject" FromRole="DepotIn" ToRole="DepotObject" />
           <NavigationProperty Name="DepotOrder" Relationship="DepotModel.FK_DepotIn_DepotOrder" FromRole="DepotIn" ToRole="DepotOrder" />
           <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotIn" FromRole="DepotIn" ToRole="DepotInX" />
+          <NavigationProperty Name="DepotRedo" Relationship="DepotModel.FK_DepotRedo_DepotIn" FromRole="DepotIn" ToRole="DepotRedo" />
         </EntityType>
         <EntityType Name="DepotStatistics">
           <Key>
@@ -1925,6 +2155,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Member Name="领用出库" Value="4" />
           <Member Name="归还" Value="5" />
           <Member Name="退货" Value="6" />
+          <Member Name="报废" Value="7" />
         </EnumType>
         <EntityType Name="DepotInXRecord">
           <Key>
@@ -1949,6 +2180,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <PropertyRef Name="IsVirtual" />
             <PropertyRef Name="OrderSource" />
             <PropertyRef Name="UsageTarget" />
+            <PropertyRef Name="Brand" />
           </Key>
           <Property Name="OrderName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Done" Type="Boolean" Nullable="false" />
@@ -1971,10 +2203,11 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="OperatorId" Type="Guid" Nullable="false" />
           <Property Name="PriceSet" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="37" Scale="12" />
           <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
           <Property Name="OrderSource" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="UsageTarget" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -2156,6 +2389,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="OperatorId" Type="Guid" Nullable="false" />
           <Property Name="ReturnedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="CatalogName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Period" Type="Int32" />
         </EntityType>
         <EntityType Name="DepotReturn">
           <Key>
@@ -2422,6 +2657,89 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="FixedNumber" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Brand" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Extension" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DepotRedo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotRedo_DepotIn" FromRole="DepotRedo" ToRole="DepotIn" />
+          <NavigationProperty Name="DepotObject" Relationship="DepotModel.FK_DepotRedo_DepotObject" FromRole="DepotRedo" ToRole="DepotObject" />
+        </EntityType>
+        <Association Name="FK_DepotRedo_DepotIn">
+          <End Type="DepotModel.DepotIn" Role="DepotIn" Multiplicity="1" />
+          <End Type="DepotModel.DepotRedo" Role="DepotRedo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotRedo">
+              <PropertyRef Name="InId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepotRedo_DepotObject">
+          <End Type="DepotModel.DepotObject" Role="DepotObject" Multiplicity="1" />
+          <End Type="DepotModel.DepotRedo" Role="DepotRedo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepotObject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotRedo">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DepotRedoRecord">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="InId" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Money" />
+          </Key>
+          <Property Name="Operator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="CatalogName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
+          <Property Name="OrderId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+        </EntityType>
+        <EntityType Name="DepotCheck">
+          <Key>
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="BatchId" />
+            <PropertyRef Name="BatchOrdinal" />
+          </Key>
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="BatchId" Type="Guid" Nullable="false" />
+          <Property Name="BatchOrdinal" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CodeJson" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="State" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="DepotCode">
           <Key>
@@ -2432,11 +2750,61 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="DepotId" Type="Guid" Nullable="false" />
           <Property Name="BatchId" Type="Guid" Nullable="false" />
           <Property Name="BatchOrdinial" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CodeJson" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="State" Type="Int32" Nullable="false" />
-          <Property Name="CodeJson" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-      </Schema>
+        <EntityType Name="DepotPeriod">
+          <Key>
+            <PropertyRef Name="CatalogId" />
+          </Key>
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Users" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DepotCatalog" Relationship="DepotModel.FK_DepotPeriod_DepotCatalog" FromRole="DepotPeriod" ToRole="DepotCatalog" />
+        </EntityType>
+        <Association Name="FK_DepotPeriod_DepotCatalog">
+          <End Type="DepotModel.DepotCatalog" Role="DepotCatalog" Multiplicity="1" />
+          <End Type="DepotModel.DepotPeriod" Role="DepotPeriod" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DepotCatalog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepotPeriod">
+              <PropertyRef Name="CatalogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="C__DepotOrderFlow">
+          <Key>
+            <PropertyRef Name="AppD_ID" />
+            <PropertyRef Name="步骤" />
+            <PropertyRef Name="状态" />
+          </Key>
+          <Property Name="AppD_ID" Type="Int32" Nullable="false" />
+          <Property Name="MainID" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="步骤" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="办理人" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="状态" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="意见" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="时间" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="C__DepotOrderContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MainID" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="物品名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="规格" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="请购数量" Type="Int32" />
+          <Property Name="单价" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="要求" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="用途" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -2506,6 +2874,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotOrder">
             <EntityTypeMapping TypeName="DepotModel.DepotOrder">
               <MappingFragment StoreEntitySet="DepotOrder">
+                <ScalarProperty Name="MainID" ColumnName="MainID" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
                 <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
@@ -2642,6 +3011,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotObject">
             <EntityTypeMapping TypeName="DepotModel.DepotObject">
               <MappingFragment StoreEntitySet="DepotObject">
+                <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="FixedNumber" ColumnName="FixedNumber" />
@@ -2771,6 +3141,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotInXRecord">
             <EntityTypeMapping TypeName="DepotModel.DepotInXRecord">
               <MappingFragment StoreEntitySet="DepotInXRecord">
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="UsageTarget" ColumnName="UsageTarget" />
                 <ScalarProperty Name="OrderSource" ColumnName="OrderSource" />
                 <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
@@ -2855,6 +3226,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotUseXRecord">
             <EntityTypeMapping TypeName="DepotModel.DepotUseXRecord">
               <MappingFragment StoreEntitySet="DepotUseXRecord">
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="CatalogName" ColumnName="CatalogName" />
                 <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
                 <ScalarProperty Name="ReturnedAmount" ColumnName="ReturnedAmount" />
                 <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
@@ -3010,6 +3383,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <EntitySetMapping Name="DepotObjectX">
             <EntityTypeMapping TypeName="DepotModel.DepotObjectX">
               <MappingFragment StoreEntitySet="DepotObjectX">
+                <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="FixedNumber" ColumnName="FixedNumber" />
@@ -3040,15 +3414,101 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DepotRedo">
+            <EntityTypeMapping TypeName="DepotModel.DepotRedo">
+              <MappingFragment StoreEntitySet="DepotRedo">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotRedoRecord">
+            <EntityTypeMapping TypeName="DepotModel.DepotRedoRecord">
+              <MappingFragment StoreEntitySet="DepotRedoRecord">
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
+                <ScalarProperty Name="CatalogName" ColumnName="CatalogName" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DoOut" FunctionName="DepotModel.Store.DoOut" />
+          <EntitySetMapping Name="DepotCheck">
+            <EntityTypeMapping TypeName="DepotModel.DepotCheck">
+              <MappingFragment StoreEntitySet="DepotCheck">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="CodeJson" ColumnName="CodeJson" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BatchOrdinal" ColumnName="BatchOrdinal" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="DepotCode">
             <EntityTypeMapping TypeName="DepotModel.DepotCode">
               <MappingFragment StoreEntitySet="DepotCode">
-                <ScalarProperty Name="CodeJson" ColumnName="CodeJson" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="CodeJson" ColumnName="CodeJson" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="BatchOrdinial" ColumnName="BatchOrdinial" />
                 <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotPeriod">
+            <EntityTypeMapping TypeName="DepotModel.DepotPeriod">
+              <MappingFragment StoreEntitySet="DepotPeriod">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Users" ColumnName="Users" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__DepotOrderFlow">
+            <EntityTypeMapping TypeName="DepotModel.C__DepotOrderFlow">
+              <MappingFragment StoreEntitySet="__DepotOrderFlow">
+                <ScalarProperty Name="时间" ColumnName="时间" />
+                <ScalarProperty Name="意见" ColumnName="意见" />
+                <ScalarProperty Name="状态" ColumnName="状态" />
+                <ScalarProperty Name="办理人" ColumnName="办理人" />
+                <ScalarProperty Name="步骤" ColumnName="步骤" />
+                <ScalarProperty Name="MainID" ColumnName="MainID" />
+                <ScalarProperty Name="AppD_ID" ColumnName="AppD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__DepotOrderContent">
+            <EntityTypeMapping TypeName="DepotModel.C__DepotOrderContent">
+              <MappingFragment StoreEntitySet="__DepotOrderContent">
+                <ScalarProperty Name="用途" ColumnName="用途" />
+                <ScalarProperty Name="要求" ColumnName="要求" />
+                <ScalarProperty Name="单价" ColumnName="单价" />
+                <ScalarProperty Name="请购数量" ColumnName="请购数量" />
+                <ScalarProperty Name="规格" ColumnName="规格" />
+                <ScalarProperty Name="物品名称" ColumnName="物品名称" />
+                <ScalarProperty Name="MainID" ColumnName="MainID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

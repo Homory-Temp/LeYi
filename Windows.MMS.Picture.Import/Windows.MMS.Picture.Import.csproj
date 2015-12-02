@@ -80,12 +80,155 @@
     <Compile Include="App_Code\Entity\InMemoryUse.cs" />
     <Compile Include="App_Code\Extensions\DepotCommonExtensions.cs" />
     <Compile Include="App_Code\Extensions\DepotDataExtensions.cs" />
-    <Compile Include="App_Code\Models\DepotEntity.Context.cs" />
-    <Compile Include="App_Code\Models\DepotEntity.cs" />
+    <Compile Include="App_Code\Models\Application.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\CodeType.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\C__DepotOrderContent.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\C__DepotOrderFlow.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\Department.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\Depot.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotCatalog.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotCatalogTree.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotCheck.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotCode.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotCreator.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotDictionary.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotEntity.Context1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepotEntity.Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Code\Models\DepotEntity.Designer.cs">
       <DependentUpon>DepotEntity.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotEntity1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotFlow.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotFlowX.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotIn.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotInRecord.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotInX.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotInXRecord.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotMember.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotObject.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotObjectCatalog.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotObjectX.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotOrder.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotOutRecord.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotPeriod.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotRedo.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotRedoRecord.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotReturn.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotReturnRecord.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotRole.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotSetting.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotST.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotStatistics.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotToOut.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotType.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotUse.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotUser.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotUserRole.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotUseX.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotUseXRecord.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DictionaryType.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\FlowType.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\State.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\UserOnline.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\UseType.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Code\ToModels\pcodelist.cs">
       <DependentUpon>ToModels.tt</DependentUpon>
@@ -150,6 +293,14 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\Models\DepotEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DepotEntity.Context1.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_Code\Models\DepotEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DepotEntity1.cs</LastGenOutput>
+    </Content>
     <Content Include="App_Code\ToModels\ToModels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ToModels.edmx</DependentUpon>

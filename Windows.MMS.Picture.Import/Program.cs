@@ -1,4 +1,4 @@
-﻿using Models;
+﻿using Windows.MMS.Picture.Import.App_Code.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -135,7 +135,7 @@ namespace Windows.MMS.Picture.Import
                                     xcco = xcco.DepotCatalogParent;
                                 }
 
-                                db.DepotObjectAdd(picid, gids, 图片库Id, wz.name, false, false, false, "", "", "", wz.code, "套", wz.gg ?? "", 0, 0, a, b, c, d, wz.xh ?? "", ordinal);
+                                db.DepotObjectAdd(picid, gids, 图片库Id, wz.name, false, false, false, "", "", "", wz.code, "套", wz.gg ?? "", 0, 0, a, b, c, d, wz.xh ?? "", ordinal, Age(wz.syfw.HasValue ? wz.syfw.Value : 0));
 
                                 var @in = new InMemoryIn { Age = Age(wz.syfw.HasValue ? wz.syfw.Value : 0), Place = "图片库", Amount = dbx.P_picbarcode.Count(o => o.pid == pid && (o.state == "0" || o.state == "1")), CatalogId = cco.Id, Money = 0, Note = "", ObjectId = picid, PriceSet = 0, Time = DateTime.Today };
                                 var list = new List<InMemoryIn>();

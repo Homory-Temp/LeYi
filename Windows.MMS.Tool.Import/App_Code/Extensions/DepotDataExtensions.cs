@@ -1,4 +1,4 @@
-﻿using Models;
+﻿using Windows.MMS.Tool.Import.App_Code.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,7 +123,7 @@ public static class DepotDataExtensions
         }
     }
 
-    public static void DepotObjectAdd(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, bool single, bool consumable, bool @fixed, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal)
+    public static void DepotObjectAdd(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, bool single, bool consumable, bool @fixed, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal, string age)
     {
         var obj = new DepotObject
         {
@@ -150,7 +150,8 @@ public static class DepotDataExtensions
             State = State.启用,
             Code = string.Empty,
             Amount = 0.00M,
-            Money = 0.00M
+            Money = 0.00M,
+            Age = age
         };
         db.DepotObject.Add(obj);
         for (var i = 0; i < catalogIds.Count; i++)

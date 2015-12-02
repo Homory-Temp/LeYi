@@ -1,4 +1,4 @@
-﻿using Models;
+﻿using Windows.MMS.Tool.Import.App_Code.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -136,7 +136,7 @@ namespace Windows.MMS.Tool.Import
                                     xcco = xcco.DepotCatalogParent;
                                 }
 
-                                db.DepotObjectAdd(picid, gids, 教玩具库Id, wz.name, false, false, false, "", "", "", wz.code, "件", wz.gg ?? "", 0, 0, a, b, c, d, wz.xh ?? "", ordinal);
+                                db.DepotObjectAdd(picid, gids, 教玩具库Id, wz.name, false, false, false, "", "", "", wz.code, "件", wz.gg ?? "", 0, 0, a, b, c, d, wz.xh ?? "", ordinal, Age(wz.syfw.HasValue ? wz.syfw.Value : 0));
 
                                 var @in = new InMemoryIn { Age = Age(wz.syfw.HasValue ? wz.syfw.Value : 0), Place = "教玩具库", Amount = wz.num.HasValue ? wz.num.Value : 0, CatalogId = cco.Id, Money = 0, Note = "", ObjectId = picid, PriceSet = 0, Time = DateTime.Today };
                                 var list = new List<InMemoryIn>();
