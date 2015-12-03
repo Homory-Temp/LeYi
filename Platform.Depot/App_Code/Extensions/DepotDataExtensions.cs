@@ -822,7 +822,7 @@ public static class DepotDataExtensions
                     TypeName = FlowType.归还.ToString(),
                     Time = returnTime,
                     Amount = @return.Amount,
-                    Money = @in.Price,
+                    Money = @in.Price * @return.Amount,
                     Note = item.Note
                 };
                 db.DepotFlow.Add(flow);
