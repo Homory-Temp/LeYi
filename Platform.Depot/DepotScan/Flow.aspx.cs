@@ -28,6 +28,11 @@ public partial class DepotScan_Flow : DepotPageSingle
         scan.Focus();
     }
 
+    protected string GU(Guid id)
+    {
+        return DataContext.DepotUser.First(o => o.Id == id).Name;
+    }
+
     protected void scanFlow_ServerClick(object sender, EventArgs e)
     {
         var code = scan.Text.Trim();
@@ -52,7 +57,7 @@ public partial class DepotScan_Flow : DepotPageSingle
                 return;
             }
             var obj = inx.DepotObject;
-            grid.DataSource = DataContext.DepotFlowX.Where(o => o.ObjectId == obj.Id && o.ObjectOrdinal == inx.Ordinal).ToList();
+            grid.DataSource = DataContext.DepotFlowX.Where(o => o.ObjectId == obj.Id && o.ObjectOrdinal == inx.Ordinal).OrderByDescending(o => o.Time).ToList();
             grid.DataBind();
         }
         Reset();

@@ -48,9 +48,15 @@
                     <telerik:RadGrid ID="grid" runat="server" AutoGenerateColumns="false" MasterTableView-AutoGenerateColumns="false">
                         <MasterTableView>
                             <Columns>
+                                <telerik:GridBoundColumn DataField="Time" HeaderText="日期" DataFormatString="{0:yyyy-MM-dd}"></telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="Type" HeaderText="流通类型"></telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="Amount" DataFormatString="{0:F2}" HeaderText="数量"></telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="Money" DataFormatString="{0:F2}" HeaderText="金额"></telerik:GridBoundColumn>
+                                <telerik:GridTemplateColumn DataField="Time" HeaderText="人员">
+                                    <ItemTemplate>
+                                        <%# GU((Guid)Eval("UserId")) %>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
                             </Columns>
                             <NoRecordsTemplate>
                                 <div class="row">
