@@ -41,13 +41,13 @@
         <telerik:RadScriptManager ID="sm" runat="server"></telerik:RadScriptManager>
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container" LoadingPanelID="loading">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 col-xs-12">
                     <span class="btn btn-tumblr">物资详情</span>
                 </div>
-                <div class="col-md-6 text-center">
+                <div class="col-md-6 col-xs-12">
                     <span class="btn btn-danger" id="name" runat="server"></span>
                 </div>
-                <div class="col-md-3 text-right">
+                <div class="col-md-3 col-xs-12 text-right">
                     <input type="button" class="btn btn-info" id="back" runat="server" value="返回" onserverclick="back_ServerClick" />
                 </div>
             </div>
@@ -66,6 +66,8 @@
                             <td style="width: 35%;">
                                 <span id="no" runat="server"></span>&nbsp;<span id="unit" runat="server"></span>
                             </td>
+                        </tr>
+                        <tr>
                             <td style="width: 15%;">
                                 <span>总量：</span>
                             </td>
@@ -80,6 +82,8 @@
                             <td style="width: 35%;">
                                 <span id="brand" runat="server"></span>
                             </td>
+                        </tr>
+                        <tr>
                             <td style="width: 15%;">
                                 <span>规格：</span>
                             </td>
@@ -99,7 +103,7 @@
                             <td style="width: 15%;">
                                 <span>备注：</span>
                             </td>
-                            <td colspan="3" style="width: 85%;">
+                            <td style="width: 85%;">
                                 <span id="note" runat="server"></span>
                             </td>
                         </tr>
