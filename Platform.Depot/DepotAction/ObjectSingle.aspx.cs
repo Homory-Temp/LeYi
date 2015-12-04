@@ -14,8 +14,6 @@ public partial class DepotAction_ObjectSingle : DepotPageSingle
             tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
             tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
             tree.DataBind();
-            period.SelectedDate = DateTime.Today;
-            periodx.SelectedDate = DateTime.Today.AddMonths(-1);
             if (!"CatalogId".Query().None())
             {
                 var cid = "CatalogId".Query();
@@ -69,7 +67,7 @@ public partial class DepotAction_ObjectSingle : DepotPageSingle
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        var timex = periodx.SelectedDate.HasValue ? periodx.SelectedDate.Value : DateTime.Today;
+        var timex = periodx.SelectedDate.HasValue ? periodx.SelectedDate.Value : DateTime.MinValue.AddMilliseconds(1);
         var time = period.SelectedDate.HasValue ? period.SelectedDate.Value : DateTime.Today;
         if (timex > time)
         {

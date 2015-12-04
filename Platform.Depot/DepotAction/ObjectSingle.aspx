@@ -68,14 +68,14 @@
                             <telerik:RadTextBox ID="toSearch" runat="server" Width="120"></telerik:RadTextBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             购置日期：
-                                                <telerik:RadDatePicker ID="periodx" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="false">
+                                                <telerik:RadDatePicker ID="periodx" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="false" MinDate="1900-01-01">
                                                     <DatePopupButton runat="server" Visible="false" />
                                                     <Calendar runat="server">
                                                         <FastNavigationSettings TodayButtonCaption="今日" OkButtonCaption="确认" CancelButtonCaption="取消"></FastNavigationSettings>
                                                     </Calendar>
                                                 </telerik:RadDatePicker>
                             &nbsp;&nbsp;-&nbsp;&nbsp;
-                    <telerik:RadDatePicker ID="period" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="false">
+                    <telerik:RadDatePicker ID="period" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="false" MinDate="1900-01-01">
                         <DatePopupButton runat="server" Visible="false" />
                                                     <Calendar runat="server">
                                                         <FastNavigationSettings TodayButtonCaption="今日" OkButtonCaption="确认" CancelButtonCaption="取消"></FastNavigationSettings>
