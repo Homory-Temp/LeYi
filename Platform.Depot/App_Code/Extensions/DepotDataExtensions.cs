@@ -123,6 +123,19 @@ public static class DepotDataExtensions
         }
     }
 
+    public static IEnumerable<DepotObjectSingle> DepotObjectSingleLoad(this DepotEntities db, Guid depotId, Guid? catalogId)
+    {
+        if (catalogId.HasValue)
+        {
+            var cid = catalogId.Value;
+            return db.DepotObjectSingle.Where(o => o.分类Id == cid && o.仓库Id == depotId);
+        }
+        else
+        {
+            return db.DepotObjectSingle.Where(o => o.仓库Id == depotId);
+        }
+    }
+
     public static IEnumerable<DepotObjectX> DepotObjectXLoad(this DepotEntities db, Guid depotId, Guid? catalogId)
     {
         if (catalogId.HasValue)

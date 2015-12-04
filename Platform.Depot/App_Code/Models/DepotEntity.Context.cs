@@ -66,6 +66,7 @@ namespace Models
         public virtual DbSet<DepotPeriod> DepotPeriod { get; set; }
         public virtual DbSet<C__DepotOrderFlow> C__DepotOrderFlow { get; set; }
         public virtual DbSet<C__DepotOrderContent> C__DepotOrderContent { get; set; }
+        public virtual DbSet<DepotObjectSingle> DepotObjectSingle { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {

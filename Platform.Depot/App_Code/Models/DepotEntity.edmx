@@ -572,6 +572,45 @@
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotObjectSingle”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="DepotObjectSingle">
+          <Key>
+            <PropertyRef Name="仓库Id" />
+            <PropertyRef Name="分类Id" />
+            <PropertyRef Name="物资Id" />
+            <PropertyRef Name="购置日期" />
+            <PropertyRef Name="仓库" />
+            <PropertyRef Name="虚拟库" />
+            <PropertyRef Name="物资" />
+            <PropertyRef Name="拼音" />
+            <PropertyRef Name="单位" />
+            <PropertyRef Name="品牌" />
+            <PropertyRef Name="规格" />
+            <PropertyRef Name="适用年龄段" />
+            <PropertyRef Name="条码" />
+            <PropertyRef Name="单价" />
+            <PropertyRef Name="卡片编号" />
+            <PropertyRef Name="存放地" />
+          </Key>
+          <Property Name="仓库Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="分类Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="物资Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="购置日期" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="仓库" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="虚拟库" Type="bit" Nullable="false" />
+          <Property Name="物资" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="拼音" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="单位" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="品牌" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="规格" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="适用年龄段" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="条码" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="单价" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="卡片编号" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="存放地" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="分类" Type="nvarchar(max)" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“Platform_LY.dbo.DepotObjectX”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotObjectX">
           <Key>
@@ -663,7 +702,7 @@
           <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ToAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
-          <Property Name="PreservedA" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreservedA" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="PreservedB" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PreservedC" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PreservedD" Type="nvarchar(max)" Nullable="false" />
@@ -1263,6 +1302,27 @@
     [DepotMember].[RoleId] AS [RoleId]
     FROM [dbo].[DepotMember] AS [DepotMember]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="DepotObjectSingle" EntityType="Self.DepotObjectSingle" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotObjectSingle].[仓库Id] AS [仓库Id], 
+    [DepotObjectSingle].[分类Id] AS [分类Id], 
+    [DepotObjectSingle].[物资Id] AS [物资Id], 
+    [DepotObjectSingle].[购置日期] AS [购置日期], 
+    [DepotObjectSingle].[仓库] AS [仓库], 
+    [DepotObjectSingle].[虚拟库] AS [虚拟库], 
+    [DepotObjectSingle].[物资] AS [物资], 
+    [DepotObjectSingle].[拼音] AS [拼音], 
+    [DepotObjectSingle].[单位] AS [单位], 
+    [DepotObjectSingle].[品牌] AS [品牌], 
+    [DepotObjectSingle].[规格] AS [规格], 
+    [DepotObjectSingle].[适用年龄段] AS [适用年龄段], 
+    [DepotObjectSingle].[条码] AS [条码], 
+    [DepotObjectSingle].[单价] AS [单价], 
+    [DepotObjectSingle].[卡片编号] AS [卡片编号], 
+    [DepotObjectSingle].[存放地] AS [存放地], 
+    [DepotObjectSingle].[分类] AS [分类]
+    FROM [dbo].[DepotObjectSingle] AS [DepotObjectSingle]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="DepotObjectX" EntityType="Self.DepotObjectX" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DepotObjectX].[Id] AS [Id], 
@@ -1658,6 +1718,7 @@
           </AssociationSet>
           <EntitySet Name="C__DepotOrderFlow" EntityType="DepotModel.C__DepotOrderFlow" />
           <EntitySet Name="C__DepotOrderContent" EntityType="DepotModel.C__DepotOrderContent" />
+          <EntitySet Name="DepotObjectSingle" EntityType="DepotModel.DepotObjectSingle" />
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -2589,7 +2650,7 @@
           <Property Name="Reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ToAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="PreservedA" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreservedA" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="PreservedB" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PreservedC" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PreservedD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -2803,6 +2864,43 @@
           <Property Name="单价" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="要求" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="用途" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DepotObjectSingle">
+          <Key>
+            <PropertyRef Name="仓库Id" />
+            <PropertyRef Name="分类Id" />
+            <PropertyRef Name="物资Id" />
+            <PropertyRef Name="购置日期" />
+            <PropertyRef Name="仓库" />
+            <PropertyRef Name="虚拟库" />
+            <PropertyRef Name="物资" />
+            <PropertyRef Name="拼音" />
+            <PropertyRef Name="单位" />
+            <PropertyRef Name="品牌" />
+            <PropertyRef Name="规格" />
+            <PropertyRef Name="适用年龄段" />
+            <PropertyRef Name="条码" />
+            <PropertyRef Name="单价" />
+            <PropertyRef Name="卡片编号" />
+            <PropertyRef Name="存放地" />
+          </Key>
+          <Property Name="仓库Id" Type="Guid" Nullable="false" />
+          <Property Name="分类Id" Type="Guid" Nullable="false" />
+          <Property Name="物资Id" Type="Guid" Nullable="false" />
+          <Property Name="购置日期" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="仓库" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="虚拟库" Type="Boolean" Nullable="false" />
+          <Property Name="物资" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="拼音" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="单位" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="品牌" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="规格" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="适用年龄段" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="条码" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="单价" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="卡片编号" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="存放地" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="分类" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3509,6 +3607,29 @@
                 <ScalarProperty Name="物品名称" ColumnName="物品名称" />
                 <ScalarProperty Name="MainID" ColumnName="MainID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotObjectSingle">
+            <EntityTypeMapping TypeName="DepotModel.DepotObjectSingle">
+              <MappingFragment StoreEntitySet="DepotObjectSingle">
+                <ScalarProperty Name="分类" ColumnName="分类" />
+                <ScalarProperty Name="存放地" ColumnName="存放地" />
+                <ScalarProperty Name="卡片编号" ColumnName="卡片编号" />
+                <ScalarProperty Name="单价" ColumnName="单价" />
+                <ScalarProperty Name="条码" ColumnName="条码" />
+                <ScalarProperty Name="适用年龄段" ColumnName="适用年龄段" />
+                <ScalarProperty Name="规格" ColumnName="规格" />
+                <ScalarProperty Name="品牌" ColumnName="品牌" />
+                <ScalarProperty Name="单位" ColumnName="单位" />
+                <ScalarProperty Name="拼音" ColumnName="拼音" />
+                <ScalarProperty Name="物资" ColumnName="物资" />
+                <ScalarProperty Name="虚拟库" ColumnName="虚拟库" />
+                <ScalarProperty Name="仓库" ColumnName="仓库" />
+                <ScalarProperty Name="购置日期" ColumnName="购置日期" />
+                <ScalarProperty Name="物资Id" ColumnName="物资Id" />
+                <ScalarProperty Name="分类Id" ColumnName="分类Id" />
+                <ScalarProperty Name="仓库Id" ColumnName="仓库Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

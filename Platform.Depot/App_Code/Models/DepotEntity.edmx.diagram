@@ -64,6 +64,7 @@
         <AssociationConnector Association="DepotModel.FK_DepotPeriod_DepotCatalog" />
         <EntityTypeShape EntityType="DepotModel.C__DepotOrderFlow" Width="1.5" PointX="14.75" PointY="21.5" />
         <EntityTypeShape EntityType="DepotModel.C__DepotOrderContent" Width="1.5" PointX="16.75" PointY="21.5" />
+        <EntityTypeShape EntityType="DepotModel.DepotObjectSingle" Width="1.5" PointX="18.75" PointY="21.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
