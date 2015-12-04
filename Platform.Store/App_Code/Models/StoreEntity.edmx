@@ -442,11 +442,15 @@
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TimeStamp" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotUseXRecord”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotUseXRecord">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
             <PropertyRef Name="UseId" />
             <PropertyRef Name="InXId" />
             <PropertyRef Name="Time" />
@@ -454,6 +458,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <PropertyRef Name="Name" />
             <PropertyRef Name="Unit" />
             <PropertyRef Name="Amount" />
+            <PropertyRef Name="ReturnedAmount" />
             <PropertyRef Name="PriceSet" />
             <PropertyRef Name="Money" />
             <PropertyRef Name="Age" />
@@ -463,7 +468,13 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
             <PropertyRef Name="UserId" />
             <PropertyRef Name="OperatorId" />
           </Key>
+          <Property Name="CatalogName" Type="nvarchar(max)" />
+          <Property Name="Period" Type="int" />
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="IsVirtual" Type="bit" Nullable="false" />
           <Property Name="UseId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="InXId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
@@ -471,6 +482,7 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="ReturnedAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="PriceSet" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Age" Type="nvarchar" MaxLength="256" Nullable="false" />
@@ -480,8 +492,8 @@ warning 6002: The table/view 'Platform_LY.dbo.DepotUseXRecord' does not have a p
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OperatorId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.Store_Creator' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.Store_Creator”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Store_Creator">
           <Key>
             <PropertyRef Name="Id" />
@@ -510,8 +522,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Creator' does not have a pri
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.Store_In' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.Store_In”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Store_In">
           <Key>
             <PropertyRef Name="Number" />
@@ -553,10 +565,11 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_In' does not have a primary 
           <Property Name="SourceAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="SourceMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.Store_LC' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.Store_LC”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Store_LC">
           <Key>
+            <PropertyRef Name="OrderSource" />
             <PropertyRef Name="PerPrice" />
             <PropertyRef Name="Amount" />
             <PropertyRef Name="Money" />
@@ -574,6 +587,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_LC' does not have a primary 
             <PropertyRef Name="OperationUserId" />
             <PropertyRef Name="Note" />
           </Key>
+          <Property Name="OrderSource" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="PerPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="Money" Type="decimal" Precision="18" Scale="6" Nullable="false" />
@@ -591,8 +605,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_LC' does not have a primary 
           <Property Name="OperationUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.Store_ObjectThumb' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.Store_ObjectThumb”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Store_ObjectThumb">
           <Key>
             <PropertyRef Name="ObjectId" />
@@ -609,8 +623,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_ObjectThumb' does not have a
           <Property Name="StoreId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="StoreName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.Store_RecordIn' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.Store_RecordIn”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Store_RecordIn">
           <Key>
             <PropertyRef Name="Id" />
@@ -654,8 +668,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_RecordIn' does not have a pr
           <Property Name="规格" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="类别" Type="nvarchar(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.Store_ST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.Store_ST”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Store_ST">
           <Key>
             <PropertyRef Name="Consumable" />
@@ -707,8 +721,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_ST' does not have a primary 
           <Property Name="EndAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="EndMoney" Type="decimal" Precision="18" Scale="6" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.Store_Target' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.Store_Target”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Store_Target">
           <Key>
             <PropertyRef Name="Id" />
@@ -749,8 +763,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Target' does not have a prim
           <Property Name="OperationTime" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.Store_Use' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.Store_Use”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Store_Use">
           <Key>
             <PropertyRef Name="Id" />
@@ -775,8 +789,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Use' does not have a primary
           <Property Name="User" Type="nvarchar" MaxLength="64" />
           <Property Name="Operator" Type="nvarchar" MaxLength="64" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.Store_User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.Store_User”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Store_User">
           <Key>
             <PropertyRef Name="Id" />
@@ -786,8 +800,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_User' does not have a primar
           <Property Name="RealName" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.Store_UseSingle' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.Store_UseSingle”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Store_UseSingle">
           <Key>
             <PropertyRef Name="Id" />
@@ -820,8 +834,8 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_UseSingle' does not have a p
           <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Specification" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.Store_Visitor”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Store_Visitor">
           <Key>
             <PropertyRef Name="Id" />
@@ -1527,7 +1541,13 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotUseXRecord" EntityType="Self.DepotUseXRecord" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [DepotUseXRecord].[CatalogName] AS [CatalogName], 
+    [DepotUseXRecord].[Period] AS [Period], 
     [DepotUseXRecord].[Id] AS [Id], 
+    [DepotUseXRecord].[ObjectId] AS [ObjectId], 
+    [DepotUseXRecord].[CatalogId] AS [CatalogId], 
+    [DepotUseXRecord].[Level] AS [Level], 
+    [DepotUseXRecord].[IsVirtual] AS [IsVirtual], 
     [DepotUseXRecord].[UseId] AS [UseId], 
     [DepotUseXRecord].[InXId] AS [InXId], 
     [DepotUseXRecord].[Time] AS [Time], 
@@ -1535,6 +1555,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
     [DepotUseXRecord].[Name] AS [Name], 
     [DepotUseXRecord].[Unit] AS [Unit], 
     [DepotUseXRecord].[Amount] AS [Amount], 
+    [DepotUseXRecord].[ReturnedAmount] AS [ReturnedAmount], 
     [DepotUseXRecord].[PriceSet] AS [PriceSet], 
     [DepotUseXRecord].[Money] AS [Money], 
     [DepotUseXRecord].[Age] AS [Age], 
@@ -1590,6 +1611,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           </EntitySet>
           <EntitySet Name="Store_LC" EntityType="Self.Store_LC" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [Store_LC].[OrderSource] AS [OrderSource], 
     [Store_LC].[PerPrice] AS [PerPrice], 
     [Store_LC].[Amount] AS [Amount], 
     [Store_LC].[Money] AS [Money], 
@@ -3734,6 +3756,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <PropertyRef Name="UserId" />
             <PropertyRef Name="OperationUserId" />
             <PropertyRef Name="Note" />
+            <PropertyRef Name="OrderSource" />
           </Key>
           <Property Name="PerPrice" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
@@ -3751,6 +3774,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="OperationUserId" Type="Guid" Nullable="false" />
           <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrderSource" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DepotUseXRecord">
           <Key>
@@ -3770,6 +3794,11 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
             <PropertyRef Name="Note" />
             <PropertyRef Name="UserId" />
             <PropertyRef Name="OperatorId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="IsVirtual" />
+            <PropertyRef Name="ReturnedAmount" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="UseId" Type="Guid" Nullable="false" />
@@ -3787,6 +3816,13 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="OperatorId" Type="Guid" Nullable="false" />
+          <Property Name="CatalogName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Period" Type="Int32" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
+          <Property Name="ReturnedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4460,6 +4496,7 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySetMapping Name="Store_LC">
             <EntityTypeMapping TypeName="StoreModel.Store_LC">
               <MappingFragment StoreEntitySet="Store_LC">
+                <ScalarProperty Name="OrderSource" ColumnName="OrderSource" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -4482,6 +4519,13 @@ warning 6002: The table/view 'Platform_LY.dbo.Store_Visitor' does not have a pri
           <EntitySetMapping Name="DepotUseXRecord">
             <EntityTypeMapping TypeName="StoreModel.DepotUseXRecord">
               <MappingFragment StoreEntitySet="DepotUseXRecord">
+                <ScalarProperty Name="ReturnedAmount" ColumnName="ReturnedAmount" />
+                <ScalarProperty Name="IsVirtual" ColumnName="IsVirtual" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="CatalogName" ColumnName="CatalogName" />
                 <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Note" ColumnName="Note" />

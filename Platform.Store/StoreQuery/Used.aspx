@@ -64,23 +64,18 @@
                 <div class="col-md-10" style="text-align: left;">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                    <telerik:RadDatePicker ID="periodx" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
-                        <DatePopupButton runat="server" Visible="false" />
-                    </telerik:RadDatePicker>
-                    &nbsp;&nbsp;-&nbsp;&nbsp;
+                            <telerik:RadDatePicker ID="periodx" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
+                                <DatePopupButton runat="server" Visible="false" />
+                            </telerik:RadDatePicker>
+                            &nbsp;&nbsp;-&nbsp;&nbsp;
                             <telerik:RadDatePicker ID="period" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
                                 <DatePopupButton runat="server" Visible="false" />
                             </telerik:RadDatePicker>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="useType" runat="server" AutoPostBack="false" Width="120" AppendDataBoundItems="false" DataTextField="Name" DataValueField="Id">
-                        <Items>
-                            <telerik:RadComboBoxItem Text="出库类型" Value="*" Selected="true" />
-                            <telerik:RadComboBoxItem Text="借用" Value="1" />
-                            <telerik:RadComboBoxItem Text="领用" Value="0" />
-                        </Items>
-                    </telerik:RadComboBox>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <telerik:RadTextBox ID="name" runat="server" Width="120" EmptyMessage="物资名称"></telerik:RadTextBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                    <telerik:RadComboBox ID="orderSource" runat="server" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name">
+                    </telerik:RadComboBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                     <telerik:RadComboBox ID="age" runat="server" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Id">
                     </telerik:RadComboBox>
@@ -97,8 +92,8 @@
                     <div class="row">&nbsp;</div>
                     <div class="row">
                         <input type="hidden" id="___total" runat="server" />
-                <!-- Start Printing -->
-                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
+                        <!-- Start Printing -->
+                        <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="false">
                             <LayoutTemplate>
                                 <div class="col-md-12">
                                     <table class="storeTable text-center">
@@ -107,9 +102,9 @@
                                             <th>操作</th>
                                         </tr>
                                         <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
-                                <%--<tr>
-                                    <td colspan="12">总计：<%# ___total.Value %></td>
-                                </tr>--%>
+                                        <tr>
+                                            <td colspan="11">总计：<%# ___total.Value %></td>
+                                        </tr>
                                     </table>
                                 </div>
                             </LayoutTemplate>
@@ -122,17 +117,19 @@
                                 </tr>
                             </ItemTemplate>
                             <EmptyDataTemplate>
-                                <div class="col-md-12 text-center"><div class="btn btn-warning">暂无记录</div></div>
+                                <div class="col-md-12 text-center">
+                                    <div class="btn btn-warning">暂无记录</div>
+                                </div>
                             </EmptyDataTemplate>
                         </telerik:RadListView>
                         <!-- End Printing -->
                     </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <input type="button" class="btn btn-tumblr" id="print" value="打印" onclick="printDepot();" />
-                </div>
-            </div>
                     <div class="row">
+                        <div class="col-md-12 text-center">
+                            <input type="button" class="btn btn-tumblr" id="print" value="打印" onclick="printDepot();" />
+                        </div>
+                    </div>
+                    <%--<div class="row">
                         <div class="col-md-4">&nbsp;</div>
                         <div class="col-md-4 text-center">
                             <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="10" OnPageIndexChanged="pager_PageIndexChanged">
@@ -144,7 +141,7 @@
                             </telerik:RadDataPager>
                         </div>
                         <div class="col-md-4">&nbsp;</div>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
         </telerik:RadAjaxPanel>

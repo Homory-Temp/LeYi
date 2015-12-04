@@ -28,6 +28,10 @@ public partial class StoreQuery_Used : SingleStorePage
             tree.CheckAllNodes();
             age.Items.Clear();
             age.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "年龄段", Value = "", Selected = true });
+            orderSource.Items.Clear();
+            orderSource.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "采购来源", Value = "", Selected = true });
+            orderSource.DataSource = db.Value.StoreDictionary.Where(o => o.StoreId == StoreId && o.Type == DictionaryType.采购来源).ToList();
+            orderSource.DataBind();
             if (CurrentStore.State == StoreState.食品)
             {
                 var s = db.Value.StoreCatalog.Where(o => o.StoreId == StoreId && o.ParentId == null && o.State < 2).OrderBy(o => o.Ordinal).ToList();
@@ -73,11 +77,7 @@ public partial class StoreQuery_Used : SingleStorePage
         var end = time.AddDays(1).ToTimeNode();
         var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => o.Value.GlobalId()).ToList();
         var source = catalogs.Join(db.Value.Store_LC.Where(o => o.TimeNode > start && o.TimeNode < end), o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.TimeNode).ThenBy(o => o.User).ToList();
-        if (useType.SelectedIndex > 0)
-        {
-            var x = useType.SelectedItem.Text;
-            source = source.Where(o => o.Type == x).ToList();
-        }
+        source = source.Where(o => o.Type == "领用").ToList();
         if (!name.Text.Trim().Null())
         {
             source = source.Where(o => o.Name.Equals(name.Text.Trim(), StringComparison.InvariantCultureIgnoreCase)).ToList();
@@ -85,6 +85,10 @@ public partial class StoreQuery_Used : SingleStorePage
         if (!age.Text.Trim().Null() && age.SelectedIndex > 0)
         {
             source = source.Where(o => o.Age.Equals(age.Text.Trim(), StringComparison.InvariantCultureIgnoreCase)).ToList();
+        }
+        if (!orderSource.Text.Trim().Null() && orderSource.SelectedIndex > 0)
+        {
+            source = source.Where(o => o.OrderSource == orderSource.SelectedItem.Text).ToList();
         }
         if (!peopleX.Text.Trim().Null() && peopleX.SelectedIndex > 0)
         {
@@ -97,7 +101,7 @@ public partial class StoreQuery_Used : SingleStorePage
         source = source.Where(o => o.Amount > 0).ToList();
         view.DataSource = source;
         ___total.Value = source.Sum(o => o.Money).ToMoney();
-        pager.Visible = source.Count > pager.PageSize;
+        //pager.Visible = source.Count > pager.PageSize;
     }
 
     protected void edit_ServerClick(object sender, EventArgs e)
