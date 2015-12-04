@@ -526,6 +526,7 @@
 警告 6002: 表/视图“Platform_LY.dbo.Store_In”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Store_In">
           <Key>
+            <PropertyRef Name="OrderSource" />
             <PropertyRef Name="Number" />
             <PropertyRef Name="Done" />
             <PropertyRef Name="Name" />
@@ -544,6 +545,7 @@
             <PropertyRef Name="SourceAmount" />
             <PropertyRef Name="SourceMoney" />
           </Key>
+          <Property Name="OrderSource" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="Done" Type="bit" Nullable="false" />
           <Property Name="Operator" Type="nvarchar" MaxLength="64" />
@@ -1587,6 +1589,7 @@
           </EntitySet>
           <EntitySet Name="Store_In" EntityType="Self.Store_In" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [Store_In].[OrderSource] AS [OrderSource], 
     [Store_In].[Number] AS [Number], 
     [Store_In].[Done] AS [Done], 
     [Store_In].[Operator] AS [Operator], 
@@ -3108,7 +3111,6 @@
           <FunctionImport Name="GetCatalogPath" ReturnType="Collection(String)">
           <Parameter Name="CatalogId" Mode="In" Type="Guid" />
           </FunctionImport>
-          <EntitySet Name="Store_In" EntityType="StoreModel.Store_In" />
           <EntitySet Name="StoreStatistics" EntityType="StoreModel.StoreStatistics" />
           <AssociationSet Name="FK_StoreStatistics_StoreObject" Association="StoreModel.FK_StoreStatistics_StoreObject">
             <End Role="StoreObject" EntitySet="StoreObject" />
@@ -3133,6 +3135,7 @@
           <EntitySet Name="Store_UseSingle" EntityType="StoreModel.Store_UseSingle" />
           <EntitySet Name="Store_LC" EntityType="StoreModel.Store_LC" />
           <EntitySet Name="DepotUseXRecord" EntityType="StoreModel.DepotUseXRecord" />
+          <EntitySet Name="Store_In" EntityType="StoreModel.Store_In" />
         </EntityContainer>
         <Association Name="FK_StoreLendSingle_StoreIn">
           <End Type="StoreModel.StoreIn" Role="StoreIn" Multiplicity="1" />
@@ -3481,47 +3484,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Store_In">
-          <Key>
-            <PropertyRef Name="Number" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="CatalogId" />
-            <PropertyRef Name="Unit" />
-            <PropertyRef Name="Specification" />
-            <PropertyRef Name="InId" />
-            <PropertyRef Name="TargetId" />
-            <PropertyRef Name="ObjectId" />
-            <PropertyRef Name="Age" />
-            <PropertyRef Name="Place" />
-            <PropertyRef Name="Note" />
-            <PropertyRef Name="TimeNode" />
-            <PropertyRef Name="OperationUserId" />
-            <PropertyRef Name="SourcePerPrice" />
-            <PropertyRef Name="SourceAmount" />
-            <PropertyRef Name="SourceMoney" />
-            <PropertyRef Name="Done" />
-          </Key>
-          <Property Name="Number" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="Operator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="Responsible" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="CatalogId" Type="Guid" Nullable="false" />
-          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="InId" Type="Guid" Nullable="false" />
-          <Property Name="TargetId" Type="Guid" Nullable="false" />
-          <Property Name="ObjectId" Type="Guid" Nullable="false" />
-          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ResponsibleUserId" Type="Guid" />
-          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TimeNode" Type="Int32" Nullable="false" />
-          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
-          <Property Name="SourcePerPrice" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="SourceAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="SourceMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
-          <Property Name="Done" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="StoreStatistics">
           <Key>
             <PropertyRef Name="ObjectId" />
@@ -3823,6 +3785,49 @@
           <Property Name="Level" Type="Int32" Nullable="false" />
           <Property Name="IsVirtual" Type="Boolean" Nullable="false" />
           <Property Name="ReturnedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+        </EntityType>
+        <EntityType Name="Store_In">
+          <Key>
+            <PropertyRef Name="OrderSource" />
+            <PropertyRef Name="Number" />
+            <PropertyRef Name="Done" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Unit" />
+            <PropertyRef Name="Specification" />
+            <PropertyRef Name="InId" />
+            <PropertyRef Name="TargetId" />
+            <PropertyRef Name="ObjectId" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Place" />
+            <PropertyRef Name="Note" />
+            <PropertyRef Name="TimeNode" />
+            <PropertyRef Name="OperationUserId" />
+            <PropertyRef Name="SourcePerPrice" />
+            <PropertyRef Name="SourceAmount" />
+            <PropertyRef Name="SourceMoney" />
+          </Key>
+          <Property Name="OrderSource" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Done" Type="Boolean" Nullable="false" />
+          <Property Name="Operator" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Responsible" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Specification" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="InId" Type="Guid" Nullable="false" />
+          <Property Name="TargetId" Type="Guid" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ResponsibleUserId" Type="Guid" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeNode" Type="Int32" Nullable="false" />
+          <Property Name="OperationUserId" Type="Guid" Nullable="false" />
+          <Property Name="SourcePerPrice" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="SourceAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="SourceMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4341,32 +4346,6 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetCatalogPath" FunctionName="StoreModel.Store.GetCatalogPath" />
-          <EntitySetMapping Name="Store_In">
-            <EntityTypeMapping TypeName="StoreModel.Store_In">
-              <MappingFragment StoreEntitySet="Store_In">
-                <ScalarProperty Name="Done" ColumnName="Done" />
-                <ScalarProperty Name="SourceMoney" ColumnName="SourceMoney" />
-                <ScalarProperty Name="SourceAmount" ColumnName="SourceAmount" />
-                <ScalarProperty Name="SourcePerPrice" ColumnName="SourcePerPrice" />
-                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
-                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="ResponsibleUserId" ColumnName="ResponsibleUserId" />
-                <ScalarProperty Name="Place" ColumnName="Place" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
-                <ScalarProperty Name="TargetId" ColumnName="TargetId" />
-                <ScalarProperty Name="InId" ColumnName="InId" />
-                <ScalarProperty Name="Specification" ColumnName="Specification" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Responsible" ColumnName="Responsible" />
-                <ScalarProperty Name="Operator" ColumnName="Operator" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="StoreStatistics">
             <EntityTypeMapping TypeName="StoreModel.StoreStatistics">
               <MappingFragment StoreEntitySet="StoreStatistics">
@@ -4542,6 +4521,33 @@
                 <ScalarProperty Name="InXId" ColumnName="InXId" />
                 <ScalarProperty Name="UseId" ColumnName="UseId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_In">
+            <EntityTypeMapping TypeName="StoreModel.Store_In">
+              <MappingFragment StoreEntitySet="Store_In">
+                <ScalarProperty Name="SourceMoney" ColumnName="SourceMoney" />
+                <ScalarProperty Name="SourceAmount" ColumnName="SourceAmount" />
+                <ScalarProperty Name="SourcePerPrice" ColumnName="SourcePerPrice" />
+                <ScalarProperty Name="OperationUserId" ColumnName="OperationUserId" />
+                <ScalarProperty Name="TimeNode" ColumnName="TimeNode" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ResponsibleUserId" ColumnName="ResponsibleUserId" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+                <ScalarProperty Name="InId" ColumnName="InId" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Responsible" ColumnName="Responsible" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="Done" ColumnName="Done" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="OrderSource" ColumnName="OrderSource" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

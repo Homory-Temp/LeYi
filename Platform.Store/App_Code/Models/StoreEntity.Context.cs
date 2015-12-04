@@ -56,7 +56,6 @@ namespace Models
         public virtual DbSet<Store_ObjectThumb> Store_ObjectThumb { get; set; }
         public virtual DbSet<Store_RecordIn> Store_RecordIn { get; set; }
         public virtual DbSet<Department> Department { get; set; }
-        public virtual DbSet<Store_In> Store_In { get; set; }
         public virtual DbSet<StoreStatistics> StoreStatistics { get; set; }
         public virtual DbSet<Store_ST> Store_ST { get; set; }
         public virtual DbSet<StoreUse> StoreUse { get; set; }
@@ -65,6 +64,7 @@ namespace Models
         public virtual DbSet<Store_UseSingle> Store_UseSingle { get; set; }
         public virtual DbSet<Store_LC> Store_LC { get; set; }
         public virtual DbSet<DepotUseXRecord> DepotUseXRecord { get; set; }
+        public virtual DbSet<Store_In> Store_In { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {

@@ -189,7 +189,9 @@ namespace Models
     
     public partial class Store_In
     {
+        public string OrderSource { get; set; }
         public string Number { get; set; }
+        public bool Done { get; set; }
         public string Operator { get; set; }
         public string Responsible { get; set; }
         public string Name { get; set; }
@@ -208,7 +210,6 @@ namespace Models
         public decimal SourcePerPrice { get; set; }
         public decimal SourceAmount { get; set; }
         public decimal SourceMoney { get; set; }
-        public bool Done { get; set; }
     }
 }
 namespace Models

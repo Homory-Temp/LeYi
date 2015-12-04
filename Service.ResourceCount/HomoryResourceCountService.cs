@@ -22,6 +22,7 @@ namespace LY.Service.QRCode
 			{
 				Log("Service", "Start");
 				CountResource();
+                AutoSignOff();
 				_timer = new Timer(double.Parse(ConfigurationManager.AppSettings["ResourceCountInterval"]) * 60 * 1000)
 				{
 					AutoReset = true
@@ -86,10 +87,43 @@ namespace LY.Service.QRCode
 			}
 		}
 
-		private void timer_Elapsed(object sender, ElapsedEventArgs e)
+        private void AutoSignOff()
+        {
+            try
+            {
+                bool autoOff = bool.Parse(ConfigurationManager.AppSettings["AutoSignOff"]);
+                int autoOffTime = int.Parse(ConfigurationManager.AppSettings["AutoSignOffMinutes"]);
+                string time = DateTime.Now.AddMinutes(-autoOffTime).ToString("yyyy-MM-dd HH:mm:ss");
+                if (!autoOff)
+                    return;
+                try
+                {
+                    var con = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["Entities"].ConnectionString);
+                    var com = new System.Data.SqlClient.SqlCommand(string.Format("DELETE FROM UserOnline WHERE [TimeStamp] < '{0}'", time), con);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    try
+                    {
+                        con.Close();
+                    }
+                    catch
+                    {
+                    }
+                }
+                catch
+                {
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        private void timer_Elapsed(object sender, ElapsedEventArgs e)
 		{
 			CountResource();
-		}
+            AutoSignOff();
+        }
 
         protected override void OnStop()
         {
