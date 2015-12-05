@@ -14,10 +14,6 @@ public partial class DepotScan_Use : DepotPageSingle
         if (!IsPostBack)
         {
             time.SelectedDate = DateTime.Today;
-            people.Items.Clear();
-            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "", Value = "", Selected = true });
-            people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
-            people.DataBind();
             //age.Items.Clear();
             //age.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "年龄段", Value = "", Selected = true });
             //age.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.年龄段).ToList();
@@ -44,34 +40,8 @@ public partial class DepotScan_Use : DepotPageSingle
     protected void Detect()
     {
         var show = true;
-        if (people.SelectedValue.None())
-        {
-            show = false;
-            x1.Visible = x2.Visible = x3.Visible = false;
-        }
-        else
-        {
-            var uid = people.SelectedValue.GlobalId();
-            var record = DataContext.DepotUseXRecord.Where(o => o.UserId == uid && o.ReturnedAmount < o.Amount && o.Type == 2).OrderBy(o => o.Time).FirstOrDefault();
-            if (record == null)
-                show = true;
-            else
-            {
-                var period = Depot.DepotSetting.SingleOrDefault(o => o.Key == "PeriodTime");
-                var time = period == null ? 0 : int.Parse(period.Value);
-                if (time > 0 && record.Time.AddMonths(time) < DateTime.Now)
-                {
-                    var ids = Depot.DepotSetting.Where(o => o.Key == "PeriodUser").ToList().Select(o => Guid.Parse(o.Value)).ToList();
-                    show = ids.Contains(uid);
-                }
-                else
-                {
-                    show = true;
-                }
-            }
-            x1.Visible = x2.Visible = show;
-            x3.Visible = !show;
-        }
+        x1.Visible = x2.Visible = show;
+        x3.Visible = !show;
         Reset();
     }
 
@@ -97,17 +67,39 @@ public partial class DepotScan_Use : DepotPageSingle
 
     protected void do_use_ServerClick(object sender, EventArgs e)
     {
-         var gid = DoUse();
+        var gid = DoUse();
         if (gid != Guid.Empty)
             Response.Redirect("~/Depot/DepotHome?DepotId={0}".Formatted(Depot.Id));
     }
 
     protected Guid DoUse()
     {
-        if (people.SelectedValue == null)
+        var x = people.Text.Trim();
+        if (x.None())
         {
-            NotifyError(ap, "请选择借领人");
+            NotifyError(ap, "请输入借领人");
             return Guid.Empty;
+        }
+        var g = DataContext.DepotUser.ToList().FirstOrDefault(o => o.Name == x || o.Phone == x || o.Phone.Substring(5) == x);
+        if (g == null)
+        {
+            NotifyError(ap, "请输入借领人");
+            return Guid.Empty;
+        }
+        var record = DataContext.DepotUseXRecord.Where(o => o.UserId == g.Id && o.ReturnedAmount < o.Amount && o.Type == 2).OrderBy(o => o.Time).FirstOrDefault();
+        if (record != null)
+        {
+            var period = Depot.DepotSetting.SingleOrDefault(o => o.Key == "PeriodTime");
+            var timex = period == null ? 0 : int.Parse(period.Value);
+            if (timex > 0 && record.Time.AddMonths(timex) < DateTime.Now)
+            {
+                var ids = Depot.DepotSetting.Where(o => o.Key == "PeriodUser").ToList().Select(o => Guid.Parse(o.Value)).ToList();
+                if (ids.Contains(g.Id))
+                {
+                    NotifyError(ap, "请先归还超期物资");
+                    return Guid.Empty;
+                }
+            }
         }
         var tn = time.SelectedDate.HasValue ? time.SelectedDate.Value : DateTime.Today;
         var list = new List<InMemoryUse>();
@@ -120,7 +112,7 @@ public partial class DepotScan_Use : DepotPageSingle
                 list.Add(use);
             }
         }
-        return DataContext.DepotActUse(Depot.Id, time.SelectedDate.HasValue ? time.SelectedDate.Value.Date : DateTime.Today, DepotUser.Id, people.SelectedValue.GlobalId(), list);
+        return DataContext.DepotActUse(Depot.Id, time.SelectedDate.HasValue ? time.SelectedDate.Value.Date : DateTime.Today, DepotUser.Id, g.Id, list);
     }
 
     protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)

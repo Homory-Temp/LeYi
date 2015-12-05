@@ -113,7 +113,7 @@ public partial class DepotAction_Import : DepotPageSingle
                     if (DataContext.DepotIn.Count(o => o.ObjectId == 物资Id && o.Note == code) == 0)
                     {
                         var responsible = row[2].ToString().Trim();
-                        var user = DataContext.DepotUserLoad(Depot.CampusId).FirstOrDefault(o => o.Name == responsible && o.State < State.停用);
+                        var user = DataContext.DepotUserLoad(Depot.CampusId).FirstOrDefault(o => o.Name == responsible && o.State < 2);
                         decimal amount = 0.00M;
                         try
                         {

@@ -852,12 +852,14 @@
 警告 6002: 表/视图“Platform_LY.dbo.DepotUser”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotUser">
           <Key>
+            <PropertyRef Name="Phone" />
             <PropertyRef Name="Id" />
-            
-            
-            
-            
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CampusId" />
+            <PropertyRef Name="CampusName" />
           </Key>
+          <Property Name="Phone" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
@@ -1452,6 +1454,7 @@
           </EntitySet>
           <EntitySet Name="DepotUser" EntityType="Self.DepotUser" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [DepotUser].[Phone] AS [Phone], 
     [DepotUser].[Id] AS [Id], 
     [DepotUser].[Name] AS [Name], 
     [DepotUser].[PinYin] AS [PinYin], 
@@ -1595,7 +1598,6 @@
           <EntitySet Name="DepotRole" EntityType="DepotModel.DepotRole" />
           <EntitySet Name="DepotUserRole" EntityType="DepotModel.DepotUserRole" />
           <EntitySet Name="DepotOrder" EntityType="DepotModel.DepotOrder" />
-          <EntitySet Name="DepotUser" EntityType="DepotModel.DepotUser" />
           <EntitySet Name="Application" EntityType="DepotModel.Application" />
           <EntitySet Name="UserOnline" EntityType="DepotModel.UserOnline" />
           <EntitySet Name="DepotCreator" EntityType="DepotModel.DepotCreator" />
@@ -1719,6 +1721,7 @@
           <EntitySet Name="C__DepotOrderFlow" EntityType="DepotModel.C__DepotOrderFlow" />
           <EntitySet Name="C__DepotOrderContent" EntityType="DepotModel.C__DepotOrderContent" />
           <EntitySet Name="DepotObjectSingle" EntityType="DepotModel.DepotObjectSingle" />
+          <EntitySet Name="DepotUser" EntityType="DepotModel.DepotUser" />
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -1816,17 +1819,6 @@
           <NavigationProperty Name="DepotIn" Relationship="DepotModel.FK_DepotIn_DepotOrder" FromRole="DepotOrder" ToRole="DepotIn" />
           <NavigationProperty Name="DepotInX" Relationship="DepotModel.FK_DepotInX_DepotOrder" FromRole="DepotOrder" ToRole="DepotInX" />
           <Property Name="MainID" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="DepotUser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="DepotModel.State" Nullable="false" />
-          <Property Name="CampusId" Type="Guid" Nullable="false" />
-          <Property Name="CampusName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Application">
           <Key>
@@ -2902,6 +2894,23 @@
           <Property Name="存放地" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="分类" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="DepotUser">
+          <Key>
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CampusId" />
+            <PropertyRef Name="CampusName" />
+          </Key>
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="CampusId" Type="Guid" Nullable="false" />
+          <Property Name="CampusName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2989,18 +2998,6 @@
                 <ScalarProperty Name="Receipt" ColumnName="Receipt" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DepotId" ColumnName="DepotId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DepotUser">
-            <EntityTypeMapping TypeName="DepotModel.DepotUser">
-              <MappingFragment StoreEntitySet="DepotUser">
-                <ScalarProperty Name="CampusName" ColumnName="CampusName" />
-                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3630,6 +3627,19 @@
                 <ScalarProperty Name="物资Id" ColumnName="物资Id" />
                 <ScalarProperty Name="分类Id" ColumnName="分类Id" />
                 <ScalarProperty Name="仓库Id" ColumnName="仓库Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotUser">
+            <EntityTypeMapping TypeName="DepotModel.DepotUser">
+              <MappingFragment StoreEntitySet="DepotUser">
+                <ScalarProperty Name="CampusName" ColumnName="CampusName" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

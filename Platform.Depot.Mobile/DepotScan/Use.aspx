@@ -39,14 +39,8 @@
                     <%--<telerik:RadComboBox ID="age" runat="server" AutoPostBack="true" MaxHeight="203" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" OnSelectedIndexChanged="usage_SelectedIndexChanged">
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;--%>
-                    <telerik:RadComboBox ID="people" runat="server" EmptyMessage="借领人" MaxHeight="203" LocalizationPath="~/Language" DataTextField="Name" DataValueField="Id" Filter="Contains" MarkFirstMatch="true" AppendDataBoundItems="true" ShowToggleImage="false" Width="120" AllowCustomText="true" AutoPostBack="true" OnSelectedIndexChanged="people_SelectedIndexChanged">
-                        <Items>
-                            <telerik:RadComboBoxItem Text="" Value="" Selected="true" />
-                        </Items>
-                        <ItemTemplate>
-                            <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
-                        </ItemTemplate>
-                    </telerik:RadComboBox>
+                    <telerik:RadTextBox ID="people" runat="server" EmptyMessage="借领人" MaxHeight="203" Width="120">
+                    </telerik:RadTextBox>
                 </div>
                 <div class="col-md-12 text-center" style="margin-top: 20px;">
                     <telerik:RadDatePicker ID="time" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="true">

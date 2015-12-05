@@ -14,10 +14,6 @@ public partial class DepotScan_Out : DepotPageSingle
         if (!IsPostBack)
         {
             time.SelectedDate = DateTime.Today;
-            people.Items.Clear();
-            people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "", Value = "", Selected = true });
-            people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
-            people.DataBind();
             counter.Value = "0";
             plus.Visible = false;
             Detect();
@@ -40,14 +36,6 @@ public partial class DepotScan_Out : DepotPageSingle
     protected void Detect()
     {
         var show = true;
-        if (people.SelectedValue.None())
-        {
-            show = false;
-        }
-        else
-        {
-            show = true;
-        }
         x1.Visible = x2.Visible = show;
         Reset();
     }
@@ -73,9 +61,17 @@ public partial class DepotScan_Out : DepotPageSingle
 
     protected void DoOut()
     {
-        if (people.SelectedValue == null)
+        var x = people.Text.Trim();
+        if (x.None())
         {
-            NotifyError(ap, "请选择报废申请人");
+            NotifyError(ap, "请输入报废申请人");
+            return;
+        }
+        var g = DataContext.DepotUser.ToList().FirstOrDefault(o => o.Name == x || o.Phone == x || o.Phone.Substring(5) == x);
+        if (g == null)
+        {
+            NotifyError(ap, "请输入报废申请人");
+            return;
         }
         var tn = time.SelectedDate.HasValue ? time.SelectedDate.Value : DateTime.Today;
         var list = new List<InMemoryOut>();
@@ -88,7 +84,7 @@ public partial class DepotScan_Out : DepotPageSingle
                 list.Add(@out);
             }
         }
-        DataContext.DepotActOut(Depot.Id, time.SelectedDate.HasValue ? time.SelectedDate.Value.Date : DateTime.Today, DepotUser.Id, people.SelectedValue.GlobalId(), list);
+        DataContext.DepotActOut(Depot.Id, time.SelectedDate.HasValue ? time.SelectedDate.Value.Date : DateTime.Today, DepotUser.Id, g.Id, list);
     }
 
     protected void view_obj_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
