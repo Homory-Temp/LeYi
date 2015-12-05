@@ -97,7 +97,7 @@
                     <div class="row">&nbsp;</div>
                     <div class="row">
                         <div class="col-md-12" style="color: #2B2B2B;">
-                            <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true">
+                            <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="true" OnItemDataBound="view_ItemDataBound">
                                 <LayoutTemplate>
                                     <table class="storeTablePrint">
                                         <tr>
@@ -124,7 +124,21 @@
                                         <td><%# Eval("单位") %></td>
                                         <td><%# Eval("品牌") %></td>
                                         <td><%# Eval("规格") %></td>
-                                        <td><%# Eval("存放地") %></td>
+                                        <td id="xp" runat="server" match='<%# Eval("条码") %>' matchp='<%# Eval("存放地") %>'>
+                                            <asp:Label runat="server" Text='<%# Eval("存放地") %>' Style="cursor: pointer; color: #3e5a70;"></asp:Label>
+                                            <telerik:RadToolTip ID="xt" runat="server" IsClientID="true" ManualClose="true" ManualCloseButtonText="" Position="MiddleLeft" Skin="Metro">
+                                                <asp:GridView ID="xv" runat="server" AutoGenerateColumns="false">
+                                                    <HeaderStyle Font-Size="Medium" />
+                                                    <RowStyle Font-Size="Medium" />
+                                                    <AlternatingRowStyle Font-Size="Medium" />
+                                                    <EmptyDataRowStyle Font-Size="Medium" />
+                                                    <Columns>
+                                                        <asp:BoundField DataField="Time" HeaderStyle-Width="100" HeaderStyle-CssClass="coreAuto text-center" HeaderText="日期" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataFormatString="{0:yyyy-MM-dd}" />
+                                                        <asp:BoundField DataField="Place" HeaderStyle-Width="200" HeaderStyle-CssClass="coreAuto text-center" HeaderText="存放地" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left" />
+                                                    </Columns>
+                                                </asp:GridView>
+                                            </telerik:RadToolTip>
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </telerik:RadListView>

@@ -1,9 +1,11 @@
 ﻿using Models;
 using System;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using Telerik.Web.UI;
 
 public partial class DepotAction_ObjectSingle : DepotPageSingle
 {
@@ -108,5 +110,21 @@ public partial class DepotAction_ObjectSingle : DepotPageSingle
     protected void only_CheckedChanged(object sender, EventArgs e)
     {
         view.Rebind();
+    }
+
+    protected void view_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
+    {
+        var c = e.Item.FindControl("xp");
+        if (c == null)
+            return;
+        var t = e.Item.FindControl("xt") as RadToolTip;
+        t.TargetControlID = c.ClientID;
+        var v = e.Item.FindControl("xv") as GridView;
+        var k = (c as HtmlTableCell).Attributes["match"].ToString();
+        var p = (c as HtmlTableCell).Attributes["matchp"].ToString();
+        v.EmptyDataText = "初始存放于：{0}".Formatted(p);
+        var source = DataContext.DepotPlace.Where(o => o.Code == k).OrderByDescending(o => o.AutoId).ToList();
+        v.DataSource = source;
+        v.DataBind();
     }
 }
