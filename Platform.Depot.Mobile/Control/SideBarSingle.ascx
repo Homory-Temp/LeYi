@@ -21,7 +21,6 @@
                 <span id="crumb" runat="server" class="btn btn-info"></span>
                 <span class="btn btn-info" onclick='<%= "top.location.href = \"../Depot/DepotHome?DepotId={0}\"".Formatted(Depot.Id) %>' style="float: right; margin-right: 13px;">快捷菜单</span>
                 <span style="clear: both;"></span>
-                <hr style="color: #2B2B2B; margin-top: 4px;" />
             </div>
             <div class="col-md-8">
             </div>
