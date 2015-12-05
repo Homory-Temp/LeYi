@@ -213,10 +213,11 @@ namespace Models
     
     public partial class DepotCreator
     {
+        public string Phone { get; set; }
         public System.Guid Id { get; set; }
         public string Name { get; set; }
         public string PinYin { get; set; }
-        public State State { get; set; }
+        public int State { get; set; }
         public System.Guid CampusId { get; set; }
         public string CampusName { get; set; }
     }
@@ -648,6 +649,19 @@ namespace Models
         public int Time { get; set; }
     
         public virtual DepotCatalog DepotCatalog { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class DepotPlace
+    {
+        public string Code { get; set; }
+        public int AutoId { get; set; }
+        public string Place { get; set; }
+        public System.DateTime Time { get; set; }
     }
 }
 namespace Models

@@ -561,6 +561,23 @@ public static class DepotDataExtensions
                 foreach (var index in item.Ordinals)
                 {
                     var @in = db.DepotInX.Single(o => o.ObjectId == objId && o.Ordinal == index);
+                    if (db.DepotPlace.Count(o => o.Code == @in.Code) == 0)
+                    {
+                        var ___px = new DepotPlace
+                        {
+                            Code = @in.Code,
+                            Place = @in.Place,
+                            Time = @in.DepotIn.Time
+                        };
+                        db.DepotPlace.Add(___px);
+                    }
+                    var ___p = new DepotPlace
+                    {
+                        Code = @in.Code,
+                        Place = item.Place,
+                        Time = DateTime.Now
+                    };
+                    db.DepotPlace.Add(___p);
                     var x = new DepotUseX
                     {
                         Id = db.GlobalId(),
@@ -803,6 +820,17 @@ public static class DepotDataExtensions
             @in.Total += @in.Price * @return.Amount;
             if (obj.Single)
             {
+                if (db.DepotPlace.Count(o => o.Code == inx.Code) > 1)
+                {
+                    var dpx = db.DepotPlace.Where(o => o.Code == inx.Code).OrderByDescending(o => o.AutoId).Skip(1).Take(1).Single();
+                    var ___px = new DepotPlace
+                    {
+                        Code = dpx.Code,
+                        Place = dpx.Place,
+                        Time = DateTime.Now
+                    };
+                    db.DepotPlace.Add(___px);
+                }
                 var flowx = new DepotFlowX
                 {
                     Id = db.GlobalId(),

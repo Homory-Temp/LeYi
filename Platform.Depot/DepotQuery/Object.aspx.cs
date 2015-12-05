@@ -122,6 +122,13 @@ public partial class DepotQuery_Object : DepotPageSingle
                         var @fixed = bool.Parse(values["Fixed"].ToString());
                         var @in = DataContext.DepotInX.SingleOrDefault(o => o.Id == id);
                         @in.Place = place;
+                        var ___px = new DepotPlace
+                        {
+                            Code = @in.Code,
+                            Place = place,
+                            Time = DateTime.Now
+                        };
+                        DataContext.DepotPlace.Add(___px);
                         if (!obj.Single)
                         {
                             @in.DepotIn.Place = @in.Place;

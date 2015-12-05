@@ -249,6 +249,16 @@
           <Property Name="Users" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Time" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="DepotPlace">
+          <Key>
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="AutoId" />
+          </Key>
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Place" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
         <EntityType Name="DepotRedo">
           <Key>
             <PropertyRef Name="Id" />
@@ -448,12 +458,14 @@
 警告 6002: 表/视图“Platform_LY.dbo.DepotCreator”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotCreator">
           <Key>
+            <PropertyRef Name="Phone" />
             <PropertyRef Name="Id" />
             <PropertyRef Name="Name" />
             <PropertyRef Name="State" />
             <PropertyRef Name="CampusId" />
             <PropertyRef Name="CampusName" />
           </Key>
+          <Property Name="Phone" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
@@ -1183,6 +1195,7 @@
           <EntitySet Name="DepotObjectCatalog" EntityType="Self.DepotObjectCatalog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotOrder" EntityType="Self.DepotOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotPeriod" EntityType="Self.DepotPeriod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepotPlace" EntityType="Self.DepotPlace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotRedo" EntityType="Self.DepotRedo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotReturn" EntityType="Self.DepotReturn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepotRole" EntityType="Self.DepotRole" Schema="dbo" store:Type="Tables" />
@@ -1233,6 +1246,7 @@
           </EntitySet>
           <EntitySet Name="DepotCreator" EntityType="Self.DepotCreator" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [DepotCreator].[Phone] AS [Phone], 
     [DepotCreator].[Id] AS [Id], 
     [DepotCreator].[Name] AS [Name], 
     [DepotCreator].[PinYin] AS [PinYin], 
@@ -1600,7 +1614,6 @@
           <EntitySet Name="DepotOrder" EntityType="DepotModel.DepotOrder" />
           <EntitySet Name="Application" EntityType="DepotModel.Application" />
           <EntitySet Name="UserOnline" EntityType="DepotModel.UserOnline" />
-          <EntitySet Name="DepotCreator" EntityType="DepotModel.DepotCreator" />
           <EntitySet Name="DepotMember" EntityType="DepotModel.DepotMember" />
           <EntitySet Name="DepotObjectCatalog" EntityType="DepotModel.DepotObjectCatalog" />
           <FunctionImport Name="ToPinYin" ReturnType="Collection(String)">
@@ -1722,6 +1735,8 @@
           <EntitySet Name="C__DepotOrderContent" EntityType="DepotModel.C__DepotOrderContent" />
           <EntitySet Name="DepotObjectSingle" EntityType="DepotModel.DepotObjectSingle" />
           <EntitySet Name="DepotUser" EntityType="DepotModel.DepotUser" />
+          <EntitySet Name="DepotPlace" EntityType="DepotModel.DepotPlace" />
+          <EntitySet Name="DepotCreator" EntityType="DepotModel.DepotCreator" />
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -1840,21 +1855,6 @@
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="7" />
-        </EntityType>
-        <EntityType Name="DepotCreator">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="State" />
-            <PropertyRef Name="CampusId" />
-            <PropertyRef Name="CampusName" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="DepotModel.State" Nullable="false" />
-          <Property Name="CampusId" Type="Guid" Nullable="false" />
-          <Property Name="CampusName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DepotMember">
           <Key>
@@ -2911,6 +2911,33 @@
           <Property Name="CampusId" Type="Guid" Nullable="false" />
           <Property Name="CampusName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="DepotPlace">
+          <Key>
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="AutoId" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="DepotCreator">
+          <Key>
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CampusId" />
+            <PropertyRef Name="CampusName" />
+          </Key>
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="CampusId" Type="Guid" Nullable="false" />
+          <Property Name="CampusName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3021,18 +3048,6 @@
               <MappingFragment StoreEntitySet="UserOnline">
                 <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DepotCreator">
-            <EntityTypeMapping TypeName="DepotModel.DepotCreator">
-              <MappingFragment StoreEntitySet="DepotCreator">
-                <ScalarProperty Name="CampusName" ColumnName="CampusName" />
-                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3633,6 +3648,29 @@
           <EntitySetMapping Name="DepotUser">
             <EntityTypeMapping TypeName="DepotModel.DepotUser">
               <MappingFragment StoreEntitySet="DepotUser">
+                <ScalarProperty Name="CampusName" ColumnName="CampusName" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotPlace">
+            <EntityTypeMapping TypeName="DepotModel.DepotPlace">
+              <MappingFragment StoreEntitySet="DepotPlace">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotCreator">
+            <EntityTypeMapping TypeName="DepotModel.DepotCreator">
+              <MappingFragment StoreEntitySet="DepotCreator">
                 <ScalarProperty Name="CampusName" ColumnName="CampusName" />
                 <ScalarProperty Name="CampusId" ColumnName="CampusId" />
                 <ScalarProperty Name="State" ColumnName="State" />
