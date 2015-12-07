@@ -76,16 +76,22 @@ public partial class StoreQuery_Statistics : SingleStorePage
             obj.Fixed = v.First().Fixed;
             obj.S = g.First().StartAmount;
             obj.SM = g.First().StartMoney;
+            obj.SP = obj.S == 0 ? 0M : decimal.Divide(obj.SM, obj.S);
             obj.I = g.Sum(o => o.InAmount);
             obj.IM = g.Sum(o => o.InMoney);
+            obj.IP = obj.I == 0 ? 0M : decimal.Divide(obj.IM, obj.I);
             obj.U = g.Sum(o => o.LendAmount + o.ConsumeAmount);
             obj.UM = g.Sum(o => o.LendMoney + o.ConsumeMoney);
+            obj.UP = obj.U == 0 ? 0M : decimal.Divide(obj.UM, obj.U);
             obj.R = g.Sum(o => o.RedoAmount);
             obj.RM = g.Sum(o => o.RedoMoney);
+            obj.RP = obj.R == 0 ? 0M : decimal.Divide(obj.RM, obj.R);
             obj.O = g.Sum(o => o.OutAmount);
             obj.OM = g.Sum(o => o.OutMoney);
+            obj.OP = obj.O == 0 ? 0M : decimal.Divide(obj.OM, obj.O);
             obj.E = g.Last().EndAmount;
             obj.EM = g.Last().EndMoney;
+            obj.EP = obj.E == 0 ? 0M : decimal.Divide(obj.EM, obj.E);
             list.Add(obj);
         }
         if (!name.Text.Trim().Null())

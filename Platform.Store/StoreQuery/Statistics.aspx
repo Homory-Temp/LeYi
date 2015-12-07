@@ -90,24 +90,28 @@
                                                 <th>物资类别</th>
                                                 <th>物资名称</th>
                                                 <th>期初数量</th>
+                                                <th>期初单价</th>
                                                 <th>期初金额</th>
                                                 <th>入库数量</th>
+                                                <th>入库单价</th>
                                                 <th>入库金额</th>
                                                 <th>出库数量</th>
+                                                <th>出库单价</th>
                                                 <th>出库金额</th>
                                                 <th>期末数量</th>
+                                                <th>期末单价</th>
                                                 <th>期末金额</th>
                                             </tr>
                                             <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
                                             <tr>
                                                 <td colspan="2">总计：</td>
-                                                <td><%# ___total.Value.Split(new[] { '@' })[0] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[0] %></td><td>&nbsp;</td>
                                                 <td><%# ___total.Value.Split(new[] { '@' })[1] %></td>
-                                                <td><%# ___total.Value.Split(new[] { '@' })[2] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[2] %></td><td>&nbsp;</td>
                                                 <td><%# ___total.Value.Split(new[] { '@' })[3] %></td>
-                                                <td><%# ___total.Value.Split(new[] { '@' })[4] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[4] %></td><td>&nbsp;</td>
                                                 <td><%# ___total.Value.Split(new[] { '@' })[5] %></td>
-                                                <td><%# ___total.Value.Split(new[] { '@' })[8] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[8] %></td><td>&nbsp;</td>
                                                 <td><%# ___total.Value.Split(new[] { '@' })[9] %></td>
                                             </tr>
                                         </table>
@@ -118,12 +122,16 @@
                                         <td><%# Eval("CatalogPath") %></td>
                                         <td><%# Eval("Name") %></td>
                                         <td><%# Eval("S").ToMoney() %></td>
+                                        <td><%# Eval("SP").ToMoney() %></td>
                                         <td><%# Eval("SM").ToMoney() %></td>
                                         <td><%# Eval("I").ToMoney() %></td>
+                                        <td><%# Eval("IP").ToMoney() %></td>
                                         <td><%# Eval("IM").ToMoney() %></td>
                                         <td><%# Eval("U").ToMoney() %></td>
+                                        <td><%# Eval("UP").ToMoney() %></td>
                                         <td><%# Eval("UM").ToMoney() %></td>
                                         <td><%# Eval("E").ToMoney() %></td>
+                                        <td><%# Eval("EP").ToMoney() %></td>
                                         <td><%# Eval("EM").ToMoney() %></td>
                                     </tr>
                                 </ItemTemplate>

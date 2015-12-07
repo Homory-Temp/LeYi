@@ -11,15 +11,21 @@ public class InMemoryST
     public bool Consumable { get; set; }
     public bool Fixed { get; set; }
     public decimal S { get; set; }
+    public decimal SP { get; set; }
     public decimal SM { get; set; }
     public decimal I { get; set; }
+    public decimal IP { get; set; }
     public decimal IM { get; set; }
     public decimal U { get; set; }
+    public decimal UP { get; set; }
     public decimal UM { get; set; }
     public decimal O { get; set; }
+    public decimal OP { get; set; }
     public decimal OM { get; set; }
     public decimal R { get; set; }
+    public decimal RP { get; set; }
     public decimal RM { get; set; }
     public decimal E { get; set; }
+    public decimal EP { get; set; }
     public decimal EM { get; set; }
 }
