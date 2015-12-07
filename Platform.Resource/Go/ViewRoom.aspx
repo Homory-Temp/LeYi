@@ -82,7 +82,7 @@
 												<table>
 														<asp:Repeater runat="server" ID="cComment">
 															<ItemTemplate>
-																<tr>
+																<tr style="vertical-align: top;">
 																	<td style="width: 40px;"><%# ((DateTime)Eval("Time")).ToShortTimeString() %></td>
 																	<td style="width: 50px;"><%# U(Eval("UserId")).DisplayName %>：</td>
 																	<td><%# Eval("Content") %></td>
