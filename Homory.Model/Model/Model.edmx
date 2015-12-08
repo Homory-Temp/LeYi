@@ -302,6 +302,8 @@
           <Property Name="CourseId" Type="uniqueidentifier" />
           <Property Name="CampusId" Type="uniqueidentifier" />
           <Property Name="AssistantType" Type="int" Nullable="false" />
+          <Property Name="Stick" Type="int" />
+          <Property Name="ResourceTime" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="ResourceAssess">
           <Key>
@@ -325,6 +327,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="Source" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="ResourceCatalog">
           <Key>
@@ -559,18 +562,15 @@
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.View_ResourceAssess' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.View_ResourceAssess”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="View_ResourceAssess">
           <Key>
             <PropertyRef Name="ResultContent" />
-            
-            
-            
-            <PropertyRef Name="RId" />
             <PropertyRef Name="DisplayName" />
             <PropertyRef Name="Content" />
             <PropertyRef Name="Id" />
+            <PropertyRef Name="RId" />
           </Key>
           <Property Name="ResultContent" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="64" Nullable="false" />
@@ -578,8 +578,8 @@ warning 6002: The table/view 'Platform_LY.dbo.View_ResourceAssess' does not have
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewLearned' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewLearned”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewLearned">
           <Key>
             <PropertyRef Name="DepartmentId" />
@@ -592,8 +592,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewLearned' does not have a prima
           <Property Name="CourseName" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewQueryOperation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewQueryOperation”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewQueryOperation">
           <Key>
             <PropertyRef Name="Id" />
@@ -608,8 +608,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewQueryOperation' does not have 
           <Property Name="Name" Type="nvarchar" MaxLength="64" />
           <Property Name="姓名" Type="nvarchar" MaxLength="64" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewQueryResource' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewQueryResource”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewQueryResource">
           <Key>
             <PropertyRef Name="Id" />
@@ -646,8 +646,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewQueryResource' does not have a
           <Property Name="学校" Type="nvarchar" MaxLength="64" />
           <Property Name="教师" Type="nvarchar" MaxLength="64" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewQuerySign' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewQuerySign”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewQuerySign">
           <Key>
             <PropertyRef Name="Id" />
@@ -670,8 +670,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewQuerySign' does not have a pri
           <Property Name="Name" Type="nvarchar" MaxLength="64" />
           <Property Name="姓名" Type="nvarchar" MaxLength="64" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewQueryStudent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewQueryStudent”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewQueryStudent">
           <Key>
             <PropertyRef Name="姓名" />
@@ -700,8 +700,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewQueryStudent' does not have a 
           <Property Name="联系人" Type="nvarchar" MaxLength="16" />
           <Property Name="联系号码" Type="nvarchar" MaxLength="64" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewQueryTaught' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewQueryTaught”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewQueryTaught">
           <Key>
             <PropertyRef Name="DepartmentId" />
@@ -722,8 +722,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewQueryTaught' does not have a p
           <Property Name="课程名称" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="教师" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewQueryTeacher' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewQueryTeacher”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewQueryTeacher">
           <Key>
             <PropertyRef Name="姓名" />
@@ -754,8 +754,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewQueryTeacher' does not have a 
           <Property Name="现居住地" Type="nvarchar" MaxLength="256" />
           <Property Name="民族" Type="nvarchar" MaxLength="16" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewResource' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewResource”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewResource">
           <Key>
             <PropertyRef Name="RC" />
@@ -811,8 +811,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewResource' does not have a prim
           <Property Name="CampusId" Type="uniqueidentifier" />
           <Property Name="AssistantType" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewResourceX' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewResourceX”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewResourceX">
           <Key>
             <PropertyRef Name="CatalogId" />
@@ -868,8 +868,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewResourceX' does not have a pri
           <Property Name="CampusId" Type="uniqueidentifier" />
           <Property Name="AssistantType" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewRole' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewRole”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewRole">
           <Key>
             <PropertyRef Name="RoleId" />
@@ -885,8 +885,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewRole' does not have a primary 
           <Property Name="RoleName" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewStatistics' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewStatistics”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewStatistics">
           <Key>
             <PropertyRef Name="Type" />
@@ -898,8 +898,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewStatistics' does not have a pr
           <Property Name="GradeId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewStudent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewStudent”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewStudent">
           <Key>
             <PropertyRef Name="Id" />
@@ -933,8 +933,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewStudent' does not have a prima
           <Property Name="Level" Type="int" />
           <Property Name="ParentId" Type="uniqueidentifier" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewTaught' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewTaught”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewTaught">
           <Key>
             <PropertyRef Name="DepartmentId" />
@@ -951,8 +951,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewTaught' does not have a primar
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewTeacher' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewTeacher”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewTeacher">
           <Key>
             <PropertyRef Name="Id" />
@@ -994,8 +994,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewTeacher' does not have a prima
           <Property Name="MinorOrdinal" Type="int" />
           <Property Name="Type" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewTeacherExport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewTeacherExport”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewTeacherExport">
           <Key>
             <PropertyRef Name="账号" />
@@ -1022,8 +1022,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewTeacherExport' does not have a
           <Property Name="现居住地" Type="nvarchar" MaxLength="256" />
           <Property Name="民族" Type="nvarchar" MaxLength="16" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Platform_LY.dbo.ViewTS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ViewTS”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewTS">
           <Key>
             <PropertyRef Name="Id" />
@@ -3305,6 +3305,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewTS' does not have a primary ke
           <Property Name="CourseId" Type="Guid" />
           <Property Name="AssistantType" Type="Int32" Nullable="false" />
           <Property Name="CampusId" Type="Guid" />
+          <Property Name="Stick" Type="Int32" />
+          <Property Name="ResourceTime" Type="DateTime" Precision="7" />
         </EntityType>
         <EntityType Name="ResourceCatalog">
           <Key>
@@ -3394,6 +3396,7 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewTS' does not have a primary ke
           <Property Name="Source" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="Homory.Model.State" Nullable="false" />
           <NavigationProperty Name="Resource" Relationship="Homory.Model.FK_ResourceAttachment_Resource" FromRole="ResourceAttachment" ToRole="Resource" />
+          <Property Name="Remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_ResourceAttachment_Resource">
           <End Type="Homory.Model.Resource" Role="Resource" Multiplicity="1" />
@@ -4817,6 +4820,8 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewTS' does not have a primary ke
           <EntitySetMapping Name="Resource">
             <EntityTypeMapping TypeName="Homory.Model.Resource">
               <MappingFragment StoreEntitySet="Resource">
+                <ScalarProperty Name="ResourceTime" ColumnName="ResourceTime" />
+                <ScalarProperty Name="Stick" ColumnName="Stick" />
                 <ScalarProperty Name="CampusId" ColumnName="CampusId" />
                 <ScalarProperty Name="AssistantType" ColumnName="AssistantType" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
@@ -4878,6 +4883,7 @@ warning 6002: The table/view 'Platform_LY.dbo.ViewTS' does not have a primary ke
           <EntitySetMapping Name="ResourceAttachment">
             <EntityTypeMapping TypeName="Homory.Model.ResourceAttachment">
               <MappingFragment StoreEntitySet="ResourceAttachment">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Source" ColumnName="Source" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
