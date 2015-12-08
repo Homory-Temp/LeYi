@@ -103,11 +103,11 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 15%;">
+                            <td style="width: 15%; line-height: 20px;">
                                 <span class="btn btn-info dictionaryX">备注：</span>
                             </td>
-                            <td colspan="3" style="width: 85%;">
-                                <span id="note" runat="server"></span>
+                            <td colspan="3" style="width: 85%; text-align: left; line-height: 20px;">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="note" runat="server"></span>
                             </td>
                         </tr>
                     </table>
@@ -115,19 +115,28 @@
             </div>
             <div class="row">&nbsp;</div>
             <div class="row">
-                <div class="col-md-6" id="da" runat="server">
-                    <img class="img-responsive" onclick="showPic(this);" style="width: 100%; cursor: pointer;" id="pa" runat="server" />
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6" id="da" runat="server">
+                            <img class="img-responsive" onclick="showPic(this);" style="width: 100%; cursor: pointer;" id="pa" runat="server" />
+                        </div>
+                        <div class="col-md-6" id="db" runat="server">
+                            <img class="img-responsive" onclick="showPic(this);" style="width: 100%; cursor: pointer;" id="pb" runat="server" />
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6" id="db" runat="server">
-                    <img class="img-responsive" onclick="showPic(this);" style="width: 100%; cursor: pointer;" id="pb" runat="server" />
-                </div>
-                <div class="col-md-6" id="dc" runat="server">
-                    <img class="img-responsive" onclick="showPic(this);" style="width: 100%; cursor: pointer;" id="pc" runat="server" />
-                </div>
-                <div class="col-md-6" id="dd" runat="server">
-                    <img class="img-responsive" onclick="showPic(this);" style="width: 100%; cursor: pointer;" id="pd" runat="server" />
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6" id="dc" runat="server">
+                            <img class="img-responsive" onclick="showPic(this);" style="width: 100%; cursor: pointer;" id="pc" runat="server" />
+                        </div>
+                        <div class="col-md-6" id="dd" runat="server">
+                            <img class="img-responsive" onclick="showPic(this);" style="width: 100%; cursor: pointer;" id="pd" runat="server" />
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="row">&nbsp;</div>
             <div class="row"><span class="btn btn-info dictionaryX">存放地</span></div>
             <div class="row">
                 <telerik:RadGrid ID="grid" runat="server" CssClass="col-md-12 text-center" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="grid_NeedDataSource" OnBatchEditCommand="grid_BatchEditCommand">

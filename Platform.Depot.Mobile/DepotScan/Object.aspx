@@ -31,7 +31,7 @@
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <telerik:RadTextBox runat="server" ID="scan" Width="200" EmptyMessage="请扫描二维码"></telerik:RadTextBox>
+                    <telerik:RadTextBox runat="server" ID="scan" Width="200" EmptyMessage="请扫描二维码" MaxLength="12"></telerik:RadTextBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="button" class="btn btn-tumblr" id="scanAdd" runat="server" value="查询" title="物资查询" onserverclick="scanAdd_ServerClick" />
                 </div>
