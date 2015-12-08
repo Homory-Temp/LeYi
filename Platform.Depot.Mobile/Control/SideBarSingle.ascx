@@ -32,7 +32,7 @@
     </div>
 </telerik:RadCodeBlock>
 
-<telerik:RadAjaxLoadingPanel ID="loading" runat="server" InitialDelayTime="1000">
+<telerik:RadAjaxLoadingPanel ID="loading" runat="server" InitialDelayTime="1000" Enabled="false">
     <div>&nbsp;</div>
     <div class="btn btn-lg btn-warning" style="margin-top: 50px;">正在加载 请稍候....</div>
 </telerik:RadAjaxLoadingPanel>
