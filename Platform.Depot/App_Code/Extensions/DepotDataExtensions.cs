@@ -188,6 +188,7 @@ public static class DepotDataExtensions
         obj.Code = db.ToQR(CodeType.Object, obj.AutoId);
         db.SaveChanges();
         db.DepotDictionaryAdd(depotId, DictionaryType.单位, unit);
+        db.DepotDictionaryAdd(depotId, DictionaryType.年龄段, age);
         db.DepotDictionaryAdd(depotId, DictionaryType.规格, specification);
         db.DepotDictionaryAdd(depotId, DictionaryType.品牌, brand);
     }
