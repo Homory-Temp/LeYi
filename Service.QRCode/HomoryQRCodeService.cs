@@ -71,6 +71,9 @@ namespace LY.Service.QRCode
             public string CodeJson { get; set; }
             public DateTime Time { get; set; }
             public int State { get; set; }
+#if xsfx
+            public string XsfxName { get; set; }
+#endif
         }
 
         private void QR()
@@ -80,12 +83,29 @@ namespace LY.Service.QRCode
                 try
                 {
                     var con = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["Entities"].ConnectionString);
+#if xsfx
+                    var com = new System.Data.SqlClient.SqlCommand("SELECT DepotCode.DepotId, DepotCode.BatchId, DepotCode.BatchOrdinial, DepotCode.CodeJson, DepotCode.Time, DepotCode.[State], Depot.Name Xsfx FROM DepotCode INNER JOIN Depot ON DepotCode.DepotId = Depot.Id AND DepotCode.[State] = 2", con);
+#else
                     var com = new System.Data.SqlClient.SqlCommand("SELECT DepotId, BatchId, BatchOrdinial, CodeJson, Time, [State] FROM DepotCode WHERE [State] = 2", con);
+#endif
                     var list = new List<DepotCode>();
                     con.Open();
                     var reader = com.ExecuteReader();
                     while (reader.Read())
                     {
+#if xsfx
+                        list.Add(
+                            new DepotCode
+                            {
+                                DepotId = Guid.Parse(reader[0].ToString()),
+                                BatchId = Guid.Parse(reader[1].ToString()),
+                                BatchOrdinal = int.Parse(reader[2].ToString()),
+                                CodeJson = reader[3].ToString(),
+                                Time = DateTime.Parse(reader[4].ToString()),
+                                State = int.Parse(reader[5].ToString()),
+                                XsfxName = reader[6].ToString()
+                            });
+#else
                         list.Add(
                             new DepotCode
                             {
@@ -96,6 +116,7 @@ namespace LY.Service.QRCode
                                 Time = DateTime.Parse(reader[4].ToString()),
                                 State = int.Parse(reader[5].ToString())
                             });
+#endif
                     }
                     try
                     {
@@ -165,7 +186,7 @@ namespace LY.Service.QRCode
 
         private void QRS(List<DepotCode> list)
         {
-            #region 图片参数
+#region 图片参数
             var 图片宽度 = 600;
             var 图片高度 = 图片宽度 / 2;
             var 边框旁白 = 15;
@@ -271,7 +292,7 @@ namespace LY.Service.QRCode
                     }
 
                     var infos = info.Split(new string[] { "@@@" }, StringSplitOptions.None);
-                    content = "　　　　　　　　固定资产";
+                    content = "　　　　　　　固定资产{0}".Formatted(list[0].XsfxName.Substring(list[0].XsfxName.IndexOf('(')));
                     Cut(sb, content, 内容每行字数, 内容空字符数);
                     content = " ";
                     Cut(sb, content, 内容每行字数, 内容空字符数);
