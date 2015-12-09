@@ -91,6 +91,7 @@
                                                 <th>序号</th>
                                                 <th>名称</th>
                                                 <th>单位</th>
+                                                <th style='<%# (Depot.Featured(Models.DepotType.幼儿园) ? "display: ;": "display: none;") %>'>适用年龄段</th>
                                                 <th>品牌</th>
                                                 <th>规格</th>
                                                 <th>总数</th>
@@ -109,6 +110,7 @@
                                             <td><%# Eval("Ordinal") %></td>
                                             <td style="cursor: pointer; color: #3E5A70;" onclick="gox(this);" goid='<%# Eval("Id") %>' did='<%# Depot.Id %>'><%# (bool)Eval("Fixed") ? "[固] " : "" %><%# Eval("Name") %></td>
                                             <td><%# Eval("Unit") %></td>
+                                            <td style='<%# (Depot.Featured(Models.DepotType.幼儿园) ? "display: ;": "display: none;") %>'><%# Eval("Age") %></td>
                                             <td><%# Eval("Brand") %></td>
                                             <td><%# Eval("Specification") %></td>
                                             <td><%# CountTotal(Container.DataItem as Models.DepotObject) %></td>
