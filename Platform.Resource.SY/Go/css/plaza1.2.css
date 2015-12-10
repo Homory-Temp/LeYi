@@ -1,0 +1,263 @@
+.c-plaza h1,.c-plaza h2{font-weight:bold}.c-plaza{position:relative;margin:0 auto;width:962px;overflow:hidden;line-height:22px}.c-p-top{position:relative}.c-p-top h2{text-indent:-9999px;height:20px;background:url("http://static.jsyxw.cn/img/class/plaza_words.png") 0 0 no-repeat;margin-bottom:15px}.c-p-top ul{text-indent:-9999px;height:20px;background:url("http://static.jsyxw.cn/img/class/plaza_top.jpg") -15px -7px no-repeat;width:985px;height:349px;background-color:white}.c-pt-opts{position:absolute;top:342px;right:30px}.c-pt-opts a em{width:97px;text-align:center}.c-pc-left{width:741px;overflow:hidden}.wrap-all{word-wrap:break-word;word-break:break-all}.c-color-a{color:#aaa}.c-pt-act{text-indent:-9999px;height:20px;background:url("http://static.jsyxw.cn/img/class/plaza_words.png") 0 -27px no-repeat}.c-pt-dir{text-indent:-9999px;height:20px;background:url("http://static.jsyxw.cn/img/class/plaza_words.png") 0 -55px no-repeat}.c-pt-pho{text-indent:-9999px;height:20px;background:url("http://static.jsyxw.cn/img/class/plaza_words.png") 0 -85px no-repeat}.c-pt-sign{text-indent:-9999px;height:20px;background:url("http://static.jsyxw.cn/img/class/plaza_words.png") 0 -115px no-repeat}.c-pt-new{text-indent:-9999px;height:20px;background:url("http://static.jsyxw.cn/img/class/plaza_words.png") 0 -145px no-repeat}.c-pt-tea{text-indent:-9999px;height:20px;background:url("http://static.jsyxw.cn/img/class/plaza_words.png") 0 -175px no-repeat}.c-pt-stu{text-indent:-9999px;height:20px;background:url("http://static.jsyxw.cn/img/class/plaza_words.png") 0 -205px no-repeat}.c-pt-par{text-indent:-9999px;height:20px;background:url("http://static.jsyxw.cn/img/class/plaza_words.png") 0 -235px no-repeat}.c-p-title{position:relative;_zoom:1;margin:10px 0 0px 0}.c-p-title i{position:absolute;top:-2px;left:0;color:#c5c5c5;font-size:16px}.c-p-title h2{margin-left:20px}.c-p-title a{position:absolute;top:0;right:0}.c-p-list{width:756px}.c-p-box1{width:152px;border:1px solid #ddd;background-color:white;padding:10px;text-align:center;margin-right:15px;float:left}.c-pb-ul-box{overflow:hidden;width:148px}.c-pb-ul{width:300px}.c-pb-ul li{float:left;padding-right:7px;margin-right:7px;border-right:1px solid #ddd}.c-pb-ul em{display:block;font-weight:bold}.c-p-right{padding:50px 0 0 15px}.c-pr-box{width:204px;border:1px solid #ddd;background-color:white}.c-prb-uinfo{padding:10px}.c-prb-nickname{margin-bottom:2px}.c-prb-face{position:absolute;left:0;top:15px}.c-prb-role{border-top:1px solid #ddd; padding:15px 10px 20px}.c-prb-role li{border-top:1px dashed #ddd;padding-top:5px;margin-top:5px;position:relative;_zoom:1}.c-prb-role .first-child{border-top:0;padding-top:10px;margin-top:10px}.c-prb-role .first-child .c-prb-face{top:5px}.c-prb-title{position:relative;_zoom:1}.c-prb-tabs{position:absolute;top:0;right:0}.c-prb-tabs a{color:#c5c5c5;font-family:Simsun}.c-prb-tabs a:hover{text-decoration:none}.c-prb-tabs .sele{color:#227dc5}
+.box-hd,.r_topic h3,.r-weekly h3{padding:0 0 12px;font-size:18px;font-family:"Microsoft YaHei"}
+
+.xy_eduCategory .tit{background:#e9e9e9;padding:10px; color:#555; font-size:20px;font-family:"Microsoft YaHei"; text-align:center;}
+.xy_eduCategory ul{ height:auto;background:#f5f5f5;border-bottom:1px solid #dedede;}
+.xy_eduCategory ul li{width:160px;  position:relative;z-index:20;}
+.xy_eduCategory ul li h3{z-index:4;position:relative; font-weight:normal}
+.xy_eduCategory ul li h3 a{display:block;width:158px;height:50px;background:url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/sourceArrow.png") no-repeat 95% center; text-indent:1em;line-height:50px;font-size:14px;color:#222;border:1px solid #dedede;border-bottom:0;}
+.xy_eduCategory ul li h3 a.hover{border:1px solid #227dc5;border-right:1px solid #fff;background: #fff url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/sourceArrow.png") no-repeat 95% center;width:159px;*width:158px;height:49px;overflow:hidden;}
+.xy_eduCategory ul li div{position:absolute;border:1px solid #38a2db;width:481px;right:-483px;*right:-481px; z-index:2;top:0; background:#fff; display:none;overflow:hidden;padding:10px 0;}
+.xy_eduCategory ul li div dl dt{font-size:14px;height:30px;line-height:30px;}
+.xy_eduCategory ul li div dl{padding:0 20px;}
+.xy_eduCategory ul li div dl dd{margin-bottom:15px;}
+.xy_eduCategory ul li div dl dd a{background:none;display:inline-block;height:24px;line-height:24px;margin-right:10px;}
+
+.xy_w570{width:575px;}
+.xy_w200{width:200px;}
+.xy_zynum{background:#fafafa;border:1px solid #d5d5d5;padding:10px;height:167px;overflow:hidden;font-size:14px;line-height:150%;font-family:"Microsoft YaHei";}
+.xy_zynum .zykicon,.xy_zynum .gxicon{ background:url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/zyicon.png") no-repeat;width:45px;height:35px;display:inline-block;}
+.xy_zynum .zykicon{background-position:10px 4px;}
+.xy_zynum .gxicon{background-position:10px -57px;}
+.xy_zynum span{display:inline-block;width:130px;}
+.xy_zynum p {padding:6px 0;}
+.xy_zynum p em{font-size:16px;color:#227dc5;}
+.xy_zynum .line{border-bottom:1px solid #dedede;}
+.xy_zynum .scbtn,.xy_zynum .scbtn:hover{display:block;margin:0 auto;background:url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/orgbtn.png") 0 0 no-repeat;width:123px;height:50px;line-height:43px;color:#fff;padding-left:50px;overflow:hidden;text-decoration:none;font-size:16px;}
+.xy_zynum .scbtn:hover{background-position:0 -53px;}
+.xy_search{padding:0 0 10px 0;z-index:10;position:relative; background-color:#FFF}
+.xy_search .keyword,.xy_scont .keyword{color:#555;padding:0 10px;}
+.xy_search .keyword a,.xy_scont .keyword a{color:#888;display:inline-block;margin:0 5px;}
+.xy_sec{width:85px;position: relative;border-right:1px solid #ccc;cursor:pointer;height:30px;line-height: 30px;background:#f6f6f6 url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/secicon.png") right center no-repeat;top:0;display:inline-block;}
+.xy_sec .secval{width:100%;padding:0 6px 0 10px;}
+.xy_sec .opval {position: absolute;right: -1px;top: 30px;width: 100%;border: 1px solid #979797;display: none;background: #f7f7f7; text-align:center;border-top:1px solid #d4d4d4;}
+.xy_sec .opval span {display: block;padding: 0 5px;_width: 100%;border-bottom:1px solid #d4d4d4;}
+.xy_sec .spanhover {background: #e6e6e6;}
+.xy_search .s-con,.xy_zzs{border:3px solid #227dc5;margin-bottom:10px; position:relative;}
+.xy_search .s-con .inps,.xy_zzs .inps{width:371px;border:0;padding:0 5px;height:30px;font-size:14px;}
+.xy_search .s-con .btn,.xy_zzs .btn{width:107px;height:35px;border:0;cursor:pointer;background:#227dc5;color:#fff;font-size:16px;font-weight:bold; position:absolute;right:-2px;top:-2px;font-family:"Microsoft YaHei";}
+.xy_search .s-con .btn:hover,.xy_zzs .btn:hover{ background:#4f7ebd;}
+.xy_search .s-con .btn,.xy_search .s-con .inps,.xy_search .xy_sec{float:left;}
+.xy_zybox .tabTit i,.xy_icon i{display:block;width:26px;height:18px; background:url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/hoticon.gif") 0 0 no-repeat; position:absolute;right:5px;top:2px;}
+.tabbg{background-color:#FFF; height:250px}
+.xy_zybox .tabTit a{padding:0 30px;position:relative;}
+.xy_tit{margin-top:10px;position:relative;border-bottom:2px solid #e0e0e0;padding-bottom:8px;font-size:14px;}
+.xkstyong{ margin-left:10px}
+.xy_tit strong,.xy_tit2 strong,.xy_zypf strong{font-size:20px;color:#555;font-weight:normal;font-family:"Microsoft YaHei";}
+.xy_tit span{position:absolute;left:140px;top:-2px;*top:2px;}
+.xy_tit span a,.xy_tit2 a{display:inline-block;padding:2px 14px 3px 14px;color:#555;margin:0 3px;}
+.xy_tit span a.on,.xy_tit span a:hover,.xy_tit2 a.on,.xy_tit2 a:hover{color:#fff; background:#227dc5;text-decoration:none;}
+.xy_tit2 em{display:inline-block;color:#e2e2e2;}
+.xy_tit2 strong{padding-right:10px;}
+.xy_tit2 a{padding:2px 10px 3px 10px;}
+.xy_tit a.more{position:absolute;right:0;top:0;color:#227dc5;}
+
+.xy_zycont{height:205px;overflow:hidden; width:98%; margin:auto}
+.xy_zycont dl,.xy_zycont dt,.xy_zycont dd{float:left;}
+.xy_zycont dl{width:50%;}
+.xy_zycont dt img{width:120px;height:90px;}
+.xy_zycont dt{font-size:14px;text-align:center;padding-right:10px;}
+.xy_zycont p{line-height:220%;*line-height:200%;}
+.xy_zycont dd{width:140px; position:relative;height:95px;}
+.xy_zycont dd h3{color:#676767;font-size:14px;}
+.xy_zycont dd h3 a{color:#676767;}
+.xy_zycont dd p{position:absolute;bottom:0;left:0;}
+.xy_kw a{display:inline-block;color:#888;}
+.xy_kicon{width:16px;height:16px;display:inline-block; position:relative;top:3px;left:3px;background:url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/kicon.gif") 0 0 no-repeat;}
+.xy_news{clear:both;width:100%;padding-top:5px;}
+.xy_news li,.xy_news2 li{float:left;width:280px;line-height:220%;*line-height:180%;}
+.xy_news li a,.xy_news2 li a,.xy_phlist li a{color:#555; }
+.xy_phlist h3,.xy_ldetail h3{font-size:20px;color:#555;border-bottom:2px solid #d9d9d9;padding:8px 5px;font-family:"Microsoft YaHei";font-weight:normal;margin-bottom:10px;}
+.xy_phlist { background-color:#FFF}
+.xy_phlist em{display:block;position:relative;margin-right:10px;top:5px; font-family:Arial, Helvetica, sans-serif;font-size:24px;color:#888;}
+.xy_phlist em,.xy_phlist p{float:left;}
+.xy_phlist p{width:176px;overflow:hidden;}
+.xy_phlist .num1{color:#ff9000;}
+.xy_phlist li{overflow:hidden;height:50px;}
+.xy_phlist li span{color:#888;display:inline-block;margin-left:5px;}
+.xy_scont{border:1px solid #e0e0e0;border-top:0;border-right:0;zoom:1;overflow:hidden;}
+.xy_rline{border-right:1px solid #e0e0e0;}
+.xy_zzs{width:550px;margin-left:100px;_margin-left:50px;height:30px;overflow:hidden;}
+.xy_scont p{display:block;float:left;}
+.xy_scont .keyword{margin-top:7px;}
+.xy_allzylist {border-left:1px solid #e3e3e3;border-right:1px solid #e3e3e3;margin-bottom:20px;}
+.xy_allzylist dl{zoom:1;overflow:hidden;border:1px solid #fff;border-bottom:1px solid #e3e3e3;}
+.xy_allzylist dl:hover{border:1px solid #227dc5;}
+.xy_allzylist dt{float:left;padding:10px 0 10px 10px;}
+.xy_allzylist dd{float:right;padding:10px 0;}
+.xy_allzylist dt{width:435px;}
+.xy_allzylist dt img{width:64px;height:64px;float:left}
+.xy_allzylist dt div{float:left;width:80%;margin-left:15px;color:#555;}
+.xy_allzylist dt div a{font-size:14px;margin:0 0 20px 0;font-weight:bold;color:#222;}
+.xy_allzylist dt div a:hover{color:#227dc5;}
+.xy_allzylist dt div a em{color:#555;font-size:12px;font-weight:normal;}
+.xy_allzylist dfn,.xy_ldetail dfn{color:#fe6000;font-size:20px;font-family:"Microsoft YaHei";}
+.xy_allzylist dt{position:relative;}
+.xy_allzylist .sd{position:absolute;bottom:10px;}
+.xy_allzylist dd a{display:block;}
+.xy_allzylist dd li{display:block;margin:0 5px;text-align:center;float:left;}
+.xy_allzylist dd li p{ text-align:left;}
+.xy_allzylist .wjdx span{color:#888;display:inline-block;margin-right:20px;}
+.xy_allzylist .wjdx span em{color:#222;}
+.xy_ylbtn,.xy_scbtn,.xy_xzbtn{color:#fff;font-size:14px;font-family:"Microsoft YaHei";text-align:center;display:block;width:70px;height:30px;line-height:30px;border-radius:5px;color:#fff;margin-top:12px;}
+.xy_ylbtn{background:#f6a100;}
+.xy_scbtn{background:#4fc0e8;}
+.xy_xzbtn{background:#a0d468;}
+.xy_ylbtn:hover{background:#e78a10;}
+.xy_scbtn:hover{background:#3eacd3;}
+.xy_xzbtn:hover{background:#8dc452;}
+.xy_ylbtn:hover,.xy_scbtn:hover,.xy_xzbtn:hover{ text-decoration:none;}
+.xy_pxbar{background:#f6f6f6;border:1px solid #e0e0e0;position:relative;}
+.xy_pxbar p{zoom:1;overflow:hidden;}
+.xy_pxbar p a{color:#606060;float:left;display:block;padding:11px 10px;border-right:1px solid #e0e0e0;background:url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/up-d-icon.gif") right 18px no-repeat;}
+.xy_pxbar p a.on,.xy_pxbar p a:hover{background:#fff url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/up-d-icon.gif") right -12px no-repeat;}
+.xy_pxbar p a:hover{text-decoration:none;}
+.xy_pxbar .zy{position:absolute;right:10px;top:7px;}
+.xy_pxbar .zy em{color:#888;}
+.xy_pxbar p a,.xy_pxbar p a.on{padding-right:22px;}
+.xy_pxbar .mr{background:#f6f6f6;padding-right:10px;}
+.xy_pxbar .mr.on,.xy_pxbar .mr:hover{background:#fff;padding-right:10px;}
+.xy_ltit{position:relative;padding-left:11px;}
+.xy_ltit dfn{margin:0 5px;color:#227dc5;}
+.xy_ltit .xy_zksq{position:absolute;right:0;top:0;color:#888; text-decoration:none;}
+.xy_zksq,.xy_zksq:hover,.xy_sqzy,.xy_sqzy:hover{padding-right:25px; background:url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/m_arrow.gif") right -46px no-repeat;display:block;height:23px;}
+.xy_zksq:hover{background-position:right -69px;}
+.xy_sqzy{background-position:right 0;}
+.xy_sqzy:hover{background-position:right -23px;}
+
+.xy_sort li{border-bottom:1px dashed #eee;padding:8px 10px; position:relative;zoom:1;overflow:hidden; background-color:#FFF;}
+.xy_sort a{color:#555;display:inline-block;margin:3px 8px 3px 0;padding:1px 3px;border:1px solid #fff;}
+.xy_sort a.on,.xy_sort a:hover{background:#e7e7e7;border:1px solid #dbd8d8; text-decoration:none;}
+.xy_sort span{color:#888;width:40px;margin:3px 0 3px 0;padding:1px 0;}
+.xy_sort span,.xy_sort p{float:left;display:block;}
+.xy_sort p{width:880px;}
+.xy_sort a.more,.xy_sort a.sqicon{ background:url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/more_ar.gif") no-repeat;padding-right:20px;position:absolute;right:0;top:8px;color:#888;display:block;}
+.xy_sort a{ background-position:right 10px;}
+.more{ background-position:right 10px; margin-right:10px}
+.xy_sort a.sqicon{background-position:right -13px;}
+.xy_minfo{display:none;margin-left:40px;}
+.xy_inp,textarea.xy_inp{border:1px solid #d5d5d5;width:440px;height:30px;color:#888;padding:0 5px;vertical-align:middle;border-radius:0;box-shadow:none;}
+.xy_inp:hover,textarea.xy_inp:hover{border:1px solid #227dc5;}
+textarea.xy_inp{height:85px;width:646px; vertical-align:top;padding-top:5px;}
+.w646{width:647px;}
+.xy_inp:focus{color:#222;}
+.xy_supbox h2{font-family:"Microsoft YaHei";font-size:16px;}
+.xy_supbox li{margin-bottom:7px;}
+.xy_supbox li label{display:inline-block;width:72px;padding-right:5px;font-size:14px;text-align:right; }
+.xy_supbox li div.xy_iw{display:inline-block;width:659px; vertical-align:top;height:125px;margin-left: -5px}
+.xy_bluebtn{width:98px;height:32px;vertical-align:middle;padding-bottom:2px;background:#227dc5;color:#fff;font-size:14px;font-weight:bold;border:0;cursor:pointer;margin:0 5px;}
+.xy_tcbtn_b,.xy_tcbtn_g,.xy_tcbtn_bing{width:104px;height:44px;font-size:18px;font-family:"Microsoft YaHei";margin:10px 5px;cursor:pointer;}
+.xy_tcbtn_b,.xy_tcbtn_bing{background:#227dc5;border:1px solid #227dc5;color:#fff;}
+.xy_tcbtn_g{background:#eeeeee;border:1px solid #d9d9d9;color:#555;}
+.xy_tcbtn_bing{padding-left:20px;background:#227dc5 url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/submit_loding.gif") 20px center no-repeat;}
+.xy_tcbtn_b:hover,.xy_bluebtn:hover,.xy_tcbtn_bing:hover{background:#4f7ebd;}
+.xy_tcbtn_g:hover{background:#e3e3e3;}
+.xy_sbtn{height:30px;width:70px;font-size:14px;}
+.xy_treetit{font-size:20px;font-family:"Microsoft YaHei";padding:10px 10px 0 10px;}
+.xy_treebox{border:1px solid #e3e3e3;height:610px;width:178px;overflow:hidden;}
+.xy_ylbox{width:100%;display:none;}
+.xy_ylbox div{ background:#f4f4f4; position:relative;border-bottom:1px solid #e3e3e3;border-top:1px solid #e3e3e3;height:36px;line-height:36px;}
+.xy_ylbox div .num{position:absolute;right:10px;top:0;color:#888;}
+.xy_ylbox div .num .pfbtn{ background:#f5f5f5;border:1px solid #cfcfcf;color:#222;width:50px;height:23px;text-align:center;line-height:23px;margin-left:20px;}
+.xy_ylbox div .num .pfbtn:hover{ text-decoration:none;background:#cfcfcf;}
+.xy_ylbox div em,.xy_ylbox div a,.xy_ylbox div i{display:inline-block;}
+.xy_ylbox div em,.xy_ylbox div i{margin-left:25px;}
+.xy_ylbox div i{border-right:1px solid #e3e3e3;padding-right:25px;}
+.xy_ylbox p{padding-left:20px;padding-top:10px;padding-bottom:15px;border-bottom:1px solid #e3e3e3;margin:0 10px;}
+.xy_ylbox p a{background-position:0 6px;padding-left:75px;color:#222;}
+.xy_ylbox p a:hover{color:#227dc5;}
+.xy_pfbo .starbig{margin:0 auto;}
+.h36{height:36px;width:100px;font-family:"宋体";font-weight:bold;}
+.xy_ylbox .turnPage{ background:#fff;border:0;}
+.xy_infotit{font-size:20px;font-family:"Microsoft YaHei";padding:20px 0;}
+.xy_wdbox{border:1px solid #8a8a8a;border-bottom:0;padding:30px;height:470px;overflow-y:auto;}
+.xy_ldetail .wjxx li{display:block;width:123px;float:left;margin-right:5px;}
+.xy_ldetail .wjxx li p{ position:relative;top:-4px;}
+.xy_ldetail .wjxx em{color:#555;}
+.xy_ldetail .wjxx{color:#888; position:relative;top:-6px;zoom:1;overflow:hidden;}
+.xy_ldetail .wjxx li.w175{width:175px;}
+.xy_ldetail .wjxx li.w195{width:198px;}
+.xy_ldetail .wjxx li.w100{width:100px;}
+.xy_ldetail span{display:inline-block; position:relative;top:5px;}
+.xy_zypf{background:#f8f8f8;border:1px solid #eee;padding:30px;height:23px;position:relative;}
+.xy_zypf strong,.xy_zypf div{float:left;margin-right:5px;}
+.xy_zypf p{ position:absolute;right:5px;top:12px;}
+.xy_zypf p span,.xy_zypf p em{display:block;}
+.xy_zypf p span{font-size:16px;font-family:"Microsoft YaHei";margin-bottom:10px;}
+.xy_zypf p em{font-size:14px;}
+.xy_zypf p a:hover{text-decoration:none;}
+.xy_zypf .xzbigbtn,.xy_zypf .scbigbtn{width:108px;height:60px;color:#fff;display:inline-block;text-align:center;margin:0 5px;}
+.xy_zypf .xzbigbtn{background:#a0d468;}
+.xy_zypf .xzbigbtn:hover{background:#8dc452;}
+.xy_zypf .scbigbtn{background:#4fc0e8;}
+.xy_zypf .scbigbtn:hover{background:#3eacd3;}
+.xy_sc_icon,.xy_sccg_icon{background:url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/scicon.png") 0 0 no-repeat;display:inline-block;width:40px;height:45px; position:relative;top:22px;right:10px;}
+.xy_sccg_icon{background-position:0 -56px;}
+.xy_scbo h3{font-size:18px;color:#555;font-family:"Microsoft YaHei";font-weight:normal;}
+.xy_wdbar{background:#f1f1f1;border:1px solid #d4d4d4; position:relative;height:47px;}
+.xy_wdbar .sxfy{ position: absolute;top:10px;}
+.xy_wdbar .prearrow,.xy_wdbar .nextarrow,.xy_wdbar .s_icon a{background:url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/lricon.png") no-repeat;display:inline-block;width:28px;height:28px;margin:0 15px; vertical-align:middle;}
+.xy_wdbar .prearrow{ background-position:5px 5px;}
+.xy_wdbar .prearrow:hover{background:#dfdfdf url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/lricon.png") 5px -49px no-repeat;}
+.xy_wdbar .nextarrow{background-position:5px -20px;}
+.xy_wdbar .nextarrow:hover{background:#dfdfdf url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/lricon.png") 5px -79px no-repeat;}
+.xy_wdbar .numinp{border:1px solid #bbbbbb;width:30px;height:18px;text-align:right;padding:0 3px;color:#555;vertical-align:middle;margin:5px 0;}
+.xy_wdbar .numinp:hover{border:1px solid #227dc5;}
+.xy_wdbar .s_icon{ position:absolute;right:20px;top:10px;}
+.xy_wdbar .s_icon a{margin:0 3px;background:url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/smallicon.png") no-repeat;}
+.xy_wdbar .s_icon a.arrow1{background-position:5px 6px;}
+.xy_wdbar .s_icon a.arrow1:hover,.xy_wdbar .s_icon a.arrow1.on{background:#dfdfdf url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/smallicon.png") 5px -24px no-repeat;}
+.xy_wdbar .s_icon a.arrow2{background-position:5px -52px;}
+.xy_wdbar .s_icon a.arrow2:hover,.xy_wdbar .s_icon a.arrow2.on{background:#dfdfdf url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/smallicon.png") 5px -85px no-repeat;}
+.xy_wdbar .s_icon a.arrow3{background-position:6px -121px;}
+.xy_wdbar .s_icon a.arrow3:hover{background:#dfdfdf url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/smallicon.png") 6px -148px no-repeat;}
+.xy_wdbar .s_icon a.arrow4{background-position:6px -180px;}
+.xy_wdbar .s_icon a.arrow4:hover{background:#dfdfdf url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/smallicon.png") 6px -210px no-repeat;}
+.xy_wdbar .s_icon a.arrow5{background-position:6px -241px;}
+.xy_wdbar .s_icon a.arrow5:hover{background:#dfdfdf url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/smallicon.png") 6px -274px no-repeat;}
+.xy_pd30{padding:30px;padding-bottom:10px;}
+
+.xy_eduCategory .zl_t_l{text-align: left;}
+.xy_eduCategory .zl_pdl15{padding-left: 15px}
+.zl_w380{width:380px;_width:378px;}
+.zl_right .zl_pdl0{padding-left: 0}
+.zl_mgt40{margin-top: 40px}
+.zl_pdl35{padding-left: 35px}
+.zl_img{border: 1px solid #e6e6e6;display: block;}
+.zl_img,.zl_img img{width: 118px;height:88px;overflow: hidden}
+.zl_f_b{color:#676767;font-weight: bold}
+.zl_fluid{display:table-cell;width:2000px;*display:block;*width:auto; *overflow:hidden;zoom:1;}
+.zl_mod_h270{height: 270px;*height:272px;overflow: hidden}
+.zl_mod_h315{height:315px;*height:317px;overflow: hidden}
+.zl_mod_tit{position: relative;border-bottom: 2px solid #e0e0e0;padding-bottom: 8px;}
+.zl_mod_tit strong{font-size: 20px;color: #555;font-weight: normal;font-family: "Microsoft YaHei";}
+.zl_mod_tit .zl_morelink{position: absolute;right: 0;top: 0;color: #227dc5;font-size: 14px;}
+.zl_mod_imgtxt {position: relative;_zoom:1;}
+.zl_mod_imgtxt .zl_img{position: absolute;}
+.zl_mod_imgtxt .zl_txt{height: 90px;padding-left: 130px;}
+.zl_tit {height: 42px;overflow: hidden}
+.zl_count{position: absolute;bottom: 0;}
+.zl_list li{height:31px;line-height:31px;vertical-align: middle;width: 100%; text-overflow:ellipsis; white-space:nowrap; overflow:hidden}
+.zl_list li a{color:#555;*height:25px;_padding-top:8px;}
+.zl_mod_list ul{margin-left:-30px;margin-right: -30px;overflow:hidden;*display: inline}
+.zl_mod_list li{margin-left:30px;margin-right:30px;display: inline;width:120px;float:left;}
+.zl_mod_list2 ul{margin-left:-20px;margin-right: -20px;overflow:hidden;*display: inline}
+.zl_mod_list2 li{float: left;margin-left:20px;margin-right:20px;display: inline;width:120px;}
+
+
+.xy_supbox li .radiolist{display:inline-block;margin:5px;}
+.xy_supbox li .radiolist label{width:auto;}
+.xy_supbox li .radiolist span{font-size:12px;color:#888;}
+.xy_supbox li .radiolist .radioTb .radioBtn,.xy_supbox li .radiolist .radioTb .radioBtn_on{background:url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/radio.png") 0% 0%;}
+.xy_supbox li .radiolist .hRadio{background: transparent url("http://res.wuhaneduyun.cn/cms-portal/area/420000/images/mhzy/radio.png") no-repeat left top;}
+.xy_supbox li .radiolist .hRadio_Checked { background-position: left bottom;}
+
+.jy_search{ width:400px; background:#47a2dc; float:left; height:35px; }
+
+.jy_search .sear_txt{ float:left; background:#fff; margin:4px; display:inline; border:none; width:319px; height:25px; line-height:25px; overflow:hidden;}
+.jy_search .sear_btn{ float:left; display:inline-block; border:none; width:70px; text-align:center; height:100%;line-height:35px; color:#fff; font-size:14px; background:#47a2dc; cursor:pointer; text-decoration:none; overflow:hidden;}
+span.gray8{ color:#888; font-size:14px;}
+.qkey{ line-height:35px; padding-left:20px;}
+.qkey a{ color:#888;}
+.qkey a.red{ color:#F00;}
+

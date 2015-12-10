@@ -1,0 +1,64 @@
+@charset "utf-8";
+/* 代码整理：懒人之家 www.lanrenzhijia.com */
+
+.wrapper {
+	width:690px;
+}
+/* tmall focus */
+#focus1 {
+	width:690px;
+	height:300px;
+	overflow:hidden;
+	position:relative;
+}
+#focus1 ul {
+	height:300px;
+	position:absolute;
+}
+#focus1 ul li {
+	float:left;
+	width:690px;
+	height:300px;
+	overflow:hidden;
+	position:relative;
+	background:#000;
+}
+#focus1 ul li div {
+	position:absolute;
+	overflow:hidden;
+}
+#focus1 .btnBg {
+	position:absolute;
+	width:690px;
+	height:40px;
+	left:0;
+	bottom:0;
+	background:#000;
+}
+#focus1 .btn {
+	position:absolute;
+	width:680px;
+	height:24px;
+	left:0;
+	bottom:8px;
+	padding-left:10px;
+}
+#focus1 .btn span {
+	display:inline-block;
+	_display:inline;
+	_zoom:1;
+	width:24px;
+	height:24px;
+	line-height:24px;
+	text-align:center;
+	font-size:20px;
+	font-family:"Microsoft YaHei", SimHei;
+	margin-right:10px;
+	cursor:pointer;
+	color:#fff;
+}
+#focus1 .btn span.on {
+	background:#000;
+	color:#fcc;
+}
+/* 代码整理：懒人之家 www.lanrenzhijia.com */

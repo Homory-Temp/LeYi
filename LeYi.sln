@@ -68,6 +68,36 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Resource", "http:/
 		Svn.Uri = Platform.Resource/
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Resource.SY", "http://localhost:59709", "{952797F7-8BA4-422C-9AA3-0300DE25B089}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = ""
+		SccAuxPath = ""
+		SccLocalPath = ""
+		SccProvider = ""
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.1"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_59709"
+		Debug.AspNetCompiler.PhysicalPath = "Platform.Resource.SY\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59709\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_59709"
+		Release.AspNetCompiler.PhysicalPath = "Platform.Resource.SY\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59709\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "Platform.Resource.SY\"
+	EndProjectSection
+	ProjectSection(SvnOrigin) = preProject
+		@Keys = Enlist,Svn.Uri
+		Enlist = Required
+		Svn.Uri = Platform.Resource.SY/
+	EndProjectSection
+EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Sso", "http://localhost:7545", "{524C8711-97BA-4431-A849-383A22FD0F0D}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = ""
@@ -238,6 +268,10 @@ Global
 		{B057919F-3054-4A05-BB8F-0AE03A26D53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B057919F-3054-4A05-BB8F-0AE03A26D53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B057919F-3054-4A05-BB8F-0AE03A26D53A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{952797F7-8BA4-422C-9AA3-0300DE25B089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{952797F7-8BA4-422C-9AA3-0300DE25B089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{952797F7-8BA4-422C-9AA3-0300DE25B089}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{952797F7-8BA4-422C-9AA3-0300DE25B089}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
