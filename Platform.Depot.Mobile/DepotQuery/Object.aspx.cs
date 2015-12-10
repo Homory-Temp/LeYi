@@ -21,14 +21,11 @@ public partial class DepotQuery_Object : DepotPageSingle
                 var objId = value.GlobalId();
                 var obj = DataContext.DepotObject.Single(o => o.Id == objId);
                 name.InnerText = obj.Name;
-                unit.InnerText = unitx.InnerText = obj.Unit;
                 sp.InnerText = obj.Specification;
-                no.InnerText = obj.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
                 note.InnerText = obj.Note;
                 brand.InnerText = obj.Brand;
                 var query = obj.DepotUseX.Where(o => o.ReturnedAmount < o.Amount);
                 var noOut = query.Count() > 0 ? query.Sum(o => o.Amount - o.ReturnedAmount) : 0;
-                total.InnerText = (obj.Amount + noOut).ToAmount(Depot.Featured(DepotType.小数数量库));
                 if (Depot.Featured(DepotType.幼儿园))
                 {
                     var di = obj.DepotInX.OrderByDescending(o => o.AutoId).FirstOrDefault();
@@ -76,6 +73,10 @@ public partial class DepotQuery_Object : DepotPageSingle
         if (obj.Fixed)
         {
             var source = DataContext.DepotInX.Where(o => (o.AvailableAmount > 0) && o.ObjectId == obj.Id).ToList().Select(o => new Placed { Id = o.Id, Ordinal = o.Ordinal, Fixed = true, Place = o.Place, Code = o.Code }).OrderBy(o => o.Ordinal).ToList();
+            if (obj.Single)
+            {
+                source = source.Where(o => o.Code == "Code".Query()).ToList();
+            }
             grid.DataSource = source;
         }
         else
@@ -84,6 +85,10 @@ public partial class DepotQuery_Object : DepotPageSingle
             for (var i = 0; i < source.Count; i++)
             {
                 source[i].Ordinal = i + 1;
+            }
+            if (obj.Single)
+            {
+                source = source.Where(o => o.Code == "Code".Query()).ToList();
             }
             grid.DataSource = source;
         }
@@ -122,12 +127,6 @@ public partial class DepotQuery_Object : DepotPageSingle
         }
         DataContext.SaveChanges();
         grid.Rebind();
-    }
-
-    protected void gridX_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
-    {
-        var id = "ObjectId".Query().GlobalId();
-        gridX.DataSource = DataContext.DepotUseXRecord.Where(o => o.ObjectId == id).OrderByDescending(o => o.Time).ToList();
     }
 
     protected void do_up_ServerClick(object sender, EventArgs e)
