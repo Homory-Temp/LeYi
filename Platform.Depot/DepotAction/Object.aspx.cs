@@ -188,4 +188,9 @@ public partial class DepotAction_Object : DepotPageSingle
             sb = sb.Remove(sb.ToString().LastIndexOf("<br />"), 6);
         return sb.ToString();
     }
+
+    protected void fix_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotQuery/ObjectToFixed?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+    }
 }
