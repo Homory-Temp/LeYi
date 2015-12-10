@@ -35,6 +35,9 @@ namespace Homory.Model
         public State State { get; set; }
         public int Ordinal { get; set; }
         public Nullable<System.Guid> TopId { get; set; }
+        public bool Audit { get; set; }
+        public bool AuditEditable { get; set; }
+        public string AuditUsers { get; set; }
     
         public virtual ICollection<Catalog> CatalogChildren { get; set; }
         public virtual Catalog CatalogParent { get; set; }

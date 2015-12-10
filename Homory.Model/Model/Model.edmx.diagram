@@ -5,16 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f68e6ee072a040518fb467af6365e2c3" Name="Diagram">
-        <EntityTypeShape EntityType="Homory.Model.Application" Width="1.5" PointX="5.75" PointY="5.25" />
-        <EntityTypeShape EntityType="Homory.Model.ApplicationPolicy" Width="1.5" PointX="8" PointY="3.25" />
+        <EntityTypeShape EntityType="Homory.Model.Application" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="Homory.Model.ApplicationPolicy" Width="1.5" PointX="3" PointY="3.25" />
         <AssociationConnector Association="Homory.Model.FK_ApplicationPolicy_Application" />
         <EntityTypeShape EntityType="Homory.Model.User" Width="1.5" PointX="0.75" PointY="33" />
         <EntityTypeShape EntityType="Homory.Model.UserOnline" Width="1.5" PointX="3" PointY="21.75" />
         <AssociationConnector Association="Homory.Model.FK_UserOnline_User" />
-        <EntityTypeShape EntityType="Homory.Model.Menu" Width="1.5" PointX="10.25" PointY="8.25" />
-        <EntityTypeShape EntityType="Homory.Model.Right" Width="1.5" PointX="8" PointY="12.375" />
-        <EntityTypeShape EntityType="Homory.Model.Role" Width="1.5" PointX="0.75" PointY="26.5" />
-        <EntityTypeShape EntityType="Homory.Model.RoleRight" Width="1.5" PointX="10.25" PointY="19.5" />
+        <EntityTypeShape EntityType="Homory.Model.Menu" Width="1.5" PointX="5.25" PointY="8.25" />
+        <EntityTypeShape EntityType="Homory.Model.Right" Width="1.5" PointX="3" PointY="12.375" />
+        <EntityTypeShape EntityType="Homory.Model.Role" Width="1.5" PointX="0.75" PointY="24.5" />
+        <EntityTypeShape EntityType="Homory.Model.RoleRight" Width="1.5" PointX="6.25" PointY="18.5" />
         <AssociationConnector Association="Homory.Model.FK_Menu_Application" />
         <AssociationConnector Association="Homory.Model.FK_Right_Application" />
         <AssociationConnector Association="Homory.Model.FK_Menu_Right" />
@@ -23,31 +23,31 @@
         <EntityTypeShape EntityType="Homory.Model.UserRole" Width="1.5" PointX="3" PointY="32.625" />
         <AssociationConnector Association="Homory.Model.FK_UserRole_Role" />
         <AssociationConnector Association="Homory.Model.FK_UserRole_User" />
-        <EntityTypeShape EntityType="Homory.Model.Department" Width="1.5" PointX="3.75" PointY="10.125" />
+        <EntityTypeShape EntityType="Homory.Model.Department" Width="1.5" PointX="3.75" PointY="15.125" />
         <AssociationConnector Association="Homory.Model.FK_Department_DepartmentParent" />
-        <EntityTypeShape EntityType="Homory.Model.Catalog" Width="1.5" PointX="1.5" PointY="16.5" />
+        <EntityTypeShape EntityType="Homory.Model.Catalog" Width="1.5" PointX="1.5" PointY="16.25" />
         <AssociationConnector Association="Homory.Model.FK_Catalog_Catalog" />
-        <EntityTypeShape EntityType="Homory.Model.DepartmentUser" Width="1.5" PointX="6" PointY="35.125" />
+        <EntityTypeShape EntityType="Homory.Model.DepartmentUser" Width="1.5" PointX="3" PointY="39.125" />
         <AssociationConnector Association="Homory.Model.FK_DepartmentUser_Department" />
         <AssociationConnector Association="Homory.Model.FK_DepartmentUser_DepartmentCampus" />
         <AssociationConnector Association="Homory.Model.FK_DepartmentUser_User" />
         <EntityTypeShape EntityType="Homory.Model.Teacher" Width="1.5" PointX="3" PointY="49.125" />
         <AssociationConnector Association="Homory.Model.FK_Teacher_User" />
         <EntityTypeShape EntityType="Homory.Model.Student" Width="1.5" PointX="3" PointY="53.25" />
-        <EntityTypeShape EntityType="Homory.Model.ViewStudent" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Homory.Model.ViewStudent" Width="1.5" PointX="7.75" PointY="3.75" />
         <AssociationConnector Association="Homory.Model.FK_Student_User" />
-        <EntityTypeShape EntityType="Homory.Model.ViewRole" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="Homory.Model.Learned" Width="1.5" PointX="6" PointY="15.25" />
+        <EntityTypeShape EntityType="Homory.Model.ViewRole" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Homory.Model.Learned" Width="1.5" PointX="6" PointY="15" />
         <AssociationConnector Association="Homory.Model.FK_Learned_Catalog" />
         <AssociationConnector Association="Homory.Model.FK_Learned_Department" />
-        <EntityTypeShape EntityType="Homory.Model.ViewLearned" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Homory.Model.Taught" Width="1.5" PointX="3" PointY="35.375" />
+        <EntityTypeShape EntityType="Homory.Model.ViewLearned" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Homory.Model.Taught" Width="1.5" PointX="6" PointY="31.375" />
         <AssociationConnector Association="Homory.Model.FK_Taught_Catalog" />
         <AssociationConnector Association="Homory.Model.FK_Taught_Department" />
         <AssociationConnector Association="Homory.Model.FK_Taught_User" />
-        <EntityTypeShape EntityType="Homory.Model.ViewTaught" Width="1.5" PointX="2.75" PointY="6.75" />
-        <EntityTypeShape EntityType="Homory.Model.ViewTeacher" Width="1.5" PointX="0.75" PointY="9.75" />
-        <EntityTypeShape EntityType="Homory.Model.ViewQueryStudent" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Homory.Model.ViewTaught" Width="1.5" PointX="9.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Homory.Model.ViewTeacher" Width="1.5" PointX="8.75" PointY="9.75" />
+        <EntityTypeShape EntityType="Homory.Model.ViewQueryStudent" Width="1.5" PointX="10.75" PointY="9.75" />
         <EntityTypeShape EntityType="Homory.Model.Resource" Width="1.5" PointX="3" PointY="57.125" />
         <EntityTypeShape EntityType="Homory.Model.ResourceCatalog" Width="1.5" PointX="5.25" PointY="60.375" />
         <EntityTypeShape EntityType="Homory.Model.ResourceStatisticsMonthly" Width="1.5" PointX="5.25" PointY="73.625" />
@@ -57,12 +57,12 @@
         <AssociationConnector Association="Homory.Model.FK_ResourceStatisticsMonthly_Resource" />
         <EntityTypeShape EntityType="Homory.Model.ResourceAttachment" Width="1.5" PointX="5.25" PointY="70.5" />
         <AssociationConnector Association="Homory.Model.FK_ResourceAttachment_Resource" />
-        <EntityTypeShape EntityType="Homory.Model.UserCatalog" Width="1.5" PointX="6" PointY="39.625" />
+        <EntityTypeShape EntityType="Homory.Model.UserCatalog" Width="1.5" PointX="6" PointY="38.625" />
         <AssociationConnector Association="Homory.Model.FK_UserCatalog_Catalog" />
         <AssociationConnector Association="Homory.Model.FK_UserCatalog_User" />
-        <EntityTypeShape EntityType="Homory.Model.Log" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Homory.Model.PrizeCredit" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Homory.Model.GroupUser" Width="1.5" PointX="3" PointY="39.375" />
+        <EntityTypeShape EntityType="Homory.Model.Log" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Homory.Model.PrizeCredit" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Homory.Model.GroupUser" Width="1.5" PointX="3" PointY="29.375" />
         <AssociationConnector Association="Homory.Model.FK_GroupUser_User" />
         <EntityTypeShape EntityType="Homory.Model.Notice" Width="1.5" PointX="3" PointY="46" />
         <AssociationConnector Association="Homory.Model.FK_Notice_User" />
@@ -74,51 +74,51 @@
         <EntityTypeShape EntityType="Homory.Model.UserFavourite" Width="1.5" PointX="3" PointY="66.5" />
         <AssociationConnector Association="Homory.Model.FK_UserFavourite_User" />
         <AssociationConnector Association="Homory.Model.FK_UserFavourite_UserFavourite" />
-        <EntityTypeShape EntityType="Homory.Model.Dictionary" Width="1.5" PointX="5.75" PointY="9.75" />
+        <EntityTypeShape EntityType="Homory.Model.Dictionary" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="Homory.Model.ResourceComment" Width="1.5" PointX="8.25" PointY="47.625" />
         <AssociationConnector Association="Homory.Model.FK_ResourceComment_Resource" />
         <AssociationConnector Association="Homory.Model.FK_ResourceComment_User" />
         <AssociationConnector Association="Homory.Model.FK_Department_DepartmentTop" />
-        <EntityTypeShape EntityType="Homory.Model.Action" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Homory.Model.Action" Width="1.5" PointX="11.75" PointY="4.75" />
         <EntityTypeShape EntityType="Homory.Model.ViewResource" Width="1.5" PointX="12.75" PointY="8.75" />
-        <EntityTypeShape EntityType="Homory.Model.MediaNote" Width="1.5" PointX="5.25" PointY="44" />
+        <EntityTypeShape EntityType="Homory.Model.MediaNote" Width="1.5" PointX="5.25" PointY="48" />
         <AssociationConnector Association="Homory.Model.FK_MediaNote_Resource" />
         <AssociationConnector Association="Homory.Model.FK_MediaNote_User" />
-        <EntityTypeShape EntityType="Homory.Model.ResourceAssess" Width="1.5" PointX="5.25" PointY="48.125" />
+        <EntityTypeShape EntityType="Homory.Model.ResourceAssess" Width="1.5" PointX="5.25" PointY="44.125" />
         <AssociationConnector Association="Homory.Model.FK_ResourceAssess_AssessTable" />
         <AssociationConnector Association="Homory.Model.FK_ResourceAssess_Resource" />
         <AssociationConnector Association="Homory.Model.FK_ResourceAssess_User" />
-        <EntityTypeShape EntityType="Homory.Model.ResourceRoom" Width="1.5" PointX="0.75" PointY="29.5" />
-        <EntityTypeShape EntityType="Homory.Model.ViewResourceX" Width="1.5" PointX="14.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Homory.Model.ResourceCommentTemp" Width="1.5" PointX="3" PointY="29.375" />
+        <EntityTypeShape EntityType="Homory.Model.ResourceRoom" Width="1.5" PointX="0.75" PointY="41.5" />
+        <EntityTypeShape EntityType="Homory.Model.ViewResourceX" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Homory.Model.ResourceCommentTemp" Width="1.5" PointX="3" PointY="35.375" />
         <AssociationConnector Association="Homory.Model.FK_ResourceCommentTemp_ResourceRoom" />
         <AssociationConnector Association="Homory.Model.FK_ResourceCommentTemp_User" />
-        <EntityTypeShape EntityType="Homory.Model.Group" Width="1.5" PointX="3.75" PointY="16.75" />
+        <EntityTypeShape EntityType="Homory.Model.Group" Width="1.5" PointX="0.75" PointY="27.75" />
         <AssociationConnector Association="Homory.Model.FK_Group_Course" />
         <AssociationConnector Association="Homory.Model.FK_Group_Grade" />
         <AssociationConnector Association="Homory.Model.FK_GroupUser_Group" />
-        <EntityTypeShape EntityType="Homory.Model.ApplicationRole" Width="1.5" PointX="8" PointY="6.25" />
+        <EntityTypeShape EntityType="Homory.Model.ApplicationRole" Width="1.5" PointX="3" PointY="6.25" />
         <AssociationConnector Association="Homory.Model.FK_ApplicationRole_Application" />
-        <EntityTypeShape EntityType="Homory.Model.Api" Width="1.5" PointX="0.75" PointY="0.875" />
-        <EntityTypeShape EntityType="Homory.Model.ApiLog" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="Homory.Model.Api" Width="1.5" PointX="5.75" PointY="0.875" />
+        <EntityTypeShape EntityType="Homory.Model.ApiLog" Width="1.5" PointX="8" PointY="0.875" />
         <AssociationConnector Association="Homory.Model.FK_ApiLog_Api" />
         <EntityTypeShape EntityType="Homory.Model.ViewQueryTeacher" Width="1.5" PointX="14.75" PointY="8.75" />
         <EntityTypeShape EntityType="Homory.Model.ViewQueryTaught" Width="1.5" PointX="14.75" PointY="13.75" />
-        <EntityTypeShape EntityType="Homory.Model.ViewQuerySign" Width="1.5" PointX="8.75" PointY="15.75" />
-        <EntityTypeShape EntityType="Homory.Model.SignLog" Width="1.5" PointX="16.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Homory.Model.OperationLog" Width="1.5" PointX="16.75" PointY="4.75" />
-        <EntityTypeShape EntityType="Homory.Model.ViewQueryOperation" Width="1.5" PointX="16.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Homory.Model.ViewQuerySign" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Homory.Model.SignLog" Width="1.5" PointX="15.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Homory.Model.OperationLog" Width="1.5" PointX="16.75" PointY="8.75" />
+        <EntityTypeShape EntityType="Homory.Model.ViewQueryOperation" Width="1.5" PointX="8.75" PointY="16.75" />
         <EntityTypeShape EntityType="Homory.Model.ResourceLog" Width="1.5" PointX="3" PointY="69.125" />
         <AssociationConnector Association="Homory.Model.FK_ResourceLog_User" />
-        <EntityTypeShape EntityType="Homory.Model.ViewQueryResource" Width="1.5" PointX="16.75" PointY="11.75" />
-        <EntityTypeShape EntityType="Homory.Model.GroupBoard" Width="1.5" PointX="6" PointY="31.375" />
+        <EntityTypeShape EntityType="Homory.Model.ViewQueryResource" Width="1.5" PointX="10.75" PointY="16.75" />
+        <EntityTypeShape EntityType="Homory.Model.GroupBoard" Width="1.5" PointX="6" PointY="35.375" />
         <AssociationConnector Association="Homory.Model.FK_GroupBoard_Group" />
         <AssociationConnector Association="Homory.Model.FK_GroupBoard_User" />
-        <EntityTypeShape EntityType="Homory.Model.ViewStatistics" Width="1.5" PointX="10.75" PointY="16.75" />
-        <EntityTypeShape EntityType="Homory.Model.ViewTS" Width="1.5" PointX="16.75" PointY="16.75" />
-        <EntityTypeShape EntityType="Homory.Model.CardNo" Width="1.5" PointX="12.75" PointY="17.75" />
-        <EntityTypeShape EntityType="Homory.Model.ViewTeacherExport" Width="1.5" PointX="18.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Homory.Model.View_ResourceAssess" Width="1.5" PointX="18.75" PointY="5.75" />
+        <EntityTypeShape EntityType="Homory.Model.ViewStatistics" Width="1.5" PointX="16.75" PointY="11.75" />
+        <EntityTypeShape EntityType="Homory.Model.ViewTS" Width="1.5" PointX="16.75" PointY="14.75" />
+        <EntityTypeShape EntityType="Homory.Model.CardNo" Width="1.5" PointX="5.75" PointY="12.75" />
+        <EntityTypeShape EntityType="Homory.Model.ViewTeacherExport" Width="1.5" PointX="17.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Homory.Model.View_ResourceAssess" Width="1.5" PointX="17.75" PointY="5.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

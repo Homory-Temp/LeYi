@@ -103,6 +103,9 @@
           <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="Audit" Type="bit" Nullable="false" />
+          <Property Name="AuditEditable" Type="bit" Nullable="false" />
+          <Property Name="AuditUsers" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -2887,6 +2890,9 @@
           <Property Name="TopId" Type="Guid" />
           <NavigationProperty Name="Group" Relationship="Homory.Model.FK_Group_Course" FromRole="Catalog" ToRole="Group" />
           <NavigationProperty Name="Group1" Relationship="Homory.Model.FK_Group_Grade" FromRole="Catalog" ToRole="Group" />
+          <Property Name="Audit" Type="Boolean" Nullable="false" />
+          <Property Name="AuditEditable" Type="Boolean" Nullable="false" />
+          <Property Name="AuditUsers" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Catalog_Catalog">
           <End Type="Homory.Model.Catalog" Role="Catalog" Multiplicity="0..1" />
@@ -4622,6 +4628,9 @@
           <EntitySetMapping Name="Catalog">
             <EntityTypeMapping TypeName="Homory.Model.Catalog">
               <MappingFragment StoreEntitySet="Catalog">
+                <ScalarProperty Name="AuditUsers" ColumnName="AuditUsers" />
+                <ScalarProperty Name="AuditEditable" ColumnName="AuditEditable" />
+                <ScalarProperty Name="Audit" ColumnName="Audit" />
                 <ScalarProperty Name="TopId" ColumnName="TopId" />
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
                 <ScalarProperty Name="State" ColumnName="State" />
