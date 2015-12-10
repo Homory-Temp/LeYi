@@ -76,15 +76,8 @@ public partial class DepotQuery_ObjectFixed : DepotPageSingle
         }
         var objId = value.GlobalId();
         var obj = DataContext.DepotObject.Single(o => o.Id == objId);
-        if (obj.Fixed)
-        {
-            var source = DataContext.DepotIn.Where(o => /*(o.AvailableAmount > 0) &&*/ o.ObjectId == obj.Id).ToList().Select(o => new Placed { Time = o.Time, Id = o.Id, Number = o.Note, Amount = o.Amount, Price = o.Price, Total = o.Total }).OrderBy(o => o.Time).ToList();
-            grid.DataSource = source;
-        }
-        else
-        {
-            grid.DataSource = null;
-        }
+        var source = DataContext.DepotIn.Where(o => /*(o.AvailableAmount > 0) &&*/ o.ObjectId == obj.Id).ToList().Select(o => new Placed { Time = o.Time, Id = o.Id, Number = o.Note, Amount = o.Amount, Price = o.Price, Total = o.Total }).OrderBy(o => o.Time).ToList();
+        grid.DataSource = source;
     }
 
     protected void grid_BatchEditCommand(object sender, GridBatchEditingEventArgs e)
