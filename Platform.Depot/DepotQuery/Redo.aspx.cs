@@ -19,7 +19,7 @@ public partial class DepotQuery_Redo : DepotPageSingle
             people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "操作人", Value = "0", Selected = true });
             people.DataSource = DataContext.DepotUserLoad(Depot.CampusId).ToList();
             people.DataBind();
-            tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
+            tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
             tree.DataBind();
             tree.CheckAllNodes();
         }

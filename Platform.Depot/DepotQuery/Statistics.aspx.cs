@@ -14,7 +14,7 @@ public partial class DepotQuery_Statistics : DepotPageSingle
     {
         if (!IsPostBack)
         {
-            tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
+            tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
             tree.DataBind();
             tree.CheckAllNodes();
             ps.SelectedDate = DateTime.Today;

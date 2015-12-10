@@ -7,7 +7,7 @@ public partial class Control_ObjectOut : DepotControlSingle
 {
     public void LoadDefaults(InMemoryOut @out)
     {
-        catalog.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
+        catalog.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList(); ;
         catalog.DataBind();
         amount.Value = (double?)@out.Amount;
         amount.NumberFormat.DecimalDigits = Depot.Featured(DepotType.小数数量库) ? 2 : 0;

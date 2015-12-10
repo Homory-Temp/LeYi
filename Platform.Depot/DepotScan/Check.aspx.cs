@@ -12,8 +12,8 @@ public partial class DepotAction_Check : DepotPageSingle
     {
         if (!IsPostBack)
         {
-            tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
-            tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
+            tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null, true).Count().EmptyWhenZero());
+            tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
             tree.DataBind();
             cName.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }

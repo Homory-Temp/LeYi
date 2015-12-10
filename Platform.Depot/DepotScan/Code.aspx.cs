@@ -12,7 +12,7 @@ public partial class DepotAction_Code : DepotPageSingle
     {
         if (!IsPostBack)
         {
-            tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
+            tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
             tree.DataBind();
             cName.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             ____v.InnerText = (new List<string>()).ToJson();

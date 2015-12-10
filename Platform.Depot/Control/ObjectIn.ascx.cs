@@ -7,7 +7,7 @@ public partial class Control_ObjectIn : DepotControlSingle
 {
     public void LoadDefaults(InMemoryIn @in)
     {
-        catalog.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
+        catalog.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList(); ;
         catalog.DataBind();
         people.Items.Clear();
         people.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "", Value = "", Selected = true });
