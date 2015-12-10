@@ -60,34 +60,34 @@
                 <div class="col-md-12">
                     <table class="storeTable">
                         <tr>
-                            <td style="width: 15%;">
+                            <td style="width: 65px;">
                                 <span>品牌：</span>
                             </td>
-                            <td style="width: 35%;">
+                            <td>
                                 <span id="brand" runat="server"></span>
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 15%;">
+                            <td style="width: 65px;">
                                 <span>规格：</span>
                             </td>
-                            <td style="width: 35%;">
+                            <td>
                                 <span id="sp" runat="server"></span>
                             </td>
                         </tr>
                         <tr id="xRow" runat="server">
-                            <td style="width: 15%;">
-                                <span>年龄段</span>
+                            <td style="width: 65px;">
+                                <span>年龄段：</span>
                             </td>
-                            <td colspan="3" style="width: 85%;">
+                            <td colspan="3">
                                 <span id="age" runat="server"></span>
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 15%;">
+                            <td style="width: 65px;">
                                 <span>备注：</span>
                             </td>
-                            <td style="width: 85%;">
+                            <td>
                                 <span id="note" runat="server"></span>
                             </td>
                         </tr>
