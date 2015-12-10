@@ -65,6 +65,15 @@ public partial class StoreQuery_Statistics : SingleStorePage
         var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => o.Value.GlobalId()).ToList();
         var source = catalogs.Join(db.Value.Store_ST.Where(o => o.Time >= _s && o.Time <= _e), o => o, o => o.CatalogId, (a, b) => b).ToList();
         var list = new List<InMemoryST>();
+        var ___objs = catalogs.Join(db.Value.StoreObject.Where(o => o.State < 2), o => o, o => o.CatalogId, (a, b) => b.Id).ToList();
+        foreach (var ___id in ___objs)
+        {
+            if (source.Count(o => o.ObjectId == ___id && o.Time == _s) == 0)
+            {
+                db.Value.ActionRecord(___id, DateTime.Parse(_s.FromTimeNode()), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                db.Value.SaveChanges();
+            }
+        }
         foreach (var g in source.GroupBy(o => o.ObjectId))
         {
             var obj = new InMemoryST();
@@ -92,7 +101,8 @@ public partial class StoreQuery_Statistics : SingleStorePage
             obj.E = g.Last().EndAmount;
             obj.EM = g.Last().EndMoney;
             obj.EP = obj.E == 0 ? 0M : decimal.Divide(obj.EM, obj.E);
-            list.Add(obj);
+            if (obj.S > 0 || obj.SM > 0 || obj.I > 0 || obj.IM > 0 || obj.U > 0 || obj.UM > 0 || obj.R > 0 || obj.RM > 0 || obj.O > 0 || obj.OM > 0 || obj.E > 0 || obj.EM > 0)
+                list.Add(obj);
         }
         if (!name.Text.Trim().Null())
         {
