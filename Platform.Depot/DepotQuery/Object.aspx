@@ -103,7 +103,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 15%; line-height: 20px;">
+                            <td style="width: 15%;">
                                 <span class="btn btn-info dictionaryX">备注：</span>
                             </td>
                             <td colspan="3" style="width: 85%; text-align: left; line-height: 20px;">
@@ -140,16 +140,16 @@
             <div class="row"><span class="btn btn-info dictionaryX">存放地</span></div>
             <div class="row">
                 <telerik:RadGrid ID="grid" runat="server" CssClass="col-md-12 text-center" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="grid_NeedDataSource" OnBatchEditCommand="grid_BatchEditCommand">
-                    <MasterTableView EditMode="Batch" DataKeyNames="Id,Fixed,Ordinal" CommandItemDisplay="Top" CommandItemSettings-ShowAddNewRecordButton="false" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
+                    <MasterTableView EditMode="Batch" DataKeyNames="Id,Fixed,Ordinal" CommandItemDisplay="Top" CommandItemSettings-ShowAddNewRecordButton="false" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true">
                         <BatchEditingSettings EditType="Row" OpenEditingEvent="DblClick" />
-                        <HeaderStyle HorizontalAlign="Center" BorderColor="Black" />
+                        <HeaderStyle HorizontalAlign="Center" Height="50" Font-Bold="true" />
                         <Columns>
                             <telerik:GridTemplateColumn HeaderStyle-CssClass="xxx" HeaderText="编号" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# (int)Eval("Ordinal") == -1 ? (Container.ItemIndex + 1).ToString() : Eval("Ordinal") %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="卡片编号" DataField="Number" SortExpression="Number" UniqueName="Number">
+                            <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="卡片编号" DataField="Number" SortExpression="Number" UniqueName="Number">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Number") %>'></asp:Label>
                                 </ItemTemplate>
@@ -158,17 +158,17 @@
                                     </telerik:RadTextBox>
                                 </EditItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="购置日期" DataField="Time" SortExpression="Time" UniqueName="Time">
+                            <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="购置日期" DataField="Time" SortExpression="Time" UniqueName="Time">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Time").ToDay() %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="条码" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true">
+                            <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="条码" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true">
                                 <ItemTemplate>
                                     <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text='<%# Eval("Code") %>' NavigateUrl='<%# "../DepotScan/Flow?DepotId={0}&Code={1}".Formatted(Depot.Id, Eval("Code")) %>'></asp:HyperLink>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="存放地" DataField="Place" SortExpression="Place" UniqueName="Place">
+                            <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="存放地" DataField="Place" SortExpression="Place" UniqueName="Place">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Place") %>'></asp:Label>
                                 </ItemTemplate>
@@ -177,7 +177,7 @@
                                     </telerik:RadTextBox>
                                 </EditItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="使用状态" DataField="State" SortExpression="State" UniqueName="State" ReadOnly="true">
+                            <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="使用状态" DataField="State" SortExpression="State" UniqueName="State" ReadOnly="true">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("State") %>' ToolTip='<%# Eval("State").ToString() == "已报废" ? ((DateTime)Eval("StateTime")).ToString("yyyy-MM-dd") : "" %>'></asp:Label>
                                 </ItemTemplate>
@@ -190,30 +190,30 @@
             <div class="row"><span class="btn btn-info dictionaryX">借出记录</span></div>
             <div class="row">
                 <telerik:RadGrid ID="gridX" runat="server" CssClass="col-md-12 text-center" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="gridX_NeedDataSource">
-                    <MasterTableView CommandItemDisplay="None" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="全部在库">
-                        <HeaderStyle HorizontalAlign="Center" BorderColor="Black" />
+                    <MasterTableView CommandItemDisplay="None" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true">
+                        <HeaderStyle HorizontalAlign="Center" Height="50" Font-Bold="true" />
                         <Columns>
                             <telerik:GridTemplateColumn HeaderText="借用人" ItemStyle-Width="20%">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("UserName") %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="借用数量" ItemStyle-Width="20%">
+                            <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="借用数量" ItemStyle-Width="20%">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="借用日期" ItemStyle-Width="20%">
+                            <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="借用日期" ItemStyle-Width="20%">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Time").ToDay() %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="待还数量" ItemStyle-Width="20%">
+                            <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="待还数量" ItemStyle-Width="20%">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# Eval("Type").ToString() == "1" ? "0" : ((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")).ToAmount(Depot.Featured(Models.DepotType.小数数量库))%>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="待还日期" ItemStyle-Width="20%">
+                            <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="待还日期" ItemStyle-Width="20%">
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%# (int)Eval("Period") == 0 ? "不限期" : ((DateTime)Eval("Time")).AddDays((int)Eval("Period")).ToDay() %>'></asp:Label>
                                 </ItemTemplate>
@@ -244,7 +244,7 @@
                 border-left: none;
             }
             html .RadGrid_Bootstrap .rgNoRecords td {
-                border-bottom: 1px solid black;
+                border-bottom: none;
             }
         </style>
     </form>
