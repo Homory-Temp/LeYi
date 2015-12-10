@@ -1,6 +1,7 @@
 ﻿using Models;
 using System;
 using System.Linq;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
@@ -137,5 +138,28 @@ public partial class DepotQuery_Object : DepotPageSingle
             }
             view.DataSource = source;
         }
+    }
+
+    protected void save_ServerClick(object sender, EventArgs e)
+    {
+        var id = (sender as HtmlInputControl).Attributes["match"].GlobalId();
+        var value = "ObjectId".Query();
+        var @in = DataContext.DepotInX.Single(o => o.Id == id);
+        var objId = value.GlobalId();
+        var obj = DataContext.DepotObject.Single(o => o.Id == objId);
+        var place = ((sender as HtmlInputControl).NamingContainer.FindControl("place") as RadTextBox).Text;
+        @in.Place = place;
+        var ___px = new DepotPlace
+        {
+            Code = @in.Code,
+            Place = place,
+            Time = DateTime.Now
+        };
+        DataContext.DepotPlace.Add(___px);
+        if (!obj.Single)
+        {
+            @in.DepotIn.Place = @in.Place;
+        }
+        DataContext.SaveChanges();
     }
 }

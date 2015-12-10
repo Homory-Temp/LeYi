@@ -118,7 +118,7 @@
             <div class="row">
                 <telerik:RadListView ID="view" runat="server" CssClass="col-md-12" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
                     <LayoutTemplate>
-                        <table>
+                        <table class="storeTable">
                             <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
                         </table>
                     </LayoutTemplate>
@@ -129,7 +129,8 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <asp:TextBox ID="place" runat="server" Text='<%# Eval("Place") %>'></asp:TextBox>
+                                存放地：<telerik:RadTextBox ID="place" runat="server" Text='<%# Eval("Place") %>'></telerik:RadTextBox>
+                                <input type="button" match='<%# Eval("Id") %>' class="btn btn-info" id="save" runat="server" value="保存" onserverclick="save_ServerClick" />
                             </td>
                         </tr>
                     </ItemTemplate>
