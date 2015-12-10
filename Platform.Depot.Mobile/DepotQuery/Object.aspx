@@ -116,34 +116,24 @@
             </div>
             <div class="row"><span class="btn btn-info dictionaryX">存放地</span></div>
             <div class="row">
-                <telerik:RadGrid ID="grid" runat="server" CssClass="col-md-12 text-center" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="grid_NeedDataSource" OnBatchEditCommand="grid_BatchEditCommand">
-                    <MasterTableView EditMode="Batch" DataKeyNames="Id,Fixed,Ordinal" CommandItemDisplay="Top" CommandItemSettings-ShowAddNewRecordButton="false" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true" NoMasterRecordsText="">
-                        <BatchEditingSettings EditType="Row" OpenEditingEvent="DblClick" />
-                        <HeaderStyle HorizontalAlign="Center" />
-                        <Columns>
-                            <telerik:GridTemplateColumn HeaderText="编号" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true" ItemStyle-Width="25%">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" Text='<%# Eval("Ordinal") %>'></asp:Label>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="条码" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true" ItemStyle-Width="25%">
-                                <ItemTemplate>
-                                    <asp:HyperLink runat="server" ForeColor="#3E5A70" Target="_blank" Text='<%# Eval("Code") %>' NavigateUrl='<%# "../DepotScan/Flow?DepotId={0}&Code={1}".Formatted(Depot.Id, Eval("Code")) %>'></asp:HyperLink>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn HeaderText="存放地" DataField="Place" SortExpression="Place" UniqueName="Place" ItemStyle-Width="30%">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" Text='<%# Eval("Place") %>'></asp:Label>
-                                </ItemTemplate>
-                                <EditItemTemplate>
-                                    <telerik:RadTextBox ID="Place" runat="server" EnabledStyle-HorizontalAlign="Center" Text='<%# Bind("Place") %>'>
-                                    </telerik:RadTextBox>
-                                </EditItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridButtonColumn HeaderText="编辑" CommandName="Edit" ItemStyle-Width="20%" Text="编辑" ButtonType="LinkButton"></telerik:GridButtonColumn>
-                        </Columns>
-                    </MasterTableView>
-                </telerik:RadGrid>
+                <telerik:RadListView ID="view" runat="server" CssClass="col-md-12" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
+                    <LayoutTemplate>
+                        <table>
+                            <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
+                        </table>
+                    </LayoutTemplate>
+                    <ItemTemplate>
+                        <tr>
+                            <td>编号：<%# Eval("Ordinal") %></td>
+                            <td>条码：<%# Eval("Code") %></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <asp:TextBox ID="place" runat="server" Text='<%# Eval("Place") %>'></asp:TextBox>
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                </telerik:RadListView>
             </div>
             <div class="row">&nbsp;</div>
             <div class="row">&nbsp;</div>

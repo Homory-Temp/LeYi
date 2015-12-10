@@ -60,40 +60,6 @@ public partial class DepotQuery_Object : DepotPageSingle
         public string Code { get; set; }
     }
 
-    protected void grid_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
-    {
-        var value = "ObjectId".Query();
-        if (value.None())
-        {
-            Response.Redirect("~/Depot/Home");
-            return;
-        }
-        var objId = value.GlobalId();
-        var obj = DataContext.DepotObject.Single(o => o.Id == objId);
-        if (obj.Fixed)
-        {
-            var source = DataContext.DepotInX.Where(o => (o.AvailableAmount > 0) && o.ObjectId == obj.Id).ToList().Select(o => new Placed { Id = o.Id, Ordinal = o.Ordinal, Fixed = true, Place = o.Place, Code = o.Code }).OrderBy(o => o.Ordinal).ToList();
-            if (obj.Single)
-            {
-                source = source.Where(o => o.Code == "Code".Query()).ToList();
-            }
-            grid.DataSource = source;
-        }
-        else
-        {
-            var source = DataContext.DepotInX.Where(o => (o.AvailableAmount > 0) && o.ObjectId == obj.Id).OrderByDescending(o => o.AvailableAmount).ToList().Select(o => new Placed { Id = o.Id, Ordinal = 0, Fixed = false, Place = o.Place, Code = o.Code }).ToList();
-            for (var i = 0; i < source.Count; i++)
-            {
-                source[i].Ordinal = i + 1;
-            }
-            if (obj.Single)
-            {
-                source = source.Where(o => o.Code == "Code".Query()).ToList();
-            }
-            grid.DataSource = source;
-        }
-    }
-
     protected void grid_BatchEditCommand(object sender, GridBatchEditingEventArgs e)
     {
         var value = "ObjectId".Query();
@@ -126,7 +92,7 @@ public partial class DepotQuery_Object : DepotPageSingle
             }
         }
         DataContext.SaveChanges();
-        grid.Rebind();
+        view.Rebind();
     }
 
     protected void do_up_ServerClick(object sender, EventArgs e)
@@ -137,5 +103,39 @@ public partial class DepotQuery_Object : DepotPageSingle
     protected void back_ServerClick(object sender, EventArgs e)
     {
         Response.Redirect("~/DepotScan/Object?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, "ObjectId".Query()));
+    }
+
+    protected void view_NeedDataSource(object sender, RadListViewNeedDataSourceEventArgs e)
+    {
+        var value = "ObjectId".Query();
+        if (value.None())
+        {
+            Response.Redirect("~/Depot/Home");
+            return;
+        }
+        var objId = value.GlobalId();
+        var obj = DataContext.DepotObject.Single(o => o.Id == objId);
+        if (obj.Fixed)
+        {
+            var source = DataContext.DepotInX.Where(o => (o.AvailableAmount > 0) && o.ObjectId == obj.Id).ToList().Select(o => new Placed { Id = o.Id, Ordinal = o.Ordinal, Fixed = true, Place = o.Place, Code = o.Code }).OrderBy(o => o.Ordinal).ToList();
+            if (obj.Single)
+            {
+                source = source.Where(o => o.Code == "Code".Query()).ToList();
+            }
+            view.DataSource = source;
+        }
+        else
+        {
+            var source = DataContext.DepotInX.Where(o => (o.AvailableAmount > 0) && o.ObjectId == obj.Id).OrderByDescending(o => o.AvailableAmount).ToList().Select(o => new Placed { Id = o.Id, Ordinal = 0, Fixed = false, Place = o.Place, Code = o.Code }).ToList();
+            for (var i = 0; i < source.Count; i++)
+            {
+                source[i].Ordinal = i + 1;
+            }
+            if (obj.Single)
+            {
+                source = source.Where(o => o.Code == "Code".Query()).ToList();
+            }
+            view.DataSource = source;
+        }
     }
 }
