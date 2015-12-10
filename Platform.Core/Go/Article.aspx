@@ -70,6 +70,8 @@
                                                     </telerik:RadTextBox>
                                                 </EditItemTemplate>
                                             </telerik:GridTemplateColumn>
+                                            <telerik:GridCheckBoxColumn HeaderText="需要审核" DataField="Audit" SortExpression="Audit" UniqueName="Audit" DataType="System.Boolean"></telerik:GridCheckBoxColumn>
+                                            <telerik:GridCheckBoxColumn HeaderText="审核后可编辑" DataField="AuditEditable" SortExpression="AuditEditable" UniqueName="AuditEditable" DataType="System.Boolean"></telerik:GridCheckBoxColumn>
                                             <telerik:GridTemplateColumn HeaderText="状态" DataField="State" SortExpression="State" UniqueName="State">
                                                 <ItemTemplate>
                                                     <asp:Label runat="server" Text='<%# Eval("State") %>'></asp:Label>
