@@ -179,7 +179,7 @@
                                     <th style="display: none;">年龄段</th>
                                     <th>存放地</th>
                                     <th>责任人</th>
-                                    <th><%# Depot.Featured(Models.DepotType.固定资产库) ? "卡片编号" : "备注" %></th>
+                                    <th>卡片编号</th>
                                 </tr>
                                 <asp:PlaceHolder ID="inHolder" runat="server"></asp:PlaceHolder>
                             </table>

@@ -121,10 +121,15 @@ public static class DepotDataExtensions
         }
         else
         {
-            if(skipFixed)
+            if (skipFixed)
                 return db.DepotCatalog.Where(o => o.DepotId == depotId && o.State < State.停用 && o.Code != "*Homory:Null*").Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).Distinct().ToList().Join(db.DepotObject.Where(o => o.State < State.停用), o => o, o => o.Id, (oc, o) => o);
             return db.DepotCatalog.Where(o => o.DepotId == depotId && o.State < State.停用).Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).Distinct().ToList().Join(db.DepotObject.Where(o => o.State < State.停用), o => o, o => o.Id, (oc, o) => o);
         }
+    }
+
+    public static IEnumerable<DepotObject> DepotObjectLoadFix(this DepotEntities db, Guid depotId)
+    {
+        return db.DepotCatalog.Where(o => o.DepotId == depotId && o.State < State.停用 && o.Code == "*Homory:Null*").Select(o => o.Id).ToList().Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (c, oc) => oc.ObjectId).Distinct().ToList().Join(db.DepotObject.Where(o => o.State < State.停用), o => o, o => o.Id, (oc, o) => o);
     }
 
     public static IEnumerable<DepotObjectSingle> DepotObjectSingleLoad(this DepotEntities db, Guid depotId, Guid? catalogId)
