@@ -150,12 +150,8 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="卡片编号" DataField="Number" SortExpression="Number" UniqueName="Number">
                                 <ItemTemplate>
-                                    <asp:Label runat="server" Text='<%# Eval("Number") %>'></asp:Label>
+                                    <asp:HyperLink runat="server" Text='<%# Eval("Number") %>' NavigateUrl='<%# "../DepotQuery/ObjectSingle?DepotId={0}&Number={1}".Formatted(Depot.Id, Server.UrlEncode(Eval("Number").ToString())) %>'></asp:HyperLink>
                                 </ItemTemplate>
-                                <EditItemTemplate>
-                                    <telerik:RadTextBox ID="Number" runat="server" EnabledStyle-HorizontalAlign="Center" Text='<%# Bind("Number") %>'>
-                                    </telerik:RadTextBox>
-                                </EditItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="购置日期" DataField="Time" SortExpression="Time" UniqueName="Time">
                                 <ItemTemplate>
