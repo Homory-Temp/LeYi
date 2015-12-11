@@ -189,7 +189,7 @@ namespace Go
                 publish_editor_label.InnerText = string.Format("{0}内容：", ResourceType);
                 publish_editor.Content = r.Content;
                 publish_grade.SelectedValue = r.GradeId.ToString().ToUpper();
-                periodx.SelectedDate = r.ResourceTime ?? DateTime.Today;
+                periodx.SelectedDate = r.ResourceTime;
                 var path = string.Format("../Common/资源/{0}/上传", CurrentUser.Id.ToString().ToUpper());
                 publish_editor.SetPaths(new[] { path }, EditorFileTypes.All, EditorFileOptions.All);
                 List<Catalog> cds = new List<Catalog>();
@@ -509,7 +509,7 @@ namespace Go
         protected void periodx_SelectedDateChanged(object sender, Telerik.Web.UI.Calendar.SelectedDateChangedEventArgs e)
         {
             var r = CurrentResource;
-            r.ResourceTime = periodx.SelectedDate;
+            r.ResourceTime = periodx.SelectedDate.HasValue ? periodx.SelectedDate.Value : DateTime.Today;
             HomoryContext.Value.SaveChanges();
         }
     }

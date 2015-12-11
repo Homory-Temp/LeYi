@@ -56,8 +56,8 @@ namespace Homory.Model
         public Nullable<System.Guid> CourseId { get; set; }
         public int AssistantType { get; set; }
         public Nullable<System.Guid> CampusId { get; set; }
-        public Nullable<int> Stick { get; set; }
-        public Nullable<System.DateTime> ResourceTime { get; set; }
+        public int Stick { get; set; }
+        public System.DateTime ResourceTime { get; set; }
     
         public virtual User User { get; set; }
         public virtual ICollection<ResourceCatalog> ResourceCatalog { get; set; }

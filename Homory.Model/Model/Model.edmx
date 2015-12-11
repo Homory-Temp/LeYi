@@ -305,8 +305,8 @@
           <Property Name="CourseId" Type="uniqueidentifier" />
           <Property Name="CampusId" Type="uniqueidentifier" />
           <Property Name="AssistantType" Type="int" Nullable="false" />
-          <Property Name="Stick" Type="int" />
-          <Property Name="ResourceTime" Type="datetime2" Precision="7" />
+          <Property Name="Stick" Type="int" Nullable="false" />
+          <Property Name="ResourceTime" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="ResourceAssess">
           <Key>
@@ -3312,8 +3312,8 @@
           <Property Name="CourseId" Type="Guid" />
           <Property Name="AssistantType" Type="Int32" Nullable="false" />
           <Property Name="CampusId" Type="Guid" />
-          <Property Name="Stick" Type="Int32" />
-          <Property Name="ResourceTime" Type="DateTime" Precision="7" />
+          <Property Name="Stick" Type="Int32" Nullable="false" />
+          <Property Name="ResourceTime" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="ResourceCatalog">
           <Key>
