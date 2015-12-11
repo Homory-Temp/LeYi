@@ -198,20 +198,35 @@ namespace Go
                     case ResourceType.视频:
                         publish_catalog.EmbeddedTree.Nodes.AddRange(LoadCDSNodes("10A37221-02C5-48D8-A82C-DA62A3386C0B"));
                         publish_catalog.ExpandAllDropDownNodes();
-                        var catalogValueMedia = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.视频 && o.State == State.启用).CatalogId.ToString();
-                        publish_catalog.SelectedValue = catalogValueMedia.ToUpper();
+                        try
+                        {
+                            var catalogValueMedia = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.视频 && o.State == State.启用).CatalogId.ToString();
+                            publish_catalog.SelectedValue = catalogValueMedia.ToUpper();
+                        }
+                        catch
+                        { }
                         break;
                     case ResourceType.文章:
                         publish_catalog.EmbeddedTree.Nodes.AddRange(LoadCDSNodes("023CAF84-4F7B-4777-ABEB-66137B4E71FD"));
                         publish_catalog.ExpandAllDropDownNodes();
-                        var catalogValueArticle = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.文章 && o.State == State.启用).CatalogId.ToString();
-                        publish_catalog.SelectedValue = catalogValueArticle.ToUpper();
+                        try
+                        {
+                            var catalogValueArticle = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.文章 && o.State == State.启用).CatalogId.ToString();
+                            publish_catalog.SelectedValue = catalogValueArticle.ToUpper();
+                        }
+                        catch
+                        { }
                         break;
                     case ResourceType.课件:
                         publish_catalog.EmbeddedTree.Nodes.AddRange(LoadCDSNodes("C7F16CCC-19EB-4363-8D24-7285F43C910F"));
                         publish_catalog.ExpandAllDropDownNodes();
-                        var catalogValueCourseware = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.课件 && o.State == State.启用).CatalogId.ToString();
-                        publish_catalog.SelectedValue = catalogValueCourseware.ToUpper();
+                        try
+                        {
+                            var catalogValueCourseware = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.课件 && o.State == State.启用).CatalogId.ToString();
+                            publish_catalog.SelectedValue = catalogValueCourseware.ToUpper();
+                        }
+                        catch
+                        { }
                         break;
                     default:
                         publish_catalog_panel.Visible = false;
@@ -320,55 +335,16 @@ namespace Go
                 return;
             }
             var resource = CurrentResource;
-            var catalog = HomoryContext.Value.ResourceCatalog.Where(o => o.ResourceId == resource.Id && o.Catalog.Type == CatalogType.文章 && o.State < State.删除).FutureCount();
-            var catalogX = HomoryContext.Value.ResourceCatalog.Where(o => o.ResourceId == resource.Id && o.Catalog.Type == CatalogType.视频 && o.State < State.删除).FutureCount();
-            var ccc = CurrentResource.CourseId.HasValue ? 1 : 0;
-            var ggc = CurrentResource.GradeId.HasValue ? 1 : 0;
-            switch (resource.Type)
-            {
-                case ResourceType.文章:
-                    {
-                        if (catalog.Value == 0 || (ccc + ggc) < 2)
-                        {
-                            publish_publish_panel.ResponseScripts.Add("popNotify();");
-                            return;
-                        }
-                        break;
-                    }
-                case ResourceType.课件:
-                case ResourceType.试卷:
-                    {
-                        if ((ccc + ggc) < 2)
-                        {
-                            publish_publish_panel.ResponseScripts.Add("popNotify();");
-                            return;
-                        }
-                        break;
-                    }
-                case ResourceType.视频:
-                    {
-                        if (catalogX.Value == 0 || (ccc + ggc) < 2)
-                        {
-                            publish_publish_panel.ResponseScripts.Add("popNotify();");
-                            return;
-                        }
-                        break;
-                    }
-            }
-            if (string.IsNullOrWhiteSpace(resource.Content) && string.IsNullOrWhiteSpace(resource.Preview))
+            var catalog = HomoryContext.Value.ResourceCatalog.Where(o => o.ResourceId == resource.Id && (o.Catalog.Type == CatalogType.文章 || o.Catalog.Type == CatalogType.视频 || o.Catalog.Type == CatalogType.课件) && o.State < State.删除).FutureCount();
+            if (catalog.Value == 0)
             {
                 publish_publish_panel.ResponseScripts.Add("popNotify();");
                 return;
             }
-            if (resource.PrizeRange != null && resource.PrizeLevel != null)
+            if (string.IsNullOrWhiteSpace(publish_editor.Content) && string.IsNullOrWhiteSpace(resource.Preview))
             {
-                var credit =
-                    HomoryContext.Value.PrizeCredit.SingleOrDefault(o => o.PrizeRange == resource.PrizeRange && o.PrizeLevel == resource.PrizeLevel);
-                if (credit != null)
-                {
-                    resource.Credit = credit.Credit;
-                    LogOp(ResourceLogType.个人积分, resource.Credit);
-                }
+                publish_publish_panel.ResponseScripts.Add("popNotify();");
+                return;
             }
             resource.Title = publish_title_content.Value;
             resource.Content = publish_editor.Content;
