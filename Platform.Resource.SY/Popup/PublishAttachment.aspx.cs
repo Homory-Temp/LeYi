@@ -42,11 +42,16 @@ namespace Popup
 			}
 		}
 
-		protected void publish_attachment_upload_OnFileUploaded(object sender, FileUploadedEventArgs e)
+        protected void publish_attachment_upload_OnFileUploaded(object sender, FileUploadedEventArgs e)
 		{
-			var id = CurrentResource.Id;
+            var aid = HomoryContext.Value.GetId();
+            var id = CurrentResource.Id;
 			var file = e.File;
-			ResourceFileType type;
+            var name = string.Format("../Common/资源/{2}/附件/{1}_{0}", file.FileName, aid, CurrentUser.Id.ToString().ToUpper());
+            var sourceX = Server.MapPath(name);
+            var pathX = string.Format("../Common/资源/{2}/附件/{1}_{0}", file.GetNameWithoutExtension(), aid, CurrentUser.Id.ToString().ToUpper());
+            file.SaveAs(Server.MapPath(name), true);
+            ResourceFileType type;
 			switch (file.GetExtension().Replace(".", ""))
 			{
 				case "jpg":
@@ -66,15 +71,27 @@ namespace Popup
 				case "txt":
 				case "rtf":
 					type = ResourceFileType.Word;
-					break;
+                    pathX += ".pdf";
+                    pathX = Server.MapPath(pathX);
+                    var docW = new Aspose.Words.Document(sourceX);
+                    docW.Save(pathX, Aspose.Words.SaveFormat.Pdf);
+                    break;
 				case "ppt":
 				case "pptx":
 					type = ResourceFileType.Powerpoint;
-					break;
+                    pathX += ".pdf";
+                    pathX = Server.MapPath(pathX);
+                    var docP = new Aspose.Slides.Presentation(sourceX);
+                    docP.Save(pathX, Aspose.Slides.Export.SaveFormat.Pdf);
+                    break;
 				case "xls":
 				case "xlsx":
 					type = ResourceFileType.Excel;
-					break;
+                    pathX += ".pdf";
+                    pathX = Server.MapPath(pathX);
+                    var docE = new Aspose.Cells.Workbook(sourceX);
+                    docE.Save(pathX, Aspose.Cells.SaveFormat.Pdf);
+                    break;
 				case "pdf":
 					type = ResourceFileType.Pdf;
 					break;
@@ -82,14 +99,13 @@ namespace Popup
 					type = ResourceFileType.Media;
 					break;
 			}
-			var name = string.Format("../Common/资源/{2}/附件/{1}_{0}", file.FileName, HomoryContext.Value.GetId(), CurrentUser.Id.ToString().ToUpper());
-			file.SaveAs(Server.MapPath(name), true);
 			var ra = new ResourceAttachment
 			{
-				Id = HomoryContext.Value.GetId(),
+				Id = aid,
 				ResourceId = id,
 				FileType = type,
 				Title = file.GetName(),
+                Remark = remarkTextbox.Text,
 				Source = name,
 				State = State.启用
 			};

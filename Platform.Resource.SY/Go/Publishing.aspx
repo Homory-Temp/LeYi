@@ -205,7 +205,7 @@
                                     <telerik:RadListView ID="publish_attachment_list" runat="server" OnNeedDataSource="publish_attachment_list_OnNeedDataSource">
                                         <ItemTemplate>
                                             <img src='<%# string.Format("../Image/img/{0}.jpg", (int)Eval("FileType")) %>' />
-                                            <a href='<%# string.Format("{0}", Eval("Source")) %>'><%# Eval("Title") %></a>
+                                            <a href='<%# string.Format("{0}", Eval("Source")) %>' title='<%# Eval("Remark") %>'><%# Eval("Title") %></a>
                                             <asp:ImageButton ImageUrl="../Image/img/Delete.png" runat="server" ID="publish_attachment_delete" CommandArgument='<%# Eval("Id") %>' OnClick="publish_attachment_delete_OnClick" />
                                         </ItemTemplate>
                                     </telerik:RadListView>
