@@ -233,6 +233,7 @@ namespace Go
                 State = State.审核,
                 GradeId = Guid.Parse("A3757840-9DF7-4370-8151-FAD39B44EF6A"),
                 Time = DateTime.Now,
+                Stick = 0,
                 ResourceTime = DateTime.Today
             };
             HomoryContext.Value.Resource.Add(resource);
