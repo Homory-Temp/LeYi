@@ -104,16 +104,28 @@ public partial class Control_CenterRight : Homory.Model.HomoryResourceControl
 
     protected void favourites_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        var favouritesSource = HomoryContext.Value.UserFavourite.Where(o => o.State == State.启用 && o.UserId == CurrentUser.Id).ToList();
-        // var favouritesSource = CurrentUser.MeFavourite.Where(o => o.State == State.启用).ToList();
-        favourites.DataSource = favouritesSource.Select(o => o.FavouriteUser).Take(3).ToList();
+        try
+        {
+            var favouritesSource = HomoryContext.Value.UserFavourite.Where(o => o.State == State.启用 && o.UserId == CurrentUser.Id).ToList();
+            // var favouritesSource = CurrentUser.MeFavourite.Where(o => o.State == State.启用).ToList();
+            favourites.DataSource = favouritesSource.Select(o => o.FavouriteUser).Take(3).ToList();
+        }
+        catch
+        {
+        }
     }
 
     protected void relatives_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        var favouritesSource = HomoryContext.Value.UserFavourite.Where(o => o.State == State.启用 && o.UserId == CurrentUser.Id).ToList();
-        var favouritesSourceId = favouritesSource.Select(o => o.FavouriteUserId).ToList();
-        relatives.DataSource =
-            HomoryContext.Value.User.Where(o => o.State < State.审核).ToList().Where(o => !favouritesSourceId.Contains(o.Id)).Take(3).ToList();
+        try
+        {
+            var favouritesSource = HomoryContext.Value.UserFavourite.Where(o => o.State == State.启用 && o.UserId == CurrentUser.Id).ToList();
+            var favouritesSourceId = favouritesSource.Select(o => o.FavouriteUserId).ToList();
+            relatives.DataSource =
+                HomoryContext.Value.User.Where(o => o.State < State.审核).ToList().Where(o => !favouritesSourceId.Contains(o.Id)).Take(3).ToList();
+        }
+        catch
+        {
+        }
     }
 }

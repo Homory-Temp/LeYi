@@ -41,48 +41,6 @@
                 <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.jQueryInclude.js" />
             </Scripts>
         </telerik:RadScriptManager>
-        <telerik:RadWindowManager runat="server" ID="Rwm" Skin="Metro">
-            <Windows>
-                <telerik:RadWindow ID="popup_pushX" runat="server" OnClientClose="pushPopped" Title="呈送" ReloadOnShow="True" Width="600" Height="400" Top="60" Left="200" ShowContentDuringLoad="false" VisibleStatusbar="false" Behaviors="Move,Close" Modal="True" CenterIfModal="False" Localization-Close="关闭">
-				</telerik:RadWindow>
-                <telerik:RadWindow ID="popup_publish" Title="资源发布" runat="server" AutoSize="False" Width="320" Height="330" ShowContentDuringLoad="false" ReloadOnShow="False" KeepInScreenBounds="true" VisibleStatusbar="false" Behaviors="Close" Modal="True" Localization-Close="关闭" EnableEmbeddedScripts="True" EnableEmbeddedBaseStylesheet="True" VisibleTitlebar="True">
-                    <ContentTemplate>
-                        <style>
-                            .pub_v, .pub_v:hover{display:block;margin:0 auto;background:url("../image/up/pub_v.png") 0 0 no-repeat;width:173px;height:48px;line-height:43px;color:#fff;padding-left:15px;overflow:hidden;text-decoration:none;font-size:16px;}
-                            .pub_a, .pub_a:hover{display:block;margin:0 auto;background:url("../image/up/pub_a.png") 0 0 no-repeat;width:173px;height:48px;line-height:43px;color:#fff;padding-left:15px;overflow:hidden;text-decoration:none;font-size:16px;}
-                            .pub_c, .pub_c:hover{display:block;margin:0 auto;background:url("../image/up/pub_c.png") 0 0 no-repeat;width:173px;height:48px;line-height:43px;color:#fff;padding-left:15px;overflow:hidden;text-decoration:none;font-size:16px;}
-                            .pub_p, .pub_p:hover{display:block;margin:0 auto;background:url("../image/up/pub_p.png") 0 0 no-repeat;width:173px;height:48px;line-height:43px;color:#fff;padding-left:15px;overflow:hidden;text-decoration:none;font-size:16px;}
-                        </style>
-                        <div style="width: 280px; text-align: center; margin: auto;">
-                            <a class="pub_v" style="cursor: pointer; margin: 20px auto 10px 50px;" href="Publishing.aspx?Type=Media">发布视频</a>
-                            <a class="pub_a" style="cursor: pointer; margin: 10px auto 10px 50px;" href="Publishing.aspx?Type=Article">发布文章</a>
-                            <a class="pub_c" style="cursor: pointer; margin: 10px auto 10px 50px;" href="Publishing.aspx?Type=Courseware">发布课件</a>
-                            <a class="pub_p" style="cursor: pointer; margin: 10px auto 20px 50px;" href="Publishing.aspx?Type=Paper">发布试卷</a>
-                        </div>
-                    </ContentTemplate>
-                </telerik:RadWindow>
-            </Windows>
-        </telerik:RadWindowManager>
-        <script>
-            var window_publish;
-            var window_push;
-
-            function popupPublish() {
-                window_publish = window.radopen(null, "popup_publish");
-                return false;
-            }
-            function closePublish() {
-                window_publish.close();
-                return false;
-            }
-            function popupPushX(url) {
-                window_push = window.radopen(url, "popup_pushX");
-                return false;
-            }
-            function pushPopped() {
-                window_push.close();
-            }
-        </script>
         <homory:CommonTop runat="server" ID="CommonTop" />
 
         <div class="srx-bg">
