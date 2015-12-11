@@ -242,7 +242,7 @@
                                     <telerik:RadAjaxPanel runat="server" ID="publish_main_catalog_panel">
                                         <asp:Panel runat="server" ID="publish_catalog_panel">
                                             <h5>栏目：</h5>
-                                            <telerik:RadDropDownTree runat="server" ID="publish_catalog" Width="140" CheckBoxes="SingleCheck" ExpandNodeOnSingleClick="true" AutoPostBack="True" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" OnEntryAdded="publish_catalog_OnEntryAdded" OnEntryRemoved="publish_catalog_OnEntryRemoved"></telerik:RadDropDownTree>
+                                            <telerik:RadDropDownTree runat="server" ID="publish_catalog" Width="140" CheckBoxes="None" ExpandNodeOnSingleClick="true" AutoPostBack="True" DropDownSettings-CloseDropDownOnSelection="true" OnEntryAdded="publish_catalog_EntryAdded"></telerik:RadDropDownTree>
                                         </asp:Panel>
                                     </telerik:RadAjaxPanel>
                                 </div>

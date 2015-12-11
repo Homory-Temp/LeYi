@@ -76,6 +76,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Resource.SY", "htt
 		SccProvider = ""
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.1"
+		ProjectReferences = "{fb9005b4-b875-4e58-aace-bfe42ce60cde}|Homory.Model.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_59709"
 		Debug.AspNetCompiler.PhysicalPath = "Platform.Resource.SY\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59709\"
@@ -232,6 +233,10 @@ Global
 		{BD2E36CD-AF37-4CDA-A0BC-FFC4B450EC64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD2E36CD-AF37-4CDA-A0BC-FFC4B450EC64}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{BD2E36CD-AF37-4CDA-A0BC-FFC4B450EC64}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{952797F7-8BA4-422C-9AA3-0300DE25B089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{952797F7-8BA4-422C-9AA3-0300DE25B089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{952797F7-8BA4-422C-9AA3-0300DE25B089}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{952797F7-8BA4-422C-9AA3-0300DE25B089}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{524C8711-97BA-4431-A849-383A22FD0F0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{524C8711-97BA-4431-A849-383A22FD0F0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{524C8711-97BA-4431-A849-383A22FD0F0D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
@@ -268,10 +273,6 @@ Global
 		{B057919F-3054-4A05-BB8F-0AE03A26D53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B057919F-3054-4A05-BB8F-0AE03A26D53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B057919F-3054-4A05-BB8F-0AE03A26D53A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{952797F7-8BA4-422C-9AA3-0300DE25B089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{952797F7-8BA4-422C-9AA3-0300DE25B089}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{952797F7-8BA4-422C-9AA3-0300DE25B089}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{952797F7-8BA4-422C-9AA3-0300DE25B089}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
