@@ -242,7 +242,31 @@
                                     <telerik:RadAjaxPanel runat="server" ID="publish_main_catalog_panel">
                                         <asp:Panel runat="server" ID="publish_catalog_panel">
                                             <h5>栏目：</h5>
+                                            <div style="height: 5px;"></div>
                                             <telerik:RadDropDownTree runat="server" ID="publish_catalog" Width="140" CheckBoxes="None" ExpandNodeOnSingleClick="true" AutoPostBack="True" DropDownSettings-CloseDropDownOnSelection="true" OnEntryAdded="publish_catalog_EntryAdded"></telerik:RadDropDownTree>
+                                        </asp:Panel><br />
+                                        <asp:Panel runat="server" ID="publish_grade_panel" Style="margin-top: 6px;">
+                                            <h5>适用年龄段：</h5>
+                                            <div style="height: 5px;"></div>
+                                            <telerik:RadComboBox runat="server" ID="publish_grade" Width="140" AutoPostBack="true" OnSelectedIndexChanged="publish_grade_SelectedIndexChanged">
+                                                <Items>
+                                                    <telerik:RadComboBoxItem Text="通用" Value="A3757840-9DF7-4370-8151-FAD39B44EF6A" />
+                                                    <telerik:RadComboBoxItem Text="大班" Value="625AE587-8C5A-454B-893C-08D2F6D187D5" />
+                                                    <telerik:RadComboBoxItem Text="中班" Value="CF3AE587-8CB9-4D0A-B29A-08D2F6D187D9" />
+                                                    <telerik:RadComboBoxItem Text="小班" Value="9FD9E587-8C09-4A55-9DB0-08D2F6D187DD" />
+                                                    <telerik:RadComboBoxItem Text="托班" Value="850557E1-9EBD-4E0D-93DC-FE090A77D393" />
+                                                </Items>
+                                            </telerik:RadComboBox>
+                                        </asp:Panel><br />
+                                        <asp:Panel runat="server" ID="publish_day">
+                                            <h5>日期：</h5>
+                                            <div style="height: 5px;"></div>
+                                            <telerik:RadDatePicker ID="periodx" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="140" AutoPostBack="true" OnSelectedDateChanged="periodx_SelectedDateChanged">
+                                                <DatePopupButton runat="server" Visible="false" />
+                                                <Calendar runat="server">
+                                                    <FastNavigationSettings TodayButtonCaption="今日" CancelButtonCaption="取消" OkButtonCaption="确认"></FastNavigationSettings>
+                                                </Calendar>
+                                            </telerik:RadDatePicker>
                                         </asp:Panel>
                                     </telerik:RadAjaxPanel>
                                 </div>

@@ -188,6 +188,8 @@ namespace Go
                 publish_open_panel.Controls.OfType<RadButton>().First(o => o.Value == ((int)r.OpenType).ToString()).Checked = true;
                 publish_editor_label.InnerText = string.Format("{0}内容：", ResourceType);
                 publish_editor.Content = r.Content;
+                publish_grade.SelectedValue = r.GradeId.ToString().ToUpper();
+                periodx.SelectedDate = r.ResourceTime ?? DateTime.Today;
                 var path = string.Format("../Common/资源/{0}/上传", CurrentUser.Id.ToString().ToUpper());
                 publish_editor.SetPaths(new[] { path }, EditorFileTypes.All, EditorFileOptions.All);
                 List<Catalog> cds = new List<Catalog>();
@@ -229,6 +231,7 @@ namespace Go
                 Title = string.Empty,
                 Author = CurrentUser.Id.ToString(),
                 State = State.审核,
+                GradeId = Guid.Parse("A3757840-9DF7-4370-8151-FAD39B44EF6A"),
                 Time = DateTime.Now
             };
             HomoryContext.Value.Resource.Add(resource);
@@ -484,6 +487,27 @@ namespace Go
             };
             HomoryContext.Value.ResourceCatalog.AddOrUpdate(rc);
             HomoryContext.Value.Database.CurrentTransaction.Commit();
+            HomoryContext.Value.SaveChanges();
+        }
+
+        protected void publish_grade_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        {
+            var r = CurrentResource;
+            if (string.IsNullOrEmpty(e.Value))
+            {
+                r.GradeId = null;
+            }
+            else
+            {
+                r.GradeId = Guid.Parse(e.Value);
+            }
+            HomoryContext.Value.SaveChanges();
+        }
+
+        protected void periodx_SelectedDateChanged(object sender, Telerik.Web.UI.Calendar.SelectedDateChangedEventArgs e)
+        {
+            var r = CurrentResource;
+            r.ResourceTime = periodx.SelectedDate;
             HomoryContext.Value.SaveChanges();
         }
     }
