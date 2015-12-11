@@ -232,7 +232,8 @@ namespace Go
                 Author = CurrentUser.Id.ToString(),
                 State = State.审核,
                 GradeId = Guid.Parse("A3757840-9DF7-4370-8151-FAD39B44EF6A"),
-                Time = DateTime.Now
+                Time = DateTime.Now,
+                ResourceTime = DateTime.Today
             };
             HomoryContext.Value.Resource.Add(resource);
             HomoryContext.Value.SaveChanges();
