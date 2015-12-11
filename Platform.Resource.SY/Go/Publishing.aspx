@@ -82,32 +82,32 @@
                             <input runat="server" class="editor-title" id="publish_title_content" type="text" />
                             <br />
                             <br />
-                                <style>
-                                    .cccc {
-                                        line-height: 32px;
-                                        height: 32px;
-                                        vertical-align: middle;
-                                        margin: auto;
-                                    }
+                            <style>
+                                .cccc {
+                                    line-height: 32px;
+                                    height: 32px;
+                                    vertical-align: middle;
+                                    margin: auto;
+                                }
 
-                                    .inFR {
-                                        float: right;
-                                        margin-left: 0;
-                                        margin-right: 10px;
-                                    }
+                                .inFR {
+                                    float: right;
+                                    margin-left: 0;
+                                    margin-right: 10px;
+                                }
 
-                                    .btnFR {
-                                        float: right;
-                                        margin-left: 10px;
-                                        margin-right: 10px;
-                                    }
+                                .btnFR {
+                                    float: right;
+                                    margin-left: 10px;
+                                    margin-right: 10px;
+                                }
 
-                                    .btnFR2 {
-                                        float: right;
-                                        margin-left: 10px;
-                                        margin-right: 0;
-                                    }
-                                </style>
+                                .btnFR2 {
+                                    float: right;
+                                    margin-left: 10px;
+                                    margin-right: 0;
+                                }
+                            </style>
                             <telerik:RadAjaxPanel runat="server" ID="apxx" CssClass="cccc" OnAjaxRequest="apxx_AjaxRequest">
                                 <label class="title" style="float: left;">作者：</label>
                                 <telerik:RadButton ID="btnOher" runat="server" Text="代发" ToggleType="CheckBox" CssClass="btnFR2" TabIndex="2" Width="100px" Height="32px" OnClientClicked="popupOther" AutoPostBack="false"></telerik:RadButton>
@@ -146,7 +146,6 @@
                                 </telerik:RadAjaxPanel>
                             </div>
                             <div id="journalEditor" class="editor-content">
-                                <asp:Timer ID="publish_editor_timer" runat="server" Enabled="False" Interval="60000" OnTick="publish_editor_timer_OnTick"></asp:Timer>
                                 <label runat="server" id="publish_editor_label"></label>
                                 <telerik:RadEditor runat="server" ID="publish_editor" Width="100%" Height="200px" MaxHtmlLength="4000" ContentAreaMode="Iframe" RenderMode="Auto" ExternalDialogsPath="../Dialog" DialogHandlerUrl="Telerik.Web.UI.DialogHandler.axd" Language="zh-CN" LocalizationPath="../Language">
                                     <Tools>
@@ -194,11 +193,6 @@
                                     <MediaManager AllowFileExtensionRename="False" AllowMultipleSelection="True" EnableAsyncUpload="True" MaxUploadFileSize="1024000000" />
                                     <TrackChangesSettings CanAcceptTrackChanges="False" />
                                 </telerik:RadEditor>
-                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                                    <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="publish_editor_timer" />
-                                    </Triggers>
-                                </asp:UpdatePanel>
                             </div>
                         </div>
                         <div>
@@ -235,7 +229,7 @@
                                         }
                                     </script>
                                 </telerik:RadCodeBlock>
-                                <div class="u-rbox sendto" id="sendto" style="padding-left: 8px; cursor: pointer;">
+                                <div class="u-rbox sendto" id="sendto0" style="padding-left: 8px; cursor: pointer;">
                                     <img alt="资源导入图片" src="../image/img/dr.png" onclick="popImport();" />
                                 </div>
                                 <!--发布导入结束-->
@@ -249,29 +243,6 @@
                                         <asp:Panel runat="server" ID="publish_catalog_panel">
                                             <h5>栏目：</h5>
                                             <telerik:RadDropDownTree runat="server" ID="publish_catalog" Width="140" CheckBoxes="SingleCheck" ExpandNodeOnSingleClick="true" AutoPostBack="True" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" OnEntryAdded="publish_catalog_OnEntryAdded" OnEntryRemoved="publish_catalog_OnEntryRemoved"></telerik:RadDropDownTree>
-                                        </asp:Panel>
-                                        <asp:Panel runat="server" ID="publish_course_panel">
-                                            <h5>学科：</h5>
-                                            <telerik:RadComboBox runat="server" ID="publish_course" Width="140" AppendDataBoundItems="true" AutoPostBack="true" DataTextField="Name" DataValueField="Id" OnSelectedIndexChanged="publish_course_SelectedIndexChanged">
-                                                <Items>
-                                                    <telerik:RadComboBoxItem Text="" Value="" />
-                                                </Items>
-                                            </telerik:RadComboBox>
-                                        </asp:Panel>
-                                        <asp:Panel runat="server" ID="publish_grade_panel">
-                                            <h5>年级：</h5>
-                                            <telerik:RadComboBox runat="server" ID="publish_grade" Width="140" AppendDataBoundItems="true" AutoPostBack="true" DataTextField="Name" DataValueField="Id" OnSelectedIndexChanged="publish_grade_SelectedIndexChanged">
-                                                <Items>
-                                                    <telerik:RadComboBoxItem Text="" Value="" />
-                                                </Items>
-                                            </telerik:RadComboBox>
-                                        </asp:Panel>
-                                        <asp:Panel runat="server" ID="publish_cg_panel">
-                                            <h5>目录：</h5>
-                                            <telerik:RadDropDownTree runat="server" ID="publish_cg" Width="140" CheckBoxes="SingleCheck" ExpandNodeOnSingleClick="true" AutoPostBack="True" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" OnEntryAdded="publish_cg_EntryAdded" OnEntryRemoved="publish_cg_EntryRemoved"></telerik:RadDropDownTree>
-                                        </asp:Panel>
-                                        <asp:Panel ID="sync_assistant" runat="server" Style="margin-top: 6px;">
-                                            <asp:CheckBox ID="sync_ass" runat="server" Text="发布至资源小助手" OnCheckedChanged="sync_ass_CheckedChanged" Style="margin: 0 0 0 16px;" AutoPostBack="true" />
                                         </asp:Panel>
                                     </telerik:RadAjaxPanel>
                                 </div>
@@ -302,43 +273,7 @@
                                     <telerik:RadAjaxPanel runat="server" ID="publish_open_panel">
                                         <telerik:RadButton runat="server" Width="50" ButtonType="ToggleButton" ToggleType="Radio" Checked="True" GroupName="OpenTypeRadio" Text="互联网&nbsp;&nbsp;&nbsp;" Value="1" OnClick="OnOpenClick"></telerik:RadButton>
                                         <telerik:RadButton runat="server" Width="50" ButtonType="ToggleButton" ToggleType="Radio" GroupName="OpenTypeRadio" Text="学校" Value="2" OnClick="OnOpenClick"></telerik:RadButton>
-                                        <%--<telerik:RadButton runat="server" Width="50" ButtonType="ToggleButton" ToggleType="Radio" GroupName="OpenTypeRadio" Text="所在园区" Value="3" OnClick="OnOpenClick"></telerik:RadButton>--%>
                                         <telerik:RadButton runat="server" Width="50" ButtonType="ToggleButton" ToggleType="Radio" GroupName="OpenTypeRadio" Text="不公开&nbsp;&nbsp;&nbsp;" Value="4" OnClick="OnOpenClick"></telerik:RadButton>
-                                    </telerik:RadAjaxPanel>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="u-rbox sendto" id="sendto" style="padding-bottom: 5px;">
-                            <div id="addBlog_otherTabs" class="addBlog-box">
-                                <div class="u-rbox auth">
-                                    <div style="height: 2px;">&nbsp;</div>
-                                    <h3>获奖情况：</h3>
-                                    <telerik:RadAjaxPanel runat="server" ID="publish_prize_panel">
-                                        <asp:Panel runat="server" ID="publish_prize_range_panel">
-                                            <telerik:RadComboBox runat="server" ID="publish_prize_range" Width="100" Label="范围：" OnSelectedIndexChanged="publish_prize_range_OnSelectedIndexChanged" AutoPostBack="True">
-                                                <Items>
-                                                    <telerik:RadComboBoxItem runat="server" Text="" Value="0" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="全国" Value="1" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="省级" Value="2" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="市级" Value="3" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="区级" Value="4" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="校级" Value="5" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="其他" Value="6" />
-                                                </Items>
-                                            </telerik:RadComboBox>
-                                        </asp:Panel>
-                                        <asp:Panel runat="server" ID="publish_prize_level_panel">
-                                            <telerik:RadComboBox runat="server" ID="publish_prize_level" Width="100" Label="奖项：" OnSelectedIndexChanged="publish_prize_level_OnSelectedIndexChanged" AutoPostBack="True">
-                                                <Items>
-                                                    <telerik:RadComboBoxItem runat="server" Text="" Value="0" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="特等奖" Value="1" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="一等奖" Value="2" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="二等奖" Value="3" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="三等奖" Value="4" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="其他" Value="5" />
-                                                </Items>
-                                            </telerik:RadComboBox>
-                                        </asp:Panel>
                                     </telerik:RadAjaxPanel>
                                 </div>
                             </div>
@@ -376,11 +311,7 @@
                 margin-top: -1px;
             }
 
-            html .rbToggleRadio, html .rbToggleRadioChecked {
-                margin-top: 8px;
-            }
-
-            .xs{
+            .xs {
                 background-color: wheat;
                 margin-left: 8px;
             }

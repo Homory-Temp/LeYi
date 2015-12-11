@@ -40,10 +40,6 @@ namespace Go
 			dir = Server.MapPath(path);
 			if (!Directory.Exists(dir))
 				Directory.CreateDirectory(dir);
-			path = string.Format("../Common/资源/{0}/试卷", CurrentUser.Id.ToString().ToUpper());
-			dir = Server.MapPath(path);
-			if (!Directory.Exists(dir))
-				Directory.CreateDirectory(dir);
 			path = string.Format("../Common/资源/{0}/视频", CurrentUser.Id.ToString().ToUpper());
 			dir = Server.MapPath(path);
 			if (!Directory.Exists(dir))
@@ -62,8 +58,6 @@ namespace Go
 				{
 					case "Courseware":
 						return ResourceType.课件;
-					case "Paper":
-						return ResourceType.试卷;
 					case "Media":
 						return ResourceType.视频;
 					case "Article":
@@ -110,7 +104,6 @@ namespace Go
             if (CurrentUser.Resource.Count(o => o.State == State.审核 && o.Type == ResourceType && o.UserId == CurrentUser.Id) != 0)
 			{
 				var r = CurrentResource;
-
 
                 var path__ = Server.MapPath(CurrentResource.Preview);
                 if (File.Exists(path__))
@@ -170,8 +163,6 @@ namespace Go
 				publish_tag_tags.DataSource =
 						HomoryContext.Value.ResourceTag.Where(o => o.ResourceId == r.Id && o.State == State.启用).Select(o => o.Tag).ToList();
 				publish_tag_tags.DataBind();
-				publish_prize_range.SelectedValue = r.PrizeRange.HasValue ? ((int)r.PrizeRange.Value).ToString() : "0";
-				publish_prize_level.SelectedValue = r.PrizeLevel.HasValue ? ((int)r.PrizeLevel.Value).ToString() : "0";
 				if (string.IsNullOrWhiteSpace(r.Preview))
 				{
 					publish_preview_plain.Visible = false;
@@ -195,8 +186,6 @@ namespace Go
 						publish_preview_pdf.Attributes["src"] = url;
 					}
 				}
-                var ass_id = Guid.Parse("45265E53-2D6A-40D4-BC50-F6BEE5FCD8EF");
-                sync_ass.Checked = CurrentResource.ResourceCatalog.Count(o => o.State == State.启用 && o.CatalogId == ass_id) > 0;
 				publish_open_panel.Controls.OfType<RadButton>().First(o => o.Value == ((int)r.OpenType).ToString()).Checked = true;
 				publish_editor_label.InnerText = string.Format("{0}简介：", ResourceType);
 				publish_editor.Content = r.Content;
@@ -234,43 +223,8 @@ namespace Go
 						publish_catalog_panel.Visible = false;
 						break;
 				}
-				publish_course.DataSource =
-					HomoryContext.Value.Catalog.Where(o => o.State < State.审核 && o.Type == CatalogType.课程 && o.Name != "综合")
-						.OrderBy(o => o.State)
-						.ThenBy(o => o.Ordinal)
-						.ToList();
-				publish_course.DataBind();
-                List<Catalog> qList;
-                switch (CurrentCampus.ClassType)
-                {
-                    case ClassType.九年一贯制:
-                        qList = HomoryContext.Value.Catalog.Where(o => o.State < State.审核 && (o.Type == CatalogType.年级_小学 || o.Type == CatalogType.年级_其他 || o.Type == CatalogType.年级_初中)).ToList().Select(o => new Catalog { Id = o.Id, Name = o.Name, Ordinal = o.Ordinal, Type = o.Type, ParentId = o.ParentId, State = o.State, TopId = o.TopId }).ToList();
-                        break;
-                    case ClassType.初中:
-                        qList = HomoryContext.Value.Catalog.Where(o => o.State < State.审核 && (o.Type == CatalogType.年级_初中 || o.Type == CatalogType.年级_其他)).ToList();
-                        break;
-                    case ClassType.小学:
-                        qList = HomoryContext.Value.Catalog.Where(o => o.State < State.审核 && (o.Type == CatalogType.年级_小学 || o.Type == CatalogType.年级_其他)).ToList();
-                        break;
-                    case ClassType.幼儿园:
-                        qList = HomoryContext.Value.Catalog.Where(o => o.State < State.审核 && (o.Type == CatalogType.年级_幼儿园 || o.Type == CatalogType.年级_其他)).ToList();
-                        break;
-                    case ClassType.高中:
-                        qList = HomoryContext.Value.Catalog.Where(o => o.State < State.审核 && (o.Type == CatalogType.年级_高中 || o.Type == CatalogType.年级_其他)).ToList();
-                        break;
-                    default:
-                        qList = HomoryContext.Value.Catalog.Where(o => o.State < State.审核 && (o.Type == CatalogType.年级_小学 || o.Type == CatalogType.年级_其他 || o.Type == CatalogType.年级_初中 || o.Type == CatalogType.年级_幼儿园 || o.Type == CatalogType.年级_高中)).ToList();
-                        break;
-                }
-                publish_grade.DataSource = qList.OrderBy(o => o.Ordinal).ToList();
-				publish_grade.DataBind();
-                var courseValue = r.CourseId.HasValue ? r.CourseId.ToString() : string.Empty;
-				publish_course.SelectedValue = courseValue;
-                var gradeValue = r.GradeId.HasValue ? r.GradeId.ToString() : string.Empty;
-				publish_grade.SelectedValue = gradeValue;
 				popup_import.NavigateUrl = string.Format("../Popup/PublishImport.aspx?Type={0}", Request.QueryString["Type"]);
 				popup_attachment.NavigateUrl = string.Format("../Popup/PublishAttachment.aspx?Type={0}", Request.QueryString["Type"]);
-                CG();
 				return;
 			}
 			var resource = new Resource
@@ -319,49 +273,10 @@ namespace Go
 			publish_tag_tags.DataBind();
 		}
 
-		protected void publish_prize_range_OnSelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
-		{
-			if (e.Value == "0")
-			{
-				CurrentResource.PrizeRange = null;
-				CurrentResource.PrizeLevel = null;
-				publish_prize_level.SelectedIndex = 0;
-			}
-			else
-			{
-				var range = (ResourcePrizeRange)(int.Parse(e.Value));
-				CurrentResource.PrizeRange = range;
-			}
-			HomoryContext.Value.SaveChanges();
-		}
-
-		protected void publish_prize_level_OnSelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
-		{
-			if (e.Value == "0")
-			{
-				CurrentResource.PrizeRange = null;
-				CurrentResource.PrizeLevel = null;
-				publish_prize_range.SelectedIndex = 0;
-			}
-			else
-			{
-				var level = (ResourcePrizeLevel)(int.Parse(e.Value));
-				CurrentResource.PrizeLevel = level;
-			}
-			HomoryContext.Value.SaveChanges();
-		}
-
 		protected void OnOpenClick(object sender, EventArgs e)
 		{
 			var type = (OpenType)int.Parse(((RadButton)sender).Value);
 			CurrentResource.OpenType = type;
-			HomoryContext.Value.SaveChanges();
-		}
-
-		protected void publish_editor_timer_OnTick(object sender, EventArgs e)
-		{
-			if (publish_editor.Content.Length == 0) return;
-			CurrentResource.Content = publish_editor.Content;
 			HomoryContext.Value.SaveChanges();
 		}
 
@@ -398,8 +313,6 @@ namespace Go
                         return ResourceLogType.发布视频;
 					case "Courseware":
                         return ResourceLogType.发布课件;
-					case "Paper":
-                        return ResourceLogType.发布试卷;
 					default:
                         return ResourceLogType.发布文章;
 				}
@@ -515,7 +428,6 @@ namespace Go
                 r.CourseId = Guid.Parse(e.Value);
             }
             HomoryContext.Value.SaveChanges();
-            CG();
         }
 
         protected void publish_grade_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
@@ -529,41 +441,6 @@ namespace Go
             {
                 r.GradeId = Guid.Parse(e.Value);
             }
-            HomoryContext.Value.SaveChanges();
-            CG();
-        }
-
-        protected void CG()
-        {
-            if (publish_course.SelectedIndex > 0 && publish_grade.SelectedIndex > 0)
-            {
-                var courseId = Guid.Parse(publish_course.SelectedValue);
-                var gradeId = Guid.Parse(publish_grade.SelectedValue);
-                publish_cg.DataSource =
-                    HomoryContext.Value.Catalog.Where(o => o.State < State.审核 && (o.TopId == courseId || o.Id == gradeId))
-                        .OrderBy(o => o.State)
-                        .ThenBy(o => o.Ordinal)
-                        .ToList();
-                publish_cg.DataBind();
-                var catalogValue = CurrentResource.ResourceCatalog.Where(o => o.Catalog.Type == CatalogType.课程资源 && o.State == State.启用).Aggregate(string.Empty, (current, catalog) => current + string.Format("{0},", catalog.CatalogId));
-                publish_cg.SelectedValue = catalogValue;
-                publish_cg.EmbeddedTree.Nodes[0].Checked = false;
-                publish_cg.EmbeddedTree.Nodes[0].Checkable = false;
-                publish_cg.EmbeddedTree.Nodes[0].Expanded = true;
-                publish_cg.EmbeddedTree.Nodes[0].Text = string.Format("{0}{1}", publish_grade.SelectedItem.Text, publish_course.SelectedItem.Text);
-            }
-        }
-
-        protected void sync_ass_CheckedChanged(object sender, EventArgs e)
-        {
-            var rc = new ResourceCatalog
-            {
-                ResourceId = CurrentResource.Id,
-                CatalogId = Guid.Parse("45265E53-2D6A-40D4-BC50-F6BEE5FCD8EF"),
-                State = sync_ass.Checked ? State.启用 : State.删除
-            };
-            HomoryContext.Value.ResourceCatalog.AddOrUpdate(rc);
-            CurrentResource.AssistantType = sync_ass.Checked ? 1 : 0;
             HomoryContext.Value.SaveChanges();
         }
 
