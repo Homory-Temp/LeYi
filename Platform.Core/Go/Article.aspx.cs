@@ -107,6 +107,15 @@ namespace Go
             return catalog.State < State.审核 ? "ui green circle icon" : "ui red circle icon";
         }
 
+        protected string LoadUsers(Guid id)
+        {
+            var c = HomoryContext.Value.Catalog.Single(o => o.Id == id).AuditUsers.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            if (c.Count() == 0)
+                return "（未选择）";
+            else
+                return c.Select(o => Guid.Parse(o)).ToList().Join(HomoryContext.Value.User.Where(o => o.State < State.停用), o => o, o => o.Id, (a, b) => b.RealName).ToList().Aggregate((o1, o2) => string.Format("{0}、{1}", o1, o2));
+        }
+
         protected void RebindExpanded()
         {
             var expanded = tree.GetAllNodes().Where(o => o.Expanded).Select(o => o.Value).ToList();
