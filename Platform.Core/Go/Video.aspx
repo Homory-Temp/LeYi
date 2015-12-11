@@ -32,6 +32,27 @@
         <div>
             <homory:SideBar runat="server" ID="SideBar" />
         </div>
+        <telerik:RadWindowManager ID="wm" runat="server">
+            <Windows>
+                <telerik:RadWindow ID="windowUsers" runat="server" OnClientClose="ccRefresh" NavigateUrl="~/Extended/CatalogUsers.aspx" Width="800" Height="400" CssClass="coreCenter coreMiddle" ReloadOnShow="true" VisibleStatusbar="false" Behaviors="Close" Modal="true" Title="选择审核人员" Localization-Close="关闭">
+                </telerik:RadWindow>
+            </Windows>
+        </telerik:RadWindowManager>
+        <script type="text/javascript">
+            function PopUsers(id) {
+                window.radopen("../Extended/CatalogUsers.aspx?" + id, "windowUsers");
+                return false;
+            }
+
+            function refreshGrid() {
+                var g = $find("grid");
+                g.MasterTableView.rebind();
+            }
+
+            function ccRefresh(sender, e) {
+                refreshGrid();
+            }
+        </script>
         <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-12">
@@ -70,6 +91,13 @@
                                                     </telerik:RadTextBox>
                                                 </EditItemTemplate>
                                             </telerik:GridTemplateColumn>
+                                            <telerik:GridCheckBoxColumn HeaderText="需要审核" DataField="Audit" SortExpression="Audit" UniqueName="Audit" DataType="System.Boolean"></telerik:GridCheckBoxColumn>
+                                            <telerik:GridTemplateColumn HeaderText="审核人员" UniqueName="AuditMembers">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="member" runat="server" CssClass="rootPointer" Text='<%# LoadUsers((Guid)Eval("Id")) %>' onclick=<%# string.Format("PopUsers('{0}');", Eval("Id")) %>></asp:Label>
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
+                                            <telerik:GridCheckBoxColumn HeaderText="审核后可编辑" DataField="AuditEditable" SortExpression="AuditEditable" UniqueName="AuditEditable" DataType="System.Boolean"></telerik:GridCheckBoxColumn>
                                             <telerik:GridTemplateColumn HeaderText="状态" DataField="State" SortExpression="State" UniqueName="State">
                                                 <ItemTemplate>
                                                     <asp:Label runat="server" Text='<%# Eval("State") %>'></asp:Label>

@@ -91,6 +91,7 @@ namespace Go
 
         private void InitRight(Guid key)
         {
+            gid.Value = key.ToString();
 			var rights = HomoryContext.Value.RoleRight.Where(o => o.RoleId == key && o.State < State.审核).Select(o => o.RightName).ToList();
 			foreach (var x in HomoryContext.Value.Right.Where(o => o.ApplicationId == HomoryCoreConstant.ApplicationKey).ToList().Select(rightName => rightName.Name))
             {

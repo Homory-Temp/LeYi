@@ -229,6 +229,12 @@
                                     <telerik:RadButtonToggleState Text="× 文章栏目" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
+                            <telerik:RadButton ID="Courseware" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
+                                <ToggleStates>
+                                    <telerik:RadButtonToggleState Text="√ 课件栏目" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 课件栏目" Value="False" CssClass="btn btn-primary" />
+                                </ToggleStates>
+                            </telerik:RadButton>
                             <telerik:RadButton ID="Note" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
                                     <telerik:RadButtonToggleState Text="√ 通知公告" Value="True" CssClass="btn btn-info" />
