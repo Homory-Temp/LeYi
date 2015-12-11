@@ -137,9 +137,9 @@
                     }
                 </style>
                 <div style="width: 280px; text-align: center; margin: auto;">
-                    <a class="pub_v" style="cursor: pointer; margin: 20px auto 10px 50px;" href="Publishing.aspx?Type=Media">发布视频</a>
-                    <a class="pub_a" style="cursor: pointer; margin: 10px auto 10px 50px;" href="Publishing.aspx?Type=Article">发布文章</a>
-                    <a class="pub_c" style="cursor: pointer; margin: 10px auto 10px 50px;" href="Publishing.aspx?Type=Courseware">发布课件</a>
+                    <a class="pub_v" style="cursor: pointer; margin: 20px auto 10px 50px;" href="Publishing.aspx?Type=Media" title="课堂实录&#10;&#13;专题活动">发布视频</a>
+                    <a class="pub_a" style="cursor: pointer; margin: 10px auto 10px 50px;" href="Publishing.aspx?Type=Article" title="案例论文&#10;&#13;活动方案&#10;&#13;教材选登&#10;&#13;佳作欣赏">发布文章</a>
+                    <a class="pub_c" style="cursor: pointer; margin: 10px auto 10px 50px;" href="Publishing.aspx?Type=Courseware" title="语言、数学、科学&#10;&#13;美术、音乐、健康、综合&#10;&#13;经历学习活动、亲子时分">发布课件</a>
                 </div>
             </ContentTemplate>
         </telerik:RadWindow>
