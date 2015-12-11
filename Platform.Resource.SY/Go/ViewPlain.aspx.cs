@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Text;
+using System.Web.UI;
 using System.Web.UI.HtmlControls;
 
 namespace Go
@@ -13,10 +14,17 @@ namespace Go
             if (!IsPostBack)
             {
                 LogOp(ResourceLogType.浏览资源);
-                cg.Visible = CanCombineCourse() || CanCombineGrade();
                 tag.Visible = CanCombineTags();
                 var url = string.Format("../Document/web/PdfViewer.aspx?Id={0}&Random={1}", Request.QueryString["Id"],
                     Guid.NewGuid());
+                if (string.IsNullOrEmpty(CurrentResource.Preview))
+                {
+                    publish_preview_pdf.Style.Add(HtmlTextWriterStyle.Display, "none");
+                }
+                else
+                {
+                    publish_preview_pdf.Style.Add(HtmlTextWriterStyle.Display, "");
+                }
                 publish_preview_pdf.Attributes["src"] = url;
                 catalog.Visible = CurrentResource.Type == ResourceType.文章 && CurrentResource.ResourceCatalog.Count(y => y.State < State.审核 && y.Catalog.State< State.审核 && y.Catalog.Type == CatalogType.文章) > 0;
                 var p =
@@ -135,6 +143,25 @@ namespace Go
 
         }
 
+        protected string CombineAge()
+        {
+            if (!CurrentResource.GradeId.HasValue)
+                return "";
+            switch(CurrentResource.GradeId.Value.ToString().ToUpper())
+            {
+                case "625AE587-8C5A-454B-893C-08D2F6D187D5":
+                    return "<a target='_blank' href='../Go/Search?Age=625AE587-8C5A-454B-893C-08D2F6D187D5'>大班</a>";
+                case "CF3AE587-8CB9-4D0A-B29A-08D2F6D187D9":
+                    return "<a target='_blank' href='../Go/Search?Age=CF3AE587-8CB9-4D0A-B29A-08D2F6D187D9'>中班</a>";
+                case "9FD9E587-8C09-4A55-9DB0-08D2F6D187DD":
+                    return "<a target='_blank' href='../Go/Search?Age=9FD9E587-8C09-4A55-9DB0-08D2F6D187DD'>小班</a>";
+                case "850557E1-9EBD-4E0D-93DC-FE090A77D393":
+                    return "<a target='_blank' href='../Go/Search?Age=850557E1-9EBD-4E0D-93DC-FE090A77D393'>托班</a>";
+                default:
+                    return "<a target='_blank' href='../Go/Search?Age=A3757840-9DF7-4370-8151-FAD39B44EF6A'>通用</a>";
+            }
+        }
+
         private Resource _resource;
 
         private bool? _detected;
@@ -197,26 +224,6 @@ namespace Go
         }
 
         protected Func<string, ResourceCatalog, string> Combine = (a, o) => string.Format("{0}<a target='_blank' href='../Go/Search?{2}={3}'>{1}</a>、", a, o.Catalog.Name, QueryType(o.Catalog.Type), o.CatalogId);
-
-        protected bool CanCombineGrade()
-        {
-            return CurrentResource.GradeId.HasValue;
-        }
-
-        protected string CombineGrade()
-        {
-            return CanCombineGrade() ? string.Format("年级：<a target='_blank' href='../Go/Search?{1}={2}'>{0}</a>", HomoryContext.Value.Catalog.First(o=>o.Id==CurrentResource.GradeId).Name, QueryType(HomoryContext.Value.Catalog.First(o => o.Id == CurrentResource.GradeId).Type), CurrentResource.GradeId) : "";
-        }
-
-        protected bool CanCombineCourse()
-        {
-            return CurrentResource.CourseId.HasValue;
-        }
-
-        protected string CombineCourse()
-        {
-            return CanCombineCourse() ? string.Format("学科：<a target='_blank' href='../Go/Search?{1}={2}'>{0}</a>", HomoryContext.Value.Catalog.First(o => o.Id == CurrentResource.CourseId).Name, QueryType(CatalogType.课程), CurrentResource.CourseId) : "";
-        }
 
         protected bool CanCombineTags()
         {

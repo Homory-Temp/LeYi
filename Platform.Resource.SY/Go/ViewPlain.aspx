@@ -101,11 +101,8 @@
                                     <span>作者：<a href='<%= string.Format("../Go/Personal?Id={0}", TargetUser.Id) %>'><%= CurrentResource.User.DisplayName %></a></span>&nbsp;&nbsp;
                                     <span id="catalog" runat="server">栏目：<%= CurrentResource.ResourceCatalog.Where(o=>o.State==State.启用 &&o.Catalog.Type== CatalogType.文章).Aggregate(string.Empty,Combine).CutString(null) %></span>
                                     <br />
-                                    <asp:Panel runat="server" ID="cg">
-                                        <span><%= CombineGrade() %></span>&nbsp;&nbsp;
-                                    <span><%= CombineCourse() %></span>
-                                        <br />
-                                    </asp:Panel>
+                                    <span>适用年龄段：<%= CombineAge() %></span>
+                                    <br />
                                     <asp:Panel runat="server" ID="tag">
                                         <span>标签：<%= CombineTags() %></span>
                                         <br />
