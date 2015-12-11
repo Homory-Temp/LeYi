@@ -341,10 +341,21 @@ namespace Go
                 publish_publish_panel.ResponseScripts.Add("popNotify();");
                 return;
             }
-            if (string.IsNullOrWhiteSpace(publish_editor.Content) && string.IsNullOrWhiteSpace(resource.Preview))
+            if (CurrentResource.Type == ResourceType.视频)
             {
-                publish_publish_panel.ResponseScripts.Add("popNotify();");
-                return;
+                if (string.IsNullOrWhiteSpace(resource.Preview))
+                {
+                    publish_publish_panel.ResponseScripts.Add("popNotify();");
+                    return;
+                }
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(publish_editor.Content) && string.IsNullOrWhiteSpace(resource.Preview))
+                {
+                    publish_publish_panel.ResponseScripts.Add("popNotify();");
+                    return;
+                }
             }
             resource.Title = publish_title_content.Value;
             resource.Content = publish_editor.Content;

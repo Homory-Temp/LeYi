@@ -37,12 +37,8 @@ namespace Popup
 				{
 					case "Courseware":
 						return ResourceType.课件;
-					case "Paper":
-						return ResourceType.试卷;
 					case "Media":
 						return ResourceType.视频;
-					case "Article":
-						return ResourceType.文章;
 					default:
 						return ResourceType.文章;
 				}
