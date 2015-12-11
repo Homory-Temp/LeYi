@@ -330,7 +330,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="Source" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
-          <Property Name="Remark" Type="nvarchar" MaxLength="250" />
+          <Property Name="Remark" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ResourceCatalog">
           <Key>
@@ -3403,7 +3403,7 @@
           <Property Name="Source" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="Homory.Model.State" Nullable="false" />
           <NavigationProperty Name="Resource" Relationship="Homory.Model.FK_ResourceAttachment_Resource" FromRole="ResourceAttachment" ToRole="Resource" />
-          <Property Name="Remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_ResourceAttachment_Resource">
           <End Type="Homory.Model.Resource" Role="Resource" Multiplicity="1" />
