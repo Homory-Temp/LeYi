@@ -52,6 +52,8 @@ namespace Go
 
         protected string MB()
         {
+            if (string.IsNullOrEmpty(CurrentResource.Preview))
+                return "";
             var p = new FileInfo(Server.MapPath(CurrentResource.Preview));
             var s = new FileInfo(Server.MapPath(CurrentResource.Source));
             if (p.Length == s.Length)
@@ -142,8 +144,8 @@ namespace Go
                 }
                 player.Video = CurrentResource.Preview;
                 catalog.Visible = CurrentResource.Type == ResourceType.视频 && CurrentResource.ResourceCatalog.Count(y => y.State < State.审核 && y.Catalog.State < State.审核 && y.Catalog.Type == CatalogType.视频) > 0;
-                cg.Visible = CanCombineCourse() || CanCombineGrade();
                 tag.Visible = CanCombineTags();
+                mb.Visible = !string.IsNullOrEmpty(CurrentResource.Preview);
                 var p =
 					TargetUser.Resource.Where(
 						o => o.State == State.启用 && o.Type == CurrentResource.Type && o.Time > CurrentResource.Time)
@@ -252,24 +254,23 @@ namespace Go
 			}
 		}
 
-        protected bool CanCombineGrade()
+        protected string CombineAge()
         {
-            return CurrentResource.GradeId.HasValue;
-        }
-
-        protected string CombineGrade()
-        {
-            return CanCombineGrade() ? string.Format("年级：<a target='_blank' href='../Go/Search?{1}={2}'>{0}</a>", HomoryContext.Value.Catalog.First(o => o.Id == CurrentResource.GradeId).Name, QueryType(HomoryContext.Value.Catalog.First(o => o.Id == CurrentResource.GradeId).Type), CurrentResource.GradeId) : "";
-        }
-
-        protected bool CanCombineCourse()
-        {
-            return CurrentResource.CourseId.HasValue;
-        }
-
-        protected string CombineCourse()
-        {
-            return CanCombineCourse() ? string.Format("学科：<a target='_blank' href='../Go/Search?{1}={2}'>{0}</a>", HomoryContext.Value.Catalog.First(o => o.Id == CurrentResource.CourseId).Name, QueryType(CatalogType.课程), CurrentResource.CourseId) : "";
+            if (!CurrentResource.GradeId.HasValue)
+                return "";
+            switch (CurrentResource.GradeId.Value.ToString().ToUpper())
+            {
+                case "625AE587-8C5A-454B-893C-08D2F6D187D5":
+                    return "<a target='_blank' href='../Go/Search?Age=625AE587-8C5A-454B-893C-08D2F6D187D5'>大班</a>";
+                case "CF3AE587-8CB9-4D0A-B29A-08D2F6D187D9":
+                    return "<a target='_blank' href='../Go/Search?Age=CF3AE587-8CB9-4D0A-B29A-08D2F6D187D9'>中班</a>";
+                case "9FD9E587-8C09-4A55-9DB0-08D2F6D187DD":
+                    return "<a target='_blank' href='../Go/Search?Age=9FD9E587-8C09-4A55-9DB0-08D2F6D187DD'>小班</a>";
+                case "850557E1-9EBD-4E0D-93DC-FE090A77D393":
+                    return "<a target='_blank' href='../Go/Search?Age=850557E1-9EBD-4E0D-93DC-FE090A77D393'>托班</a>";
+                default:
+                    return "<a target='_blank' href='../Go/Search?Age=A3757840-9DF7-4370-8151-FAD39B44EF6A'>通用</a>";
+            }
         }
 
         protected bool CanCombineTags()

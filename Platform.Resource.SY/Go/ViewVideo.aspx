@@ -98,17 +98,14 @@
                                     <span>作者：<a href='<%= string.Format("../Go/Personal?Id={0}", TargetUser.Id) %>'><%= CurrentResource.User.DisplayName %></a></span>&nbsp;&nbsp;
                                     <span id="catalog" runat="server">栏目：<%= CurrentResource.ResourceCatalog.Where(o=>o.State==State.启用 &&o.Catalog.Type== CatalogType.视频).Aggregate(string.Empty,Combine).CutString(null) %></span>
                                     <br />
-                                    <asp:Panel runat="server" ID="cg">
-                                        <span><%= CombineGrade() %></span>&nbsp;&nbsp;
-                                    <span><%= CombineCourse() %></span>
+                                    <span>适用年龄段：<%= CombineAge() %></span>
                                         <br />
-                                    </asp:Panel>
                                     <asp:Panel runat="server" ID="tag">
                                         <span>标签：<%= CombineTags() %></span>
                                         <br />
                                     </asp:Panel>
                                     <span>时间：<%= CurrentResource.Time.ToString("yyyy-MM-dd HH:mm") %></span><br />
-                                    <span>容量：<%= MB() %></span>
+                                    <span id="mb" runat="server">容量：<%= MB() %></span>
                                 </div>
 
                                 <div id="ni" runat="server" style="font-size: 14px; font-weight: bold;">
