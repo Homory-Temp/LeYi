@@ -4,9 +4,9 @@
 
 <telerik:RadAjaxPanel runat="server" ID="HomeArticlePanel">
 	<asp:Timer runat="server" ID="HomeArticleTimer" Interval="10000" Enabled="False" OnTick="HomeArticleTimer_OnTick"></asp:Timer>
-        <div  class="box class-feed" style="width:262px; height: 330px;">
+        <div  class="box class-feed" style="width:262px; height: 630px;">
 		<div class="box-hd">最新资源</div>
-		<div class="box-bd" style="height: 300px;">
+		<div class="box-bd" style="height: 600px;">
 			<ul class="hot-list">
 				<asp:Repeater ID="homory_article" runat="server">
 					<ItemTemplate>

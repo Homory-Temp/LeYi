@@ -34,18 +34,11 @@
 </div>
 <div class="nav">
 	<ul class="lg_nav">
-		<li class="cur"><a href="../Go/Home">首页</a>
-
-		</li>
-		<li>|</li>
-		
-		<li><a href="../Go/Studio">名师工作室</a></li>
+		<li class="cur"><a href="../Go/Home">首页</a></li>
 		<li>|</li>
 		<li><a href="../Go/Group">教研团队</a></li>
 		<li>|</li>
 		<li><a href="../Go/Rooms">阳光课堂</a></li>
-        <li>|</li>
-		<li><a href="../Go/Catalog">资源目录</a></li>
         <li>|</li>
         <li><a href="../Go/Teachers">教师研训</a></li>
         <li>|</li>

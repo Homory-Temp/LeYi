@@ -197,7 +197,7 @@ namespace Go
                 {
                     case ResourceType.视频:
                         publish_catalog.EmbeddedTree.Nodes.AddRange(LoadCDSNodes("10A37221-02C5-48D8-A82C-DA62A3386C0B"));
-                        publish_catalog.ExpandAllDropDownNodes();
+                        publish_catalog.EmbeddedTree.GetAllNodes().Where(o => o.Level < 1).ToList().ForEach(o => o.Expanded = true);
                         try
                         {
                             var catalogValueMedia = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.视频 && o.State == State.启用).CatalogId.ToString();
@@ -208,7 +208,7 @@ namespace Go
                         break;
                     case ResourceType.文章:
                         publish_catalog.EmbeddedTree.Nodes.AddRange(LoadCDSNodes("023CAF84-4F7B-4777-ABEB-66137B4E71FD"));
-                        publish_catalog.ExpandAllDropDownNodes();
+                        publish_catalog.EmbeddedTree.GetAllNodes().Where(o => o.Level < 1).ToList().ForEach(o => o.Expanded = true);
                         try
                         {
                             var catalogValueArticle = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.文章 && o.State == State.启用).CatalogId.ToString();
@@ -219,7 +219,7 @@ namespace Go
                         break;
                     case ResourceType.课件:
                         publish_catalog.EmbeddedTree.Nodes.AddRange(LoadCDSNodes("C7F16CCC-19EB-4363-8D24-7285F43C910F"));
-                        publish_catalog.ExpandAllDropDownNodes();
+                        publish_catalog.EmbeddedTree.GetAllNodes().Where(o => o.Level < 1).ToList().ForEach(o => o.Expanded = true);
                         try
                         {
                             var catalogValueCourseware = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.课件 && o.State == State.启用).CatalogId.ToString();
@@ -363,6 +363,11 @@ namespace Go
             resource.State = State.启用;
             resource.UserId = Guid.Parse(resource.Author);
             resource.CampusId = CurrentCampus.Id;
+            if (string.IsNullOrWhiteSpace(resource.Preview))
+            {
+                resource.FileType = ResourceFileType.None;
+                resource.Thumbnail = ((int)ResourceFileType.None).ToString();
+            }
             HomoryContext.Value.SaveChanges();
             LogOp(TeacherOperationType);
             Response.Redirect(string.Format("../Go/{1}?Id={0}", resource.Id, resource.Type == Homory.Model.ResourceType.视频 ? "ViewVideo" : "ViewPlain"), false);

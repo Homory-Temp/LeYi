@@ -19,6 +19,7 @@ namespace Homory.Model
         Pdf = 4,
         Zip = 5,
         Image = 6,
-        Media = 7
+        Media = 7,
+        None = 0
     }
 }

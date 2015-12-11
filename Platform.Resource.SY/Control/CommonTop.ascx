@@ -8,17 +8,11 @@
 			<div class="srx-nav-i">
 				<a class="srx-ni-a" href="../Go/Home" title="首页">首页</a>
 			</div>
-						<div class="srx-nav-i srx-nav-iclass">
-				<a class="srx-ni-a"  href="../Go/Studio" title="名师工作室">名师工作室</a>
-			</div>
 			<div class="srx-nav-i srx-nav-ischl">
 				<a class="srx-ni-a"  href="../Go/Group" title="团队教研">团队教研</a>
 			</div>
 			<div class="srx-nav-i srx-nav-ishare">
 				<a class="srx-ni-a" href="../Go/Rooms" title="阳光课堂">阳光课堂</a>
-			</div>
-            <div class="srx-nav-i srx-nav-ishare">
-				<a class="srx-ni-a" href="../Go/Catalog" title="资源目录">资源目录</a>
 			</div>
 		</div>			
 	

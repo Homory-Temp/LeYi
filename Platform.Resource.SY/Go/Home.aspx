@@ -8,7 +8,6 @@
 <%@ Register Src="~/Control/HomeNote.ascx" TagPrefix="homory" TagName="HomeNote" %>
 <%@ Register Src="~/Control/HomeArticle.ascx" TagPrefix="homory" TagName="HomeArticle" %>
 <%@ Register Src="~/Control/HomeHonor.ascx" TagPrefix="homory" TagName="HomeHonor" %>
-<%@ Register Src="~/Control/HomeStudio.ascx" TagPrefix="homory" TagName="HomeStudio" %>
 <%@ Register Src="~/Control/HomeGroup.ascx" TagPrefix="homory" TagName="HomeGroup" %>
 <%@ Register Src="~/Control/HomeVideo.ascx" TagPrefix="homory" TagName="HomeVideo" %>
 <%@ Register Src="~/Control/HomeCourseware.ascx" TagPrefix="homory" TagName="HomeCourseware" %>
@@ -76,14 +75,9 @@
                     <div class="login-r">
                         <homory:HomeNote runat="server" ID="HomeNote" Count="5" MaxTitleLength="12" />
 
-                        <div style="margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 6px; padding: 0;">
-                            <a href="../Go/Search.aspx?Assistant=1">
-                                <img src="../Image/help.jpg" style="margin: 0; padding: 0;" /></a>
-                        </div>
-
                         <homory:PersonalAction runat="server" ID="PersonalAction" />
 
-                        <homory:HomeArticle runat="server" ID="HomeArticle" Count="5" MaxTitleLength="12" />
+                        <homory:HomeArticle runat="server" ID="HomeArticle" Count="10" MaxTitleLength="12" />
 
                         <telerik:RadAjaxPanel runat="server">
                             <div class="box class-feed" style="width: 262px; height: 80px;">
@@ -105,7 +99,6 @@
                         <homory:HomeTopic runat="server" ID="HomeTopic" />
                         <homory:HomeHonor runat="server" ID="HomeHonor" />
                         <homory:HomeGroup runat="server" ID="HomeGroup" />
-                        <homory:HomeStudio runat="server" ID="HomeStudio" />
                     </div>
                 </div>
             </div>

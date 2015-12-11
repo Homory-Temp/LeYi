@@ -3437,6 +3437,7 @@
           <Member Name="Zip" Value="5" />
           <Member Name="Image" Value="6" />
           <Member Name="Media" Value="7" />
+          <Member Name="None" Value="0" />
         </EnumType>
         <EnumType Name="ResourcePrizeRange">
           <Member Name="全国" Value="1" />
