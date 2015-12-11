@@ -66,6 +66,8 @@ namespace Go
                 var name = values["Name"].ToString();
                 var ordinal = Get(values, "Ordinal", 99);
                 var state = Get(values, "State", State.启用);
+                var audit = Get(values, "Audit", false);
+                var auditEditable = Get(values, "AuditEditable", true);
                 switch (command.Type)
                 {
                     case GridBatchEditingCommandType.Insert:
@@ -77,7 +79,10 @@ namespace Go
                                 ParentId = parentId,
                                 Ordinal = ordinal,
                                 State = state,
-                                Type = CatalogType.文章
+                                Type = CatalogType.文章,
+                                Audit = audit.Value,
+                                AuditEditable = auditEditable.Value,
+                                AuditUsers = ""
                             });
                             HomoryContext.Value.SaveChanges();
                             LogOp(OperationType.新增);
@@ -91,6 +96,8 @@ namespace Go
                                 Name = name,
                                 Ordinal = ordinal,
                                 State = state,
+                                Audit = audit.Value,
+                                AuditEditable = auditEditable.Value
                             });
                             HomoryContext.Value.SaveChanges();
                             LogOp(state);

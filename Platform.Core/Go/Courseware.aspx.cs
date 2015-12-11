@@ -6,11 +6,11 @@ using Telerik.Web.UI;
 
 namespace Go
 {
-    public partial class GoVideo : HomoryCorePageWithGrid
+    public partial class GoCourseware : HomoryCorePageWithGrid
     {
-        private const string Right = "Video";
+        private const string Right = "Courseware";
 
-        private static Guid VideoTopId = Guid.Parse("10a37221-02c5-48d8-a82c-da62a3386c0b");
+        private static Guid CoursewareTopId = Guid.Parse("C7F16CCC-19EB-4363-8D24-7285F43C910F");
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,7 +28,7 @@ namespace Go
 
         private void BindTree()
         {
-            tree.DataSource = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.视频 && o.State < State.删除).OrderBy(o => o.State).ThenBy(o => o.Ordinal).ThenBy(o => o.Name).ToList();
+            tree.DataSource = HomoryContext.Value.Catalog.Where(o => o.Type == CatalogType.课件 && o.State < State.删除).OrderBy(o => o.State).ThenBy(o => o.Ordinal).ThenBy(o => o.Name).ToList();
             tree.DataBind();
         }
 
@@ -44,7 +44,7 @@ namespace Go
         {
             var parentId = tree.SelectedNode == null ? (Guid?)(null) : Guid.Parse(tree.SelectedNode.Value);
             grid.DataSource = parentId.HasValue
-                ? HomoryContext.Value.Catalog.Where(o => o.State < State.删除 && o.State > State.内置 && o.ParentId == parentId.Value && o.Type == CatalogType.视频)
+                ? HomoryContext.Value.Catalog.Where(o => o.State < State.删除 && o.State > State.内置 && o.ParentId == parentId.Value && o.Type == CatalogType.课件)
                     .OrderBy(o => o.State)
                     .ThenBy(o => o.Ordinal)
                     .ToList()
@@ -79,7 +79,7 @@ namespace Go
                                 ParentId = parentId,
                                 Ordinal = ordinal,
                                 State = state,
-                                Type = CatalogType.视频,
+                                Type = CatalogType.课件,
                                 Audit = audit.Value,
                                 AuditEditable = auditEditable.Value,
                                 AuditUsers = ""
@@ -154,12 +154,12 @@ namespace Go
         {
             if (catalog.Id == Guid.Empty)
             {
-                var count = HomoryContext.Value.Catalog.Count(o => o.State < State.删除 && o.Type == CatalogType.视频 && (o.ParentId == null || (o.ParentId != null && o.ParentId == VideoTopId)));
+                var count = HomoryContext.Value.Catalog.Count(o => o.State < State.删除 && o.Type == CatalogType.课件 && (o.ParentId == null || (o.ParentId != null && o.ParentId == CoursewareTopId)));
                 return count == 0 ? string.Empty : string.Format(" [{0}]", count);
             }
             else
             {
-                var count = catalog.CatalogChildren.Count(o => o.State < State.删除 && o.Type == CatalogType.视频);
+                var count = catalog.CatalogChildren.Count(o => o.State < State.删除 && o.Type == CatalogType.课件);
                 return count == 0 ? string.Empty : string.Format(" [{0}]", count);
             }
         }
