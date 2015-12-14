@@ -143,7 +143,7 @@
                                                             <p><%#(int)Eval("Stick") == 0?string.Empty:"<span style='font-weight:bolder; color:#ca0e0e;font-size:18px;'>[置顶]</span>" %>&nbsp;<a limit="30" href='<%# string.Format("../Go/{0}?Id={1}", ((Homory.Model.ResourceType)Eval("Type"))== Homory.Model.ResourceType.视频 ? "ViewVideo" : "ViewPlain", Eval("Id")) %>' class="xy_zkyl"><%# Eval("Title") %> </a></p>
 
                                                             <p class="sd wjdx">
-                                                                <span><%# UC(Eval("UserId")) %>&nbsp;<a href='<%# string.Format("../Go/Personal?Id={0}", Eval("UserId")) %>'><em><%# U(((Homory.Model.ResourceMap)Container.DataItem).UserId).RealName %></em></a></span><span>发布时间：<em> <%# ((DateTime)Eval("Time")).ToString("yyyy-MM-dd HH:mm") %></em></span>
+                                                                <a href='<%# string.Format("../Go/Personal?Id={0}", Eval("UserId")) %>'><em><%# U(((Homory.Model.ResourceMap)Container.DataItem).UserId).RealName %></em></a></span>&nbsp;&nbsp;<span>发布于：<em> <%# ((DateTime)Eval("ResourceTime")).ToString("yyyy-MM-dd") %></em></span>
                                                             </p>
                                                         </div>
                                                     </dt>
@@ -155,7 +155,25 @@
                                                                     (<%# Eval("Rate") %>次评分)
                                                                 </p>
                                                             </li>
-                                                            <li><a class="xy_scbtn">审核</a></li>
+                                                            <li>
+                                                                <a id="ab" runat="server" class="xy_scbtn" visible='<%# (bool)Eval("Audit") %>' style="cursor: pointer;"><%# ((int)Eval("State")) == 4 ? "未通过" : (((int)Eval("State")) == 3 ? "未审核" : "已通过") %></a>
+                                                                <telerik:RadToolTip ID="tip" runat="server" IsClientID="true" Skin="MetroTouch" AutoCloseDelay="0">
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td colspan="5" style="text-align: center;">
+                                                                                <telerik:RadTextBox ID="reason" runat="server" Skin="Metro" EmptyMessage="审核说明" Width="220px" Height="52" TextMode="MultiLine"></telerik:RadTextBox>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><a id="tb1" runat="server" class="xy_scbtn" style="cursor: pointer;">通过</a></td>
+                                                                            <td>&nbsp;</td>
+                                                                            <td><a id="tb2" runat="server" class="xy_scbtn" style="cursor: pointer;">不通过</a></td>
+                                                                            <td>&nbsp;</td>
+                                                                            <td><a id="tb3" runat="server" class="xy_scbtn" style="cursor: pointer;">删除</a></td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </telerik:RadToolTip>
+                                                            </li>
                                                             <li><a target="_blank" href='<%# string.Format("../Go/{0}?Id={1}", ((Homory.Model.ResourceType)Eval("Type"))== Homory.Model.ResourceType.视频 ? "ViewVideo" : "ViewPlain", Eval("Id")) %>' class="xy_xzbtn">浏览(<%# Eval("View") %>)</a></li>
                                                             <li><a target="_blank" href='<%# string.Format("../Go/{0}?Id={1}", ((Homory.Model.ResourceType)Eval("Type"))== Homory.Model.ResourceType.视频 ? "ViewVideo" : "ViewPlain", Eval("Id")) %>' class="xy_xzbtn">下载(<%# Eval("Download") %>)</a></li>
                                                             <li><asp:ImageButton ID="SetTop" class="SetTopClass" Visible='<%# ((Homory.Model.ResourceMap)Container.DataItem).AuditUsers.ToUpper().Contains(CurrentUser.Id.ToString().ToUpper()) %>' Stick='<%#Eval("Stick") %>' style="margin-top:16px;" ImageUrl='<%#(int)Eval("Stick")== 0?"Image/uph.png":"Image/downh.png"%>' ToolTip='<%#(int)Eval("Stick") == 0? "置顶":"取消置顶" %>'  runat="server"  SourceId='<%#Eval("Id")%>' OnClick="SetTop_Click" /></li>

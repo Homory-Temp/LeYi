@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
@@ -92,6 +93,9 @@ namespace Go
             var control = (e.Item.FindControl("SetTop") as ImageButton);
             control.Attributes["onmouseover"] = "MouseOver('" + control.ClientID + "')";
             control.Attributes["onmouseout"] = "MouseOut('" + control.ClientID + "')";
+            var ab = (e.Item.FindControl("ab") as HtmlAnchor).ClientID;
+            var tip = (e.Item.FindControl("tip") as RadToolTip);
+            tip.TargetControlID = ab;
         }
     }
 }
