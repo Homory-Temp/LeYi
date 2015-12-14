@@ -88,6 +88,7 @@ namespace Homory.Model
         public virtual DbSet<CardNo> CardNo { get; set; }
         public virtual DbSet<ViewTeacherExport> ViewTeacherExport { get; set; }
         public virtual DbSet<View_ResourceAssess> View_ResourceAssess { get; set; }
+        public virtual DbSet<ResourceMap> ResourceMap { get; set; }
     
         public virtual int ResetPolicyCommon()
         {

@@ -330,7 +330,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="Source" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
-          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="Remark" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="ResourceCatalog">
           <Key>
@@ -564,6 +564,71 @@
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.ResourceMap”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="ResourceMap">
+          <Key>
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Audit" />
+            <PropertyRef Name="AuditUsers" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="OpenType" />
+            <PropertyRef Name="FileType" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Author" />
+            <PropertyRef Name="Converted" />
+            <PropertyRef Name="Prize" />
+            <PropertyRef Name="Credit" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Favourite" />
+            <PropertyRef Name="Comment" />
+            <PropertyRef Name="Rate" />
+            <PropertyRef Name="Grade" />
+            <PropertyRef Name="View" />
+            <PropertyRef Name="Download" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="AssistantType" />
+            <PropertyRef Name="Stick" />
+            <PropertyRef Name="ResourceTime" />
+          </Key>
+          <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Audit" Type="bit" Nullable="false" />
+          <Property Name="AuditUsers" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="OpenType" Type="int" Nullable="false" />
+          <Property Name="FileType" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Author" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Converted" Type="bit" Nullable="false" />
+          <Property Name="Thumbnail" Type="nvarchar" MaxLength="256" />
+          <Property Name="SourceName" Type="nvarchar" MaxLength="256" />
+          <Property Name="Source" Type="nvarchar" MaxLength="256" />
+          <Property Name="Preview" Type="nvarchar" MaxLength="256" />
+          <Property Name="Image" Type="nvarchar" MaxLength="256" />
+          <Property Name="Prize" Type="bit" Nullable="false" />
+          <Property Name="PrizeRange" Type="int" />
+          <Property Name="PrizeLevel" Type="int" />
+          <Property Name="Credit" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Favourite" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="View" Type="int" Nullable="false" />
+          <Property Name="Download" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="GradeId" Type="uniqueidentifier" />
+          <Property Name="CourseId" Type="uniqueidentifier" />
+          <Property Name="CampusId" Type="uniqueidentifier" />
+          <Property Name="AssistantType" Type="int" Nullable="false" />
+          <Property Name="Stick" Type="int" Nullable="false" />
+          <Property Name="ResourceTime" Type="date" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Platform_LY.dbo.View_ResourceAssess”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -1753,6 +1818,45 @@
           <EntitySet Name="UserFavourite" EntityType="Self.UserFavourite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResourceMap" EntityType="Self.ResourceMap" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ResourceMap].[CatalogId] AS [CatalogId], 
+    [ResourceMap].[Audit] AS [Audit], 
+    [ResourceMap].[AuditUsers] AS [AuditUsers], 
+    [ResourceMap].[Id] AS [Id], 
+    [ResourceMap].[UserId] AS [UserId], 
+    [ResourceMap].[Type] AS [Type], 
+    [ResourceMap].[OpenType] AS [OpenType], 
+    [ResourceMap].[FileType] AS [FileType], 
+    [ResourceMap].[Title] AS [Title], 
+    [ResourceMap].[Author] AS [Author], 
+    [ResourceMap].[Content] AS [Content], 
+    [ResourceMap].[Converted] AS [Converted], 
+    [ResourceMap].[Thumbnail] AS [Thumbnail], 
+    [ResourceMap].[SourceName] AS [SourceName], 
+    [ResourceMap].[Source] AS [Source], 
+    [ResourceMap].[Preview] AS [Preview], 
+    [ResourceMap].[Image] AS [Image], 
+    [ResourceMap].[Prize] AS [Prize], 
+    [ResourceMap].[PrizeRange] AS [PrizeRange], 
+    [ResourceMap].[PrizeLevel] AS [PrizeLevel], 
+    [ResourceMap].[Credit] AS [Credit], 
+    [ResourceMap].[State] AS [State], 
+    [ResourceMap].[Favourite] AS [Favourite], 
+    [ResourceMap].[Comment] AS [Comment], 
+    [ResourceMap].[Rate] AS [Rate], 
+    [ResourceMap].[Grade] AS [Grade], 
+    [ResourceMap].[View] AS [View], 
+    [ResourceMap].[Download] AS [Download], 
+    [ResourceMap].[Time] AS [Time], 
+    [ResourceMap].[GradeId] AS [GradeId], 
+    [ResourceMap].[CourseId] AS [CourseId], 
+    [ResourceMap].[CampusId] AS [CampusId], 
+    [ResourceMap].[AssistantType] AS [AssistantType], 
+    [ResourceMap].[Stick] AS [Stick], 
+    [ResourceMap].[ResourceTime] AS [ResourceTime]
+    FROM [dbo].[ResourceMap] AS [ResourceMap]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="View_ResourceAssess" EntityType="Self.View_ResourceAssess" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [View_ResourceAssess].[ResultContent] AS [ResultContent], 
@@ -2560,6 +2664,7 @@
           <EntitySet Name="CardNo" EntityType="Homory.Model.CardNo" />
           <EntitySet Name="ViewTeacherExport" EntityType="Homory.Model.ViewTeacherExport" />
           <EntitySet Name="View_ResourceAssess" EntityType="Homory.Model.View_ResourceAssess" />
+          <EntitySet Name="ResourceMap" EntityType="Homory.Model.ResourceMap" />
         </EntityContainer>
         <EntityType Name="Application">
           <Key>
@@ -4494,6 +4599,69 @@
           <Property Name="现居住地" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="民族" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ResourceMap">
+          <Key>
+            <PropertyRef Name="CatalogId" />
+            <PropertyRef Name="Audit" />
+            <PropertyRef Name="AuditUsers" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="OpenType" />
+            <PropertyRef Name="FileType" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Author" />
+            <PropertyRef Name="Converted" />
+            <PropertyRef Name="Prize" />
+            <PropertyRef Name="Credit" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Favourite" />
+            <PropertyRef Name="Comment" />
+            <PropertyRef Name="Rate" />
+            <PropertyRef Name="Grade" />
+            <PropertyRef Name="View" />
+            <PropertyRef Name="Download" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="AssistantType" />
+            <PropertyRef Name="Stick" />
+            <PropertyRef Name="ResourceTime" />
+          </Key>
+          <Property Name="CatalogId" Type="Guid" Nullable="false" />
+          <Property Name="Audit" Type="Boolean" Nullable="false" />
+          <Property Name="AuditUsers" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="OpenType" Type="Int32" Nullable="false" />
+          <Property Name="FileType" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Converted" Type="Boolean" Nullable="false" />
+          <Property Name="Thumbnail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SourceName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Preview" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Prize" Type="Boolean" Nullable="false" />
+          <Property Name="PrizeRange" Type="Int32" />
+          <Property Name="PrizeLevel" Type="Int32" />
+          <Property Name="Credit" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Favourite" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Int32" Nullable="false" />
+          <Property Name="Grade" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="View" Type="Int32" Nullable="false" />
+          <Property Name="Download" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="GradeId" Type="Guid" />
+          <Property Name="CourseId" Type="Guid" />
+          <Property Name="CampusId" Type="Guid" />
+          <Property Name="AssistantType" Type="Int32" Nullable="false" />
+          <Property Name="Stick" Type="Int32" Nullable="false" />
+          <Property Name="ResourceTime" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5428,6 +5596,47 @@
                 <ScalarProperty Name="拼音" ColumnName="拼音" />
                 <ScalarProperty Name="姓名" ColumnName="姓名" />
                 <ScalarProperty Name="账号" ColumnName="账号" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResourceMap">
+            <EntityTypeMapping TypeName="Homory.Model.ResourceMap">
+              <MappingFragment StoreEntitySet="ResourceMap">
+                <ScalarProperty Name="ResourceTime" ColumnName="ResourceTime" />
+                <ScalarProperty Name="Stick" ColumnName="Stick" />
+                <ScalarProperty Name="AssistantType" ColumnName="AssistantType" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="GradeId" ColumnName="GradeId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Download" ColumnName="Download" />
+                <ScalarProperty Name="View" ColumnName="View" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Favourite" ColumnName="Favourite" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="PrizeLevel" ColumnName="PrizeLevel" />
+                <ScalarProperty Name="PrizeRange" ColumnName="PrizeRange" />
+                <ScalarProperty Name="Prize" ColumnName="Prize" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Preview" ColumnName="Preview" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="SourceName" ColumnName="SourceName" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Converted" ColumnName="Converted" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="OpenType" ColumnName="OpenType" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AuditUsers" ColumnName="AuditUsers" />
+                <ScalarProperty Name="Audit" ColumnName="Audit" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

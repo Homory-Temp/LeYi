@@ -222,6 +222,9 @@
     <Compile Include="Model\ResourceLogType.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ResourceMap.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ResourceOperationType.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

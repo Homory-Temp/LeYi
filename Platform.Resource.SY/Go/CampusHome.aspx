@@ -8,7 +8,6 @@
 <%@ Register Src="~/Control/HomeNote.ascx" TagPrefix="homory" TagName="HomeNote" %>
 <%@ Register Src="~/Control/HomeArticle.ascx" TagPrefix="homory" TagName="HomeArticle" %>
 <%@ Register Src="~/Control/HomeHonor.ascx" TagPrefix="homory" TagName="HomeHonor" %>
-<%@ Register Src="~/Control/HomeStudio.ascx" TagPrefix="homory" TagName="HomeStudio" %>
 <%@ Register Src="~/Control/HomeGroup.ascx" TagPrefix="homory" TagName="HomeGroup" %>
 <%@ Register Src="~/Control/HomeVideo.ascx" TagPrefix="homory" TagName="HomeVideo" %>
 <%@ Register Src="~/Control/HomeCourseware.ascx" TagPrefix="homory" TagName="HomeCourseware" %>
@@ -108,7 +107,6 @@
                         <homory:HomeTopic runat="server" ID="HomeTopic" />
                         <homory:HomeHonor runat="server" ID="HomeHonor" />
                         <homory:HomeGroup runat="server" ID="HomeGroup" />
-                        <homory:HomeStudio runat="server" ID="HomeStudio" />
                     </div>
                 </div>
             </div>

@@ -18,12 +18,37 @@
     <link href="../Style/zTreeStyle2.css" rel="stylesheet" />
     <base target="_top" />
     <style>
-        
         .flList_ex ul li {
             width: auto;
         }
-
     </style>
+    <script>
+        function MouseOver(id) {
+            var sourceId = $("#" + id);
+            var stick = sourceId.attr("Stick");
+            if (stick == "0") {
+                var url = "Image/upr.png";
+                sourceId.attr("src", url);
+            }
+            else {
+                url = "Image/downr.png";
+                sourceId.attr("src", url);
+            }
+        }
+
+        function MouseOut(id) {
+            var sourceId = $("#" + id);
+            var stick = sourceId.attr("Stick");
+            if (stick == "0") {
+                url = "Image/uph.png";
+                sourceId.attr("src", url);
+            }
+            else {
+                url = "Image/downh.png";
+                sourceId.attr("src", url);
+            }
+        }
+    </script>
 </head>
 <body>
     <form runat="server">
@@ -41,8 +66,7 @@
                         <h1 class="logo"><a class="fixpng" href="../Go/Home" title="互动教育资源管理平台">互动教育资源管理平台</a></h1>
                         <div class="lg-search" style="width: 396px;">
                             <input runat="server" type="text" class="srx-ns-input" id="search_content" value="" data-prevcolor="" style="color: rgb(170, 170, 170);" />
-                            <%--<a class="srx-ns-btn" runat="server" id="search_go_inner" onserverclick="search_go_OnServerClick">检索校内</a>--%>
-                            <a class="srx-ns-btn" runat="server" id="search_go" onserverclick="search_go_OnServerClick" style="border-right: solid 1px silver;">检索全部</a>
+                            <a class="srx-ns-btn" runat="server" id="search_go" onserverclick="search_go_OnServerClick" style="border-right: solid 1px silver;">检索</a>
                             <input id="hhhh" runat="server" type="hidden" value="1" />
                         </div>
 
@@ -54,79 +78,51 @@
                             <div class="Main w960 clearfix">
                                 <div class="xy_crumbs mgtb10">
                                     <a href="../Go/Home" class="h_icon"><em></em></a>
-                                    <a href="../Go/Catalog">资源目录</a>
-                                    <span>检索结果</span>
-
+                                    <span>资源检索</span>
                                 </div>
                                 <div class="xy_ltit mgtb10">
                                     &nbsp;
                                 <a class="xy_zksq" style="background-image: none;">共<dfn><label id="total" runat="server">0</label></dfn>份资源</a>
                                 </div>
                                 <div class="xy_sort">
-                                    <ul>
-                                        <li>
-                                            <span>校区:</span>
-                                            <p>
-                                                <asp:Repeater runat="server" ID="classAreaRepeater">
-                                                    <ItemTemplate>
-                                                        <telerik:RadButton Width="80" OnClick="item0_Click" runat="server" ID="period"  Text='<%#Eval("Name") %>' Value='<%# Eval("Id")%>' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 10px;">
-                                                        </telerik:RadButton>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <span>年级：</span>
-                                            <p>
-                                                <asp:Repeater runat="server" ID="gradeRepeater">
-                                                    <ItemTemplate>
-                                                        <telerik:RadButton Width="80" runat="server" ID="grade_item"  OnClick="grade_item_Click" Text='<%#Eval("Name") %>' Value='<%# Eval("Id")%>' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 10px;">
-                                                        </telerik:RadButton>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                            </p>
-                                        </li>
-                                         <li>
-                                            <span>课程：</span>
-                                            <p>
-                                                <asp:Repeater runat="server" ID="courseRepeater">
-                                                    <ItemTemplate>
-                                                        <telerik:RadButton Width="80" runat="server" ID="course_item" OnClick="course_item_Click" Text='<%#Eval("Name") %>' Value='<%# Eval("Id")%>' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 10px;">
-                                                        </telerik:RadButton>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                            </p>
-                                        </li>
-                                         <li>
-                                            <span>栏目：</span>
-                                            <p>
-                                                <asp:Repeater runat="server" ID="catalogRepeater">
-                                                    <ItemTemplate>
-                                                        <telerik:RadButton Width="80" runat="server" ID="catalog_item"  OnClick="catalog_item_Click" Text='<%#Eval("Name") %>' Value='<%# Eval("Id")%>' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 10px;">
-                                                        </telerik:RadButton>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <span>类型：</span>
-                                            <p>
-                                                <telerik:RadButton Width="80" runat="server" ID="t1" OnClick="t_Click"  Text='视频' Value='1' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 10px;"></telerik:RadButton>
-                                                <telerik:RadButton Width="80" runat="server" ID="t2" OnClick="t_Click"  Text='文章' Value='2' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 10px;"></telerik:RadButton>
-                                                <telerik:RadButton Width="80" runat="server" ID="t3" OnClick="t_Click"  Text='课件' Value='3' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 10px;"></telerik:RadButton>
-                                                <telerik:RadButton Width="80" runat="server" ID="t4" OnClick="t_Click"  Text='试卷' Value='4' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 10px;"></telerik:RadButton>
-                                            </p>
-                                        </li>
-                                    </ul>
+                                    <table style="margin: 10px 20px; clear: both; width: 90%;">
+                                        <tr>
+                                            <th>日期：</th>
+                                            <td>
+                                                <telerik:RadMonthYearPicker ID="from" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" AutoPostBack="true" Width="80" DateInput-DisplayDateFormat="yyyy年MM月" DateInput-DateFormat="yyyy年MM月">
+                                                    <DatePopupButton runat="server" Visible="false" />
+                                                    <MonthYearNavigationSettings OkButtonCaption="确认" CancelButtonCaption="取消" TodayButtonCaption="今日" />
+                                                </telerik:RadMonthYearPicker>
+                                            </td>
+                                            <th>&nbsp;-&nbsp;</th>
+                                            <td>
+                                                <telerik:RadMonthYearPicker ID="to" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" AutoPostBack="true" Width="80" DateInput-DisplayDateFormat="yyyy年MM月" DateInput-DateFormat="yyyy年MM月">
+                                                    <DatePopupButton runat="server" Visible="false" />
+                                                    <MonthYearNavigationSettings OkButtonCaption="确认" CancelButtonCaption="取消" TodayButtonCaption="今日" />
+                                                </telerik:RadMonthYearPicker>
+                                            </td>
+                                            <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                            <th>适用年龄段：</th>
+                                            <td>
+                                                <telerik:RadButton ID="a1" runat="server" Text="通用" Value="A3757840-9DF7-4370-8151-FAD39B44EF6A" ToggleType="CheckBox" Width="60" Checked="true" Style="margin-right: 4px;"></telerik:RadButton>
+                                                <telerik:RadButton ID="a2" runat="server" Text="大班" Value="625AE587-8C5A-454B-893C-08D2F6D187D5" ToggleType="CheckBox" Width="60" Checked="true" Style="margin-right: 4px;"></telerik:RadButton>
+                                                <telerik:RadButton ID="a3" runat="server" Text="中班" Value="CF3AE587-8CB9-4D0A-B29A-08D2F6D187D9" ToggleType="CheckBox" Width="60" Checked="true" Style="margin-right: 4px;"></telerik:RadButton>
+                                                <telerik:RadButton ID="a4" runat="server" Text="小班" Value="9FD9E587-8C09-4A55-9DB0-08D2F6D187DD" ToggleType="CheckBox" Width="60" Checked="true" Style="margin-right: 4px;"></telerik:RadButton>
+                                                <telerik:RadButton ID="a5" runat="server" Text="托班" Value="850557E1-9EBD-4E0D-93DC-FE090A77D393" ToggleType="CheckBox" Width="60" Checked="true"></telerik:RadButton>
+                                            </td>
+                                            <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                            <th>发布人：</th>
+                                            <td>
+                                                <telerik:RadSearchBox ID="publisher" runat="server" ShowSearchButton="false" Width="80"></telerik:RadSearchBox>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div>
+                                    </div>
                                 </div>
- 
-                                   
                                     <div id="SourceLi" runat="server"  class="fl xy_treebox mgt15" >
-                                              
-                                            <p class="xy_treetit">课程资源：</p>
-                                      
                                         <div class="zTreeDemoBackground2 left">
-                                            <telerik:RadTreeView runat="server" ID="commentList" CheckBoxes="true" CheckChildNodes="true" OnNodeCheck="commentList_NodeCheck" ExpandNodeOnSingleClick="true" AutoPostBack="True" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId"></telerik:RadTreeView>
+                                            <telerik:RadTreeView runat="server" ID="tree" CheckBoxes="true" CheckChildNodes="true" OnNodeCheck="commentList_NodeCheck" ExpandNodeOnSingleClick="true" AutoPostBack="true" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId"></telerik:RadTreeView>
                                         </div>
                                     </div>
                                     <div  class="mgt15 fr" style="width:770px;" >       
@@ -138,15 +134,16 @@
                                         </p>
                                     </div>
                                     <div class="xy_allzylist">
-                                        <telerik:RadListView runat="server" ID="result" AllowPaging="true" PageSize="20" OnNeedDataSource="result_NeedDataSource">
+                                        <telerik:RadListView runat="server" ID="result" AllowPaging="true" PageSize="20" OnNeedDataSource="result_NeedDataSource" OnItemDataBound="result_ItemDataBound">
                                             <ItemTemplate>
                                                 <dl>
                                                     <dt>
                                                         <img src='<%# string.Format("../Image/img/{0}.png", Eval("Thumbnail")) %>' width="64" height="64" />
                                                         <div>
-                                                            <p><a limit="30" href='<%# string.Format("../Go/{0}?Id={1}", ((Homory.Model.ResourceType)Eval("Type"))== Homory.Model.ResourceType.视频 ? "ViewVideo" : "ViewPlain", Eval("Id")) %>' class="xy_zkyl"><%# Eval("Title") %> </a></p>
+                                                            <p><%#(int)Eval("Stick") == 0?string.Empty:"<span style='font-weight:bolder; color:#ca0e0e;font-size:18px;'>[置顶]</span>" %>&nbsp;<a limit="30" href='<%# string.Format("../Go/{0}?Id={1}", ((Homory.Model.ResourceType)Eval("Type"))== Homory.Model.ResourceType.视频 ? "ViewVideo" : "ViewPlain", Eval("Id")) %>' class="xy_zkyl"><%# Eval("Title") %> </a></p>
+
                                                             <p class="sd wjdx">
-                                                                <span><%# UC(Eval("UserId")) %>&nbsp;<a href='<%# string.Format("../Go/Personal?Id={0}", Eval("UserId")) %>'><em><%# ((Homory.Model.Resource)Container.DataItem).User.DisplayName %></em></a></span><span>发布时间：<em> <%# ((DateTime)Eval("Time")).ToString("yyyy-MM-dd HH:mm") %></em></span>
+                                                                <span><%# UC(Eval("UserId")) %>&nbsp;<a href='<%# string.Format("../Go/Personal?Id={0}", Eval("UserId")) %>'><em><%# U(((Homory.Model.ResourceMap)Container.DataItem).UserId).RealName %></em></a></span><span>发布时间：<em> <%# ((DateTime)Eval("Time")).ToString("yyyy-MM-dd HH:mm") %></em></span>
                                                             </p>
                                                         </div>
                                                     </dt>
@@ -156,11 +153,12 @@
                                                                 <p id="grade" class="grade">
                                                                     <telerik:RadRating Skin="Default" ItemCount="5" Orientation="Horizontal" Precision="Item" runat="server" CssClass="flList_ex" AutoPostBack="false" Value='<%# Eval("Grade") %>' Enabled="false"></telerik:RadRating>
                                                                     (<%# Eval("Rate") %>次评分)
-                                                                    
                                                                 </p>
                                                             </li>
-                                                            <li><a target="_blank" href='<%# string.Format("../Go/{0}?Id={1}", ((Homory.Model.ResourceType)Eval("Type"))== Homory.Model.ResourceType.视频 ? "ViewVideo" : "ViewPlain", Eval("Id")) %>' class="xy_scbtn">浏览(<%# Eval("View") %>)</a></li>
+                                                            <li><a class="xy_scbtn">审核</a></li>
+                                                            <li><a target="_blank" href='<%# string.Format("../Go/{0}?Id={1}", ((Homory.Model.ResourceType)Eval("Type"))== Homory.Model.ResourceType.视频 ? "ViewVideo" : "ViewPlain", Eval("Id")) %>' class="xy_xzbtn">浏览(<%# Eval("View") %>)</a></li>
                                                             <li><a target="_blank" href='<%# string.Format("../Go/{0}?Id={1}", ((Homory.Model.ResourceType)Eval("Type"))== Homory.Model.ResourceType.视频 ? "ViewVideo" : "ViewPlain", Eval("Id")) %>' class="xy_xzbtn">下载(<%# Eval("Download") %>)</a></li>
+                                                            <li><asp:ImageButton ID="SetTop" class="SetTopClass" Visible='<%# ((Homory.Model.ResourceMap)Container.DataItem).AuditUsers.ToUpper().Contains(CurrentUser.Id.ToString().ToUpper()) %>' Stick='<%#Eval("Stick") %>' style="margin-top:16px;" ImageUrl='<%#(int)Eval("Stick")== 0?"Image/uph.png":"Image/downh.png"%>' ToolTip='<%#(int)Eval("Stick") == 0? "置顶":"取消置顶" %>'  runat="server"  SourceId='<%#Eval("Id")%>' OnClick="SetTop_Click" /></li>
                                                         </ul>
                                                     </dd>
                                                 </dl>
@@ -173,8 +171,7 @@
                                             </Fields>
                                         </telerik:RadDataPager>
                                     </div>
-                                        </div>
-                       
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -183,5 +180,11 @@
             </telerik:RadAjaxPanel>
         </div>
     </form>
+    <style>
+        .xy_sort span {
+            width: auto;
+            margin: 0;
+        }
+    </style>
 </body>
 </html>
