@@ -196,6 +196,7 @@ FakesAssemblies/
 *.opt
 
 # Homory
+App_Data/
 *.ldf
 *.mdf
 /Platform.Common/资源

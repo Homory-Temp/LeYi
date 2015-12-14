@@ -335,8 +335,8 @@ namespace Go
                 return;
             }
             var resource = CurrentResource;
-            var catalog = HomoryContext.Value.ResourceCatalog.Where(o => o.ResourceId == resource.Id && (o.Catalog.Type == CatalogType.文章 || o.Catalog.Type == CatalogType.视频 || o.Catalog.Type == CatalogType.课件) && o.State < State.删除).FutureCount();
-            if (catalog.Value == 0)
+            var catalog = HomoryContext.Value.ResourceCatalog.FirstOrDefault(o => o.ResourceId == resource.Id && (o.Catalog.Type == CatalogType.文章 || o.Catalog.Type == CatalogType.视频 || o.Catalog.Type == CatalogType.课件) && o.State < State.删除);
+            if (catalog == null)
             {
                 publish_publish_panel.ResponseScripts.Add("popNotify();");
                 return;
@@ -360,7 +360,14 @@ namespace Go
             resource.Title = publish_title_content.Value;
             resource.Content = publish_editor.Content;
             resource.Time = DateTime.Now;
-            resource.State = State.启用;
+            if (catalog.Catalog.Audit)
+            {
+                resource.State = State.默认;
+            }
+            else
+            {
+                resource.State = State.启用;
+            }
             resource.UserId = Guid.Parse(resource.Author);
             resource.CampusId = CurrentCampus.Id;
             if (string.IsNullOrWhiteSpace(resource.Preview))
