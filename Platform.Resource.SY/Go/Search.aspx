@@ -126,12 +126,13 @@
                                         </div>
                                     </div>
                                     <div  class="mgt15 fr" style="width:770px;" >       
-                                    <div class="xy_pxbar" style="height: 40px; line-height: 40px;">
-                                        <p>
-                                            <telerik:RadButton Width="80" runat="server" ID="s1" OnClick="itemX_OnClick" Text="最新" Value='1' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 10px;"></telerik:RadButton>
-                                            <telerik:RadButton Width="80" runat="server" ID="s2" OnClick="itemX_OnClick" Text="最热" Value='2' ToggleType="CheckBox" Style="margin-left: 10px; margin-right: 10px;"></telerik:RadButton>
-                                            <telerik:RadButton Width="80" runat="server" ID="s3" OnClick="itemX_OnClick" Text="最优" Value='3' ToggleType="CheckBox" Style="margin-left: 10px; margin-right: 10px;"></telerik:RadButton>
-                                        </p>
+                                    <div class="xy_pxbar" style="height: 40px; line-height: 40px; vertical-align: middle;">
+                                        <div style="margin: 10px auto;">
+                                            <telerik:RadButton Width="80" runat="server" ID="s1" OnClick="itemX_OnClick" Text="最新" Value='1' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 4px;"></telerik:RadButton>
+                                            <telerik:RadButton Width="80" runat="server" ID="s2" OnClick="itemX_OnClick" Text="最热" Value='2' ToggleType="CheckBox" Style="margin-right: 4px;"></telerik:RadButton>
+                                            <telerik:RadButton Width="80" runat="server" ID="s3" OnClick="itemX_OnClick" Text="最优" Value='3' ToggleType="CheckBox"></telerik:RadButton>
+                                            <telerik:RadButton Width="80" runat="server" ID="ss" OnClick="ss_Click" Text="待审核" Value='x' ToggleType="CheckBox" Style="margin-right: 10px; float: right;"></telerik:RadButton>
+                                        </div>
                                     </div>
                                     <div class="xy_allzylist">
                                         <telerik:RadListView runat="server" ID="result" AllowPaging="true" PageSize="20" OnNeedDataSource="result_NeedDataSource" OnItemDataBound="result_ItemDataBound">

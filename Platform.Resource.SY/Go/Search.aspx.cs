@@ -66,12 +66,17 @@ namespace Go
             var catalogIdList = tree.GetAllNodes().Where(o => o.Checked).Select(o => Guid.Parse(o.Value)).ToList();
             var catalogs = catalogIdList.Join(HomoryContext.Value.Catalog, o => o, o => o.Id, (a, b) => b).ToList();
             var list = new List<ResourceMap>();
-            list.AddRange(catalogIdList.Join(source.Where(o => o.State == State.启用 && o.OpenType == OpenType.不公开 && o.UserId == CurrentUser.Id), a => a, b => b.CatalogId, (a, b) => b).ToList());
-            list.AddRange(catalogIdList.Join(source.Where(o => o.State == State.启用 && o.OpenType != OpenType.不公开), a => a, b => b.CatalogId, (a, b) => b).ToList());
+            if (!ss.Checked)
+                list.AddRange(catalogIdList.Join(source.Where(o => o.State == State.启用 && o.OpenType == OpenType.不公开 && o.UserId == CurrentUser.Id), a => a, b => b.CatalogId, (a, b) => b).ToList());
+            if (!ss.Checked)
+                list.AddRange(catalogIdList.Join(source.Where(o => o.State == State.启用 && o.OpenType != OpenType.不公开), a => a, b => b.CatalogId, (a, b) => b).ToList());
             if (IsOnline)
             {
                 var uid = CurrentUser.Id.ToString().ToUpper();
-                list.AddRange(catalogs.Where(o => o.AuditUsers.ToUpper().Contains(uid.ToUpper())).Join(source.Where(o => o.State > State.启用), a => a.Id, b => b.CatalogId, (a, b) => b).ToList());
+                if (ss.Checked)
+                    list.AddRange(catalogs.Where(o => o.AuditUsers.ToUpper().Contains(uid.ToUpper())).Join(source.Where(o => o.State == State.默认), a => a.Id, b => b.CatalogId, (a, b) => b).ToList());
+                else
+                    list.AddRange(catalogs.Where(o => o.AuditUsers.ToUpper().Contains(uid.ToUpper())).Join(source.Where(o => o.State > State.启用), a => a.Id, b => b.CatalogId, (a, b) => b).ToList());
             }
             var final = list.OrderByDescending(o => o.Time).ToList();
             if (!string.IsNullOrEmpty(content))
@@ -208,6 +213,11 @@ namespace Go
             var x = e.FilterString.ToLower();
             publisher.DataSource = HomoryContext.Value.User.Where(o => o.State < State.审核).ToList().Where(o => o.RealName.ToLower().Contains(x) || o.PinYin.ToLower().Contains(x)).Select(o => new RUO { Id = o.Id, Name = o.RealName, PinYin = o.PinYin }).ToList();
             publisher.DataBind();
+        }
+
+        protected void ss_Click(object sender, EventArgs e)
+        {
+            reBind();
         }
     }
 }
