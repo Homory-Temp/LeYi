@@ -31,7 +31,7 @@ namespace Go
 
         protected override bool ShouldOnline
         {
-            get { return false; }
+            get { return true; }
         }
 
         protected void itemX_OnClick(object sender, EventArgs e)
