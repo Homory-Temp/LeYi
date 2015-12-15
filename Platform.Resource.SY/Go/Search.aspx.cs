@@ -11,8 +11,17 @@ namespace Go
 {
     public partial class GoSearch : HomoryResourcePage
     {
+        public class RUO
+        {
+            public Guid Id { get; set; }
+            public string Name { get; set; }
+            public string PinYin { get; set; }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            publisher.DataSource = HomoryContext.Value.User.Where(o => o.State < State.审核).ToList().Select(o => new RUO { Id = o.Id, Name = o.RealName, PinYin = o.PinYin }).ToList();
+            publisher.DataBind();
             if (!IsPostBack)
             {
                 search_content.Value = Request.QueryString["Content"];
@@ -102,6 +111,13 @@ namespace Go
                 final = final.Where(o => o.ResourceTime > tt).ToList();
             }
 
+            if (!string.IsNullOrEmpty(publisher.Text))
+            {
+                var uid = HomoryContext.Value.User.FirstOrDefault(o => o.RealName == publisher.Text);
+                if (uid != null)
+                    final = final.Where(o => o.UserId == uid.Id).ToList();
+            }
+
             if (s2.Checked)
                 result.DataSource = final.OrderByDescending(o => o.Stick).ThenByDescending(o => o.View);
             else if (s3.Checked)
@@ -175,6 +191,23 @@ namespace Go
             HomoryContext.Value.ResourceAudit.Add(ra);
             HomoryContext.Value.SaveChanges();
             reBind();
+        }
+
+        protected void from_SelectedDateChanged(object sender, Telerik.Web.UI.Calendar.SelectedDateChangedEventArgs e)
+        {
+            reBind();
+        }
+
+        protected void publisher_Search(object sender, SearchBoxEventArgs e)
+        {
+            reBind();
+        }
+
+        protected void publisher_DataSourceSelect(object sender, SearchBoxDataSourceSelectEventArgs e)
+        {
+            var x = e.FilterString.ToLower();
+            publisher.DataSource = HomoryContext.Value.User.Where(o => o.State < State.审核).ToList().Where(o => o.RealName.ToLower().Contains(x) || o.PinYin.ToLower().Contains(x)).Select(o => new RUO { Id = o.Id, Name = o.RealName, PinYin = o.PinYin }).ToList();
+            publisher.DataBind();
         }
     }
 }

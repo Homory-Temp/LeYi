@@ -89,14 +89,14 @@
                                         <tr>
                                             <th>日期：</th>
                                             <td>
-                                                <telerik:RadMonthYearPicker ID="from" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" AutoPostBack="true" Width="80" DateInput-DisplayDateFormat="yyyy年MM月" DateInput-DateFormat="yyyy年MM月">
+                                                <telerik:RadMonthYearPicker ID="from" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" AutoPostBack="true" Width="80" DateInput-DisplayDateFormat="yyyy年MM月" DateInput-DateFormat="yyyy年MM月" OnSelectedDateChanged="from_SelectedDateChanged">
                                                     <DatePopupButton runat="server" Visible="false" />
                                                     <MonthYearNavigationSettings OkButtonCaption="确认" CancelButtonCaption="取消" TodayButtonCaption="今日" />
                                                 </telerik:RadMonthYearPicker>
                                             </td>
                                             <th>&nbsp;-&nbsp;</th>
                                             <td>
-                                                <telerik:RadMonthYearPicker ID="to" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" AutoPostBack="true" Width="80" DateInput-DisplayDateFormat="yyyy年MM月" DateInput-DateFormat="yyyy年MM月">
+                                                <telerik:RadMonthYearPicker ID="to" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" AutoPostBack="true" Width="80" DateInput-DisplayDateFormat="yyyy年MM月" DateInput-DateFormat="yyyy年MM月" OnSelectedDateChanged="from_SelectedDateChanged">
                                                     <DatePopupButton runat="server" Visible="false" />
                                                     <MonthYearNavigationSettings OkButtonCaption="确认" CancelButtonCaption="取消" TodayButtonCaption="今日" />
                                                 </telerik:RadMonthYearPicker>
@@ -113,7 +113,7 @@
                                             <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                             <th>发布人：</th>
                                             <td>
-                                                <telerik:RadSearchBox ID="publisher" runat="server" ShowSearchButton="false" Width="80"></telerik:RadSearchBox>
+                                                <telerik:RadSearchBox ID="publisher" runat="server" ShowSearchButton="true" Width="100" DataTextField="Name" DataValueField="Id" OnSearch="publisher_Search" OnDataSourceSelect="publisher_DataSourceSelect"></telerik:RadSearchBox>
                                             </td>
                                         </tr>
                                     </table>
