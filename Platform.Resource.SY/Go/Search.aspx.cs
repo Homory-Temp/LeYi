@@ -64,8 +64,44 @@ namespace Go
                 var uid = CurrentUser.Id.ToString().ToUpper();
                 list.AddRange(catalogs.Where(o => o.AuditUsers.ToUpper().Contains(uid.ToUpper())).Join(source.Where(o => o.State > State.启用), a => a.Id, b => b.CatalogId, (a, b) => b).ToList());
             }
-            var finalSource = list;
-            var final = finalSource.Where(o => o.Title.Contains(content)).ToList().OrderByDescending(o => o.Time).ToList();
+            var final = list.OrderByDescending(o => o.Time).ToList();
+            if (!string.IsNullOrEmpty(content))
+                final = final.Where(o => o.Title.Contains(content)).ToList();
+            if (!a1.Checked)
+                final = final.Where(o => o.GradeId != Guid.Parse(a1.Value)).ToList();
+            if (!a2.Checked)
+                final = final.Where(o => o.GradeId != Guid.Parse(a2.Value)).ToList();
+            if (!a3.Checked)
+                final = final.Where(o => o.GradeId != Guid.Parse(a3.Value)).ToList();
+            if (!a4.Checked)
+                final = final.Where(o => o.GradeId != Guid.Parse(a4.Value)).ToList();
+            if (!a5.Checked)
+                final = final.Where(o => o.GradeId != Guid.Parse(a5.Value)).ToList();
+
+            DateTime ft, tt;
+            var f = from.SelectedDate;
+            var t = to.SelectedDate;
+            if (f.HasValue && t.HasValue)
+            {
+                ft = f.Value > t.Value ? t.Value : f.Value;
+                tt = f.Value > t.Value ? f.Value : t.Value;
+                ft = new DateTime(ft.Year, ft.Month, 1).AddMilliseconds(-1);
+                tt = new DateTime(tt.Year, tt.Month, 1).AddMonths(1);
+                final = final.Where(o => o.ResourceTime > ft && o.ResourceTime < tt).ToList();
+            }
+            else if (f.HasValue)
+            {
+                tt = f.Value;
+                tt = new DateTime(tt.Year, tt.Month, 1).AddMilliseconds(-1);
+                final = final.Where(o => o.ResourceTime > tt).ToList();
+            }
+            else if (t.HasValue)
+            {
+                tt = t.Value;
+                tt = new DateTime(tt.Year, tt.Month, 1).AddMilliseconds(-1);
+                final = final.Where(o => o.ResourceTime > tt).ToList();
+            }
+
             if (s2.Checked)
                 result.DataSource = final.OrderByDescending(o => o.Stick).ThenByDescending(o => o.View);
             else if (s3.Checked)
