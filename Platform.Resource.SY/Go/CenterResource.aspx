@@ -67,7 +67,6 @@
                                                         <div class="tab">视频资源</div>
                                                         <div class="tab">文章资源</div>
                                                         <div class="tab">课件资源</div>
-                                                        <div class="tab">试卷资源</div>
 
 
 
@@ -173,39 +172,6 @@
                                                             </FooterTemplate>
                                                         </asp:Repeater></telerik:RadAjaxPanel>
                                                     </div>
-
-                                                    <div class="tabContent">
-                                                        <telerik:RadAjaxPanel runat="server" ID="pp4">
-                                                       <asp:Repeater runat="server" ID="Repeater2">
-                                                            <HeaderTemplate>
-                                                                <table width="575">
-                                                                    <tr style="background:#F1F4F9;">
-                                                                    <td width="260" height="30">标题</td>
-                                                                    <td width="120">&nbsp;&nbsp;&nbsp;&nbsp;操作</td>
-                                                                    <td width="120">&nbsp;&nbsp;&nbsp;&nbsp;发布时间</td>
-                                                                    
-                                                                </tr>
-                                                            </HeaderTemplate>
-                                                            <ItemTemplate>
-                                                                <tr>
-                                                                    <td height="25">
-                                                                        <img src='<%# string.Format("../Image/img/{0}.jpg", Eval("Thumbnail")) %>' width="16" height="16" />
-                                                                    &nbsp;&nbsp;&nbsp;&nbsp;<a href='<%# string.Format("../Go/ViewPlain?Id={0}", Eval("Id")) %>'><%# Eval("Title") %></a>
-                                                                    </td>
-                                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<a  href='<%# string.Format("../Go/Editing?Id={0}", Eval("Id")) %>'>编辑</a>
-                                                                    &nbsp;&nbsp;&nbsp;&nbsp;<a id="del4" data-id='<%# Eval("Id") %>' runat="server" target="_self" onserverclick="del4_ServerClick">删除</a>
-                                                                    </td>
-                                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;
-														     <em><%# ((DateTime)Eval("Time")).ToString("yyyy-MM-dd") %></em>
-                                                                    </td>
-                                                                </tr>
-                                                            </ItemTemplate>
-                                                            <FooterTemplate>
-                                                                </table>
-                                                            </FooterTemplate>
-                                                        </asp:Repeater></telerik:RadAjaxPanel>
-                                                    </div>
-
 
                                                 </div>
 

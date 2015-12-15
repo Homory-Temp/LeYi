@@ -24,6 +24,7 @@ namespace Homory.Model
             this.ResourceComment = new HashSet<ResourceComment>();
             this.MediaNote = new HashSet<MediaNote>();
             this.ResourceAssess = new HashSet<ResourceAssess>();
+            this.ResourceAudit = new HashSet<ResourceAudit>();
         }
     
         public System.Guid Id { get; set; }
@@ -67,5 +68,6 @@ namespace Homory.Model
         public virtual ICollection<ResourceComment> ResourceComment { get; set; }
         public virtual ICollection<MediaNote> MediaNote { get; set; }
         public virtual ICollection<ResourceAssess> ResourceAssess { get; set; }
+        public virtual ICollection<ResourceAudit> ResourceAudit { get; set; }
     }
 }

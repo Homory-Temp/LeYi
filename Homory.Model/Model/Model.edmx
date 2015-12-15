@@ -332,6 +332,17 @@
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="Remark" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="ResourceAudit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ResourceId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AuditUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AuditState" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
         <EntityType Name="ResourceCatalog">
           <Key>
             <PropertyRef Name="ResourceId" />
@@ -1484,6 +1495,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ResourceAudit_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="ResourceAudit" Type="Self.ResourceAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResourceAudit">
+              <PropertyRef Name="ResourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResourceAudit_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ResourceAudit" Type="Self.ResourceAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResourceAudit">
+              <PropertyRef Name="AuditUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ResourceCatalog_Catalog">
           <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
           <End Role="ResourceCatalog" Type="Self.ResourceCatalog" Multiplicity="*" />
@@ -1799,6 +1834,7 @@
           <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResourceAssess" EntityType="Self.ResourceAssess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResourceAttachment" EntityType="Self.ResourceAttachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResourceAudit" EntityType="Self.ResourceAudit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResourceCatalog" EntityType="Self.ResourceCatalog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResourceComment" EntityType="Self.ResourceComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResourceCommentTemp" EntityType="Self.ResourceCommentTemp" Schema="dbo" store:Type="Tables" />
@@ -2288,6 +2324,14 @@
             <End Role="Resource" EntitySet="Resource" />
             <End Role="ResourceAttachment" EntitySet="ResourceAttachment" />
           </AssociationSet>
+          <AssociationSet Name="FK_ResourceAudit_Resource" Association="Self.FK_ResourceAudit_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ResourceAudit" EntitySet="ResourceAudit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResourceAudit_User" Association="Self.FK_ResourceAudit_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ResourceAudit" EntitySet="ResourceAudit" />
+          </AssociationSet>
           <AssociationSet Name="FK_ResourceCatalog_Catalog" Association="Self.FK_ResourceCatalog_Catalog">
             <End Role="Catalog" EntitySet="Catalog" />
             <End Role="ResourceCatalog" EntitySet="ResourceCatalog" />
@@ -2665,6 +2709,15 @@
           <EntitySet Name="ViewTeacherExport" EntityType="Homory.Model.ViewTeacherExport" />
           <EntitySet Name="View_ResourceAssess" EntityType="Homory.Model.View_ResourceAssess" />
           <EntitySet Name="ResourceMap" EntityType="Homory.Model.ResourceMap" />
+          <EntitySet Name="ResourceAudit" EntityType="Homory.Model.ResourceAudit" />
+          <AssociationSet Name="FK_ResourceAudit_Resource" Association="Homory.Model.FK_ResourceAudit_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ResourceAudit" EntitySet="ResourceAudit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResourceAudit_User" Association="Homory.Model.FK_ResourceAudit_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ResourceAudit" EntitySet="ResourceAudit" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Application">
           <Key>
@@ -2744,6 +2797,7 @@
           <NavigationProperty Name="ResourceLog" Relationship="Homory.Model.FK_ResourceLog_User" FromRole="User" ToRole="ResourceLog" />
           <NavigationProperty Name="GroupBoard" Relationship="Homory.Model.FK_GroupBoard_User" FromRole="User" ToRole="GroupBoard" />
           <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ResourceAudit" Relationship="Homory.Model.FK_ResourceAudit_User" FromRole="User" ToRole="ResourceAudit" />
         </EntityType>
         <EntityType Name="UserOnline">
           <Key>
@@ -3419,6 +3473,7 @@
           <Property Name="CampusId" Type="Guid" />
           <Property Name="Stick" Type="Int32" Nullable="false" />
           <Property Name="ResourceTime" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ResourceAudit" Relationship="Homory.Model.FK_ResourceAudit_Resource" FromRole="Resource" ToRole="ResourceAudit" />
         </EntityType>
         <EntityType Name="ResourceCatalog">
           <Key>
@@ -4662,6 +4717,43 @@
           <Property Name="Stick" Type="Int32" Nullable="false" />
           <Property Name="ResourceTime" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
+        <EntityType Name="ResourceAudit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ResourceId" Type="Guid" Nullable="false" />
+          <Property Name="AuditUser" Type="Guid" Nullable="false" />
+          <Property Name="AuditState" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Resource" Relationship="Homory.Model.FK_ResourceAudit_Resource" FromRole="ResourceAudit" ToRole="Resource" />
+          <NavigationProperty Name="User" Relationship="Homory.Model.FK_ResourceAudit_User" FromRole="ResourceAudit" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_ResourceAudit_Resource">
+          <End Type="Homory.Model.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="Homory.Model.ResourceAudit" Role="ResourceAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResourceAudit">
+              <PropertyRef Name="ResourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResourceAudit_User">
+          <End Type="Homory.Model.User" Role="User" Multiplicity="1" />
+          <End Type="Homory.Model.ResourceAudit" Role="ResourceAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResourceAudit">
+              <PropertyRef Name="AuditUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5637,6 +5729,18 @@
                 <ScalarProperty Name="AuditUsers" ColumnName="AuditUsers" />
                 <ScalarProperty Name="Audit" ColumnName="Audit" />
                 <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResourceAudit">
+            <EntityTypeMapping TypeName="Homory.Model.ResourceAudit">
+              <MappingFragment StoreEntitySet="ResourceAudit">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="AuditState" ColumnName="AuditState" />
+                <ScalarProperty Name="AuditUser" ColumnName="AuditUser" />
+                <ScalarProperty Name="ResourceId" ColumnName="ResourceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

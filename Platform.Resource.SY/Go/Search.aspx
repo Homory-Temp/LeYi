@@ -104,11 +104,11 @@
                                             <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                             <th>适用年龄段：</th>
                                             <td>
-                                                <telerik:RadButton ID="a1" runat="server" Text="通用" Value="A3757840-9DF7-4370-8151-FAD39B44EF6A" ToggleType="CheckBox" Width="60" Checked="true" Style="margin-right: 4px;"></telerik:RadButton>
-                                                <telerik:RadButton ID="a2" runat="server" Text="大班" Value="625AE587-8C5A-454B-893C-08D2F6D187D5" ToggleType="CheckBox" Width="60" Checked="true" Style="margin-right: 4px;"></telerik:RadButton>
-                                                <telerik:RadButton ID="a3" runat="server" Text="中班" Value="CF3AE587-8CB9-4D0A-B29A-08D2F6D187D9" ToggleType="CheckBox" Width="60" Checked="true" Style="margin-right: 4px;"></telerik:RadButton>
-                                                <telerik:RadButton ID="a4" runat="server" Text="小班" Value="9FD9E587-8C09-4A55-9DB0-08D2F6D187DD" ToggleType="CheckBox" Width="60" Checked="true" Style="margin-right: 4px;"></telerik:RadButton>
-                                                <telerik:RadButton ID="a5" runat="server" Text="托班" Value="850557E1-9EBD-4E0D-93DC-FE090A77D393" ToggleType="CheckBox" Width="60" Checked="true"></telerik:RadButton>
+                                                <telerik:RadButton ID="a1" runat="server" Text="通用" OnCheckedChanged="a_CheckedChanged" Value="A3757840-9DF7-4370-8151-FAD39B44EF6A" ToggleType="CheckBox" Width="60" Checked="true" Style="margin-right: 4px;"></telerik:RadButton>
+                                                <telerik:RadButton ID="a2" runat="server" Text="大班" OnCheckedChanged="a_CheckedChanged" Value="625AE587-8C5A-454B-893C-08D2F6D187D5" ToggleType="CheckBox" Width="60" Checked="true" Style="margin-right: 4px;"></telerik:RadButton>
+                                                <telerik:RadButton ID="a3" runat="server" Text="中班" OnCheckedChanged="a_CheckedChanged" Value="CF3AE587-8CB9-4D0A-B29A-08D2F6D187D9" ToggleType="CheckBox" Width="60" Checked="true" Style="margin-right: 4px;"></telerik:RadButton>
+                                                <telerik:RadButton ID="a4" runat="server" Text="小班" OnCheckedChanged="a_CheckedChanged" Value="9FD9E587-8C09-4A55-9DB0-08D2F6D187DD" ToggleType="CheckBox" Width="60" Checked="true" Style="margin-right: 4px;"></telerik:RadButton>
+                                                <telerik:RadButton ID="a5" runat="server" Text="托班" OnCheckedChanged="a_CheckedChanged" Value="850557E1-9EBD-4E0D-93DC-FE090A77D393" ToggleType="CheckBox" Width="60" Checked="true"></telerik:RadButton>
                                             </td>
                                             <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                             <th>发布人：</th>

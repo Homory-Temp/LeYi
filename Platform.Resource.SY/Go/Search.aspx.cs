@@ -97,5 +97,10 @@ namespace Go
             var tip = (e.Item.FindControl("tip") as RadToolTip);
             tip.TargetControlID = ab;
         }
+
+        protected void a_CheckedChanged(object sender, EventArgs e)
+        {
+            reBind();
+        }
     }
 }

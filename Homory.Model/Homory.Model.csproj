@@ -204,6 +204,9 @@
     <Compile Include="Model\ResourceAttachment.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ResourceAudit.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ResourceCatalog.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
