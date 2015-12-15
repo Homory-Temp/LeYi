@@ -4686,9 +4686,9 @@
           <Property Name="AuditUsers" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
-          <Property Name="OpenType" Type="Int32" Nullable="false" />
-          <Property Name="FileType" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Homory.Model.ResourceType" Nullable="false" />
+          <Property Name="OpenType" Type="Homory.Model.OpenType" Nullable="false" />
+          <Property Name="FileType" Type="Homory.Model.ResourceFileType" Nullable="false" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="Author" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -4702,7 +4702,7 @@
           <Property Name="PrizeRange" Type="Int32" />
           <Property Name="PrizeLevel" Type="Int32" />
           <Property Name="Credit" Type="Int32" Nullable="false" />
-          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Homory.Model.State" Nullable="false" />
           <Property Name="Favourite" Type="Int32" Nullable="false" />
           <Property Name="Comment" Type="Int32" Nullable="false" />
           <Property Name="Rate" Type="Int32" Nullable="false" />

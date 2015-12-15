@@ -20,9 +20,9 @@ namespace Homory.Model
         public string AuditUsers { get; set; }
         public System.Guid Id { get; set; }
         public System.Guid UserId { get; set; }
-        public int Type { get; set; }
-        public int OpenType { get; set; }
-        public int FileType { get; set; }
+        public ResourceType Type { get; set; }
+        public OpenType OpenType { get; set; }
+        public ResourceFileType FileType { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
         public string Content { get; set; }
@@ -36,7 +36,7 @@ namespace Homory.Model
         public Nullable<int> PrizeRange { get; set; }
         public Nullable<int> PrizeLevel { get; set; }
         public int Credit { get; set; }
-        public int State { get; set; }
+        public State State { get; set; }
         public int Favourite { get; set; }
         public int Comment { get; set; }
         public int Rate { get; set; }

@@ -57,11 +57,12 @@ namespace Go
             var catalogIdList = tree.GetAllNodes().Where(o => o.Checked).Select(o => Guid.Parse(o.Value)).ToList();
             var catalogs = catalogIdList.Join(HomoryContext.Value.Catalog, o => o, o => o.Id, (a, b) => b).ToList();
             var list = new List<ResourceMap>();
-            list.AddRange(catalogIdList.Join(source.Where(o => o.State == 1), a => a, b => b.CatalogId, (a, b) => b).ToList());
+            list.AddRange(catalogIdList.Join(source.Where(o => o.State == State.启用 && o.OpenType == OpenType.不公开 && o.UserId == CurrentUser.Id), a => a, b => b.CatalogId, (a, b) => b).ToList());
+            list.AddRange(catalogIdList.Join(source.Where(o => o.State == State.启用 && o.OpenType != OpenType.不公开), a => a, b => b.CatalogId, (a, b) => b).ToList());
             if (IsOnline)
             {
                 var uid = CurrentUser.Id.ToString().ToUpper();
-                list.AddRange(catalogs.Where(o => o.AuditUsers.ToUpper().Contains(uid.ToUpper())).Join(source.Where(o => o.State > 1), a => a.Id, b => b.CatalogId, (a, b) => b).ToList());
+                list.AddRange(catalogs.Where(o => o.AuditUsers.ToUpper().Contains(uid.ToUpper())).Join(source.Where(o => o.State > State.启用), a => a.Id, b => b.CatalogId, (a, b) => b).ToList());
             }
             var finalSource = list;
             var final = finalSource.Where(o => o.Title.Contains(content)).ToList().OrderByDescending(o => o.Time).ToList();
@@ -100,6 +101,43 @@ namespace Go
 
         protected void a_CheckedChanged(object sender, EventArgs e)
         {
+            reBind();
+        }
+
+        protected void tb1_ServerClick(object sender, EventArgs e)
+        {
+            var rid = Guid.Parse((sender as HtmlAnchor).Attributes["match"]);
+            var r = HomoryContext.Value.Resource.Single(o => o.Id == rid);
+            r.State = State.启用;
+            var ctrl = (sender as HtmlAnchor).NamingContainer.FindControl("reason") as RadTextBox;
+            var ra = new ResourceAudit { Id = HomoryContext.Value.GetId(), Content = ctrl.Text, ResourceId = rid, Time = DateTime.Now, AuditState = 1, AuditUser = CurrentUser.Id };
+            HomoryContext.Value.ResourceAudit.Add(ra);
+            HomoryContext.Value.SaveChanges();
+            reBind();
+        }
+
+        protected void tb2_ServerClick(object sender, EventArgs e)
+        {
+            var rid = Guid.Parse((sender as HtmlAnchor).Attributes["match"]);
+            var r = HomoryContext.Value.Resource.Single(o => o.Id == rid);
+            r.State = State.停用;
+            var ctrl = (sender as HtmlAnchor).NamingContainer.FindControl("reason") as RadTextBox;
+            var ra = new ResourceAudit { Id = HomoryContext.Value.GetId(), Content = ctrl.Text, ResourceId = rid, Time = DateTime.Now, AuditState = 4, AuditUser = CurrentUser.Id };
+            HomoryContext.Value.ResourceAudit.Add(ra);
+            HomoryContext.Value.SaveChanges();
+            reBind();
+        }
+
+        protected void tb3_ServerClick(object sender, EventArgs e)
+        {
+            var rid = Guid.Parse((sender as HtmlAnchor).Attributes["match"]);
+            var r = HomoryContext.Value.Resource.Single(o => o.Id == rid);
+            r.OpenType = OpenType.不公开;
+            r.State = State.启用;
+            var ctrl = (sender as HtmlAnchor).NamingContainer.FindControl("reason") as RadTextBox;
+            var ra = new ResourceAudit { Id = HomoryContext.Value.GetId(), Content = ctrl.Text, ResourceId = rid, Time = DateTime.Now, AuditState = 5, AuditUser = CurrentUser.Id };
+            HomoryContext.Value.ResourceAudit.Add(ra);
+            HomoryContext.Value.SaveChanges();
             reBind();
         }
     }

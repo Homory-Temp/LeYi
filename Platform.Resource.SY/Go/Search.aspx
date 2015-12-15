@@ -156,8 +156,8 @@
                                                                 </p>
                                                             </li>
                                                             <li>
-                                                                <a id="ab" runat="server" class="xy_scbtn" visible='<%# (bool)Eval("Audit") %>' style="cursor: pointer;"><%# ((int)Eval("State")) == 4 ? "未通过" : (((int)Eval("State")) == 3 ? "未审核" : "已通过") %></a>
-                                                                <telerik:RadToolTip ID="tip" runat="server" IsClientID="true" Skin="MetroTouch" AutoCloseDelay="0">
+                                                                <a id="ab" runat="server" class="xy_scbtn" visible='<%# (bool)Eval("Audit") %>' style="cursor: pointer;"><%# ((OpenType)Eval("OpenType")) == OpenType.不公开 ? "不公开" : (((State)Eval("State")) == State.停用 ? "未通过" : (((State)Eval("State")) == State.默认 ? "未审核" : "已通过")) %></a>
+                                                                <telerik:RadToolTip ID="tip" runat="server" IsClientID="true" Skin="MetroTouch" AutoCloseDelay="0" Visible='<%# ((OpenType)Eval("OpenType")) != OpenType.不公开 %>'>
                                                                     <table>
                                                                         <tr>
                                                                             <td colspan="5" style="text-align: center;">
@@ -165,11 +165,11 @@
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td><a id="tb1" runat="server" class="xy_scbtn" style="cursor: pointer;">通过</a></td>
+                                                                            <td><a id="tb1" runat="server" class="xy_scbtn" style="cursor: pointer;" match='<%# Eval("Id") %>' onserverclick="tb1_ServerClick">通过</a></td>
                                                                             <td>&nbsp;</td>
-                                                                            <td><a id="tb2" runat="server" class="xy_scbtn" style="cursor: pointer;">不通过</a></td>
+                                                                            <td><a id="tb2" runat="server" class="xy_scbtn" style="cursor: pointer;" match='<%# Eval("Id") %>' onserverclick="tb2_ServerClick">不通过</a></td>
                                                                             <td>&nbsp;</td>
-                                                                            <td><a id="tb3" runat="server" class="xy_scbtn" style="cursor: pointer;">删除</a></td>
+                                                                            <td><a id="tb3" runat="server" class="xy_scbtn" style="cursor: pointer;" match='<%# Eval("Id") %>' onserverclick="tb3_ServerClick">删除</a></td>
                                                                         </tr>
                                                                     </table>
                                                                 </telerik:RadToolTip>
