@@ -109,7 +109,6 @@
                                     </asp:Panel>
                                     <span>时间：<%= CurrentResource.Time.ToString("yyyy-MM-dd HH:mm") %></span>
                                 </div>
-
                                 <div id="notAllowed" runat="server" style="font-size: 14px; font-weight: bold;">
                                     <br />
                                     <br />
@@ -124,21 +123,38 @@
                                     <%= CurrentResource.Content %>
                                     <br />
                                     <iframe runat="server" src="../Document/web/PdfViewer.aspx" width="738px" height="800px" id="publish_preview_pdf" style="margin-top: 10px;"></iframe>
-
                                 </div>
                                 <br />
                                 <br />
                                 <p id="pppp1" runat="server" style="font-size: 16px;">附件：</p>
                                 <p id="pppp2" runat="server">
-
-                                    <telerik:RadListView ID="publish_attachment_list" runat="server" OnNeedDataSource="publish_attachment_list_OnNeedDataSource">
+                                    <telerik:RadListView ID="publish_attachment_list" runat="server" OnNeedDataSource="publish_attachment_list_OnNeedDataSource" ItemPlaceholderID="h_pal" OnItemDataBound="publish_attachment_list_ItemDataBound">
+                                        <LayoutTemplate>
+                                            <table style="margin: 10px auto 0 auto; float: left;">
+                                                <asp:PlaceHolder ID="h_pal" runat="server"></asp:PlaceHolder>
+                                            </table>
+                                            <div style="clear: both;">&nbsp;</div>
+                                        </LayoutTemplate>
                                         <ItemTemplate>
-                                            <img src='<%# string.Format("../Image/img/{0}.jpg", (int)Eval("FileType")) %>' />
-                                            <a href='<%# string.Format("{0}", Eval("Source")) %>'><%# Eval("Title") %></a>&nbsp;&nbsp;
+                                            <tr style="vertical-align: middle; height: 28px; line-height: 28px;">
+                                                <td>
+                                                    <img src='<%# string.Format("../Image/img/{0}.jpg", (int)Eval("FileType")) %>' />
+                                                </td>
+                                                <td>&nbsp;&nbsp;</td>
+                                                <td title='<%# Eval("Remark") %>' style="width: 400px;">
+                                                    <a href='<%# string.Format("{0}", Eval("Source")) %>'><%# Eval("Title") %></a>
+                                                </td>
+                                                <td>&nbsp;&nbsp;</td>
+                                                <td>
+                                                    <a id="pv" runat="server" style="cursor: pointer;">预览</a>
+                                                    <telerik:RadToolTip ID="tip" runat="server" Skin="MetroTouch" IsClientID="true" AutoCloseDelay="0">
+                                                        <img src='<%# string.Format("{0}", Eval("Source")) %>' />
+                                                    </telerik:RadToolTip>
+                                                </td>
+                                            </tr>
                                         </ItemTemplate>
                                     </telerik:RadListView>
                                 </p>
-
                                 <div id="vp2" runat="server" class="photo-actions clearfix">
                                     <table>
                                         <tr>
@@ -155,13 +171,8 @@
                                             </td>
                                         </tr>
                                     </table>
-
                                 </div>
-
                             </telerik:RadCodeBlock>
-
-
-
                             <div id="vp3" runat="server" class="xy_zypf mgt20" style="margin: 10px 0px;">
                                 <strong>资源评分：</strong>
                                 <div class="grade_wrap">
@@ -171,48 +182,35 @@
                                             <input type="hidden" id="gradeVal" value="8" />
                                         </telerik:RadAjaxPanel>
                                     </div>
-
                                 </div>
-
                                 <table style="margin-top: -20px;">
-
-
                                     <tr>
-
                                         <td width="180" style="font-size: 20px; cursor: pointer;" onclick="popupRate();">
                                             <telerik:RadAjaxPanel runat="server" ID="scorePanel" OnAjaxRequest="scorePanel_AjaxRequest">资源得分：<label id="score" runat="server"></label></telerik:RadAjaxPanel>
                                         </td>
-
                                         <td width="130">
                                             <telerik:RadAjaxPanel runat="server" ID="downloadPanel">
                                                 <a target="_self" id="download" runat="server" onserverclick="download_OnServerClick" class="xzbigbtn"></br>下载</br>
-                                  <em id="downloadCount" runat="server"></em></a>
+                                                <em id="downloadCount" runat="server"></em></a>
                                             </telerik:RadAjaxPanel>
                                         </td>
                                         <td align="right" width="130">
                                             <telerik:RadAjaxPanel runat="server" ID="favouritePanel">
                                                 <a target="_self" id="favourite" runat="server" onserverclick="favourite_OnServerClick"></br>收藏</br>
-                                  <em id="favouriteCount" runat="server"></em></a>
+                                                <em id="favouriteCount" runat="server"></em></a>
                                             </telerik:RadAjaxPanel>
                                         </td>
                                     </tr>
-
                                 </table>
                             </div>
-
                             <p id="vp4" runat="server" style="font-size: 16px;">评论：</p>
                             <telerik:RadAjaxPanel runat="server" ID="commentPanel">
-
                                 <div class="srx-comment-iptbox" id="srxCommentInputBox">
                                     <textarea id="comment" runat="server" rows="11" style="width: 730px;"></textarea>
                                     <div class="srx-ciptbox-toolbar">
-
                                         <a id="doComment" runat="server" class="button24 srx-ciptbox-submit" target="_self" onserverclick="doComment_OnServerClick" style="width: 60px;"><em>发表</em></a>
-
-
                                     </div>
                                 </div>
-
                                 <telerik:RadTreeView runat="server" ID="commentList" EnableEmbeddedBaseStylesheet="False" EnableEmbeddedSkins="False" DataFieldParentID="ParentId" DataTextField="Content" DataFieldID="Id" DataValueField="Id">
                                     <NodeTemplate>
                                         <div class="srx-comment-list-box" id="srxCommentListBox" style='<%# string.Format("margin-left: {0}px;", ((Homory.Model.ResourceComment)Container.DataItem).Level * 30) %>'>
@@ -241,20 +239,11 @@
                                                         </div>
                                                     </dd>
                                                 </dl>
-
-
-
                                             </div>
-
-
-
-
                                         </div>
                                     </NodeTemplate>
                                 </telerik:RadTreeView>
-
                             </telerik:RadAjaxPanel>
-
                         </div>
                         <div class="srx-right">
                             <telerik:RadCodeBlock runat="server">
@@ -279,16 +268,13 @@
                             </telerik:RadCodeBlock>
                             <div style="clear: both; height: 10px"></div>
                             <div id="tabA" class="tabControl" style="width: 200px; height: 290px; float: left; background-color: #FFF">
-
                                 <div class="box doing">
                                     <div style="width: 200px; margin: auto; height: 30px;">
                                         <div class="tabs" style="margin-left: 8px">
-
                                             <div class="tab" style="margin-top: -5px; margin-left: -1px;">最新</div>
                                             <div class="tab" style="margin-top: -5px; margin-left: -1px;">最热</div>
                                             <div class="tab" style="margin-top: -5px; margin-left: -1px;">最优</div>
                                         </div>
-
                                         <div class="tabClear"></div>
                                         <div class="tabContents">
                                             <div class="tabContent">
@@ -311,7 +297,6 @@
                                                             </ItemTemplate>
                                                         </asp:Repeater>
                                                     </telerik:RadAjaxPanel>
-
                                                 </ul>
                                             </div>
                                             <div class="tabContent">
@@ -325,7 +310,6 @@
                                                     </telerik:RadAjaxPanel>
                                                 </ul>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -333,9 +317,7 @@
                             <div class="r-visitors">
                                 <div class="rv-title clearfix">
                                     <h3 class="fl">TA们刚刚看过</h3>
-
                                     <span class="rv-count fr">访问总数：<asp:Label runat="server" ID="viewCount"></asp:Label></span>
-
                                 </div>
                                 <div class="rv-box">
                                     <ul class="clearfix" style="margin-left: 15px">
@@ -348,14 +330,9 @@
                                                 </li>
                                             </ItemTemplate>
                                         </asp:Repeater>
-
-
-
                                     </ul>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                     <script src="../Script/index.js"></script>

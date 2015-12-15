@@ -512,5 +512,12 @@ TargetUser.Resource.Where(o => o.State == State.启用 && o.Type == rt)
 
 			}
 		}
-	}
+
+        protected void publish_attachment_list_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
+        {
+            var h = (e.Item.FindControl("pv") as HtmlAnchor);
+            var t = e.Item.FindControl("tip") as Telerik.Web.UI.RadToolTip;
+            t.TargetControlID = h.ClientID;
+        }
+    }
 }
