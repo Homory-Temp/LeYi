@@ -360,13 +360,20 @@ namespace Go
             resource.Title = publish_title_content.Value;
             resource.Content = publish_editor.Content;
             resource.Time = DateTime.Now;
-            if (catalog.Catalog.Audit)
+            if (resource.OpenType == OpenType.不公开)
             {
-                resource.State = State.默认;
+                resource.State = State.启用;
             }
             else
             {
-                resource.State = State.启用;
+                if (catalog.Catalog.Audit)
+                {
+                    resource.State = State.默认;
+                }
+                else
+                {
+                    resource.State = State.启用;
+                }
             }
             resource.UserId = Guid.Parse(resource.Author);
             resource.CampusId = CurrentCampus.Id;
