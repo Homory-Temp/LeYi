@@ -513,11 +513,63 @@ TargetUser.Resource.Where(o => o.State == State.启用 && o.Type == rt)
 			}
 		}
 
+        protected bool CanPreviewA(object url)
+        {
+            if (IsPlain(url))
+            {
+                var xurl = url.ToString().Substring(0, url.ToString().LastIndexOf(".")) + ".pdf";
+                return System.IO.File.Exists(Server.MapPath(xurl));
+            }
+            return true;
+        }
+
+        protected bool IsPlain(object url)
+        {
+            return new[] { "doc", "docx", "ppt", "pptx", "xls", "xlsx", "pdf", "txt" }.Contains(url.ToString().ToLower().Split(new[] { '.' }).Last());
+        }
+
+        protected bool IsVideo(object url)
+        {
+            return new[] { "mp4", "flv" }.Contains(url.ToString().ToLower().Split(new[] { '.' }).Last());
+        }
+
+        protected bool IsImage(object url)
+        {
+            return new[] { "jpg", "jpeg", "bmp", "png", "gif" }.Contains(url.ToString().ToLower().Split(new[] { '.' }).Last());
+        }
+
+        protected bool IsAudio(object url)
+        {
+            return new[] { "mp3", "wav" }.Contains(url.ToString().ToLower().Split(new[] { '.' }).Last());
+        }
+
         protected void publish_attachment_list_ItemDataBound(object sender, Telerik.Web.UI.RadListViewItemEventArgs e)
         {
-            var h = (e.Item.FindControl("pv") as HtmlAnchor);
-            var t = e.Item.FindControl("tip") as Telerik.Web.UI.RadToolTip;
-            t.TargetControlID = h.ClientID;
+            var h = (e.Item.FindControl("col") as HtmlTableCell);
+            var a = (e.Item.FindControl("pv") as HtmlAnchor);
+            var id = a.Attributes["match"];
+            var url = a.Attributes["matchx"];
+            a.InnerText = "预览";
+            if (IsVideo(url))
+            {
+                a.Target = "_blank";
+                a.HRef = string.Format("../Go/ViewVideoMin.aspx?Id={0}", id);
+            }
+            if (IsAudio(url))
+            {
+                a.Target = "_blank";
+                a.HRef = string.Format("../Go/ViewAudioMin.aspx?Id={0}", id);
+            }
+            else if ((IsPlain(url)))
+            {
+                a.Target = "_blank";
+                a.HRef = string.Format("../Document/web/PdfViewerA.aspx?Id={0}", id);
+            }
+            else if (IsImage(url))
+            {
+                a.Target = "_blank";
+                a.HRef = url;
+            }
         }
     }
 }

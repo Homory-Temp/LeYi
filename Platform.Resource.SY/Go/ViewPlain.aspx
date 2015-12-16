@@ -145,11 +145,10 @@
                                                     <a href='<%# string.Format("{0}", Eval("Source")) %>'><%# Eval("Title") %></a>
                                                 </td>
                                                 <td>&nbsp;&nbsp;</td>
-                                                <td>
-                                                    <a id="pv" runat="server" style="cursor: pointer;">预览</a>
-                                                    <telerik:RadToolTip ID="tip" runat="server" Skin="MetroTouch" IsClientID="true" AutoCloseDelay="0">
-                                                        <img src='<%# string.Format("{0}", Eval("Source")) %>' />
-                                                    </telerik:RadToolTip>
+                                                <td id="col" runat="server" style="cursor: pointer;">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <a id="pv" runat="server" match='<%# Eval("Id") %>' matchx='<%# Eval("Source") %>' visible='<%# CanPreviewA(Eval("Source")) %>'></a>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
                                                 </td>
                                             </tr>
                                         </ItemTemplate>
