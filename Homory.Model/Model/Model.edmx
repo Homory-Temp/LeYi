@@ -583,6 +583,7 @@
             <PropertyRef Name="CatalogId" />
             <PropertyRef Name="Audit" />
             <PropertyRef Name="AuditUsers" />
+            <PropertyRef Name="AuditEditable" />
             <PropertyRef Name="Id" />
             <PropertyRef Name="UserId" />
             <PropertyRef Name="Type" />
@@ -608,6 +609,7 @@
           <Property Name="CatalogId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Audit" Type="bit" Nullable="false" />
           <Property Name="AuditUsers" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AuditEditable" Type="bit" Nullable="false" />
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
@@ -1859,6 +1861,7 @@
     [ResourceMap].[CatalogId] AS [CatalogId], 
     [ResourceMap].[Audit] AS [Audit], 
     [ResourceMap].[AuditUsers] AS [AuditUsers], 
+    [ResourceMap].[AuditEditable] AS [AuditEditable], 
     [ResourceMap].[Id] AS [Id], 
     [ResourceMap].[UserId] AS [UserId], 
     [ResourceMap].[Type] AS [Type], 
@@ -4680,6 +4683,7 @@
             <PropertyRef Name="AssistantType" />
             <PropertyRef Name="Stick" />
             <PropertyRef Name="ResourceTime" />
+            <PropertyRef Name="AuditEditable" />
           </Key>
           <Property Name="CatalogId" Type="Guid" Nullable="false" />
           <Property Name="Audit" Type="Boolean" Nullable="false" />
@@ -4716,6 +4720,7 @@
           <Property Name="AssistantType" Type="Int32" Nullable="false" />
           <Property Name="Stick" Type="Int32" Nullable="false" />
           <Property Name="ResourceTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AuditEditable" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ResourceAudit">
           <Key>
@@ -5694,6 +5699,7 @@
           <EntitySetMapping Name="ResourceMap">
             <EntityTypeMapping TypeName="Homory.Model.ResourceMap">
               <MappingFragment StoreEntitySet="ResourceMap">
+                <ScalarProperty Name="AuditEditable" ColumnName="AuditEditable" />
                 <ScalarProperty Name="ResourceTime" ColumnName="ResourceTime" />
                 <ScalarProperty Name="Stick" ColumnName="Stick" />
                 <ScalarProperty Name="AssistantType" ColumnName="AssistantType" />

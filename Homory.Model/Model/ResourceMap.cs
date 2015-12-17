@@ -50,5 +50,6 @@ namespace Homory.Model
         public int AssistantType { get; set; }
         public int Stick { get; set; }
         public System.DateTime ResourceTime { get; set; }
+        public bool AuditEditable { get; set; }
     }
 }
