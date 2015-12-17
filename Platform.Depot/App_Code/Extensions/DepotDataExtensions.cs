@@ -362,7 +362,8 @@ public static class DepotDataExtensions
 
     public static IQueryable<DepotUser> DepotUserLoad(this DepotEntities db, Guid campusId)
     {
-        return db.DepotUser.Where(o => o.CampusId == campusId).OrderBy(o => o.Name);
+        //return db.DepotUser.Where(o => o.CampusId == campusId).OrderBy(o => o.Name);
+        return db.DepotUser.OrderBy(o => o.Name);
     }
 
     public static IQueryable<DepotRole> DepotRoleLoad(this DepotEntities db, Guid depotId)
