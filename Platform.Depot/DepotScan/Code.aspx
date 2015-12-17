@@ -100,7 +100,7 @@
                                         </td>
                                         <td style="width: 70%;">
                                             <asp:Panel ID="single" runat="server" Visible='<%# (bool)Eval("Single") %>'>
-                                                <telerik:RadListView ID="viewx" runat="server" DataSource='<%# Ordinals((Guid)Eval("Id")) %>'>
+                                                <telerik:RadListView ID="viewx" runat="server" DataSource='<%# Ordinals((Guid)Eval("Id"), Container) %>'>
                                                     <ItemTemplate>
                                                         <div style="float: left;">
                                                             <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="true" OnCheckedChanged="checkx_CheckedChanged" SM="1" CC='<%# Eval("Code") %>' Checked='<%# CD(Eval("Code").ToString()) %>' OBJ='<%# Eval("ObjectId") %>' ORD='<%# Eval("Ordinal") %>' Text='<%# "&nbsp;{1}&nbsp;-&nbsp;{0}".Formatted(Eval("Ordinal"), Eval("Code")) %>' />

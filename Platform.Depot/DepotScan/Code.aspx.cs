@@ -92,9 +92,14 @@ public partial class DepotAction_Code : DepotPageSingle
         public string Code { get; set; }
     }
 
-    protected List<DepotInX> Ordinals(Guid objId)
+    protected List<DepotInX> Ordinals(Guid objId, RadListViewDataItem container)
     {
-        return DataContext.DepotInX.Where(o => o.ObjectId == objId).OrderBy(o => o.Ordinal).ToList().Where(o => o.Place.ToLower().Contains(toSearchX.Text.Trim().ToLower())).ToList();
+        var s = DataContext.DepotInX.Where(o => o.ObjectId == objId).OrderBy(o => o.Ordinal).ToList().Where(o => o.Place.ToLower().Contains(toSearchX.Text.Trim().ToLower())).ToList();
+        if (s.Count == 0)
+        {
+            container.Visible = false;
+        }
+        return s;
     }
 
     protected void coding_ServerClick(object sender, EventArgs e)
