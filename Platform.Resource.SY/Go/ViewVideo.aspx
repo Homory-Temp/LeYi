@@ -165,10 +165,29 @@
                                 <p id="pppp1" runat="server" style="font-size: 16px;">附件：</p>
                                 <p id="pppp2" runat="server">
 
-                                    <telerik:RadListView ID="publish_attachment_list" runat="server" OnNeedDataSource="publish_attachment_list_NeedDataSource">
+                                    <telerik:RadListView ID="publish_attachment_list" runat="server" OnNeedDataSource="publish_attachment_list_OnNeedDataSource" ItemPlaceholderID="h_pal" OnItemDataBound="publish_attachment_list_ItemDataBound">
+                                        <LayoutTemplate>
+                                            <table style="margin: 10px auto 0 auto; float: left;">
+                                                <asp:PlaceHolder ID="h_pal" runat="server"></asp:PlaceHolder>
+                                            </table>
+                                            <div style="clear: both;">&nbsp;</div>
+                                        </LayoutTemplate>
                                         <ItemTemplate>
-                                            <img src='<%# string.Format("../Image/img/{0}.jpg", (int)Eval("FileType")) %>' />
-                                            <a href='<%# string.Format("{0}", Eval("Source")) %>'><%# Eval("Title") %></a>&nbsp;&nbsp;
+                                            <tr style="vertical-align: middle; height: 28px; line-height: 28px;">
+                                                <td>
+                                                    <img src='<%# string.Format("../Image/img/{0}.jpg", (int)Eval("FileType")) %>' />
+                                                </td>
+                                                <td>&nbsp;&nbsp;</td>
+                                                <td title='<%# Eval("Remark") %>' style="width: 400px;">
+                                                    <a href='<%# string.Format("{0}", Eval("Source")) %>'><%# Eval("Title") %></a>
+                                                </td>
+                                                <td>&nbsp;&nbsp;</td>
+                                                <td id="col" runat="server" style="cursor: pointer;">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <a id="pv" runat="server" match='<%# Eval("Id") %>' matchx='<%# Eval("Source") %>' visible='<%# CanPreviewA(Eval("Source")) %>'></a>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                </td>
+                                            </tr>
                                         </ItemTemplate>
                                     </telerik:RadListView>
                                 </p>
