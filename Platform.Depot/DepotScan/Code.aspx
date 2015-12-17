@@ -65,17 +65,19 @@
                             <input id="all" runat="server" type="button" class="btn btn-info" value="全选" onserverclick="all_ServerClick" />
                             <input id="st" runat="server" type="button" class="btn btn-info" value="已选（0）" />
                             <input id="cl" runat="server" type="button" class="btn btn-info" value="清除选择" onserverclick="cl_ServerClick" />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <telerik:RadTextBox ID="toSearch" runat="server" Width="200" EmptyMessage="输入要检索的物资名称"></telerik:RadTextBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <telerik:RadTextBox ID="toSearch" runat="server" Width="120" EmptyMessage="物资名称"></telerik:RadTextBox>
+                            &nbsp;&nbsp;
+                            <telerik:RadTextBox ID="toSearchX" runat="server" Width="120" EmptyMessage="存放地点"></telerik:RadTextBox>
                             &nbsp;&nbsp;
                             <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <telerik:RadTextBox ID="cName" runat="server" Width="200" EmptyMessage="输入条码生成任务的名称"></telerik:RadTextBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <telerik:RadTextBox ID="cName" runat="server" Width="200" EmptyMessage="生成任务名称"></telerik:RadTextBox>
                             &nbsp;&nbsp;
                             <input id="coding" runat="server" type="button" class="btn btn-info" value="生成条码" onserverclick="coding_ServerClick" />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <input id="coded" runat="server" type="button" class="btn btn-info" value="条码列表" onserverclick="coded_ServerClick" />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
                     </div>
                     <div class="row">&nbsp;</div>
@@ -100,7 +102,7 @@
                                             <asp:Panel ID="single" runat="server" Visible='<%# (bool)Eval("Single") %>'>
                                                 <telerik:RadListView ID="viewx" runat="server" DataSource='<%# Ordinals((Guid)Eval("Id")) %>'>
                                                     <ItemTemplate>
-                                                        <div style="float: left; width: 200px;">
+                                                        <div style="float: left;">
                                                             <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="true" OnCheckedChanged="checkx_CheckedChanged" SM="1" CC='<%# Eval("Code") %>' Checked='<%# CD(Eval("Code").ToString()) %>' OBJ='<%# Eval("ObjectId") %>' ORD='<%# Eval("Ordinal") %>' Text='<%# "&nbsp;{1}&nbsp;-&nbsp;{0}".Formatted(Eval("Ordinal"), Eval("Code")) %>' />
                                                         </div>
                                                     </ItemTemplate>

@@ -94,7 +94,7 @@ public partial class DepotAction_Code : DepotPageSingle
 
     protected List<DepotInX> Ordinals(Guid objId)
     {
-        return DataContext.DepotInX.Where(o => o.ObjectId == objId).OrderBy(o => o.Ordinal).ToList();
+        return DataContext.DepotInX.Where(o => o.ObjectId == objId).OrderBy(o => o.Ordinal).ToList().Where(o => o.Place.ToLower().Contains(toSearchX.Text.Trim().ToLower())).ToList();
     }
 
     protected void coding_ServerClick(object sender, EventArgs e)
