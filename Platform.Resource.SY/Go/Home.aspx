@@ -4,7 +4,6 @@
 <%@ Register Src="~/Control/CommonBottom.ascx" TagPrefix="homory" TagName="CommonBottom" %>
 <%@ Register Src="~/Control/HomeSplash.ascx" TagPrefix="homory" TagName="HomeSplash" %>
 <%@ Register Src="~/Control/HomeTopic.ascx" TagPrefix="homory" TagName="HomeTopic" %>
-<%@ Register Src="~/Control/HomeCatalog.ascx" TagPrefix="homory" TagName="HomeCatalog" %>
 <%@ Register Src="~/Control/HomeNote.ascx" TagPrefix="homory" TagName="HomeNote" %>
 <%@ Register Src="~/Control/HomeArticle.ascx" TagPrefix="homory" TagName="HomeArticle" %>
 <%@ Register Src="~/Control/HomeHonor.ascx" TagPrefix="homory" TagName="HomeHonor" %>
@@ -63,7 +62,6 @@
                 <div class="login-lr">
                     <div class="login-l">
                         <homory:HomeSplash runat="server" ID="HomeSplash" />
-                        <homory:HomeCatalog runat="server" ID="HomeCatalog" />
                         <div class="c-plaza" id="cPlaza" style="background-color: #FFF">
                             <div class="c-p-content clearfix">
                                 <homory:HomeVideo runat="server" ID="HomeVideo" />
