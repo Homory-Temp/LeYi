@@ -6,13 +6,13 @@
         <div style="width: 688px; margin: auto; height: 44px;">
             <div class="tabs">
                 <div class="box-hd" style="float: left; width: 68px">最新课件</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm1');">语文</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm2');">数学</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm3');">英语</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm4');">音乐</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm5');">体育</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm6');">美术</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm7');">综合</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm1');">语言</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm2');">数学</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm3');">科学</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm4');">美术</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm5');">音乐</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm6');">健康</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm7');">综合</div>
             </div>
 
             <div class="tabClear"></div>
@@ -172,13 +172,13 @@
         <div style="width: 688px; margin: auto; height: 44px;">
             <div class="tabs">
                 <div class="box-hd" style="float: left; width: 68px">最热课件</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm1');">语文</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm2');">数学</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm3');">英语</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm4');">音乐</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm5');">体育</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm6');">美术</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm7');">综合</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm1');">语言</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm2');">数学</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm3');">科学</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm4');">美术</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm5');">音乐</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm6');">健康</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm7');">综合</div>
             </div>
 
             <div class="tabClear"></div>
@@ -334,14 +334,14 @@
         <div class="box doing">
             <div style="width: 688px; margin: auto; height: 44px;">
                 <div class="tabs">
-                    <div class="box-hd" style="float: left; width: 68px">在线课堂</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm1');">语文</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm2');">数学</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm3');">英语</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm4');">音乐</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm5');">体育</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm6');">美术</div>
-                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="window.open('Catalog#jump_hm7');">综合</div>
+                    <div class="box-hd" style="float: left; width: 68px">最优课件</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm1');">语言</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm2');">数学</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm3');">科学</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm4');">美术</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm5');">音乐</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm6');">健康</div>
+                <div class="tab" style="margin-top: -10px; margin-left: -6px;" onclick="return; window.open('Catalog#jump_hm7');">综合</div>
                 </div>
 
                 <div class="tabClear"></div>
