@@ -59,10 +59,13 @@ public partial class DepotAction_ObjectEdit : DepotPageSingle
             catch
             { }
             var imgs = new string[] { obj.ImageA, obj.ImageB, obj.ImageC, obj.ImageD };
+            var del = new[] { bb1, bb2, bb3, bb4 }.ToList();
             for (var i = 0; i < imgs.Length; i++)
             {
                 if (!imgs[i].None())
                     new[] { p0, p1, p2, p3 }[i].Src = imgs[i];
+                else
+                    del[i].Visible = false;
             }
             var img = new[] { p0, p1, p2, p3 }.ToList();
             var count = img.Where(o => o.Src.Contains("/Content/Images/Transparent.png")).Count();
@@ -130,6 +133,7 @@ public partial class DepotAction_ObjectEdit : DepotPageSingle
     {
         var files = upload.UploadedFiles;
         var img = new[] { p0, p1, p2, p3 }.ToList();
+        var del = new[] { bb1, bb2, bb3, bb4 }.ToList();
         for (var i = 0; i < files.Count; i++)
         {
             for (var j = 0; j < img.Count; j++)
@@ -139,6 +143,7 @@ public partial class DepotAction_ObjectEdit : DepotPageSingle
                     var path = "../Common/物资/图片/{0}{1}".Formatted(DataContext.GlobalId(), files[i].GetExtension());
                     files[i].SaveAs(Server.MapPath(path));
                     img[j].Src = path;
+                    del[j].Visible = true;
                     break;
                 }
             }
@@ -158,5 +163,54 @@ public partial class DepotAction_ObjectEdit : DepotPageSingle
         upload.MaxFileInputsCount = 4;
         clear.Visible = false;
         imgRow.Visible = false;
+        bb1.Visible = bb2.Visible = bb3.Visible = bb4.Visible = false;
+    }
+
+    protected void bb1_Click(object sender, EventArgs e)
+    {
+        var img = new[] { p0 }.ToList();
+        img.ForEach(o => o.Src = "../Content/Images/Transparent.png");
+        var count = img.Where(o => o.Src.Contains("/Content/Images/Transparent.png")).Count();
+        upload.InitialFileInputsCount = count == 0 ? 0 : 1;
+        clear.Visible = count < 4;
+        imgRow.Visible = count < 4;
+        upload.MaxFileInputsCount = count == 0 ? 0 : count;
+        bb1.Visible = false;
+    }
+
+    protected void bb2_Click(object sender, EventArgs e)
+    {
+        var img = new[] { p1 }.ToList();
+        img.ForEach(o => o.Src = "../Content/Images/Transparent.png");
+        var count = img.Where(o => o.Src.Contains("/Content/Images/Transparent.png")).Count();
+        upload.InitialFileInputsCount = count == 0 ? 0 : 1;
+        clear.Visible = count < 4;
+        imgRow.Visible = count < 4;
+        upload.MaxFileInputsCount = count == 0 ? 0 : count;
+        bb2.Visible = false;
+    }
+
+    protected void bb3_Click(object sender, EventArgs e)
+    {
+        var img = new[] { p2 }.ToList();
+        img.ForEach(o => o.Src = "../Content/Images/Transparent.png");
+        var count = img.Where(o => o.Src.Contains("/Content/Images/Transparent.png")).Count();
+        upload.InitialFileInputsCount = count == 0 ? 0 : 1;
+        clear.Visible = count < 4;
+        imgRow.Visible = count < 4;
+        upload.MaxFileInputsCount = count == 0 ? 0 : count;
+        bb3.Visible = false;
+    }
+
+    protected void bb4_Click(object sender, EventArgs e)
+    {
+        var img = new[] { p3 }.ToList();
+        img.ForEach(o => o.Src = "../Content/Images/Transparent.png");
+        var count = img.Where(o => o.Src.Contains("/Content/Images/Transparent.png")).Count();
+        upload.InitialFileInputsCount = count == 0 ? 0 : 1;
+        clear.Visible = count < 4;
+        imgRow.Visible = count < 4;
+        upload.MaxFileInputsCount = count == 0 ? 0 : count;
+        bb4.Visible = false;
     }
 }

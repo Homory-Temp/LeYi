@@ -132,15 +132,19 @@
                             <div class="row" id="imgRow" runat="server" visible="false">
                                 <div class="col-md-2 text-center">
                                     <img id="p0" runat="server" src="../Content/Images/Transparent.png" class="img-responsive image-thumb-result storeObjThumb" onclick="window.open(this.src, '_blank');" />
+                                    <telerik:RadButton ID="bb1" runat="server" Text="×" OnClick="bb1_Click"></telerik:RadButton>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <img id="p1" runat="server" src="../Content/Images/Transparent.png" class="img-responsive image-thumb-result storeObjThumb" onclick="window.open(this.src, '_blank');" />
+                                    <telerik:RadButton ID="bb2" runat="server" Text="×" OnClick="bb2_Click"></telerik:RadButton>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <img id="p2" runat="server" src="../Content/Images/Transparent.png" class="img-responsive image-thumb-result storeObjThumb" onclick="window.open(this.src, '_blank');" />
+                                    <telerik:RadButton ID="bb3" runat="server" Text="×" OnClick="bb3_Click"></telerik:RadButton>
                                 </div>
                                 <div class="col-md-2 text-center">
                                     <img id="p3" runat="server" src="../Content/Images/Transparent.png" class="img-responsive image-thumb-result storeObjThumb" onclick="window.open(this.src, '_blank');" />
+                                    <telerik:RadButton ID="bb4" runat="server" Text="×" OnClick="bb4_Click"></telerik:RadButton>
                                 </div>
                             </div>
                         </div>
