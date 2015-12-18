@@ -36,14 +36,27 @@ public partial class DepotAction_Code : DepotPageSingle
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        var node = CurrentNode;
-        var source = node.HasValue ? DataContext.DepotObjectLoad(Depot.Id, node.Value.GlobalId()) : new List<DepotObject>();
-        if (!toSearch.Text.None())
+        if (toSearchX.Text.None())
         {
-            source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+            var node = CurrentNode;
+            var source = node.HasValue ? DataContext.DepotObjectLoad(Depot.Id, node.Value.GlobalId()) : new List<DepotObject>();
+            if (!toSearch.Text.None())
+            {
+                source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+            }
+            source = source.Where(o => o.DepotInX.Count > 0 || o.Single == false);
+            view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
         }
-        source = source.Where(o => o.DepotInX.Count > 0 || o.Single == false);
-        view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
+        else
+        {
+            var source = DataContext.DepotObjectLoad(Depot.Id, null);
+            if (!toSearch.Text.None())
+            {
+                source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+            }
+            source = source.Where(o => o.DepotInX.Count > 0 || o.Single == false);
+            view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
+        }
     }
 
     protected void search_ServerClick(object sender, EventArgs e)
