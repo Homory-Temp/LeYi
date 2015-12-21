@@ -20,6 +20,7 @@ namespace Homory.Model
         Zip = 5,
         Image = 6,
         Media = 7,
-        None = 0
+        None = 0,
+        Audio = 8
     }
 }
