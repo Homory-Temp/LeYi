@@ -44,7 +44,7 @@ public partial class DepotAction_Import : DepotPageSingle
             var book = new Workbook(file.Value);
             var data = book.Worksheets[0].Cells.ExportDataTableAsString(0, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null && o[0].Value.ToString().Trim() != "").Count(), 15, true);
             var handled = new DataTable();
-            foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 })
+            foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
             {
                 handled.Columns.Add(data.Columns[index].ColumnName);
             }
@@ -171,7 +171,7 @@ public partial class DepotAction_Import : DepotPageSingle
         var book = new Workbook(file.Value);
         var data = book.Worksheets[0].Cells.ExportDataTableAsString(0, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null && o[0].Value.ToString().Trim() != "").Count(), 15, true);
         var handled = new DataTable();
-        foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 })
+        foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
         {
             handled.Columns.Add(data.Columns[index].ColumnName);
         }

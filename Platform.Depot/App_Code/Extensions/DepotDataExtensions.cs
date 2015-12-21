@@ -158,7 +158,7 @@ public static class DepotDataExtensions
         }
     }
 
-    public static void DepotObjectAdd(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, bool single, bool consumable, bool @fixed, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal, string age, bool isVirtual = false)
+    public static void DepotObjectAdd(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, bool single, bool consumable, bool @fixed, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal, string age, bool isVirtual = false, string dept = "")
     {
         var obj = new DepotObject
         {
@@ -186,7 +186,8 @@ public static class DepotDataExtensions
             Code = string.Empty,
             Amount = 0.00M,
             Money = 0.00M,
-            Age = age
+            Age = age,
+            Department = dept
         };
         db.DepotObject.Add(obj);
         for (var i = 0; i < catalogIds.Count; i++)
@@ -202,7 +203,7 @@ public static class DepotDataExtensions
         db.DepotDictionaryAdd(depotId, DictionaryType.品牌, brand);
     }
 
-    public static void DepotObjectAddX(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, bool single, bool consumable, bool @fixed, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal)
+    public static void DepotObjectAddX(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, bool single, bool consumable, bool @fixed, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal, string dept)
     {
         var obj = new DepotObject
         {
@@ -229,7 +230,8 @@ public static class DepotDataExtensions
             State = State.启用,
             Code = string.Empty,
             Amount = 0.00M,
-            Money = 0.00M
+            Money = 0.00M,
+            Department = dept
         };
         db.DepotObject.Add(obj);
         for (var i = 0; i < catalogIds.Count; i++)

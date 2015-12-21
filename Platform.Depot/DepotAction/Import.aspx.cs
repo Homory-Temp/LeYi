@@ -44,7 +44,7 @@ public partial class DepotAction_Import : DepotPageSingle
             var book = new Workbook(file.Value);
             var data = book.Worksheets[0].Cells.ExportDataTableAsString(0, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null && o[0].Value.ToString().Trim() != "").Count(), 15, true);
             var handled = new DataTable();
-            foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 })
+            foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
             {
                 handled.Columns.Add(data.Columns[index].ColumnName);
             }
@@ -102,14 +102,15 @@ public partial class DepotAction_Import : DepotPageSingle
 
                         string sp = row[11].ToString().Trim();
                         string b = row[12].ToString().Trim();
+                        string dept = row[15].ToString().Trim();
 
-                        if (catalogs.Count(o => o.DO.Name == name && o.DO.Specification == sp && o.DO.Brand == b && o.DOC.CatalogId == 二级分类Id && o.DO.State < State.停用) == 0)
+                        if (catalogs.Count(o => o.DO.Name == name && o.DO.Specification == sp && o.DO.Brand == b && o.DO.Department == dept && o.DOC.CatalogId == 二级分类Id && o.DO.State < State.停用) == 0)
                         {
                             物资Id = DataContext.GlobalId();
                             var l = new List<Guid>();
                             l.Add(一级分类Id);
                             l.Add(二级分类Id);
-                            DataContext.DepotObjectAddX(物资Id, l, Depot.Id, name, row[14].ToString().Contains("是"), false, true, row[0].ToString(), row[1].ToString(), b, "", "", sp, 0, 0, "", "", "", "", "", 100);
+                            DataContext.DepotObjectAddX(物资Id, l, Depot.Id, name, row[14].ToString().Contains("是"), false, true, row[0].ToString(), row[1].ToString(), b, "", "", sp, 0, 0, "", "", "", "", "", 100, dept);
                         }
                         else
                         {
@@ -174,7 +175,7 @@ public partial class DepotAction_Import : DepotPageSingle
         var book = new Workbook(file.Value);
         var data = book.Worksheets[0].Cells.ExportDataTableAsString(0, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null && o[0].Value.ToString().Trim() != "").Count(), 15, true);
         var handled = new DataTable();
-        foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 })
+        foreach (var index in new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
         {
             handled.Columns.Add(data.Columns[index].ColumnName);
         }
