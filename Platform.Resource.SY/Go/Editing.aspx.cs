@@ -70,7 +70,8 @@ namespace Go
         {
             get
             {
-                return CurrentUser.Resource.First(o => o.State == State.审核 && o.Type == ResourceType && o.UserId == CurrentUser.Id);
+                var rid = Guid.Parse(Request.QueryString["Id"]);
+                return HomoryContext.Value.Resource.First(o => o.Id == rid);
             }
         }
 
@@ -100,160 +101,139 @@ namespace Go
             {
                 apxx.Visible = false;
             }
-            if (CurrentUser.Resource.Count(o => o.State == State.审核 && o.Type == ResourceType && o.UserId == CurrentUser.Id) != 0)
-            {
-                var r = CurrentResource;
+            var r = CurrentResource;
 
-                var path__ = Server.MapPath(CurrentResource.Preview);
-                if (File.Exists(path__))
+            var path__ = Server.MapPath(CurrentResource.Preview);
+            if (File.Exists(path__))
+            {
+                FileInfo info = new FileInfo(path__);
+                try
                 {
-                    FileInfo info = new FileInfo(path__);
+                    var s = info.OpenWrite();
                     try
                     {
-                        var s = info.OpenWrite();
-                        try
-                        {
-                            s.Close();
-                        }
-                        catch
-                        {
-                        }
-                        publish_preview_player.Title = "请点击播放按钮预览。";
-                        preview_timer.Enabled = false;
+                        s.Close();
                     }
                     catch
                     {
-                        publish_preview_player.Title = "正在转换视频格式，请稍候。。。（可尝试先发布资源）";
-                        preview_timer.Enabled = true;
                     }
+                    publish_preview_player.Title = "请点击播放按钮预览。";
+                    preview_timer.Enabled = false;
                 }
-                else
+                catch
                 {
                     publish_preview_player.Title = "正在转换视频格式，请稍候。。。（可尝试先发布资源）";
                     preview_timer.Enabled = true;
                 }
-                try
-                {
-                    bool yes = CurrentResource.Author.Equals(CurrentUser.Id.ToString(), StringComparison.OrdinalIgnoreCase);
-                    btnMe.Checked = yes;
-                    btnOher.Checked = !yes;
-                    btnOher.Value = CurrentResource.Author;
-                    if (yes)
-                    {
-                        publish_ohter_publish.Value = string.Format(FORMAT_AUTHOR, CurrentUser.RealName, CurrentUser.Teacher.Phone);
-                    }
-                    else
-                    {
-                        var ______id = Guid.Parse(CurrentResource.Author);
-                        var ______user = HomoryContext.Value.ViewTeacher.First(o => o.Id == ______id);
-                        publish_ohter_publish.Value = string.Format(FORMAT_AUTHOR, ______user.RealName, ______user.Phone);
-                    }
-                }
-                catch
+            }
+            else
+            {
+                publish_preview_player.Title = "正在转换视频格式，请稍候。。。（可尝试先发布资源）";
+                preview_timer.Enabled = true;
+            }
+            try
+            {
+                bool yes = CurrentResource.Author.Equals(CurrentUser.Id.ToString(), StringComparison.OrdinalIgnoreCase);
+                btnMe.Checked = yes;
+                btnOher.Checked = !yes;
+                btnOher.Value = CurrentResource.Author;
+                if (yes)
                 {
                     publish_ohter_publish.Value = string.Format(FORMAT_AUTHOR, CurrentUser.RealName, CurrentUser.Teacher.Phone);
-                    CurrentResource.Author = CurrentUser.Id.ToString();
-                    HomoryContext.Value.SaveChanges();
-                    btnMe.Checked = true;
-                    btnOher.Checked = false;
-                    btnOher.Value = CurrentUser.Id.ToString();
-                }
-                publish_title_content.Value = r.Title;
-                publish_tag_tags.DataSource =
-                        HomoryContext.Value.ResourceTag.Where(o => o.ResourceId == r.Id && o.State == State.启用).Select(o => o.Tag).ToList();
-                publish_tag_tags.DataBind();
-                if (string.IsNullOrWhiteSpace(r.Preview))
-                {
-                    publish_preview_plain.Visible = false;
-                    publish_preview_media.Visible = false;
-                    publish_preview_empty.Visible = true;
                 }
                 else
                 {
-                    publish_preview_empty.Visible = false;
-                    if (ResourceType == ResourceType.视频)
-                    {
-                        publish_preview_plain.Visible = false;
-                        publish_preview_media.Visible = true;
-                        publish_preview_player.Source = r.Preview;
-                    }
-                    else
-                    {
-                        publish_preview_plain.Visible = true;
-                        publish_preview_media.Visible = false;
-                        var url = string.Format("../Document/web/PdfViewer.aspx?Id={0}&Random={1}", r.Id, Guid.NewGuid());
-                        publish_preview_pdf.Attributes["src"] = url;
-                    }
+                    var ______id = Guid.Parse(CurrentResource.Author);
+                    var ______user = HomoryContext.Value.ViewTeacher.First(o => o.Id == ______id);
+                    publish_ohter_publish.Value = string.Format(FORMAT_AUTHOR, ______user.RealName, ______user.Phone);
                 }
-                publish_open_panel.Controls.OfType<RadButton>().First(o => o.Value == ((int)r.OpenType).ToString()).Checked = true;
-                publish_editor_label.InnerText = string.Format("{0}内容：", ResourceType);
-                publish_editor.Content = r.Content;
-                publish_grade.SelectedValue = r.GradeId.ToString().ToUpper();
-                periodx.SelectedDate = r.ResourceTime;
-                var path = string.Format("~/Common/资源/{0}/上传", CurrentUser.Id.ToString().ToUpper());
-                publish_editor.SetPaths(new[] { path }, EditorFileTypes.All, EditorFileOptions.All);
-                List<Catalog> cds = new List<Catalog>();
-                switch (ResourceType)
-                {
-                    case ResourceType.视频:
-                        publish_catalog.EmbeddedTree.Nodes.AddRange(LoadCDSNodes("10A37221-02C5-48D8-A82C-DA62A3386C0B"));
-                        publish_catalog.EmbeddedTree.GetAllNodes().Where(o => o.Level < 1).ToList().ForEach(o => o.Expanded = true);
-                        try
-                        {
-                            var catalogValueMedia = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.视频 && o.State == State.启用).CatalogId.ToString();
-                            publish_catalog.SelectedValue = catalogValueMedia.ToUpper();
-                        }
-                        catch
-                        { }
-                        break;
-                    case ResourceType.文章:
-                        publish_catalog.EmbeddedTree.Nodes.AddRange(LoadCDSNodes("023CAF84-4F7B-4777-ABEB-66137B4E71FD"));
-                        publish_catalog.EmbeddedTree.GetAllNodes().Where(o => o.Level < 1).ToList().ForEach(o => o.Expanded = true);
-                        try
-                        {
-                            var catalogValueArticle = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.文章 && o.State == State.启用).CatalogId.ToString();
-                            publish_catalog.SelectedValue = catalogValueArticle.ToUpper();
-                        }
-                        catch
-                        { }
-                        break;
-                    case ResourceType.课件:
-                        publish_catalog.EmbeddedTree.Nodes.AddRange(LoadCDSNodes("C7F16CCC-19EB-4363-8D24-7285F43C910F"));
-                        publish_catalog.EmbeddedTree.GetAllNodes().Where(o => o.Level < 1).ToList().ForEach(o => o.Expanded = true);
-                        try
-                        {
-                            var catalogValueCourseware = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.课件 && o.State == State.启用).CatalogId.ToString();
-                            publish_catalog.SelectedValue = catalogValueCourseware.ToUpper();
-                        }
-                        catch
-                        { }
-                        break;
-                    default:
-                        publish_catalog_panel.Visible = false;
-                        break;
-                }
-                popup_import.NavigateUrl = string.Format("../Popup/PublishImport.aspx?Type={0}", Request.QueryString["Type"]);
-                popup_attachment.NavigateUrl = string.Format("../Popup/PublishAttachment.aspx?Type={0}", Request.QueryString["Type"]);
-                return;
             }
-            var resource = new Resource
+            catch
             {
-                Id = HomoryContext.Value.GetId(),
-                UserId = CurrentUser.Id,
-                Type = ResourceType,
-                OpenType = OpenType.互联网,
-                FileType = ResourceFileType.Word,
-                Title = string.Empty,
-                Author = CurrentUser.Id.ToString(),
-                State = State.审核,
-                GradeId = Guid.Parse("A3757840-9DF7-4370-8151-FAD39B44EF6A"),
-                Time = DateTime.Now,
-                Stick = 0,
-                ResourceTime = DateTime.Today
-            };
-            HomoryContext.Value.Resource.Add(resource);
-            HomoryContext.Value.SaveChanges();
-            Response.Redirect(Request.Url.AbsoluteUri, false);
+                publish_ohter_publish.Value = string.Format(FORMAT_AUTHOR, CurrentUser.RealName, CurrentUser.Teacher.Phone);
+                CurrentResource.Author = CurrentUser.Id.ToString();
+                HomoryContext.Value.SaveChanges();
+                btnMe.Checked = true;
+                btnOher.Checked = false;
+                btnOher.Value = CurrentUser.Id.ToString();
+            }
+            publish_title_content.Value = r.Title;
+            publish_tag_tags.DataSource =
+                    HomoryContext.Value.ResourceTag.Where(o => o.ResourceId == r.Id && o.State == State.启用).Select(o => o.Tag).ToList();
+            publish_tag_tags.DataBind();
+            if (string.IsNullOrWhiteSpace(r.Preview))
+            {
+                publish_preview_plain.Visible = false;
+                publish_preview_media.Visible = false;
+                publish_preview_empty.Visible = true;
+            }
+            else
+            {
+                publish_preview_empty.Visible = false;
+                if (ResourceType == ResourceType.视频)
+                {
+                    publish_preview_plain.Visible = false;
+                    publish_preview_media.Visible = true;
+                    publish_preview_player.Source = r.Preview;
+                }
+                else
+                {
+                    publish_preview_plain.Visible = true;
+                    publish_preview_media.Visible = false;
+                    var url = string.Format("../Document/web/PdfViewer.aspx?Id={0}&Random={1}", r.Id, Guid.NewGuid());
+                    publish_preview_pdf.Attributes["src"] = url;
+                }
+            }
+            publish_open_panel.Controls.OfType<RadButton>().First(o => o.Value == ((int)r.OpenType).ToString()).Checked = true;
+            publish_editor_label.InnerText = string.Format("{0}内容：", ResourceType);
+            publish_editor.Content = r.Content;
+            publish_grade.SelectedValue = r.GradeId.ToString().ToUpper();
+            periodx.SelectedDate = r.ResourceTime;
+            var path = string.Format("~/Common/资源/{0}/上传", CurrentUser.Id.ToString().ToUpper());
+            publish_editor.SetPaths(new[] { path }, EditorFileTypes.All, EditorFileOptions.All);
+            List<Catalog> cds = new List<Catalog>();
+            switch (ResourceType)
+            {
+                case ResourceType.视频:
+                    publish_catalog.EmbeddedTree.Nodes.AddRange(LoadCDSNodes("10A37221-02C5-48D8-A82C-DA62A3386C0B"));
+                    publish_catalog.EmbeddedTree.GetAllNodes().Where(o => o.Level < 1).ToList().ForEach(o => o.Expanded = true);
+                    try
+                    {
+                        var catalogValueMedia = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.视频 && o.State == State.启用).CatalogId.ToString();
+                        publish_catalog.SelectedValue = catalogValueMedia.ToUpper();
+                    }
+                    catch
+                    { }
+                    break;
+                case ResourceType.文章:
+                    publish_catalog.EmbeddedTree.Nodes.AddRange(LoadCDSNodes("023CAF84-4F7B-4777-ABEB-66137B4E71FD"));
+                    publish_catalog.EmbeddedTree.GetAllNodes().Where(o => o.Level < 1).ToList().ForEach(o => o.Expanded = true);
+                    try
+                    {
+                        var catalogValueArticle = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.文章 && o.State == State.启用).CatalogId.ToString();
+                        publish_catalog.SelectedValue = catalogValueArticle.ToUpper();
+                    }
+                    catch
+                    { }
+                    break;
+                case ResourceType.课件:
+                    publish_catalog.EmbeddedTree.Nodes.AddRange(LoadCDSNodes("C7F16CCC-19EB-4363-8D24-7285F43C910F"));
+                    publish_catalog.EmbeddedTree.GetAllNodes().Where(o => o.Level < 1).ToList().ForEach(o => o.Expanded = true);
+                    try
+                    {
+                        var catalogValueCourseware = r.ResourceCatalog.First(o => o.Catalog.Type == CatalogType.课件 && o.State == State.启用).CatalogId.ToString();
+                        publish_catalog.SelectedValue = catalogValueCourseware.ToUpper();
+                    }
+                    catch
+                    { }
+                    break;
+                default:
+                    publish_catalog_panel.Visible = false;
+                    break;
+            }
+            popup_import.NavigateUrl = string.Format("../Popup/PublishImport.aspx?Type={0}", Request.QueryString["Type"]);
+            popup_attachment.NavigateUrl = string.Format("../Popup/PublishAttachment.aspx?Type={0}", Request.QueryString["Type"]);
+            return;
         }
 
         protected void publish_tag_add_OnClick(object sender, EventArgs e)
@@ -360,13 +340,20 @@ namespace Go
             resource.Title = publish_title_content.Value;
             resource.Content = publish_editor.Content;
             resource.Time = DateTime.Now;
-            if (catalog.Catalog.Audit)
+            if (resource.OpenType == OpenType.不公开)
             {
-                resource.State = State.默认;
+                resource.State = State.启用;
             }
             else
             {
-                resource.State = State.启用;
+                if (catalog.Catalog.Audit)
+                {
+                    resource.State = State.默认;
+                }
+                else
+                {
+                    resource.State = State.启用;
+                }
             }
             resource.UserId = Guid.Parse(resource.Author);
             resource.CampusId = CurrentCampus.Id;
