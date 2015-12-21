@@ -81,6 +81,7 @@ public partial class DepotAction_Object : DepotPageSingle
     {
         if (tree.SelectedNode != null)
             tree.SelectedNode.Selected = false;
+        view.CurrentPageIndex = 0;
         view.Rebind();
     }
 
@@ -90,6 +91,7 @@ public partial class DepotAction_Object : DepotPageSingle
             tree0.SelectedNode.Selected = false;
         tree.GetAllNodes().Where(o => o.ParentNode == e.Node.ParentNode).ToList().ForEach(o => o.Expanded = false);
         e.Node.Expanded = true;
+        view.CurrentPageIndex = 0;
         view.Rebind();
     }
 

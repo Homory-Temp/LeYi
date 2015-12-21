@@ -26,6 +26,13 @@
             window.open('../DepotQuery/Object?ObjectId=' + id + "&DepotId=" + idx, '_blank');
         }
     </script>
+    <script>
+        function sg(sender, e) {
+            if (e.get_keyCode() == 13) {
+                $("#search").click();
+            }
+        }
+    </script>
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
@@ -69,7 +76,7 @@
                             <input id="add" runat="server" type="button" class="btn btn-info" value="新增" onserverclick="add_ServerClick" />
                         </div>
                         <div class="col-md-6 text-center">
-                            <telerik:RadTextBox ID="toSearch" runat="server" Width="200" EmptyMessage="输入要检索的物资名称"></telerik:RadTextBox>
+                            <telerik:RadTextBox ID="toSearch" runat="server" Width="200" EmptyMessage="输入要检索的物资名称" ClientEvents-OnKeyPress="sg"></telerik:RadTextBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;
