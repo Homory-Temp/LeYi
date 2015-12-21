@@ -18,7 +18,7 @@
         <EntityTypeShape EntityType="DepotModel.DepotInRecord" Width="1.5" PointX="15.75" PointY="4.5" />
         <EntityTypeShape EntityType="DepotModel.DepotCatalogTree" Width="1.5" PointX="5.75" PointY="16.5" />
         <AssociationConnector Association="DepotModel.FK_DepotCatalog_DepotCatalog" />
-        <EntityTypeShape EntityType="DepotModel.DepotObject" Width="1.5" PointX="0.75" PointY="9.5" />
+        <EntityTypeShape EntityType="DepotModel.DepotObject" Width="1.5" PointX="0.75" PointY="9.375" />
         <EntityTypeShape EntityType="DepotModel.DepotIn" Width="1.5" PointX="6" PointY="10.875" />
         <EntityTypeShape EntityType="DepotModel.DepotFlow" Width="1.5" PointX="3" PointY="7.125" />
         <EntityTypeShape EntityType="DepotModel.DepotFlowX" Width="1.5" PointX="3" PointY="10.75" />

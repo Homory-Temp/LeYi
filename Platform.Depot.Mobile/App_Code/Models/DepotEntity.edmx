@@ -186,6 +186,7 @@
           <Property Name="Fixed" Type="bit" Nullable="false" />
           <Property Name="FixedCard" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="FixedNumber" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Department" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Brand" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Extension" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
@@ -1999,6 +2000,7 @@
           <Property Name="Extension" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DepotRedo" Relationship="DepotModel.FK_DepotRedo_DepotObject" FromRole="DepotObject" ToRole="DepotRedo" />
           <Property Name="Age" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DepotFlow">
           <Key>
@@ -3121,6 +3123,7 @@
           <EntitySetMapping Name="DepotObject">
             <EntityTypeMapping TypeName="DepotModel.DepotObject">
               <MappingFragment StoreEntitySet="DepotObject">
+                <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="Brand" ColumnName="Brand" />
