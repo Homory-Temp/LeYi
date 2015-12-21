@@ -16,6 +16,8 @@ public partial class DepotAction_Code : DepotPageSingle
             tree.DataBind();
             cName.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             ____v.InnerText = (new List<string>()).ToJson();
+            depts.DataSource = DataContext.DepotObjectLoad(Depot.Id, null).Select(o => o.Department).Distinct().OrderBy(o => o).ToList();
+            depts.DataBind();
         }
     }
 
@@ -36,7 +38,7 @@ public partial class DepotAction_Code : DepotPageSingle
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        if (toSearchX.Text.None())
+        if (toSearchX.Text.None() && depts.SelectedIndex < 0)
         {
             var node = CurrentNode;
             var source = node.HasValue ? DataContext.DepotObjectLoad(Depot.Id, node.Value.GlobalId()) : new List<DepotObject>();
@@ -53,6 +55,11 @@ public partial class DepotAction_Code : DepotPageSingle
             if (!toSearch.Text.None())
             {
                 source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+            }
+            if (depts.SelectedIndex >= 0)
+            {
+                var dept = depts.SelectedItem.Text;
+                source = source.Where(o => o.Department == dept).ToList();
             }
             source = source.Where(o => o.DepotInX.Count > 0 || o.Single == false);
             view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();

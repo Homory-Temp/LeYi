@@ -70,9 +70,11 @@
                             &nbsp;&nbsp;
                             <telerik:RadTextBox ID="toSearchX" runat="server" Width="120" EmptyMessage="存放地点"></telerik:RadTextBox>
                             &nbsp;&nbsp;
+                            <telerik:RadComboBox ID="depts" runat="server" Width="120" EmptyMessage="使用部门" AutoPostBack="false"></telerik:RadComboBox>
+                            &nbsp;&nbsp;
                             <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <telerik:RadTextBox ID="cName" runat="server" Width="200" EmptyMessage="生成任务名称"></telerik:RadTextBox>
+                            <telerik:RadTextBox ID="cName" runat="server" Width="150" EmptyMessage="生成任务名称"></telerik:RadTextBox>
                             &nbsp;&nbsp;
                             <input id="coding" runat="server" type="button" class="btn btn-info" value="生成条码" onserverclick="coding_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
