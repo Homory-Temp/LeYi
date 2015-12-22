@@ -364,18 +364,18 @@ namespace LY.Service.QRCode
                     Cut(sb, content, 内容每行字数, 内容空字符数);
                     content = "规格型号：{0}{1}{2}".Formatted(infos[1], infos[1].None() ? "" : " ", infos[2]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
-                    if (infos[3] == "1")
-                    {
+                    //if (infos[3] == "1")
+                    //{
                         content = "资产编号：{0}".Formatted(infos[4].Length > 7 ? infos[4].Substring(infos[4].Length - 7) : infos[4]);
                         Cut(sb, content, 内容每行字数, 内容空字符数);
-                        content = "使用部门：{0}".Formatted(infos[8].None() ? "" : infos[8]);
+                        content = "保管部门：{0}".Formatted(infos[8].None() ? "" : infos[8]);
                         Cut(sb, content, 内容每行字数, 内容空字符数);
-                        var time = infos[7].None() ? "" : DateTime.Parse(infos[7]).ToString("yyyy-MM-dd");
-                        content = "购置日期：{0}".Formatted(time);
-                        Cut(sb, content, 内容每行字数, 内容空字符数);
-                    }
-                    content = "物资分类：{0}".Formatted(infos[5]);
-                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                        //var time = infos[7].None() ? "" : DateTime.Parse(infos[7]).ToString("yyyy-MM-dd");
+                        //content = "购置日期：{0}".Formatted(time);
+                        //Cut(sb, content, 内容每行字数, 内容空字符数);
+                    //}
+                    //content = "物资分类：{0}".Formatted(infos[5]);
+                    //Cut(sb, content, 内容每行字数, 内容空字符数);
                     g.DrawString(sb.ToString(), new Font(内容字体, 内容字号), B, 左侧左边距, 左侧上边距);
 #else
                     string title = "{0} 资产标签".Formatted(Title);
