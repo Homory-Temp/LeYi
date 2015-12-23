@@ -193,7 +193,11 @@ namespace LY.Service.QRCode
             var 边框宽度 = 2;
             var 图标上边距 = 边框旁白 + 边框宽度 + 8;
             var 图标左边距 = 边框旁白 + 边框宽度 + 33;
+#if yz
+            var 图标宽度 = 400;
+#else
             var 图标宽度 = 60;
+#endif
             var 图标高度 = 40;
             var 标题字体 = "SimHei";
             var 标题字号 = 20;
@@ -315,6 +319,72 @@ namespace LY.Service.QRCode
                     string title = "{0} 资产标签".Formatted(Title);
                     g.DrawString(title, new Font(标题字体, 标题字号), B, 标题左边距, 标题上边距);
                     g.Save();
+                    RadBarcode code = new RadBarcode { Type = BarcodeType.QRCode, Text = qrcode, OutputType = BarcodeOutputType.EmbeddedPNG };
+                    code.QRCodeSettings.Mode = Telerik.Web.UI.Barcode.Modes.CodeMode.Alphanumeric;
+                    code.QRCodeSettings.ErrorCorrectionLevel = Telerik.Web.UI.Barcode.Modes.ErrorCorrectionLevel.M;
+                    code.QRCodeSettings.ECI = Telerik.Web.UI.Barcode.Modes.ECIMode.None;
+                    code.QRCodeSettings.AutoIncreaseVersion = true;
+                    code.QRCodeSettings.Version = 0;
+                    code.QRCodeSettings.DotSize = 5;
+                    SysImage qr = code.GetImage();
+                    g.DrawImage(qr, 二维码左边距, 二维码上边距, 二维码边长, 二维码边长);
+                    g.DrawString(qrcode, new Font(二维码文字字体, 二维码文字字号), B, 二维码文字左边距, 二维码文字上边距);
+                    var content = "";
+                    var sb = new StringBuilder();
+                    var info = string.Empty;
+
+                    try
+                    {
+                        var con = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["Entities"].ConnectionString);
+                        var com = new System.Data.SqlClient.SqlCommand("EXEC [dbo].[GetQRInfo] @QR = N'{0}'".Formatted(qrcode), con);
+                        con.Open();
+                        var reader = com.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            info = reader.GetString(0);
+                        }
+                        try
+                        {
+                            reader.Close();
+                        }
+                        catch
+                        {
+                        }
+                        try
+                        {
+                            con.Close();
+                        }
+                        catch
+                        {
+                        }
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+
+                    var infos = info.Split(new string[] { "@@@" }, StringSplitOptions.None);
+                    content = "资产名称：{0}".Formatted(infos[0]);
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "规格型号：{0}{1}{2}".Formatted(infos[1], infos[1].None() ? "" : " ", infos[2]);
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                    //if (infos[3] == "1")
+                    //{
+                        content = "资产编号：{0}".Formatted(infos[4].Length > 7 ? infos[4].Substring(infos[4].Length - 7) : infos[4]);
+                        Cut(sb, content, 内容每行字数, 内容空字符数);
+                        content = "保管部门：{0}".Formatted(infos[8].None() ? "" : infos[8]);
+                        Cut(sb, content, 内容每行字数, 内容空字符数);
+                        //var time = infos[7].None() ? "" : DateTime.Parse(infos[7]).ToString("yyyy-MM-dd");
+                        //content = "购置日期：{0}".Formatted(time);
+                        //Cut(sb, content, 内容每行字数, 内容空字符数);
+                    //}
+                    //content = "物资分类：{0}".Formatted(infos[5]);
+                    //Cut(sb, content, 内容每行字数, 内容空字符数);
+                    g.DrawString(sb.ToString(), new Font(内容字体, 内容字号), B, 左侧左边距, 左侧上边距);
+#elif yz
+                    //string title = "{0} 资产标签".Formatted(Title);
+                    //g.DrawString(title, new Font(标题字体, 标题字号), B, 标题左边距, 标题上边距);
+                    //g.Save();
                     RadBarcode code = new RadBarcode { Type = BarcodeType.QRCode, Text = qrcode, OutputType = BarcodeOutputType.EmbeddedPNG };
                     code.QRCodeSettings.Mode = Telerik.Web.UI.Barcode.Modes.CodeMode.Alphanumeric;
                     code.QRCodeSettings.ErrorCorrectionLevel = Telerik.Web.UI.Barcode.Modes.ErrorCorrectionLevel.M;
