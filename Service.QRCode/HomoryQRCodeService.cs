@@ -186,7 +186,7 @@ namespace LY.Service.QRCode
 
         private void QRS(List<DepotCode> list)
         {
-#region 图片参数
+            #region 图片参数
             var 图片宽度 = 600;
             var 图片高度 = 图片宽度 / 2;
             var 边框旁白 = 15;
@@ -199,8 +199,11 @@ namespace LY.Service.QRCode
             var 图标宽度 = 60;
 #endif
             var 图标高度 = 40;
+#if yz
+#else
             var 标题字体 = "SimHei";
             var 标题字号 = 20;
+#endif
             var 标题上边距 = 边框旁白 + 边框宽度 + 17;
             var 标题左边距 = 图标左边距 + 图标宽度 + 16;
             var 右侧宽度 = 200;
@@ -231,7 +234,7 @@ namespace LY.Service.QRCode
             var BasePath = ConfigurationManager.AppSettings["CodePath"];
             var Logo = ConfigurationManager.AppSettings["CodeLogo"];
             var Title = ConfigurationManager.AppSettings["CodeTitle"];
-#endregion
+            #endregion
             foreach (var group in list.GroupBy(o => o.BatchId))
             {
                 var fold_id = group.Key;
@@ -260,11 +263,9 @@ namespace LY.Service.QRCode
                     code.QRCodeSettings.DotSize = 5;
                     SysImage qr = code.GetImage();
                     g.DrawImage(qr, 二维码左边距, 二维码上边距, 二维码边长, 二维码边长);
-                    //g.DrawString(qrcode, new Font(二维码文字字体, 二维码文字字号), B, 二维码文字左边距, 二维码文字上边距);
                     var content = "";
                     var sb = new StringBuilder();
                     var info = string.Empty;
-
                     try
                     {
                         var con = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["Entities"].ConnectionString);
@@ -294,7 +295,6 @@ namespace LY.Service.QRCode
                     {
                         continue;
                     }
-
                     var infos = info.Split(new string[] { "@@@" }, StringSplitOptions.None);
                     content = "　　　　　　　固定资产{0}".Formatted(list[0].XsfxName.Substring(list[0].XsfxName.IndexOf('(')));
                     Cut(sb, content, 内容每行字数, 内容空字符数);
@@ -332,7 +332,6 @@ namespace LY.Service.QRCode
                     var content = "";
                     var sb = new StringBuilder();
                     var info = string.Empty;
-
                     try
                     {
                         var con = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["Entities"].ConnectionString);
@@ -362,29 +361,17 @@ namespace LY.Service.QRCode
                     {
                         continue;
                     }
-
                     var infos = info.Split(new string[] { "@@@" }, StringSplitOptions.None);
                     content = "资产名称：{0}".Formatted(infos[0]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
                     content = "规格型号：{0}{1}{2}".Formatted(infos[1], infos[1].None() ? "" : " ", infos[2]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
-                    //if (infos[3] == "1")
-                    //{
-                        content = "资产编号：{0}".Formatted(infos[4].Length > 7 ? infos[4].Substring(infos[4].Length - 7) : infos[4]);
-                        Cut(sb, content, 内容每行字数, 内容空字符数);
-                        content = "保管部门：{0}".Formatted(infos[8].None() ? "" : infos[8]);
-                        Cut(sb, content, 内容每行字数, 内容空字符数);
-                        //var time = infos[7].None() ? "" : DateTime.Parse(infos[7]).ToString("yyyy-MM-dd");
-                        //content = "购置日期：{0}".Formatted(time);
-                        //Cut(sb, content, 内容每行字数, 内容空字符数);
-                    //}
-                    //content = "物资分类：{0}".Formatted(infos[5]);
-                    //Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "资产编号：{0}".Formatted(infos[4].Length > 7 ? infos[4].Substring(infos[4].Length - 7) : infos[4]);
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "保管部门：{0}".Formatted(infos[8].None() ? "" : infos[8]);
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
                     g.DrawString(sb.ToString(), new Font(内容字体, 内容字号), B, 左侧左边距, 左侧上边距);
 #elif yz
-                    //string title = "{0} 资产标签".Formatted(Title);
-                    //g.DrawString(title, new Font(标题字体, 标题字号), B, 标题左边距, 标题上边距);
-                    //g.Save();
                     RadBarcode code = new RadBarcode { Type = BarcodeType.QRCode, Text = qrcode, OutputType = BarcodeOutputType.EmbeddedPNG };
                     code.QRCodeSettings.Mode = Telerik.Web.UI.Barcode.Modes.CodeMode.Alphanumeric;
                     code.QRCodeSettings.ErrorCorrectionLevel = Telerik.Web.UI.Barcode.Modes.ErrorCorrectionLevel.M;
@@ -398,7 +385,6 @@ namespace LY.Service.QRCode
                     var content = "";
                     var sb = new StringBuilder();
                     var info = string.Empty;
-
                     try
                     {
                         var con = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["Entities"].ConnectionString);
@@ -428,24 +414,15 @@ namespace LY.Service.QRCode
                     {
                         continue;
                     }
-
                     var infos = info.Split(new string[] { "@@@" }, StringSplitOptions.None);
                     content = "资产名称：{0}".Formatted(infos[0]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
                     content = "规格型号：{0}{1}{2}".Formatted(infos[1], infos[1].None() ? "" : " ", infos[2]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
-                    //if (infos[3] == "1")
-                    //{
-                        content = "资产编号：{0}".Formatted(infos[4].Length > 7 ? infos[4].Substring(infos[4].Length - 7) : infos[4]);
-                        Cut(sb, content, 内容每行字数, 内容空字符数);
-                        content = "保管部门：{0}".Formatted(infos[8].None() ? "" : infos[8]);
-                        Cut(sb, content, 内容每行字数, 内容空字符数);
-                        //var time = infos[7].None() ? "" : DateTime.Parse(infos[7]).ToString("yyyy-MM-dd");
-                        //content = "购置日期：{0}".Formatted(time);
-                        //Cut(sb, content, 内容每行字数, 内容空字符数);
-                    //}
-                    //content = "物资分类：{0}".Formatted(infos[5]);
-                    //Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "资产编号：{0}".Formatted(infos[4].Length > 7 ? infos[4].Substring(infos[4].Length - 7) : infos[4]);
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "保管部门：{0}".Formatted(infos[8].None() ? "" : infos[8]);
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
                     g.DrawString(sb.ToString(), new Font(内容字体, 内容字号), B, 左侧左边距, 左侧上边距);
 #else
                     string title = "{0} 资产标签".Formatted(Title);
@@ -464,7 +441,6 @@ namespace LY.Service.QRCode
                     var content = "";
                     var sb = new StringBuilder();
                     var info = string.Empty;
-
                     try
                     {
                         var con = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["Entities"].ConnectionString);
@@ -494,7 +470,6 @@ namespace LY.Service.QRCode
                     {
                         continue;
                     }
-
                     var infos = info.Split(new string[] { "@@@" }, StringSplitOptions.None);
                     content = "资产名称：{0}".Formatted(infos[0]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
