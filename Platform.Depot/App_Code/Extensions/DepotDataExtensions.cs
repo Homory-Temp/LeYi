@@ -281,7 +281,7 @@ public static class DepotDataExtensions
         db.DepotDictionaryAdd(depotId, DictionaryType.品牌, brand);
     }
 
-    public static void DepotObjectEditX(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal, string age, bool isVirtual)
+    public static void DepotObjectEditX(this DepotEntities db, Guid id, List<Guid> catalogIds, Guid depotId, string name, string fixedCard, string fixedNumber, string brand, string extension, string unit, string specification, decimal low, decimal high, string pa, string pb, string pc, string pd, string note, int ordinal, string age, bool isVirtual, string dept = "")
     {
         var obj = db.DepotObject.Single(o => o.Id == id);
         obj.Name = name;
@@ -301,6 +301,7 @@ public static class DepotDataExtensions
         obj.ImageD = pd;
         obj.Note = note;
         obj.Ordinal = ordinal;
+        obj.Department = dept;
         var catalogs = db.DepotObjectCatalog.Where(o => o.ObjectId == id && o.IsVirtual == isVirtual).ToList();
         for (var i = 0; i < catalogs.Count(); i++)
         {

@@ -20,10 +20,12 @@ public partial class DepotAction_ObjectEdit : DepotPageSingle
             age.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.年龄段).ToList();
             age.DataBind();
             agex.Visible = Depot.Featured(DepotType.幼儿园);
+            deptRow.Visible = Depot.Featured(DepotType.固定资产库);
             specification.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.规格).ToList();
             specification.DataBind();
             brand.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.品牌).ToList();
             brand.DataBind();
+            deptRow.Visible = Depot.Featured(DepotType.固定资产库) && !Depot.Featured(DepotType.幼儿园);
             var oid = "ObjectId".Query().GlobalId();
             var obj = DataContext.DepotObject.Single(o => o.Id == oid);
             var cid = "CatalogId".Query();
@@ -33,6 +35,7 @@ public partial class DepotAction_ObjectEdit : DepotPageSingle
             tree.SelectedValue = node.Value;
             ordinal.Value = obj.Ordinal;
             name.Text = obj.Name;
+            dept.Text = obj.Department;
             if (unit.FindItemByText(obj.Unit) == null)
             {
                 unit.Items.Add(new Telerik.Web.UI.RadComboBoxItem { Text = obj.Unit, Value = obj.Unit });

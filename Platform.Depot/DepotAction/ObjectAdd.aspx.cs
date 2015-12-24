@@ -21,6 +21,7 @@ public partial class DepotAction_ObjectAdd : DepotPageSingle
             specification.DataBind();
             brand.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.品牌).ToList();
             brand.DataBind();
+            deptRow.Visible = Depot.Featured(DepotType.固定资产库) && !Depot.Featured(DepotType.幼儿园);
             if (Depot.Featured(DepotType.固定资产库))
             {
                 r1.Visible = r2.Visible = r3.Visible = false;
@@ -134,11 +135,11 @@ public partial class DepotAction_ObjectAdd : DepotPageSingle
         }
         if (Depot.Featured(DepotType.固定资产库))
         {
-            DataContext.DepotObjectAdd(id, ids, Depot.Id, name.Text.Trim(), t4.Checked, false, true, "", "", brand.Text.Trim(), "", unit.Text.Trim(), specification.Text.Trim(), low.PeekValue(0.00M), high.PeekValue(0.00M), photo.Length > 0 ? photo[0] : "", photo.Length > 1 ? photo[1] : "", photo.Length > 2 ? photo[2] : "", photo.Length > 3 ? photo[3] : "", content.Text.Trim(), ordinal.PeekValue(100), age.Text.Trim(), true);
+            DataContext.DepotObjectAdd(id, ids, Depot.Id, name.Text.Trim(), t4.Checked, false, true, "", "", brand.Text.Trim(), "", unit.Text.Trim(), specification.Text.Trim(), low.PeekValue(0.00M), high.PeekValue(0.00M), photo.Length > 0 ? photo[0] : "", photo.Length > 1 ? photo[1] : "", photo.Length > 2 ? photo[2] : "", photo.Length > 3 ? photo[3] : "", content.Text.Trim(), ordinal.PeekValue(100), age.Text.Trim(), true, dept.Text.Trim());
         }
         else
         {
-            DataContext.DepotObjectAdd(id, ids, Depot.Id, name.Text.Trim(), t3.Checked, t1.Checked, false, "", "", brand.Text.Trim(), "", unit.Text.Trim(), specification.Text.Trim(), low.PeekValue(0.00M), high.PeekValue(0.00M), photo.Length > 0 ? photo[0] : "", photo.Length > 1 ? photo[1] : "", photo.Length > 2 ? photo[2] : "", photo.Length > 3 ? photo[3] : "", content.Text.Trim(), ordinal.PeekValue(100), age.Text.Trim());
+            DataContext.DepotObjectAdd(id, ids, Depot.Id, name.Text.Trim(), t3.Checked, t1.Checked, false, "", "", brand.Text.Trim(), "", unit.Text.Trim(), specification.Text.Trim(), low.PeekValue(0.00M), high.PeekValue(0.00M), photo.Length > 0 ? photo[0] : "", photo.Length > 1 ? photo[1] : "", photo.Length > 2 ? photo[2] : "", photo.Length > 3 ? photo[3] : "", content.Text.Trim(), ordinal.PeekValue(100), age.Text.Trim(), false, dept.Text.Trim());
         }
         return id;
     }

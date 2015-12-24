@@ -155,6 +155,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row" id="deptRow" runat="server">
+                        <div class="col-md-4 text-right">保管部门：</div>
+                        <div class="col-md-8 text-left">
+                            <telerik:RadTextBox ID="dept" runat="server" Width="400"></telerik:RadTextBox>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-4 text-right">低库存量：</div>
                         <div class="col-md-8 text-left">
