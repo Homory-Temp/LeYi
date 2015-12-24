@@ -18,6 +18,8 @@ public partial class DepotAction_Code : DepotPageSingle
             ____v.InnerText = (new List<string>()).ToJson();
             depts.DataSource = DataContext.DepotObjectLoad(Depot.Id, null).Select(o => o.Department).Distinct().OrderBy(o => o).ToList();
             depts.DataBind();
+            ol.DataSource = DataContext.DepotOrder.Where(o => o.DepotId == Depot.Id && o.State < State.停用).OrderByDescending(o => o.RecordTime).ToList();
+            ol.DataBind();
         }
     }
 
@@ -38,7 +40,7 @@ public partial class DepotAction_Code : DepotPageSingle
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        if (toSearchX.Text.None() && depts.SelectedIndex < 0)
+        if (toSearchX.Text.None() && depts.SelectedIndex < 0 && ol.SelectedIndex < 1)
         {
             var node = CurrentNode;
             var source = node.HasValue ? DataContext.DepotObjectLoad(Depot.Id, node.Value.GlobalId()) : new List<DepotObject>();
@@ -115,6 +117,11 @@ public partial class DepotAction_Code : DepotPageSingle
     protected List<DepotInX> Ordinals(Guid objId, RadListViewDataItem container)
     {
         var s = DataContext.DepotInX.Where(o => o.ObjectId == objId).OrderBy(o => o.Ordinal).ToList().Where(o => o.Place.ToLower().Contains(toSearchX.Text.Trim().ToLower())).ToList();
+        if (ol.SelectedIndex > 0)
+        {
+            var oid = Guid.Parse(ol.SelectedValue);
+            s = s.Where(o => o.DepotOrder.Id == oid).ToList();
+        }
         if (s.Count == 0)
         {
             container.Visible = false;
