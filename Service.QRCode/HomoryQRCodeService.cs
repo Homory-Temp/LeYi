@@ -191,14 +191,17 @@ namespace LY.Service.QRCode
             var 图片高度 = 图片宽度 / 2;
             var 边框旁白 = 15;
             var 边框宽度 = 2;
-            var 图标上边距 = 边框旁白 + 边框宽度 + 8;
-            var 图标左边距 = 边框旁白 + 边框宽度 + 33;
 #if yz
-            var 图标宽度 = 400;
+            var 图标上边距 = 边框旁白 + 边框宽度 + 8 - 8;
+            var 图标宽度 = 160;
+            var 图标高度 = 70;
+            var 图标左边距 = 边框旁白 + 边框宽度 + 200;
 #else
+            var 图标上边距 = 边框旁白 + 边框宽度 + 8;
             var 图标宽度 = 60;
-#endif
             var 图标高度 = 40;
+            var 图标左边距 = 边框旁白 + 边框宽度 + 33;
+#endif
 #if yz
 #else
             var 标题字体 = "SimHei";
@@ -211,6 +214,8 @@ namespace LY.Service.QRCode
             var 二维码边长 = 右侧宽度;
 #if xsfx
             var 二维码上边距 = 边框旁白 + 边框宽度 + 图标高度 + 7 + 20;
+#elif yz
+            var 二维码上边距 = 边框旁白 + 边框宽度 + 图标高度 + 7 - 20 - 20;
 #else
             var 二维码上边距 = 边框旁白 + 边框宽度 + 图标高度 + 7;
 #endif
@@ -222,6 +227,8 @@ namespace LY.Service.QRCode
             var 左侧左边距 = 边框旁白 + 边框宽度 + 12;
 #if xsfx
             var 左侧上边距 = 边框旁白 + 边框宽度 + 图标高度 + 27-10;
+#elif yz
+            var 左侧上边距 = 边框旁白 + 边框宽度 + 图标高度 + 7 - 20;
 #else
             var 左侧上边距 = 边框旁白 + 边框宽度 + 图标高度 + 27;
 #endif
