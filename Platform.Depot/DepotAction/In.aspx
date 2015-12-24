@@ -122,7 +122,7 @@
                         <tr>
                             <td><%# Eval("购置单号") %></td>
                             <td><%# Eval("发票编号") %></td>
-                            <td><%# Eval("OrderTime").ToDay() %></td>
+                            <td><%# Eval("RecordTime").ToDay() %></td>
                             <td><%# Eval("购置来源") %></td>
                             <td><%# Eval("使用对象") %></td>
                             <td><%# Eval("应付金额").ToMoney() %></td>
