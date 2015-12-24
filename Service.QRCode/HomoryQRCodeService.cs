@@ -377,6 +377,8 @@ namespace LY.Service.QRCode
                     Cut(sb, content, 内容每行字数, 内容空字符数);
                     content = "保管部门：{0}".Formatted(infos[8].None() ? "" : infos[8]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "存放地：{0}".Formatted(infos[9].None() ? "" : infos[9]);
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
                     g.DrawString(sb.ToString(), new Font(内容字体, 内容字号), B, 左侧左边距, 左侧上边距);
 #elif yz
                     RadBarcode code = new RadBarcode { Type = BarcodeType.QRCode, Text = qrcode, OutputType = BarcodeOutputType.EmbeddedPNG };
@@ -494,10 +496,6 @@ namespace LY.Service.QRCode
                     Cut(sb, content, 内容每行字数, 内容空字符数);
                     g.DrawString(sb.ToString(), new Font(内容字体, 内容字号), B, 左侧左边距, 左侧上边距);
 #endif
-                    //content = "存放地　：{0}".Formatted("教室A");
-                    //Cut(sb, content, 内容每行字数, 内容空字符数);
-                    //content = "责任人　：{0}".Formatted("凌俊伟");
-                    //Cut(sb, content, 内容每行字数, 内容空字符数);
                     image.Save("{0}/{1}.png".Formatted(path, qrcode), ImageFormat.Png);
                     g.Dispose();
                     image.Dispose();
