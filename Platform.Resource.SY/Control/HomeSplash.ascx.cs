@@ -19,7 +19,8 @@ namespace Control
 
         protected string GetLink(int index)
         {
-            var doc = XDocument.Load(Server.MapPath("~/Common/配置/ResourceSplash.xml"));
+            return "#";
+            var doc = XDocument.Load(Server.MapPath("../Common/配置/ResourceSplash.xml"));
             var list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(doc.Root.Value);
             return list.Count > index ? list[index] : "#";
         }

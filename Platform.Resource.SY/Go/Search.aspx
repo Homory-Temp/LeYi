@@ -64,7 +64,7 @@
                 <div class="login" style="margin-top: 0px;">
                     <div class="lg-top">
                         <h1 class="logo"><a class="fixpng" href="../Go/Home" title="互动教育资源管理平台">互动教育资源管理平台</a></h1>
-                        <div class="lg-search" style="width: 396px;">
+                        <div class="lg-search" style="width: 337px;">
                             <input runat="server" type="text" class="srx-ns-input" id="search_content" value="" data-prevcolor="" style="color: rgb(170, 170, 170);" />
                             <a class="srx-ns-btn" runat="server" id="search_go" onserverclick="search_go_OnServerClick" style="border-right: solid 1px silver;">检索</a>
                             <input id="hhhh" runat="server" type="hidden" value="1" />
@@ -120,45 +120,68 @@
                                     <div>
                                     </div>
                                 </div>
-                                    <div id="SourceLi" runat="server"  class="fl xy_treebox mgt15" >
-                                        <div class="zTreeDemoBackground2 left">
-                                            <telerik:RadTreeView runat="server" ID="tree" CheckBoxes="true" CheckChildNodes="true" OnNodeCheck="commentList_NodeCheck" ExpandNodeOnSingleClick="true" AutoPostBack="true" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId"></telerik:RadTreeView>
-                                        </div>
+                                <div id="SourceLi" runat="server" class="fl xy_treebox mgt15">
+                                    <div class="zTreeDemoBackground2 left">
+                                        <telerik:RadTreeView runat="server" ID="tree" CheckBoxes="true" CheckChildNodes="true" OnNodeCheck="commentList_NodeCheck" ExpandNodeOnSingleClick="true" AutoPostBack="true" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId"></telerik:RadTreeView>
                                     </div>
-                                    <div  class="mgt15 fr" style="width:770px;" >       
+                                </div>
+                                <div class="mgt15 fr" style="width: 700px;">
                                     <div class="xy_pxbar" style="height: 40px; line-height: 40px; vertical-align: middle;">
                                         <div style="margin: 10px auto;">
-                                            <telerik:RadButton Width="80" runat="server" ID="s1" OnClick="itemX_OnClick" Text="最新" Value='1' ToggleType="CheckBox" Checked="true" Style="margin-left: 10px; margin-right: 4px;"></telerik:RadButton>
-                                            <telerik:RadButton Width="80" runat="server" ID="s2" OnClick="itemX_OnClick" Text="最热" Value='2' ToggleType="CheckBox" Style="margin-right: 4px;"></telerik:RadButton>
-                                            <telerik:RadButton Width="80" runat="server" ID="s3" OnClick="itemX_OnClick" Text="最优" Value='3' ToggleType="CheckBox"></telerik:RadButton>
-                                            <telerik:RadButton Width="80" runat="server" ID="ss" OnClick="ss_Click" Text="待审核" Value='x' ToggleType="CheckBox" Style="margin-right: 10px; float: right;"></telerik:RadButton>
+                                            <table>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<telerik:RadButton Width="80" runat="server" ID="s1" OnClick="itemX_OnClick" Text="最新" Value='1' ToggleType="CheckBox" Checked="true"></telerik:RadButton>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<telerik:RadButton Width="80" runat="server" ID="s2" OnClick="itemX_OnClick" Text="最热" Value='2' ToggleType="CheckBox"></telerik:RadButton>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<telerik:RadButton Width="80" runat="server" ID="s3" OnClick="itemX_OnClick" Text="最优" Value='3' ToggleType="CheckBox"></telerik:RadButton>
+                                                    </td>
+                                                    <td style="width: 120px;">&nbsp;</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<telerik:RadButton Width="80" runat="server" ID="sx" OnClick="sx_Click" Text="已审核" Value='s' ToggleType="CheckBox"></telerik:RadButton>
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;<telerik:RadButton Width="80" runat="server" ID="ss" OnClick="ss_Click" Text="待审核" Value='x' ToggleType="CheckBox"></telerik:RadButton>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
                                     <div class="xy_allzylist">
                                         <telerik:RadListView runat="server" ID="result" AllowPaging="true" PageSize="20" OnNeedDataSource="result_NeedDataSource" OnItemDataBound="result_ItemDataBound">
                                             <ItemTemplate>
                                                 <dl>
-                                                    <dt>
+                                                    <dt style="width: 90%;">
                                                         <img src='<%# string.Format("../Image/img/{0}.png", Eval("Thumbnail")) %>' width="64" height="64" />
                                                         <div>
-                                                            <p><%#(int)Eval("Stick") == 0?string.Empty:"<span style='font-weight:bolder; color:#ca0e0e;font-size:18px;'>[置顶]</span>" %>&nbsp;<a limit="30" href='<%# string.Format("../Go/{0}?Id={1}", ((Homory.Model.ResourceType)Eval("Type"))== Homory.Model.ResourceType.视频 ? "ViewVideo" : "ViewPlain", Eval("Id")) %>' class="xy_zkyl"><%# Eval("Title") %> </a></p>
+                                                            <p>
+                                                                <%#(int)Eval("Stick") == 0?string.Empty:"<span style='font-weight:bolder; color:#ca0e0e;font-size:14px;'>[置顶]</span>" %>&nbsp;<a limit="30" href='<%# string.Format("../Go/{0}?Id={1}", ((Homory.Model.ResourceType)Eval("Type"))== Homory.Model.ResourceType.视频 ? "ViewVideo" : "ViewPlain", Eval("Id")) %>' class="xy_zkyl"><%# Eval("Title") %> </a>
+                                                            </p>
 
-                                                            <p class="sd wjdx">
-                                                                <a href='<%# string.Format("../Go/Personal?Id={0}", Eval("UserId")) %>'><em><%# U(((Homory.Model.ResourceMap)Container.DataItem).UserId).RealName %></em></a></span>&nbsp;&nbsp;<span>发布于：<em> <%# ((DateTime)Eval("ResourceTime")).ToString("yyyy-MM-dd") %></em></span>
+                                                            <p style="margin-top: 15px">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td style="width: 50%;">
+
+                                                                            <a style="float: left;" href='<%# string.Format("../Go/Personal?Id={0}", Eval("UserId")) %>'><em><%# U(((Homory.Model.ResourceMap)Container.DataItem).UserId).RealName 
+
+                                                                            %></em></a></span>&nbsp;&nbsp;<span>发布于：<em> <%# ((DateTime)Eval("ResourceTime")).ToString("yyyy-MM-dd") %></em></span>
+                                                                        </td>
+                                                                        <td style="width: 50%; padding-left: 80px">
+                                                                            <telerik:RadRating Skin="Default" ItemCount="5" Orientation="Horizontal" Precision="Item" runat="server" CssClass="flList_ex" AutoPostBack="false" Value='<%# Eval("Grade") %>' Enabled="false"></telerik:RadRating>
+                                                                            (<%# Eval("Rate") %>次评分)
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
                                                             </p>
                                                         </div>
+
                                                     </dt>
-                                                    <dd>
+                                                    <div style="clear: both;"></div>
+                                                    <dd style="width: 90%; float: left;">
                                                         <ul>
                                                             <li>
-                                                                <p id="grade" class="grade">
-                                                                    <telerik:RadRating Skin="Default" ItemCount="5" Orientation="Horizontal" Precision="Item" runat="server" CssClass="flList_ex" AutoPostBack="false" Value='<%# Eval("Grade") %>' Enabled="false"></telerik:RadRating>
-                                                                    (<%# Eval("Rate") %>次评分)
-                                                                </p>
-                                                            </li>
-                                                            <li>
                                                                 <a id="ab" runat="server" class="xy_scbtn" visible='<%# (bool)Eval("Audit") %>' style="cursor: pointer;"><%# ((OpenType)Eval("OpenType")) == OpenType.不公开 ? "不公开" : (((State)Eval("State")) == State.停用 ? "未通过" : (((State)Eval("State")) == State.默认 ? "未审核" : "已通过")) %></a>
-                                                                <telerik:RadToolTip ID="tip" runat="server" IsClientID="true" Skin="MetroTouch" AutoCloseDelay="0" Visible='<%# ((OpenType)Eval("OpenType")) != OpenType.不公开 %>'>
+                                                                <telerik:RadToolTip ID="tip" runat="server" IsClientID="true" Skin="MetroTouch" AutoCloseDelay="0" Visible='<%# (IsOnline && AuditExists()) && ((OpenType)Eval("OpenType")) != OpenType.不公开 %>'>
                                                                     <table>
                                                                         <tr>
                                                                             <td colspan="5" style="text-align: center;">
@@ -177,7 +200,7 @@
                                                             </li>
                                                             <li><a target="_blank" href='<%# string.Format("../Go/{0}?Id={1}", ((Homory.Model.ResourceType)Eval("Type"))== Homory.Model.ResourceType.视频 ? "ViewVideo" : "ViewPlain", Eval("Id")) %>' class="xy_xzbtn">浏览(<%# Eval("View") %>)</a></li>
                                                             <li><a target="_blank" href='<%# string.Format("../Go/{0}?Id={1}", ((Homory.Model.ResourceType)Eval("Type"))== Homory.Model.ResourceType.视频 ? "ViewVideo" : "ViewPlain", Eval("Id")) %>' class="xy_xzbtn">下载(<%# Eval("Download") %>)</a></li>
-                                                            <li><asp:ImageButton ID="SetTop" class="SetTopClass" Visible='<%# ((Homory.Model.ResourceMap)Container.DataItem).AuditUsers.ToUpper().Contains(CurrentUser.Id.ToString().ToUpper()) %>' Stick='<%#Eval("Stick") %>' style="margin-top:16px;" ImageUrl='<%#(int)Eval("Stick")== 0?"Image/uph.png":"Image/downh.png"%>' ToolTip='<%#(int)Eval("Stick") == 0? "置顶":"取消置顶" %>'  runat="server"  SourceId='<%#Eval("Id")%>' OnClick="SetTop_Click" /></li>
+                                                            <li><a id="SetTop" class='<%#(int)Eval("Stick")== 0?"xy_ylbtn":"xy_blbtn" %>' style="cursor: pointer;" visible='<%# (IsOnline && AuditExists()) && ((Homory.Model.ResourceMap)Container.DataItem).AuditUsers.ToUpper().Contains(CurrentUser.Id.ToString().ToUpper()) %>' stick='<%#Eval("Stick") %>' runat="server" sourceid='<%#Eval("Id")%>' onserverclick="SetTop_Click"><%#(int)Eval("Stick") == 0? "置顶":"取消置顶" %></a></li>
                                                         </ul>
                                                     </dd>
                                                 </dl>
@@ -186,7 +209,7 @@
                                         <br />
                                         <telerik:RadDataPager runat="server" ID="pager" PageSize="20" PagedControlID="result">
                                             <Fields>
-                                                <telerik:RadDataPagerSliderField HorizontalPosition="NoFloat" LabelTextFormat="第{0}页 共{1}页" SliderDecreaseText="前翻" SliderIncreaseText="后翻" SliderDragText="拖动" SliderOrientation="Horizontal" />
+                                                <telerik:RadDataPagerSliderField HorizontalPosition="NoFloat" LabelTextFormat="第{0}页 共{1}页 每页20项" SliderDecreaseText="前翻" SliderIncreaseText="后翻" SliderDragText="拖动" SliderOrientation="Horizontal" />
                                             </Fields>
                                         </telerik:RadDataPager>
                                     </div>

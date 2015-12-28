@@ -195,4 +195,9 @@ public partial class DepotAction_Object : DepotPageSingle
     {
         Response.Redirect("~/DepotQuery/ObjectToFixed?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
+
+    protected void clear_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/ObjectClear?DepotId={0}&ObjectId={1}&CatalogId={2}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"], CurrentNode.HasValue ? CurrentNode.Value : Guid.Empty));
+    }
 }

@@ -79,7 +79,11 @@ namespace Popup
 				case "pdf":
 					type = ResourceFileType.Pdf;
 					break;
-				default:
+                case "mp3":
+                case "wma":
+                    type = ResourceFileType.Audio;
+                    break;
+                default:
 					type = ResourceFileType.Media;
 					break;
 			}

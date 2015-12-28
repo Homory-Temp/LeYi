@@ -145,6 +145,12 @@
                                                     <a href='<%# string.Format("{0}", Eval("Source")) %>'><%# Eval("Title") %></a>
                                                 </td>
                                                 <td>&nbsp;&nbsp;</td>
+                                                <td style="cursor: pointer;">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <a href='<%# Eval("Source") %>'>下载</a>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                </td>
+                                                <td>&nbsp;&nbsp;</td>
                                                 <td id="col" runat="server" style="cursor: pointer;">
                                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                                     <a id="pv" runat="server" match='<%# Eval("Id") %>' matchx='<%# Eval("Source") %>' visible='<%# CanPreviewA(Eval("Source")) %>'></a>

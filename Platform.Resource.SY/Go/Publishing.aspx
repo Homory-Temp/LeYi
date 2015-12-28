@@ -148,7 +148,7 @@
                             </div>
                             <div id="journalEditor" class="editor-content">
                                 <label runat="server" id="publish_editor_label"></label>
-                                <telerik:RadEditor runat="server" ID="publish_editor" Width="100%" Height="200px" MaxHtmlLength="4000" ContentAreaMode="Iframe" RenderMode="Auto" ExternalDialogsPath="../Dialog" DialogHandlerUrl="Telerik.Web.UI.DialogHandler.axd" Language="zh-CN" LocalizationPath="../Language">
+                                <telerik:RadEditor runat="server" ID="publish_editor" Width="100%" Height="300px" MaxHtmlLength="4000" ContentAreaMode="Div" RenderMode="Native" ExternalDialogsPath="../Dialog" DialogHandlerUrl="Telerik.Web.UI.DialogHandler.axd" Language="zh-CN" LocalizationPath="../Language">
                                     <Tools>
                                         <telerik:EditorToolGroup Tag="InsertToolbar">
                                             <telerik:EditorTool Name="JustifyLeft" />

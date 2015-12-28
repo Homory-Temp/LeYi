@@ -102,11 +102,8 @@
                                     <span>作者：<a href='<%= string.Format("../Go/Personal?Id={0}", TargetUser.Id) %>'><%= CurrentResource.User.DisplayName %></a></span>&nbsp;&nbsp;
                                     <span id="catalog" runat="server">栏目：<%= CurrentResource.ResourceCatalog.Where(o=>o.State==State.启用 &&o.Catalog.Type== CatalogType.文章).Aggregate(string.Empty,Combine).CutString(null) %></span>
                                     <br />
-                                    <asp:Panel runat="server" ID="cg">
-                                        <span><%= CombineGrade() %></span>&nbsp;&nbsp;
-                                    <span><%= CombineCourse() %></span>
-                                        <br />
-                                    </asp:Panel>
+                                    <span>适用年龄段：<%= CombineAge() %></span>
+                                    <br />
                                     <asp:Panel runat="server" ID="tag">
                                         <span>标签：<%= CombineTags() %></span>
                                         <br />
@@ -183,15 +180,38 @@
                                 <br />
                                 <p id="pppp1" runat="server" style="font-size: 16px;">附件：</p>
                                 <p id="pppp2" runat="server">
-
-                                    <telerik:RadListView ID="publish_attachment_list" runat="server" OnNeedDataSource="publish_attachment_list_OnNeedDataSource">
+                                    <telerik:RadListView ID="publish_attachment_list" runat="server" OnNeedDataSource="publish_attachment_list_OnNeedDataSource" ItemPlaceholderID="h_pal" OnItemDataBound="publish_attachment_list_ItemDataBound">
+                                        <LayoutTemplate>
+                                            <table style="margin: 10px auto 0 auto; float: left;">
+                                                <asp:PlaceHolder ID="h_pal" runat="server"></asp:PlaceHolder>
+                                            </table>
+                                            <div style="clear: both;">&nbsp;</div>
+                                        </LayoutTemplate>
                                         <ItemTemplate>
-                                            <img src='<%# string.Format("../Image/img/{0}.jpg", (int)Eval("FileType")) %>' />
-                                            <a href='<%# string.Format("{0}", Eval("Source")) %>'><%# Eval("Title") %></a>&nbsp;&nbsp;
+                                            <tr style="vertical-align: middle; height: 28px; line-height: 28px;">
+                                                <td>
+                                                    <img src='<%# string.Format("../Image/img/{0}.jpg", (int)Eval("FileType")) %>' />
+                                                </td>
+                                                <td>&nbsp;&nbsp;</td>
+                                                <td title='<%# Eval("Remark") %>' style="width: 400px;">
+                                                    <a href='<%# string.Format("{0}", Eval("Source")) %>'><%# Eval("Title") %></a>
+                                                </td>
+                                                <td>&nbsp;&nbsp;</td>
+                                                <td style="cursor: pointer;">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <a href='<%# Eval("Source") %>'>下载</a>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                </td>
+                                                <td>&nbsp;&nbsp;</td>
+                                                <td id="col" runat="server" style="cursor: pointer;">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <a id="pv" runat="server" match='<%# Eval("Id") %>' matchx='<%# Eval("Source") %>' visible='<%# CanPreviewA(Eval("Source")) %>'></a>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                </td>
+                                            </tr>
                                         </ItemTemplate>
                                     </telerik:RadListView>
                                 </p>
-
                                 <div id="vp2" runat="server" class="photo-actions clearfix">
                                     <table>
                                         <tr>

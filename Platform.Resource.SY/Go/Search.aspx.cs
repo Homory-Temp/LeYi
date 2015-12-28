@@ -31,6 +31,13 @@ namespace Go
                 tree.GetAllNodes().Where(o => o.Level < 1).ToList().ForEach(o => o.Expanded = true);
                 reBind();
             }
+            sx.Visible = ss.Visible = IsOnline && AuditExists();
+        }
+
+        protected bool AuditExists()
+        {
+            var rigths = HomoryContext.Value.Catalog.Where(o => (o.Type == CatalogType.文章 || o.Type == CatalogType.视频 || o.Type == CatalogType.课件) && o.State < State.审核).Select(o => o.AuditUsers).ToList();
+            return rigths.Count(o => o.ToUpper().Contains(CurrentUser.Id.ToString().ToUpper())) > 0;
         }
 
         protected void search_go_OnServerClick(object sender, EventArgs e)
@@ -40,7 +47,7 @@ namespace Go
 
         protected override bool ShouldOnline
         {
-            get { return true; }
+            get { return false; }
         }
 
         protected void itemX_OnClick(object sender, EventArgs e)
@@ -61,6 +68,14 @@ namespace Go
 
         protected void reBind()
         {
+            if (IsOnline)
+                reBindOnline();
+            else
+                reBindOffline();
+        }
+
+        protected void reBindOnline()
+        {
             var content = search_content.Value.Trim();
             var source = HomoryContext.Value.ResourceMap;
             var catalogIdList = tree.GetAllNodes().Where(o => o.Checked).Select(o => Guid.Parse(o.Value)).ToList();
@@ -70,6 +85,8 @@ namespace Go
                 list.AddRange(catalogIdList.Join(source.Where(o => o.State == State.启用 && o.OpenType == OpenType.不公开 && o.UserId == CurrentUser.Id), a => a, b => b.CatalogId, (a, b) => b).ToList());
             if (!ss.Checked)
                 list.AddRange(catalogIdList.Join(source.Where(o => o.State == State.启用 && o.OpenType != OpenType.不公开), a => a, b => b.CatalogId, (a, b) => b).ToList());
+            if (sx.Checked)
+                list.RemoveAll(o => o.State == State.默认);
             if (IsOnline)
             {
                 var uid = CurrentUser.Id.ToString().ToUpper();
@@ -77,8 +94,12 @@ namespace Go
                     list.AddRange(catalogs.Where(o => o.AuditUsers.ToUpper().Contains(uid.ToUpper())).Join(source.Where(o => o.State == State.默认), a => a.Id, b => b.CatalogId, (a, b) => b).ToList());
                 else
                     list.AddRange(catalogs.Where(o => o.AuditUsers.ToUpper().Contains(uid.ToUpper())).Join(source.Where(o => o.State > State.启用), a => a.Id, b => b.CatalogId, (a, b) => b).ToList());
+                if (sx.Checked)
+                    list.RemoveAll(o => o.State == State.默认);
             }
+
             var final = list.OrderByDescending(o => o.Time).ToList();
+
             if (!string.IsNullOrEmpty(content))
                 final = final.Where(o => o.Title.Contains(content)).ToList();
             if (!a1.Checked)
@@ -129,6 +150,72 @@ namespace Go
                 result.DataSource = final.OrderByDescending(o => o.Stick).ThenByDescending(o => o.Grade);
             else if (s1.Checked)
                 result.DataSource = final.OrderByDescending(o => o.Stick).ThenByDescending(o => o.Time);
+
+            pager.Visible = final.Count > 20;
+            total.InnerText = final.Count.ToString();
+        }
+
+        protected void reBindOffline()
+        {
+            var content = search_content.Value.Trim();
+            var source = HomoryContext.Value.ResourceMap;
+            var catalogIdList = tree.GetAllNodes().Where(o => o.Checked).Select(o => Guid.Parse(o.Value)).ToList();
+            var catalogs = catalogIdList.Join(HomoryContext.Value.Catalog, o => o, o => o.Id, (a, b) => b).ToList();
+
+            var final = source.Where(o => o.OpenType == OpenType.互联网).OrderByDescending(o => o.Time).ToList();
+
+            if (!string.IsNullOrEmpty(content))
+                final = final.Where(o => o.Title.Contains(content)).ToList();
+            if (!a1.Checked)
+                final = final.Where(o => o.GradeId != Guid.Parse(a1.Value)).ToList();
+            if (!a2.Checked)
+                final = final.Where(o => o.GradeId != Guid.Parse(a2.Value)).ToList();
+            if (!a3.Checked)
+                final = final.Where(o => o.GradeId != Guid.Parse(a3.Value)).ToList();
+            if (!a4.Checked)
+                final = final.Where(o => o.GradeId != Guid.Parse(a4.Value)).ToList();
+            if (!a5.Checked)
+                final = final.Where(o => o.GradeId != Guid.Parse(a5.Value)).ToList();
+
+            DateTime ft, tt;
+            var f = from.SelectedDate;
+            var t = to.SelectedDate;
+            if (f.HasValue && t.HasValue)
+            {
+                ft = f.Value > t.Value ? t.Value : f.Value;
+                tt = f.Value > t.Value ? f.Value : t.Value;
+                ft = new DateTime(ft.Year, ft.Month, 1).AddMilliseconds(-1);
+                tt = new DateTime(tt.Year, tt.Month, 1).AddMonths(1);
+                final = final.Where(o => o.ResourceTime > ft && o.ResourceTime < tt).ToList();
+            }
+            else if (f.HasValue)
+            {
+                tt = f.Value;
+                tt = new DateTime(tt.Year, tt.Month, 1).AddMilliseconds(-1);
+                final = final.Where(o => o.ResourceTime > tt).ToList();
+            }
+            else if (t.HasValue)
+            {
+                tt = t.Value;
+                tt = new DateTime(tt.Year, tt.Month, 1).AddMilliseconds(-1);
+                final = final.Where(o => o.ResourceTime > tt).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(publisher.Text))
+            {
+                var uid = HomoryContext.Value.User.FirstOrDefault(o => o.RealName == publisher.Text);
+                if (uid != null)
+                    final = final.Where(o => o.UserId == uid.Id).ToList();
+            }
+
+            if (s2.Checked)
+                result.DataSource = final.OrderByDescending(o => o.Stick).ThenByDescending(o => o.View);
+            else if (s3.Checked)
+                result.DataSource = final.OrderByDescending(o => o.Stick).ThenByDescending(o => o.Grade);
+            else if (s1.Checked)
+                result.DataSource = final.OrderByDescending(o => o.Stick).ThenByDescending(o => o.Time);
+
+            pager.Visible = final.Count > 20;
             total.InnerText = final.Count.ToString();
         }
 
@@ -137,9 +224,9 @@ namespace Go
             reBind();
         }
 
-        protected void SetTop_Click(object sender, ImageClickEventArgs e)
+        protected void SetTop_Click(object sender, EventArgs e)
         {
-            var SourceId = Guid.Parse((sender as ImageButton).Attributes["SourceId"].ToString());
+            var SourceId = Guid.Parse((sender as HtmlAnchor).Attributes["SourceId"].ToString());
             var SourceObj = HomoryContext.Value.Resource.SingleOrDefault(o => o.Id == SourceId);
             SourceObj.Stick = System.Math.Abs((Byte)SourceObj.Stick - 1);
             HomoryContext.Value.SaveChanges();
@@ -148,9 +235,7 @@ namespace Go
 
         protected void result_ItemDataBound(object sender, RadListViewItemEventArgs e)
         {
-            var control = (e.Item.FindControl("SetTop") as ImageButton);
-            control.Attributes["onmouseover"] = "MouseOver('" + control.ClientID + "')";
-            control.Attributes["onmouseout"] = "MouseOut('" + control.ClientID + "')";
+
             var ab = (e.Item.FindControl("ab") as HtmlAnchor).ClientID;
             var tip = (e.Item.FindControl("tip") as RadToolTip);
             tip.TargetControlID = ab;
@@ -217,6 +302,29 @@ namespace Go
 
         protected void ss_Click(object sender, EventArgs e)
         {
+            var button = ((RadButton)sender);
+
+            var list = new RadButton[] { ss, sx };
+
+            foreach (var btn in list)
+            {
+                btn.Checked = btn.Value == button.Value;
+            }
+
+            reBind();
+        }
+
+        protected void sx_Click(object sender, EventArgs e)
+        {
+            var button = ((RadButton)sender);
+
+            var list = new RadButton[] { ss, sx };
+
+            foreach (var btn in list)
+            {
+                btn.Checked = btn.Value == button.Value;
+            }
+
             reBind();
         }
     }

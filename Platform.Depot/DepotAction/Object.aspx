@@ -130,6 +130,7 @@
                                                 <input type="button" class="btn btn-tumblr" value="编" id="edit" runat="server" match='<%# Eval("Id") %>' onserverclick="edit_ServerClick" />
                                                 <input type="button" class="btn btn-tumblr" value="固" id="fix" runat="server" match='<%# Eval("Id") %>' visible='<%# !Depot.Featured(Models.DepotType.固定资产库) %>' onserverclick="fix_ServerClick" />
                                                 <input type="button" class="btn btn-tumblr" value="删" id="delete" runat="server" match='<%# Eval("Id") %>' onserverclick="delete_ServerClick" visible='<%# (Container.DataItem as Models.DepotObject).Amount == 0 %>' />
+                                                <input type="button" class="btn btn-tumblr" value="清" id="clear" runat="server" match='<%# Eval("Id") %>' onserverclick="clear_ServerClick" visible='<%# RightRoot %>' />
                                             </td>
                                         </tr>
                                     </asp:Panel>
@@ -171,6 +172,7 @@
                                                         <input type="button" class="btn btn-tumblr btn-xs" value="编" id="edit2" runat="server" match='<%# Eval("Id") %>' onserverclick="edit_ServerClick" />
                                                         <input type="button" class="btn btn-tumblr btn-xs" value="固" id="fix2" runat="server" match='<%# Eval("Id") %>' visible='<%# !Depot.Featured(Models.DepotType.固定资产库) %>' onserverclick="fix_ServerClick" />
                                                         <input type="button" class="btn btn-tumblr btn-xs" value="删" id="delete2" runat="server" match='<%# Eval("Id") %>' visible='<%# (Container.DataItem as Models.DepotObject).Amount == 0 %>' onserverclick="delete_ServerClick" />
+                                                        <input type="button" class="btn btn-tumblr btn-xs" value="清" id="clear2" runat="server" match='<%# Eval("Id") %>' onserverclick="clear_ServerClick" visible='<%# RightRoot %>' />
                                                     </div>
                                                 </div>
                                             </div>
