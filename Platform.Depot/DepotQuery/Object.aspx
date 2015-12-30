@@ -35,6 +35,13 @@
                 window.open(id, '_blank');
         }
     </script>
+    <script>
+        function sg(sender, e) {
+            if (e.get_keyCode() == 13) {
+                $("#search").click();
+            }
+        }
+    </script>
 </head>
 <body>
     <form id="form" runat="server">
@@ -48,7 +55,7 @@
                     <span class="btn btn-danger" id="name" runat="server"></span>
                 </div>
                 <div class="col-md-4 text-right">
-                    <telerik:RadTextBox ID="toSearch" runat="server" Width="120" EmptyMessage="物资名称"></telerik:RadTextBox>
+                    <telerik:RadTextBox ID="toSearch" runat="server" Width="120" EmptyMessage="物资名称" ClientEvents-OnKeyPress="sg"></telerik:RadTextBox>
                             <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
                 </div>
             </div>
@@ -137,12 +144,12 @@
                 </div>
             </div>
             <div class="row">&nbsp;</div>
-            <div class="row"><span class="btn btn-info dictionaryX">存放地</span></div>
+            <div class="row"><div class="col-md-12"><span class="btn btn-info dictionaryX">存放地</span></div></div>
             <div class="row">
                 <telerik:RadGrid ID="grid" runat="server" CssClass="col-md-12 text-center" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="grid_NeedDataSource" OnBatchEditCommand="grid_BatchEditCommand">
                     <MasterTableView EditMode="Batch" DataKeyNames="Id,Fixed,Ordinal" CommandItemDisplay="Top" CommandItemSettings-ShowAddNewRecordButton="false" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true">
                         <BatchEditingSettings EditType="Row" OpenEditingEvent="DblClick" />
-                        <HeaderStyle HorizontalAlign="Center" Height="50" Font-Bold="true" />
+                        <HeaderStyle HorizontalAlign="Center" Font-Bold="true" />
                         <Columns>
                             <telerik:GridTemplateColumn HeaderStyle-CssClass="xxx" HeaderText="编号" DataField="Ordinal" SortExpression="Ordinal" UniqueName="Ordinal" ReadOnly="true">
                                 <ItemTemplate>
@@ -187,11 +194,11 @@
                 </telerik:RadGrid>
             </div>
             <div class="row">&nbsp;</div>
-            <div class="row"><span class="btn btn-info dictionaryX">借出记录</span></div>
+            <div class="row"><div class="col-md-12"><span class="btn btn-info dictionaryX">借出记录</span></div></div>
             <div class="row">
                 <telerik:RadGrid ID="gridX" runat="server" CssClass="col-md-12 text-center" AutoGenerateColumns="false" LocalizationPath="../Language" AllowSorting="True" PageSize="20" GridLines="None" OnNeedDataSource="gridX_NeedDataSource">
                     <MasterTableView CommandItemDisplay="None" HorizontalAlign="NotSet" ShowHeader="true" ShowHeadersWhenNoRecords="true">
-                        <HeaderStyle HorizontalAlign="Center" Height="50" Font-Bold="true" />
+                        <HeaderStyle HorizontalAlign="Center" Font-Bold="true" />
                         <Columns>
                             <telerik:GridTemplateColumn HeaderText="借用人" ItemStyle-Width="20%">
                                 <ItemTemplate>
