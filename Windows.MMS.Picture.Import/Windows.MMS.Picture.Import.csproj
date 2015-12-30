@@ -158,6 +158,9 @@
     <Compile Include="App_Code\Models\DepotObjectCatalog.cs">
       <DependentUpon>DepotEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\Models\DepotObjectSingle.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Code\Models\DepotObjectX.cs">
       <DependentUpon>DepotEntity.tt</DependentUpon>
     </Compile>
@@ -168,6 +171,9 @@
       <DependentUpon>DepotEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Code\Models\DepotPeriod.cs">
+      <DependentUpon>DepotEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Models\DepotPlace.cs">
       <DependentUpon>DepotEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Code\Models\DepotRedo.cs">

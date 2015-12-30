@@ -53,6 +53,7 @@ namespace Windows.MMS.Picture.Import.App_Code.Models
         public string Brand { get; set; }
         public string Extension { get; set; }
         public string Age { get; set; }
+        public string Department { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepotFlow> DepotFlow { get; set; }

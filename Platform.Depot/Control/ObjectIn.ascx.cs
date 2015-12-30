@@ -26,7 +26,7 @@ public partial class Control_ObjectIn : DepotControlSingle
             node.Selected = true;
             node.ExpandParentNodes();
             catalog.SelectedValue = catalogId.ToString();
-            var source = DataContext.DepotObjectLoad(Depot.Id, @in.CatalogId).ToList();
+            var source = DataContext.DepotObjectLoad(Depot.Id, @in.CatalogId).OrderByDescending(o => o.AutoId).ToList();
             //if (Depot.Featured(DepotType.固定资产库))
             //{
             //    source = source.Where(o => o.DepotIn.Count == 0).ToList();
@@ -83,7 +83,7 @@ public partial class Control_ObjectIn : DepotControlSingle
     protected void catalog_EntryAdded(object sender, Telerik.Web.UI.DropDownTreeEntryEventArgs e)
     {
         var catalogId = e.Entry.Value.GlobalId();
-        var source = DataContext.DepotObjectLoad(Depot.Id, catalogId).ToList();
+        var source = DataContext.DepotObjectLoad(Depot.Id, catalogId).OrderByDescending(o => o.AutoId).ToList();
         //if (Depot.Featured(DepotType.固定资产库))
         //{
         //    source = source.Where(o => o.DepotIn.Count == 0).ToList();

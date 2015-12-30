@@ -191,22 +191,12 @@ namespace LY.Service.QRCode
             var 图片高度 = 图片宽度 / 2;
             var 边框旁白 = 15;
             var 边框宽度 = 2;
-#if yz
-            var 图标上边距 = 边框旁白 + 边框宽度 + 8 - 8;
-            var 图标宽度 = 160;
-            var 图标高度 = 70;
-            var 图标左边距 = 边框旁白 + 边框宽度 + 200;
-#else
             var 图标上边距 = 边框旁白 + 边框宽度 + 8;
             var 图标宽度 = 60;
             var 图标高度 = 40;
             var 图标左边距 = 边框旁白 + 边框宽度 + 33;
-#endif
-#if yz
-#else
             var 标题字体 = "SimHei";
             var 标题字号 = 20;
-#endif
             var 标题上边距 = 边框旁白 + 边框宽度 + 17;
             var 标题左边距 = 图标左边距 + 图标宽度 + 16;
             var 右侧宽度 = 200;
@@ -214,8 +204,6 @@ namespace LY.Service.QRCode
             var 二维码边长 = 右侧宽度;
 #if xsfx
             var 二维码上边距 = 边框旁白 + 边框宽度 + 图标高度 + 7 + 20;
-#elif yz
-            var 二维码上边距 = 边框旁白 + 边框宽度 + 图标高度 + 7 - 20 - 20;
 #else
             var 二维码上边距 = 边框旁白 + 边框宽度 + 图标高度 + 7;
 #endif
@@ -227,21 +215,23 @@ namespace LY.Service.QRCode
             var 左侧左边距 = 边框旁白 + 边框宽度 + 12;
 #if xsfx
             var 左侧上边距 = 边框旁白 + 边框宽度 + 图标高度 + 27-10;
-#elif yz
-            var 左侧上边距 = 边框旁白 + 边框宽度 + 图标高度 + 7 - 20;
 #else
             var 左侧上边距 = 边框旁白 + 边框宽度 + 图标高度 + 27;
 #endif
             var 内容字体 = "SimHei";
             var 内容字号 = 18;
+#if xsfx
+            var 内容每行字数 = 17;
+#else
             var 内容每行字数 = 15;
+#endif
             var 内容空字符数 = 5;
             var W = new SolidBrush(Color.White);
             var B = new SolidBrush(Color.Black);
             var BasePath = ConfigurationManager.AppSettings["CodePath"];
             var Logo = ConfigurationManager.AppSettings["CodeLogo"];
             var Title = ConfigurationManager.AppSettings["CodeTitle"];
-            #endregion
+#endregion
             foreach (var group in list.GroupBy(o => o.BatchId))
             {
                 var fold_id = group.Key;
@@ -381,6 +371,9 @@ namespace LY.Service.QRCode
                     Cut(sb, content, 内容每行字数, 内容空字符数);
                     g.DrawString(sb.ToString(), new Font(内容字体, 内容字号), B, 左侧左边距, 左侧上边距);
 #elif yz
+                    string title = "{0} 资产标签".Formatted(Title);
+                    g.DrawString(title, new Font(标题字体, 标题字号), B, 标题左边距, 标题上边距);
+                    g.Save();
                     RadBarcode code = new RadBarcode { Type = BarcodeType.QRCode, Text = qrcode, OutputType = BarcodeOutputType.EmbeddedPNG };
                     code.QRCodeSettings.Mode = Telerik.Web.UI.Barcode.Modes.CodeMode.Alphanumeric;
                     code.QRCodeSettings.ErrorCorrectionLevel = Telerik.Web.UI.Barcode.Modes.ErrorCorrectionLevel.M;
@@ -431,6 +424,8 @@ namespace LY.Service.QRCode
                     content = "资产编号：{0}".Formatted(infos[4].Length > 7 ? infos[4].Substring(infos[4].Length - 7) : infos[4]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
                     content = "保管部门：{0}".Formatted(infos[8].None() ? "" : infos[8]);
+                    Cut(sb, content, 内容每行字数, 内容空字符数);
+                    content = "存放地：{0}".Formatted(infos[9].None() ? "" : infos[9]);
                     Cut(sb, content, 内容每行字数, 内容空字符数);
                     g.DrawString(sb.ToString(), new Font(内容字体, 内容字号), B, 左侧左边距, 左侧上边距);
 #else

@@ -15,6 +15,8 @@ public partial class DepotAction_Check : DepotPageSingle
             tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null, true).Count().EmptyWhenZero());
             tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
             tree.DataBind();
+            depts.DataSource = DataContext.DepotObjectLoad(Depot.Id, null).Select(o => o.Department).Distinct().OrderBy(o => o).ToList();
+            depts.DataBind();
             cName.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
@@ -45,14 +47,32 @@ public partial class DepotAction_Check : DepotPageSingle
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        var node = CurrentNode;
-        var source = DataContext.DepotObjectLoad(Depot.Id, node.HasValue ? node.Value.GlobalId() : (Guid?)null);
-        if (!toSearch.Text.None())
+        if (depts.SelectedIndex < 0)
         {
-            source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+            var node = CurrentNode;
+            var source = DataContext.DepotObjectLoad(Depot.Id, node.HasValue ? node.Value.GlobalId() : (Guid?)null);
+            if (!toSearch.Text.None())
+            {
+                source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+            }
+            source = source.Where(o => o.DepotInX.Count(ox => ox.Place.ToLower().Contains(toSearchx.Text.Trim().ToLower())) > 0 && o.Single == true);
+            view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
         }
-        source = source.Where(o => o.DepotInX.Count(ox => ox.Place.ToLower().Contains(toSearchx.Text.Trim().ToLower())) > 0 && o.Single == true);
-        view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
+        else
+        {
+            var source = DataContext.DepotObjectLoad(Depot.Id, null);
+            if (!toSearch.Text.None())
+            {
+                source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+            }
+            if (depts.SelectedIndex >= 0)
+            {
+                var dept = depts.SelectedItem.Text;
+                source = source.Where(o => o.Department == dept).ToList();
+            }
+            source = source.Where(o => o.DepotInX.Count > 0 || o.Single == false);
+            view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
+        }
     }
 
     protected void search_ServerClick(object sender, EventArgs e)

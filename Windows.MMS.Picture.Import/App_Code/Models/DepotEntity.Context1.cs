@@ -33,10 +33,8 @@ namespace Windows.MMS.Picture.Import.App_Code.Models
         public virtual DbSet<DepotRole> DepotRole { get; set; }
         public virtual DbSet<DepotUserRole> DepotUserRole { get; set; }
         public virtual DbSet<DepotOrder> DepotOrder { get; set; }
-        public virtual DbSet<DepotUser> DepotUser { get; set; }
         public virtual DbSet<Application> Application { get; set; }
         public virtual DbSet<UserOnline> UserOnline { get; set; }
-        public virtual DbSet<DepotCreator> DepotCreator { get; set; }
         public virtual DbSet<DepotMember> DepotMember { get; set; }
         public virtual DbSet<DepotObjectCatalog> DepotObjectCatalog { get; set; }
         public virtual DbSet<DepotInRecord> DepotInRecord { get; set; }
@@ -66,6 +64,10 @@ namespace Windows.MMS.Picture.Import.App_Code.Models
         public virtual DbSet<DepotPeriod> DepotPeriod { get; set; }
         public virtual DbSet<C__DepotOrderFlow> C__DepotOrderFlow { get; set; }
         public virtual DbSet<C__DepotOrderContent> C__DepotOrderContent { get; set; }
+        public virtual DbSet<DepotObjectSingle> DepotObjectSingle { get; set; }
+        public virtual DbSet<DepotUser> DepotUser { get; set; }
+        public virtual DbSet<DepotPlace> DepotPlace { get; set; }
+        public virtual DbSet<DepotCreator> DepotCreator { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {

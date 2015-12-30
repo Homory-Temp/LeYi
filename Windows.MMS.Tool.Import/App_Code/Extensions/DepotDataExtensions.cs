@@ -151,7 +151,8 @@ public static class DepotDataExtensions
             Code = string.Empty,
             Amount = 0.00M,
             Money = 0.00M,
-            Age = age
+            Age = age,
+            Department = ""
         };
         db.DepotObject.Add(obj);
         for (var i = 0; i < catalogIds.Count; i++)
@@ -300,6 +301,7 @@ public static class DepotDataExtensions
             RecordTime = orderTime,
             OperatorId = operatorId,
             OperationTime = DateTime.Now,
+            MainID = "",
             State = State.启用
         };
         db.DepotOrder.Add(order);

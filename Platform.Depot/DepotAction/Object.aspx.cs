@@ -14,6 +14,9 @@ public partial class DepotAction_Object : DepotPageSingle
             tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null, true).Count().EmptyWhenZero());
             tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
             tree.DataBind();
+            depts.DataSource = DataContext.DepotObjectLoad(Depot.Id, null).Select(o => o.Department).Distinct().OrderBy(o => o).ToList();
+            depts.DataBind();
+            depts.Visible = deptsSpan.Visible = !Depot.Featured(DepotType.幼儿园);
             if (!"CatalogId".Query().None())
             {
                 var cid = "CatalogId".Query();
@@ -102,6 +105,11 @@ public partial class DepotAction_Object : DepotPageSingle
         if (!toSearch.Text.None())
         {
             source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+        }
+        if (depts.SelectedIndex >= 0)
+        {
+            var dept = depts.SelectedItem.Text;
+            source = source.Where(o => o.Department == dept).ToList();
         }
         if (only.Checked)
         {

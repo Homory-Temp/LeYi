@@ -78,6 +78,8 @@
                         <div class="col-md-6 text-center">
                             <telerik:RadTextBox ID="toSearch" runat="server" Width="200" EmptyMessage="输入要检索的物资名称" ClientEvents-OnKeyPress="sg"></telerik:RadTextBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
+                            <telerik:RadComboBox ID="depts" runat="server" Width="120" EmptyMessage="使用部门" AutoPostBack="false"></telerik:RadComboBox>
+                            <span id="deptsSpan" runat="server">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                             <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <telerik:RadButton ID="only" runat="server" Text="仅固定资产" AutoPostBack="true" ButtonType="ToggleButton" ToggleType="CheckBox" OnCheckedChanged="only_CheckedChanged"></telerik:RadButton>

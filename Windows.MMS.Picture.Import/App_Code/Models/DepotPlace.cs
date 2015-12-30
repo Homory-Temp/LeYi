@@ -12,14 +12,11 @@ namespace Windows.MMS.Picture.Import.App_Code.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DepotUser
+    public partial class DepotPlace
     {
-        public string Phone { get; set; }
-        public System.Guid Id { get; set; }
-        public string Name { get; set; }
-        public string PinYin { get; set; }
-        public int State { get; set; }
-        public System.Guid CampusId { get; set; }
-        public string CampusName { get; set; }
+        public string Code { get; set; }
+        public int AutoId { get; set; }
+        public string Place { get; set; }
+        public System.DateTime Time { get; set; }
     }
 }

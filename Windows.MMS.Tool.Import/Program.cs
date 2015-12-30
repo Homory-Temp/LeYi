@@ -92,29 +92,29 @@ namespace Windows.MMS.Tool.Import
                                 {
                                     var p1 = ToPic(pimg.pic1);
                                     var pgid = Guid.NewGuid();
-                                    p1.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-                                    a = "../Common/物资/图片/{0}.png".Formatted(pgid);
+                                    p1.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Bmp);
+                                    a = "../Common/物资/图片/{0}.bmp".Formatted(pgid);
                                 }
                                 if (pimg.pic2 != null)
                                 {
                                     var p2 = ToPic(pimg.pic2);
                                     var pgid = Guid.NewGuid();
-                                    p2.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-                                    b = "../Common/物资/图片/{0}.png".Formatted(pgid);
+                                    p2.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Bmp);
+                                    b = "../Common/物资/图片/{0}.bmp".Formatted(pgid);
                                 }
                                 if (pimg.pic3 != null)
                                 {
                                     var p3 = ToPic(pimg.pic3);
                                     var pgid = Guid.NewGuid();
-                                    p3.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-                                    c = "../Common/物资/图片/{0}.png".Formatted(pgid);
+                                    p3.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Bmp);
+                                    c = "../Common/物资/图片/{0}.bmp".Formatted(pgid);
                                 }
                                 if (pimg.pic4 != null)
                                 {
                                     var p4 = ToPic(pimg.pic4);
                                     var pgid = Guid.NewGuid();
-                                    p4.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Png);
-                                    d = "../Common/物资/图片/{0}.png".Formatted(pgid);
+                                    p4.Save(ConfigurationManager.AppSettings["教玩具库图片导出路径"].Formatted(pgid), System.Drawing.Imaging.ImageFormat.Bmp);
+                                    d = "../Common/物资/图片/{0}.bmp".Formatted(pgid);
                                 }
                             }
                             var catalogs = db.DepotCatalogLoad(教玩具库Id).Select(o => o.Id).Join(db.DepotObjectCatalog, o => o, o => o.CatalogId, (x, y) => y.ObjectId).Join(db.DepotObject, o => o, o => o.Id, (x, y) => y).ToList();

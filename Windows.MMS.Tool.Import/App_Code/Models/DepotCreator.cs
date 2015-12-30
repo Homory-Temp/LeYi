@@ -14,10 +14,11 @@ namespace Windows.MMS.Tool.Import.App_Code.Models
     
     public partial class DepotCreator
     {
+        public string Phone { get; set; }
         public System.Guid Id { get; set; }
         public string Name { get; set; }
         public string PinYin { get; set; }
-        public State State { get; set; }
+        public int State { get; set; }
         public System.Guid CampusId { get; set; }
         public string CampusName { get; set; }
     }

@@ -32,7 +32,10 @@ public partial class DepotQuery_Object : DepotPageSingle
                 var noOut = query.Count() > 0 ? query.Where(o => o.Type == UseType.借用).Sum(o => o.Amount - o.ReturnedAmount) : 0;
                 var isVirtual = Depot.Featured(DepotType.固定资产库);
                 var cid_x = DataContext.DepotObjectCatalog.FirstOrDefault(o => o.ObjectId == objId && o.IsLeaf == true && o.IsVirtual == isVirtual);
-                cn.InnerText = cid_x == null ? "" : DataContext.ToCatalog(cid_x.CatalogId, cid_x.Level).Single();
+                if (Depot.Id == Guid.Parse("42bce587-8cc2-4bc3-9ac7-08d30ffd8584"))
+                    cn.InnerText = cid_x == null ? "" : DataContext.ToCatalog(cid_x.CatalogId, cid_x.Level).Single().Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                else
+                    cn.InnerText = cid_x == null ? "" : DataContext.ToCatalog(cid_x.CatalogId, cid_x.Level).Single();
                 total.InnerText = (obj.Amount + noOut).ToAmount(Depot.Featured(DepotType.小数数量库));
                 if (Depot.Featured(DepotType.幼儿园))
                 {
