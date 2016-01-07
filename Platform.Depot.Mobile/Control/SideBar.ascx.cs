@@ -13,7 +13,7 @@ public partial class Control_SideBar : DepotControl
     protected void qb_ServerClick(object sender, EventArgs e)
     {
         Session.Clear();
-        var link = "~/Default";
+        var link = "~/Default.aspx";
         Response.Redirect(link);
     }
 }

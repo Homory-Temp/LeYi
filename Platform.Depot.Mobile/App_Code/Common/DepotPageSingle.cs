@@ -65,7 +65,7 @@ public class DepotPageSingle : DepotPage, IDepotSingle
     {
         if (string.IsNullOrEmpty(Request.QueryString["DepotId"]))
         {
-            Response.Redirect(string.Format("~/Depot/Home?DepotUrl={0}", Server.UrlEncode(Request.Url.PathAndQuery)));
+            Response.Redirect(string.Format("~/Depot/Home.aspx?DepotUrl={0}", Server.UrlEncode(Request.Url.PathAndQuery)));
             return;
         }
         base.OnLoad(e);

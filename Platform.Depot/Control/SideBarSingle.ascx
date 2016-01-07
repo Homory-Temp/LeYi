@@ -25,7 +25,7 @@
                             <li><a href='<%= "../DepotAction/ObjectFixed?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: none;": "display: ;") %>'>固定资产</a></li>
                             <li><a href='<%= "../DepotAction/ObjectSingle?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产查询</a></li>
                             <li><a href='<%= "../DepotAction/Batch?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: none;": "display: ;") %>'>批量转移</a></li>
-                            <li><a href='<%= "../DepotAction/Import?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产导入</a></li>
+                            <li><a href='<%= "../DepotAction/ImportX?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产导入</a></li>
                             <li><a href='<%= "../DepotAction/Move?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产分库</a></li>
                         </ul>
                     </li>

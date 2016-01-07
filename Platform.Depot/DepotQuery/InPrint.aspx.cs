@@ -27,7 +27,14 @@ public partial class DepotQuery_InPrint : DepotPageSingle
 
     protected string OpName(Guid id)
     {
-        return DataContext.DepotUser.Single(o => o.Id == id).Name;
+        try
+        {
+            return DataContext.DepotUser.Single(o => o.Id == id).Name;
+        }
+        catch
+        {
+            return "管理员";
+        }
     }
 
     protected void view_record_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)

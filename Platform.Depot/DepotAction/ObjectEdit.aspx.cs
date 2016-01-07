@@ -77,6 +77,8 @@ public partial class DepotAction_ObjectEdit : DepotPageSingle
             imgRow.Visible = count < 4;
             upload.MaxFileInputsCount = count == 0 ? 0 : count;
             content.Text = obj.Note;
+            high.Value = (double)obj.High;
+            low.Value = (double)obj.Low;
         }
     }
 

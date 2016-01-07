@@ -79,4 +79,10 @@ public partial class DepotAction_CheckList : DepotPageSingle
         DataContext.SaveChanges();
         view.Rebind();
     }
+
+    protected void import_ServerClick(object sender, EventArgs e)
+    {
+        var bid = (sender as HtmlInputButton).Attributes["match"].GlobalId();
+        Response.Redirect("~/DepotScan/Import?DepotId={0}&BatchId={1}".Formatted(Depot.Id, bid));
+    }
 }

@@ -158,7 +158,7 @@ public partial class DepotAction_In : DepotPageSingle
     protected void do_in_ServerClick(object sender, EventArgs e)
     {
         DoIn(false);
-        Response.Redirect("~/DepotQuery/InX?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("~/DepotQuery/InX.aspx?DepotId={0}".Formatted(Depot.Id));
     }
 
     protected void DoIn(bool finish)
@@ -220,17 +220,17 @@ public partial class DepotAction_In : DepotPageSingle
     protected void done_in_ServerClick(object sender, EventArgs e)
     {
         DoIn(true);
-        Response.Redirect("~/DepotQuery/InPrint?DepotId={0}&OrderId={1}".Formatted(Depot.Id, target.SelectedValue));
+        Response.Redirect("~/DepotQuery/InPrint.aspx?DepotId={0}&OrderId={1}".Formatted(Depot.Id, target.SelectedValue));
     }
 
     protected void back_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/Object?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("~/DepotAction/Object.aspx?DepotId={0}".Formatted(Depot.Id));
     }
 
     protected void addObj_ServerClick(object sender, EventArgs e)
     {
-        var url = "../DepotAction/ObjectAdd?DepotId={0}".Formatted(Depot.Id);
+        var url = "../DepotAction/ObjectAdd.aspx?DepotId={0}".Formatted(Depot.Id);
         ap.ResponseScripts.Add("window.open('{0}', '_blank');".Formatted(url));
     }
 }

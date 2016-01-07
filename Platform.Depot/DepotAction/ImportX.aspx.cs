@@ -93,6 +93,7 @@ public partial class DepotAction_Import : DepotPageSingle
                             二级分类Id = DataContext.DepotCatalog.Single(o => o.DepotId == 固定资产库Id && o.Name == 二级分类 && o.State < State.停用 && o.ParentId == 一级分类Id).Id;
                         }
 
+                        var fullCode = row[0].ToString().Trim();
                         var code = row[0].ToString().Trim().Substring(row[0].ToString().Trim().Length - 7);
                         var name = row[2].ToString().Trim();
 
@@ -100,7 +101,7 @@ public partial class DepotAction_Import : DepotPageSingle
 
                         Guid 物资Id;
 
-                        if (catalogs.Count(o => o.DO.FixedCard == code && o.DOC.CatalogId == 二级分类Id && o.DO.State < State.停用) == 0)
+                        if (catalogs.Count(o => o.DO.FixedCard == fullCode && o.DOC.CatalogId == 二级分类Id && o.DO.State < State.停用) == 0)
                         {
                             物资Id = DataContext.GlobalId();
                             var l = new List<Guid>();

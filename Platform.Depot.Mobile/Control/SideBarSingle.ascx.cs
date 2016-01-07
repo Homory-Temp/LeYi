@@ -14,7 +14,7 @@ public partial class Control_SideBarSingle : DepotControlSingle
     protected void qb_ServerClick(object sender, EventArgs e)
     {
         Session.Clear();
-        var link = "~/Default";
+        var link = "~/Default.aspx";
         Response.Redirect(link);
     }
 
@@ -44,6 +44,6 @@ public partial class Control_SideBarSingle : DepotControlSingle
 
     protected void storeName_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/Depot/DepotHome?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("~/Depot/DepotHome.aspx?DepotId={0}".Formatted(Depot.Id));
     }
 }

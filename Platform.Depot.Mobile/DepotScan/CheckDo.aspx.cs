@@ -18,6 +18,15 @@ public partial class DepotScan_CheckDo : DepotPageSingle
             {
                 scan.Text = "Code".Query().Trim();
                 scanFlow_ServerClick(null, null);
+                var id = "BatchId".Query().GlobalId();
+                var items = DataContext.DepotCheck.Where(o => o.State == 1 && o.BatchId == id).ToList();
+                var c = new List<InMemoryCheck>();
+                foreach (var item in items)
+                {
+                    var obj = item.CodeJson.FromJson<List<InMemoryCheck>>();
+                    c.AddRange(obj);
+                }
+                name.InnerText = "总数：{0} 已盘：{1} 未盘：{2}".Formatted(c.Count, c.Count(o => o.In == true), c.Count(o => o.In == false));
             }
         }
     }
@@ -31,9 +40,10 @@ public partial class DepotScan_CheckDo : DepotPageSingle
     protected void scanFlow_ServerClick(object sender, EventArgs e)
     {
         var code = scan.Text.Trim();
-        var x = h.Value.None() ? new List<InMemoryCheck>() : h.Value.FromJson<List<InMemoryCheck>>();
-        x.SingleOrDefault(o => o.Code == code).In = true;
-        h.Value = x.ToJson();
+        h.Value = code;
+        //var x = h.Value.None() ? new List<InMemoryCheck>() : h.Value.FromJson<List<InMemoryCheck>>();
+        //x.SingleOrDefault(o => o.Code == code).In = true;
+        //h.Value = x.ToJson();
         var id = "BatchId".Query().GlobalId();
         var items = DataContext.DepotCheck.Where(o => o.State == 1 && o.BatchId == id).ToList();
         foreach (var item in items)
@@ -51,26 +61,43 @@ public partial class DepotScan_CheckDo : DepotPageSingle
         Reset();
     }
 
-    protected List<InMemoryCheck> Codes
-    {
-        get
-        {
-            return h.Value.None() ? new List<InMemoryCheck>() : h.Value.FromJson<List<InMemoryCheck>>();
-        }
-    }
+    //protected List<InMemoryCheck> Codes
+    //{
+    //    get
+    //    {
+    //        return h.Value.None() ? new List<InMemoryCheck>() : h.Value.FromJson<List<InMemoryCheck>>();
+    //    }
+    //}
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         var id = "BatchId".Query().GlobalId();
         var items = DataContext.DepotCheck.Where(o => o.State == 1 && o.BatchId == id).ToList();
         var checks = new List<InMemoryCheck>();
+        var code = h.Value;
         foreach (var item in items)
         {
-            checks.AddRange(item.CodeJson.FromJson<List<InMemoryCheck>>());
+            var obj = item.CodeJson.FromJson<List<InMemoryCheck>>();
+            if (obj.Count(o => o.Code == code) > 0)
+            {
+                checks.AddRange(item.CodeJson.FromJson<List<InMemoryCheck>>().Where(o => o.Code == code));
+            }
         }
         view.DataSource = checks;
-        name.InnerText = "总数：{0} 已盘：{1} 未盘：{2}".Formatted(checks.Count, checks.Count(o => o.In == true), checks.Count(o => o.In == false));
+        //name.InnerText = "总数：{0} 已盘：{1} 未盘：{2}".Formatted(checks.Count, checks.Count(o => o.In == true), checks.Count(o => o.In == false));
         namex.InnerText = items[0].Name;
-        h.Value = checks.ToJson();
+        //h.Value = checks.ToJson();
+        var c = new List<InMemoryCheck>();
+        foreach (var item in items)
+        {
+            var obj = item.CodeJson.FromJson<List<InMemoryCheck>>();
+            c.AddRange(obj);
+        }
+        name.InnerText = "总数：{0} 已盘：{1} 未盘：{2}".Formatted(c.Count, c.Count(o => o.In == true), c.Count(o => o.In == false));
+    }
+
+    protected void scanGo_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotScan/CheckResult.aspx?DepotId={0}&BatchId={1}".Formatted(Depot.Id, "BatchId".Query()));
     }
 }

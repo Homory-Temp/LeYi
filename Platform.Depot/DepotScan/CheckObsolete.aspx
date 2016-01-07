@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Check.aspx.cs" Inherits="DepotAction_Check" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CheckObsolete.aspx.cs" Inherits="DepotAction_CheckObsolete" %>
 
 <%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
 
@@ -40,12 +40,20 @@
     <form id="form" runat="server">
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="物资条码 - 物资盘库" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
-            <label id="____v" runat="server" style="display: none;"></label>
             <div class="row">
                 <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
                     <div class="row">
                         <div class="col-md-12">
                             <span class="btn btn-tumblr">类别：</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <telerik:RadTreeView ID="tree0" runat="server" OnNodeClick="tree0_NodeClick" ShowLineImages="false">
+                                <Nodes>
+                                    <telerik:RadTreeNode Value="0" Selected="true"></telerik:RadTreeNode>
+                                </Nodes>
+                            </telerik:RadTreeView>
                         </div>
                     </div>
                     <div class="row">
@@ -63,31 +71,21 @@
                         <div class="col-md-12">
                             <span class="btn btn-tumblr">物资：</span>
                             <input id="all" runat="server" type="button" class="btn btn-info" value="全选" onserverclick="all_ServerClick" />
-                            <input id="st" runat="server" type="button" class="btn btn-info" value="已选（0）" />
-                            <input id="cl" runat="server" type="button" class="btn btn-info" value="清除选择" onserverclick="cl_ServerClick" />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        </div>
-                        <div class="col-md-12" style="margin-top: 6px;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <telerik:RadTextBox ID="toSearch" runat="server" Width="120" EmptyMessage="物资名称"></telerik:RadTextBox>
                             &nbsp;&nbsp;
-                            <telerik:RadTextBox ID="toSearchX" runat="server" Width="120" EmptyMessage="存放地点"></telerik:RadTextBox>
+                            <telerik:RadTextBox ID="toSearchx" runat="server" Width="120" EmptyMessage="存放地"></telerik:RadTextBox>
                             &nbsp;&nbsp;
                             <telerik:RadComboBox ID="depts" runat="server" Width="120" EmptyMessage="使用部门" AutoPostBack="false"></telerik:RadComboBox>
                             &nbsp;&nbsp;
-                            <telerik:RadComboBox ID="ol" runat="server" Width="120" DropDownWidth="300" EmptyMessage="购置单" AutoPostBack="false" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Id">
-                                <Items>
-                                    <telerik:RadComboBoxItem Text="" Value="*" />
-                                </Items>
-                            </telerik:RadComboBox>
-                            &nbsp;&nbsp;
                             <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <telerik:RadTextBox ID="cName" runat="server" Width="150" EmptyMessage="盘库任务名称"></telerik:RadTextBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <telerik:RadTextBox ID="cName" runat="server" Width="200" EmptyMessage="输入盘库任务的名称"></telerik:RadTextBox>
                             &nbsp;&nbsp;
-                            <input id="coding" runat="server" type="button" class="btn btn-info" value="生成任务" onserverclick="coding_ServerClick" />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input id="coded" runat="server" type="button" class="btn btn-info" value="任务列表" onserverclick="coded_ServerClick" />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input id="coding" runat="server" type="button" class="btn btn-info" value="生成盘库任务" onserverclick="coding_ServerClick" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input id="coded" runat="server" type="button" class="btn btn-info" value="盘库任务列表" onserverclick="coded_ServerClick" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
                     </div>
                     <div class="row">&nbsp;</div>
@@ -111,10 +109,10 @@
                                         </td>
                                         <td style="width: 70%;">
                                             <asp:Panel ID="single" runat="server" Visible='<%# (bool)Eval("Single") %>'>
-                                                <telerik:RadListView ID="viewx" runat="server" DataSource='<%# Ordinals((Guid)Eval("Id"), Container) %>'>
+                                                <telerik:RadListView ID="viewx" runat="server" DataSource='<%# Ordinals((Guid)Eval("Id")) %>'>
                                                     <ItemTemplate>
-                                                        <div style='<%# (Eval("Place").ToString().ToLower().Contains(toSearchX.Text.Trim().ToLower()) ? "display: ; float: left; width: 50%; text-align: left;": "display: none; float: left; width: 50%; text-align: left;") %>'>
-                                                            <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="true" OnCheckedChanged="checkx_CheckedChanged" SM="1" CC='<%# Eval("Code") %>' Checked='<%# CD(Eval("Code").ToString()) %>' OBJ='<%# Eval("ObjectId") %>' ORD='<%# Eval("Ordinal") %>' PLACE='<%# Eval("Place") %>' Text='<%# "&nbsp;{1}&nbsp;-&nbsp;{0}".Formatted(Eval("Ordinal"), Eval("Code")) %>' />
+                                                        <div style='<%# (Eval("Place").ToString().ToLower().Contains(toSearchx.Text.Trim().ToLower()) ? "display: ; float: left; width: 50%; text-align: left;": "display: none; float: left; width: 50%; text-align: left;") %>'>
+                                                            <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="false" CC='<%# Eval("Code") %>' OBJ='<%# Eval("ObjectId") %>' ORD='<%# Eval("Ordinal") %>' Text='<%# "&nbsp;{1}&nbsp;-&nbsp;{0}".Formatted(Eval("Ordinal"), Eval("Code")) %>' />
                                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                                             <asp:Label ID="lbl" Text='<%# Eval("Place") %>' runat="server"></asp:Label>
                                                         </div>
@@ -123,7 +121,7 @@
                                             </asp:Panel>
                                             <asp:Panel ID="multiple" runat="server" Visible='<%# !(bool)Eval("Single") %>'>
                                                 <div style="float: left; width: 200px;">
-                                                    <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="true" OnCheckedChanged="checkx_CheckedChanged" SM='<%# !(bool)Eval("Single") ? "1" : "0" %>' CC='<%# Eval("Code") %>' Checked='<%# CD(Eval("Code").ToString()) %>' OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Code")) %>' />
+                                                    <asp:CheckBox ID="checkx" runat="server" CssClass="depot" AutoPostBack="false" CC='<%# Eval("Code") %>' OBJ='<%# Eval("Id") %>' Text='<%# "&nbsp;{0}".Formatted(Eval("Code")) %>' />
                                                 </div>
                                             </asp:Panel>
                                         </td>

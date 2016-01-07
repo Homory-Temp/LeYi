@@ -83,7 +83,7 @@ public partial class DepotAction_Out : DepotPageSingle
     protected void do_out_ServerClick(object sender, EventArgs e)
     {
         DoOut();
-        Response.Redirect("~/DepotQuery/Out?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("~/DepotQuery/Out.aspx?DepotId={0}".Formatted(Depot.Id));
     }
 
     protected void DoOut()
@@ -122,6 +122,6 @@ public partial class DepotAction_Out : DepotPageSingle
 
     protected void back_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/Object?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("~/DepotAction/Object.aspx?DepotId={0}".Formatted(Depot.Id));
     }
 }

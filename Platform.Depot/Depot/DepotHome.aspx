@@ -29,6 +29,24 @@
         <homory:SideBarSingle runat="server" ID="SideBarSingle" NoCrumb="true" />
         <div class="container">
             <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading panel">
+                            <div class="panel-title text-center">
+                                物资概况
+                            </div>
+                        </div>
+                        <div class="panel-body text-center">
+                            <span class="btn btn-info">固定资产总数：</span><span id="fixC" class="btn btn-warning" runat="server"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-info">固定资产总额：</span><span id="fixM" class="btn btn-warning" runat="server"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="btn btn-info">普通物资总数：</span><span id="noFixC" class="btn btn-warning" runat="server"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-info">普通物资总额：</span><span id="noFixM" class="btn btn-warning" runat="server"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-info">
                         <div class="panel-heading panel">
@@ -47,7 +65,7 @@
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/ObjectFixed?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: none;": "display: ;") %>'>固定资产</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/ObjectSingle?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产查询</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Batch?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: none;": "display: ;") %>'>批量转移</a>
-                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Import?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产导入</a>
+                            <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/ImportX?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产导入</a>
                             <a class="btn btn-info dictionaryX" href='<%= "../DepotAction/Move?DepotId={0}".Formatted(Depot.Id) %>' style='<%= (Depot.Featured(Models.DepotType.固定资产库) ? "display: ;": "display: none;") %>'>资产分库</a>
                         </div>
                     </div>

@@ -13,7 +13,7 @@ public partial class Depot_Home : DepotPage
 
     protected void add_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/Depot/HomeAdd");
+        Response.Redirect("~/Depot/HomeAdd.aspx");
     }
 
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)

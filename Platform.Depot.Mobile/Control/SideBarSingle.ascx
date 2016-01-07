@@ -19,7 +19,7 @@
             <div class="col-md-12">
                 <input id="storeName" runat="server" type="button" class="btn btn-tumblr" onserverclick="storeName_ServerClick" style="display: none;" />
                 <span id="crumb" runat="server" class="btn btn-info"></span>
-                <span class="btn btn-info" onclick='<%= "top.location.href = \"../Depot/DepotHome?DepotId={0}\"".Formatted(Depot.Id) %>' style="float: right; margin-right: 13px;">快捷菜单</span>
+                <span class="btn btn-info" onclick='<%= "top.location.href = \"../Depot/DepotHome.aspx?DepotId={0}\"".Formatted(Depot.Id) %>' style="float: right; margin-right: 13px;">快捷菜单</span>
                 <span style="clear: both;"></span>
             </div>
             <div class="col-md-8">

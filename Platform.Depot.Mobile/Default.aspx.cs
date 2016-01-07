@@ -27,7 +27,7 @@ public partial class _Default : System.Web.UI.Page
         }
         var id = ___id.Value.GlobalId();
         Session["DepotUserMobile"] = DataContext.DepotUser.Single(o => o.Id == id);
-        Response.Redirect("~/Depot/Home");
+        Response.Redirect("~/Depot/Home.aspx");
     }
 
     private void Notify(RadAjaxPanel panel, string message, string type)

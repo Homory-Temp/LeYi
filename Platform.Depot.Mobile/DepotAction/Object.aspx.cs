@@ -63,12 +63,12 @@ public partial class DepotAction_Object : DepotPageSingle
 
     protected void manage_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotSetting/Catalog?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("~/DepotSetting/Catalog.aspx?DepotId={0}".Formatted(Depot.Id));
     }
 
     protected void add_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/ObjectAdd?DepotId={0}&CatalogId={1}".Formatted(Depot.Id, CurrentNode));
+        Response.Redirect("~/DepotAction/ObjectAdd.aspx?DepotId={0}&CatalogId={1}".Formatted(Depot.Id, CurrentNode));
     }
 
     protected void tree0_NodeClick(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
@@ -121,27 +121,27 @@ public partial class DepotAction_Object : DepotPageSingle
 
     protected void in_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/In?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+        Response.Redirect("~/DepotAction/In.aspx?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
 
     protected void edit_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/ObjectEdit?DepotId={0}&ObjectId={1}&CatalogId={2}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"], CurrentNode.HasValue ? CurrentNode.Value : Guid.Empty));
+        Response.Redirect("~/DepotAction/ObjectEdit.aspx?DepotId={0}&ObjectId={1}&CatalogId={2}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"], CurrentNode.HasValue ? CurrentNode.Value : Guid.Empty));
     }
 
     protected void delete_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/ObjectRemove?DepotId={0}&ObjectId={1}&CatalogId={2}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"], CurrentNode.HasValue ? CurrentNode.Value : Guid.Empty));
+        Response.Redirect("~/DepotAction/ObjectRemove.aspx?DepotId={0}&ObjectId={1}&CatalogId={2}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"], CurrentNode.HasValue ? CurrentNode.Value : Guid.Empty));
     }
 
     protected void use_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/Use?DepotId={0}&ObjectId={1}&UseType=2".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+        Response.Redirect("~/DepotAction/Use.aspx?DepotId={0}&ObjectId={1}&UseType=2".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
 
     protected void usex_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/Use?DepotId={0}&ObjectId={1}&UseType=1".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+        Response.Redirect("~/DepotAction/Use.aspx?DepotId={0}&ObjectId={1}&UseType=1".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
 
     protected void search_ServerClick(object sender, EventArgs e)
@@ -151,6 +151,6 @@ public partial class DepotAction_Object : DepotPageSingle
 
     protected void out_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/Out?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+        Response.Redirect("~/DepotAction/Out.aspx?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
 }

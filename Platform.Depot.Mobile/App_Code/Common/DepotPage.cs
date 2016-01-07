@@ -14,7 +14,7 @@ public class DepotPage : System.Web.UI.Page, IDepot
         Title = doc.Root.Element("Depot").Value;
         if (Session["DepotUserMobile"].None())
         {
-            Response.Redirect("~/Default");
+            Response.Redirect("~/Default.aspx");
             return;
         }
         else
@@ -51,7 +51,7 @@ public class DepotPage : System.Web.UI.Page, IDepot
             }
             catch
             {
-                Response.Redirect("~/Default");
+                Response.Redirect("~/Default.aspx");
                 return null;
             }
         }

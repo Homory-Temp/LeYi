@@ -56,7 +56,7 @@ public partial class DepotScan_Out : DepotPageSingle
     protected void do_out_ServerClick(object sender, EventArgs e)
     {
         DoOut();
-        Response.Redirect("~/Depot/DepotHome?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("~/Depot/DepotHome.aspx?DepotId={0}".Formatted(Depot.Id));
     }
 
     protected void DoOut()

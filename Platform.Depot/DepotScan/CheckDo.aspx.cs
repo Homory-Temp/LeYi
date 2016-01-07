@@ -30,25 +30,30 @@ public partial class DepotScan_CheckDo : DepotPageSingle
 
     protected void scanFlow_ServerClick(object sender, EventArgs e)
     {
-        var code = scan.Text.Trim();
-        var x = h.Value.None() ? new List<InMemoryCheck>() : h.Value.FromJson<List<InMemoryCheck>>();
-        x.SingleOrDefault(o => o.Code == code).In = true;
-        h.Value = x.ToJson();
-        var id = "BatchId".Query().GlobalId();
-        var items = DataContext.DepotCheck.Where(o => o.State == 1 && o.BatchId == id).ToList();
-        foreach (var item in items)
+        try
         {
-            var obj = item.CodeJson.FromJson<List<InMemoryCheck>>();
-            if (obj.Count(o => o.Code == code) > 0)
+            var code = scan.Text.Trim();
+            var x = h.Value.None() ? new List<InMemoryCheck>() : h.Value.FromJson<List<InMemoryCheck>>();
+            x.SingleOrDefault(o => o.Code == code).In = true;
+            h.Value = x.ToJson();
+            var id = "BatchId".Query().GlobalId();
+            var items = DataContext.DepotCheck.Where(o => o.State == 1 && o.BatchId == id).ToList();
+            foreach (var item in items)
             {
-                obj.First(o => o.Code == code).In = true;
+                var obj = item.CodeJson.FromJson<List<InMemoryCheck>>();
+                if (obj.Count(o => o.Code == code) > 0)
+                {
+                    obj.First(o => o.Code == code).In = true;
+                }
+                item.CodeJson = obj.ToJson();
+                break;
             }
-            item.CodeJson = obj.ToJson();
-            break;
+            DataContext.SaveChanges();
+            view.Rebind();
+            Reset();
         }
-        DataContext.SaveChanges();
-        view.Rebind();
-        Reset();
+        catch
+        { }
     }
 
     protected List<InMemoryCheck> Codes

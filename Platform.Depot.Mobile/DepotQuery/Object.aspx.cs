@@ -14,7 +14,7 @@ public partial class DepotQuery_Object : DepotPageSingle
             var value = "ObjectId".Query();
             if (value.None())
             {
-                Response.Redirect("~/Depot/Home");
+                Response.Redirect("~/Depot/Home.aspx");
                 return;
             }
             else
@@ -66,7 +66,7 @@ public partial class DepotQuery_Object : DepotPageSingle
         var value = "ObjectId".Query();
         if (value.None())
         {
-            Response.Redirect("~/Depot/Home");
+            Response.Redirect("~/Depot/Home.aspx");
             return;
         }
         var objId = value.GlobalId();
@@ -98,12 +98,12 @@ public partial class DepotQuery_Object : DepotPageSingle
 
     protected void do_up_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotAction/ObjectImage?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, "ObjectId".Query()));
+        Response.Redirect("~/DepotAction/ObjectImage.aspx?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, "ObjectId".Query()));
     }
 
     protected void back_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotScan/Object?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, "ObjectId".Query()));
+        Response.Redirect("~/DepotScan/Object.aspx?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, "ObjectId".Query()));
     }
 
     protected void view_NeedDataSource(object sender, RadListViewNeedDataSourceEventArgs e)
@@ -111,7 +111,7 @@ public partial class DepotQuery_Object : DepotPageSingle
         var value = "ObjectId".Query();
         if (value.None())
         {
-            Response.Redirect("~/Depot/Home");
+            Response.Redirect("~/Depot/Home.aspx");
             return;
         }
         var objId = value.GlobalId();

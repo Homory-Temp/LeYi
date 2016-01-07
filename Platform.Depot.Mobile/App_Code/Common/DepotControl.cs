@@ -11,7 +11,7 @@ public class DepotControl : System.Web.UI.UserControl, IDepot
     {
         if (Session["DepotUserMobile"].None())
         {
-            Response.Redirect("~/Default");
+            Response.Redirect("~/Default.aspx");
             return;
         }
         else
@@ -48,7 +48,7 @@ public class DepotControl : System.Web.UI.UserControl, IDepot
             }
             catch
             {
-                Response.Redirect("~/Default");
+                Response.Redirect("~/Default.aspx");
                 return null;
             }
         }

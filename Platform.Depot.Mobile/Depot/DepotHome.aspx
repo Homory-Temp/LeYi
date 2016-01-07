@@ -40,12 +40,12 @@
                             </div>
                         </div>
                         <div class="panel-body text-center container-fluid">
-                            <div class="row"><div class="col-md-12"><a class="btn btn-lg btn-info dictionaryX" href='<%= "../DepotScan/Object?DepotId={0}".Formatted(Depot.Id) %>'>物资查询</a></div></div>
-                            <div class="row"><div class="col-md-12"><a class="btn btn-lg btn-info dictionaryX" href='<%= "../DepotScan/Flow?DepotId={0}".Formatted(Depot.Id) %>'>流通查询</a></div></div>
-                            <div class="row"><div class="col-md-12"><a class="btn btn-lg btn-info dictionaryX" href='<%= "../DepotScan/Use?DepotId={0}".Formatted(Depot.Id) %>'>扫码出库</a></div></div>
-                            <div class="row"><div class="col-md-12"><a class="btn btn-lg btn-info dictionaryX" href='<%= "../DepotScan/Return?DepotId={0}".Formatted(Depot.Id) %>'>扫码归还</a></div></div>
-                            <div class="row"><div class="col-md-12"><a class="btn btn-lg btn-info dictionaryX" href='<%= "../DepotScan/Out?DepotId={0}".Formatted(Depot.Id) %>'>扫码报废</a></div></div>
-                            <div class="row"><div class="col-md-12"><a class="btn btn-lg btn-info dictionaryX" href='<%= "../DepotScan/CheckList?DepotId={0}".Formatted(Depot.Id) %>'>扫码盘库</a></div></div>
+                            <div class="row"><div class="col-md-12"><a class="btn btn-lg btn-info dictionaryX" href='<%= "../DepotScan/Object.aspx?DepotId={0}".Formatted(Depot.Id) %>'>物资查询</a></div></div>
+                            <div class="row"><div class="col-md-12"><a class="btn btn-lg btn-info dictionaryX" href='<%= "../DepotScan/Flow.aspx?DepotId={0}".Formatted(Depot.Id) %>'>流通查询</a></div></div>
+                            <div class="row"><div class="col-md-12"><a class="btn btn-lg btn-info dictionaryX" href='<%= "../DepotScan/Use.aspx?DepotId={0}".Formatted(Depot.Id) %>'>扫码出库</a></div></div>
+                            <div class="row"><div class="col-md-12"><a class="btn btn-lg btn-info dictionaryX" href='<%= "../DepotScan/Return.aspx?DepotId={0}".Formatted(Depot.Id) %>'>扫码归还</a></div></div>
+                            <div class="row"><div class="col-md-12"><a class="btn btn-lg btn-info dictionaryX" href='<%= "../DepotScan/Out.aspx?DepotId={0}".Formatted(Depot.Id) %>'>扫码报废</a></div></div>
+                            <div class="row"><div class="col-md-12"><a class="btn btn-lg btn-info dictionaryX" href='<%= "../DepotScan/CheckList.aspx?DepotId={0}".Formatted(Depot.Id) %>'>扫码盘库</a></div></div>
                         </div>
                     </div>
                 </div>

@@ -48,12 +48,12 @@ public partial class DepotAction_CheckList : DepotPageSingle
     protected void view_ServerClick(object sender, EventArgs e)
     {
         var bid = (sender as HtmlInputButton).Attributes["match"].GlobalId();
-        Response.Redirect("~/DepotScan/CheckResult?DepotId={0}&BatchId={1}".Formatted(Depot.Id, bid));
+        Response.Redirect("~/DepotScan/CheckResult.aspx?DepotId={0}&BatchId={1}".Formatted(Depot.Id, bid));
     }
 
     protected void start_ServerClick(object sender, EventArgs e)
     {
         var bid = (sender as HtmlInputButton).Attributes["match"].GlobalId();
-        Response.Redirect("~/DepotScan/CheckDo?DepotId={0}&BatchId={1}".Formatted(Depot.Id, bid));
+        Response.Redirect("~/DepotScan/CheckDo.aspx?DepotId={0}&BatchId={1}".Formatted(Depot.Id, bid));
     }
 }

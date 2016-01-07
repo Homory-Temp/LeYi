@@ -54,7 +54,7 @@ public partial class DepotScan_Return : DepotPageSingle
             }
         }
         DataContext.DepotActReturn(Depot.Id, time.SelectedDate.HasValue ? time.SelectedDate.Value.Date : DateTime.Today, DepotUser.Id, list);
-        Response.Redirect("~/Depot/DepotHome?DepotId={0}".Formatted(Depot.Id));
+        Response.Redirect("~/Depot/DepotHome.aspx?DepotId={0}".Formatted(Depot.Id));
     }
 
     protected void Reset()

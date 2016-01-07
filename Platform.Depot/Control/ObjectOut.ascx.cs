@@ -73,6 +73,7 @@ public partial class Control_ObjectOut : DepotControlSingle
     {
         var catalogId = e.Entry.Value.GlobalId();
         var source = DataContext.DepotObjectLoad(Depot.Id, catalogId);
+        obj.Items.Clear();
         obj.DataSource = source.ToList();
         obj.DataBind();
         obj.ClearSelection();

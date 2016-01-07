@@ -114,7 +114,7 @@ public partial class DepotAction_Import : DepotPageSingle
                         }
                         else
                         {
-                            物资Id = catalogs.First(o => o.DO.Name == name && o.DO.Specification == sp && o.DO.Brand == b && o.DOC.CatalogId == 二级分类Id && o.DO.State < State.停用).DO.Id;
+                            物资Id = catalogs.First(o => o.DO.Name == name && o.DO.Specification == sp && o.DO.Brand == b && o.DO.Department == dept && o.DOC.CatalogId == 二级分类Id && o.DO.State < State.停用).DO.Id;
                         }
                         if (DataContext.DepotIn.Count(o => o.ObjectId == 物资Id && o.Note == code) == 0)
                         {

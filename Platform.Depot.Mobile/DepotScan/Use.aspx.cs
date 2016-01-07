@@ -69,7 +69,7 @@ public partial class DepotScan_Use : DepotPageSingle
     {
         var gid = DoUse();
         if (gid != Guid.Empty)
-            Response.Redirect("~/Depot/DepotHome?DepotId={0}".Formatted(Depot.Id));
+            Response.Redirect("~/Depot/DepotHome.aspx?DepotId={0}".Formatted(Depot.Id));
     }
 
     protected Guid DoUse()

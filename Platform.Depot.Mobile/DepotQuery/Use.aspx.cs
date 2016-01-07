@@ -72,7 +72,7 @@ public partial class DepotQuery_Use : DepotPageSingle
 
     protected void print_ServerClick(object sender, EventArgs e)
     {
-        var url = "../DepotQuery/UsePrint?DepotId={0}&UseId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"].GlobalId());
+        var url = "../DepotQuery/UsePrint.aspx?DepotId={0}&UseId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"].GlobalId());
         ap.ResponseScripts.Add("window.open('{0}', '_blank');".Formatted(url));
     }
 }

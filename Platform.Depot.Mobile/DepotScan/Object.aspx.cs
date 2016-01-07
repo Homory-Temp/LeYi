@@ -33,6 +33,6 @@ public partial class DepotScan_Object : DepotPageSingle
             return;
         }
         var obj = inx.DepotObject;
-        Response.Redirect("~/DepotQuery/Object?DepotId={0}&ObjectId={1}&Code={2}".Formatted(Depot.Id, obj.Id, code));
+        Response.Redirect("~/DepotQuery/Object.aspx?DepotId={0}&ObjectId={1}&Code={2}".Formatted(Depot.Id, obj.Id, code));
     }
 }
