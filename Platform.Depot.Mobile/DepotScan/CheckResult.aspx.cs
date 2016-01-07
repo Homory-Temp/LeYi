@@ -68,8 +68,8 @@ public partial class DepotScan_CheckResult : DepotPageSingle
         {
             checks.AddRange(item.CodeJson.FromJson<List<InMemoryCheck>>());
         }
-        name.InnerText = "{0} 总数：{1} 已盘：{2} 未盘：{3}".Formatted(items[0].Name, checks.Count, checks.Count(o => o.In == true), checks.Count(o => o.In == false));
-        view.DataSource = checks;
+        name.InnerText = "{0} 未盘列表（{1}）".Formatted(items[0].Name, checks.Count(o => o.In == false));// Formatted(items[0].Name, checks.Count, checks.Count(o => o.In == true), checks.Count(o => o.In == false));
+        view.DataSource = checks.Where(o => o.In == false).ToList();
         h.Value = checks.ToJson();
     }
 }

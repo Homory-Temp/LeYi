@@ -37,6 +37,7 @@
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-12 text-center">
+                    <input type="hidden" id="____vx" runat="server" />
                     <telerik:RadTextBox runat="server" ID="scan" Width="200" EmptyMessage="" ClientEvents-OnKeyPress="sg"></telerik:RadTextBox>
                 </div>
                 <div class="col-md-12 text-center" style="margin-top: 10px;">

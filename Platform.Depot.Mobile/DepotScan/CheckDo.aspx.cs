@@ -26,6 +26,7 @@ public partial class DepotScan_CheckDo : DepotPageSingle
                     var obj = item.CodeJson.FromJson<List<InMemoryCheck>>();
                     c.AddRange(obj);
                 }
+                ____vx.Value = false.ToJson();
                 name.InnerText = "总数：{0} 已盘：{1} 未盘：{2}".Formatted(c.Count, c.Count(o => o.In == true), c.Count(o => o.In == false));
             }
         }
@@ -46,17 +47,20 @@ public partial class DepotScan_CheckDo : DepotPageSingle
         //h.Value = x.ToJson();
         var id = "BatchId".Query().GlobalId();
         var items = DataContext.DepotCheck.Where(o => o.State == 1 && o.BatchId == id).ToList();
+        var no = true;
         foreach (var item in items)
         {
             var obj = item.CodeJson.FromJson<List<InMemoryCheck>>();
             if (obj.Count(o => o.Code == code) > 0)
             {
                 obj.First(o => o.Code == code).In = true;
+                no = false;
+                item.CodeJson = obj.ToJson();
+                break;
             }
-            item.CodeJson = obj.ToJson();
-            break;
         }
         DataContext.SaveChanges();
+        ____vx.Value = no.ToJson();
         view.Rebind();
         Reset();
     }
@@ -93,7 +97,8 @@ public partial class DepotScan_CheckDo : DepotPageSingle
             var obj = item.CodeJson.FromJson<List<InMemoryCheck>>();
             c.AddRange(obj);
         }
-        name.InnerText = "总数：{0} 已盘：{1} 未盘：{2}".Formatted(c.Count, c.Count(o => o.In == true), c.Count(o => o.In == false));
+        var no = ____vx.Value.None() ? false : ____vx.Value.FromJson<bool>();
+        name.InnerText = no ? "您扫描的条码不在此次盘库任务内" : "总数：{0} 已盘：{1} 未盘：{2}".Formatted(c.Count, c.Count(o => o.In == true), c.Count(o => o.In == false));
     }
 
     protected void scanGo_ServerClick(object sender, EventArgs e)
