@@ -57,7 +57,11 @@
                                 <td>
                                     <div class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;">名称：</span><%# Eval("Name") %></div>
                                     <div class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;">时间：</span><%#  ((DateTime)Eval("Time")).ToString("yyyy-MM-dd HH:mm:ss") %></div>
-                                    <div><input type="button" class="btn btn-lg btn-tumblr" value="盘库" id="start" runat="server" match='<%# Eval("BatchId") %>' onserverclick="start_ServerClick" /></div>
+                                    <div>
+                                        <input type="button" class="btn btn-lg btn-tumblr" value="盘库" id="start" runat="server" match='<%# Eval("BatchId") %>' onserverclick="start_ServerClick" />
+                                        &nbsp;&nbsp;
+                                        <input type="button" class="btn btn-lg btn-tumblr" value="导入" id="import" runat="server" match='<%# Eval("BatchId") %>' onserverclick="import_ServerClick" />
+                                    </div>
                                 </td>
                             </tr>
                         </ItemTemplate>

@@ -56,4 +56,10 @@ public partial class DepotAction_CheckList : DepotPageSingle
         var bid = (sender as HtmlInputButton).Attributes["match"].GlobalId();
         Response.Redirect("~/DepotScan/CheckDo.aspx?DepotId={0}&BatchId={1}".Formatted(Depot.Id, bid));
     }
+
+    protected void import_ServerClick(object sender, EventArgs e)
+    {
+        var bid = (sender as HtmlInputButton).Attributes["match"].GlobalId();
+        Response.Redirect("~/DepotScan/Import.aspx?DepotId={0}&BatchId={1}".Formatted(Depot.Id, bid));
+    }
 }
