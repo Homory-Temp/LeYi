@@ -81,6 +81,6 @@ public partial class DepotAction_Import : DepotPageSingle
             { }
         }
         DataContext.SaveChanges();
-        Response.Redirect("~/DepotScan/CheckResult?DepotId={0}&BatchId={1}".Formatted(Depot.Id, "BatchId".Query()));
+        Response.Redirect("~/DepotScan/CheckResult.aspx?DepotId={0}&BatchId={1}".Formatted(Depot.Id, "BatchId".Query()));
     }
 }
