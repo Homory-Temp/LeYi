@@ -19,10 +19,6 @@
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
-    <!--[if lt IE 9]>
-	    <script src="../Content/Homory/js/html5shiv.js"></script>
-	    <script src="../Content/Homory/js/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
     <form id="form" runat="server">
@@ -32,12 +28,6 @@
                 <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource">
                     <ItemTemplate>
                         <div class="col-md-4 col-xs-12 text-center" id="area" runat="server" style='<%# CanVisit((Guid)Eval("Id")) ? "display: block; cursor: pointer;": "display: none; cursor: pointer;" %>'>
-                            <div class="row">&nbsp;</div>
-                            <div class="row" onclick="top.location.href = '../Depot/DepotHome.aspx?DepotId=<%# Eval("Id") %>';">
-                                <div class="col-md-12">
-                                    <img src="../Content/Images/Store.png" />
-                                </div>
-                            </div>
                             <div class="row" onclick="top.location.href = '../Depot/DepotHome.aspx?DepotId=<%# Eval("Id") %>';">
                                 <div class="col-md-12">
                                     <div class="btn btn-lg btn-info" style="width: 150px;" runat="server"><%# Eval("Name") %></div>

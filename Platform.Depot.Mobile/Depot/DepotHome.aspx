@@ -19,10 +19,6 @@
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
-    <!--[if lt IE 9]>
-	    <script src="../Content/Homory/js/html5shiv.js"></script>
-	    <script src="../Content/Homory/js/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
     <form id="form" runat="server">

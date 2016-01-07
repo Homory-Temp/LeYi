@@ -17,19 +17,12 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="Content/Homory/js/common.js"></script>
     <script src="Content/Homory/js/notify.min.js"></script>
-    <!--[if lt IE 9]>
-	    <script src="Content/Homory/js/html5shiv.js"></script>
-	    <script src="Content/Homory/js/respond.min.js"></script>
-    <![endif]-->
 </head>
-<body style="background: url( 'Images/quc_index_bg.jpg')  no-repeat 50%">
+<%--<body style="background: url( 'Images/quc_index_bg.jpg')  no-repeat 50%">--%>
+<body>
     <form id="form" runat="server" style="width: 100%;">
         <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
-        <telerik:RadAjaxLoadingPanel ID="loading" runat="server" InitialDelayTime="1000">
-            <div>&nbsp;</div>
-            <div class="btn btn-lg btn-warning" style="margin-top: 50px;">正在加载 请稍候....</div>
-        </telerik:RadAjaxLoadingPanel>
-        <telerik:RadAjaxPanel ID="ap" runat="server" LoadingPanelID="loading">
+        <telerik:RadAjaxPanel ID="ap" runat="server">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
