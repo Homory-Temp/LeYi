@@ -30,21 +30,29 @@
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <telerik:RadTextBox runat="server" ID="scan" Width="200" EmptyMessage="请扫描二维码"></telerik:RadTextBox>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="button" class="btn btn-tumblr" id="scanFlow" runat="server" value="盘点" onserverclick="scanFlow_ServerClick" />
+                    <input type="hidden" id="____vx" runat="server" />
+                    <telerik:RadTextBox runat="server" ID="scan" Width="200" EmptyMessage="" ClientEvents-OnKeyPress="sg"></telerik:RadTextBox>
+                </div>
+                <div class="col-md-12 text-center" style="margin-top: 10px;">
+                    <input type="button" class="btn btn-lg btn-tumblr" id="scanFlow" runat="server" value="盘点" onserverclick="scanFlow_ServerClick" />
+                    <input type="button" class="btn btn-lg btn-tumblr" id="scanGo" runat="server" value="查询" onserverclick="scanGo_ServerClick" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <div id="name" runat="server" class="btn btn-info" style="width: 60%;">
-                        盘库扫描
+                    <div id="namex" runat="server" class="btn btn-info" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div id="name" runat="server" class="btn btn-info" style="width: 100%;">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <input type="hidden" runat="server" id="h" value="" />
-                <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder">
+                <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" PageSize="10" AllowPaging="true">
                     <LayoutTemplate>
                         <div class="col-md-12">
                             <table class="storeTablePrint text-center">
@@ -63,13 +71,26 @@
                             <td><%# Eval("Name") %>-<%# Eval("Ordinal") %></td>
                             <td><%# Eval("Code") %></td>
                             <td><%# Eval("Place") %></td>
-                            <td style='<%# Codes.Count(o => o.In == true && o.Code == (string)Eval("Code")) > 0 ? "color: green;" : "color: red;" %>'><%# Codes.Count(o => o.In == true && o.Code == (string)Eval("Code")) > 0 ? "已盘" : "未盘" %></td>
+                            <td><%# "已盘" %></td>
                         </tr>
                     </ItemTemplate>
                     <EmptyDataTemplate>
                     </EmptyDataTemplate>
                 </telerik:RadListView>
             </div>
+            <%--<div class="row">
+                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-6 text-center">
+                    <telerik:RadDataPager ID="pager" runat="server" PagedControlID="view" BackColor="Transparent" BorderStyle="None" RenderMode="Auto" PageSize="10">
+                        <Fields>
+                            <telerik:RadDataPagerButtonField FieldType="FirstPrev"></telerik:RadDataPagerButtonField>
+                            <telerik:RadDataPagerButtonField FieldType="Numeric"></telerik:RadDataPagerButtonField>
+                            <telerik:RadDataPagerButtonField FieldType="NextLast"></telerik:RadDataPagerButtonField>
+                        </Fields>
+                    </telerik:RadDataPager>
+                </div>
+                <div class="col-md-3">&nbsp;</div>
+            </div>--%>
         </telerik:RadAjaxPanel>
     </form>
 </body>

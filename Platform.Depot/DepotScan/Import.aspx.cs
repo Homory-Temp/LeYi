@@ -73,8 +73,10 @@ public partial class DepotAction_Import : DepotPageSingle
                     if (obj.Count(o => o.Code == code) > 0)
                     {
                         obj.First(o => o.Code == code).In = true;
+                        item.CodeJson = obj.ToJson();
+                        item.CodeJson = obj.ToJson();
+                        DataContext.DepotCheck.Single(o => o.State == 1 && o.BatchId == id && o.BatchOrdinal == item.BatchOrdinal).CodeJson = item.CodeJson;
                     }
-                    item.CodeJson = obj.ToJson();
                     break;
                 }
             }

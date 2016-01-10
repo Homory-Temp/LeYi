@@ -104,7 +104,7 @@ public partial class DepotAction_Object : DepotPageSingle
         var source = DataContext.DepotObjectLoad(Depot.Id, node.HasValue ? node.Value.GlobalId() : (Guid?)null, true);
         if (!toSearch.Text.None())
         {
-            source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+            source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.Code.ToLower() == toSearch.Text.Trim().ToLower()).ToList();
         }
         if (depts.SelectedIndex >= 0)
         {

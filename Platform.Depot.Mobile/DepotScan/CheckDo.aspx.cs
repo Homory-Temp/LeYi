@@ -56,10 +56,10 @@ public partial class DepotScan_CheckDo : DepotPageSingle
                 obj.First(o => o.Code == code).In = true;
                 no = false;
                 item.CodeJson = obj.ToJson();
+                DataContext.SaveChanges();
                 break;
             }
         }
-        DataContext.SaveChanges();
         ____vx.Value = no.ToJson();
         view.Rebind();
         Reset();

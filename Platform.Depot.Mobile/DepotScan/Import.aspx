@@ -27,7 +27,7 @@
 <body>
     <form id="form" runat="server">
         <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="离线盘库导入" />
-        <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid left">
+        <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container-fluid text-center" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <input type="hidden" runat="server" id="h" value="" />
@@ -35,13 +35,13 @@
                         请选择离线盘库文件
                     </div>
                     <div style="margin-left: 50px;">
-                        <telerik:RadAsyncUpload RegisterWithScriptManager="True" RenderMode="Mobile" runat="server" ID="im_up" Skin="MetroTouch" OnFileUploaded="im_up_FileUploaded" HideFileInput="False" LocalizationPath="~/Language" TemporaryFolder="~/Common/物资/临时" TargetFolder="~/Common/物资/临时" PostbackTriggers="im_do" ChunkSize="1048576" AutoAddFileInputs="False" MaxFileInputsCount="1" InitialFileInputsCount="1" />
+                        <telerik:RadAsyncUpload RegisterWithScriptManager="True" RenderMode="Mobile" runat="server" ID="im_up" Skin="MetroTouch" OnFileUploaded="im_up_FileUploaded" HideFileInput="False" LocalizationPath="~/Language" TemporaryFolder="~/Common/物资/临时" TargetFolder="~/Common/物资/临时" PostbackTriggers="im_ok" ChunkSize="1048576" AutoAddFileInputs="False" MaxFileInputsCount="1" InitialFileInputsCount="1" />
                         <input type="hidden" id="file" runat="server" />
                     </div>
                 </div>
             </div>
             <div class="row">&nbsp;</div>
-            <div class="row">
+            <div class="row" style="display: none;">
                 <div class="col-md-12 text-center">
                         <telerik:RadButton ID="im_do" CssClass="btn btn-primary" runat="server" Text="预览要导入的盘库数据" OnClick="im_do_Click"></telerik:RadButton>
                     <div style="margin: 20px 50px;">
@@ -49,8 +49,6 @@
                     </div>
                 </div>
             </div>
-        </telerik:RadAjaxPanel>
-        <telerik:RadAjaxPanel ID="panelX" runat="server" CssClass="container-fluid text-center" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-12">
                     <div>
