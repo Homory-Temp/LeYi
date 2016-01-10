@@ -150,6 +150,14 @@ public partial class DepotAction_Import : DepotPageSingle
                     catch
                     { }
                 }
+
+                var ord = DataContext.DepotInRecord.Single(o => o.Id == 固定资产库购置单Id);
+                var s = DataContext.DepotInXRecord.Where(o => o.OrderId == 固定资产库购置单Id).Sum(o => o.Total);
+                var oo = DataContext.DepotOrder.Single(o => o.Id == 固定资产库购置单Id);
+                oo.ToPay = s;
+                oo.Paid = s;
+                DataContext.SaveChanges();
+
             }
         }
         finally

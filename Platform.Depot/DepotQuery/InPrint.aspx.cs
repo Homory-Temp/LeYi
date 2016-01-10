@@ -45,6 +45,7 @@ public partial class DepotQuery_InPrint : DepotPageSingle
         view_record.DataSource = source;
         var s = source.Sum(o => o.Total);
         var oo = DataContext.DepotOrder.Single(o => o.Id == orderId);
+        oo.ToPay = s;
         oo.Paid = s;
         DataContext.SaveChanges();
         total.Value = source.Sum(o => o.Amount).ToAmount(Depot.Featured(DepotType.小数数量库)) + "@@@" + s.ToMoney() + "@@@" + source.Select(o => o.ObjectId).Distinct().Count().ToString();
