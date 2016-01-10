@@ -62,7 +62,7 @@ public partial class DepotAction_Import : DepotPageSingle
                 var 固定资产库Id = Depot.Id;
                 var 固定资产库购置单Id = DataContext.GlobalId();
 
-                DataContext.DepotOrderAdd(固定资产库购置单Id, 固定资产库Id, "固定资产导入_{0}".Formatted(DateTime.Now.ToString("yyyyMMddHHmmss")), "导入", "导入", "导入", "导入", 0M, 0M, null, null, DateTime.Now, DepotUser.Id, "");
+                DataContext.DepotOrderAdd(固定资产库购置单Id, 固定资产库Id, "固定资产导入_{0}".Formatted(DateTime.Now.ToString("yyyyMMddHHmmss")), "导入", "导入", "导入", "导入", 0M, 0M, null, null, DateTime.Now, DepotUser.Id, "", false);
 
                 foreach (DataRow row in handled.Rows)
                 {
