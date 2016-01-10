@@ -20,6 +20,7 @@ public partial class DepotQuery_Statistics : DepotPageSingle
             ps.SelectedDate = DateTime.Today;
             pe.SelectedDate = DateTime.Today;
             view.Rebind();
+            name.Focus();
         }
     }
 
@@ -65,6 +66,15 @@ public partial class DepotQuery_Statistics : DepotPageSingle
         var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => o.Value.GlobalId()).ToList();
         var source = catalogs.Join(DataContext.DepotST.Where(o => o.Time >= _s && o.Time <= _e), o => o, o => o.CatalogId, (a, b) => b).ToList();
         var list = new List<InMemoryST>();
+        if (!name.Text.Trim().None())
+        {
+            var a_source = DataContext.DepotObjectLoad(Depot.Id, null);
+            if (!name.Text.None())
+            {
+                var glist = a_source.Where(o => o.Name.ToLower().Contains(name.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(name.Text.Trim().ToLower()) || o.Code.ToLower() == name.Text.Trim().ToLower()).Select(o => o.Id).ToList();
+                source = glist.Join(source, o => o, o => o.ObjectId, (a, b) => b).ToList();
+            }
+        }
         foreach (var g in source.GroupBy(o => o.ObjectId))
         {
             var obj = new InMemoryST();
@@ -87,10 +97,6 @@ public partial class DepotQuery_Statistics : DepotPageSingle
             obj.E = g.Last().EndAmount;
             obj.EM = g.Last().EndMoney;
             list.Add(obj);
-        }
-        if (!name.Text.Trim().None())
-        {
-            list = list.Where(o => o.Name.ToLower().Contains(name.Text.Trim().ToLower())).ToList();
         }
         ___total.Value = list.Sum(o => o.S).ToAmount() + "@" + list.Sum(o => o.SM).ToMoney() + "@" + list.Sum(o => o.I).ToAmount() + "@" + list.Sum(o => o.IM).ToMoney() + "@" + list.Sum(o => o.U).ToAmount() + "@" + list.Sum(o => o.UM).ToMoney() + "@" + list.Sum(o => o.O).ToAmount() + "@" + list.Sum(o => o.OM).ToMoney() + "@" + list.Sum(o => o.E).ToAmount() + "@" + list.Sum(o => o.EM).ToMoney();
         view.DataSource = list.OrderBy(o => o.CatalogPath).ThenBy(o => o.Name).ToList();

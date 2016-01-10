@@ -72,13 +72,22 @@
                         </Items>
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="source" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name">
+                    <telerik:RadComboBox ID="source" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" Filter="Contains" AllowCustomText="true">
+                        <ItemTemplate>
+                            <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
+                        </ItemTemplate>
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="usage" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name">
+                    <telerik:RadComboBox ID="usage" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" Filter="Contains" AllowCustomText="true">
+                        <ItemTemplate>
+                            <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
+                        </ItemTemplate>
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="people" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true">
+                    <telerik:RadComboBox ID="people" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true" Filter="Contains" AllowCustomText="true">
+                        <ItemTemplate>
+                            <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
+                        </ItemTemplate>
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="button" class="btn btn-tumblr" id="query" runat="server" value="查询" onserverclick="query_ServerClick" />
@@ -138,6 +147,7 @@
                                 <input type="button" class="btn btn-tumblr" value="办结" id="done" runat="server" match='<%# Eval("Id") %>' visible='<%# !(bool)Eval("Done") %>' onserverclick="done_ServerClick" />
                                 <input type="button" class="btn btn-tumblr" value="补办" id="redo" runat="server" match='<%# Eval("Id") %>' visible='<%# (bool)Eval("Done") && RightRoot %>' onserverclick="redo_ServerClick" />
                                 <input type="button" class="btn btn-tumblr" value="打印" id="print" runat="server" match='<%# Eval("Id") %>' visible='<%# (bool)Eval("Done") %>' onserverclick="print_ServerClick" />
+                                <input type="button" class="btn btn-tumblr" value="删除" id="del" runat="server" match='<%# Eval("Id") %>' onserverclick="del_ServerClick" visible='<%# CanDel((Guid)Eval("Id")) %>' />
                                 <input type="button" class="btn btn-tumblr" value="流程" id="fs" runat="server" match='<%# Eval("Id") %>' onserverclick="fs_ServerClick" />
                             </td>
                         </tr>

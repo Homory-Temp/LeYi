@@ -31,6 +31,7 @@ public partial class DepotQuery_UseX : DepotPageSingle
             age.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.年龄段).ToList();
             age.DataBind();
             age.Visible = Depot.Featured(DepotType.幼儿园);
+            name.Focus();
         }
     }
 
@@ -69,7 +70,12 @@ public partial class DepotQuery_UseX : DepotPageSingle
         var source = catalogs.Join(DataContext.DepotUseXRecord.Where(o => o.Time > start && o.Time < end && o.IsVirtual == isVirtual), o => o, o => o.CatalogId, (a, b) => b).ToList().OrderByDescending(o => o.Time).ThenBy(o => o.UserName).ToList();
         if (!name.Text.Trim().None())
         {
-            source = source.Where(o => o.Name.ToLower().Contains(name.Text.Trim().ToLower())).ToList();
+            var a_source = DataContext.DepotObjectLoad(Depot.Id, null);
+            if (!name.Text.None())
+            {
+                var glist = a_source.Where(o => o.Name.ToLower().Contains(name.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(name.Text.Trim().ToLower()) || o.Code.ToLower() == name.Text.Trim().ToLower()).Select(o => o.Id).ToList();
+                source = glist.Join(source, o => o, o => o.ObjectId, (a, b) => b).ToList();
+            }
         }
         if (!age.Text.Trim().None() && age.SelectedIndex > 0)
         {

@@ -31,6 +31,7 @@ public partial class DepotQuery_InX : DepotPageSingle
             place.Items.Insert(0, new Telerik.Web.UI.RadComboBoxItem { Text = "存放地", Value = "", Selected = true });
             place.DataSource = DataContext.DepotDictionaryLoad(Depot.Id, DictionaryType.存放地).ToList();
             place.DataBind();
+            toSearch.Focus();
         }
     }
 
@@ -89,7 +90,12 @@ public partial class DepotQuery_InX : DepotPageSingle
         }
         if (!toSearch.Text.Trim().None())
         {
-            source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+            var a_source = DataContext.DepotObjectLoad(Depot.Id, null);
+            if (!toSearch.Text.None())
+            {
+                var glist = a_source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.Code.ToLower() == toSearch.Text.Trim().ToLower()).Select(o => o.Id).ToList();
+                source = glist.Join(source, o => o, o => o.ObjectId, (a, b) => b).ToList();
+            }
         }
         view.DataSource = source.OrderByDescending(o => o.Time).ThenByDescending(o => o.InId).ToList();
         //___total.Value = source.Sum(o => o.Amount).ToAmount(Depot.Featured(DepotType.小数数量库)) + "@@@" + source.Sum(o => o.Total).ToMoney();

@@ -52,13 +52,22 @@
                         <DatePopupButton runat="server" Visible="false" />
                     </telerik:RadDatePicker>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="peopleX" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true">
+                    <telerik:RadComboBox ID="peopleX" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true" Filter="Contains" AllowCustomText="true">
+                        <ItemTemplate>
+                            <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
+                        </ItemTemplate>
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="age" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name">
+                    <telerik:RadComboBox ID="age" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name" Filter="Contains" AllowCustomText="true">
+                        <ItemTemplate>
+                            <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
+                        </ItemTemplate>
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <telerik:RadComboBox ID="people" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true">
+                    <telerik:RadComboBox ID="people" runat="server" MaxHeight="203" AutoPostBack="false" Width="120" DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true" Filter="Contains" AllowCustomText="true">
+                        <ItemTemplate>
+                            <%# Eval("Name") %><span style="display: none;"><%# Eval("PinYin") %></span>
+                        </ItemTemplate>
                     </telerik:RadComboBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="button" class="btn btn-tumblr" id="query" runat="server" value="查询" onserverclick="query_ServerClick" />

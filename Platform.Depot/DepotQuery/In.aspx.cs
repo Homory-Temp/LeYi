@@ -119,4 +119,22 @@ public partial class DepotQuery_In : DepotPageSingle
         var url = "../DepotQuery/InOrder?DepotId={0}&OrderId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"].GlobalId());
         ap.ResponseScripts.Add("pop('{0}');".Formatted(url));
     }
+
+    protected void del_ServerClick(object sender, EventArgs e)
+    {
+        var orderId = (sender as HtmlInputButton).Attributes["match"].GlobalId();
+        var order = DataContext.DepotOrder.SingleOrDefault(o => o.Id == orderId);
+        if (order != null)
+        {
+            DataContext.DepotOrder.Remove(order);
+            DataContext.SaveChanges();
+        }
+        view.Rebind();
+    }
+
+    protected bool CanDel(Guid orderId)
+    {
+        var order = DataContext.DepotOrder.Single(o => o.Id == orderId);
+        return order.DepotIn.Count == 0;
+    }
 }

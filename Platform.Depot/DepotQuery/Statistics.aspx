@@ -42,6 +42,13 @@
             }
         }
     </script>
+    <script>
+        function sg(sender, e) {
+            if (e.get_keyCode() == 13) {
+                $("#query").click();
+            }
+        }
+    </script>
 </head>
 <body>
     <form id="form" runat="server">
@@ -77,7 +84,7 @@
                                 <DatePopupButton runat="server" Visible="false" />
                             </telerik:RadMonthYearPicker>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <telerik:RadTextBox ID="name" runat="server" Width="120" EmptyMessage="物资名称"></telerik:RadTextBox>
+                            <telerik:RadTextBox ID="name" runat="server" Width="120" EmptyMessage="物资名称" ClientEvents-OnKeyPress="sg"></telerik:RadTextBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="button" class="btn btn-tumblr dictionary" id="query" runat="server" value="查询" onserverclick="query_ServerClick" />
                         </div>
