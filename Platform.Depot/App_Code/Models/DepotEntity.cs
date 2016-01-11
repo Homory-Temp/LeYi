@@ -1059,7 +1059,8 @@ namespace Models
         领用出库 = 4,
         归还 = 5,
         退货 = 6,
-        报废 = 7
+        报废 = 7,
+        领用修改 = 8
     }
 }
 namespace Models

@@ -114,6 +114,11 @@ public partial class DepotQuery_UseX : DepotPageSingle
         }
     }
 
+    protected bool IsC(Guid objId)
+    {
+        return DataContext.DepotObject.Single(o => o.Id == objId).Consumable;
+    }
+
     protected void viewx_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         var timex = periodx.SelectedDate.HasValue ? periodx.SelectedDate.Value : DateTime.Today;
@@ -190,5 +195,10 @@ public partial class DepotQuery_UseX : DepotPageSingle
     protected DateTime GT(Guid id)
     {
         return DataContext.DepotUse.Single(o => o.Id == id).Time;
+    }
+
+    protected void edit_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/UseEdit?DepotId={0}&UseXId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
 }

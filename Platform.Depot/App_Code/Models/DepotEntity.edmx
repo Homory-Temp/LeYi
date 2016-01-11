@@ -2211,6 +2211,7 @@
           <Member Name="归还" Value="5" />
           <Member Name="退货" Value="6" />
           <Member Name="报废" Value="7" />
+          <Member Name="领用修改" Value="8" />
         </EnumType>
         <EntityType Name="DepotInXRecord">
           <Key>
