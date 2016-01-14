@@ -47,6 +47,14 @@ public partial class DepotAction_Object : DepotPageSingle
         }
     }
 
+    protected string DName(Guid? did)
+    {
+        if (did == null)
+            return "";
+        else
+            return DataContext.Depot.SingleOrDefault(o => o.Id == did).Name;
+    }
+
     protected string CountTotal(DepotObject obj)
     {
         var query = obj.DepotUseX.Where(o => o.ReturnedAmount < o.Amount);
