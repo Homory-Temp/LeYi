@@ -67,7 +67,7 @@
                             g_total = accAdd(g_total, v);
                         }
                     }
-                    $find('<%= total.ClientID %>').set_value(g_total + adjust);
+                    $find('<%= total.ClientID %>').set_value(g_total + adjust + 0.0000000000001);
                 }
                 function set_adj(value) {
                     adjust = value;
