@@ -37,8 +37,7 @@
                             </div>
                         </div>
                         <div class="panel-body text-center">
-                            <span class="btn btn-info">固定资产总数：</span><span id="fixC" class="btn btn-warning" runat="server"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-info">固定资产总额：</span><span id="fixM" class="btn btn-warning" runat="server"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="btn btn-info">普通物资总数：</span><span id="noFixC" class="btn btn-warning" runat="server"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-info">普通物资总额：</span><span id="noFixM" class="btn btn-warning" runat="server"></span>
+                            <span class="btn btn-info">物品与资产总数：</span><span id="C" class="btn btn-warning" runat="server"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn btn-info">物品与资产总额：</span><span id="M" class="btn btn-warning" runat="server"></span>
                         </div>
                     </div>
                 </div>

@@ -23,6 +23,13 @@
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
     <![endif]-->
+    <script>
+        function sg(sender, e) {
+            if (e.get_keyCode() == 13) {
+                $("#scanFlow").click();
+            }
+        }
+    </script>
 </head>
 <body>
     <form id="form" runat="server">

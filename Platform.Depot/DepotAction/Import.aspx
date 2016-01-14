@@ -32,7 +32,7 @@
                 <div class="col-md-12">
                     <div>
                         <div class="btn btn-primary">1</div>
-                        请选择财政局固定资产Excel文件
+                        请选择财政局固定资产Excel文件&nbsp;&nbsp;<a target="_blank" href="./Sample.xls">导入模板下载</a>
                     </div>
                     <div style="margin-left: 50px;">
                         <telerik:RadAsyncUpload RegisterWithScriptManager="True" runat="server" ID="im_up" Skin="Metro" OnFileUploaded="im_up_FileUploaded" HideFileInput="False" LocalizationPath="~/Language" TemporaryFolder="~/Common/物资/临时" TargetFolder="~/Common/物资/临时" PostbackTriggers="im_do" ChunkSize="1048576" AutoAddFileInputs="False" MaxFileInputsCount="1" InitialFileInputsCount="1" />
