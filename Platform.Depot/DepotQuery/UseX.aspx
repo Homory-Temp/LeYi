@@ -154,7 +154,7 @@
                                     <td style="text-align: right;">
                                         <%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %>
                                         &nbsp;&nbsp;
-                                        <input type="button" class="btn btn-tumblr btn-xs" value="编" id="edit" runat="server" match='<%# Eval("Id") %>' visible='<%# IsC((Guid)Eval("ObjectId")) && RightRoot %>' onserverclick="edit_ServerClick" />
+                                        <input type="button" class="btn btn-tumblr btn-xs" value="编" id="edit" runat="server" match='<%# Eval("Id") %>' visible='<%# ((Models.UseType)Eval("Type")) == Models.UseType.领用 && RightRoot %>' onserverclick="edit_ServerClick" />
                                         &nbsp;&nbsp;
                                     </td>
                                     <td><%# ((Models.UseType)Eval("Type")) == Models.UseType.借用 ? ((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")).ToAmount(Depot.Featured(Models.DepotType.小数数量库)) : "0" %></td>
