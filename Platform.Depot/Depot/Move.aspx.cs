@@ -20,11 +20,11 @@ public partial class Depot_Move : DepotPageSingle
         }
     }
 
-    protected string CountTotal(DepotObject obj)
+    protected decimal CountTotal(DepotObject obj)
     {
         var query = obj.DepotUseX.Where(o => o.ReturnedAmount < o.Amount);
         var noOut = query.Count() > 0 ? query.Where(o => o.Type == UseType.借用).Sum(o => o.Amount - o.ReturnedAmount) : 0;
-        return (obj.Amount + noOut).ToAmount(Depot.Featured(DepotType.小数数量库));
+        return (obj.Amount + noOut);
     }
 
     private IEnumerable<DepotIn> ININ;
@@ -39,7 +39,7 @@ public partial class Depot_Move : DepotPageSingle
         }
     }
 
-    protected string CountDone(DepotObject obj)
+    protected decimal CountDone(DepotObject obj)
     {
         var query = obj.DepotIn.ToList();
         var amount = 0M;
@@ -47,7 +47,7 @@ public partial class Depot_Move : DepotPageSingle
         {
             amount+= XININ.Where(o => o.Note == g.Key).Sum(o => o.Amount);
         }
-        return (amount).ToAmount(Depot.Featured(DepotType.小数数量库));
+        return (amount);
     }
 
     protected bool IsSimple
@@ -65,6 +65,7 @@ public partial class Depot_Move : DepotPageSingle
         {
             source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
         }
+        source = source.Where(o => CountTotal(o) > CountDone(o)).ToList();
         add.InnerText = "待处理物资" + source.Count().EmptyWhenZero();
         view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
         pager.Visible = source.Count() > pager.PageSize;

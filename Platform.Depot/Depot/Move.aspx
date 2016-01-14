@@ -23,7 +23,7 @@
         function gox(obj) {
             var id = $(obj).attr("goid");
             var idx = $(obj).attr("did");
-            window.open('../DepotQuery/ObjectFixed?ObjectId=' + id + "&DepotId=" + idx, '_blank');
+            window.open('../DepotQuery/ObjectFixedMove?ObjectId=' + id + "&DepotId=" + idx, '_blank');
         }
     </script>
     <!--[if lt IE 9]>
@@ -78,8 +78,8 @@
                                             <td><%# Eval("Unit") %></td>
                                             <td><%# Eval("Brand") %></td>
                                             <td><%# Eval("Specification") %></td>
-                                            <td><%# CountTotal(Container.DataItem as Models.DepotObject) %></td>
-                                            <td><%# CountDone(Container.DataItem as Models.DepotObject) %></td>
+                                            <td><%# CountTotal(Container.DataItem as Models.DepotObject).ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
+                                            <td><%# CountDone(Container.DataItem as Models.DepotObject).ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
                                         </tr>
                                     </asp:Panel>
                                 </ItemTemplate>

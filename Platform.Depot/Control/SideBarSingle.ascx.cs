@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Models;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 public partial class Control_SideBarSingle : DepotControlSingle
@@ -19,6 +21,36 @@ public partial class Control_SideBarSingle : DepotControlSingle
         Response.Redirect(link);
     }
 
+    private IEnumerable<DepotIn> ININ;
+
+    protected IEnumerable<DepotIn> XININ
+    {
+        get
+        {
+            if (ININ == null)
+                ININ = DataContext.DepotObjectInLoad(Depot.Id, null, true);
+            return ININ;
+        }
+    }
+
+    protected decimal CountDone(DepotObject obj)
+    {
+        var query = obj.DepotIn.ToList();
+        var amount = 0M;
+        foreach (var g in query.GroupBy(o => o.Note))
+        {
+            amount += XININ.Where(o => o.Note == g.Key).Sum(o => o.Amount);
+        }
+        return (amount);
+    }
+
+    protected decimal CountTotal(DepotObject obj)
+    {
+        var query = obj.DepotUseX.Where(o => o.ReturnedAmount < o.Amount);
+        var noOut = query.Count() > 0 ? query.Where(o => o.Type == UseType.借用).Sum(o => o.Amount - o.ReturnedAmount) : 0;
+        return (obj.Amount + noOut);
+    }
+
     protected bool HasWarn()
     {
         return DataContext.DepotObject.Count(o => ((o.Amount < o.Low && o.Low > 0) || (o.Amount > o.High && o.High > 0)) && o.State < Models.State.停用) > 0;
@@ -26,20 +58,10 @@ public partial class Control_SideBarSingle : DepotControlSingle
 
     protected bool HasMove()
     {
-        if (Depot.Featured(Models.DepotType.固定资产库))
+        if (Depot.Featured(DepotType.固定资产库))
             return false;
-        var source = DataContext.DepotObjectInLoadFix(Depot.Id);
-        var actual = DataContext.DepotObjectInLoad(Depot.Id, null, true);
-        foreach (var g in source.GroupBy(o => o.Note))
-        {
-            var amount = g.Sum(o => o.Amount);
-            var xamount = actual.Where(o => o.Note == g.Key).Sum(o => o.Amount);
-            if (amount > xamount)
-            {
-                return true;
-            }
-        }
-        return false;
+        var source = DataContext.DepotObjectLoadFix(Depot.Id).ToList();
+        return source.Count(o => CountTotal(o) > CountDone(o)) > 0;
     }
 
     public string Crumb
