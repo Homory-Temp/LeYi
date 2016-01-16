@@ -141,7 +141,7 @@
                                             <div class="row" style="margin: 30px 0; border: solid 1px silver;">
                                                 <div class="col-md-12" style='width: 100%; height: 100%; opacity: <%# Eval("DepotId") == null ? 1 : 0.6 %>' title='<%# DName((Guid?)Eval("DepotId")) %>'>
                                                     <div style="height: 160px; text-align: center; cursor: pointer;" onclick="gox(this);" goid='<%# Eval("Id") %>' did='<%# Depot.Id %>'>
-                                                        <img class="img-responsive" style="height: 158px; margin: auto;" src='<%# Eval("ImageA").None() ? "../Content/Images/Transparent.png" : Eval("ImageA") %>' />
+                                                        <img class="img-responsive" style="height: 158px; margin: auto;" src='<%# GenAutoImage(Eval("ImageA")) %>' />
                                                     </div>
                                                     <div style='<%# (Depot.Featured(Models.DepotType.固定资产库) ? "height: 150px;": "height: 100px;") %>'>
                                                         <table style="margin: auto; width: 90%;">

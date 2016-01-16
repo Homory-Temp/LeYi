@@ -47,6 +47,82 @@ public partial class DepotAction_Object : DepotPageSingle
         }
     }
 
+    public void MakeThumNail(string originalImagePath, string thumNailPath, int width, int height, string model)
+    {
+        System.Drawing.Image originalImage = System.Drawing.Image.FromFile(originalImagePath);
+        int thumWidth = width; 
+        int thumHeight = height;  
+        int x = 0;
+        int y = 0;
+        int originalWidth = originalImage.Width; 
+        int originalHeight = originalImage.Height; 
+        switch (model)
+        {
+            case "HW":  
+                break;
+            case "W":     
+                thumHeight = originalImage.Height * width / originalImage.Width;
+                break;
+            case "H":   
+                thumWidth = originalImage.Width * height / originalImage.Height;
+                break;
+            case "Cut":
+                if ((double)originalImage.Width / (double)originalImage.Height > (double)thumWidth / (double)thumHeight)
+                {
+                    originalHeight = originalImage.Height;
+                    originalWidth = originalImage.Height * thumWidth / thumHeight;
+                    y = 0;
+                    x = (originalImage.Width - originalWidth) / 2;
+                }
+                else
+                {
+                    originalWidth = originalImage.Width;
+                    originalHeight = originalWidth * height / thumWidth;
+                    x = 0;
+                    y = (originalImage.Height - originalHeight) / 2;
+                }
+                break;
+            default:
+                break;
+        }
+        System.Drawing.Image bitmap = new System.Drawing.Bitmap(thumWidth, thumHeight);
+        System.Drawing.Graphics graphic = System.Drawing.Graphics.FromImage(bitmap);
+        graphic.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+        graphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+        graphic.Clear(System.Drawing.Color.Transparent);
+        graphic.DrawImage(originalImage, new System.Drawing.Rectangle(0, 0, thumWidth, thumHeight), new System.Drawing.Rectangle(x, y, originalWidth, originalHeight), System.Drawing.GraphicsUnit.Pixel);
+        try
+        {
+            bitmap.Save(thumNailPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            originalImage.Dispose();
+            bitmap.Dispose();
+            graphic.Dispose();
+        }
+    }
+
+    protected string GenAutoImage(object url)
+    {
+        if (url.None())
+            return "../Content/Images/Transparent.png";
+        else
+        {
+            var path = Server.MapPath(url.ToString());
+            var pathx = path.Substring(0, path.LastIndexOf(".")) + ".done" + path.Substring(path.LastIndexOf("."));
+            if (!System.IO.File.Exists(pathx))
+            {
+                MakeThumNail(path, pathx, 0, 158, "H");
+            }
+            return url.ToString().Substring(0, url.ToString().LastIndexOf(".")) + ".done" + url.ToString().Substring(url.ToString().LastIndexOf("."));
+        }
+    }
+
     protected string DName(Guid? did)
     {
         if (did == null)
