@@ -68,6 +68,7 @@ namespace Models
         public virtual DbSet<DepotUser> DepotUser { get; set; }
         public virtual DbSet<DepotPlace> DepotPlace { get; set; }
         public virtual DbSet<DepotCreator> DepotCreator { get; set; }
+        public virtual DbSet<DepotCatalogTreeNoFix> DepotCatalogTreeNoFix { get; set; }
     
         public virtual ObjectResult<string> ToPinYin(string name)
         {

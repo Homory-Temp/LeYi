@@ -456,6 +456,33 @@
           <Property Name="Count" Type="int" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_LY.dbo.DepotCatalogTreeNoFix”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="DepotCatalogTreeNoFix">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="TopId" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="PinYin" />
+            <PropertyRef Name="Ordinal" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="AutoId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Count" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="TopId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepotId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="AutoId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“Platform_LY.dbo.DepotCreator”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="DepotCreator">
           <Key>
@@ -635,6 +662,7 @@
             <PropertyRef Name="Fixed" />
             <PropertyRef Name="FixedCard" />
             <PropertyRef Name="FixedNumber" />
+            <PropertyRef Name="Department" />
             <PropertyRef Name="Brand" />
             <PropertyRef Name="Extension" />
             <PropertyRef Name="Unit" />
@@ -661,6 +689,7 @@
           <Property Name="Fixed" Type="bit" Nullable="false" />
           <Property Name="FixedCard" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="FixedNumber" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Department" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Brand" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Extension" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Unit" Type="nvarchar" MaxLength="256" Nullable="false" />
@@ -1245,6 +1274,21 @@
     [DepotCatalogTree].[Count] AS [Count]
     FROM [dbo].[DepotCatalogTree] AS [DepotCatalogTree]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="DepotCatalogTreeNoFix" EntityType="Self.DepotCatalogTreeNoFix" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DepotCatalogTreeNoFix].[Id] AS [Id], 
+    [DepotCatalogTreeNoFix].[ParentId] AS [ParentId], 
+    [DepotCatalogTreeNoFix].[TopId] AS [TopId], 
+    [DepotCatalogTreeNoFix].[DepotId] AS [DepotId], 
+    [DepotCatalogTreeNoFix].[Name] AS [Name], 
+    [DepotCatalogTreeNoFix].[PinYin] AS [PinYin], 
+    [DepotCatalogTreeNoFix].[Ordinal] AS [Ordinal], 
+    [DepotCatalogTreeNoFix].[State] AS [State], 
+    [DepotCatalogTreeNoFix].[AutoId] AS [AutoId], 
+    [DepotCatalogTreeNoFix].[Code] AS [Code], 
+    [DepotCatalogTreeNoFix].[Count] AS [Count]
+    FROM [dbo].[DepotCatalogTreeNoFix] AS [DepotCatalogTreeNoFix]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="DepotCreator" EntityType="Self.DepotCreator" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DepotCreator].[Phone] AS [Phone], 
@@ -1350,6 +1394,7 @@
     [DepotObjectX].[Fixed] AS [Fixed], 
     [DepotObjectX].[FixedCard] AS [FixedCard], 
     [DepotObjectX].[FixedNumber] AS [FixedNumber], 
+    [DepotObjectX].[Department] AS [Department], 
     [DepotObjectX].[Brand] AS [Brand], 
     [DepotObjectX].[Extension] AS [Extension], 
     [DepotObjectX].[Unit] AS [Unit], 
@@ -1738,6 +1783,7 @@
           <EntitySet Name="DepotUser" EntityType="DepotModel.DepotUser" />
           <EntitySet Name="DepotPlace" EntityType="DepotModel.DepotPlace" />
           <EntitySet Name="DepotCreator" EntityType="DepotModel.DepotCreator" />
+          <EntitySet Name="DepotCatalogTreeNoFix" EntityType="DepotModel.DepotCatalogTreeNoFix" />
           </EntityContainer>
         <EnumType Name="State">
           <Member Name="启用" Value="1" />
@@ -2685,6 +2731,7 @@
             <PropertyRef Name="FixedNumber" />
             <PropertyRef Name="Brand" />
             <PropertyRef Name="Extension" />
+            <PropertyRef Name="Department" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
@@ -2714,6 +2761,7 @@
           <Property Name="Brand" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Extension" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Age" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DepotRedo">
           <Key>
@@ -2940,6 +2988,31 @@
           <Property Name="State" Type="Int32" Nullable="false" />
           <Property Name="CampusId" Type="Guid" Nullable="false" />
           <Property Name="CampusName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DepotCatalogTreeNoFix">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="TopId" />
+            <PropertyRef Name="DepotId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="PinYin" />
+            <PropertyRef Name="Ordinal" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="AutoId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Count" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="TopId" Type="Guid" Nullable="false" />
+          <Property Name="DepotId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="AutoId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3497,6 +3570,7 @@
           <EntitySetMapping Name="DepotObjectX">
             <EntityTypeMapping TypeName="DepotModel.DepotObjectX">
               <MappingFragment StoreEntitySet="DepotObjectX">
+                <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="Brand" ColumnName="Brand" />
@@ -3682,6 +3756,23 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepotCatalogTreeNoFix">
+            <EntityTypeMapping TypeName="DepotModel.DepotCatalogTreeNoFix">
+              <MappingFragment StoreEntitySet="DepotCatalogTreeNoFix">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepotId" ColumnName="DepotId" />
+                <ScalarProperty Name="TopId" ColumnName="TopId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

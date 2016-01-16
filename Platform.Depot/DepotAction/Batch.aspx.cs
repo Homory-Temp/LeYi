@@ -12,8 +12,17 @@ public partial class DepotAction_Batch : DepotPageSingle
         SideBarSingle.Crumb = "物资管理 - {0}".Formatted(Depot.Featured(DepotType.固定资产库) ? "资产分库" : "批量转移");
         if (!IsPostBack)
         {
-            tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
-            tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
+            //tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null, !Depot.Featured(DepotType.固定资产库)).Count().EmptyWhenZero());
+            //tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
+            //tree.DataBind();
+            if (Depot.Featured(DepotType.固定资产库))
+            {
+                tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
+            }
+            else
+            {
+                tree.DataSource = DataContext.DepotCatalogTreeNoFixLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
+            }
             tree.DataBind();
             catalog.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
             catalog.DataBind();
@@ -37,8 +46,8 @@ public partial class DepotAction_Batch : DepotPageSingle
 
     protected void tree_NodeClick(object sender, Telerik.Web.UI.RadTreeNodeEventArgs e)
     {
-        if (tree0.SelectedNode != null)
-            tree0.SelectedNode.Selected = false;
+        //if (tree0.SelectedNode != null)
+        //    tree0.SelectedNode.Selected = false;
         tree.GetAllNodes().Where(o => o.ParentNode == e.Node.ParentNode).ToList().ForEach(o => o.Expanded = false);
         e.Node.Expanded = true;
         view.Rebind();
@@ -47,12 +56,19 @@ public partial class DepotAction_Batch : DepotPageSingle
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         var node = CurrentNode;
-        var source = DataContext.DepotObjectLoad(Depot.Id, node.HasValue ? node.Value.GlobalId() : (Guid?)null);
-        if (!toSearch.Text.None())
+        if (node.HasValue)
         {
-            source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+            var source = DataContext.DepotObjectLoad(Depot.Id, node.Value.GlobalId(), !Depot.Featured(DepotType.固定资产库));
+            if (!toSearch.Text.None())
+            {
+                source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower())).ToList();
+            }
+            view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
         }
-        view.DataSource = source.OrderByDescending(o => o.AutoId).ToList();
+        else
+        {
+            view.DataSource = null;
+        }
     }
 
     protected void search_ServerClick(object sender, EventArgs e)
@@ -109,7 +125,7 @@ public partial class DepotAction_Batch : DepotPageSingle
             }
             DataContext.SaveChanges();
         }
-        tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
+        //tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
         tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
         tree.DataBind();
         view.Rebind();

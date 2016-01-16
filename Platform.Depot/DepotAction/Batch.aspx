@@ -43,15 +43,15 @@
                             <span class="btn btn-tumblr">类别：</span>
                         </div>
                     </div>
-                    <div class="row">
+                    <%--<div class="row">
                         <div class="col-md-12">
                             <telerik:RadTreeView ID="tree0" runat="server" OnNodeClick="tree0_NodeClick" ShowLineImages="false">
                                 <Nodes>
-                                    <telerik:RadTreeNode Value="0" Selected="true"></telerik:RadTreeNode>
+                                    <telerik:RadTreeNode Value="0" Selected="false"></telerik:RadTreeNode>
                                 </Nodes>
                             </telerik:RadTreeView>
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="row">
                         <div class="col-md-12">
                             <telerik:RadTreeView ID="tree" runat="server" OnNodeClick="tree_NodeClick" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId">

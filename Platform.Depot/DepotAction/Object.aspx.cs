@@ -11,8 +11,15 @@ public partial class DepotAction_Object : DepotPageSingle
     {
         if (!IsPostBack)
         {
-            tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null, true).Count().EmptyWhenZero());
-            tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
+            tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null, !Depot.Featured(DepotType.固定资产库)).Count().EmptyWhenZero());
+            if (Depot.Featured(DepotType.固定资产库))
+            {
+                tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
+            }
+            else
+            {
+                tree.DataSource = DataContext.DepotCatalogTreeNoFixLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
+            }
             tree.DataBind();
             depts.DataSource = DataContext.DepotObjectLoad(Depot.Id, null).Select(o => o.Department).Distinct().OrderBy(o => o).ToList();
             depts.DataBind();
@@ -185,7 +192,7 @@ public partial class DepotAction_Object : DepotPageSingle
     protected void view_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
         var node = CurrentNode;
-        var source = DataContext.DepotObjectLoad(Depot.Id, node.HasValue ? node.Value.GlobalId() : (Guid?)null, true);
+        var source = DataContext.DepotObjectLoad(Depot.Id, node.HasValue ? node.Value.GlobalId() : (Guid?)null, !Depot.Featured(DepotType.固定资产库));
         if (!toSearch.Text.None())
         {
             source = source.Where(o => o.Name.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.PinYin.ToLower().Contains(toSearch.Text.Trim().ToLower()) || o.Code.ToLower() == toSearch.Text.Trim().ToLower()).ToList();

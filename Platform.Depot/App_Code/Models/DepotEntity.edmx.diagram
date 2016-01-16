@@ -66,6 +66,7 @@
         <EntityTypeShape EntityType="DepotModel.DepotUser" Width="1.5" PointX="16.75" PointY="21.5" />
         <EntityTypeShape EntityType="DepotModel.DepotPlace" Width="1.5" PointX="21.75" PointY="1.5" />
         <EntityTypeShape EntityType="DepotModel.DepotCreator" Width="1.5" PointX="21.75" PointY="4.5" />
+        <EntityTypeShape EntityType="DepotModel.DepotCatalogTreeNoFix" Width="1.5" PointX="21.75" PointY="8.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

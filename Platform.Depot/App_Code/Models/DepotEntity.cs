@@ -179,6 +179,26 @@ namespace Models
     using System;
     using System.Collections.Generic;
     
+    public partial class DepotCatalogTreeNoFix
+    {
+        public System.Guid Id { get; set; }
+        public Nullable<System.Guid> ParentId { get; set; }
+        public System.Guid TopId { get; set; }
+        public System.Guid DepotId { get; set; }
+        public string Name { get; set; }
+        public string PinYin { get; set; }
+        public int Ordinal { get; set; }
+        public int State { get; set; }
+        public int AutoId { get; set; }
+        public string Code { get; set; }
+        public int Count { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    using System.Collections.Generic;
+    
     public partial class DepotCheck
     {
         public System.Guid DepotId { get; set; }
@@ -567,6 +587,7 @@ namespace Models
         public string Brand { get; set; }
         public string Extension { get; set; }
         public string Age { get; set; }
+        public string Department { get; set; }
     }
 }
 namespace Models
