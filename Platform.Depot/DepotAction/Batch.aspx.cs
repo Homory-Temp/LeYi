@@ -24,7 +24,7 @@ public partial class DepotAction_Batch : DepotPageSingle
                 tree.DataSource = DataContext.DepotCatalogTreeNoFixLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
             }
             tree.DataBind();
-            catalog.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
+            catalog.DataSource = DataContext.DepotCatalogTreeNoFixLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
             catalog.DataBind();
         }
     }
@@ -125,9 +125,17 @@ public partial class DepotAction_Batch : DepotPageSingle
             }
             DataContext.SaveChanges();
         }
-        //tree0.Nodes[0].Text = "全部类别{0}".Formatted(DataContext.DepotObjectLoad(Depot.Id, null).Count().EmptyWhenZero());
-        tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList();
-        tree.DataBind();
-        view.Rebind();
+        //if (Depot.Featured(DepotType.固定资产库))
+        //{
+        //    tree.DataSource = DataContext.DepotCatalogTreeLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
+        //}
+        //else
+        //{
+        //    tree.DataSource = DataContext.DepotCatalogTreeNoFixLoad(Depot.Id).ToList().Where(o => o.Code != "*Homory:Null*").ToList();
+        //}
+        //tree.DataBind();
+        //tree.GetAllNodes().Where(o => o.Selected == true).ToList().ForEach(o => { o.Selected = false; });
+        //view.DataSource = null;
+        //view.DataBind();
     }
 }

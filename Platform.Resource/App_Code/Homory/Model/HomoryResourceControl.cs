@@ -1,6 +1,4 @@
-﻿#define ForceOnline
-
-using System;
+﻿using System;
 using System.Linq;
 
 namespace Homory.Model

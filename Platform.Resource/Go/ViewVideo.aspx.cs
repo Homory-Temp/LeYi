@@ -752,32 +752,32 @@ TargetUser.Resource.Where(o => o.State == State.启用 && o.Type == rt)
 
 		protected void assessTable_OnNeedDataSource(object sender, RadListViewNeedDataSourceEventArgs e)
 		{
-            var path = Server.MapPath(CurrentResource.Preview);
-            bool yes = false;
-            if (File.Exists(path))
-            {
-                FileInfo info = new FileInfo(path);
-                try
-                {
-                    var s = info.OpenWrite();
-                    try
-                    {
-                        s.Close();
-                    }
-                    catch
-                    {
-                    }
-                    yes = true;
-                }
-                catch
-                {
-                }
-            }
+            //var path = Server.MapPath(CurrentResource.Preview);
+            //bool yes = false;
+            //if (File.Exists(path))
+            //{
+            //    FileInfo info = new FileInfo(path);
+            //    try
+            //    {
+            //        var s = info.OpenWrite();
+            //        try
+            //        {
+            //            s.Close();
+            //        }
+            //        catch
+            //        {
+            //        }
+            //        yes = true;
+            //    }
+            //    catch
+            //    {
+            //    }
+            //}
 
-            if (!yes)
-            {
-                return;
-            }
+            //if (!yes)
+            //{
+            //    return;
+            //}
 
 
             if (CurrentResource.GradeId.HasValue && CurrentResource.CourseId.HasValue)

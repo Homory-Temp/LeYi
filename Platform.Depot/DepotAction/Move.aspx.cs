@@ -133,6 +133,7 @@ public partial class DepotAction_Move : DepotPageSingle
             }
             DataContext.SaveChanges();
         }
+        tree.GetAllNodes().Where(o => o.Selected).ToList().ForEach(o => { o.Selected = false; });
         view.Rebind();
     }
 }
