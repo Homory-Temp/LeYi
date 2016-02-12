@@ -90,6 +90,7 @@ namespace Homory.Model
         public virtual DbSet<View_ResourceAssess> View_ResourceAssess { get; set; }
         public virtual DbSet<ResourceMap> ResourceMap { get; set; }
         public virtual DbSet<ResourceAudit> ResourceAudit { get; set; }
+        public virtual DbSet<ViewDingDing> ViewDingDing { get; set; }
     
         public virtual int ResetPolicyCommon()
         {

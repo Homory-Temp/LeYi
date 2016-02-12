@@ -23,7 +23,7 @@ public partial class Extended_CampusSyncX : HomoryCorePage
             var id = Guid.Parse(Request.QueryString["CampusId"]);
             var campus = HomoryContext.Value.Department.First(o => o.Id == id);
             var corp = string.IsNullOrEmpty(campus.DingKey) ? new string[] { "", "" } : HomoryCryptor.Decrypt(campus.DingKey, "7U7x0keu+d5EbThVQZzgFlfdVelKNmqml2RRmSi3Y/4=", "l46OWQ3WRn4RBpAQpUZhDg==").Split(new char[] { ' ' });
-            panel.ResponseScripts.Add(string.Format("corp_id = '{0}'; corp_secret = '{1}'; check_corp(); load_depts();", corp[0], corp[1]));
+            panel.ResponseScripts.Add(string.Format("corp_id = '{0}'; corp_secret = '{1}'; check_corp(); do_dingding();", corp[0], corp[1]));
         }
     }
 
@@ -37,66 +37,48 @@ public partial class Extended_CampusSyncX : HomoryCorePage
 
     protected void panel_AjaxRequest(object sender, Telerik.Web.UI.AjaxRequestEventArgs e)
     {
-        dept_list_ding_copy.InnerText = e.Argument;
-        dept_grid_ding.Rebind();
-    }
 
-    protected void dept_grid_ding_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
-    {
-        var obj = Newtonsoft.Json.JsonConvert.DeserializeObject<List<DingDepartment>>(dept_list_ding_copy.InnerText);
-        dept_grid_ding.DataSource = obj;
-    }
-
-    protected void dept_grid_core_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
-    {
-        var id = Guid.Parse(Request.QueryString["CampusId"]);
-        dept_list_core.InnerText = Newtonsoft.Json.JsonConvert.SerializeObject(HomoryContext.Value.Department.Where(o => o.TopId == id && (o.Type == DepartmentType.部门 || o.Type == DepartmentType.学校) && o.State < State.审核).OrderBy(o => o.Type).ThenBy(o => o.Ordinal).ToList().Select(o =>
-        new CoreDepartment
-        {
-            id = o.Id.ToString().ToLower(),
-            name = o.DisplayName,
-            parentid = o.ParentId.HasValue ? o.ParentId.Value.ToString().ToLower() : "",
-            ordinal = o.Ordinal,
-            dingid = o.Type == DepartmentType.学校 ? "1" : o.DingKey,
-            ding = o.Type == DepartmentType.学校
-        }).ToList());
-        var obj = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CoreDepartment>>(dept_list_core.InnerText);
-        dept_grid_core.DataSource = obj;
     }
 
     protected void panel_depts_refresh_AjaxRequest(object sender, Telerik.Web.UI.AjaxRequestEventArgs e)
     {
+        grid.Rebind();
+        panel_depts_refresh.ResponseScripts.Add("start_dingding();");
+    }
 
-        var parts_x = e.Argument.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-        foreach (var part_s in parts_x)
+    protected void grid_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
+    {
+        var id = Guid.Parse(Request.QueryString["CampusId"]);
+        var source = HomoryContext.Value.ViewDingDing.Where(o => o.TopDepartmentId == id).OrderBy(o => o.Account).ThenBy(o => o.DingKey).ToList();
+        grid.DataSource = source;
+        var list = new List<DingUser>();
+        list.AddRange(source.Select(o => o.Account).Distinct().Select(o => new DingUser { userid = o }));
+        foreach (var x in list)
         {
-            var parts = part_s.Split(new char[] { '*' }, StringSplitOptions.RemoveEmptyEntries);
-            var id = Guid.Parse(parts[0]);
-            var dingid = parts[1];
-            var d = HomoryContext.Value.Department.First(o => o.Id == id);
-            d.DingKey = dingid;
-            d.Ding = true;
+            var first = source.First(o => o.Account == x.userid);
+            x.name = first.RealName;
+            x.mobile = first.Phone;
+            x.position = first.PerStaff;
+            x.department = source.Where(o => o.Account == x.userid).Select(o => int.Parse(o.DingKey)).ToArray();
+            x.orderInDepts = "{";
+            foreach (var key in x.department)
+            {
+                x.orderInDepts += key.ToString() + ":" + source.First(o => o.Account == x.userid && o.DingKey == key.ToString()).Ordinal + ",";
+            }
+            if (x.orderInDepts.Length > 1)
+                x.orderInDepts = x.orderInDepts.Substring(0, x.orderInDepts.Length - 1);
+            x.orderInDepts += "}";
         }
-        HomoryContext.Value.SaveChanges();
+        user_list.InnerText = Newtonsoft.Json.JsonConvert.SerializeObject(list);
     }
 
-    public class DingDepartment
+    public class DingUser
     {
-        public int id { get; set; }
+        public string userid { get; set; }
         public string name { get; set; }
-        public int parentid { get; set; }
-        public bool createDeptGroup { get; set; }
-        public bool autoAddUser { get; set; }
-        public bool core { get; set; }
-    }
-
-    public class CoreDepartment
-    {
-        public string id { get; set; }
-        public string name { get; set; }
-        public string parentid { get; set; }
-        public int ordinal { get; set; }
-        public string dingid { get; set; }
-        public bool ding { get; set; }
+        public int[] department { get; set; } 
+        public string orderInDepts { get; set; }
+        public string mobile { get; set; }
+        public string position { get; set; }
     }
 }

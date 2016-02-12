@@ -662,6 +662,25 @@
           <Property Name="RId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_BT.dbo.ViewDingDing”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="ViewDingDing">
+          <Key>
+            <PropertyRef Name="Account" />
+            <PropertyRef Name="RealName" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="PerStaff" />
+            <PropertyRef Name="TopDepartmentId" />
+            <PropertyRef Name="DingKey" />
+          </Key>
+          <Property Name="Account" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="PerStaff" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="TopDepartmentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ordinal" Type="int" />
+          <Property Name="DingKey" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“Platform_BT.dbo.ViewLearned”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewLearned">
           <Key>
@@ -1907,6 +1926,17 @@
     [View_ResourceAssess].[RId] AS [RId]
     FROM [dbo].[View_ResourceAssess] AS [View_ResourceAssess]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="ViewDingDing" EntityType="Self.ViewDingDing" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewDingDing].[Account] AS [Account], 
+    [ViewDingDing].[RealName] AS [RealName], 
+    [ViewDingDing].[Phone] AS [Phone], 
+    [ViewDingDing].[PerStaff] AS [PerStaff], 
+    [ViewDingDing].[TopDepartmentId] AS [TopDepartmentId], 
+    [ViewDingDing].[Ordinal] AS [Ordinal], 
+    [ViewDingDing].[DingKey] AS [DingKey]
+    FROM [dbo].[ViewDingDing] AS [ViewDingDing]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ViewLearned" EntityType="Self.ViewLearned" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewLearned].[DepartmentId] AS [DepartmentId], 
@@ -2723,6 +2753,7 @@
             <End Role="User" EntitySet="User" />
             <End Role="ResourceAudit" EntitySet="ResourceAudit" />
           </AssociationSet>
+          <EntitySet Name="ViewDingDing" EntityType="Homory.Model.ViewDingDing" />
         </EntityContainer>
         <EntityType Name="Application">
           <Key>
@@ -4764,6 +4795,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ViewDingDing">
+          <Key>
+            <PropertyRef Name="Account" />
+            <PropertyRef Name="RealName" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="PerStaff" />
+            <PropertyRef Name="TopDepartmentId" />
+            <PropertyRef Name="DingKey" />
+          </Key>
+          <Property Name="Account" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="RealName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="PerStaff" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="TopDepartmentId" Type="Guid" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" />
+          <Property Name="DingKey" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5754,6 +5802,19 @@
                 <ScalarProperty Name="AuditUser" ColumnName="AuditUser" />
                 <ScalarProperty Name="ResourceId" ColumnName="ResourceId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewDingDing">
+            <EntityTypeMapping TypeName="Homory.Model.ViewDingDing">
+              <MappingFragment StoreEntitySet="ViewDingDing">
+                <ScalarProperty Name="DingKey" ColumnName="DingKey" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="TopDepartmentId" ColumnName="TopDepartmentId" />
+                <ScalarProperty Name="PerStaff" ColumnName="PerStaff" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

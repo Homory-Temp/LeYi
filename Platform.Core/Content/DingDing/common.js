@@ -22,6 +22,9 @@ var url_department_remove = "https://oapi.dingtalk.com/department/delete?access_
 var url_department_edit = "https://oapi.dingtalk.com/department/update?access_token=";
 var url_department_list = "https://oapi.dingtalk.com/department/list";
 
+var url_user_get = "https://oapi.dingtalk.com/user/get?access_token=";
+var url_user_add = "https://oapi.dingtalk.com/user/create?access_token=";
+
 var access_token = "";
 
 var agent_id = "10612057";
