@@ -125,6 +125,8 @@
           <Property Name="BuildType" Type="int" Nullable="false" />
           <Property Name="ClassType" Type="int" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Ding" Type="bit" Nullable="false" />
+          <Property Name="DingKey" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="DepartmentUser">
           <Key>
@@ -306,7 +308,7 @@
           <Property Name="CampusId" Type="uniqueidentifier" />
           <Property Name="AssistantType" Type="int" Nullable="false" />
           <Property Name="Stick" Type="int" Nullable="false" />
-          <Property Name="ResourceTime" Type="date" Nullable="false" />
+          <Property Name="ResourceTime" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="ResourceAssess">
           <Key>
@@ -577,7 +579,7 @@
           <Property Name="State" Type="int" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ResourceMap”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ResourceMap”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ResourceMap">
           <Key>
             <PropertyRef Name="CatalogId" />
@@ -641,10 +643,10 @@
           <Property Name="CampusId" Type="uniqueidentifier" />
           <Property Name="AssistantType" Type="int" Nullable="false" />
           <Property Name="Stick" Type="int" Nullable="false" />
-          <Property Name="ResourceTime" Type="date" Nullable="false" />
+          <Property Name="ResourceTime" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.View_ResourceAssess”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.View_ResourceAssess”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="View_ResourceAssess">
           <Key>
             <PropertyRef Name="ResultContent" />
@@ -660,7 +662,7 @@
           <Property Name="RId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewLearned”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewLearned”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewLearned">
           <Key>
             <PropertyRef Name="DepartmentId" />
@@ -674,7 +676,7 @@
           <Property Name="Ordinal" Type="int" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewQueryOperation”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewQueryOperation”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewQueryOperation">
           <Key>
             <PropertyRef Name="Id" />
@@ -690,7 +692,7 @@
           <Property Name="姓名" Type="nvarchar" MaxLength="64" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewQueryResource”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewQueryResource”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewQueryResource">
           <Key>
             <PropertyRef Name="Id" />
@@ -728,7 +730,7 @@
           <Property Name="教师" Type="nvarchar" MaxLength="64" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewQuerySign”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewQuerySign”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewQuerySign">
           <Key>
             <PropertyRef Name="Id" />
@@ -752,7 +754,7 @@
           <Property Name="姓名" Type="nvarchar" MaxLength="64" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewQueryStudent”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewQueryStudent”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewQueryStudent">
           <Key>
             <PropertyRef Name="姓名" />
@@ -782,7 +784,7 @@
           <Property Name="联系号码" Type="nvarchar" MaxLength="64" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewQueryTaught”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewQueryTaught”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewQueryTaught">
           <Key>
             <PropertyRef Name="DepartmentId" />
@@ -804,7 +806,7 @@
           <Property Name="教师" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewQueryTeacher”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewQueryTeacher”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewQueryTeacher">
           <Key>
             <PropertyRef Name="姓名" />
@@ -836,7 +838,7 @@
           <Property Name="民族" Type="nvarchar" MaxLength="16" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewResource”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewResource”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewResource">
           <Key>
             <PropertyRef Name="RC" />
@@ -893,7 +895,7 @@
           <Property Name="AssistantType" Type="int" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewResourceX”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewResourceX”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewResourceX">
           <Key>
             <PropertyRef Name="CatalogId" />
@@ -950,7 +952,7 @@
           <Property Name="AssistantType" Type="int" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewRole”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewRole”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewRole">
           <Key>
             <PropertyRef Name="RoleId" />
@@ -967,7 +969,7 @@
           <Property Name="State" Type="int" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewStatistics”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewStatistics”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewStatistics">
           <Key>
             <PropertyRef Name="Type" />
@@ -980,7 +982,7 @@
           <Property Name="Type" Type="int" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewStudent”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewStudent”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewStudent">
           <Key>
             <PropertyRef Name="Id" />
@@ -1015,7 +1017,7 @@
           <Property Name="ParentId" Type="uniqueidentifier" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewTaught”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewTaught”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewTaught">
           <Key>
             <PropertyRef Name="DepartmentId" />
@@ -1033,7 +1035,7 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewTeacher”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewTeacher”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewTeacher">
           <Key>
             <PropertyRef Name="Id" />
@@ -1076,7 +1078,7 @@
           <Property Name="Type" Type="int" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewTeacherExport”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewTeacherExport”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewTeacherExport">
           <Key>
             <PropertyRef Name="账号" />
@@ -1104,7 +1106,7 @@
           <Property Name="民族" Type="nvarchar" MaxLength="16" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_LY.dbo.ViewTS”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+警告 6002: 表/视图“Platform_BT.dbo.ViewTS”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ViewTS">
           <Key>
             <PropertyRef Name="Id" />
@@ -3018,6 +3020,8 @@
           <Property Name="ClassType" Type="Homory.Model.ClassType" Nullable="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ding" Type="Boolean" Nullable="false" />
+          <Property Name="DingKey" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Department_DepartmentParent">
           <End Type="Homory.Model.Department" Role="Department" Multiplicity="0..1" />
@@ -3475,7 +3479,7 @@
           <Property Name="AssistantType" Type="Int32" Nullable="false" />
           <Property Name="CampusId" Type="Guid" />
           <Property Name="Stick" Type="Int32" Nullable="false" />
-          <Property Name="ResourceTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ResourceTime" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="ResourceAudit" Relationship="Homory.Model.FK_ResourceAudit_Resource" FromRole="Resource" ToRole="ResourceAudit" />
         </EntityType>
         <EntityType Name="ResourceCatalog">
@@ -4720,7 +4724,7 @@
           <Property Name="CampusId" Type="Guid" />
           <Property Name="AssistantType" Type="Int32" Nullable="false" />
           <Property Name="Stick" Type="Int32" Nullable="false" />
-          <Property Name="ResourceTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ResourceTime" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="AuditEditable" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ResourceAudit">
@@ -4876,6 +4880,8 @@
           <EntitySetMapping Name="Department">
             <EntityTypeMapping TypeName="Homory.Model.Department">
               <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DingKey" ColumnName="DingKey" />
+                <ScalarProperty Name="Ding" ColumnName="Ding" />
                 <ScalarProperty Name="AutoId" ColumnName="AutoId" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="ClassType" ColumnName="ClassType" />

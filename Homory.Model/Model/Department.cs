@@ -39,6 +39,8 @@ namespace Homory.Model
         public ClassType ClassType { get; set; }
         public string Code { get; set; }
         public int AutoId { get; set; }
+        public bool Ding { get; set; }
+        public string DingKey { get; set; }
     
         public virtual ICollection<Department> DepartmentChildren { get; set; }
         public virtual Department DepartmentParent { get; set; }

@@ -36,11 +36,17 @@ namespace Go
 					var state = Get(values, "State", State.启用);
                     var classType = Get(values, "ClassType", ClassType.其他);
                     var buildType = Get(values, "BuildType", BuildType.教育部门社会集体办);
-					switch (command.Type)
+                    var dingKey = Get(values, "DingKey", "");
+                    if (!string.IsNullOrEmpty(dingKey))
+                    {
+                        string __k, __s;
+                        dingKey = HomoryCryptor.Encrypt(dingKey, out __k, out __s);
+                    }
+                    switch (command.Type)
 					{
 						case GridBatchEditingCommandType.Insert:
                             var nid = HomoryContext.Value.GetId();
-                            HomoryContext.Value.Department.Add(new Homory.Model.Department
+                            var d = new Department
                             {
                                 Id = nid,
                                 Name = name,
@@ -53,8 +59,10 @@ namespace Go
                                 Code = code,
                                 BuildType = buildType,
                                 ClassType = classType,
-                                Type = DepartmentType.学校
-                            });
+                                Type = DepartmentType.学校,
+                                DingKey = dingKey
+                            };
+                            HomoryContext.Value.Department.Add(d);
                             try { DepartmentHelper.InsertCampus(nid.ToString().ToUpper(), name, ordinal); } catch { Notify(panel, "办公平台学校新增失败", "warn"); }
 							HomoryContext.Value.SaveChanges();
                             LogOp(OperationType.新增);
@@ -69,7 +77,8 @@ namespace Go
                                 Code = code,
 								State = state,
                                 BuildType = buildType,
-                                ClassType = classType
+                                ClassType = classType,
+                                DingKey = dingKey
                             });
                             try { DepartmentHelper.UpdateCampus(id.ToString().ToUpper(), name, ordinal, state); } catch { Notify(panel, "办公平台学校更新失败", "warn"); }
 							HomoryContext.Value.SaveChanges();

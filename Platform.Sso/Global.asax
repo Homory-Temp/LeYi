@@ -16,6 +16,7 @@
         RouteConfig.RegisterRoutes(RouteTable.Routes);
         var id = Guid.Parse("caace587-8c34-4075-8758-08d1af4862da");
         Application["Sso"] = HomoryContext.Value.Application.Single(o => o.Id == id).Home.Replace("Go/SignOn", "");
+        Application["Sso"] = "http://localhost:7545/";
     }
 
     void Application_End(object sender, EventArgs e)

@@ -118,7 +118,9 @@ namespace Go
                                 Type = DepartmentType.部门,
                                 Code = string.Empty,
                                 BuildType = BuildType.无,
-                                ClassType = ClassType.无
+                                ClassType = ClassType.无,
+                                DingKey = "",
+                                Ding = false
                             };
                             HomoryContext.Value.Department.Add(d);
                             try { DepartmentHelper.InsertDepartment(parentId.ToString().ToUpper(), d.Id.ToString().ToUpper(), name, ordinal); } catch { }

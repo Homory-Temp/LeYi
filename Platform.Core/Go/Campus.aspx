@@ -112,6 +112,25 @@
 									    </telerik:RadComboBox>
 								    </EditItemTemplate>
 							    </telerik:GridTemplateColumn>
+                                            <telerik:GridTemplateColumn HeaderText="钉钉密钥" DataField="DingKey" SortExpression="DingKey" UniqueName="DingKey">
+                                                <ItemTemplate>
+                                                    <asp:Label runat="server" Text='<%# Eval("DingKey") %>'></asp:Label>
+                                                </ItemTemplate>
+                                                <EditItemTemplate>
+                                                    <telerik:RadTextBox ID="DingKey" runat="server" EnabledStyle-HorizontalAlign="Center" Width="64" Text='<%# Bind("DingKey") %>'>
+                                                    </telerik:RadTextBox>
+                                                </EditItemTemplate>
+                                            </telerik:GridTemplateColumn>
+                                            <telerik:GridTemplateColumn HeaderText="钉钉部门同步" DataField="DingKey" SortExpression="DingSyncDept" UniqueName="DingSyncDept" ItemStyle-HorizontalAlign="Center">
+                                                <ItemTemplate>
+                                                    <asp:HyperLink runat="server" Text="同步部门" Target="_blank" NavigateUrl='<%# ((bool)Eval("Ding")) ? string.Format("~/Go/CampusSync.aspx?CampusId={0}", Eval("Id")) : "" %>' Style="cursor: pointer;"></asp:HyperLink>
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
+                                            <telerik:GridTemplateColumn HeaderText="钉钉用户同步" DataField="DingKey" SortExpression="DingSyncUser" UniqueName="DingSyncUser" ItemStyle-HorizontalAlign="Center">
+                                                <ItemTemplate>
+                                                    <asp:HyperLink runat="server" Text="同步用户" Target="_blank" NavigateUrl='<%# ((bool)Eval("Ding")) ? string.Format("~/Go/CampusSyncX.aspx?CampusId={0}", Eval("Id")) : "" %>' Style="cursor: pointer;"></asp:HyperLink>
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
 						    </Columns>
 					    </MasterTableView>
 				    </telerik:RadGrid>

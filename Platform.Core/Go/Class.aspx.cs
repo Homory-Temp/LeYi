@@ -264,7 +264,9 @@ namespace Go
                                 Type = DepartmentType.班级,
                                 Code = string.Empty,
                                 BuildType = BuildType.无,
-                                ClassType = ClassType.无
+                                ClassType = ClassType.无,
+                                Ding = false,
+                                DingKey = ""
                             });
                             HomoryContext.Value.SaveChanges();
                             LogOp(OperationType.新增);
