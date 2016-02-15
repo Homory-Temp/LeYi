@@ -8,8 +8,9 @@
         <Function Name="待办事项数量" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
-        <Function Name="未阅信息数量" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="待阅信息数量" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="未阅寻呼列表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
@@ -29,11 +30,12 @@
           <FunctionImport Name="待办事项数量" ReturnType="Collection(Int32)">
           <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="未阅信息数量" ReturnType="Collection(Int32)">
+          <FunctionImport Name="未阅寻呼列表" ReturnType="Collection(C6Model.未阅寻呼列表_Result)">
           <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="未阅寻呼列表" ReturnType="Collection(C6Model.未阅寻呼列表_Result)">
+          <FunctionImport Name="待阅信息数量" ReturnType="Collection(Int32)">
             <Parameter Name="LoginCode" Mode="In" Type="String" />
+            <Parameter Name="ModuleType" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="未阅寻呼列表_Result">
@@ -51,7 +53,6 @@
         <EntityContainerMapping StorageEntityContainer="C6ModelStoreContainer" CdmEntityContainer="C6Entities" >
           <FunctionImportMapping FunctionImportName="未阅寻呼数量" FunctionName="C6Model.Store.未阅寻呼数量" />
           <FunctionImportMapping FunctionImportName="待办事项数量" FunctionName="C6Model.Store.待办事项数量" />
-          <FunctionImportMapping FunctionImportName="未阅信息数量" FunctionName="C6Model.Store.未阅信息数量" />
           <FunctionImportMapping FunctionImportName="未阅寻呼列表" FunctionName="C6Model.Store.未阅寻呼列表">
             <ResultMapping>
               <ComplexTypeMapping TypeName="C6Model.未阅寻呼列表_Result">
@@ -63,6 +64,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="待阅信息数量" FunctionName="C6Model.Store.待阅信息数量" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -6,10 +6,16 @@
     <meta http-equiv="cache-control" content="no-cache" />
     <meta charset="utf-8" />
     <title>移动办公 - @ViewBag.Title</title>
+    <script src="~/Content/common.js"></script>
     <script src="~/Content/jquery/jquery.min.js"></script>
     <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
     <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <script>
+        corp_id = "@Platform.JHMobile.Models.Corp.corp_id";
+        corp_secret = "@Platform.JHMobile.Models.Corp.corp_secret";
+        corp_url = "@Platform.JHMobile.Models.Corp.corp_url";
+    </script>
 </head>
 <body>
     @RenderBody()

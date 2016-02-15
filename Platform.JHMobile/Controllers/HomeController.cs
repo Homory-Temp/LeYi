@@ -39,7 +39,14 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return RedirectToAction("Sso", "Home");
-            var list = new int[] { db.未阅寻呼数量(Account).Single().Value, db.未阅信息数量(Account).Single().Value, db.待办事项数量(Account).Single().Value };
+            var call = db.未阅寻呼数量(Account).Single().Value;
+            var message = 0;
+            foreach (var cm in Corp.corp_messages)
+            {
+                message += db.待阅信息数量(Account, cm).Single().Value;
+            }
+            var task = db.待办事项数量(Account).Single().Value;
+            var list = new int[] { call, message, task };
             return View(list);
         }
 

@@ -8,9 +8,7 @@
         Response.Redirect("~/Home/Home");
         return;
     }
-    var corp_id = "ding58d580673b412e33";
-    var corp_secret = "vcEKPEJuV7WdWdpL8RALe6pHBwPEkluO6fAQynZDVpYka3opAUgSqTvF-kFMT1ou";
-    var url_get_access_token = string.Format("https://oapi.dingtalk.com/gettoken?corpid={0}&corpsecret={1}", corp_id, corp_secret);
+    var url_get_access_token = string.Format("https://oapi.dingtalk.com/gettoken?corpid={0}&corpsecret={1}", Platform.JHMobile.Models.Corp.corp_id, Platform.JHMobile.Models.Corp.corp_secret);
     var request = HttpWebRequest.CreateHttp(url_get_access_token);
     var response = (HttpWebResponse)request.GetResponse();
     var stream = response.GetResponseStream();

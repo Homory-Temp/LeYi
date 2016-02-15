@@ -12,8 +12,7 @@
 
 <script>
     $(document).ready(function () {
-        var corp_id = "ding58d580673b412e33";
-        var corp_sso = "http://i.btedu.gov.cn/DingDing/Home/Index";
+        var corp_sso = corp_url + "Home/Index";
         top.location.href = "https://oapi.dingtalk.com/connect/oauth2/authorize?appid=" + corp_id + "&response_type=code&scope=snsapi_base&state=STATE&redirect_uri=" + encodeURIComponent(corp_sso);
     });
 </script>
