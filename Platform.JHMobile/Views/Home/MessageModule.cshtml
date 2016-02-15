@@ -1,0 +1,39 @@
+﻿@model List<Platform.JHMobile.Models.MessageApprove>
+@{
+    ViewBag.Title = Platform.JHMobile.Models.Corp.corp_messages[Model.First().ModuleTypeID.Value.ToString()];
+    var index = 0;
+}
+
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
+<script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    @foreach (var obj in Model)
+    {
+        index++;
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-8 text-left">
+                                <div>@obj.SendTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <div>@obj.SendUserCode</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">@Html.Raw(obj.MessageTitle)</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

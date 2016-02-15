@@ -27,6 +27,7 @@ namespace Platform.JHMobile.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<MessageApprove> MessageApprove { get; set; }
     
         public virtual ObjectResult<Nullable<int>> 未阅寻呼数量(string loginCode)
         {
@@ -66,6 +67,32 @@ namespace Platform.JHMobile.Models
                 new ObjectParameter("ModuleType", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("待阅信息数量", loginCodeParameter, moduleTypeParameter);
+        }
+    
+        public virtual ObjectResult<MessageApprove> 待阅信息列表(string loginCode, string moduleType)
+        {
+            var loginCodeParameter = loginCode != null ?
+                new ObjectParameter("LoginCode", loginCode) :
+                new ObjectParameter("LoginCode", typeof(string));
+    
+            var moduleTypeParameter = moduleType != null ?
+                new ObjectParameter("ModuleType", moduleType) :
+                new ObjectParameter("ModuleType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MessageApprove>("待阅信息列表", loginCodeParameter, moduleTypeParameter);
+        }
+    
+        public virtual ObjectResult<MessageApprove> 待阅信息列表(string loginCode, string moduleType, MergeOption mergeOption)
+        {
+            var loginCodeParameter = loginCode != null ?
+                new ObjectParameter("LoginCode", loginCode) :
+                new ObjectParameter("LoginCode", typeof(string));
+    
+            var moduleTypeParameter = moduleType != null ?
+                new ObjectParameter("ModuleType", moduleType) :
+                new ObjectParameter("ModuleType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MessageApprove>("待阅信息列表", mergeOption, loginCodeParameter, moduleTypeParameter);
         }
     }
 }
