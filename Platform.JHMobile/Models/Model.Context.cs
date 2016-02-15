@@ -54,5 +54,14 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("未阅信息数量", loginCodeParameter);
         }
+    
+        public virtual ObjectResult<未阅寻呼列表_Result> 未阅寻呼列表(string loginCode)
+        {
+            var loginCodeParameter = loginCode != null ?
+                new ObjectParameter("LoginCode", loginCode) :
+                new ObjectParameter("LoginCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<未阅寻呼列表_Result>("未阅寻呼列表", loginCodeParameter);
+        }
     }
 }

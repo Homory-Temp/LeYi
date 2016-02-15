@@ -11,6 +11,9 @@
         <Function Name="未阅信息数量" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="未阅寻呼列表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="未阅寻呼数量" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -24,12 +27,22 @@
           <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="待办事项数量" ReturnType="Collection(Int32)">
-            <Parameter Name="LoginCode" Mode="In" Type="String" />
+          <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="未阅信息数量" ReturnType="Collection(Int32)">
+          <Parameter Name="LoginCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="未阅寻呼列表" ReturnType="Collection(C6Model.未阅寻呼列表_Result)">
             <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="未阅寻呼列表_Result">
+          <Property Type="Int32" Name="CallNoSeeID" Nullable="false" />
+          <Property Type="Int32" Name="CallID" Nullable="false" />
+          <Property Type="DateTime" Name="CallTime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CallContent" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -39,6 +52,17 @@
           <FunctionImportMapping FunctionImportName="未阅寻呼数量" FunctionName="C6Model.Store.未阅寻呼数量" />
           <FunctionImportMapping FunctionImportName="待办事项数量" FunctionName="C6Model.Store.待办事项数量" />
           <FunctionImportMapping FunctionImportName="未阅信息数量" FunctionName="C6Model.Store.未阅信息数量" />
+          <FunctionImportMapping FunctionImportName="未阅寻呼列表" FunctionName="C6Model.Store.未阅寻呼列表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.未阅寻呼列表_Result">
+                <ScalarProperty Name="CallNoSeeID" ColumnName="CallNoSeeID" />
+                <ScalarProperty Name="CallID" ColumnName="CallID" />
+                <ScalarProperty Name="CallTime" ColumnName="CallTime" />
+                <ScalarProperty Name="CallContent" ColumnName="CallContent" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

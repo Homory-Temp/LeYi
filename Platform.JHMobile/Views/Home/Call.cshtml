@@ -1,9 +1,39 @@
-﻿@{
+﻿@model List<Platform.JHMobile.Models.未阅寻呼列表_Result>
+@{
     ViewBag.Title = "未阅寻呼";
+    var index = 0;
 }
 
 <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
 <script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
 
-123
+<div class="container">
+    @foreach (var obj in Model)
+    {
+        index++;
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-4 text-left">
+                                <div>@obj.UserName</div>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <div>@obj.CallTime</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">@Html.Raw(obj.CallContent)</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
