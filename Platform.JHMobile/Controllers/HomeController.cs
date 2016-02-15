@@ -39,7 +39,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Sso();
-            var list = new int[] { db.未阅寻呼数量(Account).Single().Value };
+            var list = new int[] { db.未阅寻呼数量(Account).Single().Value, db.未阅信息数量(Account).Single().Value, db.待办事项数量(Account).Single().Value };
             return View(list);
         }
     }

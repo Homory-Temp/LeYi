@@ -36,5 +36,23 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("未阅寻呼数量", loginCodeParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> 待办事项数量(string loginCode)
+        {
+            var loginCodeParameter = loginCode != null ?
+                new ObjectParameter("LoginCode", loginCode) :
+                new ObjectParameter("LoginCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("待办事项数量", loginCodeParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> 未阅信息数量(string loginCode)
+        {
+            var loginCodeParameter = loginCode != null ?
+                new ObjectParameter("LoginCode", loginCode) :
+                new ObjectParameter("LoginCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("未阅信息数量", loginCodeParameter);
+        }
     }
 }
