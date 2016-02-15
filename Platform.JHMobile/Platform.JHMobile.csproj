@@ -196,6 +196,7 @@
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\hammer-js\hammer.min.js" />
     <Content Include="Content\sb-admin-2\css\sb-admin-2.css" />
     <Content Include="Content\sb-admin-2\css\timeline.css" />
     <Content Include="Content\sb-admin-2\js\sb-admin-2.js" />

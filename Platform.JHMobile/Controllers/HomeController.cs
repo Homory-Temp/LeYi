@@ -84,16 +84,20 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return RedirectToAction("Sso", "Home");
-            var sp = RouteData.Values["id"].ToString().Split(new char[] { '.' });
+            var sp = RouteData.Values["id"].ToString().Split(new char[] { '_' });
             var type = sp[0];
             var count = db.待阅信息数量(Account, type).Single().Value;
             if (count == 0)
-                return RedirectToAction("Home", "Message");
+                return RedirectToAction("Message", "Home");
             var id = sp.Length == 1 ? 0 : int.Parse(sp[1]);
             var per = 10;
             if (count < id * per)
-                return RedirectToAction("Call", "Home", new { id = string.Format("{0}.{1}", type,  id - 1) });
+                return RedirectToAction("MessageModule", "Home", new { id = string.Format("{0}_{1}", type,  id - 1) });
             var list = db.待阅信息列表(Account, type).OrderByDescending(o => o.SendTime).Skip(id * per).Take(per).ToList();
+            ViewBag.Min = 0;
+            ViewBag.Max = count % per == 0 ? count / per - 1 : (count + (per - count % per)) / per - 1;
+            ViewBag.Current = id;
+            ViewBag.MMType = type;
             return View(list);
         }
     }
