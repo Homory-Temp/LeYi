@@ -42,5 +42,12 @@ namespace Platform.JHMobile.Controllers
             var list = new int[] { db.未阅寻呼数量(Account).Single().Value, db.未阅信息数量(Account).Single().Value, db.待办事项数量(Account).Single().Value };
             return View(list);
         }
+
+        public ActionResult Call()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return Sso();
+            return View();
+        }
     }
 }
