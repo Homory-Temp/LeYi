@@ -18,5 +18,6 @@ namespace Platform.JHMobile.Models
         public string UserName { get; set; }
         public Nullable<System.DateTime> SendTime { get; set; }
         public string MessageTitle { get; set; }
+        public Nullable<int> ModuleTypeID { get; set; }
     }
 }

@@ -15,6 +15,7 @@
           <Property Name="UserName" Type="varchar" MaxLength="50" />
           <Property Name="SendTime" Type="datetime" />
           <Property Name="MessageTitle" Type="varchar" MaxLength="1000" />
+          <Property Name="ModuleTypeID" Type="int" />
         </EntityType>
         <Function Name="待办事项数量" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
@@ -39,7 +40,8 @@
     [待阅信息列表_Result].[MessageID] AS [MessageID], 
     [待阅信息列表_Result].[UserName] AS [UserName], 
     [待阅信息列表_Result].[SendTime] AS [SendTime], 
-    [待阅信息列表_Result].[MessageTitle] AS [MessageTitle]
+    [待阅信息列表_Result].[MessageTitle] AS [MessageTitle], 
+    [待阅信息列表_Result].[ModuleTypeID] AS [ModuleTypeID]
     FROM [dbo].[待阅信息列表_Result] AS [待阅信息列表_Result]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -82,6 +84,7 @@
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SendTime" Type="DateTime" Precision="3" />
           <Property Name="MessageTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ModuleTypeID" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -107,6 +110,7 @@
           <EntitySetMapping Name="待阅信息列表_Result">
             <EntityTypeMapping TypeName="C6Model.待阅信息列表_Result">
               <MappingFragment StoreEntitySet="待阅信息列表_Result">
+                <ScalarProperty Name="ModuleTypeID" ColumnName="ModuleTypeID" />
                 <ScalarProperty Name="MessageTitle" ColumnName="MessageTitle" />
                 <ScalarProperty Name="SendTime" ColumnName="SendTime" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />

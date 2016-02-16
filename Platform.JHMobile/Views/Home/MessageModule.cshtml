@@ -7,7 +7,6 @@
 <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
 <script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
-<script src="~/Content/hammer-js/hammer.min.js"></script>
 
 <div id="root" class="container">
     <div class="row">&nbsp;</div>
@@ -23,7 +22,7 @@
                                 <div>@obj.SendTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
                             </div>
                             <div class="col-xs-4 text-right">
-                                <div>@obj.SendUserCode</div>
+                                <div>@obj.UserName</div>
                             </div>
                         </div>
                     </div>
@@ -56,5 +55,9 @@
         if (current < max){
             window.location = corp_url + 'Home/MessageModule/' + mm_type + "_" + (current + 1);
         }
+    });
+
+    hammer_time.on("doubletap", function (e) {
+        window.location = corp_url + 'Home/Message';
     });
 </script>
