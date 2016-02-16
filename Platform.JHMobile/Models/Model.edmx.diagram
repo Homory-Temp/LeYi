@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="aadbc532e27242e59ea8c7b4bf712193" Name="Diagram1" >
-        <EntityTypeShape EntityType="C6Model.MessageApprove" Width="1.5" PointX="0.75" PointY="0.75" />
+      <Diagram DiagramId="aadbc532e27242e59ea8c7b4bf712193" Name="Diagram1" ZoomLevel="66" >
+        <EntityTypeShape EntityType="C6Model.待阅信息列表_Result" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

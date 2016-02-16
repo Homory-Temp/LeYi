@@ -5,62 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="C6Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="MessageApprove">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“C6.dbo.待阅信息列表_Result”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="待阅信息列表_Result">
           <Key>
             <PropertyRef Name="MessageID" />
           </Key>
           <Property Name="MessageID" Type="int" Nullable="false" />
-          <Property Name="ModuleTypeID" Type="int" />
-          <Property Name="ModuleTypeName" Type="varchar" MaxLength="50" />
-          <Property Name="MessageTitle" Type="varchar" MaxLength="1000" />
-          <Property Name="BeginTime" Type="datetime" />
-          <Property Name="EndTime" Type="datetime" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
           <Property Name="SendTime" Type="datetime" />
-          <Property Name="SendUserCode" Type="varchar" MaxLength="50" />
-          <Property Name="MessageHTML" Type="text" />
-          <Property Name="MessageFileName" Type="varchar" MaxLength="500" />
-          <Property Name="FileType" Type="varchar" MaxLength="50" />
-          <Property Name="KeyWord" Type="varchar" MaxLength="50" />
-          <Property Name="IsPhoto" Type="int" />
-          <Property Name="PhotoId" Type="int" />
-          <Property Name="MessageArea" Type="text" />
-          <Property Name="MessageType" Type="varchar" MaxLength="100" />
-          <Property Name="IsScroll" Type="int" />
-          <Property Name="ScrollDay" Type="int" />
-          <Property Name="Instancy" Type="int" />
-          <Property Name="Attendment" Type="varchar" MaxLength="20" />
-          <Property Name="Number" Type="int" />
-          <Property Name="ApproveFLag" Type="int" />
-          <Property Name="Field01" Type="varchar" MaxLength="200" />
-          <Property Name="Field02" Type="varchar" MaxLength="200" />
-          <Property Name="Field03" Type="varchar" MaxLength="200" />
-          <Property Name="Field04" Type="varchar" MaxLength="200" />
-          <Property Name="Field05" Type="varchar" MaxLength="200" />
-          <Property Name="Field06" Type="varchar" MaxLength="200" />
-          <Property Name="Field07" Type="varchar" MaxLength="200" />
-          <Property Name="Field08" Type="varchar" MaxLength="200" />
-          <Property Name="Field09" Type="varchar" MaxLength="200" />
-          <Property Name="Field10" Type="varchar" MaxLength="200" />
-          <Property Name="Field11" Type="varchar" MaxLength="200" />
-          <Property Name="Field12" Type="varchar" MaxLength="200" />
-          <Property Name="Field13" Type="varchar" MaxLength="200" />
-          <Property Name="Field14" Type="varchar" MaxLength="8000" />
-          <Property Name="Field15" Type="varchar" MaxLength="8000" />
-          <Property Name="Field16" Type="varchar" MaxLength="200" />
-          <Property Name="Field17" Type="varchar" MaxLength="200" />
-          <Property Name="Field18" Type="varchar" MaxLength="200" />
-          <Property Name="Field19" Type="varchar" MaxLength="200" />
-          <Property Name="Field20" Type="varchar" MaxLength="200" />
-          <Property Name="DelFlag" Type="int" />
-          <Property Name="PublishOut" Type="int" />
-          <Property Name="ImportGrade" Type="int" />
-          <Property Name="PublishDept" Type="varchar" MaxLength="50" />
-          <Property Name="ApproveTime" Type="datetime" />
-          <Property Name="ApproveMan" Type="varchar" MaxLength="50" />
-          <Property Name="Anonymity" Type="int" />
-          <Property Name="selquarters" Type="varchar" MaxLength="8000" />
-          <Property Name="seldept" Type="varchar" MaxLength="8000" />
-          <Property Name="IsCopy" Type="int" />
+          <Property Name="MessageTitle" Type="varchar" MaxLength="1000" />
         </EntityType>
         <Function Name="待办事项数量" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
@@ -80,7 +34,14 @@
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
         <EntityContainer Name="C6ModelStoreContainer">
-          <EntitySet Name="MessageApprove" EntityType="Self.MessageApprove" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="待阅信息列表_Result" EntityType="Self.待阅信息列表_Result" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [待阅信息列表_Result].[MessageID] AS [MessageID], 
+    [待阅信息列表_Result].[UserName] AS [UserName], 
+    [待阅信息列表_Result].[SendTime] AS [SendTime], 
+    [待阅信息列表_Result].[MessageTitle] AS [MessageTitle]
+    FROM [dbo].[待阅信息列表_Result] AS [待阅信息列表_Result]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -100,11 +61,11 @@
             <Parameter Name="LoginCode" Mode="In" Type="String" />
             <Parameter Name="ModuleType" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="待阅信息列表" EntitySet="MessageApprove" ReturnType="Collection(C6Model.MessageApprove)">
+          <FunctionImport Name="待阅信息列表" EntitySet="待阅信息列表_Result" ReturnType="Collection(C6Model.待阅信息列表_Result)">
             <Parameter Name="LoginCode" Mode="In" Type="String" />
             <Parameter Name="ModuleType" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="MessageApprove" EntityType="C6Model.MessageApprove" />
+          <EntitySet Name="待阅信息列表_Result" EntityType="C6Model.待阅信息列表_Result" />
         </EntityContainer>
         <ComplexType Name="未阅寻呼列表_Result">
           <Property Type="Int32" Name="CallNoSeeID" Nullable="false" />
@@ -113,62 +74,14 @@
           <Property Type="String" Name="CallContent" Nullable="true" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="MessageApprove">
+        <EntityType Name="待阅信息列表_Result">
           <Key>
             <PropertyRef Name="MessageID" />
           </Key>
           <Property Name="MessageID" Type="Int32" Nullable="false" />
-          <Property Name="ModuleTypeID" Type="Int32" />
-          <Property Name="ModuleTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MessageTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="BeginTime" Type="DateTime" Precision="3" />
-          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SendTime" Type="DateTime" Precision="3" />
-          <Property Name="SendUserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MessageHTML" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="MessageFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="FileType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="KeyWord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IsPhoto" Type="Int32" />
-          <Property Name="PhotoId" Type="Int32" />
-          <Property Name="MessageArea" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="MessageType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IsScroll" Type="Int32" />
-          <Property Name="ScrollDay" Type="Int32" />
-          <Property Name="Instancy" Type="Int32" />
-          <Property Name="Attendment" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Number" Type="Int32" />
-          <Property Name="ApproveFLag" Type="Int32" />
-          <Property Name="Field01" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field02" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field03" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field04" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field05" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field06" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field07" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field08" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field09" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field10" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field11" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field12" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field13" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field14" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
-          <Property Name="Field15" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
-          <Property Name="Field16" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field17" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field18" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field19" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Field20" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="DelFlag" Type="Int32" />
-          <Property Name="PublishOut" Type="Int32" />
-          <Property Name="ImportGrade" Type="Int32" />
-          <Property Name="PublishDept" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ApproveTime" Type="DateTime" Precision="3" />
-          <Property Name="ApproveMan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Anonymity" Type="Int32" />
-          <Property Name="selquarters" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
-          <Property Name="seldept" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
-          <Property Name="IsCopy" Type="Int32" />
+          <Property Name="MessageTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -191,60 +104,12 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="待阅信息数量" FunctionName="C6Model.Store.待阅信息数量" />
           <FunctionImportMapping FunctionImportName="待阅信息列表" FunctionName="C6Model.Store.待阅信息列表" />
-          <EntitySetMapping Name="MessageApprove">
-            <EntityTypeMapping TypeName="C6Model.MessageApprove">
-              <MappingFragment StoreEntitySet="MessageApprove">
-                <ScalarProperty Name="IsCopy" ColumnName="IsCopy" />
-                <ScalarProperty Name="seldept" ColumnName="seldept" />
-                <ScalarProperty Name="selquarters" ColumnName="selquarters" />
-                <ScalarProperty Name="Anonymity" ColumnName="Anonymity" />
-                <ScalarProperty Name="ApproveMan" ColumnName="ApproveMan" />
-                <ScalarProperty Name="ApproveTime" ColumnName="ApproveTime" />
-                <ScalarProperty Name="PublishDept" ColumnName="PublishDept" />
-                <ScalarProperty Name="ImportGrade" ColumnName="ImportGrade" />
-                <ScalarProperty Name="PublishOut" ColumnName="PublishOut" />
-                <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
-                <ScalarProperty Name="Field20" ColumnName="Field20" />
-                <ScalarProperty Name="Field19" ColumnName="Field19" />
-                <ScalarProperty Name="Field18" ColumnName="Field18" />
-                <ScalarProperty Name="Field17" ColumnName="Field17" />
-                <ScalarProperty Name="Field16" ColumnName="Field16" />
-                <ScalarProperty Name="Field15" ColumnName="Field15" />
-                <ScalarProperty Name="Field14" ColumnName="Field14" />
-                <ScalarProperty Name="Field13" ColumnName="Field13" />
-                <ScalarProperty Name="Field12" ColumnName="Field12" />
-                <ScalarProperty Name="Field11" ColumnName="Field11" />
-                <ScalarProperty Name="Field10" ColumnName="Field10" />
-                <ScalarProperty Name="Field09" ColumnName="Field09" />
-                <ScalarProperty Name="Field08" ColumnName="Field08" />
-                <ScalarProperty Name="Field07" ColumnName="Field07" />
-                <ScalarProperty Name="Field06" ColumnName="Field06" />
-                <ScalarProperty Name="Field05" ColumnName="Field05" />
-                <ScalarProperty Name="Field04" ColumnName="Field04" />
-                <ScalarProperty Name="Field03" ColumnName="Field03" />
-                <ScalarProperty Name="Field02" ColumnName="Field02" />
-                <ScalarProperty Name="Field01" ColumnName="Field01" />
-                <ScalarProperty Name="ApproveFLag" ColumnName="ApproveFLag" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Attendment" ColumnName="Attendment" />
-                <ScalarProperty Name="Instancy" ColumnName="Instancy" />
-                <ScalarProperty Name="ScrollDay" ColumnName="ScrollDay" />
-                <ScalarProperty Name="IsScroll" ColumnName="IsScroll" />
-                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
-                <ScalarProperty Name="MessageArea" ColumnName="MessageArea" />
-                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
-                <ScalarProperty Name="IsPhoto" ColumnName="IsPhoto" />
-                <ScalarProperty Name="KeyWord" ColumnName="KeyWord" />
-                <ScalarProperty Name="FileType" ColumnName="FileType" />
-                <ScalarProperty Name="MessageFileName" ColumnName="MessageFileName" />
-                <ScalarProperty Name="MessageHTML" ColumnName="MessageHTML" />
-                <ScalarProperty Name="SendUserCode" ColumnName="SendUserCode" />
-                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <EntitySetMapping Name="待阅信息列表_Result">
+            <EntityTypeMapping TypeName="C6Model.待阅信息列表_Result">
+              <MappingFragment StoreEntitySet="待阅信息列表_Result">
                 <ScalarProperty Name="MessageTitle" ColumnName="MessageTitle" />
-                <ScalarProperty Name="ModuleTypeName" ColumnName="ModuleTypeName" />
-                <ScalarProperty Name="ModuleTypeID" ColumnName="ModuleTypeID" />
+                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="MessageID" ColumnName="MessageID" />
               </MappingFragment>
             </EntityTypeMapping>
