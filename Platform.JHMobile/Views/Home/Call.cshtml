@@ -40,6 +40,21 @@
 
 <script>
     var hammer_time = new Hammer(document.getElementById("root"));
+    var min = @ViewBag.Min;
+    var max = @ViewBag.Max;
+    var current = @ViewBag.Current;
+
+    hammer_time.on("swipeleft", function(e) {
+        if (current > min){
+            window.location = corp_url + 'Home/Call/' + (current - 1);
+        }
+    });
+
+    hammer_time.on("swiperight", function (e) {
+        if (current < max){
+            window.location = corp_url + 'Home/Call/' + (current + 1);
+        }
+    });
 
     hammer_time.on("doubletap", function (e) {
         window.location = corp_url + 'Home/Home';

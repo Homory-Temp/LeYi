@@ -62,6 +62,9 @@ namespace Platform.JHMobile.Controllers
             if (count < id * per)
                 return RedirectToAction("Call", "Home", new { id = id - 1 });
             var list = db.未阅寻呼列表(Account).OrderByDescending(o => o.CallTime).Skip(id * per).Take(per).ToList();
+            ViewBag.Min = 0;
+            ViewBag.Max = count % per == 0 ? count / per - 1 : (count + (per - count % per)) / per - 1;
+            ViewBag.Current = id;
             return View(list);
         }
 
