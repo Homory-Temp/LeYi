@@ -103,5 +103,15 @@ namespace Platform.JHMobile.Controllers
             ViewBag.MMType = type;
             return View(list);
         }
+
+        public ActionResult MessagePreview()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return RedirectToAction("Sso", "Home");
+            var id = RouteData.Values["id"].ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("Message", "Home");
+            return View();
+        }
     }
 }
