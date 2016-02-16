@@ -13,8 +13,8 @@
     @foreach (var obj in Model)
     {
         index++;
-        <div class="row" onclick="@("window.location = corp_url + 'Home/MessagePreview/" + obj.MessageID + "';")">
-            <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-10 col-sm-10 col-xs-10">
                 <div class="panel panel-green">
                     <div class="panel-heading">
                         <div class="row">
@@ -33,6 +33,9 @@
                         </div>
                     </a>
                 </div>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-2" onclick="@("window.location = corp_url + 'Home/MessagePreview/" + obj.MessageID + "';")">
+                <i class="fa fa-envelope fa-2x text-green ma-top-7"></i>
             </div>
         </div>
     }

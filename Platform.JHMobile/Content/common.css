@@ -6,3 +6,11 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+.text-green {
+    color: #5cb85c;
+}
+
+.ma-top-7 {
+    margin-top: 7px;
+}
