@@ -8,7 +8,7 @@
 <link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
 <script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
 
-<div id="root" class="container">
+<div class="container">
     <div class="row">&nbsp;</div>
     <div class="row">
         @foreach (var mo in Model)
@@ -40,9 +40,7 @@
 </div>
 
 <script>
-    var hammer_time = new Hammer(document.getElementById("root"));
-
-    hammer_time.on("doubletap", function (e) {
+    function back() {
         window.location = corp_url + 'Home/Home';
-    });
+    }
 </script>

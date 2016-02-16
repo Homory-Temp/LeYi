@@ -8,7 +8,7 @@
 <link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
 <script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
 
-<div id="root" class="container">
+<div class="container">
     <div class="row">&nbsp;</div>
     @foreach (var obj in Model)
     {
@@ -42,25 +42,24 @@
 </div>
 
 <script>
-    var hammer_time = new Hammer(document.getElementById("root"));
     var min = @ViewBag.Min;
     var max = @ViewBag.Max;
     var current = @ViewBag.Current;
     var mm_type = @ViewBag.MMType;
 
-    hammer_time.on("swipeleft", function(e) {
+    function previous() {
         if (current > min){
             window.location = corp_url + 'Home/MessageModule/' + mm_type + "_" + (current - 1);
         }
-    });
+    }
 
-    hammer_time.on("swiperight", function (e) {
+    function next() {
         if (current < max){
             window.location = corp_url + 'Home/MessageModule/' + mm_type + "_" + (current + 1);
         }
-    });
+    }
 
-    hammer_time.on("doubletap", function (e) {
+    function back() {
         window.location = corp_url + 'Home/Message';
-    });
+    }
 </script>
