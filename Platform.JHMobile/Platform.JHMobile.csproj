@@ -192,6 +192,7 @@
     <Content Include="Content\bootstrap\js\umd\tab.js" />
     <Content Include="Content\bootstrap\js\umd\tooltip.js" />
     <Content Include="Content\bootstrap\js\umd\util.js" />
+    <Content Include="Content\common.css" />
     <Content Include="Content\common.js" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
