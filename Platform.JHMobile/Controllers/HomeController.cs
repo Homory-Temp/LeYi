@@ -111,7 +111,8 @@ namespace Platform.JHMobile.Controllers
             var id = RouteData.Values["id"].ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("Message", "Home");
-            return View();
+            var message = db.待阅信息详情(id).FirstOrDefault();
+            return View(message);
         }
     }
 }

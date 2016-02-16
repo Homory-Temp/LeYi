@@ -94,5 +94,14 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<待阅信息列表_Result>("待阅信息列表", mergeOption, loginCodeParameter, moduleTypeParameter);
         }
+    
+        public virtual ObjectResult<待阅信息详情_Result> 待阅信息详情(string messageId)
+        {
+            var messageIdParameter = messageId != null ?
+                new ObjectParameter("MessageId", messageId) :
+                new ObjectParameter("MessageId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<待阅信息详情_Result>("待阅信息详情", messageIdParameter);
+        }
     }
 }
