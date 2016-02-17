@@ -10,6 +10,30 @@
 
 <div class="container">
     <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+        </div>
+        <div class="col-xs-8 text-right">
+            @{
+                if (ViewBag.Min < ViewBag.Current)
+                {
+                    <div class="btn btn-primary" type="button" onclick="previous();">
+                        <i class="fa fa-arrow-left fa-lg"></i>
+                    </div>
+                }
+                if (ViewBag.Current < ViewBag.Max)
+                {
+                    <div class="btn btn-primary" type="button" onclick="next();">
+                        <i class="fa fa-arrow-right fa-lg"></i>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
     @foreach (var obj in Model)
     {
         index++;
@@ -36,6 +60,30 @@
             </div>
         </div>
     }
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+        </div>
+        <div class="col-xs-8 text-right">
+            @{
+                if (ViewBag.Min < ViewBag.Current)
+                {
+                    <div class="btn btn-primary" type="button" onclick="previous();">
+                        <i class="fa fa-arrow-left fa-lg"></i>
+                    </div>
+                }
+                if (ViewBag.Current < ViewBag.Max)
+                {
+                    <div class="btn btn-primary" type="button" onclick="next();">
+                        <i class="fa fa-arrow-right fa-lg"></i>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
 </div>
 
 <script>
