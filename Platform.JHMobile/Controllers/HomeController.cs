@@ -78,7 +78,7 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("Call", "Home");
             var int_id = int.Parse(id);
-            var obj = db.未阅寻呼列表(Account).Single(o => o.CallNoSeeID == int_id);
+            var obj = db.未阅寻呼列表(Account).FirstOrDefault(o => o.CallNoSeeID == int_id);
             var query = db.未阅寻呼附件(obj.CallID.ToString()).OrderBy(o => o.SlaveID);
             var list = query == null ? new List<未阅寻呼附件_Result>() : query.ToList();
             var result = new CallObject();
