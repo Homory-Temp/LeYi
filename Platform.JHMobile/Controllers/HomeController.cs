@@ -113,6 +113,21 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("Message", "Home");
             var message = db.待阅信息详情(id).FirstOrDefault();
+            var name = message.MessageFileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+            var dir = new DirectoryInfo(Server.MapPath("~/Resource/MessageFile"));
+            ViewBag.Path = "";
+            foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+            {
+                if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                {
+                    string path = dir + "\\" + cDir.Name + "\\" + name;
+                    var converted = ConvertDoc(path);
+                    if (!string.IsNullOrEmpty(converted))
+                    {
+                        ViewBag.PDF = converted;
+                    }
+                }
+            }
             return View(message);
         }
 
