@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model Platform.JHMobile.Models.CallObject
 @{
     ViewBag.Title = "未阅寻呼详情";
 }
@@ -28,13 +28,13 @@
     <div class="row">&nbsp;</div>
     <div class="row">
         <div class="col-md-12"><div class="btn btn-primary">发送人员</div></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Obj.UserName</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.UserName</div>
         <div class="col-md-12"><div class="btn btn-primary">发送时间</div></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Obj.CallTime</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.CallTime</div>
         <div class="col-md-12"><div class="btn btn-primary">寻呼内容</div></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Obj.CallContent</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.CallContent</div>
         @{
-            if (Model.Value.Count > 0)
+            if (Model.List.Count > 0)
             {
                 <div class="col-md-12"><div class="btn btn-primary">寻呼附件</div></div>
                 foreach (var file in Model.List)
@@ -62,6 +62,6 @@
     }
 
     function read() {
-        window.location = corp_url + 'Home/CallRead/@Model.Obj.CallNoSeeID';
+        window.location = corp_url + 'Home/CallRead/@Model.Object.CallNoSeeID';
     }
 </script>

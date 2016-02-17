@@ -81,8 +81,8 @@ namespace Platform.JHMobile.Controllers
             var obj = db.未阅寻呼列表(Account).Single(o => o.CallNoSeeID == int_id);
             var query = db.未阅寻呼附件(obj.CallID.ToString()).OrderBy(o => o.SlaveID);
             var list = query == null ? new List<未阅寻呼附件_Result>() : query.ToList();
-            dynamic result = new ExpandoObject();
-            result.Obj = obj;
+            var result = new CallObject();
+            result.Object = obj;
             result.List = list;
             return View(result);
         }
