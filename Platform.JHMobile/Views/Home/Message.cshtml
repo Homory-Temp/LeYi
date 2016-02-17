@@ -11,36 +11,41 @@
 <div class="container">
     <div class="row">&nbsp;</div>
     <div class="row">
-        <div class="col-md-2"><div class="btn btn-danger btn-circle"><i class="fa fa-home"></i></div></div>
+        <div class="col-xs-6">
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+        </div>
     </div>
     <div class="row">&nbsp;</div>
     <div class="row">
         @foreach (var mo in Model)
         {
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-green" onclick="@(mo.MessageCount == 0 ? "" : "window.location = corp_url + 'Home/MessageModule/" + mo.ModuleTypeId + "';")">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-envelope fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">@mo.MessageCount</div>
-                                <div>@mo.ModuleTypeName</div>
-                            </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary" onclick="@(mo.MessageCount == 0 ? "" : "window.location = corp_url + 'Home/MessageModule/" + mo.ModuleTypeId + "';")">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-envelope fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">@mo.MessageCount</div>
+                            <div>@mo.ModuleTypeName</div>
                         </div>
                     </div>
-                    <a>
-                        <div class="panel-footer">
-                            <span class="pull-left"></span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
                 </div>
+                <a>
+                    <div class="panel-footer">
+                        <span class="pull-left"></span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
             </div>
+        </div>
         }
     </div>
+    <div class="row">&nbsp;</div>
 </div>
 
 <script>

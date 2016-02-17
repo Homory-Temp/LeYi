@@ -10,12 +10,39 @@
 
 <div class="container">
     <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="btn btn-warning" type="button" onclick="home();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-envelope fa-lg"></i>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            @{
+                if (ViewBag.Min < ViewBag.Current)
+                {
+                    <div class="btn btn-primary" type="button" onclick="previous();">
+                        <i class="fa fa-backward fa-lg"></i>
+                    </div>
+                }
+                if (ViewBag.Current < ViewBag.Max)
+                {
+                    <div class="btn btn-primary" type="button" onclick="next();">
+                        <i class="fa fa-forward fa-lg"></i>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
     @foreach (var obj in Model)
     {
         index++;
         <div class="row" onclick="@("window.location = corp_url + 'Home/MessagePreview/" + obj.MessageID + "';")">
             <div class="col-md-12">
-                <div class="panel panel-green">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-8 text-left">
@@ -36,6 +63,33 @@
             </div>
         </div>
     }
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="btn btn-warning" type="button" onclick="home();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-envelope fa-lg"></i>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            @{
+                if (ViewBag.Min < ViewBag.Current)
+                {
+                    <div class="btn btn-primary" type="button" onclick="previous();">
+                        <i class="fa fa-backward fa-lg"></i>
+                    </div>
+                }
+                if (ViewBag.Current < ViewBag.Max)
+                {
+                    <div class="btn btn-primary" type="button" onclick="next();">
+                        <i class="fa fa-forward fa-lg"></i>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
 </div>
 
 <script>
@@ -58,5 +112,9 @@
 
     function back() {
         window.location = corp_url + 'Home/Message';
+    }
+
+    function home() {
+        window.location = corp_url + 'Home/Home';
     }
 </script>
