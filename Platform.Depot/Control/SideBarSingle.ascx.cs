@@ -60,8 +60,13 @@ public partial class Control_SideBarSingle : DepotControlSingle
     {
         if (Depot.Featured(DepotType.固定资产库))
             return false;
-        var source = DataContext.DepotObjectLoadFix(Depot.Id).ToList();
-        return source.Count(o => CountTotal(o) > CountDone(o)) > 0;
+        //var source = DataContext.DepotObjectLoadFix(Depot.Id).ToList();
+        //foreach (var s in source)
+        //{
+        //    if (CountTotal(s) > CountDone(s))
+        //        return true;
+        //}
+        return true;
     }
 
     public string Crumb

@@ -1,6 +1,7 @@
 ﻿using Platform.JHMobile.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -113,6 +114,41 @@ namespace Platform.JHMobile.Controllers
                 return RedirectToAction("Message", "Home");
             var message = db.待阅信息详情(id).FirstOrDefault();
             return View(message);
+        }
+
+        private string ConvertDoc(string doc)
+        {
+            if (string.IsNullOrEmpty(doc))
+                return null;
+            var file = new FileInfo(doc);
+            if (!file.Exists)
+                return null;
+            var suffix = file.Extension.Replace(".", "").ToLower();
+            var path = string.Format("{0}.pdf", file.FullName.Substring(0, file.FullName.LastIndexOf('.')));
+            var newFile = new FileInfo(path);
+            if (newFile.Exists)
+                return path;
+            switch (suffix)
+            {
+                case "doc":
+                case "docx":
+                case "txt":
+                case "rtf":
+                    var docW = new Aspose.Words.Document(file.FullName);
+                    docW.Save(path, Aspose.Words.SaveFormat.Pdf);
+                    return path;
+                case "ppt":
+                case "pptx":
+                    var docP = new Aspose.Slides.Presentation(file.FullName);
+                    docP.Save(path, Aspose.Slides.Export.SaveFormat.Pdf);
+                    return path;
+                case "xls":
+                case "xlsx":
+                    var docE = new Aspose.Cells.Workbook(file.FullName);
+                    docE.Save(path, Aspose.Cells.SaveFormat.Pdf);
+                    return path;
+                default: return null;
+            }
         }
     }
 }
