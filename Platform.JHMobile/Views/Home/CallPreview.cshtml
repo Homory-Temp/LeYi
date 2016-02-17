@@ -1,4 +1,4 @@
-﻿@model KeyValuePair<Platform.JHMobile.Models.未阅寻呼列表_Result, List<Platform.JHMobile.Models.未阅寻呼附件_Result>>
+﻿@model dynamic
 @{
     ViewBag.Title = "未阅寻呼详情";
 }
@@ -28,21 +28,26 @@
     <div class="row">&nbsp;</div>
     <div class="row">
         <div class="col-md-12"><div class="btn btn-primary">发送人员</div></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Key.UserName</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Obj.UserName</div>
         <div class="col-md-12"><div class="btn btn-primary">发送时间</div></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Key.CallTime</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Obj.CallTime</div>
         <div class="col-md-12"><div class="btn btn-primary">寻呼内容</div></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Key.CallContent</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Obj.CallContent</div>
         @{
             if (Model.Value.Count > 0)
             {
                 <div class="col-md-12"><div class="btn btn-primary">寻呼附件</div></div>
-                foreach (var file in Model.Value)
+                foreach (var file in Model.List)
                 {
                     <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@file.SlaveName</div>
                 }
             }
         }
+        <div class="col-md-12 text-right">
+            <div class="btn btn-warning" type="button" onclick="back();">
+                已阅
+            </div>
+        </div>
     </div>
     <div class="row">&nbsp;</div>
 </div>
@@ -54,5 +59,9 @@
 
     function home() {
         window.location = corp_url + 'Home/Home';
+    }
+
+    function read() {
+        window.location = corp_url + 'Home/CallRead/@Model.Obj.CallNoSeeID';
     }
 </script>

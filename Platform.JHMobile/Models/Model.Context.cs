@@ -112,5 +112,14 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<未阅寻呼附件_Result>("未阅寻呼附件", callIDParameter);
         }
+    
+        public virtual int 未阅寻呼已阅(Nullable<int> callNoSeeId)
+        {
+            var callNoSeeIdParameter = callNoSeeId.HasValue ?
+                new ObjectParameter("CallNoSeeId", callNoSeeId) :
+                new ObjectParameter("CallNoSeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("未阅寻呼已阅", callNoSeeIdParameter);
+        }
     }
 }

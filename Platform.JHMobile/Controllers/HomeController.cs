@@ -1,6 +1,7 @@
 ﻿using Platform.JHMobile.Models;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -80,7 +81,22 @@ namespace Platform.JHMobile.Controllers
             var obj = db.未阅寻呼列表(Account).Single(o => o.CallNoSeeID == int_id);
             var query = db.未阅寻呼附件(obj.CallID.ToString()).OrderBy(o => o.SlaveID);
             var list = query == null ? new List<未阅寻呼附件_Result>() : query.ToList();
-            return View(new KeyValuePair<未阅寻呼列表_Result, List<未阅寻呼附件_Result>>(obj, list));
+            dynamic result = new ExpandoObject();
+            result.Obj = obj;
+            result.List = list;
+            return View(result);
+        }
+
+        public ActionResult CallRead()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return RedirectToAction("Sso", "Home");
+            var id = RouteData.Values["id"].ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("Call", "Home");
+            var int_id = int.Parse(id);
+            db.未阅寻呼已阅(int_id);
+            return RedirectToAction("Call", "Home");
         }
 
         public ActionResult Message()

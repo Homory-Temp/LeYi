@@ -40,6 +40,9 @@
         <Function Name="未阅寻呼数量" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="未阅寻呼已阅" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CallNoSeeId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="C6ModelStoreContainer">
           <EntitySet Name="待阅信息列表_Result" EntityType="Self.待阅信息列表_Result" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -78,7 +81,10 @@
           <Parameter Name="MessageId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="未阅寻呼附件" ReturnType="Collection(C6Model.未阅寻呼附件_Result)">
-            <Parameter Name="CallID" Mode="In" Type="String" />
+          <Parameter Name="CallID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="未阅寻呼已阅">
+            <Parameter Name="CallNoSeeId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="未阅寻呼列表_Result">
@@ -168,6 +174,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="未阅寻呼已阅" FunctionName="C6Model.Store.未阅寻呼已阅" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
