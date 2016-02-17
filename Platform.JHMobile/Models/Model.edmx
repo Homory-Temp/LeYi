@@ -31,6 +31,9 @@
         <Function Name="待阅信息详情" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MessageId" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="未阅寻呼附件" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CallID" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="未阅寻呼列表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -72,7 +75,10 @@
           </FunctionImport>
           <EntitySet Name="待阅信息列表_Result" EntityType="C6Model.待阅信息列表_Result" />
           <FunctionImport Name="待阅信息详情" ReturnType="Collection(C6Model.待阅信息详情_Result)">
-            <Parameter Name="MessageId" Mode="In" Type="String" />
+          <Parameter Name="MessageId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="未阅寻呼附件" ReturnType="Collection(C6Model.未阅寻呼附件_Result)">
+            <Parameter Name="CallID" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="未阅寻呼列表_Result">
@@ -102,6 +108,10 @@
           <Property Type="String" Name="FileType" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="MessageType" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="未阅寻呼附件_Result">
+          <Property Type="String" Name="SlaveID" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SlaveName" Nullable="false" MaxLength="1000" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -147,6 +157,14 @@
                 <ScalarProperty Name="FileType" ColumnName="FileType" />
                 <ScalarProperty Name="MessageType" ColumnName="MessageType" />
                 <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="未阅寻呼附件" FunctionName="C6Model.Store.未阅寻呼附件">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.未阅寻呼附件_Result">
+                <ScalarProperty Name="SlaveID" ColumnName="SlaveID" />
+                <ScalarProperty Name="SlaveName" ColumnName="SlaveName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

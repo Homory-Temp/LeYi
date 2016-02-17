@@ -69,6 +69,19 @@ namespace Platform.JHMobile.Controllers
             return View(list);
         }
 
+        public ActionResult CallPreview()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return RedirectToAction("Sso", "Home");
+            var id = RouteData.Values["id"].ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("Call", "Home");
+            var int_id = int.Parse(id);
+            var obj = db.未阅寻呼列表(Account).Single(o => o.CallNoSeeID == int_id);
+            var list = db.未阅寻呼附件(obj.CallID.ToString()).OrderBy(o => o.SlaveID).ToList();
+            return View(new KeyValuePair<未阅寻呼列表_Result, List<未阅寻呼附件_Result>>(obj, list));
+        }
+
         public ActionResult Message()
         {
             if (string.IsNullOrEmpty(Account))

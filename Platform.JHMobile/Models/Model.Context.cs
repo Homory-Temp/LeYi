@@ -103,5 +103,14 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<待阅信息详情_Result>("待阅信息详情", messageIdParameter);
         }
+    
+        public virtual ObjectResult<未阅寻呼附件_Result> 未阅寻呼附件(string callID)
+        {
+            var callIDParameter = callID != null ?
+                new ObjectParameter("CallID", callID) :
+                new ObjectParameter("CallID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<未阅寻呼附件_Result>("未阅寻呼附件", callIDParameter);
+        }
     }
 }

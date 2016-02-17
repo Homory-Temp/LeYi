@@ -1,0 +1,58 @@
+﻿@model KeyValuePair<Platform.JHMobile.Models.未阅寻呼列表_Result, List<Platform.JHMobile.Models.未阅寻呼附件_Result>>
+@{
+    ViewBag.Title = "未阅寻呼详情";
+}
+
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
+<script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
+<style>
+    .col-md-12 {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="btn btn-warning" type="button" onclick="home();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-comments fa-lg"></i>
+            </div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-md-12"><div class="btn btn-primary">发送人员</div></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Key.UserName</div>
+        <div class="col-md-12"><div class="btn btn-primary">发送时间</div></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Key.CallTime</div>
+        <div class="col-md-12"><div class="btn btn-primary">寻呼内容</div></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Key.CallContent</div>
+        @{
+            if (Model.Value.Count > 0)
+            {
+                <div class="col-md-12"><div class="btn btn-primary">寻呼附件</div></div>
+                foreach (var file in Model.Value)
+                {
+                    <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@file.SlaveName</div>
+                }
+            }
+        }
+    </div>
+    <div class="row">&nbsp;</div>
+</div>
+
+<script>
+    function back() {
+        window.location = corp_url + 'Home/Call';
+    }
+
+    function home() {
+        window.location = corp_url + 'Home/Home';
+    }
+</script>

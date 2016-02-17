@@ -37,7 +37,7 @@
     @foreach (var obj in Model)
     {
         index++;
-        <div class="row">
+        <div class="row" onclick="@("window.location = corp_url + 'Home/CallPreview/" + obj.CallNoSeeID + "';")">
             <div class="col-md-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
