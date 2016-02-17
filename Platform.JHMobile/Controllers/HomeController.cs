@@ -78,7 +78,8 @@ namespace Platform.JHMobile.Controllers
                 return RedirectToAction("Call", "Home");
             var int_id = int.Parse(id);
             var obj = db.未阅寻呼列表(Account).Single(o => o.CallNoSeeID == int_id);
-            var list = db.未阅寻呼附件(obj.CallID.ToString()).OrderBy(o => o.SlaveID).ToList();
+            var query = db.未阅寻呼附件(obj.CallID.ToString()).OrderBy(o => o.SlaveID);
+            var list = query == null ? new List<未阅寻呼附件_Result>() : query.ToList();
             return View(new KeyValuePair<未阅寻呼列表_Result, List<未阅寻呼附件_Result>>(obj, list));
         }
 
