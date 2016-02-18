@@ -52,8 +52,7 @@
                     </div>
                     <a>
                         <div class="panel-footer">
-                            <span class="pull-left">名称：@Html.Raw(obj.AppO_Title)</span>
-                            <span class="pull-left">类型：@Html.Raw(obj.TEM_Name)</span>
+                            <span class="pull-left">@Html.Raw(obj.TEM_Name)@(Html.Raw(string.IsNullOrEmpty(obj.AppO_Title) ? "" : " - " + obj.AppO_Title))</span>
                             <div class="clearfix"></div>
                         </div>
                     </a>
