@@ -525,7 +525,7 @@
     <Content Include="Views\Home\MessageModule.cshtml" />
     <Content Include="Views\Home\MessagePreview.cshtml" />
     <Content Include="Views\Home\CallPreview.cshtml" />
-    <None Include="Views\Home\Task.cshtml" />
+    <Content Include="Views\Home\Task.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
