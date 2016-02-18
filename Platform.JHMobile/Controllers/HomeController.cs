@@ -155,7 +155,7 @@ namespace Platform.JHMobile.Controllers
             var dir = new DirectoryInfo(Server.MapPath("~/Resource/MessageFile"));
             ViewBag.Path = "";
             var time = db.待阅信息已阅(message.MessageID, Account, false).FirstOrDefault();
-            ViewBag.ReadTime = time;
+            ViewBag.ReadTime = time.HasValue ? time.Value : DateTime.Now;
             ViewBag.Read = time.HasValue;
             ViewBag.ModuleTypeID = message.ModuleTypeID;
             foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
