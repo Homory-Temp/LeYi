@@ -32,7 +32,7 @@
         <div class="col-md-12"><div class="btn btn-primary">发送时间</div></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.CallTime</div>
         <div class="col-md-12"><div class="btn btn-primary">寻呼内容</div></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.CallContent</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.Raw(Model.Object.CallContent)</div>
         @{
             if (Model.List.Count > 0)
             {
