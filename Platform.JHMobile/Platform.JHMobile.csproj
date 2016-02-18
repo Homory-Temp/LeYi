@@ -167,6 +167,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\待办事项列表_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\待阅信息列表_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -522,6 +525,7 @@
     <Content Include="Views\Home\MessageModule.cshtml" />
     <Content Include="Views\Home\MessagePreview.cshtml" />
     <Content Include="Views\Home\CallPreview.cshtml" />
+    <None Include="Views\Home\Task.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

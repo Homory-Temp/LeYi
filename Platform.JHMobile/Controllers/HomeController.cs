@@ -186,6 +186,24 @@ namespace Platform.JHMobile.Controllers
             return RedirectToAction("MessageModule", "Home", new { id = m });
         }
 
+        public ActionResult Task()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return RedirectToAction("Sso", "Home");
+            var count = db.待办事项数量(Account).Single().Value;
+            if (count == 0)
+                return RedirectToAction("Home", "Home");
+            var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
+            var per = 10;
+            if (count < id * per)
+                return RedirectToAction("Task", "Home", new { id = id - 1 });
+            var list = db.待办事项列表(Account).OrderByDescending(o => o.Sub_Time).Skip(id * per).Take(per).ToList();
+            ViewBag.Min = 0;
+            ViewBag.Max = count % per == 0 ? count / per - 1 : (count + (per - count % per)) / per - 1;
+            ViewBag.Current = id;
+            return View(list);
+        }
+
         private string ConvertDoc(string doc)
         {
             if (string.IsNullOrEmpty(doc))

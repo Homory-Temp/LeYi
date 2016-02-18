@@ -1,0 +1,109 @@
+﻿@model List<Platform.JHMobile.Models.待办事项列表_Result>
+@{
+    ViewBag.Title = "待办事项";
+    var index = 0;
+}
+
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
+<script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            @{
+                if (ViewBag.Min < ViewBag.Current)
+                {
+                    <div class="btn btn-primary" type="button" onclick="previous();">
+                        <i class="fa fa-backward fa-lg"></i>
+                    </div>
+                }
+                if (ViewBag.Current < ViewBag.Max)
+                {
+                    <div class="btn btn-primary" type="button" onclick="next();">
+                        <i class="fa fa-forward fa-lg"></i>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    @foreach (var obj in Model)
+    {
+        index++;
+        <div class="row" onclick="@("window.location = corp_url + 'Home/TaskGo/" + obj.App_ID + "';")">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-8 text-left">
+                                <div>@obj.Sub_Time.ToString("yyyy-MM-dd HH:mm:ss")</div>
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <div>@obj.UserName</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a>
+                        <div class="panel-footer">
+                            <span class="pull-left">@Html.Raw(obj.AppO_Title)</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            @{
+                if (ViewBag.Min < ViewBag.Current)
+                {
+                    <div class="btn btn-primary" type="button" onclick="previous();">
+                        <i class="fa fa-backward fa-lg"></i>
+                    </div>
+                }
+                if (ViewBag.Current < ViewBag.Max)
+                {
+                    <div class="btn btn-primary" type="button" onclick="next();">
+                        <i class="fa fa-forward fa-lg"></i>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+</div>
+
+<script>
+    var min = @ViewBag.Min;
+    var max = @ViewBag.Max;
+    var current = @ViewBag.Current;
+
+    function previous() {
+        if (current > min){
+            window.location = corp_url + 'Home/Task/' + (current - 1);
+        }
+    }
+
+    function next() {
+        if (current < max){
+            window.location = corp_url + 'Home/Task/' + (current + 1);
+        }
+    }
+
+    function back() {
+        window.location = corp_url + 'Home/Home';
+    }
+</script>

@@ -138,5 +138,14 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.DateTime>>("待阅信息已阅", messageIdParameter, userIdParameter, commitReadParameter);
         }
+    
+        public virtual ObjectResult<待办事项列表_Result> 待办事项列表(string loginCode)
+        {
+            var loginCodeParameter = loginCode != null ?
+                new ObjectParameter("LoginCode", loginCode) :
+                new ObjectParameter("LoginCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<待办事项列表_Result>("待办事项列表", loginCodeParameter);
+        }
     }
 }
