@@ -113,6 +113,15 @@ namespace Platform.JHMobile.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<未阅寻呼附件_Result>("未阅寻呼附件", callIDParameter);
         }
     
+        public virtual ObjectResult<待阅信息详情_Result> 待阅信息详情(Nullable<int> messageId)
+        {
+            var messageIdParameter = messageId.HasValue ?
+                new ObjectParameter("MessageId", messageId) :
+                new ObjectParameter("MessageId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<待阅信息详情_Result>("待阅信息详情", messageIdParameter);
+        }
+    
         public virtual ObjectResult<Nullable<System.DateTime>> 待阅信息已阅(Nullable<int> messageId, string userId, Nullable<bool> commitRead)
         {
             var messageIdParameter = messageId.HasValue ?
@@ -128,15 +137,6 @@ namespace Platform.JHMobile.Models
                 new ObjectParameter("CommitRead", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.DateTime>>("待阅信息已阅", messageIdParameter, userIdParameter, commitReadParameter);
-        }
-    
-        public virtual ObjectResult<待阅信息详情_Result> 待阅信息详情(Nullable<int> messageId)
-        {
-            var messageIdParameter = messageId.HasValue ?
-                new ObjectParameter("MessageId", messageId) :
-                new ObjectParameter("MessageId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<待阅信息详情_Result>("待阅信息详情", messageIdParameter);
         }
     }
 }

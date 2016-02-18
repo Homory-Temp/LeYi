@@ -88,13 +88,13 @@
           <FunctionImport Name="未阅寻呼附件" ReturnType="Collection(C6Model.未阅寻呼附件_Result)">
           <Parameter Name="CallID" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="待阅信息详情" ReturnType="Collection(C6Model.待阅信息详情_Result)">
+          <Parameter Name="MessageId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="待阅信息已阅" ReturnType="Collection(DateTime)">
             <Parameter Name="MessageId" Mode="In" Type="Int32" />
             <Parameter Name="UserId" Mode="In" Type="String" />
             <Parameter Name="CommitRead" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="待阅信息详情" ReturnType="Collection(C6Model.待阅信息详情_Result)">
-            <Parameter Name="MessageId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="未阅寻呼列表_Result">
@@ -173,7 +173,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="待阅信息已阅" FunctionName="C6Model.Store.待阅信息已阅" />
           <FunctionImportMapping FunctionImportName="待阅信息详情" FunctionName="C6Model.Store.待阅信息详情">
             <ResultMapping>
               <ComplexTypeMapping TypeName="C6Model.待阅信息详情_Result">
@@ -190,6 +189,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="待阅信息已阅" FunctionName="C6Model.Store.待阅信息已阅" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
