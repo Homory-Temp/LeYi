@@ -39,7 +39,7 @@
                 <div class="col-md-12"><div class="btn btn-primary">寻呼附件</div></div>
                 foreach (var file in Model.List)
                 {
-                    <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@file.SlaveName</div>
+                    <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="@(Platform.JHMobile.Models.Corp.corp_url + file.FilePath.Substring(3).Replace("__", "h__"))">@file.SlaveName</a></div>
                 }
             }
         }

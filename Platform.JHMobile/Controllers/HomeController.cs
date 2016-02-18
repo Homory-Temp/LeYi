@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -81,6 +82,12 @@ namespace Platform.JHMobile.Controllers
             var obj = db.未阅寻呼列表(Account).FirstOrDefault(o => o.CallNoSeeID == int_id);
             var query = db.未阅寻呼附件(obj.CallID.ToString()).OrderBy(o => o.SlaveID);
             var list = query == null ? new List<未阅寻呼附件_Result>() : query.ToList();
+            foreach (var path in list)
+            {
+                var source = Corp.corp_c6 + path.FilePath.Substring(3).Replace("/", "\\");
+                var destination = source.Replace("__", "h__");
+                DecryptFile(source, destination);
+            }
             var result = new CallObject();
             result.Object = obj;
             result.List = list;
@@ -194,6 +201,28 @@ namespace Platform.JHMobile.Controllers
                     return path;
                 default: return null;
             }
+        }
+
+        private void DecryptFile(string path, string output)
+        {
+            try
+            {
+                var aes = new AES();
+                aes.CreateKey(Encoding.Default.GetBytes("12345678123456781234567812345678"), Encoding.Default.GetBytes("1234567812345678"));
+                if (!System.IO.File.Exists(path))
+                    return;
+                var stream = System.IO.File.OpenRead(path);
+                var length = stream.Length;
+                byte[] bytes = new byte[Convert.ToInt32(length.ToString())];
+                stream.Read(bytes, 0, (int)bytes.Length);
+                stream.Close();
+                bytes = aes.Decrypt(bytes);
+                var stream_x = new FileStream(output, FileMode.Create, FileAccess.Write);
+                stream_x.Write(bytes, 0, (int)bytes.Length);
+                stream_x.Close();
+            }
+            catch
+            { }
         }
     }
 }

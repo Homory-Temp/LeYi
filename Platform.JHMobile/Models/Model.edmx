@@ -80,11 +80,11 @@
           <FunctionImport Name="待阅信息详情" ReturnType="Collection(C6Model.待阅信息详情_Result)">
           <Parameter Name="MessageId" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="未阅寻呼附件" ReturnType="Collection(C6Model.未阅寻呼附件_Result)">
-          <Parameter Name="CallID" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="未阅寻呼已阅">
-            <Parameter Name="CallNoSeeId" Mode="In" Type="Int32" />
+          <Parameter Name="CallNoSeeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="未阅寻呼附件" ReturnType="Collection(C6Model.未阅寻呼附件_Result)">
+            <Parameter Name="CallID" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="未阅寻呼列表_Result">
@@ -118,6 +118,7 @@
         <ComplexType Name="未阅寻呼附件_Result">
           <Property Type="String" Name="SlaveID" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="SlaveName" Nullable="false" MaxLength="1000" />
+          <Property Type="String" Name="FilePath" Nullable="false" MaxLength="500" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -166,15 +167,16 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="未阅寻呼已阅" FunctionName="C6Model.Store.未阅寻呼已阅" />
           <FunctionImportMapping FunctionImportName="未阅寻呼附件" FunctionName="C6Model.Store.未阅寻呼附件">
             <ResultMapping>
               <ComplexTypeMapping TypeName="C6Model.未阅寻呼附件_Result">
                 <ScalarProperty Name="SlaveID" ColumnName="SlaveID" />
                 <ScalarProperty Name="SlaveName" ColumnName="SlaveName" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="未阅寻呼已阅" FunctionName="C6Model.Store.未阅寻呼已阅" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

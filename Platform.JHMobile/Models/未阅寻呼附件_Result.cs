@@ -15,5 +15,6 @@ namespace Platform.JHMobile.Models
     {
         public string SlaveID { get; set; }
         public string SlaveName { get; set; }
+        public string FilePath { get; set; }
     }
 }
