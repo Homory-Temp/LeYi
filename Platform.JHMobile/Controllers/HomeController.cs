@@ -149,10 +149,15 @@ namespace Platform.JHMobile.Controllers
             var id = RouteData.Values["id"].ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("Message", "Home");
-            var message = db.待阅信息详情(id).FirstOrDefault();
+            var int_id = int.Parse(id);
+            var message = db.待阅信息详情(int_id).FirstOrDefault();
             var name = message.MessageFileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
             var dir = new DirectoryInfo(Server.MapPath("~/Resource/MessageFile"));
             ViewBag.Path = "";
+            var time = db.待阅信息已阅(message.MessageID, Account, false).FirstOrDefault();
+            ViewBag.ReadTime = time;
+            ViewBag.Read = time.HasValue;
+            ViewBag.ModuleTypeID = message.ModuleTypeID;
             foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
             {
                 if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
@@ -166,6 +171,19 @@ namespace Platform.JHMobile.Controllers
                 }
             }
             return View(message);
+        }
+
+        public ActionResult MessageRead()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return RedirectToAction("Sso", "Home");
+            var id = RouteData.Values["id"].ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("Message", "Home");
+            var int_id = int.Parse(id);
+            var m = db.待阅信息详情(int_id).FirstOrDefault();
+            db.待阅信息已阅(int_id, Account, true);
+            return RedirectToAction("MessageModule", "Home", new { id = string.Format("{0}", m.ModuleTypeID) });
         }
 
         private string ConvertDoc(string doc)

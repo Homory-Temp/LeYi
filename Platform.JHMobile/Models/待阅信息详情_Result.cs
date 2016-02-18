@@ -14,6 +14,7 @@ namespace Platform.JHMobile.Models
     public partial class 待阅信息详情_Result
     {
         public int MessageID { get; set; }
+        public Nullable<int> ModuleTypeID { get; set; }
         public string MessageTitle { get; set; }
         public Nullable<System.DateTime> SendTime { get; set; }
         public string UserName { get; set; }
