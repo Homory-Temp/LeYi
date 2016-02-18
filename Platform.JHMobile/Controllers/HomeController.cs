@@ -181,9 +181,9 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("Message", "Home");
             var int_id = int.Parse(id);
-            var m = db.待阅信息详情(int_id).FirstOrDefault();
+            var m = db.待阅信息详情(int_id).FirstOrDefault().ModuleTypeID.Value;
             db.待阅信息已阅(int_id, Account, true);
-            return RedirectToAction("MessageModule", "Home", new { id = string.Format("{0}", m.ModuleTypeID) });
+            return RedirectToAction("MessageModule", "Home", new { id = m });
         }
 
         private string ConvertDoc(string doc)
