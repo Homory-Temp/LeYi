@@ -34,5 +34,6 @@ namespace Platform.JHMobile.Models
         public string Status { get; set; }
         public string Version { get; set; }
         public string Form_ID { get; set; }
+        public string TEM_Name { get; set; }
     }
 }

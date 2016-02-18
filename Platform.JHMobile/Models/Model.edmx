@@ -159,6 +159,7 @@
           <Property Type="String" Name="Status" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Version" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Form_ID" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="TEM_Name" Nullable="false" MaxLength="256" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -243,6 +244,7 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="Form_ID" ColumnName="Form_ID" />
+                <ScalarProperty Name="TEM_Name" ColumnName="TEM_Name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
