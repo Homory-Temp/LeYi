@@ -526,6 +526,7 @@
     <Content Include="Views\Home\MessagePreview.cshtml" />
     <Content Include="Views\Home\CallPreview.cshtml" />
     <Content Include="Views\Home\Task.cshtml" />
+    <Content Include="Views\Home\TaskGo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

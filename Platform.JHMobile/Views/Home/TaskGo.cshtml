@@ -1,0 +1,60 @@
+﻿@model Platform.JHMobile.Models.待办事项列表_Result
+@{
+    ViewBag.Title = "待办事项办理";
+}
+
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
+<script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="btn btn-warning" type="button" onclick="home();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-envelope fa-lg"></i>
+            </div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-md-12">
+            AppD_ID: @Model.AppD_ID<br />
+            AppO_ID: @Model.AppO_ID<br />
+            AppO_Title: @Model.AppO_Title<br />
+            AppO_Values: @Model.AppO_Values<br />
+            AppT_Flag: @Model.AppT_Flag<br />
+            AppT_ID: @Model.AppT_ID<br />
+            App_FatherID: @Model.App_FatherID<br />
+            App_Flag: @Model.App_Flag<br />
+            App_ID: @Model.App_ID<br />
+            App_IdeaFlag: @Model.App_IdeaFlag<br />
+            App_InnerIdea: @Model.App_InnerIdea<br />
+            App_Order: @Model.App_Order<br />
+            App_OrderSub: @Model.App_OrderSub<br />
+            Form_ID: @Model.Form_ID<br />
+            Instance_ID: @Model.Instance_ID<br />
+            Status: @Model.Status<br />
+            Sub_Code: @Model.Sub_Code<br />
+            Sub_Time: @Model.Sub_Time<br />
+            Template_ID: @Model.Template_ID<br />
+            TEM_Name: @Model.TEM_Name<br />
+            UserName: @Model.UserName<br />
+            Version: @Model.Version
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+</div>
+
+<script>
+    function back() {
+        window.location = corp_url + 'Home/Task';
+    }
+
+    function home() {
+        window.location = corp_url + 'Home/Home';
+    }
+</script>

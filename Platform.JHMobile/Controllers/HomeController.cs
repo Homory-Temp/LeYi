@@ -204,6 +204,18 @@ namespace Platform.JHMobile.Controllers
             return View(list);
         }
 
+        public ActionResult TaskGo()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return RedirectToAction("Sso", "Home");
+            var id = RouteData.Values["id"].ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("Task", "Home");
+            var int_id = int.Parse(id);
+            var obj = db.待办事项列表(Account).FirstOrDefault(o => o.App_ID == int_id);
+            return View(obj);
+        }
+
         private string ConvertDoc(string doc)
         {
             if (string.IsNullOrEmpty(doc))
