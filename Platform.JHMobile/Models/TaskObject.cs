@@ -11,5 +11,6 @@ namespace Platform.JHMobile.Models
         public string Type { get; set; }
         public string Title { get; set; }
         public string Step { get; set; }
+        public string Template { get; set; }
     }
 }

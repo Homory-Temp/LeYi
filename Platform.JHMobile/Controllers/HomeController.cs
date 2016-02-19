@@ -213,7 +213,8 @@ namespace Platform.JHMobile.Controllers
                 return RedirectToAction("Task", "Home");
             var int_id = int.Parse(id);
             var app = db.待办事项详情(Account, int_id).FirstOrDefault();
-            var obj = new TaskObject { Title = app.AppO_Title, Type = app.TEM_Name, Step = app.AppD_Name };
+            var obj = new TaskObject { Title = app.AppO_Title, Type = app.TEM_Name, Step = app.AppD_Name, Template = app.AppT_ID };
+            var sql = "SELECT * FROM __HomoryFlow WHERE MainID = 'JHC00065023'";
             return View(obj);
         }
 
