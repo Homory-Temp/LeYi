@@ -212,7 +212,7 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("Task", "Home");
             var int_id = int.Parse(id);
-            var obj = db.待办事项列表(Account).FirstOrDefault(o => o.App_ID == int_id);
+            var obj = new TaskObject();
             return View(obj);
         }
 

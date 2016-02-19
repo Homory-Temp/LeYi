@@ -151,6 +151,7 @@
     <Compile Include="Models\AES.cs" />
     <Compile Include="Models\CallObject.cs" />
     <Compile Include="Models\Corp.cs" />
+    <Compile Include="Models\TaskObject.cs" />
     <Compile Include="Models\MessageObject.cs" />
     <Compile Include="Models\Model.Context.cs">
       <AutoGen>True</AutoGen>

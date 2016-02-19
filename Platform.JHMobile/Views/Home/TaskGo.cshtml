@@ -1,4 +1,4 @@
-﻿@model Platform.JHMobile.Models.待办事项列表_Result
+﻿@model Platform.JHMobile.Models.TaskObject
 @{
     ViewBag.Title = "待办事项办理";
 }
@@ -21,13 +21,19 @@
     </div>
     <div class="row">&nbsp;</div>
     <div class="row">
-        <div class="col-md-12">
-            AppO_Title: @Model.AppO_Title<br />
-            App_ID: @Model.App_ID<br />
-            Sub_Code: @Model.Sub_Code<br />
-            Sub_Time: @Model.Sub_Time<br />
-            TEM_Name: @Model.TEM_Name<br />
-            UserName: @Model.UserName<br />
+        <div class="col-md-12"><div class="btn btn-primary">流程标题</div></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Title</div>
+        <div class="col-md-12"><div class="btn btn-primary">当前步骤</div></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Step</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="btn btn-warning" type="button" onclick="home();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-envelope fa-lg"></i>
+            </div>
         </div>
     </div>
     <div class="row">&nbsp;</div>
