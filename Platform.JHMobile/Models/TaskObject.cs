@@ -8,6 +8,7 @@ namespace Platform.JHMobile.Models
 {
     public class TaskObject
     {
+        public string Type { get; set; }
         public string Title { get; set; }
         public string Step { get; set; }
     }

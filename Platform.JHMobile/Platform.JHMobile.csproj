@@ -171,6 +171,9 @@
     <Compile Include="Models\待办事项列表_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\待办事项详情_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\待阅信息列表_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
