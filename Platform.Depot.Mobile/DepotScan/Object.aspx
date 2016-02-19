@@ -20,6 +20,13 @@
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
+    <script>
+        function sg(sender, e) {
+            if (e.get_keyCode() == 13) {
+                $("#scanAdd").click();
+            }
+        }
+    </script>
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
@@ -31,7 +38,7 @@
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <telerik:RadTextBox runat="server" ID="scan" Width="200" EmptyMessage="请扫描二维码" MaxLength="12"></telerik:RadTextBox>
+                    <telerik:RadTextBox runat="server" ID="scan" Width="200" EmptyMessage="请扫描二维码" MaxLength="12" ClientEvents-OnKeyPress="sg"></telerik:RadTextBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="button" class="btn btn-tumblr" id="scanAdd" runat="server" value="查询" title="物资查询" onserverclick="scanAdd_ServerClick" />
                 </div>
