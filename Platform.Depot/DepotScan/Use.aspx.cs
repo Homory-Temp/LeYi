@@ -153,8 +153,15 @@ public partial class DepotScan_Use : DepotPageSingle
             var obj = inx.DepotObject;
             var isVirtual = Depot.Featured(DepotType.固定资产库);
             var catalogId = DataContext.DepotObjectCatalog.Single(o => o.ObjectId == obj.Id && o.IsVirtual == isVirtual && o.IsLeaf == true).CatalogId;
-            InMemoryUse use = new InMemoryUse { Age = inx.Age, Amount = 1, CatalogId = catalogId, Note = "", ObjectId = obj.Id, Place = inx.Place, Ordinals = new List<int>() };
-            list.Add(use);
+            if (list.Count(o => o.ObjectId == obj.Id) > 0)
+            {
+                list.First(o => o.ObjectId == obj.Id).Amount++;
+            }
+            else
+            {
+                InMemoryUse use = new InMemoryUse { Age = inx.Age, Amount = 1, CatalogId = catalogId, Note = "", ObjectId = obj.Id, Place = inx.Place, Ordinals = new List<int>() };
+                list.Add(use);
+            }
         }
         else if (code.StartsWith("S"))
         {
@@ -167,13 +174,25 @@ public partial class DepotScan_Use : DepotPageSingle
             var obj = inx.DepotObject;
             var isVirtual = Depot.Featured(DepotType.固定资产库);
             var catalogId = DataContext.DepotObjectCatalog.Single(o => o.ObjectId == obj.Id && o.IsVirtual == isVirtual && o.IsLeaf == true).CatalogId;
-            InMemoryUse use = new InMemoryUse { Age = inx.Age, Amount = 1, CatalogId = catalogId, Note = "", ObjectId = obj.Id, Place = inx.Place, Ordinals = new List<int>() };
-            use.Ordinals.Add(inx.Ordinal);
-            list.Add(use);
+            if (list.Count(o => o.ObjectId == obj.Id) > 0)
+            {
+                var f = list.First(o => o.ObjectId == obj.Id);
+                if (!f.Ordinals.Contains(inx.Ordinal))
+                {
+                    f.Ordinals.Add(inx.Ordinal);
+                }
+            }
+            else
+            {
+                InMemoryUse use = new InMemoryUse { Age = inx.Age, Amount = 1, CatalogId = catalogId, Note = "", ObjectId = obj.Id, Place = inx.Place, Ordinals = new List<int>() };
+                use.Ordinals.Add(inx.Ordinal);
+                list.Add(use);
+            }
         }
         x.Value = list.ToJson();
         counter.Value = list.Count.ToString();
         view_obj.Rebind();
         Reset();
+        ap.ResponseScripts.Add("window.scrollTo(0, document.body.scrollHeight);");
     }
 }

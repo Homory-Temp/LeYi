@@ -38,7 +38,7 @@ public partial class DepotAction_Use : DepotPageSingle
             }
             else
             {
-                counter.Value = "5";
+                counter.Value = "10";
                 plus.Visible = true;
                 back.Visible = false;
             }
@@ -90,10 +90,11 @@ public partial class DepotAction_Use : DepotPageSingle
 
     protected void plus_ServerClick(object sender, EventArgs e)
     {
-        counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
+        counter.Value = ((int.Parse(counter.Value)) + 5).ToString();
         var toRem = view_obj.Items.Select(o => (o.FindControl("ObjectUse") as Control_ObjectUse)).Select(o => o.PeekValue()).ToList();
         x.Value = toRem.ToJson();
         view_obj.Rebind();
+        ap.ResponseScripts.Add("window.scrollTo(0, document.body.scrollHeight);");
     }
 
     protected void view_obj_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
