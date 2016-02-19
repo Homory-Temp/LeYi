@@ -160,5 +160,18 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<待办事项详情_Result>("待办事项详情", loginCodeParameter, approveIdParameter);
         }
+    
+        public virtual ObjectResult<待办事项按钮_Result> 待办事项按钮(Nullable<int> appD_ID, string version)
+        {
+            var appD_IDParameter = appD_ID.HasValue ?
+                new ObjectParameter("AppD_ID", appD_ID) :
+                new ObjectParameter("AppD_ID", typeof(int));
+    
+            var versionParameter = version != null ?
+                new ObjectParameter("Version", version) :
+                new ObjectParameter("Version", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<待办事项按钮_Result>("待办事项按钮", appD_IDParameter, versionParameter);
+        }
     }
 }

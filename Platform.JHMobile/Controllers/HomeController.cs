@@ -213,8 +213,15 @@ namespace Platform.JHMobile.Controllers
                 return RedirectToAction("Task", "Home");
             var int_id = int.Parse(id);
             var app = db.待办事项详情(Account, int_id).FirstOrDefault();
-            var obj = new TaskObject { Title = app.AppO_Title, Type = app.TEM_Name, Step = app.AppD_Name, Template = app.AppT_ID };
-            var sql = "SELECT * FROM __HomoryFlow WHERE MainID = 'JHC00065023'";
+            var buttons = db.待办事项按钮(app.AppD_ID, app.Version).OrderBy(o => o.AppDA_Type).ToList();
+            var obj = new TaskObject { Title = app.AppO_Title, Type = app.TEM_Name, Step = app.AppD_Name, Template = app.AppT_ID, Buttons = buttons };
+            switch (app.AppT_ID)
+            {
+                case "5e58b0a3692d4069ae0652dd2c3e3abc":
+                    var data = db.Database.SqlQuery<TaskObject_5e58b0a3692d4069ae0652dd2c3e3abc>(string.Format("SELECT * FROM __HomoryFlow WHERE MainID = '{0}'", app.AppO_Values));
+                    obj.Data = data.ToList();
+                    break;
+            }
             return View(obj);
         }
 

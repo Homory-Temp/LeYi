@@ -11,6 +11,11 @@
         margin-top: 2px;
         margin-bottom: 2px;
     }
+
+    .mm {
+        margin-top: 8px; 
+        margin-bottom: 8px;
+    }
 </style>
 
 <div class="container">
@@ -35,29 +40,40 @@
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Step</div>
         <div class="col-md-12"><div class="btn btn-primary">流程表单</div></div>
         <div class="col-md-12">
-            @{ 
+            @{
                 switch (Model.Template.ToLower())
                 {
                     case "5e58b0a3692d4069ae0652dd2c3e3abc":
-                        <table>
-                            <tr>
-                                <td>键</td>
-                                <td>值</td>
-                            </tr>
-                        </table>
+            <table class="table-responsive table-bordered mm">
+                <tr>
+                    <th class="text-center">键</th>
+                    <th class="text-center">值</th>
+                </tr>
+                @{
+                    foreach (var data in Model.Data)
+                    {
+                        <tr>
+                            <th>@data.键</th>
+                            <th><input class="form-control" type="text" value="@data.值" /></th>
+                        </tr>
+                    }
+                }
+            </table>
                         break;
                 }
             }
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="btn btn-warning" type="button" onclick="home();">
-                <i class="fa fa-home fa-lg"></i>
-            </div>
-            <div class="btn btn-warning" type="button" onclick="back();">
-                <i class="fa fa-envelope fa-lg"></i>
-            </div>
+        <div class="col-md-12"><div class="btn btn-primary">办理意见</div></div>
+        <div class="col-md-12">
+            <input class="form-control mm" type="text" />
+        </div>
+        <div class="col-md-12 text-right">
+            @{
+                foreach (var button in Model.Buttons)
+                {
+                    <div class="btn btn-warning" data-type="@button.AppDA_Type">@button.AppDA_ButtonValue</div>
+                }
+            }
         </div>
     </div>
     <div class="row">&nbsp;</div>
@@ -65,10 +81,10 @@
 
 <script>
     function back() {
-                    window.location = corp_url + 'Home/Task';
-                }
+        window.location = corp_url + 'Home/Task';
+    }
 
-                function home() {
-                    window.location = corp_url + 'Home/Home';
-                }
+    function home() {
+        window.location = corp_url + 'Home/Home';
+    }
 </script>
