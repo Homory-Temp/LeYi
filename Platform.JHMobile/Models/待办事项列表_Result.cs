@@ -14,26 +14,10 @@ namespace Platform.JHMobile.Models
     public partial class 待办事项列表_Result
     {
         public int App_ID { get; set; }
-        public int App_FatherID { get; set; }
-        public string AppT_ID { get; set; }
-        public int AppD_ID { get; set; }
-        public int AppO_ID { get; set; }
-        public string AppO_Values { get; set; }
         public string AppO_Title { get; set; }
         public string UserName { get; set; }
-        public int App_Flag { get; set; }
-        public int App_IdeaFlag { get; set; }
-        public int App_Order { get; set; }
-        public int App_OrderSub { get; set; }
-        public string App_InnerIdea { get; set; }
         public string Sub_Code { get; set; }
         public System.DateTime Sub_Time { get; set; }
-        public int AppT_Flag { get; set; }
-        public string Instance_ID { get; set; }
-        public string Template_ID { get; set; }
-        public string Status { get; set; }
-        public string Version { get; set; }
-        public string Form_ID { get; set; }
         public string TEM_Name { get; set; }
     }
 }
