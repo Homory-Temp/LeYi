@@ -2,6 +2,7 @@
 
 <tr>
     <td>
+        <label id="ix" runat="server"><%# ItemIndex %></label>
         <telerik:RadDropDownTree ID="catalog" runat="server" AutoPostBack="true" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" DropDownSettings-CloseDropDownOnSelection="true" OnEntryAdded="catalog_EntryAdded"></telerik:RadDropDownTree>
     </td>
     <td>

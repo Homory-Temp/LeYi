@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Web.UI.WebControls;
+using Telerik.Web.UI;
 
 public partial class Control_ObjectUse : DepotControlSingle
 {
@@ -73,17 +74,17 @@ public partial class Control_ObjectUse : DepotControlSingle
                 }
             }
         }
-        else if (Session["ObjectUseCNM"] != null && !string.IsNullOrEmpty(Session["ObjectUseCNM"].ToString()))
-        {
-            var catalogId = Session["ObjectUseCNM"].ToString();
-            var node = catalog.EmbeddedTree.FindNodeByValue(catalogId.ToString());
-            node.Selected = true;
-            node.ExpandParentNodes();
-            catalog.SelectedValue = catalogId.ToString();
-            var source = DataContext.DepotObjectLoad(Depot.Id, catalogId.GlobalId()).Where(o => o.Amount > 0);
-            obj.DataSource = source.ToList();
-            obj.DataBind();
-        }
+        //else if (Session["ObjectUseCNM"] != null && !string.IsNullOrEmpty(Session["ObjectUseCNM"].ToString()))
+        //{
+        //    var catalogId = Session["ObjectUseCNM"].ToString();
+        //    var node = catalog.EmbeddedTree.FindNodeByValue(catalogId.ToString());
+        //    node.Selected = true;
+        //    node.ExpandParentNodes();
+        //    catalog.SelectedValue = catalogId.ToString();
+        //    var source = DataContext.DepotObjectLoad(Depot.Id, catalogId.GlobalId()).Where(o => o.Amount > 0);
+        //    obj.DataSource = source.ToList();
+        //    obj.DataBind();
+        //}
         if (!"ObjectId".Query().None())
         {
             catalog.Enabled = false;
@@ -119,8 +120,30 @@ public partial class Control_ObjectUse : DepotControlSingle
         obj.DataBind();
         obj.ClearSelection();
         obj.Text = string.Empty;
-        Session["ObjectUseCNM"] = catalogId;
+        //Session["ObjectUseCNM"] = catalogId;
+        //DoNext(catalogId);
     }
+
+    //protected void DoNext(Guid catalogId)
+    //{
+    //    try
+    //    {
+    //        var tree = (NamingContainer.NamingContainer as RadListView).Items[ItemIndex + 1].FindControl("ObjectUse").FindControl("catalog") as RadDropDownTree;
+    //        if (tree.Entries.Count == 0)
+    //        {
+    //            var xObj = (NamingContainer.NamingContainer as RadListView).Items[ItemIndex + 1].FindControl("ObjectUse").FindControl("obj") as RadComboBox;
+    //            var node = tree.EmbeddedTree.FindNodeByValue(catalogId.ToString());
+    //            node.Selected = true;
+    //            node.ExpandParentNodes();
+    //            tree.SelectedValue = catalogId.ToString();
+    //            var source = DataContext.DepotObjectLoad(Depot.Id, catalogId).Where(o => o.Amount > 0);
+    //            xObj.DataSource = source.ToList();
+    //            xObj.DataBind();
+    //        }
+    //    }
+    //    catch
+    //    { }
+    //}
 
     protected void obj_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
