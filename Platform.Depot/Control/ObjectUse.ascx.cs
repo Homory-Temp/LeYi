@@ -73,6 +73,17 @@ public partial class Control_ObjectUse : DepotControlSingle
                 }
             }
         }
+        else if (Session["ObjectUseCNM"] != null && !string.IsNullOrEmpty(Session["ObjectUseCNM"].ToString()))
+        {
+            var catalogId = Session["ObjectUseCNM"].ToString();
+            var node = catalog.EmbeddedTree.FindNodeByValue(catalogId.ToString());
+            node.Selected = true;
+            node.ExpandParentNodes();
+            catalog.SelectedValue = catalogId.ToString();
+            var source = DataContext.DepotObjectLoad(Depot.Id, catalogId.GlobalId()).Where(o => o.Amount > 0);
+            obj.DataSource = source.ToList();
+            obj.DataBind();
+        }
         if (!"ObjectId".Query().None())
         {
             catalog.Enabled = false;
@@ -108,6 +119,7 @@ public partial class Control_ObjectUse : DepotControlSingle
         obj.DataBind();
         obj.ClearSelection();
         obj.Text = string.Empty;
+        Session["ObjectUseCNM"] = catalogId;
     }
 
     protected void obj_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
