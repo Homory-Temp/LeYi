@@ -140,7 +140,19 @@ public partial class DepotScan_Use : DepotPageSingle
 
     protected void scanAdd_ServerClick(object sender, EventArgs e)
     {
-        var list = x.Value.None() ? new List<InMemoryUse>() : x.Value.FromJson<List<InMemoryUse>>();
+        var list = new List<InMemoryUse>();
+        for (var i = 0; i < view_obj.Items.Count; i++)
+        {
+            var c = view_obj.Items[i].FindControl("ObjectUse") as Control_ObjectUse;
+            var use = c.PeekValue();
+            if (use.ObjectId.HasValue)
+            {
+                list.Add(use);
+            }
+        }
+        x.Value = list.ToJson();
+        // var list = x.Value.None() ? new List<InMemoryUse>() : x.Value.FromJson<List<InMemoryUse>>();
+
         var code = scan.Text.Trim();
         if (code.StartsWith("O"))
         {
