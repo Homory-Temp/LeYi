@@ -17,7 +17,7 @@ namespace Platform.JHMobile.Controllers
         public ActionResult Home()
         {
             if (string.IsNullOrEmpty(Account))
-                return RedirectToAction("Ding", "Authentication");
+                return RedirectToAction("Authentication", "Ding");
             return View();
         }
     }
