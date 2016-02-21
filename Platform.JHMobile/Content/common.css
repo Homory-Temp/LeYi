@@ -1,4 +1,8 @@
-﻿.metro {
+﻿body {
+    padding-top: 20px;
+}
+
+.metro {
     width: 100%;
     height: 150px;
     margin-top: 10px;
