@@ -34,6 +34,9 @@
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_List_MessageModuleSingle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageModuleSingle">
+          <Parameter Name="MessageId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="C6ModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -69,6 +72,9 @@
             <Parameter Name="LoginCode" Mode="In" Type="String" />
             <Parameter Name="ModuleType" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_MessageModuleSingle" ReturnType="Collection(C6Model.f____Mobile_List_MessageModuleSingle_Result)">
+            <Parameter Name="MessageId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
           <Property Type="Int32" Name="CallToRead" Nullable="true" />
@@ -101,6 +107,18 @@
           <Property Type="DateTime" Name="SendTime" Nullable="true" />
           <Property Type="String" Name="MessageTitle" Nullable="true" />
           <Property Type="Int32" Name="ModuleTypeID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_MessageModuleSingle_Result">
+          <Property Type="Int32" Name="MessageID" Nullable="false" />
+          <Property Type="Int32" Name="ModuleTypeID" Nullable="true" />
+          <Property Type="String" Name="MessageTitle" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="SendTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MessageHTML" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="MessageFileName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="FileType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MessageType" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -161,6 +179,22 @@
                 <ScalarProperty Name="SendTime" ColumnName="SendTime" />
                 <ScalarProperty Name="MessageTitle" ColumnName="MessageTitle" />
                 <ScalarProperty Name="ModuleTypeID" ColumnName="ModuleTypeID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_MessageModuleSingle" FunctionName="C6Model.Store.f____Mobile_List_MessageModuleSingle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_MessageModuleSingle_Result">
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="ModuleTypeID" ColumnName="ModuleTypeID" />
+                <ScalarProperty Name="MessageTitle" ColumnName="MessageTitle" />
+                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="MessageHTML" ColumnName="MessageHTML" />
+                <ScalarProperty Name="MessageFileName" ColumnName="MessageFileName" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -163,6 +163,9 @@
     <Compile Include="Models\f____Mobile_List_CallToRead_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\f____Mobile_List_MessageModuleSingle_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\f____Mobile_List_MessageModule_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -528,6 +531,7 @@
     <Content Include="Views\Call\CallReadPreview.cshtml" />
     <Content Include="Views\Message\MessageModule.cshtml" />
     <Content Include="Views\Message\MessageModuleSingle.cshtml" />
+    <Content Include="Views\Message\MessageModulePreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
