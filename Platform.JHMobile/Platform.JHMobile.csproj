@@ -163,6 +163,9 @@
     <Compile Include="Models\f____Mobile_List_CallToRead_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\f____Mobile_List_MessageModule_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\JinHerController.cs" />
     <Compile Include="Models\JinHerAES.cs" />
     <Compile Include="Models\DingTalk.cs" />
@@ -524,6 +527,7 @@
     <Content Include="Views\Call\CallRead.cshtml" />
     <Content Include="Views\Call\CallReadPreview.cshtml" />
     <Content Include="Views\Message\MessageModule.cshtml" />
+    <Content Include="Views\Message\MessageModuleSingle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
