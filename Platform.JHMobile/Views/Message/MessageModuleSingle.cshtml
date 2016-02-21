@@ -3,10 +3,10 @@
 @model List<f____Mobile_List_MessageModule_Result>
 
 @{
-    ViewBag.Title = string.Format("{0} - 第{1}页", DingTalk.CorpMessageModules[Model.First().ModuleTypeID.ToString()], ViewBag.Current + 1);
+    ViewBag.Title = string.Format("{0} - 第{1}页", DingTalk.CorpMessageModules[ViewBag.MMType], ViewBag.Current + 1);
 }
 
-@{ 
+@{
     var index = 0;
 }
 
@@ -42,31 +42,44 @@
         </div>
     </div>
     <div class="row">&nbsp;</div>
-    @foreach (var obj in Model)
-    {
-        index++;
-        <div class="row" onclick="@("window.location = corp_url + 'Message/MessageModulePreview/" + obj.MessageID + "';")">
-            <div class="col-md-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <span>@Html.Raw(obj.MessageTitle)</span>
-                    </div>
-                    <a>
-                        <div class="panel-footer">
-                            <div class="row">
-                                <div class="col-xs-8 text-left">
-                                    <div>@obj.SendTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
-                                </div>
-                                <div class="col-xs-4 text-right">
-                                    <div>@obj.UserName</div>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
+    @{
+        if (Model.Count == 0)
+        {
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    暂无内容
                 </div>
             </div>
-        </div>
+        }
+        else
+        {
+            foreach (var obj in Model)
+            {
+                index++;
+                <div class="row" onclick="@("window.location = corp_url + 'Message/MessageModulePreview/" + obj.MessageID + "';")">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <span>@Html.Raw(obj.MessageTitle)</span>
+                            </div>
+                            <a>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-xs-8 text-left">
+                                            <div>@obj.SendTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
+                                        </div>
+                                        <div class="col-xs-4 text-right">
+                                            <div>@obj.UserName</div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
     }
 </div>
 
