@@ -12,7 +12,7 @@ namespace Platform.JHMobile
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Ding", action = "Authenticate", id = UrlParameter.Optional }
+                defaults: new { controller = "Ding", action = "Home", id = UrlParameter.Optional }
             );
         }
     }

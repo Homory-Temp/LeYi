@@ -142,7 +142,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -328,9 +327,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Sso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -536,6 +533,9 @@
     <Content Include="Views\Home\CallPreview.cshtml" />
     <Content Include="Views\Home\Task.cshtml" />
     <Content Include="Views\Home\TaskGo.cshtml" />
+    <Content Include="Views\Ding\Authentication.cshtml" />
+    <Content Include="Views\Ding\Authorization.cshtml" />
+    <Content Include="Views\Ding\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

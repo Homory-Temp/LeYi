@@ -18,7 +18,15 @@ namespace Platform.JHMobile.Controllers
             {
                 if (string.IsNullOrEmpty(account))
                 {
-                    account = Session["user_id"] == null ? null : Session["user_id"].ToString();
+                    if (Session["user_id"] != null)
+                    {
+                        account = Session["user_id"].ToString();
+                    }
+                    else if (Request.Cookies["user_id"] != null)
+                    {
+                        account = Request.Cookies["user_id"].Value;
+                        Session["user_id"] = account;
+                    }
                 }
                 return account;
             }

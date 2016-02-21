@@ -44,7 +44,7 @@ namespace Platform.JHMobile.Controllers
                 return RedirectToAction("Sso", "Home");
             var call = db.未阅寻呼数量(Account).Single().Value;
             var message = 0;
-            foreach (var cm in DingTalk.CorpModules.Keys)
+            foreach (var cm in DingTalk.CorpMessageModules.Keys)
             {
                 message += db.待阅信息数量(Account, cm).Single().Value;
             }
@@ -111,7 +111,7 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(Account))
                 return RedirectToAction("Sso", "Home");
             var mo = new List<MessageObject>();
-            foreach (var pair in DingTalk.CorpModules)
+            foreach (var pair in DingTalk.CorpMessageModules)
             {
                 mo.Add(new MessageObject { ModuleTypeId = pair.Key, ModuleTypeName = pair.Value, MessageCount = db.待阅信息数量(Account, pair.Key).Single().Value });
             }

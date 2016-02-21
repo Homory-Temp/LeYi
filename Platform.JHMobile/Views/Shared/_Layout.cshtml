@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Platform.JHMobile.Models
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
@@ -6,7 +8,7 @@
     <meta http-equiv="cache-control" content="no-cache" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta charset="utf-8" />
-    <title>移动办公 - @ViewBag.Title</title>
+    <title>@ViewBag.Title</title>
     <script src="~/Content/common.js"></script>
     <script src="~/Content/jquery/jquery.min.js"></script>
     <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
@@ -14,9 +16,9 @@
     <link href="~/Content/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="~/Content/common.css" rel="stylesheet" />
     <script>
-        corp_id = "@Platform.JHMobile.Models.Corp.corp_id";
-        corp_secret = "@Platform.JHMobile.Models.Corp.corp_secret";
-        corp_url = "@Platform.JHMobile.Models.Corp.corp_url";
+        corp_id = "@DingTalk.CorpId";
+        corp_secret = "@DingTalk.CorpSecret";
+        corp_url = "@DingTalk.CorpUrl";
     </script>
 </head>
 <body>

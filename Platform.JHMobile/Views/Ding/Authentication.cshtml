@@ -1,0 +1,20 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "用户认证";
+}
+
+@{
+    if (!string.IsNullOrEmpty(Model))
+    {
+        Response.Redirect("~/Ding/Home");
+        return;
+    }
+}
+
+<script>
+    $(document).ready(function () {
+        var corp_authorize = corp_url + "Ding/Authorization";
+        top.location.href = "https://oapi.dingtalk.com/connect/oauth2/authorize?appid=" + corp_id + "&response_type=code&scope=snsapi_base&state=STATE&redirect_uri=" + encodeURIComponent(corp_authorize);
+    });
+</script>

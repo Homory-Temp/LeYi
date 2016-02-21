@@ -1,0 +1,64 @@
+﻿@using Newtonsoft.Json;
+@using Platform.JHMobile.Models
+@using System.Text
+
+@model string
+
+@{
+    ViewBag.Title = "用户授权";
+}
+
+@{
+    if (!string.IsNullOrEmpty(Model))
+    {
+        Response.Redirect("~/Ding/Home");
+        return;
+    }
+}
+
+@{
+    var url_get_access_token = string.Format("https://oapi.dingtalk.com/gettoken?corpid={0}&corpsecret={1}", DingTalk.CorpId, DingTalk.CorpSecret);
+    var request = HttpWebRequest.CreateHttp(url_get_access_token);
+    var response = (HttpWebResponse)request.GetResponse();
+    var stream = response.GetResponseStream();
+    var encoding = Encoding.UTF8;
+    var reader = new StreamReader(stream, encoding);
+    var read = new char[256];
+    int count = reader.Read(read, 0, 256);
+    var builder = new StringBuilder();
+    while (count > 0)
+    {
+        var str = new string(read, 0, count);
+        builder.Append(str);
+        count = reader.Read(read, 0, 256);
+    }
+    reader.Close();
+    response.Close();
+    var access_token = JsonConvert.DeserializeObject<dynamic>(builder.ToString()).access_token;
+    var url_get_user_info = string.Format("https://oapi.dingtalk.com/user/getuserinfo?access_token={0}&code={1}", access_token, Request.QueryString["code"]);
+    request = HttpWebRequest.CreateHttp(url_get_user_info);
+    response = (HttpWebResponse)request.GetResponse();
+    stream = response.GetResponseStream();
+    reader = new StreamReader(stream, encoding);
+    read = new char[256];
+    count = reader.Read(read, 0, 256);
+    builder = new StringBuilder();
+    while (count > 0)
+    {
+        var str = new string(read, 0, count);
+        builder.Append(str);
+        count = reader.Read(read, 0, 256);
+    }
+    reader.Close();
+    response.Close();
+    var user_id = JsonConvert.DeserializeObject<dynamic>(builder.ToString()).userid;
+    if (DingTalk.CorpUserMappings.ContainsKey(user_id.ToString()))
+    {
+        user_id = DingTalk.CorpUserMappings[user_id.ToString()];
+    }
+    var cookie = new HttpCookie("user_id", user_id.ToString());
+    cookie.Expires = DateTime.Now.AddDays(1);
+    Response.Cookies.Add(cookie);
+    Session["user_id"] = user_id.ToString();
+    Response.Redirect("~/Ding/Home");
+}
