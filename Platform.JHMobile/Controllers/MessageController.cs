@@ -53,6 +53,7 @@ namespace Platform.JHMobile.Controllers
             var dir = new DirectoryInfo(Server.MapPath("~/Resource/MessageFile"));
             ViewBag.Path = "";
             ViewBag.ModuleTypeID = message.ModuleTypeID;
+            ViewBag.PeopleRead = db.f____Mobile_List_MessageModuleSingleRead(message.MessageID, message.ModuleTypeID.ToString()).OrderBy(o => o).ToList().Aggregate("", (o, s) => o += s + "、", o => (o.Length == 0 ? "无" : o.Substring(0, o.Length - 1)));
             foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
             {
                 if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)

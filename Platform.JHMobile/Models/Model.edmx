@@ -37,6 +37,10 @@
         <Function Name="f____Mobile_List_MessageModuleSingle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageModuleSingle">
           <Parameter Name="MessageId" Type="int" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_List_MessageModuleSingleRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageModuleSingleRead">
+          <Parameter Name="MessageId" Type="int" Mode="In" />
+          <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="C6ModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -73,7 +77,11 @@
             <Parameter Name="ModuleType" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_List_MessageModuleSingle" ReturnType="Collection(C6Model.f____Mobile_List_MessageModuleSingle_Result)">
+          <Parameter Name="MessageId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_MessageModuleSingleRead" ReturnType="Collection(String)">
             <Parameter Name="MessageId" Mode="In" Type="Int32" />
+            <Parameter Name="ModuleType" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
@@ -198,6 +206,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_MessageModuleSingleRead" FunctionName="C6Model.Store.f____Mobile_List_MessageModuleSingleRead" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
