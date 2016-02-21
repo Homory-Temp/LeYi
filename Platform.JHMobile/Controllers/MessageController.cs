@@ -14,7 +14,7 @@ namespace Platform.JHMobile.Controllers
             var mo = new List<MessageModuleObject>();
             foreach (var pair in DingTalk.CorpMessageModules)
             {
-                mo.Add(new MessageModuleObject { ModuleTypeId = pair.Key, ModuleTypeName = pair.Value, MessageCount = db.f____Mobile_Count_MessageModule(Account, pair.Key) });
+                mo.Add(new MessageModuleObject { ModuleTypeId = pair.Key, ModuleTypeName = pair.Value, MessageCount = db.f____Mobile_Count_MessageModule(Account, pair.Key).SingleOrDefault().Value });
             }
             return View(mo);
         }

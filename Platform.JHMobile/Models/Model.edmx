@@ -57,7 +57,7 @@
           <FunctionImport Name="f____Mobile_Count_CallRead" ReturnType="Collection(Int32)">
           <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="f____Mobile_Count_MessageModule">
+          <FunctionImport Name="f____Mobile_Count_MessageModule" ReturnType="Collection(Int32)">
             <Parameter Name="LoginCode" Mode="In" Type="String" />
             <Parameter Name="ModuleType" Mode="In" Type="String" />
           </FunctionImport>
