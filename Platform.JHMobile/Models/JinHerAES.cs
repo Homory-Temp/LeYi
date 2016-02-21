@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Platform.JHMobile.Models
 {
-    public class AES
+    public class JinHerAES
     {
         private byte[] Iv = null;
 
@@ -32,7 +27,7 @@ namespace Platform.JHMobile.Models
             }
         }
 
-        public AES()
+        public JinHerAES()
         {
         }
 

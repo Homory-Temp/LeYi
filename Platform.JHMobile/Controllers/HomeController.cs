@@ -44,7 +44,7 @@ namespace Platform.JHMobile.Controllers
                 return RedirectToAction("Sso", "Home");
             var call = db.未阅寻呼数量(Account).Single().Value;
             var message = 0;
-            foreach (var cm in Corp.corp_messages.Keys)
+            foreach (var cm in DingTalk.corp_modules.Keys)
             {
                 message += db.待阅信息数量(Account, cm).Single().Value;
             }
@@ -84,7 +84,7 @@ namespace Platform.JHMobile.Controllers
             var list = query == null ? new List<未阅寻呼附件_Result>() : query.ToList();
             foreach (var path in list)
             {
-                var source = Corp.corp_c6 + path.FilePath.Substring(3).Replace("/", "\\");
+                var source = DingTalk.corp_jinher + path.FilePath.Substring(3).Replace("/", "\\");
                 var destination = source.Replace("__", "h__");
                 DecryptFile(source, destination);
             }
@@ -111,7 +111,7 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(Account))
                 return RedirectToAction("Sso", "Home");
             var mo = new List<MessageObject>();
-            foreach (var pair in Corp.corp_messages)
+            foreach (var pair in DingTalk.corp_modules)
             {
                 mo.Add(new MessageObject { ModuleTypeId = pair.Key, ModuleTypeName = pair.Value, MessageCount = db.待阅信息数量(Account, pair.Key).Single().Value });
             }
@@ -264,7 +264,7 @@ namespace Platform.JHMobile.Controllers
         {
             try
             {
-                var aes = new AES();
+                var aes = new JinHerAES();
                 aes.CreateKey(Encoding.Default.GetBytes("12345678123456781234567812345678"), Encoding.Default.GetBytes("1234567812345678"));
                 if (!System.IO.File.Exists(path))
                     return;
