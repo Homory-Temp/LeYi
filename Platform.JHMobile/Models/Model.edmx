@@ -11,6 +11,9 @@
         <Function Name="f____Mobile_Count_CallToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_CallToRead">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_Do_CallRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Do_CallRead">
+          <Parameter Name="CallNoSeeId" Type="int" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_List_CallAttachment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_CallAttachment">
           <Parameter Name="CallID" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -33,7 +36,10 @@
           <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_List_CallAttachment" ReturnType="Collection(C6Model.f____Mobile_List_CallAttachment_Result)">
-            <Parameter Name="CallID" Mode="In" Type="String" />
+          <Parameter Name="CallID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_Do_CallRead">
+            <Parameter Name="CallNoSeeId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
@@ -93,6 +99,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f____Mobile_Do_CallRead" FunctionName="C6Model.Store.f____Mobile_Do_CallRead" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
