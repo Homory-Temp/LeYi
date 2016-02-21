@@ -23,29 +23,31 @@
     </div>
     <div class="row">&nbsp;</div>
     <div class="row">
-        <div class="col-md-12"><div class="btn btn-primary">发送人员</div></div>
+        <div class="col-md-12"><strong>发送人员：</strong></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.UserName</div>
-        <div class="col-md-12"><div class="btn btn-primary">发送时间</div></div>
+        <div class="col-md-12"><strong>发送时间：</strong></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.CallTime</div>
-        <div class="col-md-12"><div class="btn btn-primary">寻呼内容</div></div>
+        <div class="col-md-12"><strong>寻呼内容：</strong></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.Raw(Model.Object.CallContent)</div>
         @{
             if (Model.List.Count > 0)
             {
-                <div class="col-md-12"><div class="btn btn-primary">寻呼附件</div></div>
+                <div class="col-md-12"><strong>寻呼附件：</strong></div>
                 foreach (var file in Model.List)
                 {
                     <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="@(DingTalk.CorpUrl + file.FilePath.Substring(3).Replace("__", "h__"))">@file.SlaveName</a></div>
                 }
             }
         }
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
         <div class="col-md-12 text-right">
             <div class="btn btn-warning" type="button" onclick="read();">
                 已阅
             </div>
         </div>
     </div>
-    <div class="row">&nbsp;</div>
 </div>
 
 <script>
