@@ -14,6 +14,8 @@ namespace Platform.JHMobile.Models
 
         public static string CorpJinHer = WebConfigurationManager.AppSettings["corp_jinher"];
 
+        public static bool CorpRemote = bool.Parse(WebConfigurationManager.AppSettings["corp_remote"]);
+
         public static Dictionary<string, string> CorpUserMappings
         {
             get

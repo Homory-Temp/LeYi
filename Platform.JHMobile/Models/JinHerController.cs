@@ -18,7 +18,11 @@ namespace Platform.JHMobile.Controllers
             {
                 if (string.IsNullOrEmpty(account))
                 {
-                    if (Session["user_id"] != null)
+                    if (!DingTalk.CorpRemote)
+                    {
+                        account = DingTalk.CorpUserMappings["022122292191"];
+                    }
+                    else if (Session["user_id"] != null)
                     {
                         account = Session["user_id"].ToString();
                     }
