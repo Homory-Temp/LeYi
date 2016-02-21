@@ -1,1 +1,49 @@
-﻿
+﻿.metro {
+    width: 100%;
+    height: 150px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: white;
+    padding-top: 25px;
+}
+
+.metro_text {
+    font-size: large;
+}
+
+.metro i {
+    color: white;
+}
+
+.metro_left {
+    padding-left: 30px;
+}
+
+.metro_right {
+    padding-right: 30px;
+}
+
+.metro_0 {
+    background-color: #e77960;
+}
+
+.metro_1 {
+    background-color: #50a6a7;
+}
+
+.metro_2 {
+    background-color: #6d8dbe;
+}
+
+.metro_3 {
+    background-color: #e9cc4c;
+}
+
+.metro_4 {
+    background-color: #ba769f;
+}
+
+.metro_5 {
+    background-color: #6fb57f;
+}
