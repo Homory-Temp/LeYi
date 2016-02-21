@@ -138,5 +138,14 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("f____Mobile_List_MessageModuleSingleRead", messageIdParameter, moduleTypeParameter);
         }
+    
+        public virtual ObjectResult<f____Mobile_List_MessageAttachment_Result> f____Mobile_List_MessageAttachment(string messageID)
+        {
+            var messageIDParameter = messageID != null ?
+                new ObjectParameter("MessageID", messageID) :
+                new ObjectParameter("MessageID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_MessageAttachment_Result>("f____Mobile_List_MessageAttachment", messageIDParameter);
+        }
     }
 }

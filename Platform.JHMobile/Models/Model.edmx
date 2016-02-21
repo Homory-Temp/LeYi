@@ -30,6 +30,9 @@
         <Function Name="f____Mobile_List_CallToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_CallToRead">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_List_MessageAttachment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageAttachment">
+          <Parameter Name="MessageID" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_List_MessageModule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageModule">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
@@ -83,6 +86,9 @@
             <Parameter Name="MessageId" Mode="In" Type="Int32" />
             <Parameter Name="ModuleType" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_MessageAttachment" ReturnType="Collection(C6Model.f____Mobile_List_MessageAttachment_Result)">
+            <Parameter Name="MessageID" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
           <Property Type="Int32" Name="CallToRead" Nullable="true" />
@@ -127,6 +133,11 @@
           <Property Type="String" Name="FileType" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="MessageType" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_MessageAttachment_Result">
+          <Property Type="String" Name="FileID" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="FilePath" Nullable="false" MaxLength="500" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -207,6 +218,15 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f____Mobile_List_MessageModuleSingleRead" FunctionName="C6Model.Store.f____Mobile_List_MessageModuleSingleRead" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_MessageAttachment" FunctionName="C6Model.Store.f____Mobile_List_MessageAttachment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_MessageAttachment_Result">
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

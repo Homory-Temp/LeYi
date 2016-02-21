@@ -1,9 +1,9 @@
 ﻿@using Platform.JHMobile.Models
 
-@model f____Mobile_List_MessageModuleSingle_Result
+@model MessageModuleSingleObject
 
 @{
-    ViewBag.Title = "待阅信息详情";
+    ViewBag.Title = "信息详情";
 }
 
 <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -24,14 +24,14 @@
     <div class="row">&nbsp;</div>
     <div class="row">
         <div class="col-md-12"><strong>信息标题</strong></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.MessageTitle</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.MessageTitle</div>
         <div class="col-md-12"><strong>部门人员</strong></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.DeptName&nbsp;&nbsp;-&nbsp;&nbsp;@Model.UserName</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.DeptName&nbsp;&nbsp;-&nbsp;&nbsp;@Model.Object.UserName</div>
         <div class="col-md-12"><strong>分发时间</strong></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.SendTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.SendTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
         <div class="col-md-12"><strong>信息正文</strong></div>
         <div class="col-md-12">
-            @Html.Raw(Model.MessageHTML)
+            @Html.Raw(Model.Object.MessageHTML)
             @{
                 if (!string.IsNullOrEmpty(ViewBag.PDF))
                 {
@@ -40,6 +40,16 @@
                 }
             }
         </div>
+        @{
+            if (Model.List.Count > 0)
+            {
+                <div class="col-md-12"><strong>信息附件：</strong></div>
+                foreach (var file in Model.List)
+                {
+                    <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="@(DingTalk.CorpUrl + file.FilePath.Substring(3).Replace("__", "h__"))">@file.FileName</a></div>
+                }
+            }
+        }
         <div class="col-md-12"><strong>已阅人员</strong></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@ViewBag.PeopleRead</div>
     </div>

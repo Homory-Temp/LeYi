@@ -3,7 +3,7 @@
 @model List<f____Mobile_List_MessageModule_Result>
 
 @{
-    ViewBag.Title = DingTalk.CorpMessageModules[Model.First().ModuleTypeID.ToString()];
+    ViewBag.Title = string.Format("{0} - 第{1}页", DingTalk.CorpMessageModules[Model.First().ModuleTypeID.ToString()], ViewBag.Current + 1);
 }
 
 @{ 

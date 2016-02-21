@@ -66,7 +66,18 @@ namespace Platform.JHMobile.Controllers
                     }
                 }
             }
-            return View(message);
+            var query = db.f____Mobile_List_MessageAttachment(message.MessageID.ToString()).OrderBy(o => o.FileID);
+            var list = query == null ? new List<f____Mobile_List_MessageAttachment_Result>() : query.ToList();
+            foreach (var path in list)
+            {
+                var source = DingTalk.CorpJinHer + path.FilePath.Substring(3).Replace("/", "\\");
+                var destination = source.Replace("__", "h__");
+                DecryptFile(source, destination);
+            }
+            var mo = new MessageModuleSingleObject();
+            mo.Object = message;
+            mo.List = list;
+            return View(mo);
         }
     }
 }
