@@ -20,6 +20,9 @@
             <div class="btn btn-warning" type="button" onclick="back();">
                 <i class="fa fa-home fa-lg"></i>
             </div>
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-reply fa-lg"></i>
+            </div>
         </div>
         <div class="col-xs-6 text-right">
             @{
@@ -42,7 +45,7 @@
     @foreach (var obj in Model)
     {
         index++;
-        <div class="row" onclick="@("window.location = corp_url + 'Home/CallPreview/" + obj.CallNoSeeID + "';")">
+        <div class="row" onclick="@("window.location = corp_url + 'Call/CallPreview/" + obj.CallNoSeeID + "';")">
             <div class="col-md-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">

@@ -54,5 +54,14 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_CallToRead_Result>("f____Mobile_List_CallToRead", loginCodeParameter);
         }
+    
+        public virtual ObjectResult<f____Mobile_List_CallAttachment_Result> f____Mobile_List_CallAttachment(string callID)
+        {
+            var callIDParameter = callID != null ?
+                new ObjectParameter("CallID", callID) :
+                new ObjectParameter("CallID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_CallAttachment_Result>("f____Mobile_List_CallAttachment", callIDParameter);
+        }
     }
 }
