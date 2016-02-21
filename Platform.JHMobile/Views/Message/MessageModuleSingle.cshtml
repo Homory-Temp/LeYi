@@ -45,11 +45,11 @@
     @foreach (var obj in Model)
     {
         index++;
-        <div class="row" onclick="@("window.location = corp_url + 'Message/MessagePreview/" + obj.MessageID + "';")">
+        <div class="row" onclick="@("window.location = corp_url + 'Message/MessageModulePreview/" + obj.MessageID + "';")">
             <div class="col-md-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <span class="pull-left">@Html.Raw(obj.MessageTitle)</span>
+                        <span>@Html.Raw(obj.MessageTitle)</span>
                     </div>
                     <a>
                         <div class="panel-footer">
