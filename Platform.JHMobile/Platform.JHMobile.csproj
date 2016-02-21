@@ -148,11 +148,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CallObject.cs" />
+    <Compile Include="Models\CallReadObject.cs" />
+    <Compile Include="Models\CallToReadObject.cs" />
     <Compile Include="Models\f____Mobile_Count_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\f____Mobile_List_CallAttachment_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\f____Mobile_List_CallRead_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\f____Mobile_List_CallToRead_Result.cs">
@@ -514,7 +518,9 @@
     <Content Include="Views\Ding\Authorization.cshtml" />
     <Content Include="Views\Ding\Home.cshtml" />
     <Content Include="Views\Call\CallToRead.cshtml" />
-    <Content Include="Views\Call\CallPreview.cshtml" />
+    <Content Include="Views\Call\CallToReadPreview.cshtml" />
+    <Content Include="Views\Call\CallRead.cshtml" />
+    <Content Include="Views\Call\CallReadPreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

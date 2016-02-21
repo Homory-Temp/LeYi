@@ -8,6 +8,9 @@
         <Function Name="f____Mobile_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_Count_CallRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_CallRead">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_Count_CallToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_CallToRead">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -16,6 +19,9 @@
         </Function>
         <Function Name="f____Mobile_List_CallAttachment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_CallAttachment">
           <Parameter Name="CallID" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f____Mobile_List_CallRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_CallRead">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="f____Mobile_List_CallToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_CallToRead">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
@@ -39,7 +45,13 @@
           <Parameter Name="CallID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_Do_CallRead">
-            <Parameter Name="CallNoSeeId" Mode="In" Type="Int32" />
+          <Parameter Name="CallNoSeeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_CallRead" ReturnType="Collection(C6Model.f____Mobile_List_CallRead_Result)">
+          <Parameter Name="LoginCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_Count_CallRead" ReturnType="Collection(Int32)">
+            <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
@@ -60,6 +72,12 @@
           <Property Type="String" Name="SlaveID" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="SlaveName" Nullable="false" MaxLength="1000" />
           <Property Type="String" Name="FilePath" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_CallRead_Result">
+          <Property Type="Int32" Name="CallID" Nullable="false" />
+          <Property Type="DateTime" Name="CallTime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CallContent" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -100,6 +118,17 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f____Mobile_Do_CallRead" FunctionName="C6Model.Store.f____Mobile_Do_CallRead" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_CallRead" FunctionName="C6Model.Store.f____Mobile_List_CallRead">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_CallRead_Result">
+                <ScalarProperty Name="CallID" ColumnName="CallID" />
+                <ScalarProperty Name="CallTime" ColumnName="CallTime" />
+                <ScalarProperty Name="CallContent" ColumnName="CallContent" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f____Mobile_Count_CallRead" FunctionName="C6Model.Store.f____Mobile_Count_CallRead" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

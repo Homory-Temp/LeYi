@@ -1,9 +1,9 @@
 ﻿@using Platform.JHMobile.Models
 
-@model List<f____Mobile_List_CallToRead_Result>
+@model List<f____Mobile_List_CallRead_Result>
 
 @{
-    ViewBag.Title = string.Format("未阅寻呼 - 第{0}页", ViewBag.Current + 1);
+    ViewBag.Title = string.Format("已阅寻呼 - 第{0}页", ViewBag.Current + 1);
 }
 
 @{
@@ -45,7 +45,7 @@
     @foreach (var obj in Model)
     {
         index++;
-        <div class="row" onclick="@("window.location = corp_url + 'Call/CallToReadPreview/" + obj.CallNoSeeID + "';")">
+        <div class="row" onclick="@("window.location = corp_url + 'Call/CallReadPreview/" + obj.CallID + "';")">
             <div class="col-md-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -77,13 +77,13 @@
 
     function previous() {
         if (current > min){
-            window.location = corp_url + 'Call/CallToRead/' + (current - 1);
+            window.location = corp_url + 'Call/CallRead/' + (current - 1);
         }
     }
 
     function next() {
         if (current < max){
-            window.location = corp_url + 'Call/CallToRead/' + (current + 1);
+            window.location = corp_url + 'Call/CallRead/' + (current + 1);
         }
     }
 

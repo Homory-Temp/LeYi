@@ -1,0 +1,53 @@
+﻿@using Platform.JHMobile.Models
+
+@model CallObject
+
+@{
+    ViewBag.Title = "已阅寻呼详情";
+}
+
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
+<script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="btn btn-warning" type="button" onclick="home();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-reply fa-lg"></i>
+            </div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-md-12"><strong>发送人员：</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.UserName</div>
+        <div class="col-md-12"><strong>发送时间：</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.CallTime</div>
+        <div class="col-md-12"><strong>寻呼内容：</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.Raw(Model.Object.CallContent)</div>
+        @{
+            if (Model.List.Count > 0)
+            {
+                <div class="col-md-12"><strong>寻呼附件：</strong></div>
+                foreach (var file in Model.List)
+                {
+                    <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="@(DingTalk.CorpUrl + file.FilePath.Substring(3).Replace("__", "h__"))">@file.SlaveName</a></div>
+                }
+            }
+        }
+    </div>
+</div>
+
+<script>
+    function back() {
+        window.location = corp_url + 'Call/CallRead';
+    }
+
+    function home() {
+        window.location = corp_url + 'Ding/Home';
+    }
+</script>
