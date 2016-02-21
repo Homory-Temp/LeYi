@@ -509,14 +509,12 @@
     <Content Include="Views\Ding\Authentication.cshtml" />
     <Content Include="Views\Ding\Authorization.cshtml" />
     <Content Include="Views\Ding\Home.cshtml" />
-    <Content Include="Views\Shared\CallToRead.cshtml" />
+    <Content Include="Views\Call\CallToRead.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Call\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
