@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\CallController.cs" />
     <Compile Include="Controllers\DingController.cs" />
     <Compile Include="Global.asax.cs">
@@ -165,6 +166,7 @@
     <Compile Include="Models\JinHerController.cs" />
     <Compile Include="Models\JinHerAES.cs" />
     <Compile Include="Models\DingTalk.cs" />
+    <Compile Include="Models\MessageModuleObject.cs" />
     <Compile Include="Models\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -521,6 +523,7 @@
     <Content Include="Views\Call\CallToReadPreview.cshtml" />
     <Content Include="Views\Call\CallRead.cshtml" />
     <Content Include="Views\Call\CallReadPreview.cshtml" />
+    <Content Include="Views\Message\MessageModule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

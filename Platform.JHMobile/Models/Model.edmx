@@ -14,6 +14,10 @@
         <Function Name="f____Mobile_Count_CallToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_CallToRead">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_Count_MessageModule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_MessageModule">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_Do_CallRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Do_CallRead">
           <Parameter Name="CallNoSeeId" Type="int" Mode="In" />
         </Function>
@@ -51,7 +55,11 @@
           <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_Count_CallRead" ReturnType="Collection(Int32)">
+          <Parameter Name="LoginCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_Count_MessageModule">
             <Parameter Name="LoginCode" Mode="In" Type="String" />
+            <Parameter Name="ModuleType" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
@@ -129,6 +137,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f____Mobile_Count_CallRead" FunctionName="C6Model.Store.f____Mobile_Count_CallRead" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_Count_MessageModule" FunctionName="C6Model.Store.f____Mobile_Count_MessageModule" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
