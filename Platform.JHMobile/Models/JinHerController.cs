@@ -8,7 +8,7 @@ namespace Platform.JHMobile.Controllers
 {
     public class JinHerController : Controller
     {
-        private C6Entities db = new C6Entities();
+        protected C6Entities db = new C6Entities();
 
         private string account;
 

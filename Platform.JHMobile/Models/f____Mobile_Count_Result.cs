@@ -11,12 +11,12 @@ namespace Platform.JHMobile.Models
 {
     using System;
     
-    public partial class 未阅寻呼列表_Result
+    public partial class f____Mobile_Count_Result
     {
-        public int CallNoSeeID { get; set; }
-        public int CallID { get; set; }
-        public System.DateTime CallTime { get; set; }
-        public string CallContent { get; set; }
-        public string UserName { get; set; }
+        public Nullable<int> CallToRead { get; set; }
+        public Nullable<int> CallRead { get; set; }
+        public Nullable<int> MessageToRead { get; set; }
+        public Nullable<int> TaskToDo { get; set; }
+        public Nullable<int> TaskDone { get; set; }
     }
 }

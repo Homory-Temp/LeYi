@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using Platform.JHMobile.Models;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Platform.JHMobile.Controllers
 {
@@ -18,12 +20,13 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authentication();
-            ViewBag.CallToRead = 0;
-            ViewBag.CallRead = 1;
-            ViewBag.MessageModule = 2;
-            ViewBag.MessageToRead = 3;
-            ViewBag.TaskToDo = 4;
-            ViewBag.TaskDone = 5;
+            var count = db.f____Mobile_Count(Account).FirstOrDefault();
+            ViewBag.CallToRead = count.CallToRead;
+            ViewBag.CallRead = count.CallRead;
+            ViewBag.MessageModule = DingTalk.CorpMessageModules.Count;
+            ViewBag.MessageToRead = count.MessageToRead;
+            ViewBag.TaskToDo = count.TaskToDo;
+            ViewBag.TaskDone = count.TaskDone;
             return View();
         }
     }

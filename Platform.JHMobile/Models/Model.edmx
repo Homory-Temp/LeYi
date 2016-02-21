@@ -4,200 +4,26 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="C6Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“C6.dbo.待阅信息列表_Result”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="待阅信息列表_Result">
-          <Key>
-            <PropertyRef Name="MessageID" />
-          </Key>
-          <Property Name="MessageID" Type="int" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" />
-          <Property Name="SendTime" Type="datetime" />
-          <Property Name="MessageTitle" Type="varchar" MaxLength="1000" />
-          <Property Name="ModuleTypeID" Type="int" />
-        </EntityType>
-        <Function Name="待办事项按钮" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="AppD_ID" Type="int" Mode="In" />
-          <Parameter Name="Version" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="待办事项列表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Schema Namespace="C6Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="f____Mobile_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
-        <Function Name="待办事项数量" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
-        </Function>
-        <Function Name="待办事项详情" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="ApproveId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="待阅信息列表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
-        </Function>
-        <Function Name="待阅信息数量" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
-        </Function>
-        <Function Name="待阅信息详情" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="MessageId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="待阅信息已阅" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="MessageId" Type="int" Mode="In" />
-          <Parameter Name="UserId" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="CommitRead" Type="bit" Mode="In" />
-        </Function>
-        <Function Name="未阅寻呼附件" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="CallID" Type="nvarchar(max)" Mode="In" />
-        </Function>
-        <Function Name="未阅寻呼列表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
-        </Function>
-        <Function Name="未阅寻呼数量" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
-        </Function>
-        <Function Name="未阅寻呼已阅" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="CallNoSeeId" Type="int" Mode="In" />
-        </Function>
-        <EntityContainer Name="C6ModelStoreContainer">
-          <EntitySet Name="待阅信息列表_Result" EntityType="Self.待阅信息列表_Result" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [待阅信息列表_Result].[MessageID] AS [MessageID], 
-    [待阅信息列表_Result].[UserName] AS [UserName], 
-    [待阅信息列表_Result].[SendTime] AS [SendTime], 
-    [待阅信息列表_Result].[MessageTitle] AS [MessageTitle], 
-    [待阅信息列表_Result].[ModuleTypeID] AS [ModuleTypeID]
-    FROM [dbo].[待阅信息列表_Result] AS [待阅信息列表_Result]</DefiningQuery>
-          </EntitySet>
-        </EntityContainer>
+        <EntityContainer Name="C6ModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="C6Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="C6Entities" annotation:LazyLoadingEnabled="true" >
-          <FunctionImport Name="未阅寻呼数量" ReturnType="Collection(Int32)">
-          <Parameter Name="LoginCode" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="待办事项数量" ReturnType="Collection(Int32)">
-          <Parameter Name="LoginCode" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="未阅寻呼列表" ReturnType="Collection(C6Model.未阅寻呼列表_Result)">
-          <Parameter Name="LoginCode" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="待阅信息数量" ReturnType="Collection(Int32)">
+          <FunctionImport Name="f____Mobile_Count" ReturnType="Collection(C6Model.f____Mobile_Count_Result)">
             <Parameter Name="LoginCode" Mode="In" Type="String" />
-            <Parameter Name="ModuleType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="待阅信息列表" EntitySet="待阅信息列表_Result" ReturnType="Collection(C6Model.待阅信息列表_Result)">
-            <Parameter Name="LoginCode" Mode="In" Type="String" />
-            <Parameter Name="ModuleType" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="待阅信息列表_Result" EntityType="C6Model.待阅信息列表_Result" />
-          <FunctionImport Name="未阅寻呼已阅">
-          <Parameter Name="CallNoSeeId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="未阅寻呼附件" ReturnType="Collection(C6Model.未阅寻呼附件_Result)">
-          <Parameter Name="CallID" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="待阅信息详情" ReturnType="Collection(C6Model.待阅信息详情_Result)">
-          <Parameter Name="MessageId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="待阅信息已阅" ReturnType="Collection(DateTime)">
-            <Parameter Name="MessageId" Mode="In" Type="Int32" />
-            <Parameter Name="UserId" Mode="In" Type="String" />
-            <Parameter Name="CommitRead" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="待办事项列表" ReturnType="Collection(C6Model.待办事项列表_Result)">
-          <Parameter Name="LoginCode" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="待办事项详情" ReturnType="Collection(C6Model.待办事项详情_Result)">
-            <Parameter Name="LoginCode" Mode="In" Type="String" />
-            <Parameter Name="ApproveId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="待办事项按钮" ReturnType="Collection(C6Model.待办事项按钮_Result)">
-            <Parameter Name="AppD_ID" Mode="In" Type="Int32" />
-            <Parameter Name="Version" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="未阅寻呼列表_Result">
-          <Property Type="Int32" Name="CallNoSeeID" Nullable="false" />
-          <Property Type="Int32" Name="CallID" Nullable="false" />
-          <Property Type="DateTime" Name="CallTime" Nullable="false" Precision="23" />
-          <Property Type="String" Name="CallContent" Nullable="true" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <EntityType Name="待阅信息列表_Result">
-          <Key>
-            <PropertyRef Name="MessageID" />
-          </Key>
-          <Property Name="MessageID" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SendTime" Type="DateTime" Precision="3" />
-          <Property Name="MessageTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="ModuleTypeID" Type="Int32" />
-        </EntityType>
-        <ComplexType Name="未阅寻呼附件_Result">
-          <Property Type="String" Name="SlaveID" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="SlaveName" Nullable="false" MaxLength="1000" />
-          <Property Type="String" Name="FilePath" Nullable="false" MaxLength="500" />
-        </ComplexType>
-        <ComplexType Name="待阅信息详情_Result">
-          <Property Type="Int32" Name="MessageID" Nullable="false" />
-          <Property Type="Int32" Name="ModuleTypeID" Nullable="true" />
-          <Property Type="String" Name="MessageTitle" Nullable="true" MaxLength="1000" />
-          <Property Type="DateTime" Name="SendTime" Nullable="true" Precision="23" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="MessageHTML" Nullable="true" MaxLength="Max" />
-          <Property Type="String" Name="MessageFileName" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="FileType" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="MessageType" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="待办事项列表_Result">
-          <Property Type="Int32" Name="App_ID" Nullable="false" />
-          <Property Type="String" Name="AppO_Title" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Sub_Code" Nullable="false" MaxLength="20" />
-          <Property Type="DateTime" Name="Sub_Time" Nullable="false" Precision="23" />
-          <Property Type="String" Name="TEM_Name" Nullable="false" MaxLength="256" />
-        </ComplexType>
-        <ComplexType Name="待办事项详情_Result">
-          <Property Type="Int32" Name="App_ID" Nullable="false" />
-          <Property Type="Int32" Name="App_FatherID" Nullable="false" />
-          <Property Type="String" Name="AppT_ID" Nullable="false" MaxLength="256" />
-          <Property Type="String" Name="AppD_Name" Nullable="false" MaxLength="200" />
-          <Property Type="Int32" Name="AppD_ID" Nullable="false" />
-          <Property Type="Int32" Name="AppO_ID" Nullable="false" />
-          <Property Type="String" Name="AppO_Values" Nullable="true" MaxLength="1000" />
-          <Property Type="String" Name="AppO_Title" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="App_Flag" Nullable="false" />
-          <Property Type="Int32" Name="App_IdeaFlag" Nullable="false" />
-          <Property Type="Int32" Name="App_Order" Nullable="false" />
-          <Property Type="Int32" Name="App_OrderSub" Nullable="false" />
-          <Property Type="String" Name="App_InnerIdea" Nullable="true" MaxLength="5000" />
-          <Property Type="String" Name="Sub_Code" Nullable="false" MaxLength="20" />
-          <Property Type="DateTime" Name="Sub_Time" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="AppT_Flag" Nullable="false" />
-          <Property Type="String" Name="Instance_ID" Nullable="true" MaxLength="32" />
-          <Property Type="String" Name="Status" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Version" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Form_ID" Nullable="true" MaxLength="256" />
-          <Property Type="String" Name="TEM_Name" Nullable="false" MaxLength="256" />
-        </ComplexType>
-        <ComplexType Name="待办事项按钮_Result">
-          <Property Type="Int32" Name="AppDA_ID" Nullable="false" />
-          <Property Type="String" Name="AppT_ID" Nullable="false" MaxLength="256" />
-          <Property Type="Int32" Name="AppD_ID" Nullable="false" />
-          <Property Type="Int32" Name="AppDA_Type" Nullable="false" />
-          <Property Type="String" Name="AppDA_ButtonValue" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="AppDA_Desc" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="AppDA_Content" Nullable="true" MaxLength="8000" />
-          <Property Type="Int32" Name="AppDA_SelectFlag" Nullable="true" />
-          <Property Type="String" Name="Sub_Code" Nullable="false" MaxLength="20" />
-          <Property Type="DateTime" Name="Sub_Time" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="del_Flag" Nullable="false" />
-          <Property Type="String" Name="Version" Nullable="true" MaxLength="100" />
+        <ComplexType Name="f____Mobile_Count_Result">
+          <Property Type="Int32" Name="CallToRead" Nullable="true" />
+          <Property Type="Int32" Name="CallRead" Nullable="true" />
+          <Property Type="Int32" Name="MessageToRead" Nullable="true" />
+          <Property Type="Int32" Name="TaskToDo" Nullable="true" />
+          <Property Type="Int32" Name="TaskDone" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -205,114 +31,14 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="C6ModelStoreContainer" CdmEntityContainer="C6Entities" >
-          <FunctionImportMapping FunctionImportName="未阅寻呼数量" FunctionName="C6Model.Store.未阅寻呼数量" />
-          <FunctionImportMapping FunctionImportName="待办事项数量" FunctionName="C6Model.Store.待办事项数量" />
-          <FunctionImportMapping FunctionImportName="未阅寻呼列表" FunctionName="C6Model.Store.未阅寻呼列表">
+          <FunctionImportMapping FunctionImportName="f____Mobile_Count" FunctionName="C6Model.Store.f____Mobile_Count">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="C6Model.未阅寻呼列表_Result">
-                <ScalarProperty Name="CallNoSeeID" ColumnName="CallNoSeeID" />
-                <ScalarProperty Name="CallID" ColumnName="CallID" />
-                <ScalarProperty Name="CallTime" ColumnName="CallTime" />
-                <ScalarProperty Name="CallContent" ColumnName="CallContent" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="待阅信息数量" FunctionName="C6Model.Store.待阅信息数量" />
-          <FunctionImportMapping FunctionImportName="待阅信息列表" FunctionName="C6Model.Store.待阅信息列表" />
-          <EntitySetMapping Name="待阅信息列表_Result">
-            <EntityTypeMapping TypeName="C6Model.待阅信息列表_Result">
-              <MappingFragment StoreEntitySet="待阅信息列表_Result">
-                <ScalarProperty Name="ModuleTypeID" ColumnName="ModuleTypeID" />
-                <ScalarProperty Name="MessageTitle" ColumnName="MessageTitle" />
-                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="未阅寻呼已阅" FunctionName="C6Model.Store.未阅寻呼已阅" />
-          <FunctionImportMapping FunctionImportName="未阅寻呼附件" FunctionName="C6Model.Store.未阅寻呼附件">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="C6Model.未阅寻呼附件_Result">
-                <ScalarProperty Name="SlaveID" ColumnName="SlaveID" />
-                <ScalarProperty Name="SlaveName" ColumnName="SlaveName" />
-                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="待阅信息详情" FunctionName="C6Model.Store.待阅信息详情">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="C6Model.待阅信息详情_Result">
-                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
-                <ScalarProperty Name="ModuleTypeID" ColumnName="ModuleTypeID" />
-                <ScalarProperty Name="MessageTitle" ColumnName="MessageTitle" />
-                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="MessageHTML" ColumnName="MessageHTML" />
-                <ScalarProperty Name="MessageFileName" ColumnName="MessageFileName" />
-                <ScalarProperty Name="FileType" ColumnName="FileType" />
-                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
-                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="待阅信息已阅" FunctionName="C6Model.Store.待阅信息已阅" />
-          <FunctionImportMapping FunctionImportName="待办事项列表" FunctionName="C6Model.Store.待办事项列表">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="C6Model.待办事项列表_Result">
-                <ScalarProperty Name="App_ID" ColumnName="App_ID" />
-                <ScalarProperty Name="AppO_Title" ColumnName="AppO_Title" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Sub_Code" ColumnName="Sub_Code" />
-                <ScalarProperty Name="Sub_Time" ColumnName="Sub_Time" />
-                <ScalarProperty Name="TEM_Name" ColumnName="TEM_Name" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="待办事项详情" FunctionName="C6Model.Store.待办事项详情">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="C6Model.待办事项详情_Result">
-                <ScalarProperty Name="App_ID" ColumnName="App_ID" />
-                <ScalarProperty Name="App_FatherID" ColumnName="App_FatherID" />
-                <ScalarProperty Name="AppT_ID" ColumnName="AppT_ID" />
-                <ScalarProperty Name="AppD_Name" ColumnName="AppD_Name" />
-                <ScalarProperty Name="AppD_ID" ColumnName="AppD_ID" />
-                <ScalarProperty Name="AppO_ID" ColumnName="AppO_ID" />
-                <ScalarProperty Name="AppO_Values" ColumnName="AppO_Values" />
-                <ScalarProperty Name="AppO_Title" ColumnName="AppO_Title" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="App_Flag" ColumnName="App_Flag" />
-                <ScalarProperty Name="App_IdeaFlag" ColumnName="App_IdeaFlag" />
-                <ScalarProperty Name="App_Order" ColumnName="App_Order" />
-                <ScalarProperty Name="App_OrderSub" ColumnName="App_OrderSub" />
-                <ScalarProperty Name="App_InnerIdea" ColumnName="App_InnerIdea" />
-                <ScalarProperty Name="Sub_Code" ColumnName="Sub_Code" />
-                <ScalarProperty Name="Sub_Time" ColumnName="Sub_Time" />
-                <ScalarProperty Name="AppT_Flag" ColumnName="AppT_Flag" />
-                <ScalarProperty Name="Instance_ID" ColumnName="Instance_ID" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="Form_ID" ColumnName="Form_ID" />
-                <ScalarProperty Name="TEM_Name" ColumnName="TEM_Name" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="待办事项按钮" FunctionName="C6Model.Store.待办事项按钮">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="C6Model.待办事项按钮_Result">
-                <ScalarProperty Name="AppDA_ID" ColumnName="AppDA_ID" />
-                <ScalarProperty Name="AppT_ID" ColumnName="AppT_ID" />
-                <ScalarProperty Name="AppD_ID" ColumnName="AppD_ID" />
-                <ScalarProperty Name="AppDA_Type" ColumnName="AppDA_Type" />
-                <ScalarProperty Name="AppDA_ButtonValue" ColumnName="AppDA_ButtonValue" />
-                <ScalarProperty Name="AppDA_Desc" ColumnName="AppDA_Desc" />
-                <ScalarProperty Name="AppDA_Content" ColumnName="AppDA_Content" />
-                <ScalarProperty Name="AppDA_SelectFlag" ColumnName="AppDA_SelectFlag" />
-                <ScalarProperty Name="Sub_Code" ColumnName="Sub_Code" />
-                <ScalarProperty Name="Sub_Time" ColumnName="Sub_Time" />
-                <ScalarProperty Name="del_Flag" ColumnName="del_Flag" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_Count_Result">
+                <ScalarProperty Name="CallToRead" ColumnName="CallToRead" />
+                <ScalarProperty Name="CallRead" ColumnName="CallRead" />
+                <ScalarProperty Name="MessageToRead" ColumnName="MessageToRead" />
+                <ScalarProperty Name="TaskToDo" ColumnName="TaskToDo" />
+                <ScalarProperty Name="TaskDone" ColumnName="TaskDone" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
