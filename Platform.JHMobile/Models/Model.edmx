@@ -8,6 +8,12 @@
         <Function Name="f____Mobile_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_Count_CallToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_CallToRead">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f____Mobile_List_CallToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_CallToRead">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="C6ModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -15,6 +21,12 @@
       <Schema Namespace="C6Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="C6Entities" annotation:LazyLoadingEnabled="true" >
           <FunctionImport Name="f____Mobile_Count" ReturnType="Collection(C6Model.f____Mobile_Count_Result)">
+          <Parameter Name="LoginCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_Count_CallToRead" ReturnType="Collection(Int32)">
+          <Parameter Name="LoginCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_CallToRead" ReturnType="Collection(C6Model.f____Mobile_List_CallToRead_Result)">
             <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
@@ -24,6 +36,13 @@
           <Property Type="Int32" Name="MessageToRead" Nullable="true" />
           <Property Type="Int32" Name="TaskToDo" Nullable="true" />
           <Property Type="Int32" Name="TaskDone" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_CallToRead_Result">
+          <Property Type="Int32" Name="CallNoSeeID" Nullable="false" />
+          <Property Type="Int32" Name="CallID" Nullable="false" />
+          <Property Type="DateTime" Name="CallTime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CallContent" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -39,6 +58,18 @@
                 <ScalarProperty Name="MessageToRead" ColumnName="MessageToRead" />
                 <ScalarProperty Name="TaskToDo" ColumnName="TaskToDo" />
                 <ScalarProperty Name="TaskDone" ColumnName="TaskDone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f____Mobile_Count_CallToRead" FunctionName="C6Model.Store.f____Mobile_Count_CallToRead" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_CallToRead" FunctionName="C6Model.Store.f____Mobile_List_CallToRead">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_CallToRead_Result">
+                <ScalarProperty Name="CallNoSeeID" ColumnName="CallNoSeeID" />
+                <ScalarProperty Name="CallID" ColumnName="CallID" />
+                <ScalarProperty Name="CallTime" ColumnName="CallTime" />
+                <ScalarProperty Name="CallContent" ColumnName="CallContent" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
