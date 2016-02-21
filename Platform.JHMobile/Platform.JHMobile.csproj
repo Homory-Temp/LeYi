@@ -144,16 +144,12 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DingController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\JinHerController.cs" />
     <Compile Include="Models\JinHerAES.cs" />
-    <Compile Include="Models\CallObject.cs" />
     <Compile Include="Models\DingTalk.cs" />
-    <Compile Include="Models\TaskObject.cs" />
-    <Compile Include="Models\MessageObject.cs" />
     <Compile Include="Models\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -524,15 +520,6 @@
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Home.cshtml" />
-    <Content Include="Views\Home\Call.cshtml" />
-    <Content Include="Views\Home\Message.cshtml" />
-    <Content Include="Views\Home\MessageModule.cshtml" />
-    <Content Include="Views\Home\MessagePreview.cshtml" />
-    <Content Include="Views\Home\CallPreview.cshtml" />
-    <Content Include="Views\Home\Task.cshtml" />
-    <Content Include="Views\Home\TaskGo.cshtml" />
     <Content Include="Views\Ding\Authentication.cshtml" />
     <Content Include="Views\Ding\Authorization.cshtml" />
     <Content Include="Views\Ding\Home.cshtml" />
