@@ -18,6 +18,12 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authentication();
+            ViewBag.CallToRead = 0;
+            ViewBag.CallRead = 1;
+            ViewBag.MessageModule = 2;
+            ViewBag.MessageToRead = 3;
+            ViewBag.TaskToDo = 4;
+            ViewBag.TaskDone = 5;
             return View();
         }
     }
