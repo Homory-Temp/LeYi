@@ -6,11 +6,11 @@ namespace Platform.JHMobile.Models
 {
     public class DingTalk
     {
-        public static string corp_id = WebConfigurationManager.AppSettings["corp_id"];
-        public static string corp_secret = WebConfigurationManager.AppSettings["corp_secret"];
-        public static string corp_url = WebConfigurationManager.AppSettings["corp_url"];
-        public static string corp_jinher = WebConfigurationManager.AppSettings["corp_jinher"];
-        public static Dictionary<string, string> corp_modules
+        public static string CorpId = WebConfigurationManager.AppSettings["corp_id"];
+        public static string CorpSecret = WebConfigurationManager.AppSettings["corp_secret"];
+        public static string CorpUrl = WebConfigurationManager.AppSettings["corp_url"];
+        public static string CorpJinHer = WebConfigurationManager.AppSettings["corp_jinher"];
+        public static Dictionary<string, string> CorpModules
         {
             get
             {

@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Platform.JHMobile.Controllers
 {
-    public class HomeController : Controller
+    public class DingController : Controller
     {
         private C6Entities db = new C6Entities();
 

@@ -144,10 +144,12 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\JinHerController.cs" />
     <Compile Include="Models\JinHerAES.cs" />
     <Compile Include="Models\CallObject.cs" />
     <Compile Include="Models\DingTalk.cs" />
