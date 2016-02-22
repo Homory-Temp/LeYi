@@ -51,7 +51,7 @@ public partial class DepotQuery_UsePrint : DepotPageSingle
                 var objId = us.ObjectId;
                 var obj = DataContext.DepotObject.Single(o => o.Id == objId);
                 var catalog = DataContext.DepotObjectCatalog.Single(o => o.ObjectId == objId && o.IsLeaf == true && o.IsVirtual == isVirtual);
-                list.Add(new UseRecord { ObjectId = us.ObjectId, Name = obj.Name, Brand = obj.Brand, Catalog = DataContext.ToCatalog(catalog.CatalogId, catalog.Level).Single(), Type = us.Type, Unit = obj.Unit, Specification = obj.Specification, Amount = us.Amount, Money = us.Money, Note = us.Note, InId = us.InXId, PerPrice = decimal.Divide(us.Money, us.Amount) });
+                list.Add(new UseRecord { ObjectId = us.ObjectId, Name = obj.Name, Brand = obj.Brand, Catalog = DataContext.ToCatalog(catalog.CatalogId, catalog.Level).Single(), Type = us.Type, Unit = obj.Unit, Specification = obj.Specification, Amount = us.Amount, Money = us.Money, Note = us.Note, InId = us.InXId, PerPrice = us.Amount == 0 ? us.DepotInX.PriceSet : decimal.Divide(us.Money, us.Amount) });
             }
             else
             {
