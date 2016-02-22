@@ -199,5 +199,14 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_Message_Result>("f____Mobile_List_Message", loginCodeParameter);
         }
+    
+        public virtual ObjectResult<string> f____Mobile_List_User(string loginCode)
+        {
+            var loginCodeParameter = loginCode != null ?
+                new ObjectParameter("LoginCode", loginCode) :
+                new ObjectParameter("LoginCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("f____Mobile_List_User", loginCodeParameter);
+        }
     }
 }

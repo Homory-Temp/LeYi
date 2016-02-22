@@ -60,6 +60,9 @@
           <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_List_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_User">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="C6ModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -116,9 +119,12 @@
             <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_Count_Message" ReturnType="Collection(Int32)">
-            <Parameter Name="LoginCode" Mode="In" Type="String" />
+          <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_List_Message" ReturnType="Collection(C6Model.f____Mobile_List_Message_Result)">
+          <Parameter Name="LoginCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_User" ReturnType="Collection(String)">
             <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
@@ -286,6 +292,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_User" FunctionName="C6Model.Store.f____Mobile_List_User" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
