@@ -12,7 +12,7 @@ namespace Platform.JHMobile.Controllers
         public ActionResult Message()
         {
             if (string.IsNullOrEmpty(Account))
-                return new DingController().Authentication();
+                return Authenticate();
             var count = db.f____Mobile_Count_Message(Account).FirstOrDefault().Value;
             var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
             var per = 10;
@@ -28,7 +28,7 @@ namespace Platform.JHMobile.Controllers
         public ActionResult MessageModule()
         {
             if (string.IsNullOrEmpty(Account))
-                return new DingController().Authentication();
+                return Authenticate();
             var mo = new List<MessageModuleObject>();
             foreach (var pair in DingTalk.CorpMessageModules)
             {
@@ -40,7 +40,7 @@ namespace Platform.JHMobile.Controllers
         public ActionResult MessageModuleSingle()
         {
             if (string.IsNullOrEmpty(Account))
-                return new DingController().Authentication();
+                return Authenticate();
             var sp = RouteData.Values["id"].ToString().Split(new char[] { '_' });
             var type = sp[0];
             var count = db.f____Mobile_Count_MessageModule(Account, type).Single().Value;
@@ -59,7 +59,7 @@ namespace Platform.JHMobile.Controllers
         public ActionResult MessageModulePreview()
         {
             if (string.IsNullOrEmpty(Account))
-                return new DingController().Authentication();
+                return Authenticate();
             var id = RouteData.Values["id"].ToString();
             if (string.IsNullOrEmpty(id))
                 return MessageModule();
@@ -100,7 +100,7 @@ namespace Platform.JHMobile.Controllers
         public ActionResult DoMessageRead()
         {
             if (string.IsNullOrEmpty(Account))
-                return new DingController().Authentication();
+                return Authenticate();
             var id = RouteData.Values["id"].ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("MessageModule", "Message");

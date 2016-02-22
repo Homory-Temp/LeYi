@@ -41,11 +41,6 @@ namespace Platform.JHMobile.Controllers
             return RedirectToAction("Authentication", "Ding");
         }
 
-        protected ActionResult Authorize()
-        {
-            return RedirectToAction("Authorization", "Ding");
-        }
-
         protected string ConvertDoc(string doc)
         {
             if (string.IsNullOrEmpty(doc))

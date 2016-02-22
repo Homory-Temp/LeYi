@@ -10,7 +10,7 @@ namespace Platform.JHMobile.Controllers
         public ActionResult CallToRead()
         {
             if (string.IsNullOrEmpty(Account))
-                return new DingController().Authentication();
+                return Authenticate();
             var count = db.f____Mobile_Count_CallToRead(Account).FirstOrDefault().Value;
             var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
             var per = 10;
@@ -26,7 +26,7 @@ namespace Platform.JHMobile.Controllers
         public ActionResult CallRead()
         {
             if (string.IsNullOrEmpty(Account))
-                return new DingController().Authentication();
+                return Authenticate();
             var count = db.f____Mobile_Count_CallRead(Account).FirstOrDefault().Value;
             var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
             var per = 10;
@@ -42,7 +42,7 @@ namespace Platform.JHMobile.Controllers
         public ActionResult CallToReadPreview()
         {
             if (string.IsNullOrEmpty(Account))
-                return new DingController().Authentication();
+                return Authenticate();
             var id = RouteData.Values["id"].ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("CallToRead", "Call");
@@ -65,7 +65,7 @@ namespace Platform.JHMobile.Controllers
         public ActionResult CallReadPreview()
         {
             if (string.IsNullOrEmpty(Account))
-                return new DingController().Authentication();
+                return Authenticate();
             var id = RouteData.Values["id"].ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("CallRead", "Call");
@@ -88,7 +88,7 @@ namespace Platform.JHMobile.Controllers
         public ActionResult DoCallRead()
         {
             if (string.IsNullOrEmpty(Account))
-                return new DingController().Authentication();
+                return Authenticate();
             var id = RouteData.Values["id"].ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("CallToRead", "Call");

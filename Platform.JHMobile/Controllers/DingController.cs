@@ -8,22 +8,18 @@ namespace Platform.JHMobile.Controllers
     {
         public ActionResult Authentication()
         {
-            if (string.IsNullOrEmpty(Account))
-                return View("");
             return View(Account);
         }
 
         public ActionResult Authorization()
         {
-            if (string.IsNullOrEmpty(Account))
-                return View("");
             return View(Account);
         }
 
         public ActionResult Home()
         {
             if (string.IsNullOrEmpty(Account))
-                return Authentication();
+                return Authenticate();
             var count = db.f____Mobile_Count(Account).FirstOrDefault();
             ViewBag.CallToRead = count.CallToRead;
             ViewBag.CallRead = count.CallRead;
