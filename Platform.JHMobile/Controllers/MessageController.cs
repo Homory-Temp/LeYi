@@ -13,7 +13,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
-            var count = db.f____Mobile_Count_Message(Account).FirstOrDefault().Value;
+            var count = db.f____Mobile_Count_Message(Account).Single().Value;
             var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
             var per = 10;
             if (count < id * per)

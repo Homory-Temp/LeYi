@@ -20,7 +20,8 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
-            var user = db.f____Mobile_List_User(Account).Single();
+            var query = db.f____Mobile_List_User(Account);
+            var user = query == null || query.SingleOrDefault() == null ? "" : query.SingleOrDefault();
             if (string.IsNullOrEmpty(user))
             {
                 ViewBag.Forbidden = true;
