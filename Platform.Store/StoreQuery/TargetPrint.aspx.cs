@@ -15,6 +15,16 @@ public partial class StoreQuery_TargetPrint : SingleStorePage
         {
             var targetId = "TargetId".Query().GlobalId();
             var target = db.Value.StoreTarget.Single(o => o.Id == targetId);
+
+
+
+            var money = target.StoreIn.Where(o => o.SourceAmount > 0).Sum(o => o.SourceMoney);
+            target.Paid = money;
+            target.AdjustedMoney = money;
+
+            db.Value.SaveChanges();
+
+
             campus.InnerText = db.Value.Department.Single(o => o.Id == CurrentCampus).Name;
             time.InnerText = target.TimeNode.FromTimeNode();
             order.Value = target.OrderSource;
@@ -22,6 +32,9 @@ public partial class StoreQuery_TargetPrint : SingleStorePage
             keep.Value = target.KeepUserId.HasValue ? db.Value.GetUserName(target.KeepUserId.Value) : "";
             brokerage.Value = target.BrokerageUserId.HasValue ? db.Value.GetUserName(target.BrokerageUserId.Value) : "";
             ___target.InnerText = target.UsageTarget;
+
+
+
         }
     }
 

@@ -113,10 +113,6 @@ public partial class StoreQuery_Target : SingleStorePage
         target.AdjustedMoney = money;
 
         db.Value.SaveChanges();
-
-
-
-        db.Value.SaveChanges();
         Response.Redirect("~/StoreQuery/TargetPrint?StoreId={0}&TargetId={1}".Formatted(StoreId, (sender as HtmlInputButton).Attributes["match"].GlobalId()));
     }
 
