@@ -14,6 +14,9 @@
         <Function Name="f____Mobile_Count_CallToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_CallToRead">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_Count_Message" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_Message">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_Count_MessageModule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_MessageModule">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
@@ -33,6 +36,9 @@
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="f____Mobile_List_CallToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_CallToRead">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f____Mobile_List_Message" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_Message">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="f____Mobile_List_MessageAttachment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageAttachment">
@@ -109,6 +115,12 @@
             <Parameter Name="ModuleType" Mode="In" Type="String" />
             <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="f____Mobile_Count_Message" ReturnType="Collection(Int32)">
+            <Parameter Name="LoginCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_Message" ReturnType="Collection(C6Model.f____Mobile_List_Message_Result)">
+            <Parameter Name="LoginCode" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
           <Property Type="Int32" Name="CallToRead" Nullable="true" />
@@ -158,6 +170,16 @@
           <Property Type="String" Name="FileID" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="FileName" Nullable="true" MaxLength="1000" />
           <Property Type="String" Name="FilePath" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_Message_Result">
+          <Property Type="Int32" Name="AppG_ID" Nullable="false" />
+          <Property Type="String" Name="AppT_ID" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="TEM_Name" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="Instance_ID" Nullable="true" MaxLength="32" />
+          <Property Type="DateTime" Name="AppG_Begintime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AppG_Code" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="AppO_Title" Nullable="true" MaxLength="500" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -249,6 +271,21 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f____Mobile_Do_MessageRead" FunctionName="C6Model.Store.f____Mobile_Do_MessageRead" />
           <FunctionImportMapping FunctionImportName="f____Mobile_List_MessageModuleSingleReadPersonal" FunctionName="C6Model.Store.f____Mobile_List_MessageModuleSingleReadPersonal" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_Count_Message" FunctionName="C6Model.Store.f____Mobile_Count_Message" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_Message" FunctionName="C6Model.Store.f____Mobile_List_Message">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_Message_Result">
+                <ScalarProperty Name="AppG_ID" ColumnName="AppG_ID" />
+                <ScalarProperty Name="AppT_ID" ColumnName="AppT_ID" />
+                <ScalarProperty Name="TEM_Name" ColumnName="TEM_Name" />
+                <ScalarProperty Name="Instance_ID" ColumnName="Instance_ID" />
+                <ScalarProperty Name="AppG_Begintime" ColumnName="AppG_Begintime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AppG_Code" ColumnName="AppG_Code" />
+                <ScalarProperty Name="AppO_Title" ColumnName="AppO_Title" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -9,6 +9,22 @@ namespace Platform.JHMobile.Controllers
 {
     public class MessageController : JinHerController
     {
+        public ActionResult Message()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return new DingController().Authentication();
+            var count = db.f____Mobile_Count_Message(Account).FirstOrDefault().Value;
+            var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
+            var per = 10;
+            if (count < id * per)
+                return RedirectToAction("Message", "Message", new { id = id - 1 });
+            var list = db.f____Mobile_List_Message(Account).OrderByDescending(o => o.AppG_Begintime).Skip(id * per).Take(per).ToList();
+            ViewBag.Min = 0;
+            ViewBag.Max = count % per == 0 ? count / per - 1 : (count + (per - count % per)) / per - 1;
+            ViewBag.Current = id;
+            return View(list);
+        }
+
         public ActionResult MessageModule()
         {
             if (string.IsNullOrEmpty(Account))
