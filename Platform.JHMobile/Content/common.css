@@ -53,3 +53,7 @@
 .metro_5 {
     background-color: #6fb57f;
 }
+
+.panel-heading span a, .panel-heading span a:hover, .panel-heading span a:active, .panel-heading span a:visited {
+    color: white;
+}
