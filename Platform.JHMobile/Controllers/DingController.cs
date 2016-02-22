@@ -8,11 +8,15 @@ namespace Platform.JHMobile.Controllers
     {
         public ActionResult Authentication()
         {
+            if (string.IsNullOrEmpty(Account))
+                return View("");
             return View(Account);
         }
 
         public ActionResult Authorization()
         {
+            if (string.IsNullOrEmpty(Account))
+                return View("");
             return View(Account);
         }
 
