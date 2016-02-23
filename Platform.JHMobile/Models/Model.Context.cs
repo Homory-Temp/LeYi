@@ -256,5 +256,14 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f____Mobile_Do_MessageReadDone", giveOutIdParameter, loginCodeParameter);
         }
+    
+        public virtual ObjectResult<string> f____Mobile_List_MessageRead(Nullable<int> giveOutId)
+        {
+            var giveOutIdParameter = giveOutId.HasValue ?
+                new ObjectParameter("GiveOutId", giveOutId) :
+                new ObjectParameter("GiveOutId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("f____Mobile_List_MessageRead", giveOutIdParameter);
+        }
     }
 }
