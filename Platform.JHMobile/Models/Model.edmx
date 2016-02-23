@@ -153,14 +153,14 @@
             <Parameter Name="FromTime" Mode="In" Type="DateTime" />
             <Parameter Name="ToTime" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="f____Mobile_List_MessageSend" ReturnType="Collection(C6Model.f____Mobile_List_MessageSend_Result)">
-          <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="f____Mobile_Do_MessageReadDone">
             <Parameter Name="GiveOutId" Mode="In" Type="Int32" />
             <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_List_MessageReceive" ReturnType="Collection(C6Model.f____Mobile_List_MessageReceive_Result)">
+          <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_MessageSend" ReturnType="Collection(C6Model.f____Mobile_List_MessageSend_Result)">
             <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -234,20 +234,6 @@
           <Property Type="String" Name="CallContent" Nullable="true" MaxLength="8000" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="f____Mobile_List_MessageSend_Result">
-          <Property Type="Int32" Name="AppG_ID" Nullable="false" />
-          <Property Type="String" Name="SendTitle" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="UserID" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="SendKey" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="SendZsdw" Nullable="true" MaxLength="500" />
-          <Property Type="DateTime" Name="AppG_Begintime" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="SubDate" Nullable="true" Precision="23" />
-          <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="TypeName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="ArchivesTypeName" Nullable="false" MaxLength="250" />
-          <Property Type="String" Name="FileName" Nullable="true" MaxLength="500" />
-        </ComplexType>
         <ComplexType Name="f____Mobile_List_MessageReceive_Result">
           <Property Type="Int32" Name="AppG_ID" Nullable="false" />
           <Property Type="String" Name="AcceptTitle" Nullable="true" MaxLength="500" />
@@ -259,7 +245,19 @@
           <Property Type="DateTime" Name="AcceptDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="TypeName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="ArchivesTypeName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_MessageSend_Result">
+          <Property Type="Int32" Name="AppG_ID" Nullable="false" />
+          <Property Type="String" Name="SendTitle" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SendKey" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SendZsdw" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="AppG_Begintime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="SubDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TypeName" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="FileName" Nullable="true" MaxLength="500" />
         </ComplexType>
       </Schema>
@@ -387,24 +385,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="f____Mobile_List_MessageSend" FunctionName="C6Model.Store.f____Mobile_List_MessageSend">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_MessageSend_Result">
-                <ScalarProperty Name="AppG_ID" ColumnName="AppG_ID" />
-                <ScalarProperty Name="SendTitle" ColumnName="SendTitle" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="SendKey" ColumnName="SendKey" />
-                <ScalarProperty Name="SendZsdw" ColumnName="SendZsdw" />
-                <ScalarProperty Name="AppG_Begintime" ColumnName="AppG_Begintime" />
-                <ScalarProperty Name="SubDate" ColumnName="SubDate" />
-                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
-                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
-                <ScalarProperty Name="ArchivesTypeName" ColumnName="ArchivesTypeName" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f____Mobile_Do_MessageReadDone" FunctionName="C6Model.Store.f____Mobile_Do_MessageReadDone" />
           <FunctionImportMapping FunctionImportName="f____Mobile_List_MessageReceive" FunctionName="C6Model.Store.f____Mobile_List_MessageReceive">
             <ResultMapping>
@@ -419,7 +399,23 @@
                 <ScalarProperty Name="AcceptDate" ColumnName="AcceptDate" />
                 <ScalarProperty Name="DeptName" ColumnName="DeptName" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
-                <ScalarProperty Name="ArchivesTypeName" ColumnName="ArchivesTypeName" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_MessageSend" FunctionName="C6Model.Store.f____Mobile_List_MessageSend">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_MessageSend_Result">
+                <ScalarProperty Name="AppG_ID" ColumnName="AppG_ID" />
+                <ScalarProperty Name="SendTitle" ColumnName="SendTitle" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="SendKey" ColumnName="SendKey" />
+                <ScalarProperty Name="SendZsdw" ColumnName="SendZsdw" />
+                <ScalarProperty Name="AppG_Begintime" ColumnName="AppG_Begintime" />
+                <ScalarProperty Name="SubDate" ColumnName="SubDate" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
               </ComplexTypeMapping>
             </ResultMapping>

@@ -23,7 +23,6 @@ namespace Platform.JHMobile.Models
         public Nullable<System.DateTime> AcceptDate { get; set; }
         public string DeptName { get; set; }
         public string TypeName { get; set; }
-        public string ArchivesTypeName { get; set; }
         public string FileName { get; set; }
     }
 }
