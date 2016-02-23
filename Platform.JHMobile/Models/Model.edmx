@@ -60,6 +60,9 @@
           <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_List_MessageType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageType">
+          <Parameter Name="AppG_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_List_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_User">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -125,7 +128,10 @@
           <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_List_User" ReturnType="Collection(String)">
-            <Parameter Name="LoginCode" Mode="In" Type="String" />
+          <Parameter Name="LoginCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_MessageType" ReturnType="Collection(C6Model.f____Mobile_List_MessageType_Result)">
+            <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
@@ -186,6 +192,11 @@
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="AppG_Code" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="AppO_Title" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_MessageType_Result">
+          <Property Type="Int32" Name="AppG_ID" Nullable="false" />
+          <Property Type="String" Name="AppT_ID" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="AppO_ID" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -293,6 +304,15 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f____Mobile_List_User" FunctionName="C6Model.Store.f____Mobile_List_User" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_MessageType" FunctionName="C6Model.Store.f____Mobile_List_MessageType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_MessageType_Result">
+                <ScalarProperty Name="AppG_ID" ColumnName="AppG_ID" />
+                <ScalarProperty Name="AppT_ID" ColumnName="AppT_ID" />
+                <ScalarProperty Name="AppO_ID" ColumnName="AppO_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

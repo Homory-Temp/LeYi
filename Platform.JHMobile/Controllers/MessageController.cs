@@ -109,5 +109,64 @@ namespace Platform.JHMobile.Controllers
             db.f____Mobile_Do_MessageRead(int_id, sp[1], Account);
             return RedirectToAction("MessageModuleSingle", "Message", new { id = sp[1] });
         }
+
+        public ActionResult MessageToPreview()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var id = RouteData.Values["id"].ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("Message", "Message");
+            var int_id = int.Parse(id);
+            var type = db.f____Mobile_List_MessageType(int_id).FirstOrDefault();
+            if (type.AppT_ID.StartsWith("IOA_Message", StringComparison.OrdinalIgnoreCase))
+            {
+                return RedirectToAction("MessageMessage", "Message", new { id = id });
+            }
+            return RedirectToAction("Message", "Message");
+        }
+
+        public ActionResult MessageMessagePreview()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var id = RouteData.Values["id"].ToString();
+            if (string.IsNullOrEmpty(id))
+                return MessageModule();
+            var int_idx = int.Parse(id);
+            var giveOut = db.f____Mobile_List_MessageType(int_idx).FirstOrDefault();
+            var int_id = int.Parse(giveOut.AppO_ID);
+            var message = db.f____Mobile_List_MessageModuleSingle(int_id).FirstOrDefault();
+            var name = message.MessageFileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+            var dir = new DirectoryInfo(Server.MapPath("~/Resource/MessageFile"));
+            ViewBag.Path = "";
+            ViewBag.ModuleTypeID = message.ModuleTypeID;
+            ViewBag.Read = db.f____Mobile_List_MessageModuleSingleReadPersonal(message.MessageID, message.ModuleTypeID.ToString(), Account).Single().Value;
+            ViewBag.PeopleRead = db.f____Mobile_List_MessageModuleSingleRead(message.MessageID, message.ModuleTypeID.ToString()).OrderBy(o => o).ToList().Aggregate("", (o, s) => o += s + "、", o => (o.Length == 0 ? "无" : o.Substring(0, o.Length - 1)));
+            foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+            {
+                if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                {
+                    string path = dir + "\\" + cDir.Name + "\\" + name;
+                    var converted = ConvertDoc(path);
+                    if (!string.IsNullOrEmpty(converted))
+                    {
+                        ViewBag.PDF = converted;
+                    }
+                }
+            }
+            var query = db.f____Mobile_List_MessageAttachment(message.MessageID.ToString()).OrderBy(o => o.FileID);
+            var list = query == null ? new List<f____Mobile_List_MessageAttachment_Result>() : query.ToList();
+            foreach (var path in list)
+            {
+                var source = DingTalk.CorpJinHer + path.FilePath.Substring(3).Replace("/", "\\");
+                var destination = source.Replace("__", "h__");
+                DecryptFile(source, destination);
+            }
+            var mo = new MessageModuleSingleObject();
+            mo.Object = message;
+            mo.List = list;
+            return View(mo);
+        }
     }
 }

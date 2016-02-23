@@ -149,6 +149,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\f____Mobile_List_MessageType_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\f____Mobile_List_Message_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -540,6 +543,7 @@
     <Content Include="Views\Message\MessageModuleSingle.cshtml" />
     <Content Include="Views\Message\MessageModulePreview.cshtml" />
     <Content Include="Views\Message\Message.cshtml" />
+    <Content Include="Views\Message\MessageMessagePreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
