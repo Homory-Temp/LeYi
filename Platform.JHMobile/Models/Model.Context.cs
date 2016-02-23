@@ -266,22 +266,22 @@ namespace Platform.JHMobile.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_MessageSend_Result>("f____Mobile_List_MessageSend", appG_IDParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> f____Mobile_Count_FlowDone(string loginCode)
+        public virtual ObjectResult<Nullable<int>> f____Mobile_Count_TaskDone(string loginCode)
         {
             var loginCodeParameter = loginCode != null ?
                 new ObjectParameter("LoginCode", loginCode) :
                 new ObjectParameter("LoginCode", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f____Mobile_Count_FlowDone", loginCodeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f____Mobile_Count_TaskDone", loginCodeParameter);
         }
     
-        public virtual ObjectResult<f____Mobile_List_FlowDone_Result> f____Mobile_List_FlowDone(string loginCode)
+        public virtual ObjectResult<f____Mobile_List_TaskDone_Result> f____Mobile_List_TaskDone(string loginCode)
         {
             var loginCodeParameter = loginCode != null ?
                 new ObjectParameter("LoginCode", loginCode) :
                 new ObjectParameter("LoginCode", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_FlowDone_Result>("f____Mobile_List_FlowDone", loginCodeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_TaskDone_Result>("f____Mobile_List_TaskDone", loginCodeParameter);
         }
     }
 }
