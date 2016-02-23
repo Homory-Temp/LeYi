@@ -217,5 +217,22 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_MessageType_Result>("f____Mobile_List_MessageType", appG_IDParameter);
         }
+    
+        public virtual int f____Mobile_Do_MessageReadDone(Nullable<int> messageId, string moduleType, string loginCode)
+        {
+            var messageIdParameter = messageId.HasValue ?
+                new ObjectParameter("MessageId", messageId) :
+                new ObjectParameter("MessageId", typeof(int));
+    
+            var moduleTypeParameter = moduleType != null ?
+                new ObjectParameter("ModuleType", moduleType) :
+                new ObjectParameter("ModuleType", typeof(string));
+    
+            var loginCodeParameter = loginCode != null ?
+                new ObjectParameter("LoginCode", loginCode) :
+                new ObjectParameter("LoginCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f____Mobile_Do_MessageReadDone", messageIdParameter, moduleTypeParameter, loginCodeParameter);
+        }
     }
 }

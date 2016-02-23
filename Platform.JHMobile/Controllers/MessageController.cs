@@ -168,5 +168,18 @@ namespace Platform.JHMobile.Controllers
             mo.List = list;
             return View(mo);
         }
+
+        public ActionResult DoMessageReadDone()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var id = RouteData.Values["id"].ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("Message", "Message");
+            var sp = id.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
+            var int_id = int.Parse(sp[0]);
+            db.f____Mobile_Do_MessageReadDone(int_id, sp[1], Account);
+            return RedirectToAction("Message", "Message");
+        }
     }
 }
