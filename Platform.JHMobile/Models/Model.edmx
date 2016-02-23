@@ -70,6 +70,9 @@
           <Parameter Name="MessageId" Type="int" Mode="In" />
           <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_List_MessageSend" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageSend">
+          <Parameter Name="AppG_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_List_MessageType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageType">
           <Parameter Name="AppG_ID" Type="int" Mode="In" />
         </Function>
@@ -153,6 +156,9 @@
             <Parameter Name="FromTime" Mode="In" Type="DateTime" />
             <Parameter Name="ToTime" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_MessageSend" ReturnType="Collection(C6Model.f____Mobile_List_MessageSend_Result)">
+            <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
           <Property Type="Int32" Name="CallToRead" Nullable="true" />
@@ -223,6 +229,20 @@
           <Property Type="DateTime" Name="CallTime" Nullable="false" Precision="23" />
           <Property Type="String" Name="CallContent" Nullable="true" MaxLength="8000" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_MessageSend_Result">
+          <Property Type="Int32" Name="AppG_ID" Nullable="false" />
+          <Property Type="String" Name="SendTitle" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SendKey" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SendZsdw" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="AppG_Begintime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="SubDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TypeName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ArchivesTypeName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="500" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -347,6 +367,24 @@
                 <ScalarProperty Name="CallTime" ColumnName="CallTime" />
                 <ScalarProperty Name="CallContent" ColumnName="CallContent" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_MessageSend" FunctionName="C6Model.Store.f____Mobile_List_MessageSend">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_MessageSend_Result">
+                <ScalarProperty Name="AppG_ID" ColumnName="AppG_ID" />
+                <ScalarProperty Name="SendTitle" ColumnName="SendTitle" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="SendKey" ColumnName="SendKey" />
+                <ScalarProperty Name="SendZsdw" ColumnName="SendZsdw" />
+                <ScalarProperty Name="AppG_Begintime" ColumnName="AppG_Begintime" />
+                <ScalarProperty Name="SubDate" ColumnName="SubDate" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="ArchivesTypeName" ColumnName="ArchivesTypeName" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

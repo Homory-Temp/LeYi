@@ -62,7 +62,7 @@ namespace Platform.JHMobile.Controllers
                 return Authenticate();
             var id = RouteData.Values["id"].ToString();
             if (string.IsNullOrEmpty(id))
-                return MessageModule();
+                return RedirectToAction("MessageModule", "Message");
             var int_id = int.Parse(id);
             var message = db.f____Mobile_List_MessageModuleSingle(int_id).FirstOrDefault();
             db.f____Mobile_Do_MessageRead(int_id, message.ModuleTypeID.ToString(), Account);
@@ -136,7 +136,7 @@ namespace Platform.JHMobile.Controllers
                 return Authenticate();
             var id = RouteData.Values["id"].ToString();
             if (string.IsNullOrEmpty(id))
-                return MessageModule();
+                return RedirectToAction("Message", "Message");
             var int_idx = int.Parse(id);
             var giveOut = db.f____Mobile_List_MessageType(int_idx).FirstOrDefault();
             var int_id = int.Parse(giveOut.AppO_ID);
@@ -169,6 +169,20 @@ namespace Platform.JHMobile.Controllers
             var mo = new MessageModuleSingleObject();
             mo.Object = message;
             mo.List = list;
+            return View(mo);
+        }
+
+        public ActionResult MessageSendPreview()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var id = RouteData.Values["id"].ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("Message", "Message");
+            var int_id = int.Parse(id);
+            var send = db.f____Mobile_List_MessageSend(int_id).FirstOrDefault();
+            var mo = new MessageSendObject();
+            mo.Object = send;
             return View(mo);
         }
     }
