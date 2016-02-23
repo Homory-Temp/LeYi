@@ -23,6 +23,9 @@
             <div class="btn btn-warning" type="button" onclick="back();">
                 <i class="fa fa-reply fa-lg"></i>
             </div>
+            <div class="btn btn-warning" type="button" onclick="historic();">
+                <i class="fa fa-history fa-lg"></i>
+            </div>
         </div>
         <div class="col-xs-6 text-right">
             @{
@@ -98,6 +101,10 @@
         if (current < max){
             window.location = corp_url + 'Call/CallRead/' + (current + 1);
         }
+    }
+    
+    function historic() {
+        window.location = corp_url + 'Call/CallHistoric';
     }
 
     function back() {
