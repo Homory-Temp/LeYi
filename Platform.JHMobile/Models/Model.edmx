@@ -19,6 +19,9 @@
         <Function Name="f____Mobile_Count_CallToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_CallToRead">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_Count_FlowDone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_FlowDone">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_Count_Message" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_Message">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -50,6 +53,9 @@
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="f____Mobile_List_CallToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_CallToRead">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f____Mobile_List_FlowDone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_FlowDone">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="f____Mobile_List_Message" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_Message">
@@ -161,7 +167,13 @@
           <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_List_MessageSend" ReturnType="Collection(C6Model.f____Mobile_List_MessageSend_Result)">
-            <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
+          <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_Count_FlowDone" ReturnType="Collection(Int32)">
+            <Parameter Name="LoginCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_FlowDone" ReturnType="Collection(C6Model.f____Mobile_List_FlowDone_Result)">
+            <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
@@ -259,6 +271,12 @@
           <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="TypeName" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="FileName" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_FlowDone_Result">
+          <Property Type="Int32" Name="App_ID" Nullable="false" />
+          <Property Type="String" Name="AppO_Title" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="App_Time" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -417,6 +435,17 @@
                 <ScalarProperty Name="DeptName" ColumnName="DeptName" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f____Mobile_Count_FlowDone" FunctionName="C6Model.Store.f____Mobile_Count_FlowDone" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_FlowDone" FunctionName="C6Model.Store.f____Mobile_List_FlowDone">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_FlowDone_Result">
+                <ScalarProperty Name="App_ID" ColumnName="App_ID" />
+                <ScalarProperty Name="AppO_Title" ColumnName="AppO_Title" />
+                <ScalarProperty Name="App_Time" ColumnName="App_Time" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

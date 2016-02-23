@@ -153,6 +153,9 @@
     <Compile Include="Models\f____Mobile_List_CallHistoric_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\f____Mobile_List_FlowDone_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\f____Mobile_List_MessageReceive_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
