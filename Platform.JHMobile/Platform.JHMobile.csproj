@@ -149,6 +149,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\f____Mobile_List_CallHistoric_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\f____Mobile_List_MessageType_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

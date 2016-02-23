@@ -8,6 +8,11 @@
         <Function Name="f____Mobile_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_Count_CallHistoric" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_CallHistoric">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FromTime" Type="datetime2" Mode="In" />
+          <Parameter Name="ToTime" Type="datetime2" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_Count_CallRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_CallRead">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -36,6 +41,11 @@
         </Function>
         <Function Name="f____Mobile_List_CallAttachment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_CallAttachment">
           <Parameter Name="CallID" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f____Mobile_List_CallHistoric" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_CallHistoric">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FromTime" Type="datetime2" Mode="In" />
+          <Parameter Name="ToTime" Type="datetime2" Mode="In" />
         </Function>
         <Function Name="f____Mobile_List_CallRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_CallRead">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
@@ -133,6 +143,16 @@
             <Parameter Name="ModuleType" Mode="In" Type="String" />
             <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="f____Mobile_Count_CallHistoric" ReturnType="Collection(Int32)">
+            <Parameter Name="LoginCode" Mode="In" Type="String" />
+            <Parameter Name="FromTime" Mode="In" Type="DateTime" />
+            <Parameter Name="ToTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_CallHistoric" ReturnType="Collection(C6Model.f____Mobile_List_CallHistoric_Result)">
+            <Parameter Name="LoginCode" Mode="In" Type="String" />
+            <Parameter Name="FromTime" Mode="In" Type="DateTime" />
+            <Parameter Name="ToTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
           <Property Type="Int32" Name="CallToRead" Nullable="true" />
@@ -197,6 +217,12 @@
           <Property Type="Int32" Name="AppG_ID" Nullable="false" />
           <Property Type="String" Name="AppT_ID" Nullable="false" MaxLength="256" />
           <Property Type="String" Name="AppO_ID" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_CallHistoric_Result">
+          <Property Type="Int32" Name="CallID" Nullable="false" />
+          <Property Type="DateTime" Name="CallTime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CallContent" Nullable="true" MaxLength="8000" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -313,6 +339,17 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f____Mobile_Do_MessageReadDone" FunctionName="C6Model.Store.f____Mobile_Do_MessageReadDone" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_Count_CallHistoric" FunctionName="C6Model.Store.f____Mobile_Count_CallHistoric" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_CallHistoric" FunctionName="C6Model.Store.f____Mobile_List_CallHistoric">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_CallHistoric_Result">
+                <ScalarProperty Name="CallID" ColumnName="CallID" />
+                <ScalarProperty Name="CallTime" ColumnName="CallTime" />
+                <ScalarProperty Name="CallContent" ColumnName="CallContent" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

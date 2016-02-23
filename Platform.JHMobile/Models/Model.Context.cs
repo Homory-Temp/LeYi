@@ -217,5 +217,39 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f____Mobile_Do_MessageReadDone", messageIdParameter, moduleTypeParameter, loginCodeParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> f____Mobile_Count_CallHistoric(string loginCode, Nullable<System.DateTime> fromTime, Nullable<System.DateTime> toTime)
+        {
+            var loginCodeParameter = loginCode != null ?
+                new ObjectParameter("LoginCode", loginCode) :
+                new ObjectParameter("LoginCode", typeof(string));
+    
+            var fromTimeParameter = fromTime.HasValue ?
+                new ObjectParameter("FromTime", fromTime) :
+                new ObjectParameter("FromTime", typeof(System.DateTime));
+    
+            var toTimeParameter = toTime.HasValue ?
+                new ObjectParameter("ToTime", toTime) :
+                new ObjectParameter("ToTime", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f____Mobile_Count_CallHistoric", loginCodeParameter, fromTimeParameter, toTimeParameter);
+        }
+    
+        public virtual ObjectResult<f____Mobile_List_CallHistoric_Result> f____Mobile_List_CallHistoric(string loginCode, Nullable<System.DateTime> fromTime, Nullable<System.DateTime> toTime)
+        {
+            var loginCodeParameter = loginCode != null ?
+                new ObjectParameter("LoginCode", loginCode) :
+                new ObjectParameter("LoginCode", typeof(string));
+    
+            var fromTimeParameter = fromTime.HasValue ?
+                new ObjectParameter("FromTime", fromTime) :
+                new ObjectParameter("FromTime", typeof(System.DateTime));
+    
+            var toTimeParameter = toTime.HasValue ?
+                new ObjectParameter("ToTime", toTime) :
+                new ObjectParameter("ToTime", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_CallHistoric_Result>("f____Mobile_List_CallHistoric", loginCodeParameter, fromTimeParameter, toTimeParameter);
+        }
     }
 }
