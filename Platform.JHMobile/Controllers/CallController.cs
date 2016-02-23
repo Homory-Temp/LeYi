@@ -59,6 +59,7 @@ namespace Platform.JHMobile.Controllers
             var result = new CallToReadObject();
             result.Object = obj;
             result.List = list;
+            db.f____Mobile_Do_CallRead(int_id);
             return View(result);
         }
 
@@ -83,18 +84,6 @@ namespace Platform.JHMobile.Controllers
             result.Object = obj;
             result.List = list;
             return View(result);
-        }
-
-        public ActionResult DoCallRead()
-        {
-            if (string.IsNullOrEmpty(Account))
-                return Authenticate();
-            var id = RouteData.Values["id"].ToString();
-            if (string.IsNullOrEmpty(id))
-                return RedirectToAction("CallToRead", "Call");
-            var int_id = int.Parse(id);
-            db.f____Mobile_Do_CallRead(int_id);
-            return RedirectToAction("CallToRead", "Call");
         }
     }
 }
