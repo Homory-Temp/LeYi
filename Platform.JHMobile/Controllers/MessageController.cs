@@ -66,20 +66,23 @@ namespace Platform.JHMobile.Controllers
             var int_id = int.Parse(id);
             var message = db.f____Mobile_List_MessageModuleSingle(int_id).FirstOrDefault();
             db.f____Mobile_Do_MessageRead(int_id, message.ModuleTypeID.ToString(), Account);
-            var name = message.MessageFileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
-            var dir = new DirectoryInfo(Server.MapPath("~/Resource/MessageFile"));
-            ViewBag.Path = "";
-            ViewBag.ModuleTypeID = message.ModuleTypeID;
-            ViewBag.PeopleRead = db.f____Mobile_List_MessageModuleSingleRead(message.MessageID, message.ModuleTypeID.ToString()).OrderBy(o => o).ToList().Aggregate("", (o, s) => o += s + "、", o => (o.Length == 0 ? "无" : o.Substring(0, o.Length - 1)));
-            foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+            if (!string.IsNullOrEmpty(message.MessageFileName))
             {
-                if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                var name = message.MessageFileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+                var dir = new DirectoryInfo(Server.MapPath("~/Resource/MessageFile"));
+                ViewBag.Path = "";
+                ViewBag.ModuleTypeID = message.ModuleTypeID;
+                ViewBag.PeopleRead = db.f____Mobile_List_MessageModuleSingleRead(message.MessageID, message.ModuleTypeID.ToString()).OrderBy(o => o).ToList().Aggregate("", (o, s) => o += s + "、", o => (o.Length == 0 ? "无" : o.Substring(0, o.Length - 1)));
+                foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
                 {
-                    string path = dir + "\\" + cDir.Name + "\\" + name;
-                    var converted = ConvertDoc(path);
-                    if (!string.IsNullOrEmpty(converted))
+                    if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
                     {
-                        ViewBag.PDF = converted;
+                        string path = dir + "\\" + cDir.Name + "\\" + name;
+                        var converted = ConvertDoc(path);
+                        if (!string.IsNullOrEmpty(converted))
+                        {
+                            ViewBag.PDF = converted;
+                        }
                     }
                 }
             }
@@ -145,19 +148,22 @@ namespace Platform.JHMobile.Controllers
             ViewBag.GiveOutId = giveOut.AppG_ID;
             var int_id = int.Parse(giveOut.AppO_ID);
             var message = db.f____Mobile_List_MessageModuleSingle(int_id).FirstOrDefault();
-            var name = message.MessageFileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
-            var dir = new DirectoryInfo(Server.MapPath("~/Resource/MessageFile"));
-            ViewBag.Path = "";
-            ViewBag.ModuleTypeID = message.ModuleTypeID;
-            foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+            if (!string.IsNullOrEmpty(message.MessageFileName))
             {
-                if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                var name = message.MessageFileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+                var dir = new DirectoryInfo(Server.MapPath("~/Resource/MessageFile"));
+                ViewBag.Path = "";
+                ViewBag.ModuleTypeID = message.ModuleTypeID;
+                foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
                 {
-                    string path = dir + "\\" + cDir.Name + "\\" + name;
-                    var converted = ConvertDoc(path);
-                    if (!string.IsNullOrEmpty(converted))
+                    if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
                     {
-                        ViewBag.PDF = converted;
+                        string path = dir + "\\" + cDir.Name + "\\" + name;
+                        var converted = ConvertDoc(path);
+                        if (!string.IsNullOrEmpty(converted))
+                        {
+                            ViewBag.PDF = converted;
+                        }
                     }
                 }
             }
@@ -185,18 +191,21 @@ namespace Platform.JHMobile.Controllers
             var int_id = int.Parse(id);
             ViewBag.GiveOutId = int_id;
             var send = db.f____Mobile_List_MessageSend(int_id).FirstOrDefault();
-            var name = send.FileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
-            var dir = new DirectoryInfo(Server.MapPath("~/Resource/GovFiles"));
-            ViewBag.Path = "";
-            foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+            if (!string.IsNullOrEmpty(send.FileName))
             {
-                if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                var name = send.FileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+                var dir = new DirectoryInfo(Server.MapPath("~/Resource/GovFiles"));
+                ViewBag.Path = "";
+                foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
                 {
-                    string path = dir + "\\" + cDir.Name + "\\" + name;
-                    var converted = ConvertDoc(path);
-                    if (!string.IsNullOrEmpty(converted))
+                    if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
                     {
-                        ViewBag.PDF = converted;
+                        string path = dir + "\\" + cDir.Name + "\\" + name;
+                        var converted = ConvertDoc(path);
+                        if (!string.IsNullOrEmpty(converted))
+                        {
+                            ViewBag.PDF = converted;
+                        }
                     }
                 }
             }
@@ -213,18 +222,21 @@ namespace Platform.JHMobile.Controllers
             var int_id = int.Parse(id);
             ViewBag.GiveOutId = int_id;
             var receive = db.f____Mobile_List_MessageReceive(int_id).FirstOrDefault();
-            var name = receive.FileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
-            var dir = new DirectoryInfo(Server.MapPath("~/Resource/GovFiles"));
-            ViewBag.Path = "";
-            foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+            if (!string.IsNullOrEmpty(receive.FileName))
             {
-                if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                var name = receive.FileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+                var dir = new DirectoryInfo(Server.MapPath("~/Resource/GovFiles"));
+                ViewBag.Path = "";
+                foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
                 {
-                    string path = dir + "\\" + cDir.Name + "\\" + name;
-                    var converted = ConvertDoc(path);
-                    if (!string.IsNullOrEmpty(converted))
+                    if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
                     {
-                        ViewBag.PDF = converted;
+                        string path = dir + "\\" + cDir.Name + "\\" + name;
+                        var converted = ConvertDoc(path);
+                        if (!string.IsNullOrEmpty(converted))
+                        {
+                            ViewBag.PDF = converted;
+                        }
                     }
                 }
             }
