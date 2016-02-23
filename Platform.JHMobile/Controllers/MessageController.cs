@@ -65,6 +65,7 @@ namespace Platform.JHMobile.Controllers
                 return MessageModule();
             var int_id = int.Parse(id);
             var message = db.f____Mobile_List_MessageModuleSingle(int_id).FirstOrDefault();
+            db.f____Mobile_Do_MessageRead(int_id, message.ModuleTypeID.ToString(), Account);
             var name = message.MessageFileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
             var dir = new DirectoryInfo(Server.MapPath("~/Resource/MessageFile"));
             ViewBag.Path = "";
@@ -95,19 +96,6 @@ namespace Platform.JHMobile.Controllers
             mo.Object = message;
             mo.List = list;
             return View(mo);
-        }
-
-        public ActionResult DoMessageRead()
-        {
-            if (string.IsNullOrEmpty(Account))
-                return Authenticate();
-            var id = RouteData.Values["id"].ToString();
-            if (string.IsNullOrEmpty(id))
-                return RedirectToAction("MessageModule", "Message");
-            var sp = id.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
-            var int_id = int.Parse(sp[0]);
-            db.f____Mobile_Do_MessageRead(int_id, sp[1], Account);
-            return RedirectToAction("MessageModuleSingle", "Message", new { id = sp[1] });
         }
 
         public ActionResult MessageToPreview()
