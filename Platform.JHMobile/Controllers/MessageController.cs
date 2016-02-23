@@ -182,6 +182,21 @@ namespace Platform.JHMobile.Controllers
             var int_id = int.Parse(id);
             ViewBag.GiveOutId = int_id;
             var send = db.f____Mobile_List_MessageSend(int_id).FirstOrDefault();
+            var name = send.FileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+            var dir = new DirectoryInfo(Server.MapPath("~/Resource/GovFiles"));
+            ViewBag.Path = "";
+            foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+            {
+                if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                {
+                    string path = dir + "\\" + cDir.Name + "\\" + name;
+                    var converted = ConvertDoc(path);
+                    if (!string.IsNullOrEmpty(converted))
+                    {
+                        ViewBag.PDF = converted;
+                    }
+                }
+            }
             var mo = new MessageSendObject();
             mo.Object = send;
             return View(mo);

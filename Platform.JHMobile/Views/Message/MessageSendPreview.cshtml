@@ -24,14 +24,21 @@
     <div class="row">&nbsp;</div>
     <div class="row">
         <div class="col-md-12"><strong>信息标题</strong></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.MessageTitle</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.SendTitle</div>
         <div class="col-md-12"><strong>部门人员</strong></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.DeptName&nbsp;&nbsp;-&nbsp;&nbsp;@Model.Object.UserName</div>
         <div class="col-md-12"><strong>分发时间</strong></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.SendTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.AppG_Begintime.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
+        <div class="col-md-12"><strong>公文类型</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.ArchivesTypeName</div>
+        <div class="col-md-12"><strong>文件类型</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.TypeName</div>
+        <div class="col-md-12"><strong>主送机关</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.SendZsdw</div>
+        <div class="col-md-12"><strong>主题词</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.SendKey</div>
         <div class="col-md-12"><strong>信息正文</strong></div>
         <div class="col-md-12">
-            @Html.Raw(Model.Object.MessageHTML)
             @{
                 if (!string.IsNullOrEmpty(ViewBag.PDF))
                 {
@@ -40,7 +47,7 @@
                 }
             }
         </div>
-        @{
+        @*@{
             if (Model.List.Count > 0)
             {
                 <div class="col-md-12"><strong>信息附件：</strong></div>
@@ -49,7 +56,7 @@
                     <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="@(DingTalk.CorpUrl + file.FilePath.Substring(3).Replace("__", "h__"))">@file.FileName</a></div>
                 }
             }
-        }
+        }*@
         <div class="col-md-12"><strong>已阅人员</strong></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@ViewBag.PeopleRead</div>
     </div>
