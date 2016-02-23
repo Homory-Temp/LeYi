@@ -153,6 +153,9 @@
     <Compile Include="Models\f____Mobile_List_CallHistoric_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\f____Mobile_List_MessageReceive_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\f____Mobile_List_MessageSend_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -162,7 +165,6 @@
     <Compile Include="Models\f____Mobile_List_Message_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MessageSendObject.cs" />
     <Compile Include="Models\MessageModuleSingleObject.cs" />
     <Compile Include="Models\CallReadObject.cs" />
     <Compile Include="Models\CallToReadObject.cs" />
@@ -555,6 +557,7 @@
     <Content Include="Views\Call\CallHistoric.cshtml" />
     <Content Include="Views\Call\CallHistoricPreview.cshtml" />
     <Content Include="Views\Message\MessageSendPreview.cshtml" />
+    <Content Include="Views\Message\MessageReceivePreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

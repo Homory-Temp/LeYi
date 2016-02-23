@@ -1,6 +1,6 @@
 ﻿@using Platform.JHMobile.Models
 
-@model f____Mobile_List_MessageSend_Result
+@model f____Mobile_List_MessageReceive_Result
 
 @{
     ViewBag.Title = "信息详情";
@@ -24,7 +24,7 @@
     <div class="row">&nbsp;</div>
     <div class="row">
         <div class="col-md-12"><strong>信息标题</strong></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.SendTitle</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.AcceptTitle</div>
         <div class="col-md-12"><strong>部门人员</strong></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.DeptName&nbsp;&nbsp;-&nbsp;&nbsp;@Model.UserName</div>
         <div class="col-md-12"><strong>分发时间</strong></div>
@@ -33,10 +33,10 @@
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.ArchivesTypeName</div>
         <div class="col-md-12"><strong>文件类型</strong></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.TypeName</div>
-        <div class="col-md-12"><strong>主送机关</strong></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.SendZsdw</div>
+        <div class="col-md-12"><strong>来源机关</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.AcceptFrom</div>
         <div class="col-md-12"><strong>主题词</strong></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.SendKey</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.AcceptKey</div>
         <div class="col-md-12"><strong>信息正文</strong></div>
         <div class="col-md-12">
             @{

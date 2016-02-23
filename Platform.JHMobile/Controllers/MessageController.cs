@@ -126,6 +126,10 @@ namespace Platform.JHMobile.Controllers
             {
                 return RedirectToAction("MessageSendPreview", "Message", new { id = id });
             }
+            else if (type.AppT_ID.StartsWith("IOA_Accept", StringComparison.OrdinalIgnoreCase))
+            {
+                return RedirectToAction("MessageReceivePreview", "Message", new { id = id });
+            }
             return RedirectToAction("Message", "Message");
         }
 
@@ -196,9 +200,35 @@ namespace Platform.JHMobile.Controllers
                     }
                 }
             }
-            var mo = new MessageSendObject();
-            mo.Object = send;
-            return View(mo);
+            return View(send);
+        }
+
+        public ActionResult MessageReceivePreview()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var id = RouteData.Values["id"].ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("Message", "Message");
+            var int_id = int.Parse(id);
+            ViewBag.GiveOutId = int_id;
+            var receive = db.f____Mobile_List_MessageReceive(int_id).FirstOrDefault();
+            var name = receive.FileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+            var dir = new DirectoryInfo(Server.MapPath("~/Resource/GovFiles"));
+            ViewBag.Path = "";
+            foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+            {
+                if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                {
+                    string path = dir + "\\" + cDir.Name + "\\" + name;
+                    var converted = ConvertDoc(path);
+                    if (!string.IsNullOrEmpty(converted))
+                    {
+                        ViewBag.PDF = converted;
+                    }
+                }
+            }
+            return View(receive);
         }
     }
 }

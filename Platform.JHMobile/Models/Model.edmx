@@ -69,6 +69,9 @@
           <Parameter Name="MessageId" Type="int" Mode="In" />
           <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_List_MessageReceive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageReceive">
+          <Parameter Name="AppG_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_List_MessageSend" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageSend">
           <Parameter Name="AppG_ID" Type="int" Mode="In" />
         </Function>
@@ -157,6 +160,9 @@
             <Parameter Name="GiveOutId" Mode="In" Type="Int32" />
             <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_MessageReceive" ReturnType="Collection(C6Model.f____Mobile_List_MessageReceive_Result)">
+            <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
           <Property Type="Int32" Name="CallToRead" Nullable="true" />
@@ -237,6 +243,20 @@
           <Property Type="String" Name="SendZsdw" Nullable="true" MaxLength="500" />
           <Property Type="DateTime" Name="AppG_Begintime" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="SubDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TypeName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ArchivesTypeName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_MessageReceive_Result">
+          <Property Type="Int32" Name="AppG_ID" Nullable="false" />
+          <Property Type="String" Name="AcceptTitle" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AcceptKey" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AcceptFrom" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="AppG_Begintime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="AcceptDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="TypeName" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="ArchivesTypeName" Nullable="false" MaxLength="250" />
@@ -386,6 +406,24 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f____Mobile_Do_MessageReadDone" FunctionName="C6Model.Store.f____Mobile_Do_MessageReadDone" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_MessageReceive" FunctionName="C6Model.Store.f____Mobile_List_MessageReceive">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_MessageReceive_Result">
+                <ScalarProperty Name="AppG_ID" ColumnName="AppG_ID" />
+                <ScalarProperty Name="AcceptTitle" ColumnName="AcceptTitle" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AcceptKey" ColumnName="AcceptKey" />
+                <ScalarProperty Name="AcceptFrom" ColumnName="AcceptFrom" />
+                <ScalarProperty Name="AppG_Begintime" ColumnName="AppG_Begintime" />
+                <ScalarProperty Name="AcceptDate" ColumnName="AcceptDate" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="ArchivesTypeName" ColumnName="ArchivesTypeName" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
