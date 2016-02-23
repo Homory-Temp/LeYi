@@ -121,7 +121,7 @@ namespace Platform.JHMobile.Controllers
             var type = db.f____Mobile_List_MessageType(int_id).FirstOrDefault();
             if (type.AppT_ID.StartsWith("IOA_Message", StringComparison.OrdinalIgnoreCase))
             {
-                return RedirectToAction("MessageMessage", "Message", new { id = id });
+                return RedirectToAction("MessageMessagePreview", "Message", new { id = id });
             }
             return RedirectToAction("Message", "Message");
         }
