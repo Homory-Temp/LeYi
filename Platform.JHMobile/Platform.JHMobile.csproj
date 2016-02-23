@@ -554,6 +554,7 @@
     <Content Include="Views\Message\MessageMessagePreview.cshtml" />
     <Content Include="Views\Call\CallHistoric.cshtml" />
     <Content Include="Views\Call\CallHistoricPreview.cshtml" />
+    <Content Include="Views\Message\MessageSendPreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

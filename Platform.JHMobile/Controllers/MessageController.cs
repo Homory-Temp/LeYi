@@ -180,6 +180,7 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("Message", "Message");
             var int_id = int.Parse(id);
+            ViewBag.GiveOutId = int_id;
             var send = db.f____Mobile_List_MessageSend(int_id).FirstOrDefault();
             var mo = new MessageSendObject();
             mo.Object = send;
