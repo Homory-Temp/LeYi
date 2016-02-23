@@ -97,6 +97,19 @@ namespace Platform.JHMobile.Controllers
             return View(mo);
         }
 
+        public ActionResult DoMessageReadDone()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var id = RouteData.Values["id"].ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("Message", "Message");
+            var sp = id.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
+            var int_id = int.Parse(sp[0]);
+            db.f____Mobile_Do_MessageReadDone(int_id, sp[1], Account);
+            return RedirectToAction("Message", "Message");
+        }
+
         public ActionResult MessageToPreview()
         {
             if (string.IsNullOrEmpty(Account))
@@ -109,6 +122,10 @@ namespace Platform.JHMobile.Controllers
             if (type.AppT_ID.StartsWith("IOA_Message", StringComparison.OrdinalIgnoreCase))
             {
                 return RedirectToAction("MessageMessagePreview", "Message", new { id = id });
+            }
+            else if (type.AppT_ID.StartsWith("IOA_Send", StringComparison.OrdinalIgnoreCase))
+            {
+                return RedirectToAction("MessageSendPreview", "Message", new { id = id });
             }
             return RedirectToAction("Message", "Message");
         }
@@ -153,19 +170,6 @@ namespace Platform.JHMobile.Controllers
             mo.Object = message;
             mo.List = list;
             return View(mo);
-        }
-
-        public ActionResult DoMessageReadDone()
-        {
-            if (string.IsNullOrEmpty(Account))
-                return Authenticate();
-            var id = RouteData.Values["id"].ToString();
-            if (string.IsNullOrEmpty(id))
-                return RedirectToAction("Message", "Message");
-            var sp = id.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
-            var int_id = int.Parse(sp[0]);
-            db.f____Mobile_Do_MessageReadDone(int_id, sp[1], Account);
-            return RedirectToAction("Message", "Message");
         }
     }
 }
