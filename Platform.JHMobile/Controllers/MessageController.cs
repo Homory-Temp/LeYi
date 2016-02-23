@@ -145,7 +145,6 @@ namespace Platform.JHMobile.Controllers
             var dir = new DirectoryInfo(Server.MapPath("~/Resource/MessageFile"));
             ViewBag.Path = "";
             ViewBag.ModuleTypeID = message.ModuleTypeID;
-            ViewBag.PeopleRead = db.f____Mobile_List_MessageRead(giveOut.AppG_ID).OrderBy(o => o).ToList().Aggregate("", (o, s) => o += s + "、", o => (o.Length == 0 ? "无" : o.Substring(0, o.Length - 1)));
             foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
             {
                 if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
@@ -185,7 +184,6 @@ namespace Platform.JHMobile.Controllers
             var name = send.FileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
             var dir = new DirectoryInfo(Server.MapPath("~/Resource/GovFiles"));
             ViewBag.Path = "";
-            ViewBag.PeopleRead = db.f____Mobile_List_MessageRead(int_id).OrderBy(o => o).ToList().Aggregate("", (o, s) => o += s + "、", o => (o.Length == 0 ? "无" : o.Substring(0, o.Length - 1)));
             foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
             {
                 if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)

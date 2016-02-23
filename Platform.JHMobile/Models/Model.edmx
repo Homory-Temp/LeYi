@@ -69,9 +69,6 @@
           <Parameter Name="MessageId" Type="int" Mode="In" />
           <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
         </Function>
-        <Function Name="f____Mobile_List_MessageRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageRead">
-          <Parameter Name="GiveOutId" Type="int" Mode="In" />
-        </Function>
         <Function Name="f____Mobile_List_MessageSend" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageSend">
           <Parameter Name="AppG_ID" Type="int" Mode="In" />
         </Function>
@@ -159,9 +156,6 @@
           <FunctionImport Name="f____Mobile_Do_MessageReadDone">
             <Parameter Name="GiveOutId" Mode="In" Type="Int32" />
             <Parameter Name="LoginCode" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="f____Mobile_List_MessageRead" ReturnType="Collection(String)">
-            <Parameter Name="GiveOutId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
@@ -392,7 +386,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f____Mobile_Do_MessageReadDone" FunctionName="C6Model.Store.f____Mobile_Do_MessageReadDone" />
-          <FunctionImportMapping FunctionImportName="f____Mobile_List_MessageRead" FunctionName="C6Model.Store.f____Mobile_List_MessageRead" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
