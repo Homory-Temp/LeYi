@@ -60,6 +60,7 @@ namespace Platform.JHMobile.Controllers
                     }
                     dict.Add(new TaskDoneConfigObject { Name = name, DisplayName = display, Visible = visible, Type = t });
                 }
+                obj.Config = dict;
                 var builder = JinHerDynamic.CreateTypeBuilder("Homory", "JinHerTask", "TaskDoneForm");
                 foreach (var item in dict)
                 {
