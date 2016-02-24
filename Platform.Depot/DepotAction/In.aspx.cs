@@ -43,7 +43,7 @@ public partial class DepotAction_In : DepotPageSingle
                 ReloadOrders();
                 target.Items.FindItemByValue(value).Selected = true;
                 view_target.Rebind();
-                counter.Value = "5";
+                counter.Value = "10";
                 x1.Visible = x2.Visible = x3.Visible = x4.Visible = true;
             }
             else
@@ -59,7 +59,7 @@ public partial class DepotAction_In : DepotPageSingle
                 var obj = DataContext.DepotObject.Single(o => o.Id == objId);
                 var isVirtual = Depot.Featured(DepotType.固定资产库);
                 var catalogId = DataContext.DepotObjectCatalog.Single(o => o.ObjectId == objId && o.IsLeaf == true && o.IsVirtual == isVirtual).CatalogId;
-                counter.Value = "5";
+                counter.Value = "10";
                 var list = new List<InMemoryIn>();
                 list.Add(new InMemoryIn { Time = inTime.SelectedDate.HasValue ? inTime.SelectedDate.Value.Date : DateTime.Today, CatalogId = catalogId, ObjectId = objId });
                 x.Value = list.ToJson();
@@ -133,7 +133,7 @@ public partial class DepotAction_In : DepotPageSingle
 
     protected void target_SelectedIndexChanged(object sender, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
     {
-        counter.Value = target.SelectedIndex == -1 ? "0" : "5";
+        counter.Value = target.SelectedIndex == -1 ? "0" : "10";
         x1.Visible = x2.Visible = x3.Visible = x4.Visible = target.SelectedIndex >= 0;
         view_target.Rebind();
         view_obj.Rebind();
