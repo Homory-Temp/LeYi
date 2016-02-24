@@ -62,7 +62,7 @@
                                                 <th>品牌</th>
                                                 <th>规格</th>
                                                 <th>总数</th>
-                                                <th>在库</th>
+                                                <%--<th>在库</th>--%>
                                             </tr>
                                     </asp:Panel>
                                     <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
@@ -78,7 +78,7 @@
                                             <td><%# Eval("Unit") %></td>
                                             <td><%# Eval("Brand") %></td>
                                             <td><%# Eval("Specification") %></td>
-                                            <td><%# CountTotal(Container.DataItem as Models.DepotObject) %></td>
+                                            <%--<td><%# CountTotal(Container.DataItem as Models.DepotObject) %></td>--%>
                                             <td><%# Eval("Amount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
                                         </tr>
                                     </asp:Panel>
