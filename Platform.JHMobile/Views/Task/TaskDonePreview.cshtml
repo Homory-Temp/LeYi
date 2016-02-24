@@ -1,7 +1,8 @@
 ﻿@using Platform.JHMobile.Models
-@using System.Xml.Linq;
+@using System.Dynamic
+@using System.Xml.Linq
 
-@model f____Mobile_List_TaskDoneSingle_Result
+@model TaskDoneObject
 
 @{
     ViewBag.Title = "已办工作详情";
@@ -25,27 +26,38 @@
     <div class="row">&nbsp;</div>
     <div class="row">
         <div class="col-md-12"><strong>ID：</strong></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.App_ID</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.App_ID</div>
         <div class="col-md-12"><strong>流程标题：</strong></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.AppO_Title</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.AppO_Title</div>
     </div>
     @{
-        var path = Server.MapPath(string.Format("~/Views/Task/Config/{0}.xml", Model.Form_ID));
-        if (File.Exists(path))
+        if (Model.Form != null)
         {
             <div class="row">
-                @{
-                    var doc = XDocument.Load(path);
-                    var fields = doc.Root.Element("fields").Elements("field");
-                    foreach (var field in fields)
-                    {
-                        if (field.Element("visible").Value == "是")
+                <div class="col-md-12"><strong>表单数据：</strong></div>
+                <div class="col-md-12">
+                    @{
+                        foreach (var item in Model.Form)
                         {
-                            <div class="col-md-12"><strong>@field.Element("displaylabel").Value：</strong></div>
-                            <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</div>
+                            <table class="text-center table-responsive table-bordered">
+                                @{
+                                    foreach (var field in Model.Config)
+                                    {
+                                        if (field.Visible)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <strong>@field.DisplayName</strong>
+                                                </td>
+                                                <td>@item.GetType().GetProperty(@field.Name).GetValue(item)</td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </table>
                         }
                     }
-                }
+                </div>
             </div>
         }
         else

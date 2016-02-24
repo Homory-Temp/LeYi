@@ -1,7 +1,9 @@
 ﻿using Platform.JHMobile.Models;
 using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace Platform.JHMobile.Controllers
 {
@@ -32,7 +34,42 @@ namespace Platform.JHMobile.Controllers
                 return RedirectToAction("TaskDone", "Task");
             var int_id = int.Parse(id);
             var task = db.f____Mobile_List_TaskDoneSingle(int_id).FirstOrDefault();
-            return View(task);
+            var path = Server.MapPath(string.Format("~/Views/Task/Config/{0}.xml", task.Form_ID));
+            var obj = new TaskDoneObject();
+            obj.Object = task;
+            if (System.IO.File.Exists(path))
+            {
+                var doc = XDocument.Load(path);
+                var sql = doc.Root.Element("sql").Value.Replace("@AppO_Values", task.AppO_Values);
+                var fields = doc.Root.Element("fields").Elements("field");
+                var dict = new List<TaskDoneConfigObject>();
+                foreach (var field in fields)
+                {
+                    var visible = field.Element("visible").Value == "是";
+                    var name = field.Element("fieldname").Value;
+                    var display = field.Element("displaylabel").Value;
+                    var typeName = field.Element("datatype").Value;
+                    Type t;
+                    switch (typeName)
+                    {
+                        default:
+                            {
+                                t = typeof(string);
+                                break;
+                            }
+                    }
+                    dict.Add(new TaskDoneConfigObject { Name = name, DisplayName = display, Visible = visible, Type = t });
+                }
+                var builder = JinHerDynamic.CreateTypeBuilder("Homory", "JinHerTask", "TaskDoneForm");
+                foreach (var item in dict)
+                {
+                    JinHerDynamic.CreateAutoImplementedProperty(builder, item.Name, item.Type);
+                }
+                var type = builder.CreateType();
+                var form = db.Database.SqlQuery(type, sql).ToListAsync().Result;
+                obj.Form = form;
+            }
+            return View(obj);
         }
     }
 }

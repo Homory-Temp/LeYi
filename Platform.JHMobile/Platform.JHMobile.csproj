@@ -151,6 +151,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CallHistoricObject.cs" />
+    <Compile Include="Models\JinHerDynamic.cs" />
+    <Compile Include="Models\TaskDoneConfigObject.cs" />
+    <Compile Include="Models\TaskDoneObject.cs" />
     <Compile Include="Models\f____Mobile_List_CallHistoric_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
