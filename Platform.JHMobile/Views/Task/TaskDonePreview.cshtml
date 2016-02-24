@@ -1,6 +1,6 @@
 ﻿@using Platform.JHMobile.Models
 
-@model int
+@model f____Mobile_List_TaskDoneSingle_Result
 
 @{
     ViewBag.Title = "已办工作详情";
@@ -24,7 +24,9 @@
     <div class="row">&nbsp;</div>
     <div class="row">
         <div class="col-md-12"><strong>ID：</strong></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.App_ID</div>
+        <div class="col-md-12"><strong>流程标题：</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.AppO_Title</div>
     </div>
 </div>
 

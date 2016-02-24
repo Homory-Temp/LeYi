@@ -169,6 +169,9 @@
     <Compile Include="Models\f____Mobile_List_Message_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\f____Mobile_List_TaskDoneSingle_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\f____Mobile_List_TaskDone_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -343,6 +346,7 @@
     <Content Include="PDFViewer\web\viewer.css" />
     <Content Include="PDFViewer\web\viewer.html" />
     <Content Include="PDFViewer\web\viewer.js" />
+    <Content Include="Views\Task\Config\jhsjbljw_9247e85f-b7b3-4f17-8486-14691cb70091.xml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

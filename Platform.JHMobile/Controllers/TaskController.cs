@@ -31,7 +31,8 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("TaskDone", "Task");
             var int_id = int.Parse(id);
-            return View(int_id);
+            var task = db.f____Mobile_List_TaskDoneSingle(int_id).FirstOrDefault();
+            return View(task);
         }
     }
 }

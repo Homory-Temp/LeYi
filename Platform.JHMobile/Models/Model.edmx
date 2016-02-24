@@ -84,6 +84,9 @@
         <Function Name="f____Mobile_List_TaskDone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskDone">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_List_TaskDoneSingle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskDoneSingle">
+          <Parameter Name="App_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_List_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_User">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -170,10 +173,13 @@
           <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_Count_TaskDone" ReturnType="Collection(Int32)">
-            <Parameter Name="LoginCode" Mode="In" Type="String" />
+          <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_List_TaskDone" ReturnType="Collection(C6Model.f____Mobile_List_TaskDone_Result)">
-            <Parameter Name="LoginCode" Mode="In" Type="String" />
+          <Parameter Name="LoginCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_TaskDoneSingle" ReturnType="Collection(C6Model.f____Mobile_List_TaskDoneSingle_Result)">
+            <Parameter Name="App_ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
@@ -283,6 +289,26 @@
           <Property Type="String" Name="AppO_Title" Nullable="true" MaxLength="500" />
           <Property Type="DateTime" Name="App_Time" Nullable="true" Precision="23" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_TaskDoneSingle_Result">
+          <Property Type="Int32" Name="App_ID" Nullable="false" />
+          <Property Type="String" Name="AppT_ID" Nullable="false" MaxLength="256" />
+          <Property Type="Int32" Name="AppD_ID" Nullable="false" />
+          <Property Type="Int32" Name="AppO_ID" Nullable="false" />
+          <Property Type="String" Name="AppO_Values" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="AppO_Title" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="App_IdeaFlag" Nullable="false" />
+          <Property Type="DateTime" Name="App_Time" Nullable="true" Precision="23" />
+          <Property Type="String" Name="App_InnerIdea" Nullable="true" MaxLength="5000" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Instance_ID" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Instance_Name" Nullable="false" MaxLength="512" />
+          <Property Type="String" Name="Version" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="AppD_Type" Nullable="true" />
+          <Property Type="String" Name="AppD_Name" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Form_ID" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="TEM_TypeID" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Form_URL" Nullable="false" MaxLength="512" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -452,6 +478,30 @@
                 <ScalarProperty Name="AppO_Title" ColumnName="AppO_Title" />
                 <ScalarProperty Name="App_Time" ColumnName="App_Time" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoneSingle" FunctionName="C6Model.Store.f____Mobile_List_TaskDoneSingle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_TaskDoneSingle_Result">
+                <ScalarProperty Name="App_ID" ColumnName="App_ID" />
+                <ScalarProperty Name="AppT_ID" ColumnName="AppT_ID" />
+                <ScalarProperty Name="AppD_ID" ColumnName="AppD_ID" />
+                <ScalarProperty Name="AppO_ID" ColumnName="AppO_ID" />
+                <ScalarProperty Name="AppO_Values" ColumnName="AppO_Values" />
+                <ScalarProperty Name="AppO_Title" ColumnName="AppO_Title" />
+                <ScalarProperty Name="App_IdeaFlag" ColumnName="App_IdeaFlag" />
+                <ScalarProperty Name="App_Time" ColumnName="App_Time" />
+                <ScalarProperty Name="App_InnerIdea" ColumnName="App_InnerIdea" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Instance_ID" ColumnName="Instance_ID" />
+                <ScalarProperty Name="Instance_Name" ColumnName="Instance_Name" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="AppD_Type" ColumnName="AppD_Type" />
+                <ScalarProperty Name="AppD_Name" ColumnName="AppD_Name" />
+                <ScalarProperty Name="Form_ID" ColumnName="Form_ID" />
+                <ScalarProperty Name="TEM_TypeID" ColumnName="TEM_TypeID" />
+                <ScalarProperty Name="Form_URL" ColumnName="Form_URL" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
