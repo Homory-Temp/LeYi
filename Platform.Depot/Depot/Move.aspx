@@ -62,7 +62,7 @@
                                                 <th>品牌</th>
                                                 <th>规格</th>
                                                 <th>总库数量</th>
-                                                <th>分库数量</th>
+                                                <%--<th>分库数量</th>--%>
                                             </tr>
                                     </asp:Panel>
                                     <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
@@ -79,7 +79,7 @@
                                             <td><%# Eval("Brand") %></td>
                                             <td><%# Eval("Specification") %></td>
                                             <td><%# CountTotal(Container.DataItem as Models.DepotObject).ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
-                                            <td><%# CountDone(Container.DataItem as Models.DepotObject).ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
+                                            <%--<td><%# CountDone(Container.DataItem as Models.DepotObject).ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>--%>
                                         </tr>
                                     </asp:Panel>
                                 </ItemTemplate>
