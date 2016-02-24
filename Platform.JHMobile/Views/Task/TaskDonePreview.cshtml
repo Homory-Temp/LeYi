@@ -1,4 +1,5 @@
 ﻿@using Platform.JHMobile.Models
+@using System.Xml.Linq;
 
 @model f____Mobile_List_TaskDoneSingle_Result
 
@@ -28,6 +29,34 @@
         <div class="col-md-12"><strong>流程标题：</strong></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.AppO_Title</div>
     </div>
+    @{
+        var path = Server.MapPath(string.Format("~/Views/Task/Config/{0}.xml", Model.Form_ID));
+        if (File.Exists(path))
+        {
+            <div class="row">
+                @{
+                    var doc = XDocument.Load(path);
+                    var fields = doc.Root.Element("fields").Elements("field");
+                    foreach (var field in fields)
+                    {
+                        if (field.Element("visible").Value == "是")
+                        {
+                            <div class="col-md-12"><strong>@field.Element("displaylabel").Value：</strong></div>
+                            <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</div>
+                        }
+                    }
+                }
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    请配置表单数据集
+                </div>
+            </div>
+        }
+    }
 </div>
 
 <script>
