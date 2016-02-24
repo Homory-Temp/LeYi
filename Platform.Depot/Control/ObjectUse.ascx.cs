@@ -35,6 +35,7 @@ public partial class Control_ObjectUse : DepotControlSingle
                 brand.Text = so.Brand;
                 specification.Text = so.Specification;
                 stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
+                amount.MaxValue = (double)so.Amount;
                 obj.SelectedIndex = obj.FindItemIndexByValue(use.ObjectId.ToString());
                 if (so.Single)
                 {
@@ -159,6 +160,7 @@ public partial class Control_ObjectUse : DepotControlSingle
                 brand.Text = so.Brand;
                 specification.Text = so.Specification;
                 stored.Text = so.Amount.ToAmount(Depot.Featured(DepotType.小数数量库));
+                amount.MaxValue = (double)so.Amount;
                 if (so.Consumable)
                 {
                     act.Items.Clear();
