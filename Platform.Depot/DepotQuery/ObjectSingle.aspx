@@ -69,7 +69,7 @@
                                 </LayoutTemplate>
                                 <ItemTemplate>
                                     <tr>
-                                        <td><%# Eval("Name") %></td>
+                                        <td onclick="gox(this);" goid='<%# Eval("ObjectId") %>' did='<%# Depot.Id %>' style="color: rgb(62, 90, 112); cursor: pointer;"><%# Eval("Name") %></td>
                                         <td><%# Eval("Note") %></td>
                                         <td><%# Eval("Amount").ToAmount() %></td>
                                         <td><%# Eval("PriceSet").ToMoney() %></td>
