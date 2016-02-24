@@ -75,17 +75,19 @@ public partial class Control_ObjectUse : DepotControlSingle
                 }
             }
         }
-        //else if (Session["ObjectUseCNM"] != null && !string.IsNullOrEmpty(Session["ObjectUseCNM"].ToString()))
-        //{
-        //    var catalogId = Session["ObjectUseCNM"].ToString();
-        //    var node = catalog.EmbeddedTree.FindNodeByValue(catalogId.ToString());
-        //    node.Selected = true;
-        //    node.ExpandParentNodes();
-        //    catalog.SelectedValue = catalogId.ToString();
-        //    var source = DataContext.DepotObjectLoad(Depot.Id, catalogId.GlobalId()).Where(o => o.Amount > 0);
-        //    obj.DataSource = source.ToList();
-        //    obj.DataBind();
-        //}
+        else
+        {
+            if (catalog.EmbeddedTree.Nodes.Count > 0)
+            {
+                var node = catalog.EmbeddedTree.Nodes[0];
+                node.Selected = true;
+                node.ExpandParentNodes();
+                catalog.SelectedValue = node.Value;
+                var source = DataContext.DepotObjectLoad(Depot.Id, use.CatalogId).Where(o => o.Amount > 0);
+                obj.DataSource = source.ToList();
+                obj.DataBind();
+            }
+        }
         if (!"ObjectId".Query().None())
         {
             catalog.Enabled = false;
