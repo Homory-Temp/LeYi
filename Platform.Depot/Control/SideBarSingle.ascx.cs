@@ -53,7 +53,7 @@ public partial class Control_SideBarSingle : DepotControlSingle
 
     protected bool HasWarn()
     {
-        return DataContext.DepotObject.Count(o => ((o.Amount < o.Low && o.Low > 0) || (o.Amount > o.High && o.High > 0)) && o.State < Models.State.停用) > 0;
+        return DataContext.DepotObjectLoad(Depot.Id, null).Count(o => ((o.Amount < o.Low && o.Low > 0) || (o.Amount > o.High && o.High > 0)) && o.State < Models.State.停用) > 0;
     }
 
     protected bool HasMove()

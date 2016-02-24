@@ -18,13 +18,13 @@ public partial class Depot_Warn : DepotPageSingle
 
     protected void view_action_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        var s = DataContext.DepotObject.Where(o => o.Amount < o.Low && o.Low > 0 && o.State < State.停用).ToList();
+        var s = DataContext.DepotObjectLoad(Depot.Id, null).Where(o => o.Amount < o.Low && o.Low > 0 && o.State < State.停用).ToList();
         view_action.DataSource = s;
     }
 
     protected void view_query_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        var s = DataContext.DepotObject.Where(o => o.Amount > o.High && o.High > 0 && o.State < State.停用).ToList();
+        var s = DataContext.DepotObjectLoad(Depot.Id, null).Where(o => o.Amount > o.High && o.High > 0 && o.State < State.停用).ToList();
         view_query.DataSource = s;
     }
 
