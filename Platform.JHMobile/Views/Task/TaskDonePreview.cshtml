@@ -1,0 +1,39 @@
+﻿@using Platform.JHMobile.Models
+
+@model int
+
+@{
+    ViewBag.Title = "已办工作详情";
+}
+
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
+<script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="btn btn-warning" type="button" onclick="home();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-reply fa-lg"></i>
+            </div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-md-12"><strong>ID：</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model</div>
+    </div>
+</div>
+
+<script>
+    function back() {
+        window.location = corp_url + 'Task/TaskDone';
+    }
+
+    function home() {
+        window.location = corp_url + 'Ding/Home';
+    }
+</script>

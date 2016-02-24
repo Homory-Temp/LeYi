@@ -22,5 +22,16 @@ namespace Platform.JHMobile.Controllers
             ViewBag.Current = id;
             return View(list);
         }
+
+        public ActionResult TaskDonePreview()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var id = RouteData.Values["id"].ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("TaskDone", "Task");
+            var int_id = int.Parse(id);
+            return View(int_id);
+        }
     }
 }

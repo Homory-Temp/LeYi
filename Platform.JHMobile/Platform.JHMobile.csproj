@@ -566,6 +566,7 @@
     <Content Include="Views\Message\MessageSendPreview.cshtml" />
     <Content Include="Views\Message\MessageReceivePreview.cshtml" />
     <Content Include="Views\Task\TaskDone.cshtml" />
+    <Content Include="Views\Task\TaskDonePreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
