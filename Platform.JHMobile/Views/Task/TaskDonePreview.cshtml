@@ -25,14 +25,15 @@
     <div class="row">
         <div class="col-md-12"><strong>ID：</strong></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.App_ID</div>
-        <div class="col-md-12"><strong>流程标题：</strong></div>
+        <div class="col-md-12"><strong>标题：</strong></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.AppO_Title</div>
     </div>
-    @{
-        if (Model.Form != null)
-        {
-            <div class="row">
-                <div class="col-md-12"><strong>表单数据：</strong></div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        @{
+            if (Model.Form != null)
+            {
+                <div class="col-md-12"><strong>表单：</strong></div>
                 <div class="col-md-12">
                     @{
                         foreach (var item in Model.Form)
@@ -53,47 +54,42 @@
                                     }
                                 }
                             </table>
-                        }
+                                    }
                     }
                 </div>
-            </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-12"><strong>表单：</strong></div>
+                                        <div class="col-md-12 text-center">
+                                            未配置表单数据集
+                                        </div>
+                                    }
         }
-        else
-        {
-            <div class="row">
-                <div class="col-md-12"><strong>表单数据：</strong></div>
-                <div class="col-md-12 text-center">
-                    未配置表单数据集
-                </div>
-            </div>
-        }
-    }
-    @{
-        <div class="row">
-            <div class="col-md-12"><strong>办理流程：</strong></div>
+        @{
+            <div class="col-md-12"><strong>流程：</strong></div>
             <div class="col-md-12">
-                <table class="text-center table-responsive table-bordered">
-                    <tr>
-                        <th>办理人员</th>
-                        <th>流程步骤</th>
-                        <th>办理意见</th>
-                        <th>办理时间</th>
-                    </tr>
+                <table class="text-left table-responsive table-bordered">
                     @{
+                        var index = 0;
                         foreach (var flow in Model.Flow)
                         {
+                            index++;
                             <tr>
-                                <td>@flow.UserName</td>
-                                <td>@flow.AppDA_ButtonValue</td>
-                                <td>@flow.AppI_Content</td>
-                                <td>@flow.App_Time.Value.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                <td>
+                                    <div>&nbsp;&nbsp;@(index)、<strong>@(flow.AppDA_ButtonValue)</strong></div>
+                                </td>
+                                <td>
+                                    <div>&nbsp;&nbsp;<strong>@(flow.UserName)</strong> 办理于 <strong>@flow.App_Time.Value.ToString("yyyy-MM-dd HH:mm:ss")</strong></div>
+                                    <div>&nbsp;&nbsp;<strong>意见：</strong>@flow.AppI_Content</div>
+                                </td>
                             </tr>
                         }
                     }
                 </table>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
 
 <script>
