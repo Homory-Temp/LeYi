@@ -23,8 +23,6 @@
     </div>
     <div class="row">&nbsp;</div>
     <div class="row">
-        <div class="col-md-12"><strong>ID：</strong></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.App_ID</div>
         <div class="col-md-12"><strong>标题：</strong></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.AppO_Title</div>
     </div>
@@ -77,11 +75,11 @@
                             index++;
                             <tr>
                                 <td>
-                                    <div>&nbsp;&nbsp;@(index)、<strong>@(flow.AppDA_ButtonValue)</strong></div>
+                                    <div>&nbsp;&nbsp;<strong>@(index)</strong>、<strong>@(flow.AppDA_ButtonValue)</strong></div>
                                 </td>
                                 <td>
                                     <div>&nbsp;&nbsp;<strong>@(flow.UserName)</strong> 办理于 <strong>@flow.App_Time.Value.ToString("yyyy-MM-dd HH:mm:ss")</strong></div>
-                                    <div>&nbsp;&nbsp;<strong>意见：</strong>@flow.AppI_Content</div>
+                                    <div>&nbsp;&nbsp;<strong>意见</strong>：@flow.AppI_Content</div>
                                 </td>
                             </tr>
                         }
