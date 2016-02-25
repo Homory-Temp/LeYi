@@ -80,7 +80,7 @@
                                 </td>
                                 <td>
                                     <div>&nbsp;&nbsp;<strong>@(flow.UserName)</strong> 办理于 <strong>@flow.App_Time.Value.ToString("yyyy-MM-dd HH:mm:ss")</strong></div>
-                                    <div>&nbsp;&nbsp;<strong>意见</strong>：@flow.AppI_Content</div>
+                                    <div>&nbsp;&nbsp;<strong>意见</strong>：@(string.IsNullOrEmpty(flow.AppI_Content) ? "无" : flow.AppI_Content)</div>
                                 </td>
                             </tr>
                         }
