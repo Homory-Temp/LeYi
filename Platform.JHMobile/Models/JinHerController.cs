@@ -41,6 +41,19 @@ namespace Platform.JHMobile.Controllers
             return RedirectToAction("Authentication", "Ding");
         }
 
+        public static string ConvertTaskToDoStep(int type)
+        {
+            switch(type)
+            {
+                case 5:
+                    return "Back";
+                case 9:
+                    return "Done";
+                default:
+                    return "Next";
+            }
+        }
+
         protected string ConvertDoc(string doc)
         {
             if (string.IsNullOrEmpty(doc))

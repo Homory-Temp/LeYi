@@ -1,4 +1,5 @@
 ﻿@using Platform.JHMobile.Models
+@using Platform.JHMobile.Controllers
 
 @model TaskToDoObject
 
@@ -10,110 +11,113 @@
 <link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
 <script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="btn btn-warning" type="button" onclick="home();">
-                <i class="fa fa-home fa-lg"></i>
-            </div>
-            <div class="btn btn-warning" type="button" onclick="back();">
-                <i class="fa fa-reply fa-lg"></i>
-            </div>
-        </div>
-    </div>
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-md-12"><strong>标题：</strong></div>
-        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.AppO_Title</div>
-        @{
-            if (!string.IsNullOrEmpty(Model.Object.App_InnerIdea))
-            {
-                <div class="col-md-12"><strong>提示：</strong></div>
-                <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.App_InnerIdea.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries)[1]</div>
-            }
-        }
-    </div>
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        @{
-            if (Model.Form != null)
-            {
-                <div class="col-md-12"><strong>表单：</strong></div>
-                <div class="col-md-12">
-                    @{
-                        foreach (var item in Model.Form)
-                        {
-                            <table class="text-center table-responsive table-bordered">
-                                @{
-                                    foreach (var field in Model.Config)
-                                    {
-                                        if (field.Visible)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    <strong>@field.DisplayName</strong>
-                                                </td>
-                                                <td>@item.GetType().GetProperty(@field.Name).GetValue(item)</td>
-                                            </tr>
-                                        }
-                                    }
-                                }
-                            </table>
-                                    }
-                    }
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="btn btn-warning" type="button" onclick="home();">
+                    <i class="fa fa-home fa-lg"></i>
                 </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-md-12"><strong>表单：</strong></div>
-                                        <div class="col-md-12 text-center">
-                                            未配置表单数据集
-                                        </div>
-                                        <div class="col-md-12">&nbsp;</div>
-                                    }
-        }
-        @{
-            <div class="col-md-12"><strong>流程：</strong></div>
-            <div class="col-md-12">
-                <table class="text-left table-responsive table-bordered">
-                    @{
-                        var index = 0;
-                        foreach (var flow in Model.Flow)
-                        {
-                            index++;
-                            <tr>
-                                <td>
-                                    <div>&nbsp;&nbsp;<strong>@(index)</strong>、<strong>@(flow.AppDA_ButtonValue)</strong></div>
-                                </td>
-                                <td>
-                                    <div>&nbsp;&nbsp;<strong>@(flow.UserName)</strong> @(index == 1 ? "发起" : "办理")于 <strong>@flow.App_Time.Value.ToString("yyyy-MM-dd HH:mm:ss")</strong></div>
-                                    <div>&nbsp;&nbsp;<strong>意见</strong>：@(string.IsNullOrEmpty(flow.AppI_Content) ? "无" : flow.AppI_Content)</div>
-                                </td>
-                            </tr>
-                        }
-                    }
-                </table>
+                <div class="btn btn-warning" type="button" onclick="back();">
+                    <i class="fa fa-reply fa-lg"></i>
+                </div>
             </div>
-        }
-    </div>
-    <div class="row">
-        <div class="col-md-12"><strong>意见：</strong></div>
-        <div class="col-md-12 text-center">
-            <input class="form-control mm" type="text" />
         </div>
-    </div>
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-md-12 text-right">
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-12"><strong>标题：</strong></div>
+            <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.AppO_Title</div>
             @{
-                foreach (var button in Model.Button)
+                if (!string.IsNullOrEmpty(Model.Object.App_InnerIdea))
                 {
-                    <input class="btn btn-warning" type="button" data-type="@button.AppDA_Type" value="@button.AppDA_ButtonValue" />
+                    <div class="col-md-12"><strong>提示：</strong></div>
+                    <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.App_InnerIdea.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries)[1]</div>
                 }
             }
         </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            @{
+                if (Model.Form != null)
+                {
+                    <div class="col-md-12"><strong>表单：</strong></div>
+                    <div class="col-md-12">
+                        @{
+                            foreach (var item in Model.Form)
+                            {
+                                <table class="text-center table-responsive table-bordered">
+                                    @{
+                                        foreach (var field in Model.Config)
+                                        {
+                                            if (field.Visible)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <strong>@field.DisplayName</strong>
+                                                    </td>
+                                                    <td>@item.GetType().GetProperty(@field.Name).GetValue(item)</td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </table>
+                                        }
+                        }
+                    </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-12"><strong>表单：</strong></div>
+                                            <div class="col-md-12 text-center">
+                                                未配置表单数据集
+                                            </div>
+                                            <div class="col-md-12">&nbsp;</div>
+                                        }
+            }
+            @{
+                <div class="col-md-12"><strong>流程：</strong></div>
+                <div class="col-md-12">
+                    <table class="text-left table-responsive table-bordered">
+                        @{
+                            var index = 0;
+                            foreach (var flow in Model.Flow)
+                            {
+                                index++;
+                                <tr>
+                                    <td>
+                                        <div>&nbsp;&nbsp;<strong>@(index)</strong>、<strong>@(flow.AppDA_ButtonValue)</strong></div>
+                                    </td>
+                                    <td>
+                                        <div>&nbsp;&nbsp;<strong>@(flow.UserName)</strong> @(index == 1 ? "发起" : "办理")于 <strong>@flow.App_Time.Value.ToString("yyyy-MM-dd HH:mm:ss")</strong></div>
+                                        <div>&nbsp;&nbsp;<strong>意见</strong>：@(string.IsNullOrEmpty(flow.AppI_Content) ? "无" : flow.AppI_Content)</div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-12"><strong>意见：</strong></div>
+            <div class="col-md-12 text-center">
+                <input class="form-control mm" type="text" />
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                @{
+                    foreach (var button in Model.Button)
+                    {
+                        <input class="btn btn-warning" type="submit" onclick='this.form.action = "@Url.Action("TaskToDoStep" + JinHerController.ConvertTaskToDoStep(button.AppDA_Type), "Task", new { id = Model.Object.App_ID })"' value="@button.AppDA_ButtonValue" />
+                    }
+                }
+            </div>
+        </div>
     </div>
-</div>
+                    }
 
 <script>
     function back() {

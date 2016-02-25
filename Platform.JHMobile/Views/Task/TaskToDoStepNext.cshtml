@@ -1,0 +1,23 @@
+﻿@using Platform.JHMobile.Models
+
+@model string
+
+@{
+    ViewBag.Title = "待办工作办理";
+}
+
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
+<script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
+
+@Model
+
+<script>
+    function back() {
+        window.location = corp_url + 'Task/TaskToDo';
+    }
+
+    function home() {
+        window.location = corp_url + 'Ding/Home';
+    }
+</script>

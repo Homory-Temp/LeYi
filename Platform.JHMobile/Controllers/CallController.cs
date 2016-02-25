@@ -59,7 +59,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
-            var id = RouteData.Values["id"].ToString();
+            var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("CallToRead", "Call");
             var int_id = int.Parse(id);
@@ -83,7 +83,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
-            var id = RouteData.Values["id"].ToString();
+            var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("CallRead", "Call");
             var int_id = int.Parse(id);
@@ -106,7 +106,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
-            var id = RouteData.Values["id"].ToString();
+            var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("CallHistoric", "Call");
             var int_id = int.Parse(id);

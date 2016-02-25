@@ -41,6 +41,8 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
+            if (RouteData.Values["id"] == null)
+                return RedirectToAction("Message", "Message");
             var sp = RouteData.Values["id"].ToString().Split(new char[] { '_' });
             var type = sp[0];
             var count = db.f____Mobile_Count_MessageModule(Account, type).Single().Value;
@@ -60,7 +62,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
-            var id = RouteData.Values["id"].ToString();
+            var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("MessageModule", "Message");
             var int_id = int.Parse(id);
@@ -104,7 +106,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
-            var id = RouteData.Values["id"].ToString();
+            var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("Message", "Message");
             var int_id = int.Parse(id);
@@ -116,7 +118,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
-            var id = RouteData.Values["id"].ToString();
+            var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("Message", "Message");
             var int_id = int.Parse(id);
@@ -140,7 +142,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
-            var id = RouteData.Values["id"].ToString();
+            var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("Message", "Message");
             var int_idx = int.Parse(id);
@@ -185,7 +187,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
-            var id = RouteData.Values["id"].ToString();
+            var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("Message", "Message");
             var int_id = int.Parse(id);
@@ -216,7 +218,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
-            var id = RouteData.Values["id"].ToString();
+            var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("Message", "Message");
             var int_id = int.Parse(id);

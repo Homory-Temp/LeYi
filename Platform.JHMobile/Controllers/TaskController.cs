@@ -45,7 +45,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
-            var id = RouteData.Values["id"].ToString();
+            var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("TaskToDo", "Task");
             var int_id = int.Parse(id);
@@ -97,7 +97,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return Authenticate();
-            var id = RouteData.Values["id"].ToString();
+            var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("TaskDone", "Task");
             var int_id = int.Parse(id);
@@ -141,6 +141,21 @@ namespace Platform.JHMobile.Controllers
                 obj.Form = form;
             }
             return View(obj);
+        }
+
+        public ActionResult TaskToDoStepNext()
+        {
+            return View("退回");
+        }
+
+        public ActionResult TaskToDoStepBack()
+        {
+            return View("下一步");
+        }
+
+        public ActionResult TaskToDoStepDone()
+        {
+            return View("结束");
         }
     }
 }
