@@ -111,7 +111,7 @@
                 @{
                     foreach (var button in Model.Button)
                     {
-                        <input class="btn btn-warning" type="submit" onclick='this.form.action = "@Url.Action("TaskToDoStep" + JinHerController.ConvertTaskToDoStep(button.AppDA_Type), "Task", new { id = Model.Object.App_ID })"' value="@button.AppDA_ButtonValue" />
+                        <input class="btn btn-warning" type="submit" onclick='this.form.action = "@Url.Action("TaskToDoStep" + TaskController.ConvertTaskToDoStep(button.AppDA_Type), "Task", new { id = Model.Object.App_ID })"' value="@button.AppDA_ButtonValue" />
                     }
                 }
             </div>

@@ -143,19 +143,32 @@ namespace Platform.JHMobile.Controllers
             return View(obj);
         }
 
+        public static string ConvertTaskToDoStep(int type)
+        {
+            switch (type)
+            {
+                case 5:
+                    return "Back";
+                case 9:
+                    return "Done";
+                default:
+                    return "Next";
+            }
+        }
+
         public ActionResult TaskToDoStepNext()
         {
-            return View("退回");
+            return View(new { Type = "退回" });
         }
 
         public ActionResult TaskToDoStepBack()
         {
-            return View("下一步");
+            return View(new { Type = "下一步" });
         }
 
         public ActionResult TaskToDoStepDone()
         {
-            return View("结束");
+            return View(new { Type = "结束" });
         }
     }
 }
