@@ -103,9 +103,10 @@
         @{
             foreach (var button in Model.Button)
             {
-                <div class="btn btn-warning" data-type="@button.AppDA_Type">@button.AppDA_ButtonValue</div>
+                <input class="btn btn-warning" type="button" data-type="@button.AppDA_Type" value="@button.AppDA_ButtonValue" />
             }
         }
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
 </div>
 
