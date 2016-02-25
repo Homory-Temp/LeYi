@@ -8,5 +8,6 @@ namespace Platform.JHMobile.Models
         public List<dynamic> Form { get; set; }
         public List<TaskToDoConfigObject> Config { get; set; }
         public List<f____Mobile_List_TaskToDoFlow_Result> Flow { get; set; }
+        public List<f____Mobile_List_TaskToDoSingleButton_Result> Button { get; set; }
     }
 }

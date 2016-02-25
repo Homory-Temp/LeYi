@@ -55,6 +55,8 @@ namespace Platform.JHMobile.Controllers
             obj.Object = task;
             var flow = db.f____Mobile_List_TaskToDoFlow(int_id).OrderBy(o => o.App_ID).ToList();
             obj.Flow = flow;
+            var button = db.f____Mobile_List_TaskToDoSingleButton(task.AppD_ID, task.Version).ToList();
+            obj.Button = button;
             if (System.IO.File.Exists(path))
             {
                 var doc = XDocument.Load(path);
