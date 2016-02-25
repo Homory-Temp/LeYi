@@ -292,5 +292,14 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_TaskDoneSingle_Result>("f____Mobile_List_TaskDoneSingle", app_IDParameter);
         }
+    
+        public virtual ObjectResult<f____Mobile_List_TaskDoneFlow_Result> f____Mobile_List_TaskDoneFlow(Nullable<int> app_ID)
+        {
+            var app_IDParameter = app_ID.HasValue ?
+                new ObjectParameter("App_ID", app_ID) :
+                new ObjectParameter("App_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_TaskDoneFlow_Result>("f____Mobile_List_TaskDoneFlow", app_IDParameter);
+        }
     }
 }

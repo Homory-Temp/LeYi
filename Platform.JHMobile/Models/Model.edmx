@@ -84,6 +84,9 @@
         <Function Name="f____Mobile_List_TaskDone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskDone">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_List_TaskDoneFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskDoneFlow">
+          <Parameter Name="App_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_List_TaskDoneSingle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskDoneSingle">
           <Parameter Name="App_ID" Type="int" Mode="In" />
         </Function>
@@ -179,6 +182,9 @@
           <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_List_TaskDoneSingle" ReturnType="Collection(C6Model.f____Mobile_List_TaskDoneSingle_Result)">
+          <Parameter Name="App_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_TaskDoneFlow" ReturnType="Collection(C6Model.f____Mobile_List_TaskDoneFlow_Result)">
             <Parameter Name="App_ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -309,6 +315,13 @@
           <Property Type="String" Name="Form_ID" Nullable="false" MaxLength="256" />
           <Property Type="String" Name="TEM_TypeID" Nullable="false" MaxLength="64" />
           <Property Type="String" Name="Form_URL" Nullable="false" MaxLength="512" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_TaskDoneFlow_Result">
+          <Property Type="Int32" Name="App_ID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="App_Time" Nullable="true" Precision="23" />
+          <Property Type="String" Name="AppI_Content" Nullable="true" MaxLength="5000" />
+          <Property Type="String" Name="AppDA_ButtonValue" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -502,6 +515,17 @@
                 <ScalarProperty Name="Form_ID" ColumnName="Form_ID" />
                 <ScalarProperty Name="TEM_TypeID" ColumnName="TEM_TypeID" />
                 <ScalarProperty Name="Form_URL" ColumnName="Form_URL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoneFlow" FunctionName="C6Model.Store.f____Mobile_List_TaskDoneFlow">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_TaskDoneFlow_Result">
+                <ScalarProperty Name="App_ID" ColumnName="App_ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="App_Time" ColumnName="App_Time" />
+                <ScalarProperty Name="AppI_Content" ColumnName="AppI_Content" />
+                <ScalarProperty Name="AppDA_ButtonValue" ColumnName="AppDA_ButtonValue" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

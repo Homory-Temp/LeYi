@@ -37,6 +37,8 @@ namespace Platform.JHMobile.Controllers
             var path = Server.MapPath(string.Format("~/Views/Task/Config/{0}.xml", task.Form_ID));
             var obj = new TaskDoneObject();
             obj.Object = task;
+            var flow = db.f____Mobile_List_TaskDoneFlow(int_id).OrderBy(o => o.App_ID).ToList();
+            obj.Flow = flow;
             if (System.IO.File.Exists(path))
             {
                 var doc = XDocument.Load(path);

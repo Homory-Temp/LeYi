@@ -7,5 +7,6 @@ namespace Platform.JHMobile.Models
         public f____Mobile_List_TaskDoneSingle_Result Object { get; set; }
         public List<dynamic> Form { get; set; }
         public List<TaskDoneConfigObject> Config { get; set; }
+        public List<f____Mobile_List_TaskDoneFlow_Result> Flow { get; set; }
     }
 }

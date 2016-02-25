@@ -61,11 +61,38 @@
         else
         {
             <div class="row">
+                <div class="col-md-12"><strong>表单数据：</strong></div>
                 <div class="col-md-12 text-center">
-                    请配置表单数据集
+                    未配置表单数据集
                 </div>
             </div>
         }
+    }
+    @{
+        <div class="row">
+            <div class="col-md-12"><strong>办理流程：</strong></div>
+            <div class="col-md-12">
+                <table class="text-center table-responsive table-bordered">
+                    <tr>
+                        <th>办理人员</th>
+                        <th>流程步骤</th>
+                        <th>办理意见</th>
+                        <th>办理时间</th>
+                    </tr>
+                    @{
+                        foreach (var flow in Model.Flow)
+                        {
+                            <tr>
+                                <td>@flow.UserName</td>
+                                <td>@flow.AppDA_ButtonValue</td>
+                                <td>@flow.AppI_Content</td>
+                                <td>@flow.App_Time.Value.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </div>
     }
 </div>
 
