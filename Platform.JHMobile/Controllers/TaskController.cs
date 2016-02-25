@@ -158,6 +158,16 @@ namespace Platform.JHMobile.Controllers
 
         public ActionResult TaskToDoStepNext()
         {
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var id = RouteData.Values["id"]?.ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("TaskDone", "Task");
+            var int_id = int.Parse(id);
+            var so = new TaskToDoStepObject();
+            so.AppID = int_id;
+            so.Type = "Next";
+            so.StepText = Request["stepText"];
             return View(new { Type = "下一步" });
         }
 

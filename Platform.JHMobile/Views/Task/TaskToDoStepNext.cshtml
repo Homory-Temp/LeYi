@@ -1,6 +1,6 @@
 ﻿@using Platform.JHMobile.Models
 
-@model object
+@model TaskToDoStepObject
 
 @{
     ViewBag.Title = "待办工作办理";
@@ -10,7 +10,11 @@
 <link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
 <script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
 
-@Model
+@Model.AppID
+<br />
+@Model.Type
+<br />
+@Model.StepText
 
 <script>
     function back() {
