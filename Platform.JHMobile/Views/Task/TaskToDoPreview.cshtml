@@ -96,17 +96,22 @@
             </div>
         }
     </div>
-</div>
-<div class="row">&nbsp;</div>
-<div class="row">
-    <div class="col-md-12 text-right">
-        @{
-            foreach (var button in Model.Button)
-            {
-                <input class="btn btn-warning" type="button" data-type="@button.AppDA_Type" value="@button.AppDA_ButtonValue" />
+    <div class="row">
+        <div class="col-md-12"><strong>意见：</strong></div>
+        <div class="col-md-12 text-center">
+            <input class="form-control mm" type="text" />
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            @{
+                foreach (var button in Model.Button)
+                {
+                    <input class="btn btn-warning" type="button" data-type="@button.AppDA_Type" value="@button.AppDA_ButtonValue" />
+                }
             }
-        }
-        &nbsp;&nbsp;&nbsp;
+        </div>
     </div>
 </div>
 
