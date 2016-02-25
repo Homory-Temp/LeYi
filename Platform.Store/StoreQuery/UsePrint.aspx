@@ -107,5 +107,10 @@
             </div>
         </telerik:RadAjaxPanel>
     </form>
+    <style>
+        html body {
+            padding-top: 0px;
+        }
+    </style>
 </body>
 </html>
