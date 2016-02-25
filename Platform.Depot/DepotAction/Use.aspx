@@ -102,6 +102,7 @@
                 </div>
                 <div class="col-md-12 text-center">
                     <input type="button" class="btn btn-tumblr" id="do_use" runat="server" value="出库" onserverclick="do_use_ServerClick" />
+                    <input type="button" class="btn btn-tumblr" id="do_back" runat="server" value="返回" onserverclick="do_back_ServerClick" />
                 </div>
             </div>
             <div class="row" id="x3" runat="server" visible="false">

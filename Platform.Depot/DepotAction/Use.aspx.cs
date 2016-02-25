@@ -150,4 +150,9 @@ public partial class DepotAction_Use : DepotPageSingle
     {
         Response.Redirect("~/DepotAction/Object?DepotId={0}".Formatted(Depot.Id));
     }
+
+    protected void do_back_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/DepotAction/Object?DepotId={0}".Formatted(Depot.Id));
+    }
 }
