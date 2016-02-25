@@ -168,17 +168,37 @@ namespace Platform.JHMobile.Controllers
             so.AppID = int_id;
             so.Type = "Next";
             so.StepText = Request["stepText"];
-            return View(new { Type = "下一步" });
+            return View(so);
         }
 
         public ActionResult TaskToDoStepBack()
         {
-            return View(new { Type = "退回" });
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var id = RouteData.Values["id"]?.ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("TaskDone", "Task");
+            var int_id = int.Parse(id);
+            var so = new TaskToDoStepObject();
+            so.AppID = int_id;
+            so.Type = "Back";
+            so.StepText = Request["stepText"];
+            return View(so);
         }
 
         public ActionResult TaskToDoStepDone()
         {
-            return View(new { Type = "结束" });
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var id = RouteData.Values["id"]?.ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("TaskDone", "Task");
+            var int_id = int.Parse(id);
+            var so = new TaskToDoStepObject();
+            so.AppID = int_id;
+            so.Type = "Done";
+            so.StepText = Request["stepText"];
+            return View(so);
         }
     }
 }
