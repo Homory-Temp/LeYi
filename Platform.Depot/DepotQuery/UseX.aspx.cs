@@ -101,6 +101,7 @@ public partial class DepotQuery_UseX : DepotPageSingle
         {
             source = source.Where(o => o.Type == 1).ToList();
         }
+        source = source.Where(o => o.Amount > 0).ToList();
         view.DataSource = source.OrderByDescending(o => o.Time).ToList();
         //___total.Value = source.Sum(o => o.Amount).ToAmount(Depot.Featured(DepotType.小数数量库)) + "@@@" + source.Sum(o => o.Money).ToMoney();
         if (useTypeX.SelectedIndex == 2)
@@ -150,6 +151,7 @@ public partial class DepotQuery_UseX : DepotPageSingle
         {
             source = source.Where(o => o.UserName.Equals(peopleX.Text.Trim(), StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
+        source = source.Where(o => o.Amount > 0).ToList();
         viewx.DataSource = source.OrderByDescending(o => o.Time).ToList();
         //___total.Value = source.Sum(o => o.ReturnAmount).ToAmount(Depot.Featured(DepotType.小数数量库)) + "@@@" + source.Sum(o => o.PriceSet * o.ReturnAmount).ToMoney();
         if (useTypeX.SelectedIndex != 2)
