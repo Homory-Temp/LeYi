@@ -158,7 +158,7 @@
                                         &nbsp;&nbsp;
                                     </td>
                                     <td><%# ((Models.UseType)Eval("Type")) == Models.UseType.借用 ? ((decimal)Eval("Amount") - (decimal)Eval("ReturnedAmount")).ToAmount(Depot.Featured(Models.DepotType.小数数量库)) : "0" %></td>
-                                    <td><%# decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount")).ToMoney() %></td>
+                                    <td><%# (decimal)Eval("Amount") == 0 ? "0" : decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount")).ToMoney() %></td>
                                     <td><%# Eval("Money").ToMoney() %></td>
                                     <td style='<%# (Depot.Featured(Models.DepotType.幼儿园) ? "display: ;": "display: none;") %>'><%# Eval("Age") %></td>
                                     <td><%# Eval("UserName") %></td>
@@ -211,8 +211,8 @@
                                     <td>归还</td>
                                     <td><%# Eval("Amount").ToAmount() %></td>
                                     <td><%# Eval("ReturnAmount").ToAmount(Depot.Featured(Models.DepotType.小数数量库)) %></td>
-                                    <td><%# decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount")).ToMoney() %></td>
-                                    <td><%# (decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount")) * (decimal)Eval("ReturnAmount")).ToMoney() %></td>
+                                    <td><%# (decimal)Eval("Amount") == 0 ? "0" : decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount")).ToMoney() %></td>
+                                    <td><%# (decimal)Eval("Amount") == 0 ? "0" : (decimal.Divide((decimal)Eval("Money"), (decimal)Eval("Amount")) * (decimal)Eval("ReturnAmount")).ToMoney() %></td>
                                     <td style='<%# (Depot.Featured(Models.DepotType.幼儿园) ? "display: ;": "display: none;") %>'><%# Eval("Age") %></td>
                                     <td><%# Eval("UserName") %></td>
                                     <td><%# Eval("OperatorName") %></td>
