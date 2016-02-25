@@ -319,5 +319,27 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_TaskToDo_Result>("f____Mobile_List_TaskToDo", loginCodeParameter);
         }
+    
+        public virtual ObjectResult<f____Mobile_List_TaskToDoSingle_Result> f____Mobile_List_TaskToDoSingle(string loginCode, Nullable<int> approveId)
+        {
+            var loginCodeParameter = loginCode != null ?
+                new ObjectParameter("LoginCode", loginCode) :
+                new ObjectParameter("LoginCode", typeof(string));
+    
+            var approveIdParameter = approveId.HasValue ?
+                new ObjectParameter("ApproveId", approveId) :
+                new ObjectParameter("ApproveId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_TaskToDoSingle_Result>("f____Mobile_List_TaskToDoSingle", loginCodeParameter, approveIdParameter);
+        }
+    
+        public virtual ObjectResult<f____Mobile_List_TaskToDoFlow_Result> f____Mobile_List_TaskToDoFlow(Nullable<int> app_ID)
+        {
+            var app_IDParameter = app_ID.HasValue ?
+                new ObjectParameter("App_ID", app_ID) :
+                new ObjectParameter("App_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_TaskToDoFlow_Result>("f____Mobile_List_TaskToDoFlow", app_IDParameter);
+        }
     }
 }

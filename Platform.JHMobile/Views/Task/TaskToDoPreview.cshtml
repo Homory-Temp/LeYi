@@ -1,0 +1,104 @@
+﻿@using Platform.JHMobile.Models
+
+@model TaskToDoObject
+
+@{
+    ViewBag.Title = "待办工作办理";
+}
+
+<link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
+<script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="btn btn-warning" type="button" onclick="home();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-reply fa-lg"></i>
+            </div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-md-12"><strong>标题：</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.AppO_Title</div>
+        <div class="col-md-12"><strong>提示：</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.App_InnerIdea</div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        @{
+            if (Model.Form != null)
+            {
+                <div class="col-md-12"><strong>表单：</strong></div>
+                <div class="col-md-12">
+                    @{
+                        foreach (var item in Model.Form)
+                        {
+                            <table class="text-center table-responsive table-bordered">
+                                @{
+                                    foreach (var field in Model.Config)
+                                    {
+                                        if (field.Visible)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <strong>@field.DisplayName</strong>
+                                                </td>
+                                                <td>@item.GetType().GetProperty(@field.Name).GetValue(item)</td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </table>
+                                    }
+                    }
+                </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-12"><strong>表单：</strong></div>
+                                        <div class="col-md-12 text-center">
+                                            未配置表单数据集
+                                        </div>
+                                        <div class="col-md-12">&nbsp;</div>
+                                    }
+        }
+        @{
+            <div class="col-md-12"><strong>流程：</strong></div>
+            <div class="col-md-12">
+                <table class="text-left table-responsive table-bordered">
+                    @{
+                        var index = 0;
+                        foreach (var flow in Model.Flow)
+                        {
+                            index++;
+                            <tr>
+                                <td>
+                                    <div>&nbsp;&nbsp;<strong>@(index)</strong>、<strong>@(flow.AppDA_ButtonValue)</strong></div>
+                                </td>
+                                <td>
+                                    <div>&nbsp;&nbsp;<strong>@(flow.UserName)</strong> 办理于 <strong>@flow.App_Time.Value.ToString("yyyy-MM-dd HH:mm:ss")</strong></div>
+                                    <div>&nbsp;&nbsp;<strong>意见</strong>：@flow.AppI_Content</div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function back() {
+        window.location = corp_url + 'Task/TaskToDo';
+    }
+
+    function home() {
+        window.location = corp_url + 'Ding/Home';
+    }
+</script>

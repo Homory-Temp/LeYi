@@ -41,6 +41,56 @@ namespace Platform.JHMobile.Controllers
             return View(list);
         }
 
+        public ActionResult TaskToDoPreview()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var id = RouteData.Values["id"].ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("TaskToDo", "Task");
+            var int_id = int.Parse(id);
+            var task = db.f____Mobile_List_TaskToDoSingle(Account, int_id).FirstOrDefault();
+            var path = Server.MapPath(string.Format("~/Views/Task/Config/{0}.xml", task.Form_ID));
+            var obj = new TaskToDoObject();
+            obj.Object = task;
+            var flow = db.f____Mobile_List_TaskToDoFlow(int_id).OrderBy(o => o.App_ID).ToList();
+            obj.Flow = flow;
+            if (System.IO.File.Exists(path))
+            {
+                var doc = XDocument.Load(path);
+                var sql = doc.Root.Element("sql").Value.Replace("@AppO_Values", task.AppO_Values);
+                var fields = doc.Root.Element("fields").Elements("field");
+                var dict = new List<TaskToDoConfigObject>();
+                foreach (var field in fields)
+                {
+                    var visible = field.Element("visible").Value == "是";
+                    var name = field.Element("fieldname").Value;
+                    var display = field.Element("displaylabel").Value;
+                    var typeName = field.Element("datatype").Value;
+                    Type t;
+                    switch (typeName)
+                    {
+                        default:
+                            {
+                                t = typeof(string);
+                                break;
+                            }
+                    }
+                    dict.Add(new TaskToDoConfigObject { Name = name, DisplayName = display, Visible = visible, Type = t });
+                }
+                obj.Config = dict;
+                var builder = JinHerDynamic.CreateTypeBuilder("Homory", "JinHerTask", "TaskToDoForm");
+                foreach (var item in dict)
+                {
+                    JinHerDynamic.CreateAutoImplementedProperty(builder, item.Name, item.Type);
+                }
+                var type = builder.CreateType();
+                var form = db.Database.SqlQuery(type, sql).ToListAsync().Result;
+                obj.Form = form;
+            }
+            return View(obj);
+        }
+
         public ActionResult TaskDonePreview()
         {
             if (string.IsNullOrEmpty(Account))
