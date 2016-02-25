@@ -22,7 +22,7 @@ public partial class Control_ObjectUse : DepotControlSingle
             node.Selected = true;
             node.ExpandParentNodes();
             catalog.SelectedValue = catalogId.ToString();
-            var source = DataContext.DepotObjectLoad(Depot.Id, use.CatalogId).Where(o => o.Amount > 0);
+            var source = DataContext.DepotObjectLoad(Depot.Id, use.CatalogId, true).Where(o => o.Amount > 0);
             obj.DataSource = source.ToList();
             obj.DataBind();
             if (use.ObjectId.HasValue && use.ObjectId.Value != Guid.Empty)
@@ -83,7 +83,7 @@ public partial class Control_ObjectUse : DepotControlSingle
                 node.Selected = true;
                 node.ExpandParentNodes();
                 catalog.SelectedValue = node.Value;
-                var source = DataContext.DepotObjectLoad(Depot.Id, use.CatalogId).Where(o => o.Amount > 0);
+                var source = DataContext.DepotObjectLoad(Depot.Id, use.CatalogId, true).Where(o => o.Amount > 0);
                 obj.DataSource = source.ToList();
                 obj.DataBind();
             }
