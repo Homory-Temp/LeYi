@@ -29,6 +29,9 @@
         <Function Name="f____Mobile_Count_TaskDone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_TaskDone">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_Count_TaskToDo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_TaskToDo">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_Do_CallRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Do_CallRead">
           <Parameter Name="CallNoSeeId" Type="int" Mode="In" />
         </Function>
@@ -89,6 +92,9 @@
         </Function>
         <Function Name="f____Mobile_List_TaskDoneSingle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskDoneSingle">
           <Parameter Name="App_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="f____Mobile_List_TaskToDo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskToDo">
+          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="f____Mobile_List_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_User">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
@@ -185,7 +191,13 @@
           <Parameter Name="App_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_List_TaskDoneFlow" ReturnType="Collection(C6Model.f____Mobile_List_TaskDoneFlow_Result)">
-            <Parameter Name="App_ID" Mode="In" Type="Int32" />
+          <Parameter Name="App_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_Count_TaskToDo" ReturnType="Collection(Int32)">
+            <Parameter Name="LoginCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_TaskToDo" ReturnType="Collection(C6Model.f____Mobile_List_TaskToDo_Result)">
+            <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
@@ -322,6 +334,12 @@
           <Property Type="DateTime" Name="App_Time" Nullable="true" Precision="23" />
           <Property Type="String" Name="AppI_Content" Nullable="true" MaxLength="5000" />
           <Property Type="String" Name="AppDA_ButtonValue" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_TaskToDo_Result">
+          <Property Type="Int32" Name="App_ID" Nullable="false" />
+          <Property Type="String" Name="AppO_Title" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="App_BeginTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -526,6 +544,17 @@
                 <ScalarProperty Name="App_Time" ColumnName="App_Time" />
                 <ScalarProperty Name="AppI_Content" ColumnName="AppI_Content" />
                 <ScalarProperty Name="AppDA_ButtonValue" ColumnName="AppDA_ButtonValue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f____Mobile_Count_TaskToDo" FunctionName="C6Model.Store.f____Mobile_Count_TaskToDo" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskToDo" FunctionName="C6Model.Store.f____Mobile_List_TaskToDo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_TaskToDo_Result">
+                <ScalarProperty Name="App_ID" ColumnName="App_ID" />
+                <ScalarProperty Name="AppO_Title" ColumnName="AppO_Title" />
+                <ScalarProperty Name="App_BeginTime" ColumnName="App_BeginTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

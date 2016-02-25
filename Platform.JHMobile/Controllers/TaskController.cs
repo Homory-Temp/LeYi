@@ -9,6 +9,22 @@ namespace Platform.JHMobile.Controllers
 {
     public class TaskController : JinHerController
     {
+        public ActionResult TaskToDo()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var count = db.f____Mobile_Count_TaskToDo(Account).Single().Value;
+            var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
+            var per = 10;
+            if (count < id * per)
+                return RedirectToAction("TaskToDo", "Task", new { id = id - 1 });
+            var list = db.f____Mobile_List_TaskToDo(Account).OrderByDescending(o => o.App_BeginTime).Skip(id * per).Take(per).ToList();
+            ViewBag.Min = 0;
+            ViewBag.Max = count % per == 0 ? count / per - 1 : (count + (per - count % per)) / per - 1;
+            ViewBag.Current = id;
+            return View(list);
+        }
+
         public ActionResult TaskDone()
         {
             if (string.IsNullOrEmpty(Account))

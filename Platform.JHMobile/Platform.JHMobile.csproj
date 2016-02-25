@@ -154,6 +154,9 @@
     <Compile Include="Models\f____Mobile_List_TaskDoneFlow_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\f____Mobile_List_TaskToDo_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\JinHerDynamic.cs" />
     <Compile Include="Models\TaskDoneConfigObject.cs" />
     <Compile Include="Models\TaskDoneObject.cs" />
@@ -577,6 +580,7 @@
     <Content Include="Views\Message\MessageReceivePreview.cshtml" />
     <Content Include="Views\Task\TaskDone.cshtml" />
     <Content Include="Views\Task\TaskDonePreview.cshtml" />
+    <Content Include="Views\Task\TaskToDo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
