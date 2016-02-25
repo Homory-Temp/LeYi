@@ -158,12 +158,12 @@ namespace Platform.JHMobile.Controllers
 
         public ActionResult TaskToDoStepNext()
         {
-            return View(new { Type = "退回" });
+            return View(new { Type = "下一步" });
         }
 
         public ActionResult TaskToDoStepBack()
         {
-            return View(new { Type = "下一步" });
+            return View(new { Type = "退回" });
         }
 
         public ActionResult TaskToDoStepDone()
