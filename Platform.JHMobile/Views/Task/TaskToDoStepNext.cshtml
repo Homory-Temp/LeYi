@@ -38,10 +38,14 @@
         <div class="row">&nbsp;</div>
         <div class="row">
             @{ 
-                foreach (var user in Model.Next)
+                foreach (var next in Model.Next)
                 {
                     <div class="col-xs-4">
-                        <input class="form-control mm" type="radio" value="@user.UserName" />
+                        <div class="radio">
+                            <label>
+                                <input name="stepUser" type="radio" value="@next.AppDACO_Values" /> @next.UserName
+                            </label>
+                        </div>
                     </div>
                 }
             }
