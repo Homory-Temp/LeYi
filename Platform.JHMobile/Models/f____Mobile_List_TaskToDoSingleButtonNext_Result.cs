@@ -11,7 +11,7 @@ namespace Platform.JHMobile.Models
 {
     using System;
     
-    public partial class f____Mobile_List_TaskToDoSingleButtonUser_Result
+    public partial class f____Mobile_List_TaskToDoSingleButtonNext_Result
     {
         public int AppDAC_ID { get; set; }
         public string AppT_ID { get; set; }

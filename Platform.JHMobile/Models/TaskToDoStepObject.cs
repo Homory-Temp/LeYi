@@ -11,6 +11,6 @@ namespace Platform.JHMobile.Models
         public int AppID { get; set; }
         public string Type { get; set; }
         public string StepText { get; set; }
-        public List<f____Mobile_List_TaskToDoSingleButtonUser_Result> Users { get; set; }
+        public List<f____Mobile_List_TaskToDoSingleButtonNext_Result> Next { get; set; }
     }
 }

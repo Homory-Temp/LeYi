@@ -355,7 +355,7 @@ namespace Platform.JHMobile.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_TaskToDoSingleButton_Result>("f____Mobile_List_TaskToDoSingleButton", appD_IDParameter, versionParameter);
         }
     
-        public virtual ObjectResult<f____Mobile_List_TaskToDoSingleButtonUser_Result> f____Mobile_List_TaskToDoSingleButtonUser(Nullable<int> appD_ID, string version, Nullable<int> appDA_Type)
+        public virtual ObjectResult<f____Mobile_List_TaskToDoSingleButtonNext_Result> f____Mobile_List_TaskToDoSingleButtonNext(Nullable<int> appD_ID, string version, Nullable<int> appDA_Type)
         {
             var appD_IDParameter = appD_ID.HasValue ?
                 new ObjectParameter("AppD_ID", appD_ID) :
@@ -369,7 +369,7 @@ namespace Platform.JHMobile.Models
                 new ObjectParameter("AppDA_Type", appDA_Type) :
                 new ObjectParameter("AppDA_Type", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_TaskToDoSingleButtonUser_Result>("f____Mobile_List_TaskToDoSingleButtonUser", appD_IDParameter, versionParameter, appDA_TypeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_TaskToDoSingleButtonNext_Result>("f____Mobile_List_TaskToDoSingleButtonNext", appD_IDParameter, versionParameter, appDA_TypeParameter);
         }
     }
 }

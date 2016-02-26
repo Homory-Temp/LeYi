@@ -107,7 +107,7 @@
           <Parameter Name="AppD_ID" Type="int" Mode="In" />
           <Parameter Name="Version" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="f____Mobile_List_TaskToDoSingleButtonUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskToDoSingleButtonUser">
+        <Function Name="f____Mobile_List_TaskToDoSingleButtonNext" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskToDoSingleButtonNext">
           <Parameter Name="AppD_ID" Type="int" Mode="In" />
           <Parameter Name="Version" Type="nvarchar" Mode="In" />
           <Parameter Name="AppDA_Type" Type="int" Mode="In" />
@@ -226,7 +226,7 @@
             <Parameter Name="AppD_ID" Mode="In" Type="Int32" />
             <Parameter Name="Version" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="f____Mobile_List_TaskToDoSingleButtonUser" ReturnType="Collection(C6Model.f____Mobile_List_TaskToDoSingleButtonUser_Result)">
+          <FunctionImport Name="f____Mobile_List_TaskToDoSingleButtonNext" ReturnType="Collection(C6Model.f____Mobile_List_TaskToDoSingleButtonNext_Result)">
             <Parameter Name="AppD_ID" Mode="In" Type="Int32" />
             <Parameter Name="Version" Mode="In" Type="String" />
             <Parameter Name="AppDA_Type" Mode="In" Type="Int32" />
@@ -418,7 +418,7 @@
           <Property Type="Int32" Name="del_Flag" Nullable="false" />
           <Property Type="String" Name="Version" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="f____Mobile_List_TaskToDoSingleButtonUser_Result">
+        <ComplexType Name="f____Mobile_List_TaskToDoSingleButtonNext_Result">
           <Property Type="Int32" Name="AppDAC_ID" Nullable="false" />
           <Property Type="String" Name="AppT_ID" Nullable="false" MaxLength="256" />
           <Property Type="Int32" Name="AppD_ID" Nullable="false" />
@@ -706,9 +706,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskToDoSingleButtonUser" FunctionName="C6Model.Store.f____Mobile_List_TaskToDoSingleButtonUser">
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskToDoSingleButtonNext" FunctionName="C6Model.Store.f____Mobile_List_TaskToDoSingleButtonNext">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_TaskToDoSingleButtonUser_Result">
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_TaskToDoSingleButtonNext_Result">
                 <ScalarProperty Name="AppDAC_ID" ColumnName="AppDAC_ID" />
                 <ScalarProperty Name="AppT_ID" ColumnName="AppT_ID" />
                 <ScalarProperty Name="AppD_ID" ColumnName="AppD_ID" />
