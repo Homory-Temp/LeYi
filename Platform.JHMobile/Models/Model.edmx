@@ -107,6 +107,11 @@
           <Parameter Name="AppD_ID" Type="int" Mode="In" />
           <Parameter Name="Version" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_List_TaskToDoSingleButtonUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskToDoSingleButtonUser">
+          <Parameter Name="AppD_ID" Type="int" Mode="In" />
+          <Parameter Name="Version" Type="nvarchar" Mode="In" />
+          <Parameter Name="AppDA_Type" Type="int" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_List_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_User">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -220,6 +225,11 @@
           <FunctionImport Name="f____Mobile_List_TaskToDoSingleButton" ReturnType="Collection(C6Model.f____Mobile_List_TaskToDoSingleButton_Result)">
             <Parameter Name="AppD_ID" Mode="In" Type="Int32" />
             <Parameter Name="Version" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_TaskToDoSingleButtonUser" ReturnType="Collection(C6Model.f____Mobile_List_TaskToDoSingleButtonUser_Result)">
+            <Parameter Name="AppD_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Version" Mode="In" Type="String" />
+            <Parameter Name="AppDA_Type" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
@@ -407,6 +417,20 @@
           <Property Type="DateTime" Name="Sub_Time" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="del_Flag" Nullable="false" />
           <Property Type="String" Name="Version" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="f____Mobile_List_TaskToDoSingleButtonUser_Result">
+          <Property Type="Int32" Name="AppDAC_ID" Nullable="false" />
+          <Property Type="String" Name="AppT_ID" Nullable="false" MaxLength="256" />
+          <Property Type="Int32" Name="AppD_ID" Nullable="false" />
+          <Property Type="Int32" Name="AppDA_Type" Nullable="true" />
+          <Property Type="String" Name="AppDACO_Type" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="AppDACO_ID" Nullable="true" />
+          <Property Type="String" Name="AppDACO_Values" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="Sub_Code" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="Sub_Time" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Del_Flag" Nullable="false" />
+          <Property Type="String" Name="Version" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -679,6 +703,24 @@
                 <ScalarProperty Name="Sub_Time" ColumnName="Sub_Time" />
                 <ScalarProperty Name="del_Flag" ColumnName="del_Flag" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskToDoSingleButtonUser" FunctionName="C6Model.Store.f____Mobile_List_TaskToDoSingleButtonUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_TaskToDoSingleButtonUser_Result">
+                <ScalarProperty Name="AppDAC_ID" ColumnName="AppDAC_ID" />
+                <ScalarProperty Name="AppT_ID" ColumnName="AppT_ID" />
+                <ScalarProperty Name="AppD_ID" ColumnName="AppD_ID" />
+                <ScalarProperty Name="AppDA_Type" ColumnName="AppDA_Type" />
+                <ScalarProperty Name="AppDACO_Type" ColumnName="AppDACO_Type" />
+                <ScalarProperty Name="AppDACO_ID" ColumnName="AppDACO_ID" />
+                <ScalarProperty Name="AppDACO_Values" ColumnName="AppDACO_Values" />
+                <ScalarProperty Name="Sub_Code" ColumnName="Sub_Code" />
+                <ScalarProperty Name="Sub_Time" ColumnName="Sub_Time" />
+                <ScalarProperty Name="Del_Flag" ColumnName="Del_Flag" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

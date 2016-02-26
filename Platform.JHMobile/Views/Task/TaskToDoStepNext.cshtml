@@ -15,6 +15,13 @@
 @Model.Type
 <br />
 @Model.StepText
+@{ 
+    foreach (var user in Model.Users)
+    {
+        <br />
+        @user.UserName
+    }
+}
 
 <script>
     function back() {
