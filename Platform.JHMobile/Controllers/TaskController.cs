@@ -183,7 +183,7 @@ namespace Platform.JHMobile.Controllers
                 return RedirectToAction("TaskDone", "Task");
             var int_id = int.Parse(id);
             var task = db.f____Mobile_List_TaskToDoSingle(Account, int_id).FirstOrDefault();
-            var users = db.f____Mobile_List_TaskToDoSingleButtonUser(task.AppD_ID, task.Version, 6).ToList();
+            var users = db.f____Mobile_List_TaskToDoSingleButtonUser(task.AppD_ID, task.Version, 5).ToList();
             var so = new TaskToDoStepObject();
             so.AppID = int_id;
             so.Type = "Back";
