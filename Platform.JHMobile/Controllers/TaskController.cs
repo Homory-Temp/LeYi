@@ -221,5 +221,19 @@ namespace Platform.JHMobile.Controllers
             so.StepText = Request["stepText"];
             return View(so);
         }
+
+        public ActionResult TaskToDoStepDoneDo()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var id = RouteData.Values["id"]?.ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("TaskToDo", "Task");
+            var int_id = int.Parse(id);
+            var task = db.f____Mobile_List_TaskToDoSingle(Account, int_id).FirstOrDefault();
+            var idea = Request["stepText"];
+            db.f____Mobile_List_TaskDoingDone(task.App_ID, Account, idea);
+            return RedirectToAction("TaskToDo", "Task");
+        }
     }
 }
