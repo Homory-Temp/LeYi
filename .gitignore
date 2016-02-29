@@ -202,6 +202,7 @@ App_Data/
 /Platform.Common/资源
 /Platform.Common/物资/图片
 /Platform.Common/物资/条码
+GCopLog.txt
 *.config
 *.table
 /Platform.Storage/Upload
