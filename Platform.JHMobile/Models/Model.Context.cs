@@ -371,5 +371,30 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_TaskToDoSingleButtonNext_Result>("f____Mobile_List_TaskToDoSingleButtonNext", appD_IDParameter, versionParameter, appDA_TypeParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> f____Mobile_List_TaskDoingNext(Nullable<int> app_ID, string next_User_ID, string app_InnerIdea, string loginCode, string idea)
+        {
+            var app_IDParameter = app_ID.HasValue ?
+                new ObjectParameter("App_ID", app_ID) :
+                new ObjectParameter("App_ID", typeof(int));
+    
+            var next_User_IDParameter = next_User_ID != null ?
+                new ObjectParameter("Next_User_ID", next_User_ID) :
+                new ObjectParameter("Next_User_ID", typeof(string));
+    
+            var app_InnerIdeaParameter = app_InnerIdea != null ?
+                new ObjectParameter("App_InnerIdea", app_InnerIdea) :
+                new ObjectParameter("App_InnerIdea", typeof(string));
+    
+            var loginCodeParameter = loginCode != null ?
+                new ObjectParameter("LoginCode", loginCode) :
+                new ObjectParameter("LoginCode", typeof(string));
+    
+            var ideaParameter = idea != null ?
+                new ObjectParameter("Idea", idea) :
+                new ObjectParameter("Idea", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f____Mobile_List_TaskDoingNext", app_IDParameter, next_User_IDParameter, app_InnerIdeaParameter, loginCodeParameter, ideaParameter);
+        }
     }
 }

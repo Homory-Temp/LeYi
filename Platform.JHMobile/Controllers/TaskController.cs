@@ -162,7 +162,7 @@ namespace Platform.JHMobile.Controllers
                 return Authenticate();
             var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
-                return RedirectToAction("TaskDone", "Task");
+                return RedirectToAction("TaskToDo", "Task");
             var int_id = int.Parse(id);
             var task = db.f____Mobile_List_TaskToDoSingle(Account, int_id).FirstOrDefault();
             var users = db.f____Mobile_List_TaskToDoSingleButtonNext(task.AppD_ID, task.Version, 6).ToList();
@@ -172,6 +172,22 @@ namespace Platform.JHMobile.Controllers
             so.StepText = Request["stepText"];
             so.Next = users;
             return View(so);
+        }
+
+        public ActionResult TaskToDoStepNextDo()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return Authenticate();
+            var id = RouteData.Values["id"]?.ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("TaskToDo", "Task");
+            var int_id = int.Parse(id);
+            var task = db.f____Mobile_List_TaskToDoSingle(Account, int_id).FirstOrDefault();
+            var user = Request["stepUser"];
+            var idea = Request["stepText"];
+            var hint = Request["stepHint"];
+            db.f____Mobile_List_TaskDoingNext(task.App_ID, "next", "hint", Account, "idea");
+            return RedirectToAction("TaskToDo", "Task");
         }
 
         public ActionResult TaskToDoStepBack()
