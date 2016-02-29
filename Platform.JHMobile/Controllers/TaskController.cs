@@ -186,7 +186,7 @@ namespace Platform.JHMobile.Controllers
             var user = Request["stepUser"];
             var idea = Request["stepText"];
             var hint = Request["stepHint"];
-            db.f____Mobile_List_TaskDoingNext(task.App_ID, "next", "hint", Account, "idea");
+            db.f____Mobile_List_TaskDoingNext(task.App_ID, user, hint, Account, idea);
             return RedirectToAction("TaskToDo", "Task");
         }
 
