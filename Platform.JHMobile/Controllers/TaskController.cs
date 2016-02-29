@@ -212,7 +212,7 @@ namespace Platform.JHMobile.Controllers
                 return Authenticate();
             var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
-                return RedirectToAction("TaskDone", "Task");
+                return RedirectToAction("TaskToDo", "Task");
             var int_id = int.Parse(id);
             var task = db.f____Mobile_List_TaskToDoSingle(Account, int_id).FirstOrDefault();
             var so = new TaskToDoStepObject();
