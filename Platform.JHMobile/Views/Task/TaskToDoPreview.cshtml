@@ -29,7 +29,7 @@
             <div class="col-md-12"><strong>标题：</strong></div>
             <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.AppO_Title</div>
             @{
-                if (!string.IsNullOrEmpty(Model.Object.App_InnerIdea))
+                if (!string.IsNullOrEmpty(Model.Object.App_InnerIdea) && Model.Object.App_InnerIdea.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).Length > 1)
                 {
                     <div class="col-md-12"><strong>提示：</strong></div>
                     <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.App_InnerIdea.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries)[1]</div>
