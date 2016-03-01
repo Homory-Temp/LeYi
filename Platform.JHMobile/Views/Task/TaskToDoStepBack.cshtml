@@ -10,15 +10,47 @@
 <link href="~/Content/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" />
 <script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
 
-@Model.Object.App_ID
-<br />
-@Model.Type
-<br />
-@Model.StepText
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="btn btn-warning" type="button" onclick="home();">
+                    <i class="fa fa-home fa-lg"></i>
+                </div>
+                <div class="btn btn-warning" type="button" onclick="back();">
+                    <i class="fa fa-reply fa-lg"></i>
+                </div>
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-12"><strong>标题：</strong></div>
+            <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.AppO_Title</div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-12"><strong>意见：</strong></div>
+            <div class="col-md-12 text-center">
+                <input name="stepText" class="form-control mm" type="text" value="@Model.StepText" />
+            </div>
+            <div class="col-md-12"><strong>提示：</strong></div>
+            <div class="col-md-12 text-center">
+                <input name="stepHint" class="form-control mm" type="text" value="" />
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <input class="btn btn-warning" type="submit" onclick='this.form.action = "@Url.Action("TaskToDoStepBackDo", "Task", new { id = Model.Object.App_ID })"' value="提交" />
+            </div>
+        </div>
+    </div>
+                }
 
 <script>
     function back() {
-        window.location = corp_url + 'Task/TaskToDo';
+        window.location = corp_url + 'Task/TaskToDoPreview/@Model.Object.App_ID';
     }
 
     function home() {

@@ -84,6 +84,12 @@
         <Function Name="f____Mobile_List_MessageType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_MessageType">
           <Parameter Name="AppG_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_List_TaskDoingBack" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskDoingBack">
+          <Parameter Name="App_ID" Type="int" Mode="In" />
+          <Parameter Name="App_InnerIdea" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="LoginCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="Idea" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_List_TaskDoingDone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskDoingDone">
           <Parameter Name="App_ID" Type="int" Mode="In" />
           <Parameter Name="LoginCode" Type="nvarchar" Mode="In" />
@@ -252,6 +258,12 @@
           </FunctionImport>
           <FunctionImport Name="f____Mobile_List_TaskDoingDone">
             <Parameter Name="App_ID" Mode="In" Type="Int32" />
+            <Parameter Name="LoginCode" Mode="In" Type="String" />
+            <Parameter Name="Idea" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_TaskDoingBack" ReturnType="Collection(Int32)">
+            <Parameter Name="App_ID" Mode="In" Type="Int32" />
+            <Parameter Name="App_InnerIdea" Mode="In" Type="String" />
             <Parameter Name="LoginCode" Mode="In" Type="String" />
             <Parameter Name="Idea" Mode="In" Type="String" />
           </FunctionImport>
@@ -750,6 +762,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoingNext" FunctionName="C6Model.Store.f____Mobile_List_TaskDoingNext" />
           <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoingDone" FunctionName="C6Model.Store.f____Mobile_List_TaskDoingDone" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoingBack" FunctionName="C6Model.Store.f____Mobile_List_TaskDoingBack" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
