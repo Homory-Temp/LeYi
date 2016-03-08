@@ -84,6 +84,36 @@
             }
         }
     }
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-home fa-lg"></i>
+            </div>
+            <div class="btn btn-warning" type="button" onclick="back();">
+                <i class="fa fa-reply fa-lg"></i>
+            </div>
+            <div class="btn btn-warning" type="button" onclick="historic();">
+                <i class="fa fa-history fa-lg"></i>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            @{
+                if (ViewBag.Min < ViewBag.Current)
+                {
+                    <div class="btn btn-primary" type="button" onclick="previous();">
+                        <i class="fa fa-backward fa-lg"></i>
+                    </div>
+                }
+                if (ViewBag.Current < ViewBag.Max)
+                {
+                    <div class="btn btn-primary" type="button" onclick="next();">
+                        <i class="fa fa-forward fa-lg"></i>
+                    </div>
+                }
+            }
+        </div>
+    </div>
 </div>
 
 <script>
