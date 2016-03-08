@@ -45,6 +45,15 @@
                 }
             }
         </div>
+        @{
+            if (!string.IsNullOrEmpty(ViewBag.PDF))
+            {
+                <div class="col-md-12">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a target="_blank" href="@string.Format("../../{0}", ViewBag.PDF.Replace(DingTalk.CorpJinHer, "").Replace("\\", "/"))">正文下载</a>
+                </div>
+            }
+        }
     </div>
     <div class="row">&nbsp;</div>
     <div class="row">
