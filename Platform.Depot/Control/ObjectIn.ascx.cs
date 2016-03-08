@@ -45,6 +45,19 @@ public partial class Control_ObjectIn : DepotControlSingle
                 obj.SelectedIndex = obj.FindItemIndexByValue(@in.ObjectId.ToString());
             }
         }
+        else
+        {
+            if (catalog.EmbeddedTree.Nodes.Count > 0)
+            {
+                var node = catalog.EmbeddedTree.Nodes[0];
+                node.Selected = true;
+                node.ExpandParentNodes();
+                catalog.SelectedValue = node.Value;
+                var source = DataContext.DepotObjectLoad(Depot.Id, Guid.Parse(node.Value), true).Where(o => o.Amount > 0);
+                obj.DataSource = source.ToList();
+                obj.DataBind();
+            }
+        }
         if (@in.ResponsibleId.HasValue)
         {
             var item = people.FindItemByValue(@in.ResponsibleId.Value.ToString());
