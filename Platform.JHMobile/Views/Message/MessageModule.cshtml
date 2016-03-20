@@ -11,13 +11,16 @@
 <script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
 
 <div class="container">
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="btn btn-warning" type="button" onclick="back();">
-                <i class="fa fa-home fa-lg"></i>
-            </div>
-            <div class="btn btn-warning" type="button" onclick="back();">
-                <i class="fa fa-reply fa-lg"></i>
+    <h1 class="page-heading">信息门户</h1>
+    <div class="the-box toolbar no-border no-margin">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="btn btn-warning" type="button" onclick="back();">
+                    <i class="fa fa-home fa-lg"></i>
+                </div>
+                <div class="btn btn-warning" type="button" onclick="back();">
+                    <i class="fa fa-reply fa-lg"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -26,8 +29,8 @@
         @foreach (var mo in Model)
         {
             <div class="col-lg-3 col-md-6">
-                <div class="panel panel-primary" onclick="@("window.location = corp_url + 'Message/MessageModuleSingle/" + mo.ModuleTypeId + "';")">
-                    <div class="panel-heading">
+                <div class="panel metro_2" onclick="@("window.location = corp_url + 'Message/MessageModuleSingle/" + mo.ModuleTypeId + "';")">
+                    <div class="panel-heading" style="color:#fff;font-size:20px;line-height:26px">
                         <div class="row">
                             <div class="col-xs-3">
                                 <i class="fa fa-envelope fa-4x"></i>
@@ -49,13 +52,15 @@
         }
     </div>
     <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="btn btn-warning" type="button" onclick="back();">
-                <i class="fa fa-home fa-lg"></i>
-            </div>
-            <div class="btn btn-warning" type="button" onclick="back();">
-                <i class="fa fa-reply fa-lg"></i>
+    <div class="the-box toolbar no-border no-margin">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="btn btn-warning" type="button" onclick="back();">
+                    <i class="fa fa-home fa-lg"></i>
+                </div>
+                <div class="btn btn-warning" type="button" onclick="back();">
+                    <i class="fa fa-reply fa-lg"></i>
+                </div>
             </div>
         </div>
     </div>

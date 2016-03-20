@@ -15,30 +15,33 @@
 <script src="~/Content/sb-admin-2/js/sb-admin-2.js"></script>
 
 <div class="container">
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="btn btn-warning" type="button" onclick="home();">
-                <i class="fa fa-home fa-lg"></i>
+    <h1 class="page-heading">@DingTalk.CorpMessageModules[ViewBag.MMType] <small>第@(ViewBag.Current + 1)页</small></h1>
+    <div class="the-box toolbar no-border no-margin">
+        <div class="row">
+            <div class="col-xs-7">
+                <div class="btn btn-warning" type="button" onclick="home();">
+                    <i class="fa fa-home fa-lg"></i>
+                </div>
+                <div class="btn btn-warning" type="button" onclick="back();">
+                    <i class="fa fa-reply fa-lg"></i>
+                </div>
             </div>
-            <div class="btn btn-warning" type="button" onclick="back();">
-                <i class="fa fa-reply fa-lg"></i>
-            </div>
-        </div>
-        <div class="col-xs-6 text-right">
-            @{
+            <div class="col-xs-5 text-right">
+                @{
                 if (ViewBag.Min < ViewBag.Current)
                 {
-                    <div class="btn btn-primary" type="button" onclick="previous();">
-                        <i class="fa fa-backward fa-lg"></i>
-                    </div>
+            <div class="btn btn-primary" type="button" onclick="previous();">
+                <i class="fa fa-chevron-left"></i>
+            </div>
                 }
                 if (ViewBag.Current < ViewBag.Max)
                 {
-                    <div class="btn btn-primary" type="button" onclick="next();">
-                        <i class="fa fa-forward fa-lg"></i>
-                    </div>
+            <div class="btn btn-primary" type="button" onclick="next();">
+                <i class="fa fa-chevron-right"></i>
+            </div>
                 }
-            }
+                }
+            </div>
         </div>
     </div>
     <div class="row">&nbsp;</div>
@@ -58,8 +61,8 @@
                 index++;
                 <div class="row" onclick="@("window.location = corp_url + 'Message/MessageModulePreview/" + obj.MessageID + "';")">
                     <div class="col-md-12">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
+                        <div class="panel metro_2">
+                            <div class="panel-heading" style="color:#fff;font-size:20px;line-height:26px">
                                 <span>@Html.Raw(obj.MessageTitle)</span>
                             </div>
                             <a>
@@ -82,30 +85,32 @@
         }
     }
     <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="btn btn-warning" type="button" onclick="home();">
-                <i class="fa fa-home fa-lg"></i>
+    <div class="the-box toolbar no-border no-margin">
+        <div class="row">
+            <div class="col-xs-7">
+                <div class="btn btn-warning" type="button" onclick="home();">
+                    <i class="fa fa-home fa-lg"></i>
+                </div>
+                <div class="btn btn-warning" type="button" onclick="back();">
+                    <i class="fa fa-reply fa-lg"></i>
+                </div>
             </div>
-            <div class="btn btn-warning" type="button" onclick="back();">
-                <i class="fa fa-reply fa-lg"></i>
+            <div class="col-xs-5 text-right">
+                @{
+                    if (ViewBag.Min < ViewBag.Current)
+                    {
+                        <div class="btn btn-primary" type="button" onclick="previous();">
+                            <i class="fa fa-chevron-left"></i>
+                        </div>
+                    }
+                    if (ViewBag.Current < ViewBag.Max)
+                    {
+                        <div class="btn btn-primary" type="button" onclick="next();">
+                            <i class="fa fa-chevron-right"></i>
+                        </div>
+                    }
+                }
             </div>
-        </div>
-        <div class="col-xs-6 text-right">
-            @{
-                if (ViewBag.Min < ViewBag.Current)
-                {
-                    <div class="btn btn-primary" type="button" onclick="previous();">
-                        <i class="fa fa-backward fa-lg"></i>
-                    </div>
-                }
-                if (ViewBag.Current < ViewBag.Max)
-                {
-                    <div class="btn btn-primary" type="button" onclick="next();">
-                        <i class="fa fa-forward fa-lg"></i>
-                    </div>
-                }
-            }
         </div>
     </div>
 </div>
