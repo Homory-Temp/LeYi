@@ -83,6 +83,8 @@ namespace Go
         private void BindTreeX()
         {
             var node = tree.SelectedNode;
+            if (node == null)
+                return;
             while (node.Level > 0)
                 node = node.ParentNode;
             var id = Guid.Parse(node.Value);

@@ -48,7 +48,7 @@ namespace Go
 		{
 			icon.Visible = !string.IsNullOrWhiteSpace(InitUser.Icon);
             icon.ImageUrl = InitUser.Icon;
-			headInfo.InnerText = string.Format("{1}控制面板 —— {0}", InitUser.DisplayName, this.Title);
+			headInfo.InnerText = string.Format("智能化管理平台 —— {0}", InitUser.DisplayName);
 			LoadSite(InitUser.Type);
 		}
 

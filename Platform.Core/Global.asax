@@ -19,8 +19,8 @@
         var rid = Guid.Parse("ce43e587-8cc0-4a1c-bf9e-08d1af495d0c");
         Application["Resource"] = HomoryContext.Value.Application.Single(o => o.Id == rid).Home.Replace("Go/Home", "");
 
-        Application["Sso"] = "http://localhost:7545/";
-        Application["Core"] = "http://localhost:3998/";
+        //Application["Sso"] = "http://61.160.121.83:703/Sso/";
+        //Application["Core"] = "http://localhost:3998/";
     }
 
     void Application_End(object sender, EventArgs e)
