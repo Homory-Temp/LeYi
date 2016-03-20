@@ -434,5 +434,18 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f____Mobile_List_TaskDoingBack", app_IDParameter, app_InnerIdeaParameter, loginCodeParameter, ideaParameter);
         }
+    
+        public virtual ObjectResult<string> f____Mobile_List_TaskDoneFile(string appT_ID, Nullable<int> appO_ID)
+        {
+            var appT_IDParameter = appT_ID != null ?
+                new ObjectParameter("AppT_ID", appT_ID) :
+                new ObjectParameter("AppT_ID", typeof(string));
+    
+            var appO_IDParameter = appO_ID.HasValue ?
+                new ObjectParameter("AppO_ID", appO_ID) :
+                new ObjectParameter("AppO_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("f____Mobile_List_TaskDoneFile", appT_IDParameter, appO_IDParameter);
+        }
     }
 }

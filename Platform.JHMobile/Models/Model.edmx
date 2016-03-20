@@ -105,6 +105,10 @@
         <Function Name="f____Mobile_List_TaskDone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskDone">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_List_TaskDoneFile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskDoneFile">
+          <Parameter Name="AppT_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="AppO_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="f____Mobile_List_TaskDoneFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_TaskDoneFlow">
           <Parameter Name="App_ID" Type="int" Mode="In" />
         </Function>
@@ -266,6 +270,10 @@
             <Parameter Name="App_InnerIdea" Mode="In" Type="String" />
             <Parameter Name="LoginCode" Mode="In" Type="String" />
             <Parameter Name="Idea" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_List_TaskDoneFile" ReturnType="Collection(String)">
+            <Parameter Name="AppT_ID" Mode="In" Type="String" />
+            <Parameter Name="AppO_ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
@@ -763,6 +771,7 @@
           <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoingNext" FunctionName="C6Model.Store.f____Mobile_List_TaskDoingNext" />
           <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoingDone" FunctionName="C6Model.Store.f____Mobile_List_TaskDoingDone" />
           <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoingBack" FunctionName="C6Model.Store.f____Mobile_List_TaskDoingBack" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoneFile" FunctionName="C6Model.Store.f____Mobile_List_TaskDoneFile" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
