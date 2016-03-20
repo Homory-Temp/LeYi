@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Xml.Linq;
+using System.IO;
 
 namespace Platform.JHMobile.Controllers
 {
@@ -117,6 +118,27 @@ namespace Platform.JHMobile.Controllers
             else if (task.AppT_ID.StartsWith("IOA_Message", StringComparison.OrdinalIgnoreCase))
             {
                 ViewBag.XType = "Message";
+                var message = db.f____Mobile_List_MessageModuleSingle(task.AppO_ID).FirstOrDefault();
+                ViewBag.Html = message.MessageHTML;
+                if (!string.IsNullOrEmpty(message.MessageFileName))
+                {
+                    var name = message.MessageFileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+                    var dir = new DirectoryInfo(Server.MapPath("~/Resource/MessageFile"));
+                    ViewBag.Path = "";
+                    ViewBag.ModuleTypeID = message.ModuleTypeID;
+                    foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+                    {
+                        if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                        {
+                            string pathx = dir + "\\" + cDir.Name + "\\" + name;
+                            var converted = ConvertDoc(pathx);
+                            if (!string.IsNullOrEmpty(converted))
+                            {
+                                ViewBag.PDF = converted;
+                            }
+                        }
+                    }
+                }
             }
             else
             {
