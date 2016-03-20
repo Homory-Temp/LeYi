@@ -42,11 +42,11 @@
                 if (Model.Form != null)
                 {
                     <div class="col-md-12"><strong>表单：</strong></div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 table-responsive">
                         @{
                             foreach (var item in Model.Form)
                             {
-                                <table class="text-center table-responsive table-bordered">
+                                <table class="table table-striped table-hover">
                                     @{
                                         foreach (var field in Model.Config)
                                         {
@@ -77,8 +77,8 @@
             }
             @{
                 <div class="col-md-12"><strong>流程：</strong></div>
-                <div class="col-md-12">
-                    <table class="text-left table-responsive table-bordered">
+                <div class="col-md-12 table-responsive">
+                    <table class="table table-striped table-hover">
                         @{
                             var index = 0;
                             foreach (var flow in Model.Flow)
