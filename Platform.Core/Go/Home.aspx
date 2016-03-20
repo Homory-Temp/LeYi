@@ -70,11 +70,6 @@
                 </asp:Repeater>
             </div>
             <div class="row">&nbsp;</div>
-            <div class="row">
-                <div class="col-md-12" style="text-align: center;">
-                    <img alt="" style="width: 80%; height: auto; margin: auto;" src="../Common/配置/CoreCopyright.png" />
-                </div>
-            </div>
         </div>
         <style>
             .rb_panel {
