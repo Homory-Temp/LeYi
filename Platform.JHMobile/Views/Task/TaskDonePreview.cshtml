@@ -25,45 +25,49 @@
     <div class="row">
         <div class="col-md-12"><strong>标题：</strong></div>
         <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.AppO_Title</div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Object.AppT_ID</div>
     </div>
     <div class="row">&nbsp;</div>
     <div class="row">
         @{
-            if (Model.Form != null)
+            if (ViewBag.XType == "Form")
             {
-                <div class="col-md-12"><strong>表单：</strong></div>
-                <div class="col-md-12 table-responsive">
-                    @{
-                        foreach (var item in Model.Form)
-                        {
-                            <table class="table table-striped" table-hover>
-                                @{
-                                    foreach (var field in Model.Config)
-                                    {
-                                        if (field.Visible)
+                if (Model.Form != null)
+                {
+                    <div class="col-md-12"><strong>表单：</strong></div>
+                    <div class="col-md-12 table-responsive">
+                        @{
+                            foreach (var item in Model.Form)
+                            {
+                                <table class="table table-striped" table-hover>
+                                    @{
+                                        foreach (var field in Model.Config)
                                         {
-                                            <tr>
-                                                <td>
-                                                    <strong>@field.DisplayName</strong>
-                                                </td>
-                                                <td>@item.GetType().GetProperty(@field.Name).GetValue(item)</td>
-                                            </tr>
+                                            if (field.Visible)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <strong>@field.DisplayName</strong>
+                                                    </td>
+                                                    <td>@item.GetType().GetProperty(@field.Name).GetValue(item)</td>
+                                                </tr>
+                                            }
                                         }
                                     }
-                                }
-                            </table>
-                                    }
-                    }
-                </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-md-12"><strong>表单：</strong></div>
-                                        <div class="col-md-12 text-center">
-                                            未配置表单数据集
-                                        </div>
-                                        <div class="col-md-12">&nbsp;</div>
-                                    }
+                                </table>
+                                        }
+                        }
+                    </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-12"><strong>表单：</strong></div>
+                                            <div class="col-md-12 text-center">
+                                                未配置表单数据集
+                                            </div>
+                                            <div class="col-md-12">&nbsp;</div>
+                                            }
+                                        }
         }
         @{
             <div class="col-md-12"><strong>流程：</strong></div>

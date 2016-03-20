@@ -102,6 +102,26 @@ namespace Platform.JHMobile.Controllers
                 return RedirectToAction("TaskDone", "Task");
             var int_id = int.Parse(id);
             var task = db.f____Mobile_List_TaskDoneSingle(int_id).FirstOrDefault();
+            if (task.AppT_ID.StartsWith("IOA_Ask", StringComparison.OrdinalIgnoreCase))
+            {
+                ViewBag.XType = "Ask";
+            }
+            else if (task.AppT_ID.StartsWith("IOA_Accept", StringComparison.OrdinalIgnoreCase))
+            {
+                ViewBag.XType = "Accept";
+            }
+            else if (task.AppT_ID.StartsWith("IOA_Send", StringComparison.OrdinalIgnoreCase))
+            {
+                ViewBag.XType = "Send";
+            }
+            else if (task.AppT_ID.StartsWith("IOA_Message", StringComparison.OrdinalIgnoreCase))
+            {
+                ViewBag.XType = "Message";
+            }
+            else
+            {
+                ViewBag.XType = "Form";
+            }
             var path = Server.MapPath(string.Format("~/Views/Task/Config/{0}.xml", task.Form_ID));
             var obj = new TaskDoneObject();
             obj.Object = task;
