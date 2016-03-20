@@ -14,15 +14,6 @@
 </head>
 <body>
 
-    <script type="text/javascript">$(document).ready(function (c) {
-    $('.close').on('click', function (c) {
-        $('.login-form').fadeOut('slow', function (c) {
-            $('.login-form').remove();
-        });
-    });
-});
-    </script>
-
     <h1>
         <img alt="" src="images/SsoLogoLX.png" /></h1>
     <div class="login-form">
@@ -90,6 +81,10 @@
     <div class="bottom2016">
         Copyrigth@梁溪区教育局 技术支持：华佳科技
     </div>
-
+<style>
+  html input:-webkit-autofill, html textarea:-webkit-autofill, html select:-webkit-autofill {
+    background-color: transparent;
+  }
+</style>
 </body>
 </html>
