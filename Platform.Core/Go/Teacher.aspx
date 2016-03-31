@@ -48,6 +48,9 @@
                 <div class="col-md-4">
                     <telerik:RadSearchBox ID="peek" runat="server" OnSearch="peek_Search" EmptyMessage="查找教师...." EnableAutoComplete="false">
                     </telerik:RadSearchBox>
+                    &nbsp;&nbsp;
+                    <telerik:RadButton ID="btnImport" runat="server" Text="导入" OnClick="btnImport_Click">
+                    </telerik:RadButton>
                 </div>
                 <div class="col-md-4">
                     &nbsp;

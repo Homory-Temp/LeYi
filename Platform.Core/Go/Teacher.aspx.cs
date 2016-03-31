@@ -97,6 +97,12 @@ namespace Go
             InitCombo();
             BindTree();
             InitTree();
+            BindIMP();
+        }
+
+        private void BindIMP()
+        {
+            btnImport.Visible = tree.SelectedNode != null && tree.SelectedNode.Level > 0;
         }
 
         private void InitCombo()
@@ -782,11 +788,6 @@ namespace Go
             get { return Right; }
         }
 
-        protected void btnImport_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("../Go/Import", false);
-        }
-
         protected void view_NeedDataSource(object sender, RadListViewNeedDataSourceEventArgs e)
         {
             try
@@ -1060,6 +1061,11 @@ namespace Go
         protected void btnV_Load(object sender, EventArgs e)
         {
             (sender as Button).Visible = CanMove;
+        }
+
+        protected void btnImport_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("../Patch/Import?CampusId={0}&DepartmentId={1}", tree.SelectedNode.ParentNode.Value, tree.SelectedNode.Value), false);
         }
     }
 }
