@@ -27,9 +27,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <div>
-                <homory:SideBar runat="server" ID="SideBar" Crumb="教师导入" />
-            </div>
+        <telerik:RadScriptManager ID="sm" runat="server"></telerik:RadScriptManager>
+        <telerik:RadAjaxLoadingPanel ID="loading" runat="server">
+            <div>&nbsp;</div>
+            <div class="btn btn-lg btn-warning" style="margin-top: 50px;">正在加载 请稍候....</div>
+        </telerik:RadAjaxLoadingPanel>
             <telerik:RadAjaxPanel ID="panel" runat="server" CssClass="container" LoadingPanelID="loading">
                 <div class="row">
                     <div class="col-md-12">

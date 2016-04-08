@@ -66,7 +66,7 @@
                     <div class="col-md-12">
                         <div class="panel metro_1">
                             <div class="panel-heading" style="color:#fff;font-size:20px;line-height:26px">
-                                <span>@Html.Raw(obj.CallContent)</span>
+                                <span>@Platform.JHMobile.Controllers.JinHerController.Cut(Html.Raw(obj.CallContent).ToString(), 20)</span>
                             </div>
                             <a>
                                 <div class="panel-footer">

@@ -84,12 +84,16 @@ namespace LY.Service.Sms
                 while (sqlDataReader.Read())
                 {
                     string str2 = sqlDataReader.GetString(0);
+                    if (str2.Length > 6)
+                    {
+                        str2 = str2.Substring(str2.Length - 6);
+                    }
                     string str3 = HttpUtility.UrlEncode(sqlDataReader.GetString(1));
                     string str4 = sqlDataReader.GetString(2);
                     sqlDataReader.GetString(3).PadLeft(4, '0');
                     string str5 = sqlDataReader.GetString(4);
                     str3 = string.Format("{0}（{1}）", str3, str5);
-                    str = string.Format("http://www.4001185185.com/sdk/smssdk!mt.action?sdk={3}&code={4}&phones={0}&msg={1}&resulttype=txt&subcode=2802{2}&rpt=1", str4, str3, str2, sys_account, sys_password);
+                    str = string.Format("http://www.4001185185.com/sdk/smssdk!mt.action?sdk={3}&code={4}&phones={0}&msg={1}&resulttype=txt&subcode={5}{2}&rpt=1", str4, str3, str2, sys_account, sys_password, ConfigurationManager.AppSettings["SubCode"]);
                     this.Log("待发送内容", str);
                     strs1.Add(str);
                     strs.Add(str2);

@@ -14,6 +14,14 @@ public class UserHelper
         db.ExecProcReDataSet("__InsertUser", param);
     }
 
+    // 新增用户
+    public static void InsertUserEx(string name, string password, bool sync, Homory.Model.State state, string account, string deptId, string userId, string phone, string idCard, int ordinal, int relState = 0, string groupId = "1000", string ex = "")
+    {
+        var id = IDCreator.CreateMaxStrID("Users");
+        var param = new object[] { id, name, password, (sync && state < Homory.Model.State.审核) ? 0 : 1, account, deptId, userId, phone, idCard, ordinal, relState, groupId, ex };
+        db.ExecProcReDataSet("__InsertUserEx", param);
+    }
+
     // 更新用户
     public static void UpdateUser(string name, bool sync, Homory.Model.State state, string account, string userId, string phone, string idCard, int ordinal)
     {

@@ -20,7 +20,7 @@ namespace Platform.JHMobile.Controllers
                 {
                     if (!DingTalk.CorpRemote)
                     {
-                        account = DingTalk.CorpUserMappings["022122292191"];
+                        account = DingTalk.CorpUserMappings["manager9601"];
                     }
                     else if (Session["user_id"] != null)
                     {
@@ -96,6 +96,39 @@ namespace Platform.JHMobile.Controllers
             }
             catch
             { }
+        }
+
+        public static string Cut(string text, int total, string suffix = "...")
+        {
+            var sb = new StringBuilder();
+            var x = text.Length;
+            var i = 0;
+            bool e = false;
+            bool n = false;
+            while (i < x)
+            {
+                if (n)
+                {
+                    e = false;
+                    n = false;
+                }
+                if (text[i] == '<')
+                {
+                    e = true;
+                }
+                else if (text[i] == '>')
+                {
+                    n = true;
+                }
+                if (!e)
+                    sb.Append(text[i]);
+                i++;
+            }
+            var value = sb.ToString();
+            if (value.Length <= total)
+                return value;
+            else
+                return value.Substring(0, total) + suffix;
         }
     }
 }

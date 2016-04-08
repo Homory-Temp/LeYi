@@ -79,7 +79,7 @@
     <br />
     <br />
     <div class="bottom2016">
-        Copyrigth@梁溪区教育局 技术支持：华佳科技
+        Copyright &copy;2016 梁溪教育筹备组  技术支持：北京金和网络
     </div>
 <style>
   html input:-webkit-autofill, html textarea:-webkit-autofill, html select:-webkit-autofill {

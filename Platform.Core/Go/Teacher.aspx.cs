@@ -1065,7 +1065,8 @@ namespace Go
 
         protected void btnImport_Click(object sender, EventArgs e)
         {
-            Response.Redirect(string.Format("../Patch/Import?CampusId={0}&DepartmentId={1}", tree.SelectedNode.ParentNode.Value, tree.SelectedNode.Value), false);
+            var url = string.Format("../Patch/Import?CampusId={0}&DepartmentId={1}", tree.SelectedNode.ParentNode.Value, tree.SelectedNode.Value);
+            panel.ResponseScripts.Add(string.Format("window.open('{0}', '_blank');", url));
         }
     }
 }

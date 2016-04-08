@@ -21,7 +21,7 @@ public partial class Extended_Import : HomoryCorePage
         file.Value = name;
         e.File.SaveAs(name, true);
         var book = new Workbook(name);
-        var data = book.Worksheets[0].Cells.ExportDataTable(0, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null).Count(), 4, false);
+        var data = book.Worksheets[0].Cells.ExportDataTable(0, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null).Count(), 6, false);
         grid.DataSource = data;
         grid.DataBind();
     }
@@ -38,7 +38,7 @@ public partial class Extended_Import : HomoryCorePage
         }
     }
 
-    public bool TeacherAdd(Entities db, Guid campusId, Guid departmentId, int ordinal, string name, string phone, string passwordInitial, State state, string email, string idCard, bool? gender, DateTime? birthday, string nationality, string birthplace, string address, string account, bool? perstaff, bool sync, out Guid gid)
+    public bool TeacherAdd(Entities db, Guid campusId, Guid departmentId, int ordinal, string name, string phone, string passwordInitial, State state, string email, string idCard, bool? gender, DateTime? birthday, string nationality, string birthplace, string address, string account, bool? perstaff, bool sync, out Guid gid, string ex)
     {
         gid = db.GetId();
         try
@@ -90,6 +90,7 @@ public partial class Extended_Import : HomoryCorePage
             db.Teacher.Add(userTeacher);
             db.DepartmentUser.Add(relation);
             db.SaveChanges();
+            try { UserHelper.InsertUserEx(name, "C984AED014AEC7623A54F0591DA07A85FD4B762D", sync, state, account, departmentId.ToString().ToUpper(), gid.ToString().ToUpper(), phone, idCard, ordinal, 0, "1000", ex); } catch { }
             return true;
         }
         catch
@@ -101,7 +102,7 @@ public partial class Extended_Import : HomoryCorePage
     protected void im_ok_Click(object sender, EventArgs e)
     {
         var book = new Workbook(file.Value);
-        var data = book.Worksheets[0].Cells.ExportDataTable(0, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null).Count(), 4, false);
+        var data = book.Worksheets[0].Cells.ExportDataTable(0, 0, book.Worksheets[0].Cells.Rows.Where(o => o[0].Value != null).Count(), 6, false);
         var campusId = Guid.Parse(Request.QueryString["CampusId"]);
         var departmentId = Guid.Parse(Request.QueryString["DepartmentId"]);
         foreach (DataRow row in data.Rows)
@@ -117,7 +118,7 @@ public partial class Extended_Import : HomoryCorePage
                 {
                 }
                 Guid gid;
-                TeacherAdd(HomoryContext.Value, campusId, departmentId, ordinal, row[2].ToString(), row[3].ToString(), "000000", State.启用, "", "", (bool?)null, (DateTime?)null, "", "", "", row[1].ToString(), true, false, out gid);
+                TeacherAdd(HomoryContext.Value, campusId, departmentId, ordinal, row[1].ToString(), row[3].ToString(), "000000", State.启用, "", row[4].ToString(), (bool?)null, (DateTime?)null, "", "", "", row[2].ToString(), true, true, out gid, row[5] == null ? "" : row[5].ToString());
                 HomoryContext.Value.SaveChanges();
             }
             catch
