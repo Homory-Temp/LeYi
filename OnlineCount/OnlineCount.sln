@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25029.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "OnlineCount(1)", "OnlineCount\", "{9346C202-58D2-4E6A-B2C2-FDA0A55D7B94}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50301"
+		Debug.AspNetCompiler.PhysicalPath = "OnlineCount\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50301\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50301"
+		Release.AspNetCompiler.PhysicalPath = "OnlineCount\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50301\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "50301"
+		SlnRelativePath = "OnlineCount\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9346C202-58D2-4E6A-B2C2-FDA0A55D7B94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9346C202-58D2-4E6A-B2C2-FDA0A55D7B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

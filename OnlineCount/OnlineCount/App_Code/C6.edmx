@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="C6Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="____OnlineCountStatistics">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Online" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DeptID" />
+          </Key>
+          <Property Name="DeptID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeptName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeptParentID" Type="varchar" MaxLength="100" />
+          <Property Name="DeptSort" Type="int" />
+          <Property Name="DeptDesc" Type="varchar" MaxLength="1000" />
+          <Property Name="DeptDelFlag" Type="int" Nullable="false" />
+          <Property Name="DeptGuid" Type="varchar" MaxLength="100" />
+          <Property Name="DeptPy" Type="varchar" MaxLength="50" />
+          <Property Name="DeptPrincipal" Type="varchar" MaxLength="50" />
+          <Property Name="UpperLeader" Type="varchar" MaxLength="50" />
+          <Property Name="IsCompany" Type="int" />
+          <Property Name="UnitID" Type="varchar" MaxLength="50" />
+          <Property Name="BMID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“C6.dbo.RelationshipUsers”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="RelationshipUsers">
+          <Key>
+            <PropertyRef Name="RelaType" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="DeptID" />
+            <PropertyRef Name="PosiID" />
+            <PropertyRef Name="DeptLeader" />
+            <PropertyRef Name="UserOrder" />
+            <PropertyRef Name="RelaPrimary" />
+          </Key>
+          <Property Name="RelaType" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DeptID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PosiID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeptLeader" Type="int" Nullable="false" />
+          <Property Name="UserOrder" Type="int" Nullable="false" />
+          <Property Name="RelaPrimary" Type="int" Nullable="false" />
+          <Property Name="StatID" Type="int" />
+          <Property Name="ID" Type="varchar" MaxLength="50" />
+          <Property Name="DelFlag" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="PassWord" Type="varchar" MaxLength="100" />
+          <Property Name="EmployeeID" Type="varchar" MaxLength="30" />
+          <Property Name="PassWordType" Type="int" />
+          <Property Name="PassWordTerm" Type="int" />
+          <Property Name="PassWordLeastLengh" Type="int" />
+          <Property Name="PWDLastUpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="PhotoURL" Type="varchar" MaxLength="500" />
+          <Property Name="Status" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="LonginStatus" Type="int" Nullable="false" />
+          <Property Name="LastLonginActive" Type="datetime" />
+          <Property Name="SysFlag" Type="int" Nullable="false" />
+          <Property Name="UserType" Type="int" Nullable="false" />
+          <Property Name="LastFlushTime" Type="datetime" />
+          <Property Name="SessionID" Type="varchar" MaxLength="50" />
+          <Property Name="LoginCode" Type="varchar" MaxLength="30" />
+          <Property Name="LoginIp" Type="varchar" MaxLength="200" />
+          <Property Name="RegTime" Type="datetime" Nullable="false" />
+          <Property Name="Reg_AipPower" Type="int" Nullable="false" />
+          <Property Name="UserPy" Type="varchar" MaxLength="20" />
+          <Property Name="LastLonginIP" Type="varchar" MaxLength="200" />
+          <Property Name="WorkStatus" Type="int" />
+          <Property Name="InPhase" Type="int" Nullable="false" />
+          <Property Name="UnitID" Type="varchar" MaxLength="50" />
+          <Property Name="YHID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="C6ModelStoreContainer">
+          <EntitySet Name="____OnlineCountStatistics" EntityType="Self.____OnlineCountStatistics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RelationshipUsers" EntityType="Self.RelationshipUsers" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RelationshipUsers].[RelaType] AS [RelaType], 
+    [RelationshipUsers].[UserID] AS [UserID], 
+    [RelationshipUsers].[DeptID] AS [DeptID], 
+    [RelationshipUsers].[PosiID] AS [PosiID], 
+    [RelationshipUsers].[DeptLeader] AS [DeptLeader], 
+    [RelationshipUsers].[UserOrder] AS [UserOrder], 
+    [RelationshipUsers].[RelaPrimary] AS [RelaPrimary], 
+    [RelationshipUsers].[StatID] AS [StatID], 
+    [RelationshipUsers].[ID] AS [ID], 
+    [RelationshipUsers].[DelFlag] AS [DelFlag]
+    FROM [dbo].[RelationshipUsers] AS [RelationshipUsers]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="C6Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C____OnlineCountStatistics">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Online" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DeptID" />
+          </Key>
+          <Property Name="DeptID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DeptName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DeptParentID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DeptSort" Type="Int32" />
+          <Property Name="DeptDesc" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="DeptDelFlag" Type="Int32" Nullable="false" />
+          <Property Name="DeptGuid" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DeptPy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeptPrincipal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpperLeader" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsCompany" Type="Int32" />
+          <Property Name="UnitID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BMID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PassWord" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PassWordType" Type="Int32" />
+          <Property Name="PassWordTerm" Type="Int32" />
+          <Property Name="PassWordLeastLengh" Type="Int32" />
+          <Property Name="PWDLastUpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PhotoURL" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="LonginStatus" Type="Int32" Nullable="false" />
+          <Property Name="LastLonginActive" Type="DateTime" Precision="3" />
+          <Property Name="SysFlag" Type="Int32" Nullable="false" />
+          <Property Name="UserType" Type="Int32" Nullable="false" />
+          <Property Name="LastFlushTime" Type="DateTime" Precision="3" />
+          <Property Name="SessionID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LoginCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LoginIp" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RegTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reg_AipPower" Type="Int32" Nullable="false" />
+          <Property Name="UserPy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LastLonginIP" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="WorkStatus" Type="Int32" />
+          <Property Name="InPhase" Type="Int32" Nullable="false" />
+          <Property Name="UnitID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="YHID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RelationshipUsers">
+          <Key>
+            <PropertyRef Name="RelaType" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="DeptID" />
+            <PropertyRef Name="PosiID" />
+            <PropertyRef Name="DeptLeader" />
+            <PropertyRef Name="UserOrder" />
+            <PropertyRef Name="RelaPrimary" />
+          </Key>
+          <Property Name="RelaType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DeptID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PosiID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DeptLeader" Type="Int32" Nullable="false" />
+          <Property Name="UserOrder" Type="Int32" Nullable="false" />
+          <Property Name="RelaPrimary" Type="Int32" Nullable="false" />
+          <Property Name="StatID" Type="Int32" />
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DelFlag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="C6Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C____OnlineCountStatistics" EntityType="Self.C____OnlineCountStatistics" />
+          <EntitySet Name="Department" EntityType="Self.Department" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="RelationshipUsers" EntityType="Self.RelationshipUsers" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="C6ModelStoreContainer" CdmEntityContainer="C6Entities">
+          <EntitySetMapping Name="C____OnlineCountStatistics">
+            <EntityTypeMapping TypeName="C6Model.C____OnlineCountStatistics">
+              <MappingFragment StoreEntitySet="____OnlineCountStatistics">
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Online" ColumnName="Online" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="C6Model.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="DeptParentID" ColumnName="DeptParentID" />
+                <ScalarProperty Name="DeptSort" ColumnName="DeptSort" />
+                <ScalarProperty Name="DeptDesc" ColumnName="DeptDesc" />
+                <ScalarProperty Name="DeptDelFlag" ColumnName="DeptDelFlag" />
+                <ScalarProperty Name="DeptGuid" ColumnName="DeptGuid" />
+                <ScalarProperty Name="DeptPy" ColumnName="DeptPy" />
+                <ScalarProperty Name="DeptPrincipal" ColumnName="DeptPrincipal" />
+                <ScalarProperty Name="UpperLeader" ColumnName="UpperLeader" />
+                <ScalarProperty Name="IsCompany" ColumnName="IsCompany" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="BMID" ColumnName="BMID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="C6Model.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="PassWordType" ColumnName="PassWordType" />
+                <ScalarProperty Name="PassWordTerm" ColumnName="PassWordTerm" />
+                <ScalarProperty Name="PassWordLeastLengh" ColumnName="PassWordLeastLengh" />
+                <ScalarProperty Name="PWDLastUpdateTime" ColumnName="PWDLastUpdateTime" />
+                <ScalarProperty Name="PhotoURL" ColumnName="PhotoURL" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LonginStatus" ColumnName="LonginStatus" />
+                <ScalarProperty Name="LastLonginActive" ColumnName="LastLonginActive" />
+                <ScalarProperty Name="SysFlag" ColumnName="SysFlag" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="LastFlushTime" ColumnName="LastFlushTime" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="LoginCode" ColumnName="LoginCode" />
+                <ScalarProperty Name="LoginIp" ColumnName="LoginIp" />
+                <ScalarProperty Name="RegTime" ColumnName="RegTime" />
+                <ScalarProperty Name="Reg_AipPower" ColumnName="Reg_AipPower" />
+                <ScalarProperty Name="UserPy" ColumnName="UserPy" />
+                <ScalarProperty Name="LastLonginIP" ColumnName="LastLonginIP" />
+                <ScalarProperty Name="WorkStatus" ColumnName="WorkStatus" />
+                <ScalarProperty Name="InPhase" ColumnName="InPhase" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="YHID" ColumnName="YHID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RelationshipUsers">
+            <EntityTypeMapping TypeName="C6Model.RelationshipUsers">
+              <MappingFragment StoreEntitySet="RelationshipUsers">
+                <ScalarProperty Name="RelaType" ColumnName="RelaType" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+                <ScalarProperty Name="PosiID" ColumnName="PosiID" />
+                <ScalarProperty Name="DeptLeader" ColumnName="DeptLeader" />
+                <ScalarProperty Name="UserOrder" ColumnName="UserOrder" />
+                <ScalarProperty Name="RelaPrimary" ColumnName="RelaPrimary" />
+                <ScalarProperty Name="StatID" ColumnName="StatID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
