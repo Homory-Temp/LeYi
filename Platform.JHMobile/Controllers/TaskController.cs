@@ -52,6 +52,109 @@ namespace Platform.JHMobile.Controllers
                 return RedirectToAction("TaskToDo", "Task");
             var int_id = int.Parse(id);
             var task = db.f____Mobile_List_TaskToDoSingle(Account, int_id).FirstOrDefault();
+
+            if (task.AppT_ID.StartsWith("IOA_Ask", StringComparison.OrdinalIgnoreCase))
+            {
+                ViewBag.XType = "Ask";
+                ObjectResult<string> fnx = db.f____Mobile_List_TaskDoneFile(ViewBag.XType, task.AppO_ID);
+                var fn = fnx.SingleOrDefault();
+                if (!string.IsNullOrEmpty(fn))
+                {
+                    var name = fn.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+                    var dir = new DirectoryInfo(Server.MapPath("~/Resource/GovFiles"));
+                    ViewBag.Path = "";
+                    foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+                    {
+                        if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                        {
+                            string pathx = dir + "\\" + cDir.Name + "\\" + name;
+                            var converted = ConvertDoc(pathx);
+                            if (!string.IsNullOrEmpty(converted))
+                            {
+                                ViewBag.PDF = converted;
+                            }
+                        }
+                    }
+                }
+            }
+            else if (task.AppT_ID.StartsWith("IOA_Accept", StringComparison.OrdinalIgnoreCase))
+            {
+                ViewBag.XType = "Accept";
+                ObjectResult<string> fnx = db.f____Mobile_List_TaskDoneFile(ViewBag.XType, task.AppO_ID);
+                var fn = fnx.SingleOrDefault();
+                if (!string.IsNullOrEmpty(fn))
+                {
+                    var name = fn.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+                    var dir = new DirectoryInfo(Server.MapPath("~/Resource/GovFiles"));
+                    ViewBag.Path = "";
+                    foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+                    {
+                        if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                        {
+                            string pathx = dir + "\\" + cDir.Name + "\\" + name;
+                            var converted = ConvertDoc(pathx);
+                            if (!string.IsNullOrEmpty(converted))
+                            {
+                                ViewBag.PDF = converted;
+                            }
+                        }
+                    }
+                }
+            }
+            else if (task.AppT_ID.StartsWith("IOA_Send", StringComparison.OrdinalIgnoreCase))
+            {
+                ViewBag.XType = "Send";
+                ObjectResult<string> fnx = db.f____Mobile_List_TaskDoneFile(ViewBag.XType, task.AppO_ID);
+                var fn = fnx.SingleOrDefault();
+                if (!string.IsNullOrEmpty(fn))
+                {
+                    var name = fn.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+                    var dir = new DirectoryInfo(Server.MapPath("~/Resource/GovFiles"));
+                    ViewBag.Path = "";
+                    foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+                    {
+                        if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                        {
+                            string pathx = dir + "\\" + cDir.Name + "\\" + name;
+                            var converted = ConvertDoc(pathx);
+                            if (!string.IsNullOrEmpty(converted))
+                            {
+                                ViewBag.PDF = converted;
+                            }
+                        }
+                    }
+                }
+            }
+            else if (task.AppT_ID.StartsWith("IOA_Message", StringComparison.OrdinalIgnoreCase))
+            {
+                ViewBag.XType = "Message";
+                var message = db.f____Mobile_List_MessageModuleSingle(task.AppO_ID).FirstOrDefault();
+                ViewBag.Html = message.MessageHTML;
+                if (!string.IsNullOrEmpty(message.MessageFileName))
+                {
+                    var name = message.MessageFileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+                    var dir = new DirectoryInfo(Server.MapPath("~/Resource/MessageFile"));
+                    ViewBag.Path = "";
+                    ViewBag.ModuleTypeID = message.ModuleTypeID;
+                    foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+                    {
+                        if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                        {
+                            string pathx = dir + "\\" + cDir.Name + "\\" + name;
+                            var converted = ConvertDoc(pathx);
+                            if (!string.IsNullOrEmpty(converted))
+                            {
+                                ViewBag.PDF = converted;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                ViewBag.XType = "Form";
+            }
+
             var path = Server.MapPath(string.Format("~/Views/Task/Config/{0}.xml", task.Form_ID));
             var obj = new TaskToDoObject();
             obj.Object = task;

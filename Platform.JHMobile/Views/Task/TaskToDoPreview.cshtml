@@ -37,44 +37,103 @@
             }
         </div>
         <div class="row">&nbsp;</div>
-        <div class="row">
-            @{
-                if (Model.Form != null)
-                {
+        @{
+            if (ViewBag.XType == "Form")
+            {
+                <div class="row">
                     <div class="col-md-12"><strong>内容：</strong></div>
-                    <div class="col-md-12 table-responsive">
-                        @{
-                            foreach (var item in Model.Form)
-                            {
-                                <table class="table table-striped table-hover">
-                                    @{
-                                        foreach (var field in Model.Config)
-                                        {
-                                            if (field.Visible)
-                                            {
-                                                <tr>
-                                                    <td>
-                                                        <strong>@field.DisplayName</strong>
-                                                    </td>
-                                                    <td>@item.GetType().GetProperty(@field.Name).GetValue(item)</td>
-                                                </tr>
+                    @{
+                        if (Model.Form != null)
+                        {
+                            <div class="col-md-12 table-responsive">
+                                @{
+                                    foreach (var item in Model.Form)
+                                    {
+                                        <table class="table table-striped" table-hover>
+                                            @{
+                                                foreach (var field in Model.Config)
+                                                {
+                                                    if (field.Visible)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                <strong>@field.DisplayName</strong>
+                                                            </td>
+                                                            <td>@item.GetType().GetProperty(@field.Name).GetValue(item)</td>
+                                                        </tr>
+                                                    }
+                                                }
                                             }
-                                        }
-                                    }
-                                </table>
-                                        }
+                                        </table>
+                                                }
+                                }
+                            </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="col-md-12 text-center">
+                                                        未配置表单数据集
+                                                    </div>
+                                                }
+                    }
+                </div>
+                                                }
+        }
+        @{
+            if (ViewBag.XType == "Message")
+            {
+                <div class="row">
+                    <div class="col-md-12"><strong>正文：</strong></div>
+                    <div class="col-md-12">
+                        @Html.Raw(ViewBag.Html)
+                        @{
+                            if (!string.IsNullOrEmpty(ViewBag.PDF))
+                            {
+                                <input id="pdfPath" type="hidden" value="@string.Format("../../{0}", ViewBag.PDF.Replace(DingTalk.CorpJinHer, "").Replace("\\", "/"))" />
+                                <iframe id="viewer" style="width: 100%; height: 389px;" src="~/PDFViewer/web/viewer.html"></iframe>
+                            }
                         }
                     </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="col-md-12"><strong>表单：</strong></div>
-                                            <div class="col-md-12 text-center">
-                                                未配置表单数据集
-                                            </div>
-                                            <div class="col-md-12">&nbsp;</div>
-                                        }
-            }
+                    @{
+                        if (!string.IsNullOrEmpty(ViewBag.PDF))
+                        {
+                            <div class="col-md-12">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a target="_blank" href="@string.Format("../../{0}", ViewBag.PDF.Replace(DingTalk.CorpJinHer, "").Replace("\\", "/"))">正文下载</a>
+                            </div>
+                        }
+                    }
+                </div>
+                        }
+        }
+        @{
+            if (ViewBag.XType == "Ask" || ViewBag.XType == "Accept" || ViewBag.XType == "Send")
+            {
+                <div class="row">
+                    <div class="col-md-12"><strong>正文：</strong></div>
+                    <div class="col-md-12">
+                        @Html.Raw(ViewBag.Html)
+                        @{
+                            if (!string.IsNullOrEmpty(ViewBag.PDF))
+                            {
+                                <input id="pdfPath" type="hidden" value="@string.Format("../../{0}", ViewBag.PDF.Replace(DingTalk.CorpJinHer, "").Replace("\\", "/"))" />
+                                <iframe id="viewer" style="width: 100%; height: 389px;" src="~/PDFViewer/web/viewer.html"></iframe>
+                            }
+                        }
+                    </div>
+                    @{
+                        if (!string.IsNullOrEmpty(ViewBag.PDF))
+                        {
+                            <div class="col-md-12">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a target="_blank" href="@string.Format("../../{0}", ViewBag.PDF.Replace(DingTalk.CorpJinHer, "").Replace("\\", "/"))">正文下载</a>
+                            </div>
+                        }
+                    }
+                </div>
+                        }
+        }
+        <div class="row">
             @{
                 <div class="col-md-12"><strong>流程：</strong></div>
                 <div class="col-md-12 table-responsive">
