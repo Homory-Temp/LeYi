@@ -156,7 +156,7 @@ public partial class DepotAction_In : DepotPageSingle
 
     protected void plus_ServerClick(object sender, EventArgs e)
     {
-        counter.Value = ((int.Parse(counter.Value)) + 1).ToString();
+        counter.Value = ((int.Parse(counter.Value)) + 5).ToString();
         var toRem = view_obj.Items.Select(o => (o.FindControl("ObjectIn") as Control_ObjectIn)).Select(o => o.PeekValue()).ToList();
         x.Value = toRem.ToJson();
         view_obj.Rebind();

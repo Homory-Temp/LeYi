@@ -53,7 +53,7 @@ public partial class Control_ObjectIn : DepotControlSingle
                 node.Selected = true;
                 node.ExpandParentNodes();
                 catalog.SelectedValue = node.Value;
-                var source = DataContext.DepotObjectLoad(Depot.Id, Guid.Parse(node.Value), true).Where(o => o.Amount > 0);
+                var source = DataContext.DepotObjectLoad(Depot.Id, Guid.Parse(node.Value), true);
                 obj.DataSource = source.ToList();
                 obj.DataBind();
             }

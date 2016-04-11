@@ -35,6 +35,7 @@
                             <%--<li style='<%= (CurrentStore.State == Models.StoreState.食品 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/StatisticsMonthly?StoreId={0}".Formatted(StoreId) %>'>月库存查询</a></li>--%>
                             <li style='<%= (CurrentStore.State == Models.StoreState.食品 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/StatisticsDaily?StoreId={0}".Formatted(StoreId) %>'>汇总统计</a></li>
                             <li><a href='<%= "../StoreQuery/Statistics?StoreId={0}".Formatted(StoreId) %>'>月库存查询</a></li>
+                            <li><a href='<%= "../StoreQuery/StatisticsX?StoreId={0}".Formatted(StoreId) %>'>月累计查询</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Import?StoreId={0}".Formatted(StoreId) %>'>导入查询</a></li>
                             <li style='<%= (CurrentStore.State == Models.StoreState.固产 ? "display: block;": "display: none;") %>'><a href='<%= "../StoreQuery/Move?StoreId={0}".Formatted(StoreId) %>'>分库查询</a></li>
                         </ul>
