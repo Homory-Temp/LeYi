@@ -244,6 +244,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Platform.Sms", "Platform.Sm
 		SlnRelativePath = "Platform.Sms\"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Local.Sync", "Local.Sync\Local.Sync.csproj", "{B6BF254B-5813-4DCD-A952-1CF80F2EA590}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -314,6 +316,10 @@ Global
 		{A44609C0-311D-4803-A919-81BE39C4F47B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A44609C0-311D-4803-A919-81BE39C4F47B}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{A44609C0-311D-4803-A919-81BE39C4F47B}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{B6BF254B-5813-4DCD-A952-1CF80F2EA590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6BF254B-5813-4DCD-A952-1CF80F2EA590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6BF254B-5813-4DCD-A952-1CF80F2EA590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6BF254B-5813-4DCD-A952-1CF80F2EA590}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
