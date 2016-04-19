@@ -170,32 +170,47 @@ namespace Go
             dynamic output = new ExpandoObject();
             output.Ok = false;
             output.Data = new ExpandoObject();
+            var cp = false;
             try
             {
                 var user = db.User.SingleOrDefault(o => o.Account == account && o.State < State.删除);
-                if (user == null ||
-                    !password.Equals(HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt),
+                if (user == null)
+                {
+                    var teacher = db.Teacher.SingleOrDefault(o => o.IDCard == account);
+                    if (teacher != null)
+                    {
+                        user = teacher.User;
+                        cp = true;
+                    }
+                    if (user == null)
+                    {
+                        output.Data.Message = "请输入正确的账号和密码";
+                        output.Entity = null;
+                        return output;
+                    }
+                }
+                if (!cp && !password.Equals(HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt),
                         StringComparison.OrdinalIgnoreCase))
                 {
                     output.Data.Message = "请输入正确的账号和密码";
                     output.Entity = null;
                     return output;
                 }
-                if (user.State == State.停用)
+                if (user.State > State.启用)
                 {
                     output.Data.Message = "用户已被停用";
                     output.Entity = null;
                     return output;
                 }
-                if (user.State == State.默认 || user.State == State.审核)
-                {
-                    Session[HomoryConstant.SessionRegisterId] = user.Id;
-                    output.Ok = true;
-                    output.Data.Redirect = true;
-                    output.Data.RedirectUrl = Application["Sso"] + "Go/ToVerify";
-                    output.Entity = null;
-                    return output;
-                }
+                //if (user.State == State.默认 || user.State == State.审核)
+                //{
+                //    Session[HomoryConstant.SessionRegisterId] = user.Id;
+                //    output.Ok = true;
+                //    output.Data.Redirect = true;
+                //    output.Data.RedirectUrl = Application["Sso"] + "Go/ToVerify";
+                //    output.Entity = null;
+                //    return output;
+                //}
                 var online = user.UserOnline.SingleOrDefault();
                 if (online == null)
                 {
@@ -219,63 +234,72 @@ namespace Go
                 Session[HomoryConstant.SessionOnlineId] = online.Id;
                 output.Ok = true;
                 output.Data.Redirect = true;
-                var query = Server.UrlDecode(Request.QueryString["SsoRedirect"]);
-                var query_x = Request.QueryString;
-                if (string.IsNullOrEmpty(Request.QueryString["Permanent"]))
+                if (cp)
                 {
-                    if (string.IsNullOrWhiteSpace(Request.QueryString["SsoRedirect"]))
-                    {
-                        if (user.Type == UserType.教师)
-                            output.Data.RedirectUrl = string.Format(string.Format("SsoRedirect".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirect".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt)));
-                        else
-                            output.Data.RedirectUrl = string.Format(string.Format("SsoRedirectOther".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirectOther".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt)));
-                    }
-                    else
-                    {
-                        string url;
-                        if (!string.IsNullOrWhiteSpace(Request.QueryString["OnlineId"]))
-                        {
-                            url = query;
-                        }
-                        else
-                        {
-                            if (query.IndexOf('&') <= 0)
-                            {
-                                url = string.Format("{0}?OnlineId={1}", query, user.UserOnline.Single().Id);
-                            }
-                            else
-                            {
-                                var index = query.IndexOf('&');
-                                url =
-                                    Server.UrlDecode(query.Remove(index, 1)
-                                        .Insert(index, string.Format("?OnlineId={0}&", user.UserOnline.Single().Id)));
-                            }
-                        }
-                        foreach (var qx in query_x)
-                        {
-                            if (!qx.ToString().Equals("SsoRedirect", StringComparison.OrdinalIgnoreCase))
-                                url += "&" + qx + "=" + query_x[qx.ToString()];
-                        }
-                        output.Entity = null;
-                        if (string.IsNullOrWhiteSpace(url))
-                        {
-                            if (user.Type == UserType.教师)
-                                string.Format(string.Format("SsoRedirect".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirect".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt)));
-                            else
-                                string.Format(string.Format("SsoRedirectOther".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirectOther".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt)));
-                        }
-                        else
-                        {
-                            output.Data.RedirectUrl = url;
-                        }
-                    }
+                    output.Entity = user;
+                    output.Data.RedirectUrl = string.Format("../Go/Mobile?{0}", user.Teacher.IDCard);
+                    return output;
                 }
                 else
                 {
-                    output.Entity = user;
-                    output.Data.RedirectUrl = "*Permanent*";
+                    var query = Server.UrlDecode(Request.QueryString["SsoRedirect"]);
+                    var query_x = Request.QueryString;
+                    if (string.IsNullOrEmpty(Request.QueryString["Permanent"]))
+                    {
+                        if (string.IsNullOrWhiteSpace(Request.QueryString["SsoRedirect"]))
+                        {
+                            if (user.Type == UserType.教师)
+                                output.Data.RedirectUrl = string.Format(string.Format("SsoRedirect".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirect".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt)));
+                            else
+                                output.Data.RedirectUrl = string.Format(string.Format("SsoRedirectOther".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirectOther".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt)));
+                        }
+                        else
+                        {
+                            string url;
+                            if (!string.IsNullOrWhiteSpace(Request.QueryString["OnlineId"]))
+                            {
+                                url = query;
+                            }
+                            else
+                            {
+                                if (query.IndexOf('&') <= 0)
+                                {
+                                    url = string.Format("{0}?OnlineId={1}", query, user.UserOnline.Single().Id);
+                                }
+                                else
+                                {
+                                    var index = query.IndexOf('&');
+                                    url =
+                                        Server.UrlDecode(query.Remove(index, 1)
+                                            .Insert(index, string.Format("?OnlineId={0}&", user.UserOnline.Single().Id)));
+                                }
+                            }
+                            foreach (var qx in query_x)
+                            {
+                                if (!qx.ToString().Equals("SsoRedirect", StringComparison.OrdinalIgnoreCase))
+                                    url += "&" + qx + "=" + query_x[qx.ToString()];
+                            }
+                            output.Entity = null;
+                            if (string.IsNullOrWhiteSpace(url))
+                            {
+                                if (user.Type == UserType.教师)
+                                    string.Format(string.Format("SsoRedirect".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirect".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt)));
+                                else
+                                    string.Format(string.Format("SsoRedirectOther".FromWebConfig() == "" ? Application["Sso"] + "Go/Board" : "SsoRedirectOther".FromWebConfig(), user.Account, HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt)));
+                            }
+                            else
+                            {
+                                output.Data.RedirectUrl = url;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        output.Entity = user;
+                        output.Data.RedirectUrl = "*Permanent*";
+                    }
+                    return output;
                 }
-                return output;
             }
             catch (Exception exception)
             {
