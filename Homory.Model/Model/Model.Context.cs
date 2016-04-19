@@ -96,5 +96,22 @@ namespace Homory.Model
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetPolicyCommon");
         }
+    
+        public virtual int SsoInitialize(Nullable<System.Guid> id, string phone, Nullable<bool> reset)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(System.Guid));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var resetParameter = reset.HasValue ?
+                new ObjectParameter("Reset", reset) :
+                new ObjectParameter("Reset", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SsoInitialize", idParameter, phoneParameter, resetParameter);
+        }
     }
 }

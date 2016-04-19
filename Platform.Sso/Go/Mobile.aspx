@@ -18,6 +18,7 @@
 
         function send_code() {
             if (getCookie("client_tick") == 0) {
+                do_send();
                 setCookie("client_tick", 30);
                 $("#code_btn").css('color', 'dimgray');
                 $("#code_btn").val('重新发送（' + getCookie("client_tick") + '秒）');
@@ -39,6 +40,25 @@
                 return null;
         }
 
+        var chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+        function generateMixed(n) {
+            var res = "";
+            for (var i = 0; i < n ; i++) {
+                var id = Math.ceil(Math.random() * 9);
+                res += chars[id];
+            }
+            return res;
+        }
+
+        function do_send() {
+            var no = $("#phone").val().replace("手机号码：", "").trim();
+            var gen = generateMixed(6);
+            $("#gen_no").val(gen);
+            var url = "http://www.4001185185.com/sdk/smssdk!mt.action?sdk=18687&code=lx888888&phones=" + no + "&msg=本次操作的验证码为：" + gen + "&resulttype=txt&subcode=2897&rpt=0";
+            $.get(url);
+        }
+
         function send_tick() {
             if ( parseInt(getCookie("client_tick")) > 1) {
                 setCookie("client_tick", parseInt(getCookie("client_tick"))-1);
@@ -49,6 +69,14 @@
                 setCookie("client_tick", 0);
                 $("#code_btn").css('color', 'red');
                 $("#code_btn").val('发送验证码');
+            }
+        }
+
+        function check_post() {
+            if ($("#gen_no").val() == $("#code").val() && ($("#gen_no").val().trim().length == 6)) {
+                return true;
+            } else {
+                return false;
             }
         }
     </script>
@@ -74,36 +102,15 @@
         <form runat="server">
             <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
             <telerik:RadAjaxPanel ID="areaAction" runat="server">
+                <input id="gen_no" runat="server" type="hidden" />
                 <input id="phone" runat="server" type="text" class="text" />
                 <input id="reset" runat="server" type="text" class="text" />
                 <input id="code" runat="server" type="text" class="text" />
                 <input id="code_btn" name="textx" type="text" readonly="readonly" value="发送验证码" style="cursor: pointer; border: 1px solid dimgray; width: auto; text-align: center; height: auto;" onclick="send_code();" />
                 <div class="signin" style="margin-top: 12px;">
-                    <input id="buttonSign" runat="server" onserverclick="buttonSign_OnClick" type="submit" value="保存" />
+                    <input id="buttonSign" runat="server" onserverclick="buttonSign_OnClick" type="submit" value="保存" onclick="return check_post();" />
                 </div>
             </telerik:RadAjaxPanel>
-            <telerik:RadCodeBlock runat="server">
-                <script type="text/javascript">
-                    function pwdError() {
-                    }
-
-                    //if (!getCookie("client_tick")) {
-                    //    s_calc = 0;
-                    //    setCookie("client_tick", 0);
-                    //} else {
-                    //    s_calc = getCookie("client_tick");
-                    //}
-
-                    //if (s_calc == 0) {
-                    //    $("#code_btn").css('color', 'red');
-                    //    $("#code_btn").val('发送验证码');
-                    //} else {
-                    //    $("#code_btn").css('color', 'dimgray');
-                    //    $("#code_btn").val('重新发送（' + s_calc + '秒）');
-                    //    setInterval(send_tick, 1000);
-                    //}
-                </script>
-            </telerik:RadCodeBlock>
         </form>
     </div>
     <div style="clear: both"></div>

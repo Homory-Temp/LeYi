@@ -51,6 +51,7 @@ namespace Homory.Model
         public int Ordinal { get; set; }
         public string Description { get; set; }
         public string PinYin { get; set; }
+        public string WXOpenId { get; set; }
     
         public virtual ICollection<UserOnline> UserOnline { get; set; }
         public virtual ICollection<UserRole> UserRole { get; set; }

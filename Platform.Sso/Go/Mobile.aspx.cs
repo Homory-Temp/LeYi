@@ -55,8 +55,23 @@ namespace Go
 
         protected void buttonSign_OnClick(object sender, EventArgs e)
         {
-            var script_re = string.Format("top.location.href = '{0}';", "https://www.baidu.com/");
-            areaAction.ResponseScripts.Add(script_re);
+            var x_phone = phone.Value.Replace("手机号码：", "");
+            var x_reset = reset.Value == "y" || reset.Value == "Y";
+            var idc = Request.QueryString[0];
+            var teacher = HomoryContext.Value.Teacher.SingleOrDefault(o => o.IDCard == idc);
+            if (teacher == null)
+            {
+                Response.Redirect("../Go/SignOff", false);
+                return;
+            }
+            var user = teacher.User;
+            if (user == null)
+            {
+                Response.Redirect("../Go/SignOff", false);
+                return;
+            }
+            HomoryContext.Value.SsoInitialize(user.Id, x_phone, x_reset);
+            Response.Redirect("../Go/SignOff", false);
         }
     }
 }

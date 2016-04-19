@@ -542,6 +542,7 @@
           <Property Name="Ordinal" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
+          <Property Name="WXOpenId" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="UserCatalog">
           <Key>
@@ -1831,6 +1832,11 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="ResetPolicyCommon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SsoInitialize" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Reset" Type="bit" Mode="In" />
+        </Function>
         <EntityContainer Name="PrimarySchoolModelStoreContainer">
           <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Api" EntityType="Self.Api" Schema="dbo" store:Type="Tables" />
@@ -2754,6 +2760,11 @@
             <End Role="ResourceAudit" EntitySet="ResourceAudit" />
           </AssociationSet>
           <EntitySet Name="ViewDingDing" EntityType="Homory.Model.ViewDingDing" />
+          <FunctionImport Name="SsoInitialize">
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Reset" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Application">
           <Key>
@@ -2834,6 +2845,7 @@
           <NavigationProperty Name="GroupBoard" Relationship="Homory.Model.FK_GroupBoard_User" FromRole="User" ToRole="GroupBoard" />
           <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ResourceAudit" Relationship="Homory.Model.FK_ResourceAudit_User" FromRole="User" ToRole="ResourceAudit" />
+          <Property Name="WXOpenId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserOnline">
           <Key>
@@ -4847,6 +4859,7 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="Homory.Model.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="WXOpenId" ColumnName="WXOpenId" />
                 <ScalarProperty Name="PinYin" ColumnName="PinYin" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
@@ -5818,6 +5831,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SsoInitialize" FunctionName="PrimarySchoolModel.Store.SsoInitialize" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
