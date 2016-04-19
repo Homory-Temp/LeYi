@@ -173,22 +173,23 @@ namespace Go
             var cp = false;
             try
             {
-                var user = db.User.SingleOrDefault(o => o.Account == account && o.State < State.删除);
-                if (user == null)
+                User user = null;
+                var teacher = db.Teacher.SingleOrDefault(o => o.IDCard == account);
+                if (teacher != null)
                 {
-                    var teacher = db.Teacher.SingleOrDefault(o => o.IDCard == account);
-                    if (teacher != null)
-                    {
-                        user = teacher.User;
+                    user = teacher.User;
+                    if (user != null)
                         cp = true;
-                    }
-                    if (user == null)
-                    {
-                        output.Data.Message = "请输入正确的账号和密码";
-                        output.Entity = null;
-                        return output;
-                    }
                 }
+                if (user == null)
+                    user = db.User.SingleOrDefault(o => o.Account == account && o.State < State.删除);
+                if (user == null && !cp)
+                {
+                    output.Data.Message = "请输入正确的账号和密码";
+                    output.Entity = null;
+                    return output;
+                }
+
                 if (!cp && !password.Equals(HomoryCryptor.Decrypt(user.Password, user.CryptoKey, user.CryptoSalt),
                         StringComparison.OrdinalIgnoreCase))
                 {
