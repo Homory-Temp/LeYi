@@ -695,8 +695,8 @@ namespace Go
                         idCard = null;
                     }
                     var gender = Get(values, "Gender", (bool?)null);
-                    var sync_ex = Get(values, "Sync", true);
-                    var sync = sync_ex.HasValue ? sync_ex.Value : true;
+                    var sync_ex = Get(values, "Sync", false);
+                    var sync = sync_ex.HasValue ? sync_ex.Value : false;
                     var birthday = Get(values, "Birthday", (DateTime?)null);
                     var nationality = Get(values, "Nationality", (string)null);
                     var birthplace = Get(values, "Birthplace", (string)null);
