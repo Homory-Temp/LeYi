@@ -49,7 +49,7 @@
                     <telerik:RadSearchBox ID="peek" runat="server" OnSearch="peek_Search" EmptyMessage="查找教师...." EnableAutoComplete="false">
                     </telerik:RadSearchBox>
                     &nbsp;&nbsp;
-                    <telerik:RadButton ID="btnImport" runat="server" Text="导入" OnClick="btnImport_Click">
+                    <telerik:RadButton ID="btnImport" runat="server" Text="导入" OnClick="btnImport_Click" style="display: none;">
                     </telerik:RadButton>
                 </div>
                 <div class="col-md-4">
@@ -263,6 +263,11 @@
                                                             </Items>
                                                         </telerik:RadComboBox>
                                                     </EditItemTemplate>
+                                                </telerik:GridTemplateColumn>
+                                                <telerik:GridTemplateColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60" ItemStyle-Width="60" HeaderText="代理登录">
+                                                    <ItemTemplate>
+                                                        <asp:HyperLink runat="server" Text="代理登录" Target="_blank" NavigateUrl='<%# string.Format("../Go/C6Redirect?{0}", Eval("Id")) %>'></asp:HyperLink>
+                                                    </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
                                             </Columns>
                                             <PagerStyle Mode="NextPrevAndNumeric" PageSizes="10,20,50,100" Position="Bottom" PageSizeControlType="RadComboBox" AlwaysVisible="true" PagerTextFormat="{4} 第{0}页，共{1}页；第{2}-{3}项，共{5}项" />

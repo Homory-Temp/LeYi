@@ -19,6 +19,8 @@ namespace Go
             {
                 var doc = XDocument.Load(Server.MapPath("../Common/配置/Title.xml"));
                 this.Title = doc.Root.Element("Sso").Value;
+                if (!string.IsNullOrEmpty(Request.QueryString["Name"]) && !string.IsNullOrEmpty("Password"))
+                    return;
                 User user;
                 if (IsSsoOnline(out user))
                 {
