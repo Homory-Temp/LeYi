@@ -495,7 +495,7 @@ namespace Go
                 {
                     var values = command.NewValues;
                     var ordinal = Get(values, "MinorOrdinal", 99);
-                    var state = Get(values, "State", State.停用);
+                    var state = Get(values, "State", State.启用);
                     switch (command.Type)
                     {
                         case GridBatchEditingCommandType.Update:
@@ -575,7 +575,7 @@ namespace Go
                 foreach (var command in e.Commands)
                 {
                     var values = command.NewValues;
-                    var state = Get(values, "QuitBorrow", State.停用);
+                    var state = Get(values, "QuitBorrow", State.启用);
                     switch (command.Type)
                     {
                         case GridBatchEditingCommandType.Update:
@@ -625,7 +625,7 @@ namespace Go
                 {
                     var values = command.NewValues;
                     var ordinal = Get(values, "MinorOrdinal", 99);
-                    var state = Get(values, "State", State.停用);
+                    var state = Get(values, "State", State.启用);
                     switch (command.Type)
                     {
                         case GridBatchEditingCommandType.Update:
@@ -674,7 +674,7 @@ namespace Go
                 foreach (var command in e.Commands)
                 {
                     var values = command.NewValues;
-                    var state = Get(values, "State", State.停用);
+                    var state = Get(values, "State", State.启用);
                     if (NotSet(values, "RealName") || (NotSet(values, "Phone") && state < State.停用) || NotSet(values, "Account"))
                         continue;
                     var name = values["RealName"].ToString();
