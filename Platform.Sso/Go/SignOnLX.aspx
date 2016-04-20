@@ -5,7 +5,7 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <link href="css/style.css" rel='stylesheet' type='text/css' />
 
@@ -25,40 +25,43 @@
         </div>
         <div class="clear"></div>
         <div class="avtar">
-            <img alt="" src="images/avtar.png" /></div>
+            <img alt="" src="images/avtar.png" />
+        </div>
         <form runat="server">
             <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
-        <telerik:RadAjaxPanel ID="areaAction" runat="server">
-            <input id="userName" runat="server" type="text" class="text" value="用户名" onfocus="if(this.value=='用户名') this.value = '';" onblur="if (this.value == '') {this.value = '用户名';}"/>
-            <div id="kDiv" class="">
-                <input id="userPassword" runat="server" type="password" value="密码" onkeypress="pwdInput();" /></div>
-        <div class="signin">
-            <input id="buttonSign" runat="server" onserverclick="buttonSign_OnClick" type="submit" value="登录" /></div>
-        </telerik:RadAjaxPanel>
-                                <telerik:RadCodeBlock runat="server">
-                                    <script type="text/javascript">
-                                        function GetUrlParms() {
-                                            var args = new Object();
-                                            var query = location.search.substring(1);
-                                            var pairs = query.split("&");
-                                            for (var i = 0; i < pairs.length; i++) {
-                                                var pos = pairs[i].indexOf('=');
-                                                if (pos == -1) continue;
-                                                var argname = pairs[i].substring(0, pos);
-                                                var value = pairs[i].substring(pos + 1);
-                                                args[argname] = unescape(value);
-                                            }
-                                            return args;
-                                        }
-                                        var args = new Object();
-                                        args = GetUrlParms();
-                                        var u = args["Name"];
-                                        var p = args["Password"];
-                                        if (u) {
-                                            if (p) {
-                                                $("#userName").val(decodeURIComponent(u));
-                                                $("#userPassword").val(decodeURIComponent(p));
-                                                __doPostBack("<%= buttonSign.ClientID %>", "");
+            <telerik:RadAjaxPanel ID="areaAction" runat="server">
+                <input id="userName" runat="server" type="text" class="text" value="用户名" onfocus="if(this.value=='用户名') this.value = '';" onblur="if (this.value == '') {this.value = '用户名';}" />
+                <div id="kDiv" class="">
+                    <input id="userPassword" runat="server" type="password" value="密码" onkeypress="pwdInput();" />
+                </div>
+                <div class="signin">
+                    <input id="buttonSign" runat="server" onserverclick="buttonSign_OnClick" type="submit" value="登录" />
+                </div>
+            </telerik:RadAjaxPanel>
+            <telerik:RadCodeBlock runat="server">
+                <script type="text/javascript">
+                    function GetUrlParms() {
+                        var args = new Object();
+                        var query = location.search.substring(1);
+                        var pairs = query.split("&");
+                        for (var i = 0; i < pairs.length; i++) {
+                            var pos = pairs[i].indexOf('=');
+                            if (pos == -1) continue;
+                            var argname = pairs[i].substring(0, pos);
+                            var value = pairs[i].substring(pos + 1);
+                            args[argname] = unescape(value);
+                        }
+                        return args;
+                    }
+                    var args = new Object();
+                    args = GetUrlParms();
+                    var u = args["Name"];
+                    var p = args["Password"];
+                    if (u) {
+                        if (p) {
+                            $("#userName").val(decodeURIComponent(u));
+                            $("#userPassword").val(decodeURIComponent(p));
+                            __doPostBack("<%= buttonSign.ClientID %>", "");
                                             }
                                         }
 
@@ -71,20 +74,28 @@
                                         function pwdInput() {
                                             $("#kDiv").removeClass("key");
                                         }
-                                    </script>
-                                </telerik:RadCodeBlock>
+                </script>
+            </telerik:RadCodeBlock>
         </form>
     </div>
     <div style="clear: both"></div>
     <br />
     <br />
-    <div class="bottom2016">
-        Copyright &copy;2016 梁溪教育筹备组  技术支持：北京金和网络
-    </div>
-<style>
-  html input:-webkit-autofill, html textarea:-webkit-autofill, html select:-webkit-autofill {
-    background-color: transparent;
-  }
-</style>
+    <br />
+    <center>
+        <span style="font-family:arial;color:#FFFFFF;">更正手机号码请使用身份证号码登录 &nbsp;&nbsp;&nbsp;&nbsp;<a href="MobileReset.aspx">密码重置</a></span>
+    </center><br />
+    <center>
+        <span style="font-family: arial; color: #FFFFFF;">Copyright &copy;2016 梁溪教育筹备组  技术支持：北京金和网络 </br> </br><a href="http://oa.wxlxjy.com:888/首次环境部署.rar"><font color="#FFFFFF">首次环境部署<font></a>   <a href="http://oa.wxlxjy.com:888/oa.rar"><font color="#FFFFFF">专用浏览器</font></a></span>
+    </center>
+    <style>
+        html input:-webkit-autofill, html textarea:-webkit-autofill, html select:-webkit-autofill {
+            background-color: transparent;
+        }
+
+        a:link, a:hover, a:visited{
+            color: white;
+        }
+    </style>
 </body>
 </html>
