@@ -37,7 +37,8 @@ namespace Go
                     Response.Redirect("../Go/SignOff", false);
                     return;
                 }
-                idcs.InnerText = Request.QueryString[0];
+                p.Value = "手机号码：" + teacher.Phone;
+                idcs.Value = "身份证号：" + Request.QueryString[0];
                 var v_phone = "请输入新手机号码";
                 phone.Value = v_phone;
                 phone.Attributes["onfocus"] = string.Format("if(this.value=='{0}') this.value='';", v_phone);

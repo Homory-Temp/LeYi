@@ -55,7 +55,7 @@
             var no = $("#phone").val().replace("手机号码：", "").trim();
             var gen = generateMixed(6);
             $("#gen_no").val(gen);
-            var url = "http://www.4001185185.com/sdk/smssdk!mt.action?sdk=18687&code=lx888888&phones=" + no + "&msg=本次操作的验证码为：" + gen + "&resulttype=txt&subcode=2897&rpt=0";
+            var url = "http://www.4001185185.com/sdk/smssdk!mt.action?sdk=18687&code=lx888888&phones=" + no + "&msg=您正在申请手机号码变更，验证码为：" + gen + "，成功后登录账号将改为新手机号。&resulttype=txt&subcode=2897&rpt=0";
             $.get(url);
         }
 
@@ -89,7 +89,7 @@
     <h1>
         <img alt="" src="images/SsoLogoLX.png" /></h1>
     <div class="login-form">
-        <div class="close" style="width: 100%; text-align: left;">在职教工信息登记（更正）（<span id="idcs" runat="server"></span>） </div>
+        <div class="close" style="width: 100%; text-align: left;">在职教工信息登记（更正） </div>
         <div class="head-info">
             <label class="lbl-1"></label>
             <label class="lbl-2"></label>
@@ -103,11 +103,13 @@
             <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
             <telerik:RadAjaxPanel ID="areaAction" runat="server">
                 <input id="gen_no" runat="server" type="hidden" />
+                <input id="idcs" runat="server" type="text" class="text" readonly="readonly" />
+                <input id="p" runat="server" type="text" class="text" readonly="readonly" />
                 <input id="phone" runat="server" type="text" class="text" />
                 <input id="code" runat="server" type="text" class="text" />
                 <input id="code_btn" name="textx" type="text" readonly="readonly" value="发送验证码" style="cursor: pointer; border: 1px solid dimgray; width: auto; text-align: center; height: auto;" onclick="send_code();" />
                 <div class="signin" style="margin-top: 12px;">
-                    <input id="buttonSign" runat="server" onserverclick="buttonSign_OnClick" type="submit" value="保存" onclick="return check_post();" />
+                    <input id="buttonSign" runat="server" onserverclick="buttonSign_OnClick" type="submit" value="提交" onclick="return check_post();" />
                 </div>
             </telerik:RadAjaxPanel>
         </form>
