@@ -89,7 +89,7 @@
     <h1>
         <img alt="" src="images/SsoLogoLX.png" /></h1>
     <div class="login-form">
-        <div class="close" style="width: 100%; text-align: left;">用户初始化（<span id="idcs" runat="server"></span>） </div>
+        <div class="close" style="width: 100%; text-align: left;">在职教工信息登记（更正）（<span id="idcs" runat="server"></span>） </div>
         <div class="head-info">
             <label class="lbl-1"></label>
             <label class="lbl-2"></label>
@@ -104,7 +104,6 @@
             <telerik:RadAjaxPanel ID="areaAction" runat="server">
                 <input id="gen_no" runat="server" type="hidden" />
                 <input id="phone" runat="server" type="text" class="text" />
-                <input id="reset" runat="server" type="text" class="text" />
                 <input id="code" runat="server" type="text" class="text" />
                 <input id="code_btn" name="textx" type="text" readonly="readonly" value="发送验证码" style="cursor: pointer; border: 1px solid dimgray; width: auto; text-align: center; height: auto;" onclick="send_code();" />
                 <div class="signin" style="margin-top: 12px;">

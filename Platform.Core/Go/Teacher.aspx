@@ -145,6 +145,11 @@
                                                         </telerik:RadTextBox>
                                                     </EditItemTemplate>
                                                 </telerik:GridTemplateColumn>
+                                                <telerik:GridTemplateColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80" ItemStyle-Width="80" HeaderText="代理登录">
+                                                    <ItemTemplate>
+                                                        <asp:HyperLink runat="server" Text="代理登录" Target="_blank" NavigateUrl='<%# string.Format("../Go/C6Redirect?{0}", Eval("Id")) %>'></asp:HyperLink>
+                                                    </ItemTemplate>
+                                                </telerik:GridTemplateColumn>
                                                 <telerik:GridTemplateColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60" ItemStyle-Width="60" HeaderText="状态" DataField="State" SortExpression="State" UniqueName="State">
                                                     <ItemTemplate>
                                                         <asp:Label ID="Label4" runat="server" Text='<%# Eval("State") %>'></asp:Label>
@@ -263,11 +268,6 @@
                                                             </Items>
                                                         </telerik:RadComboBox>
                                                     </EditItemTemplate>
-                                                </telerik:GridTemplateColumn>
-                                                <telerik:GridTemplateColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60" ItemStyle-Width="60" HeaderText="代理登录">
-                                                    <ItemTemplate>
-                                                        <asp:HyperLink runat="server" Text="代理登录" Target="_blank" NavigateUrl='<%# string.Format("../Go/C6Redirect?{0}", Eval("Id")) %>'></asp:HyperLink>
-                                                    </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
                                             </Columns>
                                             <PagerStyle Mode="NextPrevAndNumeric" PageSizes="10,20,50,100" Position="Bottom" PageSizeControlType="RadComboBox" AlwaysVisible="true" PagerTextFormat="{4} 第{0}页，共{1}页；第{2}-{3}项，共{5}项" />

@@ -38,14 +38,10 @@ namespace Go
                     return;
                 }
                 idcs.InnerText = Request.QueryString[0];
-                var v_phone = string.IsNullOrEmpty(teacher.Phone) ? "请输入手机号码" : string.Format("手机号码：{0}", teacher.Phone);
+                var v_phone = "请输入新手机号码";
                 phone.Value = v_phone;
                 phone.Attributes["onfocus"] = string.Format("if(this.value=='{0}') this.value='';", v_phone);
                 phone.Attributes["onblur"] = string.Format("if(this.value=='') this.value='{0}';", v_phone);
-                var v_reset = "密码重置：如忘记密码 请输入Y";
-                reset.Value = v_reset;
-                reset.Attributes["onfocus"] = string.Format("if(this.value=='{0}') this.value='';", v_reset);
-                reset.Attributes["onblur"] = string.Format("if(this.value=='') this.value='{0}';", v_reset);
                 var v_code = "请输入手机收到的验证码";
                 code.Value = v_code;
                 code.Attributes["onfocus"] = string.Format("if(this.value=='{0}') this.value='';", v_code);
@@ -56,7 +52,7 @@ namespace Go
         protected void buttonSign_OnClick(object sender, EventArgs e)
         {
             var x_phone = phone.Value.Replace("手机号码：", "");
-            var x_reset = reset.Value == "y" || reset.Value == "Y";
+            var x_reset = false;
             var idc = Request.QueryString[0];
             var teacher = HomoryContext.Value.Teacher.SingleOrDefault(o => o.IDCard == idc);
             if (teacher == null)
