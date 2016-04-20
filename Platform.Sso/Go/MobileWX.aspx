@@ -102,6 +102,8 @@
         <form runat="server">
             <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
             <telerik:RadAjaxPanel ID="areaAction" runat="server">
+                <input id="wx" runat="server" type="text" class="text" />
+                <input id="wxn" runat="server" type="text" class="text" />
                 <input id="gen_no" runat="server" type="hidden" />
                 <input id="idcs" runat="server" type="text" class="text" readonly="readonly" />
                 <input id="p" runat="server" type="text" class="text" readonly="readonly" />
