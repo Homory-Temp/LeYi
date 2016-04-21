@@ -17,6 +17,15 @@
         var tick_handler;
 
         function send_code() {
+            var t = $("#wxn").val();
+            if (t == "Create" && $("#idcs").val().length != 18 && $("#phone").val().length != 11) {
+                alert("请输入正确的身份证号和手机号码");
+                return;
+            }
+            if (t == "Update" && $("#phone").val().length != 11) {
+                alert("请输入正确的新手机号码");
+                return;
+            }
             if (getCookie("client_tick") == 0) {
                 do_send();
                 setCookie("client_tick", 3000);
@@ -89,7 +98,7 @@
     <h1 style="padding-top: 20px;">
         <img alt="" src="images/SsoLogoLX.png" style="width: 90%;" /></h1>
     <div class="login-form" style="margin: 30px auto 0 auto; width: 86%;">
-        <div class="close" style="width: 100%; text-align: left;">在职教工信息登记（更正） </div>
+        <div class="close" style="width: 100%; text-align: left;">在职教工信息<span id="tname" runat="server"></span></div>
         <div class="head-info">
             <label class="lbl-1"></label>
             <label class="lbl-2"></label>
@@ -105,8 +114,8 @@
                 <input id="wx" runat="server" type="text" class="text" style="display: none;" />
                 <input id="wxn" runat="server" type="text" class="text" style="display: none;" />
                 <input id="gen_no" runat="server" type="hidden" />
-                <input id="idcs" runat="server" type="text" class="text" readonly="readonly" />
-                <input id="p" runat="server" type="text" class="text" readonly="readonly" />
+                <input id="idcs" runat="server" type="text" class="text" />
+                <input id="p" runat="server" type="text" class="text" />
                 <input id="phone" runat="server" type="text" class="text" />
                 <input id="code_btn" name="textx" type="text" readonly="readonly" value="发送验证码" style="cursor: pointer; border: 1px solid dimgray; width: 50%; text-align: center; height: auto;" onclick="send_code();" />
                 <input id="code" runat="server" type="text" class="text" />
