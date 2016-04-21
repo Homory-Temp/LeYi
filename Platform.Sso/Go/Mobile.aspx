@@ -17,16 +17,12 @@
         var tick_handler;
 
         function send_code() {
-            if ($("#idcs").val().length != 18) {
-                alert("请输入正确的身份证号");
-                return;
-            }
             if ($("#phone").val().length != 11) {
                 alert("请输入正确的手机号码");
                 return;
             }
             var url = "../Go/IDCard";
-            $.get(url, $("#idcs").val(), function (d) {
+            $.get(url, $("#idcs").val().replace("身份证号：", ""), function (d) {
                 if (d == "OK") {
                     if (getCookie("client_tick") == 0) {
                         do_send();
@@ -89,10 +85,6 @@
         }
 
         function check_post() {
-            if ($("#idcs").val().length != 18) {
-                alert("请输入正确的身份证号");
-                return false;
-            }
             if ($("#phone").val().length != 11) {
                 alert("请输入正确的手机号码");
                 return false;
