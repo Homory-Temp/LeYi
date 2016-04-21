@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Login</title>
+    <title>提交成功</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <link href="css/style.css" rel='stylesheet' type='text/css' />
@@ -32,7 +32,7 @@
         <form runat="server">
             <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
             <telerik:RadAjaxPanel ID="areaAction" runat="server">
-                <input id="code_btn" name="textx" type="text" readonly="readonly" value="提交成功" style="cursor: pointer; border: 1px solid dimgray; width: 50%; text-align: center; height: auto;" onclick="send_code();" /><br /><br />
+                <div id="code_btn" name="textx" runat="server" type="text" style="cursor: pointer; height: auto; color: green; margin: 20px 20px auto 20px;"></div><br /><br />
             </telerik:RadAjaxPanel>
         </form>
     </div>

@@ -18,20 +18,43 @@
 
         function send_code() {
             var t = $("#wxn").val();
-            if (t == "Create" && $("#idcs").val().length != 18 && $("#phone").val().length != 11) {
-                alert("请输入正确的身份证号和手机号码");
+            if (t == "Create") {
+                if ($("#idcs").val().length != 18) {
+                    alert("请输入正确的身份证号");
+                    return;
+                }
+                if ($("#phone").val().length != 11) {
+                    alert("请输入正确的手机号码");
+                    return;
+                }
+                var url = "../Go/IDCard";
+                $.get(url, $("#idcs").val(), function (d) {
+                    if (d == "OK") {
+                        if (getCookie("client_tick") == 0) {
+                            do_send();
+                            setCookie("client_tick", 30);
+                            $("#code_btn").css('color', 'dimgray');
+                            $("#code_btn").val('重新发送（' + getCookie("client_tick") + '秒）');
+                            tick_handler = setInterval(send_tick, 1000);
+                        }
+                    } else {
+                        alert("您的身份证号人事系统中不存在，请联系单位人事秘书。");
+                    }
+                });
                 return;
             }
-            if (t == "Update" && $("#phone").val().length != 11) {
-                alert("请输入正确的新手机号码");
-                return;
-            }
-            if (getCookie("client_tick") == 0) {
-                do_send();
-                setCookie("client_tick", 300);
-                $("#code_btn").css('color', 'dimgray');
-                $("#code_btn").val('重新发送（' + getCookie("client_tick") + '秒）');
-                tick_handler = setInterval(send_tick, 1000);
+            else if (t == "Update") {
+                if ($("#phone").val().length != 11) {
+                    alert("请输入正确的新手机号码");
+                    return;
+                }
+                if (getCookie("client_tick") == 0) {
+                    do_send();
+                    setCookie("client_tick", 30);
+                    $("#code_btn").css('color', 'dimgray');
+                    $("#code_btn").val('重新发送（' + getCookie("client_tick") + '秒）');
+                    tick_handler = setInterval(send_tick, 1000);
+                }
             }
         }
 
@@ -64,7 +87,7 @@
             var no = $("#phone").val().replace("手机号码：", "").trim();
             var gen = generateMixed(6);
             $("#gen_no").val(gen);
-            var url = "http://www.4001185185.com/sdk/smssdk!mt.action?sdk=18687&code=lx888888&phones=" + no + "&msg=您正在申请在职教工信息登记（更正），验证码为：" + gen + "，成功后登录账号将改为新手机号。&resulttype=txt&subcode=2897&rpt=0";
+            var url = "http://www.4001185185.com/sdk/smssdk!mt.action?sdk=18687&code=lx888888&phones=" + no + "&msg=验证码：" + gen + "，30分钟内有效&resulttype=txt&subcode=2897&rpt=0";
             $.get(url);
         }
 
@@ -82,9 +105,27 @@
         }
 
         function check_post() {
+            var t = $("#wxn").val();
+            if (t == "Create") {
+                if ($("#idcs").val().length != 18) {
+                    alert("请输入正确的身份证号");
+                    return false;
+                }
+                if ($("#phone").val().length != 11) {
+                    alert("请输入正确的手机号码");
+                    return false;
+                }
+            }
+            else if (t == "Update") {
+                if ($("#phone").val().length != 11) {
+                    alert("请输入正确的新手机号码");
+                    return false;
+                }
+            }
             if ($("#gen_no").val() == $("#code").val() && ($("#gen_no").val().trim().length == 6)) {
                 return true;
             } else {
+                alert("请输入手机收到的验证码");
                 return false;
             }
         }

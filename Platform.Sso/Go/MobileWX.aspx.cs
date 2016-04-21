@@ -52,7 +52,7 @@ namespace Go
                     v_idcs = "身份证号：" + user.Teacher.IDCard;
                     v_p = "手机号码：" + user.Teacher.Phone;
                     idcs.Attributes["readonly"] = "readonly";
-                    idcs.Style[System.Web.UI.HtmlTextWriterStyle.Display] = "none";
+                    idcs.Style[System.Web.UI.HtmlTextWriterStyle.Display] = "";
                     p.Style[System.Web.UI.HtmlTextWriterStyle.Display] = "";
                     p.Attributes["readonly"] = "readonly";
                     v_phone = "请输入新手机号码";
@@ -116,7 +116,7 @@ namespace Go
                     HomoryContext.Value.SaveChanges();
                 }
                 HomoryContext.Value.SsoInitialize(user.Id, _p, false);
-                Response.Redirect("../Go/MobileWXSucceeded", false);
+                Response.Redirect(string.Format("../Go/MobileWXSucceeded?Dept={0}&User={1}", Server.UrlEncode(user.DepartmentUser.FirstOrDefault(r => r.State < State.审核 && (r.Type == DepartmentUserType.借调后部门主职教师 || r.Type == DepartmentUserType.部门主职教师)).TopDepartment.Name), Server.UrlEncode(user.RealName)), false);
             }
             else if (t == "Update")
             {
@@ -128,7 +128,7 @@ namespace Go
                     return;
                 }
                 HomoryContext.Value.SsoInitialize(user.Id, _p, false);
-                Response.Redirect("../Go/MobileWXSucceeded", false);
+                Response.Redirect(string.Format("../Go/MobileWXSucceeded?Dept={0}&User={1}", Server.UrlEncode(user.DepartmentUser.FirstOrDefault(r => r.State < State.审核 && (r.Type == DepartmentUserType.借调后部门主职教师 || r.Type == DepartmentUserType.部门主职教师)).TopDepartment.Name), Server.UrlEncode(user.RealName)), false);
             }
         }
     }

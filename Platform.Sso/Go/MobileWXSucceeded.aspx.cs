@@ -15,6 +15,7 @@ namespace Go
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            code_btn.InnerText = string.Format("{0}{1}老师您好，您的信息已经绑定，我们将在后期为您提供更为便捷的平台应用服务。", Request.QueryString["Dept"], Request.QueryString["User"]);
         }
     }
 }
