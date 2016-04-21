@@ -81,14 +81,14 @@
         }
     </script>
 </head>
-<body>
+<body style="min-height: 600px;">
     <script type="text/javascript">
         if (getCookie("client_tick") == null)
             setCookie("client_tick", 0);
     </script>
-    <h1>
-        <img alt="" src="images/SsoLogoLX.png" /></h1>
-    <div class="login-form">
+    <h1 style="padding-top: 20px;">
+        <img alt="" src="images/SsoLogoLX.png" style="width: 90%;" /></h1>
+    <div class="login-form" style="margin: 30px auto 0 auto; width: 86%;">
         <div class="close" style="width: 100%; text-align: left;">在职教工信息登记（更正） </div>
         <div class="head-info">
             <label class="lbl-1"></label>
@@ -102,14 +102,14 @@
         <form runat="server">
             <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
             <telerik:RadAjaxPanel ID="areaAction" runat="server">
-                <input id="wx" runat="server" type="text" class="text" />
-                <input id="wxn" runat="server" type="text" class="text" />
+                <input id="wx" runat="server" type="text" class="text" style="display: none;" />
+                <input id="wxn" runat="server" type="text" class="text" style="display: none;" />
                 <input id="gen_no" runat="server" type="hidden" />
                 <input id="idcs" runat="server" type="text" class="text" readonly="readonly" />
                 <input id="p" runat="server" type="text" class="text" readonly="readonly" />
                 <input id="phone" runat="server" type="text" class="text" />
+                <input id="code_btn" name="textx" type="text" readonly="readonly" value="发送验证码" style="cursor: pointer; border: 1px solid dimgray; width: 50%; text-align: center; height: auto;" onclick="send_code();" />
                 <input id="code" runat="server" type="text" class="text" />
-                <input id="code_btn" name="textx" type="text" readonly="readonly" value="发送验证码" style="cursor: pointer; border: 1px solid dimgray; width: auto; text-align: center; height: auto;" onclick="send_code();" />
                 <div class="signin" style="margin-top: 12px;">
                     <input id="buttonSign" runat="server" onserverclick="buttonSign_OnClick" type="submit" value="提交" onclick="return check_post();" />
                 </div>
@@ -138,7 +138,7 @@
         }
     </style>
     <script type="text/javascript">
-        if (getCookie("client_tick")) {
+        if (getCookie("client_tick") && getCookie("client_tick") > 0) {
             $("#code_btn").css('color', 'dimgray');
             $("#code_btn").val('重新发送（' + getCookie("client_tick") + '秒）');
             tick_handler = setInterval(send_tick, 1000);

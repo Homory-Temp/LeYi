@@ -62,7 +62,12 @@ namespace Go
             {
                 var code = Request.QueryString["code"];
                 var wc = new WeChat();
-                Session["WeChatOpenId"] = wc.GetOpenId(code);
+                wx.Value = wc.GetOpenId(code);
+                Session["WeChatOpenId"] = wx.Value;
+            }
+            else
+            {
+                wx.Value = Session["WeChatOpenId"].ToString();
             }
         }
 

@@ -136,7 +136,7 @@
         }
     </style>
     <script type="text/javascript">
-        if (getCookie("client_tick")) {
+        if (getCookie("client_tick") && getCookie("client_tick") > 0) {
             $("#code_btn").css('color', 'dimgray');
             $("#code_btn").val('重新发送（' + getCookie("client_tick") + '秒）');
             tick_handler = setInterval(send_tick, 1000);
