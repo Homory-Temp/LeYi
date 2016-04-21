@@ -55,7 +55,7 @@
             var no = $("#phone").val().replace("手机号码：", "").trim();
             var gen = generateMixed(6);
             $("#gen_no").val(gen);
-            var url = "http://www.4001185185.com/sdk/smssdk!mt.action?sdk=18687&code=lx888888&phones=" + no + "&msg=您正在申请重置密码，验证码为：" + gen + "，成功后密码将改为000000，请登录并及时修改密码&resulttype=txt&subcode=2897&rpt=0";
+            var url = "http://www.4001185185.com/sdk/smssdk!mt.action?sdk=18687&code=lx888888&phones=" + no + "&msg=验证码：" + gen + "，30分钟内有效&resulttype=txt&subcode=2897&rpt=0";
             $.get(url);
         }
 
