@@ -28,7 +28,7 @@
             }
             if (getCookie("client_tick") == 0) {
                 do_send();
-                setCookie("client_tick", 3000);
+                setCookie("client_tick", 300);
                 $("#code_btn").css('color', 'dimgray');
                 $("#code_btn").val('重新发送（' + getCookie("client_tick") + '秒）');
                 tick_handler = setInterval(send_tick, 1000);
