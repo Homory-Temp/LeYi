@@ -132,6 +132,42 @@ public class WeChat
         return oac.openid;
     }
 
+    public UserInfo GetUserInfoByOpenId(string access_token, string openId)
+    {
+        UserInfo ui = new UserInfo();
+        var url = string.Format("https://api.weixin.qq.com/cgi-bin/user/info?access_token={0}&openid={1}&lang=zh_CN", access_token, openId);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        request.Accept = "*/*";
+        request.KeepAlive = true;
+        request.ContentType = "application/x-www-form-urlencoded";
+        request.Method = "GET";
+        Encoding encoding = Encoding.UTF8;
+        request.ContentLength = 0;
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        Stream responseStream = response.GetResponseStream();
+        StreamReader streamReader = new StreamReader(responseStream, encoding);
+        string retString = streamReader.ReadToEnd();
+        streamReader.Close();
+        responseStream.Close();
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        ui = js.Deserialize<UserInfo>(retString);
+        return ui;
+    }
+
+    public class UserInfo
+    {
+        public string subscribe { get; set; }
+        public string openid { get; set; }
+        public string nickname { get; set; }
+        public string sex { get; set; }
+        public string language { get; set; }
+        public string city { get; set; }
+        public string province { get; set; }
+        public string country { get; set; }
+        public string headimgurl { get; set; }
+        public string subscribe_time { get; set; }
+    }
+
     public class OAuthClass
     {
         public string access_token { get; set; }

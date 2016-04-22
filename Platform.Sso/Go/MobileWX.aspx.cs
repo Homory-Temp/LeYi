@@ -77,16 +77,26 @@ namespace Go
         protected void WeChatOpen()
         {
             var session = Session["WeChatOpenId"];
+            var wc = new WeChat();
             if (session == null)
             {
                 var code = Request.QueryString["code"];
-                var wc = new WeChat();
                 wx.Value = wc.GetOpenId(code);
                 Session["WeChatOpenId"] = wx.Value;
             }
             else
             {
                 wx.Value = Session["WeChatOpenId"].ToString();
+            }
+            var token = WeChat.GetAccessToken().access_token;
+            var img = wc.GetUserInfoByOpenId(token, wx.Value).headimgurl;
+            if (!string.IsNullOrEmpty(img))
+            {
+                Session["UserIcon"] = img;
+            }
+            else
+            {
+                Session["UserIcon"] = "";
             }
         }
 
@@ -114,8 +124,22 @@ namespace Go
                     }
                     if (user.WXOpenId == null || user.WXOpenId != v)
                     {
+                        var img = Session["UserIcon"].ToString();
+                        if (!string.IsNullOrEmpty(img) && !img.Equals(user.Icon, StringComparison.OrdinalIgnoreCase))
+                        {
+                            user.Icon = img;
+                        }
                         HomoryContext.Value.User.Single(o => o.Id == user.Id).WXOpenId = wx.Value;
                         HomoryContext.Value.SaveChanges();
+                    }
+                    else
+                    {
+                        var img = Session["UserIcon"].ToString();
+                        if (!string.IsNullOrEmpty(img) && !img.Equals(user.Icon, StringComparison.OrdinalIgnoreCase))
+                        {
+                            user.Icon = img;
+                            HomoryContext.Value.SaveChanges();
+                        }
                     }
                     HomoryContext.Value.SsoInitialize(user.Id, _p, false);
                     var deptId = user.DepartmentUser.FirstOrDefault(r => r.State < State.审核 && (r.Type == DepartmentUserType.借调后部门主职教师 || r.Type == DepartmentUserType.部门主职教师)).DepartmentId;
@@ -130,6 +154,12 @@ namespace Go
                     {
                         Response.Redirect("../Go/MobileWXFailed", false);
                         return;
+                    }
+                    var img = Session["UserIcon"].ToString();
+                    if (!string.IsNullOrEmpty(img) && !img.Equals(user.Icon, StringComparison.OrdinalIgnoreCase))
+                    {
+                        user.Icon = img;
+                        HomoryContext.Value.SaveChanges();
                     }
                     HomoryContext.Value.SsoInitialize(user.Id, _p, false);
                     var deptId = user.DepartmentUser.FirstOrDefault(r => r.State < State.审核 && (r.Type == DepartmentUserType.借调后部门主职教师 || r.Type == DepartmentUserType.部门主职教师)).DepartmentId;
