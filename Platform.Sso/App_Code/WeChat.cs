@@ -154,6 +154,19 @@ public class WeChat
         return ui;
     }
 
+    public string sendTextMessage(WeChatMessage wx, string content)
+    {
+        string res = string.Format(@"<xml>"
+            + "<ToUserName><![CDATA[{0}]]></ToUserName>"
+            + "<FromUserName><![CDATA[{1}]]></FromUserName>"
+            + "<CreateTime>{2}</CreateTime>"
+            + "<MsgType><![CDATA[text]]></MsgType>"
+            + "<Content><![CDATA[{3}]]></Content>"
+            + "</xml>",
+            wx.FromUserName, wx.ToUserName, DateTime.Now, content);
+        return res;
+    }
+
     public class UserInfo
     {
         public string subscribe { get; set; }
