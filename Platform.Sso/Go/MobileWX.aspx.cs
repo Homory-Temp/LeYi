@@ -49,8 +49,8 @@ namespace Go
                 else
                 {
                     tname.InnerText = "更正 ";
-                    v_idcs = "身份证号：" + user.Teacher.IDCard;
-                    v_p = "手机号码：" + user.Teacher.Phone;
+                    v_idcs = "" + user.Teacher.IDCard;
+                    v_p = "" + user.Teacher.Phone;
                     idcs.Attributes["readonly"] = "readonly";
                     idcs.Style[System.Web.UI.HtmlTextWriterStyle.Display] = "";
                     p.Style[System.Web.UI.HtmlTextWriterStyle.Display] = "";
@@ -92,43 +92,54 @@ namespace Go
 
         protected void buttonSign_OnClick(object sender, EventArgs e)
         {
-            var t = wxn.Value;
-            var v = Session["WeChatOpenId"].ToString();
-            if (t == "Create")
+            try
             {
-                var _idc = idcs.Value;
-                var _p = phone.Value;
-                var teacher = HomoryContext.Value.Teacher.SingleOrDefault(o => o.IDCard == _idc);
-                if (teacher == null)
+                var t = wxn.Value;
+                var v = Session["WeChatOpenId"].ToString();
+                if (t == "Create")
                 {
-                    Response.Redirect("../Go/MobileWXFailed", false);
-                    return;
+                    var _idc = idcs.Value;
+                    var _p = phone.Value;
+                    var teacher = HomoryContext.Value.Teacher.SingleOrDefault(o => o.IDCard == _idc);
+                    if (teacher == null)
+                    {
+                        Response.Redirect("../Go/MobileWXFailed", false);
+                        return;
+                    }
+                    var user = teacher.User;
+                    if (user == null)
+                    {
+                        Response.Redirect("../Go/MobileWXFailed", false);
+                        return;
+                    }
+                    if (user.WXOpenId == null || user.WXOpenId != v)
+                    {
+                        HomoryContext.Value.User.Single(o => o.Id == user.Id).WXOpenId = wx.Value;
+                        HomoryContext.Value.SaveChanges();
+                    }
+                    HomoryContext.Value.SsoInitialize(user.Id, _p, false);
+                    var deptId = user.DepartmentUser.FirstOrDefault(r => r.State < State.审核 && (r.Type == DepartmentUserType.借调后部门主职教师 || r.Type == DepartmentUserType.部门主职教师)).DepartmentId;
+                    var dept = HomoryContext.Value.Department.SingleOrDefault(o => o.Id == deptId).DepartmentRoot.Name;
+                    Response.Redirect(string.Format("../Go/MobileWXSucceeded?Dept={0}&User={1}", Server.UrlEncode(dept), Server.UrlEncode(user.RealName)), false);
                 }
-                var user = teacher.User;
-                if (user == null)
+                else if (t == "Update")
                 {
-                    Response.Redirect("../Go/MobileWXFailed", false);
-                    return;
+                    var _p = phone.Value;
+                    var user = HomoryContext.Value.User.SingleOrDefault(o => o.WXOpenId == v);
+                    if (user == null)
+                    {
+                        Response.Redirect("../Go/MobileWXFailed", false);
+                        return;
+                    }
+                    HomoryContext.Value.SsoInitialize(user.Id, _p, false);
+                    var deptId = user.DepartmentUser.FirstOrDefault(r => r.State < State.审核 && (r.Type == DepartmentUserType.借调后部门主职教师 || r.Type == DepartmentUserType.部门主职教师)).DepartmentId;
+                    var dept = HomoryContext.Value.Department.SingleOrDefault(o => o.Id == deptId).DepartmentRoot.Name;
+                    Response.Redirect(string.Format("../Go/MobileWXSucceeded?Dept={0}&User={1}", Server.UrlEncode(dept), Server.UrlEncode(user.RealName)), false);
                 }
-                if (user.WXOpenId == null || user.WXOpenId != v)
-                {
-                    HomoryContext.Value.User.Single(o => o.Id == user.Id).WXOpenId = wx.Value;
-                    HomoryContext.Value.SaveChanges();
-                }
-                HomoryContext.Value.SsoInitialize(user.Id, _p, false);
-                Response.Redirect(string.Format("../Go/MobileWXSucceeded?Dept={0}&User={1}", Server.UrlEncode(user.DepartmentUser.FirstOrDefault(r => r.State < State.审核 && (r.Type == DepartmentUserType.借调后部门主职教师 || r.Type == DepartmentUserType.部门主职教师)).TopDepartment.Name), Server.UrlEncode(user.RealName)), false);
             }
-            else if (t == "Update")
+            catch
             {
-                var _p = phone.Value;
-                var user = HomoryContext.Value.User.SingleOrDefault(o => o.WXOpenId == v);
-                if (user == null)
-                {
-                    Response.Redirect("../Go/MobileWXFailed", false);
-                    return;
-                }
-                HomoryContext.Value.SsoInitialize(user.Id, _p, false);
-                Response.Redirect(string.Format("../Go/MobileWXSucceeded?Dept={0}&User={1}", Server.UrlEncode(user.DepartmentUser.FirstOrDefault(r => r.State < State.审核 && (r.Type == DepartmentUserType.借调后部门主职教师 || r.Type == DepartmentUserType.部门主职教师)).TopDepartment.Name), Server.UrlEncode(user.RealName)), false);
+                Response.Redirect("../Go/MobileWXFailed", false);
             }
         }
     }

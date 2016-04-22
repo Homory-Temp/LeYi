@@ -32,7 +32,9 @@
         <form runat="server">
             <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
             <telerik:RadAjaxPanel ID="areaAction" runat="server">
-                <div id="code_btn" name="textx" runat="server" type="text" style="cursor: pointer; height: auto; color: green; margin: 20px 20px auto 20px;"></div><br /><br />
+                <div style="width: 100%; text-align: left;">
+                    <div id="code_btn" name="textx" runat="server" type="text" style="cursor: pointer; height: auto; color: green; margin: 20px 20px auto 20px;"></div><br /><br />
+                </div>
             </telerik:RadAjaxPanel>
         </form>
     </div>
@@ -40,7 +42,7 @@
     <br />
     <br />
     <div class="bottom2016">
-        Copyright &copy;2016 梁溪教育筹备组<br />技术支持：北京金和网络
+        Copyright &copy;2016 梁溪教育筹备组<br />技术支持电话：82795099
     </div>
     <style>
         html input:-webkit-autofill, html textarea:-webkit-autofill, html select:-webkit-autofill {
