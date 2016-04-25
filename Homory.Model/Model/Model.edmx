@@ -580,6 +580,44 @@
           <Property Name="State" Type="int" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_BT.dbo.__机构”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="__机构">
+          <Key>
+            <PropertyRef Name="机构ID" />
+            <PropertyRef Name="金和ID" />
+            <PropertyRef Name="机构名称" />
+          </Key>
+          <Property Name="机构ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="金和ID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="机构名称" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="机构拼音" Type="nvarchar" MaxLength="4000" />
+          <Property Name="父级ID" Type="uniqueidentifier" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_BT.dbo.__用户”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="__用户">
+          <Key>
+            <PropertyRef Name="用户ID" />
+            <PropertyRef Name="金和ID" />
+            <PropertyRef Name="用户账号" />
+            <PropertyRef Name="用户姓名" />
+            <PropertyRef Name="用户手机" />
+            <PropertyRef Name="用户在编" />
+            <PropertyRef Name="用户同步" />
+          </Key>
+          <Property Name="用户ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="金和ID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="用户账号" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="金和账号" Type="varchar" MaxLength="30" />
+          <Property Name="用户姓名" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="用户拼音" Type="nvarchar" MaxLength="256" />
+          <Property Name="用户头像" Type="nvarchar" MaxLength="256" />
+          <Property Name="用户手机" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="用户证件" Type="nvarchar" MaxLength="64" />
+          <Property Name="用户在编" Type="bit" Nullable="false" />
+          <Property Name="用户同步" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“Platform_BT.dbo.Contact_Users”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Contact_Users">
           <Key>
@@ -1927,6 +1965,30 @@
           <EntitySet Name="UserFavourite" EntityType="Self.UserFavourite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="__机构" EntityType="Self.__机构" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [__机构].[机构ID] AS [机构ID], 
+    [__机构].[金和ID] AS [金和ID], 
+    [__机构].[机构名称] AS [机构名称], 
+    [__机构].[机构拼音] AS [机构拼音], 
+    [__机构].[父级ID] AS [父级ID]
+    FROM [dbo].[__机构] AS [__机构]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="__用户" EntityType="Self.__用户" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [__用户].[用户ID] AS [用户ID], 
+    [__用户].[金和ID] AS [金和ID], 
+    [__用户].[用户账号] AS [用户账号], 
+    [__用户].[金和账号] AS [金和账号], 
+    [__用户].[用户姓名] AS [用户姓名], 
+    [__用户].[用户拼音] AS [用户拼音], 
+    [__用户].[用户头像] AS [用户头像], 
+    [__用户].[用户手机] AS [用户手机], 
+    [__用户].[用户证件] AS [用户证件], 
+    [__用户].[用户在编] AS [用户在编], 
+    [__用户].[用户同步] AS [用户同步]
+    FROM [dbo].[__用户] AS [__用户]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Contact_Users" EntityType="Self.Contact_Users" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Contact_Users].[CampusId] AS [CampusId], 
@@ -2838,8 +2900,10 @@
           </FunctionImport>
           <FunctionImport Name="Contact_GetDepartmentVIPUsers" EntitySet="Contact_Users" ReturnType="Collection(Homory.Model.Contact_Users)" />
           <FunctionImport Name="Contact_GetUsers" EntitySet="Contact_Users" ReturnType="Collection(Homory.Model.Contact_Users)">
-            <Parameter Name="query" Mode="In" Type="String" />
+          <Parameter Name="query" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="C__用户" EntityType="Homory.Model.C__用户" />
+          <EntitySet Name="C__机构" EntityType="Homory.Model.C__机构" />
         </EntityContainer>
         <EntityType Name="Application">
           <Key>
@@ -4931,6 +4995,40 @@
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="C__用户">
+          <Key>
+            <PropertyRef Name="用户ID" />
+            <PropertyRef Name="金和ID" />
+            <PropertyRef Name="用户账号" />
+            <PropertyRef Name="用户姓名" />
+            <PropertyRef Name="用户手机" />
+            <PropertyRef Name="用户在编" />
+            <PropertyRef Name="用户同步" />
+          </Key>
+          <Property Name="用户ID" Type="Guid" Nullable="false" />
+          <Property Name="金和ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="用户账号" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="金和账号" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="用户姓名" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="用户拼音" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="用户头像" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="用户手机" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="用户证件" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="用户在编" Type="Boolean" Nullable="false" />
+          <Property Name="用户同步" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="C__机构">
+          <Key>
+            <PropertyRef Name="机构ID" />
+            <PropertyRef Name="金和ID" />
+            <PropertyRef Name="机构名称" />
+          </Key>
+          <Property Name="机构ID" Type="Guid" Nullable="false" />
+          <Property Name="金和ID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="机构名称" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="机构拼音" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="父级ID" Type="Guid" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5969,6 +6067,34 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Contact_GetUsers" FunctionName="PrimarySchoolModel.Store.Contact_GetUsers">
           </FunctionImportMapping>
+          <EntitySetMapping Name="C__用户">
+            <EntityTypeMapping TypeName="Homory.Model.C__用户">
+              <MappingFragment StoreEntitySet="__用户">
+                <ScalarProperty Name="用户同步" ColumnName="用户同步" />
+                <ScalarProperty Name="用户在编" ColumnName="用户在编" />
+                <ScalarProperty Name="用户证件" ColumnName="用户证件" />
+                <ScalarProperty Name="用户手机" ColumnName="用户手机" />
+                <ScalarProperty Name="用户头像" ColumnName="用户头像" />
+                <ScalarProperty Name="用户拼音" ColumnName="用户拼音" />
+                <ScalarProperty Name="用户姓名" ColumnName="用户姓名" />
+                <ScalarProperty Name="金和账号" ColumnName="金和账号" />
+                <ScalarProperty Name="用户账号" ColumnName="用户账号" />
+                <ScalarProperty Name="金和ID" ColumnName="金和ID" />
+                <ScalarProperty Name="用户ID" ColumnName="用户ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__机构">
+            <EntityTypeMapping TypeName="Homory.Model.C__机构">
+              <MappingFragment StoreEntitySet="__机构">
+                <ScalarProperty Name="父级ID" ColumnName="父级ID" />
+                <ScalarProperty Name="机构拼音" ColumnName="机构拼音" />
+                <ScalarProperty Name="机构名称" ColumnName="机构名称" />
+                <ScalarProperty Name="金和ID" ColumnName="金和ID" />
+                <ScalarProperty Name="机构ID" ColumnName="机构ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

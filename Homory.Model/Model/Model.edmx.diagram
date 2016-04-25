@@ -125,6 +125,8 @@
         <AssociationConnector Association="Homory.Model.FK_ResourceAudit_User" />
         <EntityTypeShape EntityType="Homory.Model.ViewDingDing" Width="1.5" PointX="18.75" PointY="17.75" />
         <EntityTypeShape EntityType="Homory.Model.Contact_Users" Width="1.5" PointX="6.375" PointY="19.75" />
+        <EntityTypeShape EntityType="Homory.Model.C__用户" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Homory.Model.C__机构" Width="1.5" PointX="12.375" PointY="19.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -92,6 +92,8 @@ namespace Homory.Model
         public virtual DbSet<ResourceAudit> ResourceAudit { get; set; }
         public virtual DbSet<ViewDingDing> ViewDingDing { get; set; }
         public virtual DbSet<Contact_Users> Contact_Users { get; set; }
+        public virtual DbSet<C__用户> C__用户 { get; set; }
+        public virtual DbSet<C__机构> C__机构 { get; set; }
     
         public virtual int ResetPolicyCommon()
         {

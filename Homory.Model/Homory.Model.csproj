@@ -114,6 +114,12 @@
     <Compile Include="Model\Contact_Users.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\C__机构.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\C__用户.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Department.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
