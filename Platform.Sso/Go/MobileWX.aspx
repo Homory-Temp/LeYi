@@ -171,7 +171,7 @@
     <br />
     <br />
     <div class="bottom2016">
-        Copyright &copy;2016 梁溪教育筹备组<br />技术支持电话：82795099
+        Copyright &copy;2016 梁溪教育局筹备组<br />技术支持电话：82795099
     </div>
     <style>
         html input:-webkit-autofill, html textarea:-webkit-autofill, html select:-webkit-autofill {
