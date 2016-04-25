@@ -1872,6 +1872,9 @@
           <Parameter Name="DepartmentId" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="Contact_GetDepartmentVIPUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Contact_GetUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="query" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="ResetPolicyCommon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SsoInitialize" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
@@ -2834,6 +2837,9 @@
           <Parameter Name="DepartmentId" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="Contact_GetDepartmentVIPUsers" EntitySet="Contact_Users" ReturnType="Collection(Homory.Model.Contact_Users)" />
+          <FunctionImport Name="Contact_GetUsers" EntitySet="Contact_Users" ReturnType="Collection(Homory.Model.Contact_Users)">
+            <Parameter Name="query" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Application">
           <Key>
@@ -5960,6 +5966,8 @@
           <FunctionImportMapping FunctionImportName="Contact_GetDepartmentUsers" FunctionName="PrimarySchoolModel.Store.Contact_GetDepartmentUsers">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Contact_GetDepartmentVIPUsers" FunctionName="PrimarySchoolModel.Store.Contact_GetDepartmentVIPUsers">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Contact_GetUsers" FunctionName="PrimarySchoolModel.Store.Contact_GetUsers">
           </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>

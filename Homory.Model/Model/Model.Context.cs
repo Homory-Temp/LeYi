@@ -160,5 +160,23 @@ namespace Homory.Model
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Contact_Users>("Contact_GetDepartmentVIPUsers", mergeOption);
         }
+    
+        public virtual ObjectResult<Contact_Users> Contact_GetUsers(string query)
+        {
+            var queryParameter = query != null ?
+                new ObjectParameter("query", query) :
+                new ObjectParameter("query", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Contact_Users>("Contact_GetUsers", queryParameter);
+        }
+    
+        public virtual ObjectResult<Contact_Users> Contact_GetUsers(string query, MergeOption mergeOption)
+        {
+            var queryParameter = query != null ?
+                new ObjectParameter("query", query) :
+                new ObjectParameter("query", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Contact_Users>("Contact_GetUsers", mergeOption, queryParameter);
+        }
     }
 }
