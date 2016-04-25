@@ -1,17 +1,15 @@
-﻿
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>首页</title>
 </head>
 <body>
-    <div> 
-    </div>
+    <ul>
+        <li>@Html.ActionLink("局部门", "Index", "Department")</li>
+        <li>@Html.ActionLink("局人员", "Index", "User")</li>
+        <li>@Html.ActionLink("大数据", "Index", "Query")</li>
+    </ul>
 </body>
 </html>

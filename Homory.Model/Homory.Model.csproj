@@ -111,7 +111,7 @@
     <Compile Include="Model\ClassType.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Contact_GetDepartments_Result.cs">
+    <Compile Include="Model\Contact_Users.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Department.cs">

@@ -1,0 +1,48 @@
+﻿@model Platform.Contact.Controllers.DepartmentObject
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>局部门</title>
+</head>
+<body>
+    <ul>
+        @{
+            foreach (var department in Model.Departments)
+            {
+                <li>
+                    @Html.ActionLink(@department.Name, "Index", new { id = department.Id })
+                </li>
+            }
+        }
+    </ul>
+    <ul>
+        @{
+            foreach (var user in Model.Users)
+            {
+                <li>
+                    <ul>
+                        <li>
+                            单位：@user.CampusName
+                        </li>
+                        <li>
+                            姓名：@user.RealName
+                        </li>
+                        <li>
+                            手机号码：@user.Phone
+                        </li>
+                        <li>
+                            头像：<img src="@user.Icon" style="width: 120px; height: 120px;" />
+                        </li>
+                        <li>
+                            主职：@(user.PerStaff ? "是" : "否")
+                        </li>
+                    </ul>
+                </li>
+            }
+        }
+    </ul>
+</body>
+</html>

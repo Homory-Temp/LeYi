@@ -580,6 +580,40 @@
           <Property Name="State" Type="int" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_BT.dbo.Contact_Users”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Contact_Users">
+          <Key>
+            <PropertyRef Name="CampusId" />
+            <PropertyRef Name="CampusName" />
+            <PropertyRef Name="DepartmentId" />
+            <PropertyRef Name="DepartmentName" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Account" />
+            <PropertyRef Name="RealName" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="PerStaff" />
+            <PropertyRef Name="Sync" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Ordinal" />
+          </Key>
+          <Property Name="CampusId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CampusName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="DepartmentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepartmentName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Account" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="256" />
+          <Property Name="WXOpenId" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="IDCard" Type="nvarchar" MaxLength="64" />
+          <Property Name="PerStaff" Type="bit" Nullable="false" />
+          <Property Name="Sync" Type="bit" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“Platform_BT.dbo.ResourceMap”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ResourceMap">
           <Key>
@@ -1834,6 +1868,10 @@
         <Function Name="Contact_GetDepartments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DepartmentId" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="Contact_GetDepartmentUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DepartmentId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="Contact_GetDepartmentVIPUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ResetPolicyCommon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SsoInitialize" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
@@ -1886,6 +1924,26 @@
           <EntitySet Name="UserFavourite" EntityType="Self.UserFavourite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact_Users" EntityType="Self.Contact_Users" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Contact_Users].[CampusId] AS [CampusId], 
+    [Contact_Users].[CampusName] AS [CampusName], 
+    [Contact_Users].[DepartmentId] AS [DepartmentId], 
+    [Contact_Users].[DepartmentName] AS [DepartmentName], 
+    [Contact_Users].[Id] AS [Id], 
+    [Contact_Users].[Account] AS [Account], 
+    [Contact_Users].[RealName] AS [RealName], 
+    [Contact_Users].[PinYin] AS [PinYin], 
+    [Contact_Users].[Icon] AS [Icon], 
+    [Contact_Users].[WXOpenId] AS [WXOpenId], 
+    [Contact_Users].[Phone] AS [Phone], 
+    [Contact_Users].[IDCard] AS [IDCard], 
+    [Contact_Users].[PerStaff] AS [PerStaff], 
+    [Contact_Users].[Sync] AS [Sync], 
+    [Contact_Users].[Type] AS [Type], 
+    [Contact_Users].[Ordinal] AS [Ordinal]
+    FROM [dbo].[Contact_Users] AS [Contact_Users]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ResourceMap" EntityType="Self.ResourceMap" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ResourceMap].[CatalogId] AS [CatalogId], 
@@ -2768,9 +2826,14 @@
             <Parameter Name="Phone" Mode="In" Type="String" />
             <Parameter Name="Reset" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="Contact_GetDepartments" ReturnType="Collection(Homory.Model.Contact_GetDepartments_Result)">
-            <Parameter Name="DepartmentId" Mode="In" Type="Guid" />
+          <FunctionImport Name="Contact_GetDepartments" EntitySet="Department" ReturnType="Collection(Homory.Model.Department)">
+          <Parameter Name="DepartmentId" Mode="In" Type="Guid" />
           </FunctionImport>
+          <EntitySet Name="Contact_Users" EntityType="Homory.Model.Contact_Users" />
+          <FunctionImport Name="Contact_GetDepartmentUsers" EntitySet="Contact_Users" ReturnType="Collection(Homory.Model.Contact_Users)">
+          <Parameter Name="DepartmentId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="Contact_GetDepartmentVIPUsers" EntitySet="Contact_Users" ReturnType="Collection(Homory.Model.Contact_Users)" />
         </EntityContainer>
         <EntityType Name="Application">
           <Key>
@@ -4830,24 +4893,38 @@
           <Property Name="Ordinal" Type="Int32" />
           <Property Name="DingKey" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <ComplexType Name="Contact_GetDepartments_Result">
-          <Property Type="Guid" Name="Id" Nullable="false" />
-          <Property Type="Guid" Name="ParentId" Nullable="true" />
-          <Property Type="Guid" Name="TopId" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" />
-          <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="64" />
-          <Property Type="Int32" Name="Level" Nullable="false" />
-          <Property Type="Boolean" Name="Hidden" Nullable="false" />
-          <Property Type="Int32" Name="Type" Nullable="false" />
-          <Property Type="Int32" Name="State" Nullable="false" />
-          <Property Type="Int32" Name="Ordinal" Nullable="false" />
-          <Property Type="Int32" Name="AutoId" Nullable="false" />
-          <Property Type="Int32" Name="BuildType" Nullable="false" />
-          <Property Type="Int32" Name="ClassType" Nullable="false" />
-          <Property Type="String" Name="Code" Nullable="false" MaxLength="32" />
-          <Property Type="Boolean" Name="Ding" Nullable="false" />
-          <Property Type="String" Name="DingKey" Nullable="false" />
-        </ComplexType>
+        <EntityType Name="Contact_Users">
+          <Key>
+            <PropertyRef Name="CampusId" />
+            <PropertyRef Name="CampusName" />
+            <PropertyRef Name="DepartmentId" />
+            <PropertyRef Name="DepartmentName" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Account" />
+            <PropertyRef Name="RealName" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="PerStaff" />
+            <PropertyRef Name="Sync" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Ordinal" />
+          </Key>
+          <Property Name="CampusId" Type="Guid" Nullable="false" />
+          <Property Name="CampusName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentId" Type="Guid" Nullable="false" />
+          <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Account" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="RealName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="WXOpenId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="IDCard" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PerStaff" Type="Boolean" Nullable="false" />
+          <Property Name="Sync" Type="Boolean" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5857,26 +5934,32 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SsoInitialize" FunctionName="PrimarySchoolModel.Store.SsoInitialize" />
           <FunctionImportMapping FunctionImportName="Contact_GetDepartments" FunctionName="PrimarySchoolModel.Store.Contact_GetDepartments">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Homory.Model.Contact_GetDepartments_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="TopId" ColumnName="TopId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Level" ColumnName="Level" />
-                <ScalarProperty Name="Hidden" ColumnName="Hidden" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="State" ColumnName="State" />
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Contact_Users">
+            <EntityTypeMapping TypeName="Homory.Model.Contact_Users">
+              <MappingFragment StoreEntitySet="Contact_Users">
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
-                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
-                <ScalarProperty Name="BuildType" ColumnName="BuildType" />
-                <ScalarProperty Name="ClassType" ColumnName="ClassType" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Ding" ColumnName="Ding" />
-                <ScalarProperty Name="DingKey" ColumnName="DingKey" />
-              </ComplexTypeMapping>
-            </ResultMapping>
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Sync" ColumnName="Sync" />
+                <ScalarProperty Name="PerStaff" ColumnName="PerStaff" />
+                <ScalarProperty Name="IDCard" ColumnName="IDCard" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="WXOpenId" ColumnName="WXOpenId" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="CampusName" ColumnName="CampusName" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Contact_GetDepartmentUsers" FunctionName="PrimarySchoolModel.Store.Contact_GetDepartmentUsers">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Contact_GetDepartmentVIPUsers" FunctionName="PrimarySchoolModel.Store.Contact_GetDepartmentVIPUsers">
           </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>

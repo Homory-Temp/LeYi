@@ -91,6 +91,7 @@ namespace Homory.Model
         public virtual DbSet<ResourceMap> ResourceMap { get; set; }
         public virtual DbSet<ResourceAudit> ResourceAudit { get; set; }
         public virtual DbSet<ViewDingDing> ViewDingDing { get; set; }
+        public virtual DbSet<Contact_Users> Contact_Users { get; set; }
     
         public virtual int ResetPolicyCommon()
         {
@@ -114,13 +115,50 @@ namespace Homory.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SsoInitialize", idParameter, phoneParameter, resetParameter);
         }
     
-        public virtual ObjectResult<Contact_GetDepartments_Result> Contact_GetDepartments(Nullable<System.Guid> departmentId)
+        public virtual ObjectResult<Department> Contact_GetDepartments(Nullable<System.Guid> departmentId)
         {
             var departmentIdParameter = departmentId.HasValue ?
                 new ObjectParameter("DepartmentId", departmentId) :
                 new ObjectParameter("DepartmentId", typeof(System.Guid));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Contact_GetDepartments_Result>("Contact_GetDepartments", departmentIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Department>("Contact_GetDepartments", departmentIdParameter);
+        }
+    
+        public virtual ObjectResult<Department> Contact_GetDepartments(Nullable<System.Guid> departmentId, MergeOption mergeOption)
+        {
+            var departmentIdParameter = departmentId.HasValue ?
+                new ObjectParameter("DepartmentId", departmentId) :
+                new ObjectParameter("DepartmentId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Department>("Contact_GetDepartments", mergeOption, departmentIdParameter);
+        }
+    
+        public virtual ObjectResult<Contact_Users> Contact_GetDepartmentUsers(Nullable<System.Guid> departmentId)
+        {
+            var departmentIdParameter = departmentId.HasValue ?
+                new ObjectParameter("DepartmentId", departmentId) :
+                new ObjectParameter("DepartmentId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Contact_Users>("Contact_GetDepartmentUsers", departmentIdParameter);
+        }
+    
+        public virtual ObjectResult<Contact_Users> Contact_GetDepartmentUsers(Nullable<System.Guid> departmentId, MergeOption mergeOption)
+        {
+            var departmentIdParameter = departmentId.HasValue ?
+                new ObjectParameter("DepartmentId", departmentId) :
+                new ObjectParameter("DepartmentId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Contact_Users>("Contact_GetDepartmentUsers", mergeOption, departmentIdParameter);
+        }
+    
+        public virtual ObjectResult<Contact_Users> Contact_GetDepartmentVIPUsers()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Contact_Users>("Contact_GetDepartmentVIPUsers");
+        }
+    
+        public virtual ObjectResult<Contact_Users> Contact_GetDepartmentVIPUsers(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Contact_Users>("Contact_GetDepartmentVIPUsers", mergeOption);
         }
     }
 }
