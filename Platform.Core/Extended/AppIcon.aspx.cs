@@ -31,10 +31,8 @@ namespace Extended
 					var id = Guid.Parse(Request.QueryString[0]);
 					var path = string.Format("~/Common/头像/应用/{0}.png", id);
 					upload.UploadedFiles[0].SaveAs(Server.MapPath(path), true);
-					HomoryContext.Value.Application.Where(o => o.Id == id).Update(o => new Application
-					{
-						Icon = path
-					});
+                    var app = HomoryContext.Value.Application.Single(o => o.Id == id);
+                    app.Icon = path;
 					HomoryContext.Value.SaveChanges();
 				}
 			}

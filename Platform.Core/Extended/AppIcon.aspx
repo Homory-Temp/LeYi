@@ -35,7 +35,7 @@
             }
         </script>
         <telerik:RadAjaxPanel ID="panelInner" runat="server">
-            <telerik:RadAsyncUpload ID="uploadControl" runat="server" PostbackTriggers="uploadControlOk" Style="margin-top: 6px; margin-left: 6px;" AllowedFileExtensions="jpg,jpeg,png,gif" MultipleFileSelection="Disabled" Skin="MetroTouch" AutoAddFileInputs="false" Localization-Cancel="取消" Localization-Remove="移除" Localization-Select="选择" OnFileUploaded="upload_FileUploaded">
+            <telerik:RadAsyncUpload ID="uploadControl" runat="server" PostbackTriggers="uploadOk" Style="margin-top: 6px; margin-left: 6px;" AllowedFileExtensions="jpg,jpeg,png,gif" MultipleFileSelection="Disabled" Skin="MetroTouch" AutoAddFileInputs="false" Localization-Cancel="取消" Localization-Remove="移除" Localization-Select="选择" OnFileUploaded="upload_FileUploaded">
             </telerik:RadAsyncUpload>
             <telerik:RadButton ID="uploadOk" runat="server" Skin="MetroTouch" Text="保存"></telerik:RadButton>
         </telerik:RadAjaxPanel>
