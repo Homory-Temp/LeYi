@@ -121,7 +121,7 @@
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
-          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AutoId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="BuildType" Type="int" Nullable="false" />
           <Property Name="ClassType" Type="int" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="32" Nullable="false" />
@@ -1831,6 +1831,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Contact_GetDepartments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DepartmentId" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="ResetPolicyCommon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SsoInitialize" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
@@ -2764,6 +2767,9 @@
             <Parameter Name="Id" Mode="In" Type="Guid" />
             <Parameter Name="Phone" Mode="In" Type="String" />
             <Parameter Name="Reset" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Contact_GetDepartments" ReturnType="Collection(Homory.Model.Contact_GetDepartments_Result)">
+            <Parameter Name="DepartmentId" Mode="In" Type="Guid" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Application">
@@ -4824,6 +4830,24 @@
           <Property Name="Ordinal" Type="Int32" />
           <Property Name="DingKey" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="Contact_GetDepartments_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="ParentId" Nullable="true" />
+          <Property Type="Guid" Name="TopId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="64" />
+          <Property Type="Int32" Name="Level" Nullable="false" />
+          <Property Type="Boolean" Name="Hidden" Nullable="false" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="Int32" Name="State" Nullable="false" />
+          <Property Type="Int32" Name="Ordinal" Nullable="false" />
+          <Property Type="Int32" Name="AutoId" Nullable="false" />
+          <Property Type="Int32" Name="BuildType" Nullable="false" />
+          <Property Type="Int32" Name="ClassType" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="32" />
+          <Property Type="Boolean" Name="Ding" Nullable="false" />
+          <Property Type="String" Name="DingKey" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5832,6 +5856,28 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SsoInitialize" FunctionName="PrimarySchoolModel.Store.SsoInitialize" />
+          <FunctionImportMapping FunctionImportName="Contact_GetDepartments" FunctionName="PrimarySchoolModel.Store.Contact_GetDepartments">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Homory.Model.Contact_GetDepartments_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="TopId" ColumnName="TopId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Hidden" ColumnName="Hidden" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="BuildType" ColumnName="BuildType" />
+                <ScalarProperty Name="ClassType" ColumnName="ClassType" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Ding" ColumnName="Ding" />
+                <ScalarProperty Name="DingKey" ColumnName="DingKey" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

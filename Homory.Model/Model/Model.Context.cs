@@ -113,5 +113,14 @@ namespace Homory.Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SsoInitialize", idParameter, phoneParameter, resetParameter);
         }
+    
+        public virtual ObjectResult<Contact_GetDepartments_Result> Contact_GetDepartments(Nullable<System.Guid> departmentId)
+        {
+            var departmentIdParameter = departmentId.HasValue ?
+                new ObjectParameter("DepartmentId", departmentId) :
+                new ObjectParameter("DepartmentId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Contact_GetDepartments_Result>("Contact_GetDepartments", departmentIdParameter);
+        }
     }
 }
