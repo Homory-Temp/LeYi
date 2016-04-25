@@ -55,8 +55,18 @@
             var no = $("#phone").val().replace("手机号码：", "").trim();
             var gen = generateMixed(6);
             $("#gen_no").val(gen);
-            var url = "http://www.4001185185.com/sdk/smssdk!mt.action?sdk=18687&code=lx888888&phones=" + no + "&msg=验证码：" + gen + "，30分钟内有效&resulttype=txt&subcode=2897&rpt=0";
-            $.get(url);
+            var msg = encodeURIComponent("验证码：" + gen + "，30分钟内有效");
+            var url = "http://www.4001185185.com/sdk/smssdk!mt.action?sdk=18687&code=lx888888&phones=" + no + "&msg=" + msg + "&resulttype=txt&subcode=2897&rpt=0";
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.open("GET", url + "&homory=" + Math.random(), true);
+            xmlhttp.send();
+            // $.get(url);
         }
 
         function send_tick() {
