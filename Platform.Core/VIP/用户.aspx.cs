@@ -9,8 +9,6 @@ using Telerik.Web.UI;
 
 public partial class VIP_用户 : Homory.Model.HomoryCorePage
 {
-    private Lazy<Entities> db = new Lazy<Entities>(() => new Entities());
-
     protected override string PageRight
     {
         get
@@ -27,7 +25,7 @@ public partial class VIP_用户 : Homory.Model.HomoryCorePage
         }
         if (!IsPostBack)
         {
-            box.DataSource = db.Value.Department.Where(o => o.Type == DepartmentType.学校 && o.State < State.审核).OrderBy(o => o.Ordinal).ToList();
+            box.DataSource = HomoryContext.Value.Department.Where(o => o.Type == DepartmentType.学校 && o.State < State.审核).OrderBy(o => o.Ordinal).ToList();
             box.DataBind();
             box.SelectedIndex = 0;
             view.Rebind();
@@ -47,7 +45,7 @@ public partial class VIP_用户 : Homory.Model.HomoryCorePage
     {
         if (box.SelectedIndex < 0)
             return;
-        view.DataSource = db.Value.机构用户(Guid.Parse(box.SelectedValue)).ToList();
+        view.DataSource = HomoryContext.Value.机构用户(Guid.Parse(box.SelectedValue)).ToList();
     }
 
     protected void box_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)

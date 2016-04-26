@@ -9,8 +9,6 @@ using Telerik.Web.UI;
 
 public partial class VIP_机构 : Homory.Model.HomoryCorePage
 {
-    private Lazy<Entities> db = new Lazy<Entities>(() => new Entities());
-
     protected override string PageRight
     {
         get
@@ -29,7 +27,7 @@ public partial class VIP_机构 : Homory.Model.HomoryCorePage
 
     protected void tree_NeedDataSource(object sender, Telerik.Web.UI.TreeListNeedDataSourceEventArgs e)
     {
-        tree.DataSource = db.Value.C__机构.ToList();
+        tree.DataSource = HomoryContext.Value.C__机构.ToList();
     }
 
     protected void tree_PreRender(object sender, EventArgs e)

@@ -579,6 +579,20 @@
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="机构用户关系">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Batch" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BatchType" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserSyncId" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="OrgId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrgSyncId" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Platform_BT.dbo.__机构”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="__机构">
@@ -1971,6 +1985,7 @@
           <EntitySet Name="UserFavourite" EntityType="Self.UserFavourite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserOnline" EntityType="Self.UserOnline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="机构用户关系" EntityType="Self.机构用户关系" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="__机构" EntityType="Self.__机构" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [__机构].[机构ID] AS [机构ID], 
@@ -2913,8 +2928,9 @@
           <EntitySet Name="C__机构" EntityType="Homory.Model.C__机构" />
           <EntitySet Name="C__用户" EntityType="Homory.Model.C__用户" />
           <FunctionImport Name="机构用户" EntitySet="C__用户" ReturnType="Collection(Homory.Model.C__用户)">
-            <Parameter Name="OrgId" Mode="In" Type="Guid" />
+          <Parameter Name="OrgId" Mode="In" Type="Guid" />
           </FunctionImport>
+          <EntitySet Name="机构用户关系" EntityType="Homory.Model.机构用户关系" />
         </EntityContainer>
         <EntityType Name="Application">
           <Key>
@@ -5043,6 +5059,20 @@
           <Property Name="用户同步" Type="Boolean" Nullable="false" />
           <Property Name="用户单位" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="机构用户关系">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Batch" Type="Guid" Nullable="false" />
+          <Property Name="BatchType" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserSyncId" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="OrgId" Type="Guid" Nullable="false" />
+          <Property Name="OrgSyncId" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6113,6 +6143,21 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="机构用户" FunctionName="PrimarySchoolModel.Store.机构用户">
           </FunctionImportMapping>
+          <EntitySetMapping Name="机构用户关系">
+            <EntityTypeMapping TypeName="Homory.Model.机构用户关系">
+              <MappingFragment StoreEntitySet="机构用户关系">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="OrgSyncId" ColumnName="OrgSyncId" />
+                <ScalarProperty Name="OrgId" ColumnName="OrgId" />
+                <ScalarProperty Name="UserSyncId" ColumnName="UserSyncId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BatchType" ColumnName="BatchType" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
