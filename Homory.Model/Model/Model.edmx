@@ -604,6 +604,7 @@
             <PropertyRef Name="用户手机" />
             <PropertyRef Name="用户在编" />
             <PropertyRef Name="用户同步" />
+            <PropertyRef Name="用户单位" />
           </Key>
           <Property Name="用户ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="金和ID" Type="varchar" MaxLength="20" Nullable="false" />
@@ -612,10 +613,12 @@
           <Property Name="用户姓名" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="用户拼音" Type="nvarchar" MaxLength="256" />
           <Property Name="用户头像" Type="nvarchar" MaxLength="256" />
+          <Property Name="微信ID" Type="nvarchar(max)" />
           <Property Name="用户手机" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="用户证件" Type="nvarchar" MaxLength="64" />
           <Property Name="用户在编" Type="bit" Nullable="false" />
           <Property Name="用户同步" Type="bit" Nullable="false" />
+          <Property Name="用户单位" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Platform_BT.dbo.Contact_Users”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -1983,10 +1986,12 @@
     [__用户].[用户姓名] AS [用户姓名], 
     [__用户].[用户拼音] AS [用户拼音], 
     [__用户].[用户头像] AS [用户头像], 
+    [__用户].[微信ID] AS [微信ID], 
     [__用户].[用户手机] AS [用户手机], 
     [__用户].[用户证件] AS [用户证件], 
     [__用户].[用户在编] AS [用户在编], 
-    [__用户].[用户同步] AS [用户同步]
+    [__用户].[用户同步] AS [用户同步], 
+    [__用户].[用户单位] AS [用户单位]
     FROM [dbo].[__用户] AS [__用户]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Contact_Users" EntityType="Self.Contact_Users" store:Type="Views" store:Schema="dbo">
@@ -2902,8 +2907,8 @@
           <FunctionImport Name="Contact_GetUsers" EntitySet="Contact_Users" ReturnType="Collection(Homory.Model.Contact_Users)">
           <Parameter Name="query" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="C__用户" EntityType="Homory.Model.C__用户" />
           <EntitySet Name="C__机构" EntityType="Homory.Model.C__机构" />
+          <EntitySet Name="C__用户" EntityType="Homory.Model.C__用户" />
         </EntityContainer>
         <EntityType Name="Application">
           <Key>
@@ -4995,28 +5000,6 @@
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="C__用户">
-          <Key>
-            <PropertyRef Name="用户ID" />
-            <PropertyRef Name="金和ID" />
-            <PropertyRef Name="用户账号" />
-            <PropertyRef Name="用户姓名" />
-            <PropertyRef Name="用户手机" />
-            <PropertyRef Name="用户在编" />
-            <PropertyRef Name="用户同步" />
-          </Key>
-          <Property Name="用户ID" Type="Guid" Nullable="false" />
-          <Property Name="金和ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="用户账号" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="金和账号" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="用户姓名" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="用户拼音" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="用户头像" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="用户手机" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="用户证件" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="用户在编" Type="Boolean" Nullable="false" />
-          <Property Name="用户同步" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="C__机构">
           <Key>
             <PropertyRef Name="机构ID" />
@@ -5028,6 +5011,31 @@
           <Property Name="机构名称" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="机构拼音" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="父级ID" Type="Guid" />
+        </EntityType>
+        <EntityType Name="C__用户">
+          <Key>
+            <PropertyRef Name="用户ID" />
+            <PropertyRef Name="金和ID" />
+            <PropertyRef Name="用户账号" />
+            <PropertyRef Name="用户姓名" />
+            <PropertyRef Name="用户手机" />
+            <PropertyRef Name="用户在编" />
+            <PropertyRef Name="用户同步" />
+            <PropertyRef Name="用户单位" />
+          </Key>
+          <Property Name="用户ID" Type="Guid" Nullable="false" />
+          <Property Name="金和ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="用户账号" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="金和账号" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="用户姓名" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="用户拼音" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="用户头像" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="微信ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="用户手机" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="用户证件" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="用户在编" Type="Boolean" Nullable="false" />
+          <Property Name="用户同步" Type="Boolean" Nullable="false" />
+          <Property Name="用户单位" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -6067,23 +6075,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Contact_GetUsers" FunctionName="PrimarySchoolModel.Store.Contact_GetUsers">
           </FunctionImportMapping>
-          <EntitySetMapping Name="C__用户">
-            <EntityTypeMapping TypeName="Homory.Model.C__用户">
-              <MappingFragment StoreEntitySet="__用户">
-                <ScalarProperty Name="用户同步" ColumnName="用户同步" />
-                <ScalarProperty Name="用户在编" ColumnName="用户在编" />
-                <ScalarProperty Name="用户证件" ColumnName="用户证件" />
-                <ScalarProperty Name="用户手机" ColumnName="用户手机" />
-                <ScalarProperty Name="用户头像" ColumnName="用户头像" />
-                <ScalarProperty Name="用户拼音" ColumnName="用户拼音" />
-                <ScalarProperty Name="用户姓名" ColumnName="用户姓名" />
-                <ScalarProperty Name="金和账号" ColumnName="金和账号" />
-                <ScalarProperty Name="用户账号" ColumnName="用户账号" />
-                <ScalarProperty Name="金和ID" ColumnName="金和ID" />
-                <ScalarProperty Name="用户ID" ColumnName="用户ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="C__机构">
             <EntityTypeMapping TypeName="Homory.Model.C__机构">
               <MappingFragment StoreEntitySet="__机构">
@@ -6092,6 +6083,25 @@
                 <ScalarProperty Name="机构名称" ColumnName="机构名称" />
                 <ScalarProperty Name="金和ID" ColumnName="金和ID" />
                 <ScalarProperty Name="机构ID" ColumnName="机构ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__用户">
+            <EntityTypeMapping TypeName="Homory.Model.C__用户">
+              <MappingFragment StoreEntitySet="__用户">
+                <ScalarProperty Name="用户单位" ColumnName="用户单位" />
+                <ScalarProperty Name="用户同步" ColumnName="用户同步" />
+                <ScalarProperty Name="用户在编" ColumnName="用户在编" />
+                <ScalarProperty Name="用户证件" ColumnName="用户证件" />
+                <ScalarProperty Name="用户手机" ColumnName="用户手机" />
+                <ScalarProperty Name="微信ID" ColumnName="微信ID" />
+                <ScalarProperty Name="用户头像" ColumnName="用户头像" />
+                <ScalarProperty Name="用户拼音" ColumnName="用户拼音" />
+                <ScalarProperty Name="用户姓名" ColumnName="用户姓名" />
+                <ScalarProperty Name="金和账号" ColumnName="金和账号" />
+                <ScalarProperty Name="用户账号" ColumnName="用户账号" />
+                <ScalarProperty Name="金和ID" ColumnName="金和ID" />
+                <ScalarProperty Name="用户ID" ColumnName="用户ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

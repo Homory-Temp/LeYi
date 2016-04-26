@@ -22,9 +22,11 @@ namespace Homory.Model
         public string 用户姓名 { get; set; }
         public string 用户拼音 { get; set; }
         public string 用户头像 { get; set; }
+        public string 微信ID { get; set; }
         public string 用户手机 { get; set; }
         public string 用户证件 { get; set; }
         public bool 用户在编 { get; set; }
         public bool 用户同步 { get; set; }
+        public string 用户单位 { get; set; }
     }
 }
