@@ -108,9 +108,9 @@ public partial class VIP_关系 : Homory.Model.HomoryCorePage
             HomoryContext.Value.SaveChanges();
             Session["Sp_Org_X"] = null;
             Session["Sp_User_X"] = null;
-            Response.Redirect(string.Format("../VIP/查询.aspx?BatchId={0}", batch));
+            Response.Redirect("../VIP/查询.aspx");
         }
-        catch(System.Exception ex)
+        catch
         { }
     }
 }
