@@ -37,11 +37,6 @@ public partial class VIP_机构 : Homory.Model.HomoryCorePage
         tree.ExpandAllItems();
     }
 
-    protected void move_Click(object sender, EventArgs e)
-    {
-
-    }
-
     protected void tree_ItemDataBound(object sender, Telerik.Web.UI.TreeListItemDataBoundEventArgs e)
     {
         if (e.Item is TreeListHeaderItem)
@@ -50,17 +45,27 @@ public partial class VIP_机构 : Homory.Model.HomoryCorePage
         }
         else if (e.Item is TreeListDataItem)
         {
-            if ((e.Item as TreeListDataItem).ParentItem == null)
+            var item = e.Item as TreeListDataItem;
+            if (item.ParentItem == null)
             {
-                (e.Item as TreeListDataItem).Cells[(e.Item as TreeListDataItem).Cells.Count - 3].Controls[0].Visible = false;
-            }
-            else
-            {
-                var cb = ((e.Item as TreeListDataItem).Cells[(e.Item as TreeListDataItem).Cells.Count - 3].Controls[0] as CheckBox);
-                cb.InputAttributes["org_id"] = ((e.Item as TreeListDataItem).DataItem as C__机构).机构ID.ToString();
-
-                cb.InputAttributes["org_name"] = ((e.Item as TreeListDataItem).DataItem as C__机构).机构名称.ToString();
+                item.Cells[item.Cells.Count - 3].Controls[0].Visible = false;
             }
         }
+    }
+
+    protected void sub_ServerClick(object sender, EventArgs e)
+    {
+        Session["Sp_Org_X"] = v.Value;
+        Response.Redirect("../VIP/用户.aspx");
+    }
+
+    protected void act_ServerClick(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void sto_ServerClick(object sender, EventArgs e)
+    {
+
     }
 }
