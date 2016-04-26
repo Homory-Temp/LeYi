@@ -180,5 +180,23 @@ namespace Homory.Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Contact_Users>("Contact_GetUsers", mergeOption, queryParameter);
         }
+    
+        public virtual ObjectResult<C__用户> 机构用户(Nullable<System.Guid> orgId)
+        {
+            var orgIdParameter = orgId.HasValue ?
+                new ObjectParameter("OrgId", orgId) :
+                new ObjectParameter("OrgId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<C__用户>("机构用户", orgIdParameter);
+        }
+    
+        public virtual ObjectResult<C__用户> 机构用户(Nullable<System.Guid> orgId, MergeOption mergeOption)
+        {
+            var orgIdParameter = orgId.HasValue ?
+                new ObjectParameter("OrgId", orgId) :
+                new ObjectParameter("OrgId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<C__用户>("机构用户", mergeOption, orgIdParameter);
+        }
     }
 }

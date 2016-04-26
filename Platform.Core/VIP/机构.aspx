@@ -13,7 +13,7 @@
     <style>
         div {
             font-family: "Segoe UI",Arial,Helvetica,sans-serif;
-            font-size: 1em;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -27,7 +27,6 @@
                 <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.Core.js" />
                 <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.jQuery.js" />
                 <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.jQueryPlugins.js" />
-                <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.ComboBox.RadComboBoxScripts.js" />
             </Scripts>
         </telerik:RadScriptManager>
         <telerik:RadAjaxPanel ID="ap" runat="server">

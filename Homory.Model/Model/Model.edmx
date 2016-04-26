@@ -121,7 +121,7 @@
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
-          <Property Name="AutoId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BuildType" Type="int" Nullable="false" />
           <Property Name="ClassType" Type="int" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="32" Nullable="false" />
@@ -1922,6 +1922,9 @@
           <Parameter Name="Phone" Type="nvarchar" Mode="In" />
           <Parameter Name="Reset" Type="bit" Mode="In" />
         </Function>
+        <Function Name="机构用户" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrgId" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <EntityContainer Name="PrimarySchoolModelStoreContainer">
           <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Api" EntityType="Self.Api" Schema="dbo" store:Type="Tables" />
@@ -2909,6 +2912,9 @@
           </FunctionImport>
           <EntitySet Name="C__机构" EntityType="Homory.Model.C__机构" />
           <EntitySet Name="C__用户" EntityType="Homory.Model.C__用户" />
+          <FunctionImport Name="机构用户" EntitySet="C__用户" ReturnType="Collection(Homory.Model.C__用户)">
+            <Parameter Name="OrgId" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Application">
           <Key>
@@ -6105,6 +6111,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="机构用户" FunctionName="PrimarySchoolModel.Store.机构用户">
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

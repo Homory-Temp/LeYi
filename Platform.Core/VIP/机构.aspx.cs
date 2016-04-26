@@ -56,16 +56,9 @@ public partial class VIP_机构 : Homory.Model.HomoryCorePage
     protected void sub_ServerClick(object sender, EventArgs e)
     {
         Session["Sp_Org_X"] = v.Value;
-        Response.Redirect("../VIP/用户.aspx");
-    }
-
-    protected void act_ServerClick(object sender, EventArgs e)
-    {
-
-    }
-
-    protected void sto_ServerClick(object sender, EventArgs e)
-    {
-
+        if (Session["Sp_User_X"] == null)
+            Response.Redirect("../VIP/用户.aspx");
+        else
+            Response.Redirect("../VIP/关系.aspx");
     }
 }
