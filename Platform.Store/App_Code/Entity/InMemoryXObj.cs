@@ -9,6 +9,7 @@ using System.Web;
 public class InMemoryXObj
 {
     public Guid CatalogId { get; set; }
+    public Guid? ParentId { get; set; }
     public string CatalogName { get; set; }
     public decimal I { get; set; }
     public decimal C { get; set; }

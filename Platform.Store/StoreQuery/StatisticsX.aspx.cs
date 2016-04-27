@@ -94,14 +94,17 @@ public partial class StoreQuery_StatisticsX : SingleStorePage
         var start = timex.AddMilliseconds(-1).ToTimeNode();
         var end = time.AddDays(1).ToTimeNode();
 
-        if (orderSource.SelectedIndex < 0)
+        if (orderSource.SelectedIndex < 0 || tree.GetAllNodes().Count(o => o.Checked) == 0)
+        {
+            view.DataSource = null;
             return;
+        }
         var os = orderSource.SelectedItem.Text;
 
         var list_i = db.Value.GetStoreX(start, end, "I").ToList().Where(o => o.OrderSource == os).ToList();
         var list_c = db.Value.GetStoreX(start, end, "C").ToList().Where(o => o.OrderSource == os).ToList();
 
-        var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => new InMemoryCatalog { Id = o.Value.GlobalId(), Name = Fix(o.Level, o.Text)}).ToList();
+        var catalogs = tree.GetAllNodes().Where(o => o.Checked).Select(o => new InMemoryCatalog { Id = o.Value.GlobalId(), Name = Fix(o.Level, o.Text), Parent = o.Level == 0 ? (Guid?)null : Guid.Parse(o.ParentNode.Value) }).ToList();
 
         list_i = catalogs.Select(o => o.Id).ToList().Join(list_i, o => o, o => o.CatalogId, (a, b) => b).ToList();
         list_c = catalogs.Select(o => o.Id).ToList().Join(list_c, o => o, o => o.CatalogId, (a, b) => b).ToList();
@@ -114,8 +117,39 @@ public partial class StoreQuery_StatisticsX : SingleStorePage
             x.CatalogName = b.Name;
             x.I = (list_i.Count(o => o.CatalogId == b.Id) == 0 ? 0M : list_i.Where(o => o.CatalogId == b.Id).Sum(o => o.Money));
             x.C = (list_c.Count(o => o.CatalogId == b.Id) == 0 ? 0M : list_c.Where(o => o.CatalogId == b.Id).Sum(o => o.Money));
+            x.ParentId = b.Parent;
             list.Add(x);
         }
+
+        var max = tree.GetAllNodes().Where(o => o.Checked).Max(o => o.Level);
+        for (var i = max - 1; i >= 0; i--)
+        {
+            var nodes = tree.GetAllNodes().Where(o => o.Level == i && o.Checked).ToList();
+            foreach (var node in nodes)
+            {
+                var item = list.SingleOrDefault(o => o.CatalogId == Guid.Parse(node.Value));
+                if (item != null)
+                {
+                    for (var j = 0; j < node.Nodes.Count; j++)
+                    {
+                        if (node.Nodes[j].Checked)
+                        {
+                            var c_item = list.SingleOrDefault(o => o.CatalogId == Guid.Parse(node.Nodes[j].Value));
+                            if (c_item != null)
+                            {
+                                item.I += c_item.I;
+                                item.C += c_item.C;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        list.RemoveAll(o => o.C == 0M && o.I == 0M);
+
+        ___total.Value = list.Where(o => o.ParentId == null).Sum(o => o.I).ToMoney() + "@" + list.Where(o => o.ParentId == null).Sum(o => o.C).ToMoney();
+
         view.DataSource = list;
     }
 }

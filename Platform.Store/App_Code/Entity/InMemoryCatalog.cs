@@ -9,5 +9,6 @@ using System.Web;
 public class InMemoryCatalog
 {
     public Guid Id { get; set; }
+    public Guid? Parent { get; set; }
     public string Name { get; set; }
 }

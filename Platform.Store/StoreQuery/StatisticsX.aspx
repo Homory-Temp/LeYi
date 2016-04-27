@@ -45,7 +45,7 @@
                 <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
                     <div class="row">
                         <div class="col-md-12">
-                            <span class="btn btn-tumblr">物资类别：</span>
+                            <span class="btn btn-tumblr">统计对象：</span>
                             &nbsp;&nbsp;
                             <input type="button" class="btn btn-info" id="all" runat="server" value="清除选定" onserverclick="all_ServerClick" />
                             <input type="hidden" id="_all" runat="server" value="1" />
@@ -53,8 +53,13 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <telerik:RadTreeView ID="tree" runat="server" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" CheckBoxes="true" CheckChildNodes="true" OnNodeCheck="tree_NodeCheck">
+                            <telerik:RadTreeView ID="tree" runat="server" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" CheckBoxes="true" CheckChildNodes="true" OnNodeCheck="tree_NodeCheck" OnClientNodeExpanding="ca">
                             </telerik:RadTreeView>
+                            <script>
+                                function ca(sender, args) {
+                                    args.set_cancel(true);
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -92,12 +97,11 @@
                                                 <th>出库总额</th>
                                             </tr>
                                             <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
-                                            <%--<tr>
-                                                <td colspan="2">总计：</td>
+                                            <tr>
+                                                <td>总计：</td>
                                                 <td><%# ___total.Value.Split(new[] { '@' })[0] %></td>
                                                 <td><%# ___total.Value.Split(new[] { '@' })[1] %></td>
-                                                <td><%# ___total.Value.Split(new[] { '@' })[2] %></td>
-                                            </tr>--%>
+                                            </tr>
                                         </table>
                                     </div>
                                 </LayoutTemplate>
