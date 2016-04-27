@@ -88,7 +88,7 @@
             var gen = generateMixed(6);
             $("#gen_no").val(gen);
             var msg = encodeURIComponent("验证码：" + gen + "，30分钟内有效");
-            var url = "http://www.4001185185.com/sdk/smssdk!mt.action?sdk=18687&code=lx888888&phones=" + no + "&msg=" + msg + "&resulttype=txt&subcode=2897&rpt=0";
+            var url = "Msg.aspx?phones=" + no + "&msg=" + msg;
             $.get(url);
         }
 
@@ -139,6 +139,7 @@
     </script>
     <h1 style="padding-top: 20px;">
         <img alt="" src="images/SsoLogoLX.png" style="width: 90%;" /></h1>
+        <input type="hidden" id="xp" value="lxjy6688" />
     <div class="login-form" style="margin: 30px auto 0 auto; width: 86%;">
         <div class="close" style="width: 100%; text-align: left;">在职教工信息<span id="tname" runat="server"></span></div>
         <div class="head-info">

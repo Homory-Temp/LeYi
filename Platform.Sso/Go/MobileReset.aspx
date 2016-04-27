@@ -56,7 +56,7 @@
             var gen = generateMixed(6);
             $("#gen_no").val(gen);
             var msg = encodeURIComponent("验证码：" + gen + "，30分钟内有效");
-            var url = "http://www.4001185185.com/sdk/smssdk!mt.action?sdk=18687&code=lx888888&phones=" + no + "&msg=" + msg + "&resulttype=txt&subcode=2897&rpt=0";
+            var url = "Msg.aspx?phones=" + no + "&msg=" + msg;
             var xmlhttp;
             if (window.XMLHttpRequest) {
                 xmlhttp = new XMLHttpRequest();
@@ -98,6 +98,7 @@
     </script>
     <h1>
         <img alt="" src="images/SsoLogoLX.png" /></h1>
+        <input type="hidden" id="xp" value="lxjy6688" />
     <div class="login-form">
         <div class="close" style="width: 100%; text-align: left;">用户密码重置</div>
         <div class="head-info">
