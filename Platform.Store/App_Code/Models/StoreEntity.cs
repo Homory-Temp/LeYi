@@ -1134,6 +1134,17 @@ namespace Models
 {
     using System;
     
+    public partial class StoreX_Obj
+    {
+        public decimal Money { get; set; }
+        public System.Guid CatalogId { get; set; }
+        public string OrderSource { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    
     public enum DictionaryType : int
     {
         单位 = 1,

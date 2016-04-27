@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="StatisticsX.aspx.cs" Inherits="StoreQuery_StatisticsX" %>
+<%@ Register Src="~/Control/SideBarSingle.ascx" TagPrefix="homory" TagName="SideBarSingle" %>
 
 <!DOCTYPE html>
 
@@ -21,47 +22,109 @@
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
     <![endif]-->
+    <script>
+        function printDepot() {
+            bdhtml = window.document.body.innerHTML;
+            sprnstr = "<!-- Start Printing -->";
+            eprnstr = "<!-- End Printing -->";
+            prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 23);
+            prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
+            prnhtml = "<body>" + prnhtml + "</body>";
+            window.document.body.innerHTML = prnhtml;
+            window.print();
+            window.document.body.innerHTML = bdhtml;
+            return false;
+        }
+    </script>
 </head>
 <body>
     <form id="form" runat="server">
-        <telerik:RadScriptManager ID="sm" runat="server"></telerik:RadScriptManager>
-        <telerik:RadAjaxLoadingPanel ID="loading" runat="server" InitialDelayTime="1000">
-            <div>&nbsp;</div>
-            <div class="btn btn-lg btn-warning" style="margin-top: 50px;">正在加载 请稍候....</div>
-        </telerik:RadAjaxLoadingPanel>
+        <homory:SideBarSingle runat="server" ID="SideBarSingle" Crumb="日常查询 - 采购来源统计" />
         <telerik:RadAjaxPanel ID="ap" runat="server" CssClass="container-fluid" LoadingPanelID="loading">
-            <div class="row text-center">
-                <div class="col-md-12">
-                    <span class="btn btn-info">期初：</span>
-                    <telerik:RadMonthYearPicker ID="ps" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="false">
-                        <DatePopupButton runat="server" Visible="false" />
-                    </telerik:RadMonthYearPicker>
-                    &nbsp;&nbsp;
+            <div class="row">
+                <div class="col-md-2" style="border-right: 1px solid #2B2B2B;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="btn btn-tumblr">物资类别：</span>
+                            &nbsp;&nbsp;
+                            <input type="button" class="btn btn-info" id="all" runat="server" value="清除选定" onserverclick="all_ServerClick" />
+                            <input type="hidden" id="_all" runat="server" value="1" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <telerik:RadTreeView ID="tree" runat="server" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" CheckBoxes="true" CheckChildNodes="true" OnNodeCheck="tree_NodeCheck">
+                            </telerik:RadTreeView>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10" style="text-align: left;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="btn btn-info">期初：</span>
+                            <telerik:RadDatePicker ID="periodx" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
+                                <DatePopupButton runat="server" Visible="false" />
+                            </telerik:RadDatePicker>
+                            &nbsp;&nbsp;
                             <span class="btn btn-info">期末：</span>
-                    <telerik:RadMonthYearPicker ID="pe" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="100" AutoPostBack="false">
-                        <DatePopupButton runat="server" Visible="false" />
-                    </telerik:RadMonthYearPicker>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
+                            <telerik:RadDatePicker ID="period" runat="server" LocalizationPath="~/Language" ShowPopupOnFocus="true" Width="120" AutoPostBack="false">
+                                <DatePopupButton runat="server" Visible="false" />
+                            </telerik:RadDatePicker>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <telerik:RadComboBox ID="orderSource" runat="server" AutoPostBack="false" Width="120" AppendDataBoundItems="true" DataTextField="Name" DataValueField="Name">
+                            </telerik:RadComboBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="button" class="btn btn-tumblr dictionary" id="query" runat="server" value="查询" onserverclick="query_ServerClick" />
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="hidden" id="___total" runat="server" />
+                            <!-- Start Printing -->
+                            <telerik:RadListView ID="view" runat="server" OnNeedDataSource="view_NeedDataSource" ItemPlaceholderID="holder" AllowPaging="false">
+                                <LayoutTemplate>
+                                    <div class="col-md-12">
+                                        <table class="storeTable text-center">
+                                            <tr>
+                                                <th>物资类别</th>
+                                                <th>入库总额</th>
+                                                <th>出库总额</th>
+                                            </tr>
+                                            <asp:PlaceHolder ID="holder" runat="server"></asp:PlaceHolder>
+                                            <%--<tr>
+                                                <td colspan="2">总计：</td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[0] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[1] %></td>
+                                                <td><%# ___total.Value.Split(new[] { '@' })[2] %></td>
+                                            </tr>--%>
+                                        </table>
+                                    </div>
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                    <tr>
+                                        <td style="text-align: left;"><%# Eval("CatalogName") %></td>
+                                        <td><%# Eval("I").ToMoney() %></td>
+                                        <td><%# Eval("C").ToMoney() %></td>
+                                    </tr>
+                                </ItemTemplate>
+                                <EmptyDataTemplate>
+                                    <div class="col-md-12 text-center">
+                                        <div class="btn btn-warning">暂无记录</div>
+                                    </div>
+                                </EmptyDataTemplate>
+                            </telerik:RadListView>
+                            <!-- End Printing -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <input type="button" class="btn btn-tumblr" id="print" value="打印" onclick="printDepot();" />
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">&nbsp;</div>
-                <div class="col-md-4 text-left">
-                    <telerik:RadTreeView ID="tree" runat="server" DataTextField="Name" DataValueField="Id" DataFieldID="Id" DataFieldParentID="ParentId" CheckBoxes="false" CheckChildNodes="true">
-                        <NodeTemplate>
-                            <div style="float: left; width: 100px;"><%# Eval("Name") %></div>
-                            <div style="float: left; width: 300px; overflow: visible;"><%# Calc(Container, (Guid)Eval("Id")) %></div>
-                            <div style="clear: both;"></div>
-                        </NodeTemplate>
-                    </telerik:RadTreeView>
-                </div>
-                <div class="col-md-4">&nbsp;</div>
             </div>
         </telerik:RadAjaxPanel>
     </form>
-    <style>
-        body {
-            padding-top: 0;
-        }
-    </style>
 </body>
 </html>

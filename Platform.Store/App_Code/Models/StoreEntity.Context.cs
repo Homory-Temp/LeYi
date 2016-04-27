@@ -88,6 +88,23 @@ namespace Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("CountObjects", catalogIdParameter, storeIdParameter);
         }
     
+        public virtual ObjectResult<StoreX_Obj> GetStoreX(Nullable<int> from, Nullable<int> to, string type)
+        {
+            var fromParameter = from.HasValue ?
+                new ObjectParameter("From", from) :
+                new ObjectParameter("From", typeof(int));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("To", to) :
+                new ObjectParameter("To", typeof(int));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StoreX_Obj>("GetStoreX", fromParameter, toParameter, typeParameter);
+        }
+    
         public virtual ObjectResult<string> GetCatalogPath(Nullable<System.Guid> catalogId)
         {
             var catalogIdParameter = catalogId.HasValue ?

@@ -1507,7 +1507,12 @@
           <Parameter Name="CatalogId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="StoreId" Type="uniqueidentifier" Mode="In" />
         </Function>
-        <Function Name="GetCatalogPath" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+      <Function Name="GetStoreX" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Parameter Name="From" Type="int" Mode="In" />
+        <Parameter Name="To" Type="int" Mode="In" />
+        <Parameter Name="Type" Type="nvarchar(max)" Mode="In" />
+      </Function>
+      <Function Name="GetCatalogPath" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CatalogId" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="ToPinYin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -3086,6 +3091,11 @@
             <Parameter Name="CatalogId" Mode="In" Type="Guid" />
             <Parameter Name="StoreId" Mode="In" Type="Guid" />
           </FunctionImport>
+          <FunctionImport Name="GetStoreX" ReturnType="Collection(StoreModel.StoreX_Obj)">
+            <Parameter Name="From" Mode="In" Type="Int32" />
+            <Parameter Name="To" Mode="In" Type="Int32" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+          </FunctionImport>
           <EntitySet Name="Store_RecordIn" EntityType="StoreModel.Store_RecordIn" />
           <EntitySet Name="Department" EntityType="StoreModel.Department" />
           <AssociationSet Name="FK_Department_DepartmentParent" Association="StoreModel.FK_Department_DepartmentParent">
@@ -3829,6 +3839,11 @@
           <Property Name="SourceAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
           <Property Name="SourceMoney" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
         </EntityType>
+        <ComplexType Name="StoreX_Obj" >
+          <Property Type="Decimal" Name="Money" Nullable="false" />
+          <Property Type="Guid" Name="CatalogId" Nullable="false" />
+          <Property Type="String" Name="OrderSource" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4299,6 +4314,15 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="CountObjects" FunctionName="StoreModel.Store.CountObjects" />
+          <FunctionImportMapping FunctionImportName="GetStoreX" FunctionName="StoreModel.Store.GetStoreX" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StoreModel.StoreX_Obj">
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+                <ScalarProperty Name="OrderSource" ColumnName="OrderSource" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="Store_RecordIn">
             <EntityTypeMapping TypeName="StoreModel.Store_RecordIn">
               <MappingFragment StoreEntitySet="Store_RecordIn">
