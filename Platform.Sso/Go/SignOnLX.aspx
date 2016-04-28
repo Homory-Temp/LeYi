@@ -86,7 +86,7 @@
         <span style="font-family:arial;color:#FFFFFF;">更正手机号码请使用身份证号码登录 &nbsp;&nbsp;&nbsp;&nbsp;<a href="MobileReset.aspx">密码重置</a></span>
     </center><br />
     <center>
-        <span style="font-family: arial; color: #FFFFFF;">Copyright &copy;2016 梁溪教育筹备组  技术支持：北京金和网络 </br> </br><a href="http://oa.wxlxjy.com:888/首次环境部署.rar"><font color="#FFFFFF">首次环境部署<font></a>   <a href="http://oa.wxlxjy.com:888/oa.rar"><font color="#FFFFFF">专用浏览器</font></a></span>
+        <span style="font-family: arial; color: #FFFFFF;">Copyright &copy;2016 梁溪教育筹备组  技术支持：华佳科技 </br> </br><a href="http://oa.wxlxjy.com:888/首次环境部署.rar"><font color="#FFFFFF">首次环境部署<font></a>   <a href="http://oa.wxlxjy.com:888/oa.rar"><font color="#FFFFFF">专用浏览器</font></a></span>
     </center>
     <style>
         html input:-webkit-autofill, html textarea:-webkit-autofill, html select:-webkit-autofill {
