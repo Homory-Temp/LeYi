@@ -613,6 +613,7 @@
     <Content Include="Views\微信\授权.cshtml" />
     <Content Include="Views\首页\首页.cshtml" />
     <Content Include="Views\已收寻呼\首页.cshtml" />
+    <Content Include="Views\已收寻呼\寻呼列表未阅.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

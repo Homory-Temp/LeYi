@@ -19,20 +19,11 @@ namespace Platform.JHMobile.Controllers
             return View();
         }
 
-        public ActionResult 未阅寻呼列表()
+        public ActionResult 寻呼列表未阅()
         {
             if (string.IsNullOrEmpty(Account))
                 return 认证();
-            //var count = db.f____Mobile_Count_CallToRead(Account).Single().Value;
-            //var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
-            //var per = 10;
-            //if (count < id * per)
-            //    return RedirectToAction("CallToRead", "Call", new { id = id - 1 });
-            //var list = db.f____Mobile_List_CallToRead(Account).OrderByDescending(o => o.CallTime).Skip(id * per).Take(per).ToList();
-            //ViewBag.Min = 0;
-            //ViewBag.Max = count % per == 0 ? count / per - 1 : (count + (per - count % per)) / per - 1;
-            //ViewBag.Current = id;
-            return View(/*list*/);
+            return View();
         }
     }
 }
