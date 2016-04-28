@@ -281,6 +281,7 @@
     <Content Include="Content\sb-admin-2\js\sb-admin-2.js" />
     <Content Include="Content\jquery\jquery.js" />
     <Content Include="Content\jquery\jquery.min.js" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
