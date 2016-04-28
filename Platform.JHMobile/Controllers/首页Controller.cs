@@ -13,6 +13,7 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return 认证();
+            ViewBag.已收寻呼数 = DB.f____Mobile_Count_CallToRead(Account).Single() + DB.f____Mobile_Count_CallRead(Account).Single() + DB.f____Mobile_Count_CallHistoric(Account, null, null).Single();
             return View();
         }
     }
