@@ -3,8 +3,16 @@
 }
 <div class="container">
     <div class="row">
+        <div class="col-xs-12 metro_left metro_right">
+            <div class="metro metro_1" style="height: 100px;">
+                <div class="metro_text" style="font-size: 30px;">梁溪教育信息化管理平台</div>
+                <div class="metro_text" style="font-size: 20px;">手机版</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-xs-6 metro_left">
-            <div class="metro metro_0" onclick="window.location = corp_url + '已收寻呼';">
+            <div class="metro metro_0" onclick="top.location = '@Url.Action("首页", "已收寻呼")';">
                 <div><i class="fa fa-comments fa-5x"></i></div>
                 <div class="metro_text">已收寻呼</div>
                 <div class="metro_text">@ViewBag.已收寻呼数</div>
