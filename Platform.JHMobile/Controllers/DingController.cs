@@ -23,21 +23,21 @@ namespace Platform.JHMobile.Controllers
             var query = db.f____Mobile_List_User(Account);
             var query_o = query.SingleOrDefault();
             var user = query == null || query_o == null ? "" : query_o;
-            if (string.IsNullOrEmpty(user))
-            {
-                ViewBag.Forbidden = true;
-            }
-            else
-            {
-                ViewBag.Forbidden = false;
-                var count = db.f____Mobile_Count(Account).FirstOrDefault();
-                ViewBag.CallToRead = count.CallToRead;
-                ViewBag.CallRead = count.CallRead;
-                ViewBag.MessageModule = DingTalk.CorpMessageModules.Count;
-                ViewBag.MessageToRead = count.MessageToRead;
-                ViewBag.TaskToDo = count.TaskToDo;
-                ViewBag.TaskDone = count.TaskDone;
-            }
+            //if (string.IsNullOrEmpty(user))
+            //{
+            //    ViewBag.Forbidden = true;
+            //}
+            //else
+            //{
+            //    ViewBag.Forbidden = false;
+            //    var count = db.f____Mobile_Count(Account).FirstOrDefault();
+            //    ViewBag.CallToRead = count.CallToRead;
+            //    ViewBag.CallRead = count.CallRead;
+            //    ViewBag.MessageModule = DingTalk.CorpMessageModules.Count;
+            //    ViewBag.MessageToRead = count.MessageToRead;
+            //    ViewBag.TaskToDo = count.TaskToDo;
+            //    ViewBag.TaskDone = count.TaskDone;
+            //}
             return View();
         }
     }

@@ -28,24 +28,6 @@ namespace Platform.JHMobile.Models
         }
     
     
-        public virtual ObjectResult<f____Mobile_Count_Result> f____Mobile_Count(string loginCode)
-        {
-            var loginCodeParameter = loginCode != null ?
-                new ObjectParameter("LoginCode", loginCode) :
-                new ObjectParameter("LoginCode", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_Count_Result>("f____Mobile_Count", loginCodeParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> f____Mobile_Count_CallToRead(string loginCode)
-        {
-            var loginCodeParameter = loginCode != null ?
-                new ObjectParameter("LoginCode", loginCode) :
-                new ObjectParameter("LoginCode", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f____Mobile_Count_CallToRead", loginCodeParameter);
-        }
-    
         public virtual ObjectResult<f____Mobile_List_CallToRead_Result> f____Mobile_List_CallToRead(string loginCode)
         {
             var loginCodeParameter = loginCode != null ?
@@ -80,15 +62,6 @@ namespace Platform.JHMobile.Models
                 new ObjectParameter("LoginCode", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_CallRead_Result>("f____Mobile_List_CallRead", loginCodeParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> f____Mobile_Count_CallRead(string loginCode)
-        {
-            var loginCodeParameter = loginCode != null ?
-                new ObjectParameter("LoginCode", loginCode) :
-                new ObjectParameter("LoginCode", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f____Mobile_Count_CallRead", loginCodeParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> f____Mobile_Count_MessageModule(string loginCode, string moduleType)
@@ -199,23 +172,6 @@ namespace Platform.JHMobile.Models
                 new ObjectParameter("AppG_ID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f____Mobile_List_MessageType_Result>("f____Mobile_List_MessageType", appG_IDParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> f____Mobile_Count_CallHistoric(string loginCode, Nullable<System.DateTime> fromTime, Nullable<System.DateTime> toTime)
-        {
-            var loginCodeParameter = loginCode != null ?
-                new ObjectParameter("LoginCode", loginCode) :
-                new ObjectParameter("LoginCode", typeof(string));
-    
-            var fromTimeParameter = fromTime.HasValue ?
-                new ObjectParameter("FromTime", fromTime) :
-                new ObjectParameter("FromTime", typeof(System.DateTime));
-    
-            var toTimeParameter = toTime.HasValue ?
-                new ObjectParameter("ToTime", toTime) :
-                new ObjectParameter("ToTime", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f____Mobile_Count_CallHistoric", loginCodeParameter, fromTimeParameter, toTimeParameter);
         }
     
         public virtual ObjectResult<f____Mobile_List_CallHistoric_Result> f____Mobile_List_CallHistoric(string loginCode, Nullable<System.DateTime> fromTime, Nullable<System.DateTime> toTime)
@@ -448,13 +404,40 @@ namespace Platform.JHMobile.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("f____Mobile_List_TaskDoneFile", appT_IDParameter, appO_IDParameter);
         }
     
-        public virtual ObjectResult<string> f____Mobile_WeChat_User(string openId)
+        public virtual ObjectResult<string> f______微信ID获取用户ID(string openId)
         {
             var openIdParameter = openId != null ?
-                new ObjectParameter("openId", openId) :
-                new ObjectParameter("openId", typeof(string));
+                new ObjectParameter("OpenId", openId) :
+                new ObjectParameter("OpenId", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("f____Mobile_WeChat_User", openIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("f______微信ID获取用户ID", openIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> f______计数寻呼历史数(string userID)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f______计数寻呼历史数", userIDParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> f______计数寻呼未阅数(string userID)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f______计数寻呼未阅数", userIDParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> f______计数寻呼已阅数(string userID)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f______计数寻呼已阅数", userIDParameter);
         }
     }
 }

@@ -8,7 +8,7 @@
         Response.Redirect("~/微信/认证");
         return;
     }
-    var id = ((OfficeController)ViewContext.Controller).DB.f____Mobile_WeChat_User(WeChat.OpenId.ToString()).FirstOrDefault();
+    var id = ((OfficeController)ViewContext.Controller).DB.f______微信ID获取用户ID(WeChat.OpenId.ToString()).FirstOrDefault();
     if (string.IsNullOrEmpty(id))
     {
         Response.Redirect("http://weixin.qq.com/");

@@ -5,19 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="C6Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <Function Name="f____Mobile_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count">
-          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+        <Function Name="f______计数寻呼历史数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数寻呼历史数">
+          <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
         </Function>
-        <Function Name="f____Mobile_Count_CallHistoric" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_CallHistoric">
-          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="FromTime" Type="datetime2" Mode="In" />
-          <Parameter Name="ToTime" Type="datetime2" Mode="In" />
+        <Function Name="f______计数寻呼未阅数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数寻呼未阅数">
+          <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
         </Function>
-        <Function Name="f____Mobile_Count_CallRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_CallRead">
-          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+        <Function Name="f______计数寻呼已阅数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数寻呼已阅数">
+          <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
         </Function>
-        <Function Name="f____Mobile_Count_CallToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_CallToRead">
-          <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
+        <Function Name="f______微信ID获取用户ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______微信ID获取用户ID">
+          <Parameter Name="OpenId" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="f____Mobile_Count_Message" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_Count_Message">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
@@ -137,21 +135,12 @@
         <Function Name="f____Mobile_List_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_User">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
-        <Function Name="f____Mobile_WeChat_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_WeChat_User">
-          <Parameter Name="openId" Type="nvarchar(max)" Mode="In" />
-        </Function>
         <EntityContainer Name="C6ModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="C6Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="C6Entities" annotation:LazyLoadingEnabled="true" >
-          <FunctionImport Name="f____Mobile_Count" ReturnType="Collection(C6Model.f____Mobile_Count_Result)">
-          <Parameter Name="LoginCode" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="f____Mobile_Count_CallToRead" ReturnType="Collection(Int32)">
-          <Parameter Name="LoginCode" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="f____Mobile_List_CallToRead" ReturnType="Collection(C6Model.f____Mobile_List_CallToRead_Result)">
           <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
@@ -162,9 +151,6 @@
           <Parameter Name="CallNoSeeId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_List_CallRead" ReturnType="Collection(C6Model.f____Mobile_List_CallRead_Result)">
-          <Parameter Name="LoginCode" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="f____Mobile_Count_CallRead" ReturnType="Collection(Int32)">
           <Parameter Name="LoginCode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_Count_MessageModule" ReturnType="Collection(Int32)">
@@ -201,11 +187,6 @@
           </FunctionImport>
           <FunctionImport Name="f____Mobile_List_MessageType" ReturnType="Collection(C6Model.f____Mobile_List_MessageType_Result)">
           <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="f____Mobile_Count_CallHistoric" ReturnType="Collection(Int32)">
-            <Parameter Name="LoginCode" Mode="In" Type="String" />
-            <Parameter Name="FromTime" Mode="In" Type="DateTime" />
-            <Parameter Name="ToTime" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="f____Mobile_List_CallHistoric" ReturnType="Collection(C6Model.f____Mobile_List_CallHistoric_Result)">
             <Parameter Name="LoginCode" Mode="In" Type="String" />
@@ -278,8 +259,17 @@
             <Parameter Name="AppT_ID" Mode="In" Type="String" />
             <Parameter Name="AppO_ID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="f____Mobile_WeChat_User" ReturnType="Collection(String)">
-            <Parameter Name="openId" Mode="In" Type="String" />
+          <FunctionImport Name="f______微信ID获取用户ID" ReturnType="Collection(String)">
+          <Parameter Name="OpenId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______计数寻呼历史数" ReturnType="Collection(Int32)">
+            <Parameter Name="UserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______计数寻呼未阅数" ReturnType="Collection(Int32)">
+            <Parameter Name="UserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______计数寻呼已阅数" ReturnType="Collection(Int32)">
+            <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
@@ -488,18 +478,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="C6ModelStoreContainer" CdmEntityContainer="C6Entities" >
-          <FunctionImportMapping FunctionImportName="f____Mobile_Count" FunctionName="C6Model.Store.f____Mobile_Count">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="C6Model.f____Mobile_Count_Result">
-                <ScalarProperty Name="CallToRead" ColumnName="CallToRead" />
-                <ScalarProperty Name="CallRead" ColumnName="CallRead" />
-                <ScalarProperty Name="MessageToRead" ColumnName="MessageToRead" />
-                <ScalarProperty Name="TaskToDo" ColumnName="TaskToDo" />
-                <ScalarProperty Name="TaskDone" ColumnName="TaskDone" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="f____Mobile_Count_CallToRead" FunctionName="C6Model.Store.f____Mobile_Count_CallToRead" />
           <FunctionImportMapping FunctionImportName="f____Mobile_List_CallToRead" FunctionName="C6Model.Store.f____Mobile_List_CallToRead">
             <ResultMapping>
               <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_CallToRead_Result">
@@ -531,7 +509,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="f____Mobile_Count_CallRead" FunctionName="C6Model.Store.f____Mobile_Count_CallRead" />
           <FunctionImportMapping FunctionImportName="f____Mobile_Count_MessageModule" FunctionName="C6Model.Store.f____Mobile_Count_MessageModule" />
           <FunctionImportMapping FunctionImportName="f____Mobile_List_MessageModule" FunctionName="C6Model.Store.f____Mobile_List_MessageModule" >
             <ResultMapping>
@@ -596,7 +573,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="f____Mobile_Count_CallHistoric" FunctionName="C6Model.Store.f____Mobile_Count_CallHistoric" />
           <FunctionImportMapping FunctionImportName="f____Mobile_List_CallHistoric" FunctionName="C6Model.Store.f____Mobile_List_CallHistoric">
             <ResultMapping>
               <ComplexTypeMapping TypeName="C6Model.f____Mobile_List_CallHistoric_Result">
@@ -778,7 +754,10 @@
           <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoingDone" FunctionName="C6Model.Store.f____Mobile_List_TaskDoingDone" />
           <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoingBack" FunctionName="C6Model.Store.f____Mobile_List_TaskDoingBack" />
           <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoneFile" FunctionName="C6Model.Store.f____Mobile_List_TaskDoneFile" />
-          <FunctionImportMapping FunctionImportName="f____Mobile_WeChat_User" FunctionName="C6Model.Store.f____Mobile_WeChat_User" />
+          <FunctionImportMapping FunctionImportName="f______微信ID获取用户ID" FunctionName="C6Model.Store.f______微信ID获取用户ID" />
+          <FunctionImportMapping FunctionImportName="f______计数寻呼历史数" FunctionName="C6Model.Store.f______计数寻呼历史数" />
+          <FunctionImportMapping FunctionImportName="f______计数寻呼未阅数" FunctionName="C6Model.Store.f______计数寻呼未阅数" />
+          <FunctionImportMapping FunctionImportName="f______计数寻呼已阅数" FunctionName="C6Model.Store.f______计数寻呼已阅数" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
