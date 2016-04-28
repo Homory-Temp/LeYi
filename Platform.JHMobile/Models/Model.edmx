@@ -137,6 +137,9 @@
         <Function Name="f____Mobile_List_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_List_User">
           <Parameter Name="LoginCode" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f____Mobile_WeChat_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="____Mobile_WeChat_User">
+          <Parameter Name="openId" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="C6ModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -274,6 +277,9 @@
           <FunctionImport Name="f____Mobile_List_TaskDoneFile" ReturnType="Collection(String)">
             <Parameter Name="AppT_ID" Mode="In" Type="String" />
             <Parameter Name="AppO_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f____Mobile_WeChat_User" ReturnType="Collection(String)">
+            <Parameter Name="openId" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f____Mobile_Count_Result">
@@ -772,6 +778,7 @@
           <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoingDone" FunctionName="C6Model.Store.f____Mobile_List_TaskDoingDone" />
           <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoingBack" FunctionName="C6Model.Store.f____Mobile_List_TaskDoingBack" />
           <FunctionImportMapping FunctionImportName="f____Mobile_List_TaskDoneFile" FunctionName="C6Model.Store.f____Mobile_List_TaskDoneFile" />
+          <FunctionImportMapping FunctionImportName="f____Mobile_WeChat_User" FunctionName="C6Model.Store.f____Mobile_WeChat_User" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

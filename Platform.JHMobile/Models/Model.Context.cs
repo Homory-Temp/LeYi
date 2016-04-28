@@ -447,5 +447,14 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("f____Mobile_List_TaskDoneFile", appT_IDParameter, appO_IDParameter);
         }
+    
+        public virtual ObjectResult<string> f____Mobile_WeChat_User(string openId)
+        {
+            var openIdParameter = openId != null ?
+                new ObjectParameter("openId", openId) :
+                new ObjectParameter("openId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("f____Mobile_WeChat_User", openIdParameter);
+        }
     }
 }

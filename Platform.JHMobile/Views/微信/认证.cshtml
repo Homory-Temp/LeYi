@@ -1,0 +1,33 @@
+﻿@using Platform.JHMobile.Models;
+@model string
+@{
+    ViewBag.Title = "微信用户认证";
+}
+@{
+    if (!string.IsNullOrEmpty(Model))
+    {
+        Response.Redirect("~/首页/首页");
+        return;
+    }
+    else
+    {
+        WeChat.OpenId = "oHp6Bs5UInPdFVPomYSzUPUNZ_j0";
+        if (WeChat.OpenId == null)
+        {
+            var code = Request.QueryString["code"];
+            if (string.IsNullOrEmpty(code))
+            {
+                Response.Redirect("http://weixin.qq.com/");
+                return;
+            }
+            WeChat.OpenId = new WeChat().GetOpenAuthId(code);
+        }
+        if (WeChat.OpenId == null)
+        {
+            Response.Redirect("http://weixin.qq.com/");
+            return;
+        }
+        Response.Redirect("~/微信/授权");
+        return;
+    }
+}

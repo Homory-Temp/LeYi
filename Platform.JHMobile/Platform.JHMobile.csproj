@@ -147,10 +147,13 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\CallController.cs" />
     <Compile Include="Controllers\DingController.cs" />
+    <Compile Include="Controllers\微信Controller.cs" />
+    <Compile Include="Controllers\首页Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CallHistoricObject.cs" />
+    <Compile Include="Models\Common\OfficeController.cs" />
     <Compile Include="Models\f____Mobile_List_TaskDoneFlow_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -170,6 +173,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\JinHerDynamic.cs" />
+    <Compile Include="Models\OpenAuth\WeChat.cs" />
     <Compile Include="Models\TaskToDoConfigObject.cs" />
     <Compile Include="Models\TaskDoneConfigObject.cs" />
     <Compile Include="Models\TaskToDoObject.cs" />
@@ -603,6 +607,9 @@
     <Content Include="Views\Task\TaskToDoStepNext.cshtml" />
     <Content Include="Views\Task\TaskToDoStepDone.cshtml" />
     <Content Include="Views\Task\TaskToDoStepBack.cshtml" />
+    <Content Include="Views\微信\认证.cshtml" />
+    <Content Include="Views\微信\授权.cshtml" />
+    <Content Include="Views\首页\首页.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

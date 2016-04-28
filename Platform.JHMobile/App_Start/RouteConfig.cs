@@ -8,12 +8,7 @@ namespace Platform.JHMobile
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Ding", action = "Home", id = UrlParameter.Optional }
-            );
+            routes.MapRoute(name: "Default", url: "{controller}/{action}/{id}", defaults: new { controller = "首页", action = "首页", id = UrlParameter.Optional });
         }
     }
 }

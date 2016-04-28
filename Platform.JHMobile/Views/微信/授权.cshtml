@@ -1,0 +1,19 @@
+﻿@using Platform.JHMobile.Models;
+@{
+    ViewBag.Title = "微信用户授权";
+}
+@{
+    if (WeChat.OpenId == null)
+    {
+        Response.Redirect("~/微信/认证");
+        return;
+    }
+    var id = ((OfficeController)ViewContext.Controller).DB.f____Mobile_WeChat_User(WeChat.OpenId.ToString()).FirstOrDefault();
+    if (string.IsNullOrEmpty(id))
+    {
+        Response.Redirect("http://weixin.qq.com/");
+        return;
+    }
+    OfficeController.Account = id;
+    Response.Redirect("~/首页/首页");
+}
