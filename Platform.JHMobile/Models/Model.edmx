@@ -17,6 +17,19 @@
           <Property Name="MessageTitle" Type="varchar" MaxLength="1000" />
           <Property Name="ModuleTypeID" Type="int" />
         </EntityType>
+        <Function Name="f______待阅信息发文表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______待阅信息发文表">
+          <Parameter Name="AppG_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="f______待阅信息类型表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______待阅信息类型表">
+          <Parameter Name="AppG_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="f______待阅信息收文表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______待阅信息收文表">
+          <Parameter Name="AppG_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="f______待阅信息转已阅" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______待阅信息转已阅">
+          <Parameter Name="GiveOutId" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f______计数待阅信息数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数待阅信息数">
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -31,6 +44,9 @@
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="f______计数寻呼已阅数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数寻呼已阅数">
+          <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f______列表待阅信息表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表待阅信息表">
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="f______列表信息门户表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表信息门户表">
@@ -140,6 +156,22 @@
             <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______计数待阅信息数" ReturnType="Collection(Int32)">
+          <Parameter Name="UserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______待阅信息发文表" ReturnType="Collection(C6Model.f______待阅信息发文表_Result)">
+            <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f______待阅信息类型表" ReturnType="Collection(C6Model.f______待阅信息类型表_Result)">
+            <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f______待阅信息收文表" ReturnType="Collection(C6Model.f______待阅信息收文表_Result)">
+            <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f______待阅信息转已阅">
+            <Parameter Name="GiveOutId" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______列表待阅信息表" ReturnType="Collection(C6Model.f______列表待阅信息表_Result)">
             <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
@@ -197,6 +229,47 @@
           <Property Type="String" Name="FileType" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="MessageType" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="f______待阅信息发文表_Result">
+          <Property Type="Int32" Name="AppG_ID" Nullable="false" />
+          <Property Type="String" Name="SendTitle" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SendKey" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SendZsdw" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="AppG_Begintime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="SubDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TypeName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="f______待阅信息类型表_Result">
+          <Property Type="Int32" Name="AppG_ID" Nullable="false" />
+          <Property Type="String" Name="AppT_ID" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="AppO_ID" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="f______待阅信息收文表_Result">
+          <Property Type="Int32" Name="AppG_ID" Nullable="false" />
+          <Property Type="String" Name="AcceptTitle" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AcceptKey" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AcceptFrom" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="AppG_Begintime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="AcceptDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TypeName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="f______列表待阅信息表_Result">
+          <Property Type="Int32" Name="AppG_ID" Nullable="false" />
+          <Property Type="String" Name="AppT_ID" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="TEM_Name" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="Instance_ID" Nullable="true" MaxLength="32" />
+          <Property Type="DateTime" Name="AppG_Begintime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AppG_Code" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="AppO_Title" Nullable="true" MaxLength="500" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -298,6 +371,64 @@
           <FunctionImportMapping FunctionImportName="f______信息门户已阅表" FunctionName="C6Model.Store.f______信息门户已阅表" />
           <FunctionImportMapping FunctionImportName="f______信息门户转已阅" FunctionName="C6Model.Store.f______信息门户转已阅" />
           <FunctionImportMapping FunctionImportName="f______计数待阅信息数" FunctionName="C6Model.Store.f______计数待阅信息数" />
+          <FunctionImportMapping FunctionImportName="f______待阅信息发文表" FunctionName="C6Model.Store.f______待阅信息发文表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______待阅信息发文表_Result">
+                <ScalarProperty Name="AppG_ID" ColumnName="AppG_ID" />
+                <ScalarProperty Name="SendTitle" ColumnName="SendTitle" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="SendKey" ColumnName="SendKey" />
+                <ScalarProperty Name="SendZsdw" ColumnName="SendZsdw" />
+                <ScalarProperty Name="AppG_Begintime" ColumnName="AppG_Begintime" />
+                <ScalarProperty Name="SubDate" ColumnName="SubDate" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f______待阅信息类型表" FunctionName="C6Model.Store.f______待阅信息类型表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______待阅信息类型表_Result">
+                <ScalarProperty Name="AppG_ID" ColumnName="AppG_ID" />
+                <ScalarProperty Name="AppT_ID" ColumnName="AppT_ID" />
+                <ScalarProperty Name="AppO_ID" ColumnName="AppO_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f______待阅信息收文表" FunctionName="C6Model.Store.f______待阅信息收文表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______待阅信息收文表_Result">
+                <ScalarProperty Name="AppG_ID" ColumnName="AppG_ID" />
+                <ScalarProperty Name="AcceptTitle" ColumnName="AcceptTitle" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AcceptKey" ColumnName="AcceptKey" />
+                <ScalarProperty Name="AcceptFrom" ColumnName="AcceptFrom" />
+                <ScalarProperty Name="AppG_Begintime" ColumnName="AppG_Begintime" />
+                <ScalarProperty Name="AcceptDate" ColumnName="AcceptDate" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f______待阅信息转已阅" FunctionName="C6Model.Store.f______待阅信息转已阅" />
+          <FunctionImportMapping FunctionImportName="f______列表待阅信息表" FunctionName="C6Model.Store.f______列表待阅信息表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______列表待阅信息表_Result">
+                <ScalarProperty Name="AppG_ID" ColumnName="AppG_ID" />
+                <ScalarProperty Name="AppT_ID" ColumnName="AppT_ID" />
+                <ScalarProperty Name="TEM_Name" ColumnName="TEM_Name" />
+                <ScalarProperty Name="Instance_ID" ColumnName="Instance_ID" />
+                <ScalarProperty Name="AppG_Begintime" ColumnName="AppG_Begintime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AppG_Code" ColumnName="AppG_Code" />
+                <ScalarProperty Name="AppO_Title" ColumnName="AppO_Title" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

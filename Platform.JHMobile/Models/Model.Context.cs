@@ -210,5 +210,54 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f______计数待阅信息数", userIDParameter);
         }
+    
+        public virtual ObjectResult<f______待阅信息发文表_Result> f______待阅信息发文表(Nullable<int> appG_ID)
+        {
+            var appG_IDParameter = appG_ID.HasValue ?
+                new ObjectParameter("AppG_ID", appG_ID) :
+                new ObjectParameter("AppG_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______待阅信息发文表_Result>("f______待阅信息发文表", appG_IDParameter);
+        }
+    
+        public virtual ObjectResult<f______待阅信息类型表_Result> f______待阅信息类型表(Nullable<int> appG_ID)
+        {
+            var appG_IDParameter = appG_ID.HasValue ?
+                new ObjectParameter("AppG_ID", appG_ID) :
+                new ObjectParameter("AppG_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______待阅信息类型表_Result>("f______待阅信息类型表", appG_IDParameter);
+        }
+    
+        public virtual ObjectResult<f______待阅信息收文表_Result> f______待阅信息收文表(Nullable<int> appG_ID)
+        {
+            var appG_IDParameter = appG_ID.HasValue ?
+                new ObjectParameter("AppG_ID", appG_ID) :
+                new ObjectParameter("AppG_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______待阅信息收文表_Result>("f______待阅信息收文表", appG_IDParameter);
+        }
+    
+        public virtual int f______待阅信息转已阅(Nullable<int> giveOutId, string userID)
+        {
+            var giveOutIdParameter = giveOutId.HasValue ?
+                new ObjectParameter("GiveOutId", giveOutId) :
+                new ObjectParameter("GiveOutId", typeof(int));
+    
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f______待阅信息转已阅", giveOutIdParameter, userIDParameter);
+        }
+    
+        public virtual ObjectResult<f______列表待阅信息表_Result> f______列表待阅信息表(string userID)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表待阅信息表_Result>("f______列表待阅信息表", userIDParameter);
+        }
     }
 }
