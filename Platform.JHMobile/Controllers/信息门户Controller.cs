@@ -41,7 +41,7 @@ namespace Platform.JHMobile.Controllers
             var type = sp[0];
             var id = int.Parse(sp[1]);
             ViewBag.Current = id + 1;
-            var list = DB.f______列表信息门户表(Account, type).Skip(id * per).Take(per).ToList();
+            var list = DB.f______列表信息门户表(Account, type).OrderByDescending(o => o.SendTime).Skip(id * per).Take(per).ToList();
             return View(list);
         }
 

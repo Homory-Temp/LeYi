@@ -54,7 +54,7 @@ namespace Platform.JHMobile.Controllers
                 return 认证();
             var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
             ViewBag.Current = id + 1;
-            var list = DB.f______列表寻呼未阅表(Account).Skip(id * per).Take(per).ToList();
+            var list = DB.f______列表寻呼未阅表(Account).OrderByDescending(o => o.CallTime).Skip(id * per).Take(per).ToList();
             return View(list);
         }
 
@@ -64,7 +64,7 @@ namespace Platform.JHMobile.Controllers
                 return 认证();
             var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
             ViewBag.Current = id + 1;
-            var list = DB.f______列表寻呼已阅表(Account).Skip(id * per).Take(per).ToList();
+            var list = DB.f______列表寻呼已阅表(Account).OrderByDescending(o => o.CallTime).Skip(id * per).Take(per).ToList();
             return View(list);
         }
 
@@ -74,7 +74,7 @@ namespace Platform.JHMobile.Controllers
                 return 认证();
             var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
             ViewBag.Current = id + 1;
-            var list = DB.f______列表寻呼历史表(Account).Skip(id * per).Take(per).ToList();
+            var list = DB.f______列表寻呼历史表(Account).OrderByDescending(o => o.CallTime).Skip(id * per).Take(per).ToList();
             return View(list);
         }
 
