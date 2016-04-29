@@ -11,7 +11,7 @@ namespace Platform.JHMobile.Models
 {
     using System;
     
-    public partial class f____Mobile_List_CallToRead_Result
+    public partial class f______列表寻呼未阅表_Result
     {
         public int CallNoSeeID { get; set; }
         public int CallID { get; set; }
