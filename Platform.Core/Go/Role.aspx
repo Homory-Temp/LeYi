@@ -259,12 +259,12 @@
                                 <telerik:RadButtonToggleState Text="× 资源管理" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
-						<telerik:RadButton ID="Honor" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
-                            <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 荣誉分值" Value="True" CssClass="btn btn-info" />
-                                <telerik:RadButtonToggleState Text="× 荣誉分值" Value="False" CssClass="btn btn-primary" />
-                            </ToggleStates>
-                        </telerik:RadButton>
+                            <telerik:RadButton ID="Honor" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
+                                <ToggleStates>
+                                    <telerik:RadButtonToggleState Text="√ 荣誉分值" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 荣誉分值" Value="False" CssClass="btn btn-primary" />
+                                </ToggleStates>
+                            </telerik:RadButton>
                             <telerik:RadButton ID="Assess" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                                 <ToggleStates>
                                     <telerik:RadButtonToggleState Text="√ 课堂评估" Value="True" CssClass="btn btn-info" />
@@ -322,6 +322,15 @@
                                     <telerik:RadButtonToggleState Text="× 登录审计" Value="False" CssClass="btn btn-primary" />
                                 </ToggleStates>
                             </telerik:RadButton>
+                        </div>
+                        <div>
+                            会议管理：
+						<telerik:RadButton ID="Meeting" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
+                            <ToggleStates>
+                                <telerik:RadButtonToggleState Text="√ 创建会议" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 创建会议" Value="False" CssClass="btn btn-primary" />
+                            </ToggleStates>
+                        </telerik:RadButton>
                         </div>
                         <input id="gid" runat="server" type="hidden" />
                     </asp:Panel>

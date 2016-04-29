@@ -54,19 +54,15 @@ namespace Platform.JHMobile.Controllers
             var list = query == null ? new List<f______列表寻呼附件表_Result>() : query.ToList();
             foreach (var path in list)
             {
-                try
-                {
-                    var source = System.Web.HttpContext.Current.Server.MapPath("Resource") + path.FilePath.Substring(3).Replace("/", "\\");
-                    var destination = source.Replace("__", "h__");
-                    DecryptFile(source, destination);
-                }
-                catch
-                { }
+                var source = Directory + path.FilePath.Substring(3).Replace("/", "\\");
+                ViewBag.X = source;
+                var destination = source.Replace("__", "h__");
+                DecryptFile(source, destination);
             }
             var result = new 已收寻呼对象未阅();
             result.列表寻呼未阅表 = obj;
             result.已收寻呼附件表 = list;
-            DB.f______列表寻呼转已阅(int_id);
+            //DB.f______列表寻呼转已阅(int_id);
             return View(result);
         }
     }
