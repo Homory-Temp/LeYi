@@ -72,5 +72,14 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("f______微信ID获取用户ID", openIdParameter);
         }
+    
+        public virtual ObjectResult<f______列表寻呼附件表_Result> f______列表寻呼附件表(string callID)
+        {
+            var callIDParameter = callID != null ?
+                new ObjectParameter("CallID", callID) :
+                new ObjectParameter("CallID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表寻呼附件表_Result>("f______列表寻呼附件表", callIDParameter);
+        }
     }
 }

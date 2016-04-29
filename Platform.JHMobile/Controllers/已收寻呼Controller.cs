@@ -36,8 +36,9 @@ namespace Platform.JHMobile.Controllers
                 return 认证();
             var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
             var count = DB.f______计数寻呼未阅数(Account).Single();
+            ViewBag.Current = id + 1;
             var list = DB.f______列表寻呼未阅表(Account).Skip(id * per).Take(per).ToList();
-            return View(new KeyValuePair<int, List<f______列表寻呼未阅表_Result>>(id + 1, list));
+            return View(list);
         }
     }
 }

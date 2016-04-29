@@ -14,6 +14,9 @@
         <Function Name="f______计数寻呼已阅数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数寻呼已阅数">
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f______列表寻呼附件表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表寻呼附件表">
+          <Parameter Name="CallID" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f______列表寻呼未阅表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表寻呼未阅表">
           <Parameter Name="UserId" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -27,19 +30,22 @@
       <Schema Namespace="C6Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="C6Entities" annotation:LazyLoadingEnabled="true" >
           <FunctionImport Name="f______计数寻呼历史数" ReturnType="Collection(Int32)">
-            <Parameter Name="UserID" Mode="In" Type="String" />
+          <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______计数寻呼未阅数" ReturnType="Collection(Int32)">
-            <Parameter Name="UserID" Mode="In" Type="String" />
+          <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______计数寻呼已阅数" ReturnType="Collection(Int32)">
-            <Parameter Name="UserID" Mode="In" Type="String" />
+          <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______列表寻呼未阅表" ReturnType="Collection(C6Model.f______列表寻呼未阅表_Result)">
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______微信ID获取用户ID" ReturnType="Collection(String)">
-            <Parameter Name="OpenId" Mode="In" Type="String" />
+          <Parameter Name="OpenId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______列表寻呼附件表" ReturnType="Collection(C6Model.f______列表寻呼附件表_Result)">
+            <Parameter Name="CallID" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f______列表寻呼未阅表_Result">
@@ -48,6 +54,11 @@
           <Property Type="DateTime" Name="CallTime" Nullable="false" Precision="23" />
           <Property Type="String" Name="CallContent" Nullable="true" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="f______列表寻呼附件表_Result">
+          <Property Type="String" Name="SlaveID" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SlaveName" Nullable="false" MaxLength="1000" />
+          <Property Type="String" Name="FilePath" Nullable="false" MaxLength="500" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -70,6 +81,15 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f______微信ID获取用户ID" FunctionName="C6Model.Store.f______微信ID获取用户ID" />
+          <FunctionImportMapping FunctionImportName="f______列表寻呼附件表" FunctionName="C6Model.Store.f______列表寻呼附件表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______列表寻呼附件表_Result">
+                <ScalarProperty Name="SlaveID" ColumnName="SlaveID" />
+                <ScalarProperty Name="SlaveName" ColumnName="SlaveName" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
