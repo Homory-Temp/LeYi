@@ -208,10 +208,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.ResourceCount", "Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.ResourceConvert", "Service.ResourceConvert\Service.ResourceConvert.csproj", "{5B566ADC-4F6E-45A8-9255-2ED344F1D024}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Picture.Import", "Windows.MMS.Picture.Import\Windows.MMS.Picture.Import.csproj", "{584C559C-9AD0-4DAD-909D-FDBB106C2F25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows.MMS.Tool.Import", "Windows.MMS.Tool.Import\Windows.MMS.Tool.Import.csproj", "{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.QRCode", "Service.QRCode\Service.QRCode.csproj", "{B057919F-3054-4A05-BB8F-0AE03A26D53A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.JHMobile", "Platform.JHMobile\Platform.JHMobile.csproj", "{4385F3A4-EC02-433C-8825-C7DAF1FBABC8}"
@@ -292,14 +288,6 @@ Global
 		{5B566ADC-4F6E-45A8-9255-2ED344F1D024}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B566ADC-4F6E-45A8-9255-2ED344F1D024}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B566ADC-4F6E-45A8-9255-2ED344F1D024}.Release|Any CPU.Build.0 = Release|Any CPU
-		{584C559C-9AD0-4DAD-909D-FDBB106C2F25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{584C559C-9AD0-4DAD-909D-FDBB106C2F25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{584C559C-9AD0-4DAD-909D-FDBB106C2F25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{584C559C-9AD0-4DAD-909D-FDBB106C2F25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{992AFB41-7C0C-47A1-85E6-5358FE59BCE2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B057919F-3054-4A05-BB8F-0AE03A26D53A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B057919F-3054-4A05-BB8F-0AE03A26D53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B057919F-3054-4A05-BB8F-0AE03A26D53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
