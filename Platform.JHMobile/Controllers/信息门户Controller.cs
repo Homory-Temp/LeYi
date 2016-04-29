@@ -52,13 +52,14 @@ namespace Platform.JHMobile.Controllers
             var id = RouteData.Values["id"]?.ToString();
             var int_id = int.Parse(id);
             var message = DB.f______信息门户内容表(int_id).FirstOrDefault();
+            ViewBag.ModuleTypeID = message.ModuleTypeID;
+            ViewBag.ModuleTypeName = DB.f______信息门户模块表().Single(o => o.ModuleTypeID == message.ModuleTypeID.Value).ModuleTypeName;
             DB.f______信息门户转已阅(int_id, message.ModuleTypeID.ToString(), Account);
             if (!string.IsNullOrEmpty(message.MessageFileName))
             {
                 var name = message.MessageFileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
                 var dir = new DirectoryInfo(Directory + "\\Resource\\MessageFile");
                 ViewBag.Path = "";
-                ViewBag.ModuleTypeID = message.ModuleTypeID;
                 ViewBag.PeopleRead = DB.f______信息门户已阅表(message.MessageID, message.ModuleTypeID.ToString()).OrderBy(o => o).ToList().Aggregate("", (o, s) => o += s + "、", o => (o.Length == 0 ? "无" : o.Substring(0, o.Length - 1)));
                 foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
                 {
