@@ -60,12 +60,15 @@ namespace Platform.JHMobile.Controllers
                 var name = message.MessageFileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
                 var dir = new DirectoryInfo(Directory + "\\Resource\\MessageFile");
                 ViewBag.Path = "";
-                ViewBag.PeopleRead = DB.f______信息门户已阅表(message.MessageID, message.ModuleTypeID.ToString()).OrderBy(o => o).ToList().Aggregate("", (o, s) => o += s + "、", o => (o.Length == 0 ? "无" : o.Substring(0, o.Length - 1)));
+                var people = DB.f______信息门户已阅表(message.MessageID, message.ModuleTypeID.ToString()).OrderBy(o => o).ToList();
+                ViewBag.PeopleCount = people.Count;
+                ViewBag.PeopleRead = people.Aggregate("", (o, s) => o += s + "、", o => (o.Length == 0 ? "无" : o.Substring(0, o.Length - 1)));
                 foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
                 {
                     if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
                     {
                         string path = dir + "\\" + cDir.Name + "\\" + name;
+                        ViewBag.Link = path;
                         var converted = ConvertDoc(path);
                         if (!string.IsNullOrEmpty(converted))
                         {
