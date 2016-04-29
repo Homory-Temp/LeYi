@@ -39,15 +39,15 @@ namespace Platform.JHMobile.Controllers
             var type = DB.f______待阅信息类型表(int_id).FirstOrDefault();
             if (type.AppT_ID.StartsWith("IOA_Message", StringComparison.OrdinalIgnoreCase))
             {
-                return RedirectToAction("信息门户列表内容通知", "待阅信息", new { id = id });
+                return RedirectToAction("待阅信息列表内容通知", "待阅信息", new { id = id });
             }
             else if (type.AppT_ID.StartsWith("IOA_Send", StringComparison.OrdinalIgnoreCase))
             {
-                return RedirectToAction("信息门户列表内容发文", "待阅信息", new { id = id });
+                return RedirectToAction("待阅信息列表内容发文", "待阅信息", new { id = id });
             }
             else if (type.AppT_ID.StartsWith("IOA_Accept", StringComparison.OrdinalIgnoreCase))
             {
-                return RedirectToAction("信息门户列表内容收文", "待阅信息", new { id = id });
+                return RedirectToAction("待阅信息列表内容收文", "待阅信息", new { id = id });
             }
             return new EmptyResult();
         }
