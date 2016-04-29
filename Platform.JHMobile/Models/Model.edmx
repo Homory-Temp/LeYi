@@ -52,7 +52,13 @@
         <Function Name="f______微信ID获取用户ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______微信ID获取用户ID">
           <Parameter Name="OpenId" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f______信息门户附件表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______信息门户附件表">
+          <Parameter Name="MessageID" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f______信息门户模块表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______信息门户模块表" />
+        <Function Name="f______信息门户内容表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______信息门户内容表">
+          <Parameter Name="MessageId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="C6ModelStoreContainer">
           <EntitySet Name="信息门户对象简略" EntityType="Self.信息门户对象简略" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -106,6 +112,12 @@
             <Parameter Name="ModuleType" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="信息门户对象简略" EntityType="C6Model.信息门户对象简略" />
+          <FunctionImport Name="f______信息门户附件表" ReturnType="Collection(C6Model.f______信息门户附件表_Result)">
+            <Parameter Name="MessageID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______信息门户内容表" ReturnType="Collection(C6Model.f______信息门户内容表_Result)">
+            <Parameter Name="MessageId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f______列表寻呼未阅表_Result">
           <Property Type="Int32" Name="CallNoSeeID" Nullable="false" />
@@ -145,6 +157,23 @@
           <Property Name="MessageTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="ModuleTypeID" Type="Int32" />
         </EntityType>
+        <ComplexType Name="f______信息门户附件表_Result">
+          <Property Type="String" Name="FileID" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="FilePath" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="f______信息门户内容表_Result">
+          <Property Type="Int32" Name="MessageID" Nullable="false" />
+          <Property Type="Int32" Name="ModuleTypeID" Nullable="true" />
+          <Property Type="String" Name="MessageTitle" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="SendTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MessageHTML" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="MessageFileName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="FileType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MessageType" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -217,6 +246,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="f______信息门户附件表" FunctionName="C6Model.Store.f______信息门户附件表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______信息门户附件表_Result">
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f______信息门户内容表" FunctionName="C6Model.Store.f______信息门户内容表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______信息门户内容表_Result">
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="ModuleTypeID" ColumnName="ModuleTypeID" />
+                <ScalarProperty Name="MessageTitle" ColumnName="MessageTitle" />
+                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="MessageHTML" ColumnName="MessageHTML" />
+                <ScalarProperty Name="MessageFileName" ColumnName="MessageFileName" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

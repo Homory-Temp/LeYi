@@ -155,7 +155,13 @@
     <Compile Include="Models\Entity\已收寻呼对象历史.cs" />
     <Compile Include="Models\Entity\已收寻呼对象已阅.cs" />
     <Compile Include="Models\Entity\已收寻呼对象未阅.cs" />
+    <Compile Include="Models\f______信息门户内容表_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\f______信息门户模块表_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\f______信息门户附件表_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\f______列表寻呼历史表_Result.cs">

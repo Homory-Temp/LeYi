@@ -153,5 +153,23 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<信息门户对象简略>("f______列表信息门户表", mergeOption, userIDParameter, moduleTypeParameter);
         }
+    
+        public virtual ObjectResult<f______信息门户附件表_Result> f______信息门户附件表(string messageID)
+        {
+            var messageIDParameter = messageID != null ?
+                new ObjectParameter("MessageID", messageID) :
+                new ObjectParameter("MessageID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______信息门户附件表_Result>("f______信息门户附件表", messageIDParameter);
+        }
+    
+        public virtual ObjectResult<f______信息门户内容表_Result> f______信息门户内容表(Nullable<int> messageId)
+        {
+            var messageIdParameter = messageId.HasValue ?
+                new ObjectParameter("MessageId", messageId) :
+                new ObjectParameter("MessageId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______信息门户内容表_Result>("f______信息门户内容表", messageIdParameter);
+        }
     }
 }
