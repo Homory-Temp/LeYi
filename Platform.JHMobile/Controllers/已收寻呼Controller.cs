@@ -29,5 +29,15 @@ namespace Platform.JHMobile.Controllers
             ViewBag.Max = count % per == 0 ? count / per - 1 : (count + (per - count % per)) / per - 1;
             return View();
         }
+
+        public ActionResult 寻呼列表未阅单页()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return 认证();
+            var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
+            var count = DB.f______计数寻呼未阅数(Account).Single();
+            var list = DB.f______列表寻呼未阅表(Account).Skip(id * per).Take(per).ToList();
+            return View(new KeyValuePair<int, List<f______列表寻呼未阅表_Result>>(id + 1, list));
+        }
     }
 }
