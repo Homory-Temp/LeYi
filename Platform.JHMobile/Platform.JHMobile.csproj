@@ -150,6 +150,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Common\DynamicController.cs" />
     <Compile Include="Models\Common\OfficeController.cs" />
     <Compile Include="Models\Entity\信息门户对象内容.cs" />
     <Compile Include="Models\Entity\信息门户对象模块.cs" />
