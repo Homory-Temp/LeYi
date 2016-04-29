@@ -1,7 +1,6 @@
 ﻿<script>
     var _index = 0;
     var _max = @ViewBag.Max;
-    var _module= @ViewBag.Module;
 
     $(document).ready(function () {
         if(_max >=0)
@@ -13,6 +12,7 @@
     function loadList() {
         $("#handler").hide();
         var href = '@Url.Action("待阅信息列表单页", "待阅信息")' + "/" + _index;
+        alert(href);
         $.ajax({
             url: href,
             type: "GET",
