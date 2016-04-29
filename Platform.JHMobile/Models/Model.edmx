@@ -17,6 +17,9 @@
           <Property Name="MessageTitle" Type="varchar" MaxLength="1000" />
           <Property Name="ModuleTypeID" Type="int" />
         </EntityType>
+        <Function Name="f______计数待阅信息数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数待阅信息数">
+          <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f______计数信息门户数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数信息门户数">
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
@@ -134,6 +137,9 @@
           <FunctionImport Name="f______信息门户转已阅">
             <Parameter Name="MessageId" Mode="In" Type="Int32" />
             <Parameter Name="ModuleType" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______计数待阅信息数" ReturnType="Collection(Int32)">
             <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
@@ -291,6 +297,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f______信息门户已阅表" FunctionName="C6Model.Store.f______信息门户已阅表" />
           <FunctionImportMapping FunctionImportName="f______信息门户转已阅" FunctionName="C6Model.Store.f______信息门户转已阅" />
+          <FunctionImportMapping FunctionImportName="f______计数待阅信息数" FunctionName="C6Model.Store.f______计数待阅信息数" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
