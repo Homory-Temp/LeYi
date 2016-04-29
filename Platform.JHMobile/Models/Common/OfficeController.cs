@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Web.Mvc;
 
@@ -8,6 +9,30 @@ namespace Platform.JHMobile.Models
     public class OfficeController : Controller
     {
         public C6Entities DB = new C6Entities();
+
+        private Rijndael aes;
+
+        public void CreateKey(byte[] key, byte[] iv)
+        {
+            aes = Rijndael.Create();
+            aes.Key = key;
+            aes.IV = iv;
+        }
+
+        public byte[] Decrypt(byte[] cipherText)
+        {
+            MemoryStream memoryStream = new MemoryStream(cipherText, 0, cipherText.Length);
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, aes.CreateDecryptor(), CryptoStreamMode.Read);
+            int length = (int)cipherText.Length;
+            byte[] numArray = new byte[length];
+            int num = cryptoStream.Read(numArray, 0, length);
+            byte[] result = new byte[num];
+            for (int i = 0; i < num; i++)
+            {
+                result[i] = numArray[i];
+            }
+            return result;
+        }
 
         public static string Account
         {
@@ -77,8 +102,7 @@ namespace Platform.JHMobile.Models
         {
             try
             {
-                var aes = new JinHerAES();
-                aes.CreateKey(Encoding.Default.GetBytes("12345678123456781234567812345678"), Encoding.Default.GetBytes("1234567812345678"));
+                CreateKey(Encoding.Default.GetBytes("12345678123456781234567812345678"), Encoding.Default.GetBytes("1234567812345678"));
                 if (!System.IO.File.Exists(path))
                     return false;
                 var stream = System.IO.File.OpenRead(path);
@@ -86,7 +110,7 @@ namespace Platform.JHMobile.Models
                 byte[] bytes = new byte[Convert.ToInt32(length.ToString())];
                 stream.Read(bytes, 0, (int)bytes.Length);
                 stream.Close();
-                bytes = aes.Decrypt(bytes);
+                bytes = Decrypt(bytes);
                 var stream_x = new FileStream(output, FileMode.Create, FileAccess.Write);
                 stream_x.Write(bytes, 0, (int)bytes.Length);
                 stream_x.Close();
