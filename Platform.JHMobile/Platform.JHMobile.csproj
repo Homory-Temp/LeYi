@@ -186,6 +186,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\信息门户对象简略.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -538,6 +541,8 @@
     <Content Include="Views\已收寻呼\寻呼列表历史单页.cshtml" />
     <Content Include="Views\已收寻呼\寻呼列表历史内容.cshtml" />
     <Content Include="Views\信息门户\首页.cshtml" />
+    <Content Include="Views\信息门户\信息门户列表.cshtml" />
+    <Content Include="Views\信息门户\信息门户列表单页.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

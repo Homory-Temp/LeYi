@@ -53,7 +53,6 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(Account))
                 return 认证();
             var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
-            var count = DB.f______计数寻呼未阅数(Account).Single();
             ViewBag.Current = id + 1;
             var list = DB.f______列表寻呼未阅表(Account).Skip(id * per).Take(per).ToList();
             return View(list);
@@ -64,7 +63,6 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(Account))
                 return 认证();
             var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
-            var count = DB.f______计数寻呼已阅数(Account).Single();
             ViewBag.Current = id + 1;
             var list = DB.f______列表寻呼已阅表(Account).Skip(id * per).Take(per).ToList();
             return View(list);
@@ -75,7 +73,6 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(Account))
                 return 认证();
             var id = RouteData.Values["id"] == null ? 0 : int.Parse(RouteData.Values["id"].ToString());
-            var count = DB.f______计数寻呼历史数(Account).Single();
             ViewBag.Current = id + 1;
             var list = DB.f______列表寻呼历史表(Account).Skip(id * per).Take(per).ToList();
             return View(list);
@@ -86,8 +83,6 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(Account))
                 return 认证();
             var id = RouteData.Values["id"]?.ToString();
-            if (string.IsNullOrEmpty(id))
-                return RedirectToAction("寻呼列表未阅", "已收寻呼");
             var int_id = int.Parse(id);
             var obj = DB.f______列表寻呼未阅表(Account).FirstOrDefault(o => o.CallNoSeeID == int_id);
             var query = DB.f______列表寻呼附件表(obj.CallID.ToString()).OrderBy(o => o.SlaveID);
@@ -111,8 +106,6 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(Account))
                 return 认证();
             var id = RouteData.Values["id"]?.ToString();
-            if (string.IsNullOrEmpty(id))
-                return RedirectToAction("寻呼列表已阅", "已收寻呼");
             var int_id = int.Parse(id);
             var obj = DB.f______列表寻呼已阅表(Account).FirstOrDefault(o => o.CallID == int_id);
             var query = DB.f______列表寻呼附件表(obj.CallID.ToString()).OrderBy(o => o.SlaveID);
@@ -135,8 +128,6 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(Account))
                 return 认证();
             var id = RouteData.Values["id"]?.ToString();
-            if (string.IsNullOrEmpty(id))
-                return RedirectToAction("寻呼列表历史", "已收寻呼");
             var int_id = int.Parse(id);
             var obj = DB.f______列表寻呼历史表(Account).FirstOrDefault(o => o.CallID == int_id);
             var query = DB.f______列表寻呼附件表(obj.CallID.ToString()).OrderBy(o => o.SlaveID);

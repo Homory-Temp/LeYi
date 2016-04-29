@@ -27,6 +27,7 @@ namespace Platform.JHMobile.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<信息门户对象简略> 信息门户对象简略 { get; set; }
     
         public virtual ObjectResult<Nullable<int>> f______计数寻呼历史数(string userID)
         {
@@ -127,7 +128,7 @@ namespace Platform.JHMobile.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______信息门户模块表_Result>("f______信息门户模块表");
         }
     
-        public virtual int f______列表信息门户表(string userID, string moduleType)
+        public virtual ObjectResult<信息门户对象简略> f______列表信息门户表(string userID, string moduleType)
         {
             var userIDParameter = userID != null ?
                 new ObjectParameter("UserID", userID) :
@@ -137,7 +138,20 @@ namespace Platform.JHMobile.Models
                 new ObjectParameter("ModuleType", moduleType) :
                 new ObjectParameter("ModuleType", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f______列表信息门户表", userIDParameter, moduleTypeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<信息门户对象简略>("f______列表信息门户表", userIDParameter, moduleTypeParameter);
+        }
+    
+        public virtual ObjectResult<信息门户对象简略> f______列表信息门户表(string userID, string moduleType, MergeOption mergeOption)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            var moduleTypeParameter = moduleType != null ?
+                new ObjectParameter("ModuleType", moduleType) :
+                new ObjectParameter("ModuleType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<信息门户对象简略>("f______列表信息门户表", mergeOption, userIDParameter, moduleTypeParameter);
         }
     }
 }

@@ -4,7 +4,19 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="C6Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="C6Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“C6.dbo.信息门户对象简略”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="信息门户对象简略">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="SendTime" Type="datetime" />
+          <Property Name="MessageTitle" Type="varchar" MaxLength="1000" />
+          <Property Name="ModuleTypeID" Type="int" />
+        </EntityType>
         <Function Name="f______计数信息门户数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数信息门户数">
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
@@ -41,7 +53,17 @@
           <Parameter Name="OpenId" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="f______信息门户模块表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______信息门户模块表" />
-        <EntityContainer Name="C6ModelStoreContainer" />
+        <EntityContainer Name="C6ModelStoreContainer">
+          <EntitySet Name="信息门户对象简略" EntityType="Self.信息门户对象简略" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [信息门户对象简略].[MessageID] AS [MessageID], 
+    [信息门户对象简略].[UserName] AS [UserName], 
+    [信息门户对象简略].[SendTime] AS [SendTime], 
+    [信息门户对象简略].[MessageTitle] AS [MessageTitle], 
+    [信息门户对象简略].[ModuleTypeID] AS [ModuleTypeID]
+    FROM [dbo].[信息门户对象简略] AS [信息门户对象简略]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -79,10 +101,11 @@
             <Parameter Name="ModuleType" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______信息门户模块表" ReturnType="Collection(C6Model.f______信息门户模块表_Result)" />
-          <FunctionImport Name="f______列表信息门户表">
+          <FunctionImport Name="f______列表信息门户表" EntitySet="信息门户对象简略" ReturnType="Collection(C6Model.信息门户对象简略)">
             <Parameter Name="UserID" Mode="In" Type="String" />
             <Parameter Name="ModuleType" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="信息门户对象简略" EntityType="C6Model.信息门户对象简略" />
         </EntityContainer>
         <ComplexType Name="f______列表寻呼未阅表_Result">
           <Property Type="Int32" Name="CallNoSeeID" Nullable="false" />
@@ -112,6 +135,16 @@
           <Property Type="Int32" Name="ModuleTypeID" Nullable="false" />
           <Property Type="String" Name="ModuleTypeName" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <EntityType Name="信息门户对象简略">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SendTime" Type="DateTime" Precision="3" />
+          <Property Name="MessageTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ModuleTypeID" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -173,6 +206,17 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f______列表信息门户表" FunctionName="C6Model.Store.f______列表信息门户表" />
+          <EntitySetMapping Name="信息门户对象简略">
+            <EntityTypeMapping TypeName="C6Model.信息门户对象简略">
+              <MappingFragment StoreEntitySet="信息门户对象简略">
+                <ScalarProperty Name="ModuleTypeID" ColumnName="ModuleTypeID" />
+                <ScalarProperty Name="MessageTitle" ColumnName="MessageTitle" />
+                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

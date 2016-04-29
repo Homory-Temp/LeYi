@@ -5,6 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="aadbc532e27242e59ea8c7b4bf712193" Name="DiagramMobile" ZoomLevel="66" >
+        <EntityTypeShape EntityType="C6Model.信息门户对象简略" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
