@@ -40,5 +40,34 @@ namespace Platform.JHMobile.Controllers
             var list = DB.f______列表寻呼未阅表(Account).Skip(id * per).Take(per).ToList();
             return View(list);
         }
+
+        public ActionResult 寻呼列表未阅内容()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return 认证();
+            var id = RouteData.Values["id"]?.ToString();
+            if (string.IsNullOrEmpty(id))
+                return RedirectToAction("寻呼列表未阅", "已收寻呼");
+            var int_id = int.Parse(id);
+            var obj = DB.f______列表寻呼未阅表(Account).FirstOrDefault(o => o.CallNoSeeID == int_id);
+            var query = DB.f______列表寻呼附件表(obj.CallID.ToString()).OrderBy(o => o.SlaveID);
+            var list = query == null ? new List<f______列表寻呼附件表_Result>() : query.ToList();
+            foreach (var path in list)
+            {
+                try
+                {
+                    var source = System.Web.HttpContext.Current.Server.MapPath("Resource") + path.FilePath.Substring(3).Replace("/", "\\");
+                    var destination = source.Replace("__", "h__");
+                    DecryptFile(source, destination);
+                }
+                catch
+                { }
+            }
+            var result = new 已收寻呼对象未阅();
+            result.列表寻呼未阅表 = obj;
+            result.已收寻呼附件表 = list;
+            DB.f______列表寻呼转已阅(int_id);
+            return View(result);
+        }
     }
 }

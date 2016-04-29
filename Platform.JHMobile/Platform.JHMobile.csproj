@@ -150,6 +150,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Common\OfficeController.cs" />
+    <Compile Include="Models\Entity\已收寻呼对象未阅.cs" />
     <Compile Include="Models\f______列表寻呼未阅表_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
