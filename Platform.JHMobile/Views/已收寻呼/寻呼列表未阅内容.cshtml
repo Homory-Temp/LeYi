@@ -1,0 +1,51 @@
+﻿@using Platform.JHMobile.Models
+@model 已收寻呼对象未阅
+@{
+    ViewBag.Title = "未阅寻呼查看";
+}
+<div class="container metro_left metro_right">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="page-heading" style="margin: 5px;">未阅寻呼查看</h1>
+            <div class="the-box toolbar no-border no-margin">
+                <div class="row">
+                    <div class="col-xs-7">
+                        <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("首页", "首页")';">
+                            <i class="fa fa-home fa-lg"></i>
+                        </div>
+                        <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("寻呼列表未阅", "已收寻呼")';">
+                            <i class="fa fa-reply fa-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="the-box toolbar no-border no-margin">
+        <div class="featured-text relative-left">
+            <h4 style="line-height:26px">
+                @Html.Raw(Model.列表寻呼未阅表.CallContent)
+            </h4>
+            <p></p>
+            <p style="font-size:16px;line-height:26px">
+                @{
+                    if (Model.已收寻呼附件表.Count > 0)
+                    {
+                        <div class="col-md-12" style="font-size:16px;"><strong>寻呼附件：</strong></div>
+                        foreach (var file in Model.已收寻呼附件表)
+                        {
+                            <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="@(Url.Content("~") + file.FilePath.Substring(3).Replace("__", "h__"))">@file.SlaveName</a></div>
+                        }
+                    }
+                }
+            </p>
+            <p></p>
+            <p class="additional-post-wrap" style="font-size:14px;">
+                <span class="additional-post"><i class="fa fa-user"></i>&nbsp;&nbsp;<a href="#fakelink">@Model.列表寻呼未阅表.UserName</a></span>
+                <span class="additional-post"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;<a href="#fakelink">@Model.列表寻呼未阅表.CallTime</a></span>
+            </p>
+            <hr />
+        </div>
+    </div>
+</div>
