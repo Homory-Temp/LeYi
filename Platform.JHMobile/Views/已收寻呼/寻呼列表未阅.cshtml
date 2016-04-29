@@ -6,7 +6,10 @@
     var _max = @ViewBag.Max;
 
     $(document).ready(function () {
-        loadList();
+        if(_max >=0)
+            loadList();
+        else
+            $("#handler").hide();
     });
 
     function loadList() {
