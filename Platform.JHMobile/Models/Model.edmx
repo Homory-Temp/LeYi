@@ -18,6 +18,10 @@
         <Function Name="f______计数寻呼已阅数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数寻呼已阅数">
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f______列表信息门户表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表信息门户表">
+          <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f______列表寻呼附件表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表寻呼附件表">
           <Parameter Name="CallID" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -75,6 +79,10 @@
             <Parameter Name="ModuleType" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______信息门户模块表" ReturnType="Collection(C6Model.f______信息门户模块表_Result)" />
+          <FunctionImport Name="f______列表信息门户表">
+            <Parameter Name="UserID" Mode="In" Type="String" />
+            <Parameter Name="ModuleType" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f______列表寻呼未阅表_Result">
           <Property Type="Int32" Name="CallNoSeeID" Nullable="false" />
@@ -164,6 +172,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f______列表信息门户表" FunctionName="C6Model.Store.f______列表信息门户表" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

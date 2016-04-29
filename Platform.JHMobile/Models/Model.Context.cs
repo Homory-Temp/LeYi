@@ -126,5 +126,18 @@ namespace Platform.JHMobile.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______信息门户模块表_Result>("f______信息门户模块表");
         }
+    
+        public virtual int f______列表信息门户表(string userID, string moduleType)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            var moduleTypeParameter = moduleType != null ?
+                new ObjectParameter("ModuleType", moduleType) :
+                new ObjectParameter("ModuleType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f______列表信息门户表", userIDParameter, moduleTypeParameter);
+        }
     }
 }
