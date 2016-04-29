@@ -151,6 +151,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Common\OfficeController.cs" />
+    <Compile Include="Models\Entity\信息门户对象内容.cs" />
     <Compile Include="Models\Entity\信息门户对象模块.cs" />
     <Compile Include="Models\Entity\已收寻呼对象历史.cs" />
     <Compile Include="Models\Entity\已收寻呼对象已阅.cs" />
@@ -549,6 +550,7 @@
     <Content Include="Views\信息门户\首页.cshtml" />
     <Content Include="Views\信息门户\信息门户列表.cshtml" />
     <Content Include="Views\信息门户\信息门户列表单页.cshtml" />
+    <Content Include="Views\信息门户\信息门户列表内容.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

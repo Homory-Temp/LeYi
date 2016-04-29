@@ -171,5 +171,35 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______信息门户内容表_Result>("f______信息门户内容表", messageIdParameter);
         }
+    
+        public virtual ObjectResult<string> f______信息门户已阅表(Nullable<int> messageId, string moduleType)
+        {
+            var messageIdParameter = messageId.HasValue ?
+                new ObjectParameter("MessageId", messageId) :
+                new ObjectParameter("MessageId", typeof(int));
+    
+            var moduleTypeParameter = moduleType != null ?
+                new ObjectParameter("ModuleType", moduleType) :
+                new ObjectParameter("ModuleType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("f______信息门户已阅表", messageIdParameter, moduleTypeParameter);
+        }
+    
+        public virtual int f______信息门户转已阅(Nullable<int> messageId, string moduleType, string userID)
+        {
+            var messageIdParameter = messageId.HasValue ?
+                new ObjectParameter("MessageId", messageId) :
+                new ObjectParameter("MessageId", typeof(int));
+    
+            var moduleTypeParameter = moduleType != null ?
+                new ObjectParameter("ModuleType", moduleType) :
+                new ObjectParameter("ModuleType", typeof(string));
+    
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f______信息门户转已阅", messageIdParameter, moduleTypeParameter, userIDParameter);
+        }
     }
 }

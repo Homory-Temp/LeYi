@@ -59,6 +59,15 @@
         <Function Name="f______信息门户内容表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______信息门户内容表">
           <Parameter Name="MessageId" Type="int" Mode="In" />
         </Function>
+        <Function Name="f______信息门户已阅表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______信息门户已阅表">
+          <Parameter Name="MessageId" Type="int" Mode="In" />
+          <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f______信息门户转已阅" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______信息门户转已阅">
+          <Parameter Name="MessageId" Type="int" Mode="In" />
+          <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="C6ModelStoreContainer">
           <EntitySet Name="信息门户对象简略" EntityType="Self.信息门户对象简略" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -113,10 +122,19 @@
           </FunctionImport>
           <EntitySet Name="信息门户对象简略" EntityType="C6Model.信息门户对象简略" />
           <FunctionImport Name="f______信息门户附件表" ReturnType="Collection(C6Model.f______信息门户附件表_Result)">
-            <Parameter Name="MessageID" Mode="In" Type="String" />
+          <Parameter Name="MessageID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______信息门户内容表" ReturnType="Collection(C6Model.f______信息门户内容表_Result)">
+          <Parameter Name="MessageId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f______信息门户已阅表" ReturnType="Collection(String)">
             <Parameter Name="MessageId" Mode="In" Type="Int32" />
+            <Parameter Name="ModuleType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______信息门户转已阅">
+            <Parameter Name="MessageId" Mode="In" Type="Int32" />
+            <Parameter Name="ModuleType" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f______列表寻呼未阅表_Result">
@@ -271,6 +289,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f______信息门户已阅表" FunctionName="C6Model.Store.f______信息门户已阅表" />
+          <FunctionImportMapping FunctionImportName="f______信息门户转已阅" FunctionName="C6Model.Store.f______信息门户转已阅" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

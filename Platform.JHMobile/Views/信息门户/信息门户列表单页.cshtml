@@ -5,7 +5,7 @@
     {
         <div class="row">
             <div class="col-md-12">
-                <div class="panel metro_2" onclick="top.location = '@(Url.Action("信息门户列表内容", "信息门户") + "/" + obj.MessageID)';">
+                <div class="panel metro_2" onclick="top.location = '@Url.Action("信息门户列表内容", "信息门户", new { id = obj.MessageID })';">
                     <div class="panel-heading" style="color:#fff;">
                         <i class="fa fa-envelope"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>@Html.Raw(obj.MessageTitle)</span>
                     </div>

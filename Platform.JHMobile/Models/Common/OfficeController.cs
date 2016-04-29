@@ -10,7 +10,7 @@ namespace Platform.JHMobile.Models
     {
         public C6Entities DB = new C6Entities();
 
-        public string Directory = "E:\\JinHer\\C6\\";
+        public static string Directory = "E:\\JinHer\\C6\\";
 
         private Rijndael aes;
 

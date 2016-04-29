@@ -1,6 +1,7 @@
 ﻿using Platform.JHMobile.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -42,6 +43,48 @@ namespace Platform.JHMobile.Controllers
             ViewBag.Current = id + 1;
             var list = DB.f______列表信息门户表(Account, type).Skip(id * per).Take(per).ToList();
             return View(list);
+        }
+
+        public ActionResult 信息门户列表内容()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return 认证();
+            var id = RouteData.Values["id"]?.ToString();
+            var int_id = int.Parse(id);
+            var message = DB.f______信息门户内容表(int_id).FirstOrDefault();
+            DB.f______信息门户转已阅(int_id, message.ModuleTypeID.ToString(), Account);
+            if (!string.IsNullOrEmpty(message.MessageFileName))
+            {
+                var name = message.MessageFileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+                var dir = new DirectoryInfo(Directory + "\\Resource\\MessageFile");
+                ViewBag.Path = "";
+                ViewBag.ModuleTypeID = message.ModuleTypeID;
+                ViewBag.PeopleRead = DB.f______信息门户已阅表(message.MessageID, message.ModuleTypeID.ToString()).OrderBy(o => o).ToList().Aggregate("", (o, s) => o += s + "、", o => (o.Length == 0 ? "无" : o.Substring(0, o.Length - 1)));
+                foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+                {
+                    if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                    {
+                        string path = dir + "\\" + cDir.Name + "\\" + name;
+                        var converted = ConvertDoc(path);
+                        if (!string.IsNullOrEmpty(converted))
+                        {
+                            ViewBag.PDF = converted;
+                        }
+                    }
+                }
+            }
+            var query = DB.f______信息门户附件表(message.MessageID.ToString()).OrderBy(o => o.FileID);
+            var list = query == null ? new List<f______信息门户附件表_Result>() : query.ToList();
+            foreach (var path in list)
+            {
+                var source = Directory + path.FilePath.Substring(3).Replace("/", "\\");
+                var destination = source.Replace("__", "h__");
+                DecryptFile(source, destination);
+            }
+            var mo = new 信息门户对象内容();
+            mo.内容 = message;
+            mo.附件 = list;
+            return View(mo);
         }
     }
 }

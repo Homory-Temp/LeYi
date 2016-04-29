@@ -1,0 +1,62 @@
+﻿@using Platform.JHMobile.Models
+@model 信息门户对象内容
+<div id="area" class="container metro_left metro_right">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="page-heading" style="margin: 5px;">门户信息查看</h1>
+            <div class="the-box toolbar no-border no-margin">
+                <div class="row">
+                    <div class="col-xs-7">
+                        <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("首页", "首页")';">
+                            <i class="fa fa-home fa-lg"></i>
+                        </div>
+                        <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("信息门户单页", "信息门户", new { id = ViewBag.ModuleTypeID })';">
+                            <i class="fa fa-reply fa-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><strong>信息标题</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.内容.MessageTitle</div>
+        <div class="col-md-12"><strong>部门人员</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.内容.DeptName&nbsp;&nbsp;-&nbsp;&nbsp;@Model.内容.UserName</div>
+        <div class="col-md-12"><strong>分发时间</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.内容.SendTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
+        <div class="col-md-12"><strong>信息正文</strong></div>
+        <div class="col-md-12">
+            @Html.Raw(Model.内容.MessageHTML)
+            @{
+                if (!string.IsNullOrEmpty(ViewBag.PDF))
+                {
+                    <input id="pdfPath" type="hidden" value="@string.Format("../../{0}", ViewBag.PDF.Replace(OfficeController.Directory, "").Replace("\\", "/"))" />
+                    <iframe id="viewer" style="width: 100%; height: 389px;" src="~/PDFViewer/web/viewer.html"></iframe>
+                }
+            }
+        </div>
+        @{
+            if (!string.IsNullOrEmpty(ViewBag.PDF))
+            {
+                <div class="col-md-12">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a target="_blank" href="@string.Format("../../{0}", ViewBag.PDF.Replace(OfficeController.Directory, "").Replace("\\", "/"))">正文下载</a>
+                </div>
+            }
+        }
+        @{
+            if (Model.附件.Count > 0)
+            {
+                <div class="col-md-12"><strong>信息附件：</strong></div>
+                foreach (var file in Model.附件)
+                {
+                    <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="@(Url.Content("~/") + file.FilePath.Substring(3).Replace("__", "h__"))">@file.FileName</a></div>
+                }
+            }
+        }
+        <div class="col-md-12"><strong>已阅人员</strong></div>
+        <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@ViewBag.PeopleRead</div>
+        <div class="row">&nbsp;</div>
+    </div>
+    </div>
