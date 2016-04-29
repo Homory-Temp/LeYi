@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "历史寻呼";
+}
+<script>
+    var _index = 0;
+    var _max = @ViewBag.Max;
+
+    $(document).ready(function () {
+        loadList();
+    });
+
+    function loadList() {
+        $("#handler").hide();
+        var href = '@Url.Action("寻呼列表历史单页", "已收寻呼")' + "/" + _index;
+        $.ajax({
+            url: href,
+            type: "GET",
+            success: function (data) {
+                $("#area").append(data);
+                _index++;
+                if(_index > _max)
+                    $("#handler").hide();
+                else
+                    $("#handler").show();
+            },
+            error: function () {
+            }
+        });
+    }
+</script>
+<div id="area" class="container metro_left metro_right">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="page-heading" style="margin: 5px;">历史寻呼</h1>
+            <div class="the-box toolbar no-border no-margin">
+                <div class="row">
+                    <div class="col-xs-7">
+                        <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("首页", "首页")';">
+                            <i class="fa fa-home fa-lg"></i>
+                        </div>
+                        <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("首页", "已收寻呼")';">
+                            <i class="fa fa-reply fa-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+</div>
+<div id="handler" class="container">
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <input class="btn btn-warning" type="button" value="显示更多" onclick="loadList();" />
+        </div>
+    </div>
+</div>

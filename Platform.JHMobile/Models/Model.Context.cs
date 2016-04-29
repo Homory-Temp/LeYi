@@ -90,5 +90,23 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f______列表寻呼转已阅", callNoSeeIdParameter);
         }
+    
+        public virtual ObjectResult<f______列表寻呼历史表_Result> f______列表寻呼历史表(string userID)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表寻呼历史表_Result>("f______列表寻呼历史表", userIDParameter);
+        }
+    
+        public virtual ObjectResult<f______列表寻呼已阅表_Result> f______列表寻呼已阅表(string userID)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表寻呼已阅表_Result>("f______列表寻呼已阅表", userIDParameter);
+        }
     }
 }

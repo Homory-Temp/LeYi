@@ -150,7 +150,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Common\OfficeController.cs" />
+    <Compile Include="Models\Entity\已收寻呼对象历史.cs" />
+    <Compile Include="Models\Entity\已收寻呼对象已阅.cs" />
     <Compile Include="Models\Entity\已收寻呼对象未阅.cs" />
+    <Compile Include="Models\f______列表寻呼历史表_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\f______列表寻呼已阅表_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\f______列表寻呼未阅表_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -518,6 +526,12 @@
     <Content Include="Views\已收寻呼\寻呼列表未阅.cshtml" />
     <Content Include="Views\已收寻呼\寻呼列表未阅单页.cshtml" />
     <Content Include="Views\已收寻呼\寻呼列表未阅内容.cshtml" />
+    <Content Include="Views\已收寻呼\寻呼列表已阅.cshtml" />
+    <Content Include="Views\已收寻呼\寻呼列表已阅单页.cshtml" />
+    <Content Include="Views\已收寻呼\寻呼列表已阅内容.cshtml" />
+    <Content Include="Views\已收寻呼\寻呼列表历史.cshtml" />
+    <Content Include="Views\已收寻呼\寻呼列表历史单页.cshtml" />
+    <Content Include="Views\已收寻呼\寻呼列表历史内容.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -17,8 +17,14 @@
         <Function Name="f______列表寻呼附件表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表寻呼附件表">
           <Parameter Name="CallID" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f______列表寻呼历史表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表寻呼历史表">
+          <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f______列表寻呼未阅表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表寻呼未阅表">
           <Parameter Name="UserId" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f______列表寻呼已阅表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表寻呼已阅表">
+          <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="f______列表寻呼转已阅" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表寻呼转已阅">
           <Parameter Name="CallNoSeeId" Type="int" Mode="In" />
@@ -51,7 +57,13 @@
           <Parameter Name="CallID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______列表寻呼转已阅">
-            <Parameter Name="CallNoSeeId" Mode="In" Type="Int32" />
+          <Parameter Name="CallNoSeeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f______列表寻呼历史表" ReturnType="Collection(C6Model.f______列表寻呼历史表_Result)">
+            <Parameter Name="UserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______列表寻呼已阅表" ReturnType="Collection(C6Model.f______列表寻呼已阅表_Result)">
+            <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f______列表寻呼未阅表_Result">
@@ -65,6 +77,18 @@
           <Property Type="String" Name="SlaveID" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="SlaveName" Nullable="false" MaxLength="1000" />
           <Property Type="String" Name="FilePath" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="f______列表寻呼历史表_Result">
+          <Property Type="Int32" Name="CallID" Nullable="false" />
+          <Property Type="DateTime" Name="CallTime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CallContent" Nullable="true" MaxLength="8000" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="f______列表寻呼已阅表_Result">
+          <Property Type="Int32" Name="CallID" Nullable="false" />
+          <Property Type="DateTime" Name="CallTime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CallContent" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -97,6 +121,26 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f______列表寻呼转已阅" FunctionName="C6Model.Store.f______列表寻呼转已阅" />
+          <FunctionImportMapping FunctionImportName="f______列表寻呼历史表" FunctionName="C6Model.Store.f______列表寻呼历史表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______列表寻呼历史表_Result">
+                <ScalarProperty Name="CallID" ColumnName="CallID" />
+                <ScalarProperty Name="CallTime" ColumnName="CallTime" />
+                <ScalarProperty Name="CallContent" ColumnName="CallContent" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f______列表寻呼已阅表" FunctionName="C6Model.Store.f______列表寻呼已阅表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______列表寻呼已阅表_Result">
+                <ScalarProperty Name="CallID" ColumnName="CallID" />
+                <ScalarProperty Name="CallTime" ColumnName="CallTime" />
+                <ScalarProperty Name="CallContent" ColumnName="CallContent" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
