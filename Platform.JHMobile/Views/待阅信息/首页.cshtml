@@ -12,7 +12,7 @@
 
     function loadList() {
         $("#handler").hide();
-        var href = '@Url.Action("待阅信息列表单页", "信息门户")' + "/" + _index;
+        var href = '@Url.Action("待阅信息列表单页", "待阅信息")' + "/" + _index;
         $.ajax({
             url: href,
             type: "GET",
