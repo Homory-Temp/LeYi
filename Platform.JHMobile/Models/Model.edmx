@@ -5,6 +5,10 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="C6Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="f______计数信息门户数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数信息门户数">
+          <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f______计数寻呼历史数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数寻呼历史数">
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -32,6 +36,7 @@
         <Function Name="f______微信ID获取用户ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______微信ID获取用户ID">
           <Parameter Name="OpenId" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f______信息门户模块表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______信息门户模块表" />
         <EntityContainer Name="C6ModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -60,11 +65,16 @@
           <Parameter Name="CallNoSeeId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="f______列表寻呼历史表" ReturnType="Collection(C6Model.f______列表寻呼历史表_Result)">
-            <Parameter Name="UserID" Mode="In" Type="String" />
+          <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______列表寻呼已阅表" ReturnType="Collection(C6Model.f______列表寻呼已阅表_Result)">
-            <Parameter Name="UserID" Mode="In" Type="String" />
+          <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="f______计数信息门户数" ReturnType="Collection(Int32)">
+            <Parameter Name="UserID" Mode="In" Type="String" />
+            <Parameter Name="ModuleType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______信息门户模块表" ReturnType="Collection(C6Model.f______信息门户模块表_Result)" />
         </EntityContainer>
         <ComplexType Name="f______列表寻呼未阅表_Result">
           <Property Type="Int32" Name="CallNoSeeID" Nullable="false" />
@@ -89,6 +99,10 @@
           <Property Type="DateTime" Name="CallTime" Nullable="false" Precision="23" />
           <Property Type="String" Name="CallContent" Nullable="true" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="f______信息门户模块表_Result">
+          <Property Type="Int32" Name="ModuleTypeID" Nullable="false" />
+          <Property Type="String" Name="ModuleTypeName" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -138,6 +152,15 @@
                 <ScalarProperty Name="CallTime" ColumnName="CallTime" />
                 <ScalarProperty Name="CallContent" ColumnName="CallContent" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f______计数信息门户数" FunctionName="C6Model.Store.f______计数信息门户数" />
+          <FunctionImportMapping FunctionImportName="f______信息门户模块表" FunctionName="C6Model.Store.f______信息门户模块表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______信息门户模块表_Result">
+                <ScalarProperty Name="ModuleTypeID" ColumnName="ModuleTypeID" />
+                <ScalarProperty Name="ModuleTypeName" ColumnName="ModuleTypeName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -108,5 +108,23 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表寻呼已阅表_Result>("f______列表寻呼已阅表", userIDParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> f______计数信息门户数(string userID, string moduleType)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            var moduleTypeParameter = moduleType != null ?
+                new ObjectParameter("ModuleType", moduleType) :
+                new ObjectParameter("ModuleType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f______计数信息门户数", userIDParameter, moduleTypeParameter);
+        }
+    
+        public virtual ObjectResult<f______信息门户模块表_Result> f______信息门户模块表()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______信息门户模块表_Result>("f______信息门户模块表");
+        }
     }
 }

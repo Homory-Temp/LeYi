@@ -1,0 +1,51 @@
+﻿@using Platform.JHMobile.Models
+@model List<信息门户对象模块>
+@{
+    ViewBag.Title = "信息门户";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 metro_left metro_right">
+            <h1 class="page-heading" style="margin: 5px;">信息门户</h1>
+            <div class="the-box toolbar no-border no-margin">
+                <div class="row">
+                    <div class="col-xs-7">
+                        <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("首页", "首页")';">
+                            <i class="fa fa-home fa-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    @{
+        for (var i = 0; i < Model.Count; i++)
+        {
+            if (i % 2 == 0)
+            {
+                <div class="row">
+                    <div class="col-xs-6 metro_left">
+                        <div class="metro metro_2" onclick="top.location = '@Url.Action("信息门户模块", "信息门户")';">
+                            <div><i class="fa fa-envelope fa-5x"></i></div>
+                            <div class="metro_text">@Model[i].模块.ModuleTypeName</div>
+                            <div class="metro_text">@Model[i].数量</div>
+                        </div>
+                    </div>
+                    @{
+                        if ((i + 1) < Model.Count)
+                        {
+                            <div class="col-xs-6 metro_right">
+                                <div class="metro metro_2" onclick="top.location = '@Url.Action("信息门户模块", "信息门户")';">
+                                    <div><i class="fa fa-envelope fa-5x"></i></div>
+                                    <div class="metro_text">@Model[i + 1].模块.ModuleTypeName</div>
+                                    <div class="metro_text">@Model[i + 1].数量</div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        }
+    }
+</div>
