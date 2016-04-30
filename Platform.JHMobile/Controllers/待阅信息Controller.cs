@@ -52,6 +52,16 @@ namespace Platform.JHMobile.Controllers
             return new EmptyResult();
         }
 
+        public ActionResult 待阅信息列表内容已阅()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return 认证();
+            var id = RouteData.Values["id"]?.ToString();
+            var int_id = int.Parse(id);
+            DB.f______待阅信息转已阅(int_id, Account);
+            return RedirectToAction("首页", "待阅信息");
+        }
+
         public ActionResult 待阅信息列表内容通知()
         {
             if (string.IsNullOrEmpty(Account))
