@@ -105,5 +105,65 @@ namespace Platform.JHMobile.Controllers
             mo.附件 = list;
             return View(mo);
         }
+
+        public ActionResult 待阅信息列表内容发文()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return 认证();
+            var id = RouteData.Values["id"]?.ToString();
+            var int_id = int.Parse(id);
+            ViewBag.GiveOutId = int_id;
+            var send = DB.f______待阅信息发文表(int_id).FirstOrDefault();
+            if (!string.IsNullOrEmpty(send.FileName))
+            {
+                var name = send.FileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+                var dir = new DirectoryInfo(Directory + "\\Resource\\GovFiles");
+                ViewBag.Path = "";
+                foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+                {
+                    if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                    {
+                        string path = dir + "\\" + cDir.Name + "\\" + name;
+                        ViewBag.Link = path;
+                        var converted = ConvertDoc(path);
+                        if (!string.IsNullOrEmpty(converted))
+                        {
+                            ViewBag.PDF = converted;
+                        }
+                    }
+                }
+            }
+            return View(send);
+        }
+
+        public ActionResult 待阅信息列表内容收文()
+        {
+            if (string.IsNullOrEmpty(Account))
+                return 认证();
+            var id = RouteData.Values["id"]?.ToString();
+            var int_id = int.Parse(id);
+            ViewBag.GiveOutId = int_id;
+            var receive = DB.f______待阅信息收文表(int_id).FirstOrDefault();
+            if (!string.IsNullOrEmpty(receive.FileName))
+            {
+                var name = receive.FileName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Last();
+                var dir = new DirectoryInfo(Directory + "\\Resource\\GovFiles");
+                ViewBag.Path = "";
+                foreach (var cDir in dir.GetDirectories().OrderByDescending(o => o.CreationTime))
+                {
+                    if (cDir.GetFiles().Count(o => o.Name.ToLower() == name.ToLower()) > 0)
+                    {
+                        string path = dir + "\\" + cDir.Name + "\\" + name;
+                        ViewBag.Link = path;
+                        var converted = ConvertDoc(path);
+                        if (!string.IsNullOrEmpty(converted))
+                        {
+                            ViewBag.PDF = converted;
+                        }
+                    }
+                }
+            }
+            return View(receive);
+        }
     }
 }
