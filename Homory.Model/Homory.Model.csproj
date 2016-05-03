@@ -300,6 +300,9 @@
     <Compile Include="Model\UserType.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\UserWeChat.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\ViewDingDing.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

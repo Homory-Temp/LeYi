@@ -736,6 +736,21 @@
           <Property Name="ResourceTime" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_BT.dbo.UserWeChat”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="UserWeChat">
+          <Key>
+            <PropertyRef Name="用户ID" />
+            <PropertyRef Name="用户单位" />
+            <PropertyRef Name="用户姓名" />
+            <PropertyRef Name="用户在编" />
+          </Key>
+          <Property Name="用户ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="用户单位" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="用户姓名" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="微信ID" Type="nvarchar(max)" />
+          <Property Name="用户在编" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“Platform_BT.dbo.View_ResourceAssess”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="View_ResourceAssess">
           <Key>
@@ -2072,6 +2087,15 @@
     [ResourceMap].[ResourceTime] AS [ResourceTime]
     FROM [dbo].[ResourceMap] AS [ResourceMap]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="UserWeChat" EntityType="Self.UserWeChat" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserWeChat].[用户ID] AS [用户ID], 
+    [UserWeChat].[用户单位] AS [用户单位], 
+    [UserWeChat].[用户姓名] AS [用户姓名], 
+    [UserWeChat].[微信ID] AS [微信ID], 
+    [UserWeChat].[用户在编] AS [用户在编]
+    FROM [dbo].[UserWeChat] AS [UserWeChat]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="View_ResourceAssess" EntityType="Self.View_ResourceAssess" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [View_ResourceAssess].[ResultContent] AS [ResultContent], 
@@ -2931,6 +2955,7 @@
           <Parameter Name="OrgId" Mode="In" Type="Guid" />
           </FunctionImport>
           <EntitySet Name="机构用户关系" EntityType="Homory.Model.机构用户关系" />
+          <EntitySet Name="UserWeChat" EntityType="Homory.Model.UserWeChat" />
         </EntityContainer>
         <EntityType Name="Application">
           <Key>
@@ -5073,6 +5098,19 @@
           <Property Name="Time" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="State" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserWeChat">
+          <Key>
+            <PropertyRef Name="用户ID" />
+            <PropertyRef Name="用户单位" />
+            <PropertyRef Name="用户姓名" />
+            <PropertyRef Name="用户在编" />
+          </Key>
+          <Property Name="用户ID" Type="Guid" Nullable="false" />
+          <Property Name="用户单位" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="用户姓名" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="微信ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="用户在编" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6155,6 +6193,17 @@
                 <ScalarProperty Name="BatchType" ColumnName="BatchType" />
                 <ScalarProperty Name="Batch" ColumnName="Batch" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserWeChat">
+            <EntityTypeMapping TypeName="Homory.Model.UserWeChat">
+              <MappingFragment StoreEntitySet="UserWeChat">
+                <ScalarProperty Name="用户在编" ColumnName="用户在编" />
+                <ScalarProperty Name="微信ID" ColumnName="微信ID" />
+                <ScalarProperty Name="用户姓名" ColumnName="用户姓名" />
+                <ScalarProperty Name="用户单位" ColumnName="用户单位" />
+                <ScalarProperty Name="用户ID" ColumnName="用户ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

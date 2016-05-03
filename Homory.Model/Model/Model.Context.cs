@@ -95,6 +95,7 @@ namespace Homory.Model
         public virtual DbSet<C__机构> C__机构 { get; set; }
         public virtual DbSet<C__用户> C__用户 { get; set; }
         public virtual DbSet<机构用户关系> 机构用户关系 { get; set; }
+        public virtual DbSet<UserWeChat> UserWeChat { get; set; }
     
         public virtual int ResetPolicyCommon()
         {

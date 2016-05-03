@@ -128,6 +128,7 @@
         <EntityTypeShape EntityType="Homory.Model.C__机构" Width="1.5" PointX="12.375" PointY="19.75" />
         <EntityTypeShape EntityType="Homory.Model.C__用户" Width="1.5" PointX="21.375" PointY="0.75" />
         <EntityTypeShape EntityType="Homory.Model.机构用户关系" Width="1.5" PointX="21.375" PointY="5.75" />
+        <EntityTypeShape EntityType="Homory.Model.UserWeChat" Width="1.5" PointX="21.375" PointY="9.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
