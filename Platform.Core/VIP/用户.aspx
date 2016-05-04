@@ -52,7 +52,7 @@
                             <LayoutTemplate>
                                 <table>
                                     <tr>
-                                        <th>用户单位</th>
+                                        <th>用户单位部门</th>
                                         <th>用户姓名</th>
                                         <th>选择</th>
                                         <th>用户手机</th>
@@ -63,7 +63,7 @@
                             </LayoutTemplate>
                             <ItemTemplate>
                                 <tr>
-                                    <td><%# Eval("用户单位") %></td>
+                                    <td><%# Eval("用户部门") %></td>
                                     <td><%# Eval("用户姓名") %></td>
                                     <td>
                                         <input type="checkbox" match='<%# string.Format("{0}@{1}", Eval("用户ID"), Eval("金和ID")) %>' onchange="uis(this, 0, '<%# Eval("用户ID") %>', '<%# Eval("金和ID") %>', '<%# string.Format("{0}-{1}", Eval("用户单位"), Eval("用户姓名")) %>');" /></td>
@@ -73,7 +73,7 @@
                             </ItemTemplate>
                             <AlternatingItemTemplate>
                                 <tr style="background-color: #EBEBEB;">
-                                    <td><%# Eval("用户单位") %></td>
+                                    <td><%# Eval("用户部门") %></td>
                                     <td><%# Eval("用户姓名") %></td>
                                     <td>
                                         <input type="checkbox" match='<%# string.Format("{0}@{1}", Eval("用户ID"), Eval("金和ID")) %>' onchange="uis(this, 1,'<%# Eval("用户ID") %>', '<%# Eval("金和ID") %>', '<%# string.Format("{0}-{1}", Eval("用户单位"), Eval("用户姓名")) %>');" /></td>

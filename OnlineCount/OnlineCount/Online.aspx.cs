@@ -128,9 +128,9 @@ public partial class Online : System.Web.UI.Page
         {
             sb.AppendFormat("【{0}】\r\n", child.DeptName);
             var inners = db.Department.Where(o => o.DeptDelFlag == 0 && o.DeptParentID == child.DeptID);
-            foreach (var inner in inners)
+            foreach (var inner in children)
             {
-                var relations = db.RelationshipUsers.Where(o => o.DelFlag == "0" && o.DeptID == inner.DeptID && o.RelaPrimary == 1);
+                var relations = db.RelationshipUsers.Where(o => o.DelFlag == "0" && o.DeptID == inner.DeptID /*&& o.RelaPrimary == 1*/);
                 if (relations.Count() == 0)
                     continue;
                 sb.AppendFormat("  **【{0}】", inner.DeptName);

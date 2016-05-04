@@ -619,6 +619,7 @@
             <PropertyRef Name="用户在编" />
             <PropertyRef Name="用户同步" />
             <PropertyRef Name="用户单位" />
+            <PropertyRef Name="用户部门" />
           </Key>
           <Property Name="用户ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="金和ID" Type="varchar" MaxLength="20" Nullable="false" />
@@ -633,6 +634,7 @@
           <Property Name="用户在编" Type="bit" Nullable="false" />
           <Property Name="用户同步" Type="bit" Nullable="false" />
           <Property Name="用户单位" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="用户部门" Type="nvarchar" MaxLength="4000" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Platform_BT.dbo.Contact_Users”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -2024,7 +2026,8 @@
     [__用户].[用户证件] AS [用户证件], 
     [__用户].[用户在编] AS [用户在编], 
     [__用户].[用户同步] AS [用户同步], 
-    [__用户].[用户单位] AS [用户单位]
+    [__用户].[用户单位] AS [用户单位],
+    [__用户].[用户部门] AS [用户部门]
     FROM [dbo].[__用户] AS [__用户]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Contact_Users" EntityType="Self.Contact_Users" store:Type="Views" store:Schema="dbo">
@@ -5069,6 +5072,7 @@
             <PropertyRef Name="用户在编" />
             <PropertyRef Name="用户同步" />
             <PropertyRef Name="用户单位" />
+            <PropertyRef Name="用户部门" />
           </Key>
           <Property Name="用户ID" Type="Guid" Nullable="false" />
           <Property Name="金和ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -5083,6 +5087,7 @@
           <Property Name="用户在编" Type="Boolean" Nullable="false" />
           <Property Name="用户同步" Type="Boolean" Nullable="false" />
           <Property Name="用户单位" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="用户部门" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="机构用户关系">
           <Key>
@@ -6164,6 +6169,7 @@
             <EntityTypeMapping TypeName="Homory.Model.C__用户">
               <MappingFragment StoreEntitySet="__用户">
                 <ScalarProperty Name="用户单位" ColumnName="用户单位" />
+                <ScalarProperty Name="用户部门" ColumnName="用户部门" />
                 <ScalarProperty Name="用户同步" ColumnName="用户同步" />
                 <ScalarProperty Name="用户在编" ColumnName="用户在编" />
                 <ScalarProperty Name="用户证件" ColumnName="用户证件" />
