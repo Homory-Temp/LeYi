@@ -28,5 +28,6 @@ namespace Homory.Model
         public bool 用户在编 { get; set; }
         public bool 用户同步 { get; set; }
         public string 用户单位 { get; set; }
+        public string 用户部门 { get; set; }
     }
 }

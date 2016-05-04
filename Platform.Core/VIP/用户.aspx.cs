@@ -45,7 +45,7 @@ public partial class VIP_用户 : Homory.Model.HomoryCorePage
     {
         if (box.SelectedIndex < 0)
             return;
-        view.DataSource = HomoryContext.Value.机构用户(Guid.Parse(box.SelectedValue)).ToList();
+        view.DataSource = HomoryContext.Value.机构用户(Guid.Parse(box.SelectedValue)).OrderBy(o => o.用户部门).ToList();
     }
 
     protected void box_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)

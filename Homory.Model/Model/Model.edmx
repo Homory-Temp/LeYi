@@ -5087,7 +5087,7 @@
           <Property Name="用户在编" Type="Boolean" Nullable="false" />
           <Property Name="用户同步" Type="Boolean" Nullable="false" />
           <Property Name="用户单位" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="用户部门" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="用户部门" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="机构用户关系">
           <Key>
