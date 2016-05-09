@@ -19,7 +19,22 @@ public partial class Control_CenterLeft : Homory.Model.HomoryResourceControl
         icon.ImageUrl = P(user.Icon);
         name.Text = user.DisplayName;
         favourite.Text = HomoryContext.Value.UserFavourite.Count(o => o.FavouriteUserId == user.Id && o.State == State.启用).ToString();
-        honor.Text = HomoryContext.Value.ViewTS.First(o => o.Id == user.Id).Credit.ToString();
+
+        if (HomoryContext.Value.ViewTS.Count(o => o.Id == user.Id) == 0)
+        {
+            honor.Text = "0";
+        }
+        else
+        {
+            try
+            {
+                honor.Text = HomoryContext.Value.ViewTS.First(o => o.Id == user.Id).Credit.ToString();
+            }
+            catch
+            {
+                honor.Text = "0";
+            }
+        }
 
         fav.Text = HomoryContext.Value.Action.Count(o => o.Id3 == CurrentUser.Id && o.Type == ActionType.用户收藏资源 && o.State == State.启用).ToString();
 

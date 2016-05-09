@@ -104,9 +104,9 @@ public partial class Control_CenterRight : Homory.Model.HomoryResourceControl
 
     protected void favourites_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
     {
-        var favouritesSource = HomoryContext.Value.UserFavourite.Where(o => o.State == State.启用 && o.UserId == CurrentUser.Id).ToList();
+        var favouritesSource = HomoryContext.Value.UserFavourite.Where(o => o.State == State.启用 && o.UserId == CurrentUser.Id);
         // var favouritesSource = CurrentUser.MeFavourite.Where(o => o.State == State.启用).ToList();
-        favourites.DataSource = favouritesSource.Select(o => o.FavouriteUser).Take(3).ToList();
+        favourites.DataSource = favouritesSource.Count() == 0 ? null : favouritesSource.ToList().Select(o => o.FavouriteUser).Take(3).ToList();
     }
 
     protected void relatives_NeedDataSource(object sender, Telerik.Web.UI.RadListViewNeedDataSourceEventArgs e)
