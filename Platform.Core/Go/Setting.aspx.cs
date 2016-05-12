@@ -15,7 +15,7 @@ namespace Go
 
 		private void LoadInit()
 		{
-            if (File.Exists(Server.MapPath(CurrentUser.Icon)))
+            if (CurrentUser.Icon.StartsWith("http") || File.Exists(Server.MapPath(CurrentUser.Icon)))
                 viewer.ImageUrl = CurrentUser.Icon;
             else
                 viewer.ImageUrl = "~/Common/默认/用户.png";

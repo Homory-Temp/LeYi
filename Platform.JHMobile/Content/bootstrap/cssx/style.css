@@ -764,7 +764,7 @@ footer {
 	line-height: 170%;
 }/**+++++++++++++++++++++++++++++++++++++++++++CSS ELEMENTS+++++++++++++++++++++++++++++++++++++++++++**//**-------------------------------------------THE BOX-------------------------------------------**/
 .the-box {
-	padding: 15px;
+	padding: 8px;
 	margin-bottom: 30px;
 	background: #fff;
 	border: 1px solid #D5DAE0;
@@ -1769,7 +1769,8 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 	margin: 10px 0 5px;
 }
 .media-xs p.small {
-	font-size: 13px;
+	font-size: 16px;
+       padding:0px 10px 0px 10px
 }
 .media-xs .media-heading {
 	font-size: 16px;
@@ -4508,14 +4509,14 @@ p.additional-post-wrap {
 	font-size: 13px;
 }
 p.additional-post-wrap a {
-	color: #AAB2BD;
+	color: #999;
 }
 .additional-post {
 	padding: 10px 15px 10px 0;
-	color: #AAB2BD;
+	color: #999;
 }
 .additional-post a {
-	color: #AAB2BD;
+	color: #999;
 }
 .additional-post i {
 	margin-right: 5px;
@@ -4713,31 +4714,35 @@ p.bordered.dashed {
 	top: 10px;
 }
 .chat-wrap {
-	height: 330px;
+	height:auto;
 	overflow-y: auto;
-	padding: 20px;
+	
 }
 .action-chat {
 	margin-top: 30px;
 }
+
+
 .media-chat .media-body {
 	background: #F6F8F9;
-	padding: 10px;
+	
 	border-radius: 8px;
 }
 .media-chat .media {
-	padding: 20px 0;
+	padding: 10px 0;
 	margin: 0;
 }
 .media-chat p.name small {
 	text-transform: uppercase;
-	font-size: 11px;
+	font-size: 15px;
 	font-weight: 700;
+	color:#FFF
 }
 .media-chat .media-body.me {
-	background: #8EC051;
-	color: #fff;
+	background:#F6F8F9;
+	color:#656D78;
 }
+
 .post-form-timeline {
 }
 .post-form-timeline textarea {
