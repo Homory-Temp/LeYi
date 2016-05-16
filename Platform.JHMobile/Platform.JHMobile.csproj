@@ -568,6 +568,8 @@
     <Content Include="Views\待阅信息\首页.cshtml" />
     <Content Include="Views\待阅信息\待阅信息列表单页.cshtml" />
     <Content Include="Views\待阅信息\待阅信息列表内容通知.cshtml" />
+    <Content Include="Views\待阅信息\待阅信息列表内容发文.cshtml" />
+    <Content Include="Views\待阅信息\待阅信息列表内容收文.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
