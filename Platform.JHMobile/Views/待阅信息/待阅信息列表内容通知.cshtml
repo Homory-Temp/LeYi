@@ -1,9 +1,9 @@
 ﻿@using Platform.JHMobile.Models
 @model 信息门户对象内容
-<div id="area" class="container metro_left metro_right">
+<div id="area" class="container">
     <div class="row">
         <div class="col-xs-12">
-            <h1 class="page-heading" style="margin: 5px;">待阅信息查看</h1>
+            <h1 class="page-heading" style="margin-top: 5px; margin-bottom: 5px;">待阅信息查看</h1>
             <div class="the-box toolbar no-border no-margin">
                 <div class="row">
                     <div class="col-xs-7">
@@ -20,9 +20,9 @@
     </div>
     <div class="row">&nbsp;</div>
     <div class="row">
-        <div class="col-md-12 text-center"><h3><strong>@Model.内容.MessageTitle</strong></h3></div>
+        <div class="col-md-12"><h4><strong>@Model.内容.MessageTitle</strong></h4></div>
         <div class="col-xs-5">发布人：@Model.内容.UserName</div>
-        <div class="col-xs-7 text-right">发布时间：@Model.内容.SendTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
+        <div class="col-xs-7 text-right">发布时间：@Model.内容.SendTime.Value.ToString("yyyy-MM-dd")</div>
         <div class="col-md-12">&nbsp;</div>
         <div class="col-md-12">
             @Html.Raw(Model.内容.MessageHTML)
