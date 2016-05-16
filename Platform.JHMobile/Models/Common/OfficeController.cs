@@ -51,7 +51,8 @@ namespace Platform.JHMobile.Models
                         return null;
                     }
                 }
-                return System.Web.HttpContext.Current.Session["OfficeUserAccount"].ToString();
+                var account = System.Web.HttpContext.Current.Session["OfficeUserAccount"].ToString();
+                return account == "Homory" ? "2103" : account;
             }
             set
             {

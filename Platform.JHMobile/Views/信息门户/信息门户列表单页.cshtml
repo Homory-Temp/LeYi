@@ -3,24 +3,31 @@
 @{
     foreach (var obj in Model)
     {
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel metro_2" onclick="top.location = '@Url.Action("信息门户列表内容", "信息门户", new { id = obj.MessageID })';">
-                    <div class="panel-heading" style="color:#fff;">
-                        <i class="fa fa-envelope"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>@Html.Raw(obj.MessageTitle)</span>
-                    </div>
-                    <div style="clear: both;"></div>
-                    <div class="panel-footer" style="margin-top: 6px;">
-                        <div class="row">
-                            <div class="col-xs-8 text-left">
-                                <div>@obj.SendTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
+        <div class="row" onclick="top.location = '@Url.Action("信息门户列表内容", "信息门户", new { id = obj.MessageID })';">
+            <div class="col-xs-12">
+                <div class="chat-wrap scroll-chat-widget">
+                    <ul class="media-list media-xs media-dotted media-chat">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <img class="media-object img-circle" src="~/Content/img/信息门户.jpg" alt="" />
+                            </a>
+                            <div class="media-body" style="background-color:#fff;">
+                                <p class="name" style="background-color:#5C96F7; padding:8px">
+                                    <small><span>@Html.Raw(obj.MessageTitle)</span></small>
+                                </p>
+                                <p class="small">
+                                    <div class="row">
+                                        <div class="col-xs-8 text-left">
+                                            <div>@obj.SendTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
+                                        </div>
+                                        <div class="col-xs-4 text-right">
+                                            <div>@obj.UserName</div>
+                                        </div>
+                                    </div>
+                                </p>
                             </div>
-                            <div class="col-xs-4 text-right">
-                                <div>@obj.UserName</div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
