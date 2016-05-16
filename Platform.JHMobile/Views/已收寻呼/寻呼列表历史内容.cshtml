@@ -22,30 +22,48 @@
         </div>
     </div>
     <div class="row">&nbsp;</div>
-    <div class="the-box toolbar no-border no-margin">
-        <div class="featured-text relative-left">
-            <h4 style="line-height:26px">
-                @Html.Raw(Model.列表寻呼历史表.CallContent)
-            </h4>
-            <hr />
-            <p style="font-size:16px;line-height:26px">
-                @{
-                    if (Model.已收寻呼附件表.Count > 0)
-                    {
-                        <div class="col-md-12" style="font-size:16px;margin-bottom:10px"><strong>寻呼附件：</strong></div>
-                        foreach (var file in Model.已收寻呼附件表)
+    <div class="the-box no-border">
+        <div class="chat-wrap scroll-chat-widget">
+            <ul class="media-list media-xs media-dotted media-chat">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object img-circle" src="~/Content/img/已收寻呼历史寻呼X.jpg" alt="" />
+                    </a>
+                    <div class="media-body">
+                        <p class="name" style="background-color:#98C86C; padding:8px"><small>寻呼内容</small></p>
+                        <p class="small">
+                            &nbsp;&nbsp;&nbsp;&nbsp;@Html.Raw(Model.列表寻呼历史表.CallContent)
+                        </p>
+                    </div>
+                </li>
+                <li class="media">
+                    @{
+                        if (Model.已收寻呼附件表.Count > 0)
                         {
-                            <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-paperclip"></i>&nbsp;&nbsp;<a target="_blank" href="@(Url.Content("~/") + file.FilePath.Substring(3).Replace("__", "h__"))">@file.SlaveName</a></div>
-                        }
+                            <a class="pull-left" href="#fakelink">
+                                <img class="media-object img-circle" src="~/Content/img/附件.jpg" alt="">
+                            </a>
+                            <div class="media-body me">
+                                <p class="name" style="background-color:#9989B8;padding:8px">
+                                    <small>寻呼附件</small>
+                                </p>
+                                @{
+                                    foreach (var file in Model.已收寻呼附件表)
+                                    {
+                                        <p class="small">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-paperclip"></i>&nbsp;&nbsp;<a target="_blank" href="@(Url.Content("~/") + file.FilePath.Substring(3).Replace("__", "h__"))">@file.SlaveName</a>
+                                        </p>
+                                    }
+                                }
+                            </div>
+                                    }
                     }
-                }
+                </li>
+            </ul>
+            <p class="additional-post-wrap" style="font-size:16px;">
+                <span class="additional-post"><i class="fa fa-user"></i>&nbsp;&nbsp;<a href="#">@Model.列表寻呼历史表.UserName</a></span>
+                <span class="additional-post">&nbsp;&nbsp;<a href="#" style="float:right">@Model.列表寻呼历史表.CallTime</a></span>
             </p>
-            <p></p>
-            <p class="additional-post-wrap" style="font-size:14px;">
-                <span class="additional-post"><i class="fa fa-user"></i>&nbsp;&nbsp;<a href="#fakelink">@Model.列表寻呼历史表.UserName</a></span>
-                <span class="additional-post"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;<a href="#fakelink">@Model.列表寻呼历史表.CallTime</a></span>
-            </p>
-            <hr />
         </div>
     </div>
 </div>
