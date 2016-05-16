@@ -80,23 +80,30 @@ namespace Platform.JHMobile.Controllers
         {
             if (string.IsNullOrEmpty(Account))
                 return 认证();
-            var id = RouteData.Values["id"]?.ToString();
-            var int_id = int.Parse(id);
-            var obj = DB.f______列表寻呼未阅表(Account).FirstOrDefault(o => o.CallNoSeeID == int_id);
-            var query = DB.f______列表寻呼附件表(obj.CallID.ToString()).OrderBy(o => o.SlaveID);
-            var list = query == null ? new List<f______列表寻呼附件表_Result>() : query.ToList();
-            foreach (var path in list)
+            try
             {
-                var source = Directory + path.FilePath.Substring(3).Replace("/", "\\");
-                ViewBag.X = source;
-                var destination = source.Replace("__", "h__");
-                DecryptFile(source, destination);
+                var id = RouteData.Values["id"]?.ToString();
+                var int_id = int.Parse(id);
+                var obj = DB.f______列表寻呼未阅表(Account).FirstOrDefault(o => o.CallNoSeeID == int_id);
+                var query = DB.f______列表寻呼附件表(obj.CallID.ToString()).OrderBy(o => o.SlaveID);
+                var list = query == null ? new List<f______列表寻呼附件表_Result>() : query.ToList();
+                foreach (var path in list)
+                {
+                    var source = Directory + path.FilePath.Substring(3).Replace("/", "\\");
+                    ViewBag.X = source;
+                    var destination = source.Replace("__", "h__");
+                    DecryptFile(source, destination);
+                }
+                var result = new 已收寻呼对象未阅();
+                result.列表寻呼未阅表 = obj;
+                result.已收寻呼附件表 = list;
+                DB.f______列表寻呼转已阅(int_id);
+                return View(result);
             }
-            var result = new 已收寻呼对象未阅();
-            result.列表寻呼未阅表 = obj;
-            result.已收寻呼附件表 = list;
-            DB.f______列表寻呼转已阅(int_id);
-            return View(result);
+            catch
+            {
+                return RedirectToAction("寻呼列表未阅", "已收寻呼");
+            }
         }
 
         public ActionResult 寻呼列表已阅内容()
