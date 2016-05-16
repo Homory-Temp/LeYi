@@ -30,6 +30,9 @@
           <Parameter Name="GiveOutId" Type="int" Mode="In" />
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f______计数待办工作数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数待办工作数">
+          <Parameter Name="UserId" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f______计数待阅信息数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数待阅信息数">
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -159,20 +162,23 @@
           <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______待阅信息发文表" ReturnType="Collection(C6Model.f______待阅信息发文表_Result)">
-            <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
+          <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="f______待阅信息类型表" ReturnType="Collection(C6Model.f______待阅信息类型表_Result)">
-            <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
+          <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="f______待阅信息收文表" ReturnType="Collection(C6Model.f______待阅信息收文表_Result)">
-            <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
+          <Parameter Name="AppG_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="f______待阅信息转已阅">
             <Parameter Name="GiveOutId" Mode="In" Type="Int32" />
             <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______列表待阅信息表" ReturnType="Collection(C6Model.f______列表待阅信息表_Result)">
-            <Parameter Name="UserID" Mode="In" Type="String" />
+          <Parameter Name="UserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______计数待办工作数" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f______列表寻呼未阅表_Result">
@@ -429,6 +435,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f______计数待办工作数" FunctionName="C6Model.Store.f______计数待办工作数" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -14,6 +14,7 @@ namespace Platform.JHMobile.Controllers
             var mo = DB.f______信息门户模块表().ToList().Select(o => new 信息门户对象模块 { 模块 = o, 数量 = DB.f______计数信息门户数(Account, o.ModuleTypeID.ToString()).Single().Value }).ToList();
             ViewBag.信息门户数 = mo.Sum(o => o.数量);
             ViewBag.待阅信息数 = DB.f______计数待阅信息数(Account).Single();
+            ViewBag.待办工作数 = DB.f______计数待办工作数(Account).Single();
             return View();
         }
     }

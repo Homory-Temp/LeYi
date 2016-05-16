@@ -259,5 +259,14 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表待阅信息表_Result>("f______列表待阅信息表", userIDParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> f______计数待办工作数(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f______计数待办工作数", userIdParameter);
+        }
     }
 }

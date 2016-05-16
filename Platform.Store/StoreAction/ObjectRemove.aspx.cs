@@ -43,6 +43,7 @@ public partial class StoreAction_ObjectRemove : SingleStorePage
     {
         var oid = "ObjectId".Query().GlobalId();
         var obj = db.Value.StoreObject.Single(o => o.Id == oid);
+        db.Value.StoreStatistics.RemoveRange(db.Value.StoreStatistics.Where(o => o.ObjectId == oid).ToList());
         db.Value.StoreObject.Remove(obj);
         db.Value.SaveChanges();
         return obj.Id;
