@@ -36,6 +36,9 @@
         <Function Name="f______计数待阅信息数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数待阅信息数">
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="f______计数流程查询数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数流程查询数">
+          <Parameter Name="UserId" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f______计数信息门户数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数信息门户数">
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="ModuleType" Type="nvarchar(max)" Mode="In" />
@@ -178,6 +181,9 @@
           <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______计数待办工作数" ReturnType="Collection(Int32)">
+          <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______计数流程查询数" ReturnType="Collection(Int32)">
             <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
@@ -436,6 +442,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f______计数待办工作数" FunctionName="C6Model.Store.f______计数待办工作数" />
+          <FunctionImportMapping FunctionImportName="f______计数流程查询数" FunctionName="C6Model.Store.f______计数流程查询数" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

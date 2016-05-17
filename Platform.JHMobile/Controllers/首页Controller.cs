@@ -15,6 +15,7 @@ namespace Platform.JHMobile.Controllers
             ViewBag.信息门户数 = mo.Sum(o => o.数量);
             ViewBag.待阅信息数 = DB.f______计数待阅信息数(Account).Single();
             ViewBag.待办工作数 = DB.f______计数待办工作数(Account).Single();
+            ViewBag.流程查询数 = DB.f______计数流程查询数(Account).Single();
             return View();
         }
     }
