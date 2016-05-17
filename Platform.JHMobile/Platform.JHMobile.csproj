@@ -583,6 +583,7 @@
     <Content Include="Views\待阅信息\待阅信息列表内容收文.cshtml" />
     <Content Include="Views\流程查询\流程查询列表单页.cshtml" />
     <Content Include="Views\流程查询\首页.cshtml" />
+    <Content Include="Views\流程查询\流程查询列表内容.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
