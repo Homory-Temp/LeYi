@@ -317,5 +317,129 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("f______列表流程文件表", appT_IDParameter, appO_IDParameter);
         }
+    
+        public virtual int f______待办工作转办结(Nullable<int> app_ID, string userID, string idea)
+        {
+            var app_IDParameter = app_ID.HasValue ?
+                new ObjectParameter("App_ID", app_ID) :
+                new ObjectParameter("App_ID", typeof(int));
+    
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            var ideaParameter = idea != null ?
+                new ObjectParameter("Idea", idea) :
+                new ObjectParameter("Idea", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f______待办工作转办结", app_IDParameter, userIDParameter, ideaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> f______待办工作转返回(Nullable<int> app_ID, string app_InnerIdea, string userID, string idea)
+        {
+            var app_IDParameter = app_ID.HasValue ?
+                new ObjectParameter("App_ID", app_ID) :
+                new ObjectParameter("App_ID", typeof(int));
+    
+            var app_InnerIdeaParameter = app_InnerIdea != null ?
+                new ObjectParameter("App_InnerIdea", app_InnerIdea) :
+                new ObjectParameter("App_InnerIdea", typeof(string));
+    
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            var ideaParameter = idea != null ?
+                new ObjectParameter("Idea", idea) :
+                new ObjectParameter("Idea", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f______待办工作转返回", app_IDParameter, app_InnerIdeaParameter, userIDParameter, ideaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> f______待办工作转下步(Nullable<int> app_ID, string next_User_ID, string app_InnerIdea, string userID, string idea)
+        {
+            var app_IDParameter = app_ID.HasValue ?
+                new ObjectParameter("App_ID", app_ID) :
+                new ObjectParameter("App_ID", typeof(int));
+    
+            var next_User_IDParameter = next_User_ID != null ?
+                new ObjectParameter("Next_User_ID", next_User_ID) :
+                new ObjectParameter("Next_User_ID", typeof(string));
+    
+            var app_InnerIdeaParameter = app_InnerIdea != null ?
+                new ObjectParameter("App_InnerIdea", app_InnerIdea) :
+                new ObjectParameter("App_InnerIdea", typeof(string));
+    
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            var ideaParameter = idea != null ?
+                new ObjectParameter("Idea", idea) :
+                new ObjectParameter("Idea", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f______待办工作转下步", app_IDParameter, next_User_IDParameter, app_InnerIdeaParameter, userIDParameter, ideaParameter);
+        }
+    
+        public virtual ObjectResult<f______列表待办按钮表_Result> f______列表待办按钮表(Nullable<int> appD_ID, string version)
+        {
+            var appD_IDParameter = appD_ID.HasValue ?
+                new ObjectParameter("AppD_ID", appD_ID) :
+                new ObjectParameter("AppD_ID", typeof(int));
+    
+            var versionParameter = version != null ?
+                new ObjectParameter("Version", version) :
+                new ObjectParameter("Version", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表待办按钮表_Result>("f______列表待办按钮表", appD_IDParameter, versionParameter);
+        }
+    
+        public virtual ObjectResult<f______列表待办单条表_Result> f______列表待办单条表(string userId, Nullable<int> approveId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            var approveIdParameter = approveId.HasValue ?
+                new ObjectParameter("ApproveId", approveId) :
+                new ObjectParameter("ApproveId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表待办单条表_Result>("f______列表待办单条表", userIdParameter, approveIdParameter);
+        }
+    
+        public virtual ObjectResult<f______列表待办工作表_Result> f______列表待办工作表(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表待办工作表_Result>("f______列表待办工作表", userIdParameter);
+        }
+    
+        public virtual ObjectResult<f______列表待办流程表_Result> f______列表待办流程表(Nullable<int> app_ID)
+        {
+            var app_IDParameter = app_ID.HasValue ?
+                new ObjectParameter("App_ID", app_ID) :
+                new ObjectParameter("App_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表待办流程表_Result>("f______列表待办流程表", app_IDParameter);
+        }
+    
+        public virtual ObjectResult<f______列表待办下步表_Result> f______列表待办下步表(Nullable<int> appD_ID, string version, Nullable<int> appDA_Type)
+        {
+            var appD_IDParameter = appD_ID.HasValue ?
+                new ObjectParameter("AppD_ID", appD_ID) :
+                new ObjectParameter("AppD_ID", typeof(int));
+    
+            var versionParameter = version != null ?
+                new ObjectParameter("Version", version) :
+                new ObjectParameter("Version", typeof(string));
+    
+            var appDA_TypeParameter = appDA_Type.HasValue ?
+                new ObjectParameter("AppDA_Type", appDA_Type) :
+                new ObjectParameter("AppDA_Type", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表待办下步表_Result>("f______列表待办下步表", appD_IDParameter, versionParameter, appDA_TypeParameter);
+        }
     }
 }

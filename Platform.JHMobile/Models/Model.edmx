@@ -17,6 +17,24 @@
           <Property Name="MessageTitle" Type="varchar" MaxLength="1000" />
           <Property Name="ModuleTypeID" Type="int" />
         </EntityType>
+        <Function Name="f______待办工作转办结" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______待办工作转办结">
+          <Parameter Name="App_ID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Idea" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f______待办工作转返回" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______待办工作转返回">
+          <Parameter Name="App_ID" Type="int" Mode="In" />
+          <Parameter Name="App_InnerIdea" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UserID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Idea" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f______待办工作转下步" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______待办工作转下步">
+          <Parameter Name="App_ID" Type="int" Mode="In" />
+          <Parameter Name="Next_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="App_InnerIdea" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UserID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Idea" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="f______待阅信息发文表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______待阅信息发文表">
           <Parameter Name="AppG_ID" Type="int" Mode="In" />
         </Function>
@@ -51,6 +69,25 @@
         </Function>
         <Function Name="f______计数寻呼已阅数" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______计数寻呼已阅数">
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f______列表待办按钮表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表待办按钮表">
+          <Parameter Name="AppD_ID" Type="int" Mode="In" />
+          <Parameter Name="Version" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="f______列表待办单条表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表待办单条表">
+          <Parameter Name="UserId" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ApproveId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="f______列表待办工作表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表待办工作表">
+          <Parameter Name="UserId" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="f______列表待办流程表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表待办流程表">
+          <Parameter Name="App_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="f______列表待办下步表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表待办下步表">
+          <Parameter Name="AppD_ID" Type="int" Mode="In" />
+          <Parameter Name="Version" Type="nvarchar" Mode="In" />
+          <Parameter Name="AppDA_Type" Type="int" Mode="In" />
         </Function>
         <Function Name="f______列表待阅信息表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="______列表待阅信息表">
           <Parameter Name="UserID" Type="nvarchar(max)" Mode="In" />
@@ -200,17 +237,54 @@
           <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______列表流程查询表" ReturnType="Collection(C6Model.f______列表流程查询表_Result)">
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="f______列表流程单条表" ReturnType="Collection(C6Model.f______列表流程单条表_Result)">
-            <Parameter Name="App_ID" Mode="In" Type="Int32" />
+          <Parameter Name="App_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="f______列表流程流程表" ReturnType="Collection(C6Model.f______列表流程流程表_Result)">
-            <Parameter Name="App_ID" Mode="In" Type="Int32" />
+          <Parameter Name="App_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="f______列表流程文件表" ReturnType="Collection(String)">
             <Parameter Name="AppT_ID" Mode="In" Type="String" />
             <Parameter Name="AppO_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f______待办工作转办结">
+            <Parameter Name="App_ID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="String" />
+            <Parameter Name="Idea" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______待办工作转返回" ReturnType="Collection(Int32)">
+            <Parameter Name="App_ID" Mode="In" Type="Int32" />
+            <Parameter Name="App_InnerIdea" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="String" />
+            <Parameter Name="Idea" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______待办工作转下步" ReturnType="Collection(Int32)">
+            <Parameter Name="App_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Next_User_ID" Mode="In" Type="String" />
+            <Parameter Name="App_InnerIdea" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="String" />
+            <Parameter Name="Idea" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______列表待办按钮表" ReturnType="Collection(C6Model.f______列表待办按钮表_Result)">
+            <Parameter Name="AppD_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Version" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______列表待办单条表" ReturnType="Collection(C6Model.f______列表待办单条表_Result)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="ApproveId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f______列表待办工作表" ReturnType="Collection(C6Model.f______列表待办工作表_Result)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="f______列表待办流程表" ReturnType="Collection(C6Model.f______列表待办流程表_Result)">
+            <Parameter Name="App_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f______列表待办下步表" ReturnType="Collection(C6Model.f______列表待办下步表_Result)">
+            <Parameter Name="AppD_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Version" Mode="In" Type="String" />
+            <Parameter Name="AppDA_Type" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="f______列表寻呼未阅表_Result">
@@ -342,6 +416,71 @@
           <Property Type="DateTime" Name="App_Time" Nullable="true" Precision="23" />
           <Property Type="String" Name="AppI_Content" Nullable="true" MaxLength="5000" />
           <Property Type="String" Name="AppDA_ButtonValue" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="f______列表待办按钮表_Result">
+          <Property Type="Int32" Name="AppDA_ID" Nullable="false" />
+          <Property Type="String" Name="AppT_ID" Nullable="false" MaxLength="256" />
+          <Property Type="Int32" Name="AppD_ID" Nullable="false" />
+          <Property Type="Int32" Name="AppDA_Type" Nullable="false" />
+          <Property Type="String" Name="AppDA_ButtonValue" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AppDA_Desc" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AppDA_Content" Nullable="true" MaxLength="8000" />
+          <Property Type="Int32" Name="AppDA_SelectFlag" Nullable="true" />
+          <Property Type="String" Name="Sub_Code" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="Sub_Time" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="del_Flag" Nullable="false" />
+          <Property Type="String" Name="Version" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="f______列表待办单条表_Result">
+          <Property Type="Int32" Name="App_ID" Nullable="false" />
+          <Property Type="Int32" Name="App_FatherID" Nullable="false" />
+          <Property Type="String" Name="AppT_ID" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="AppD_Name" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="AppD_ID" Nullable="false" />
+          <Property Type="Int32" Name="AppO_ID" Nullable="false" />
+          <Property Type="String" Name="AppO_Values" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="AppO_Title" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="App_Flag" Nullable="false" />
+          <Property Type="Int32" Name="App_IdeaFlag" Nullable="false" />
+          <Property Type="Int32" Name="App_Order" Nullable="false" />
+          <Property Type="Int32" Name="App_OrderSub" Nullable="false" />
+          <Property Type="String" Name="App_InnerIdea" Nullable="true" MaxLength="5000" />
+          <Property Type="String" Name="Sub_Code" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="Sub_Time" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="AppT_Flag" Nullable="false" />
+          <Property Type="String" Name="Instance_ID" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Version" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Form_ID" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="TEM_Name" Nullable="false" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="f______列表待办工作表_Result">
+          <Property Type="Int32" Name="App_ID" Nullable="false" />
+          <Property Type="String" Name="AppO_Title" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="App_BeginTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="f______列表待办流程表_Result">
+          <Property Type="Int32" Name="App_ID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="App_Time" Nullable="true" Precision="23" />
+          <Property Type="String" Name="AppI_Content" Nullable="true" MaxLength="5000" />
+          <Property Type="String" Name="AppDA_ButtonValue" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="f______列表待办下步表_Result">
+          <Property Type="Int32" Name="AppDAC_ID" Nullable="false" />
+          <Property Type="String" Name="AppT_ID" Nullable="false" MaxLength="256" />
+          <Property Type="Int32" Name="AppD_ID" Nullable="false" />
+          <Property Type="Int32" Name="AppDA_Type" Nullable="true" />
+          <Property Type="String" Name="AppDACO_Type" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="AppDACO_ID" Nullable="true" />
+          <Property Type="String" Name="AppDACO_Values" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="Sub_Code" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="Sub_Time" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Del_Flag" Nullable="false" />
+          <Property Type="String" Name="Version" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -550,6 +689,94 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="f______列表流程文件表" FunctionName="C6Model.Store.f______列表流程文件表" />
+          <FunctionImportMapping FunctionImportName="f______待办工作转办结" FunctionName="C6Model.Store.f______待办工作转办结" />
+          <FunctionImportMapping FunctionImportName="f______待办工作转返回" FunctionName="C6Model.Store.f______待办工作转返回" />
+          <FunctionImportMapping FunctionImportName="f______待办工作转下步" FunctionName="C6Model.Store.f______待办工作转下步" />
+          <FunctionImportMapping FunctionImportName="f______列表待办按钮表" FunctionName="C6Model.Store.f______列表待办按钮表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______列表待办按钮表_Result">
+                <ScalarProperty Name="AppDA_ID" ColumnName="AppDA_ID" />
+                <ScalarProperty Name="AppT_ID" ColumnName="AppT_ID" />
+                <ScalarProperty Name="AppD_ID" ColumnName="AppD_ID" />
+                <ScalarProperty Name="AppDA_Type" ColumnName="AppDA_Type" />
+                <ScalarProperty Name="AppDA_ButtonValue" ColumnName="AppDA_ButtonValue" />
+                <ScalarProperty Name="AppDA_Desc" ColumnName="AppDA_Desc" />
+                <ScalarProperty Name="AppDA_Content" ColumnName="AppDA_Content" />
+                <ScalarProperty Name="AppDA_SelectFlag" ColumnName="AppDA_SelectFlag" />
+                <ScalarProperty Name="Sub_Code" ColumnName="Sub_Code" />
+                <ScalarProperty Name="Sub_Time" ColumnName="Sub_Time" />
+                <ScalarProperty Name="del_Flag" ColumnName="del_Flag" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f______列表待办单条表" FunctionName="C6Model.Store.f______列表待办单条表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______列表待办单条表_Result">
+                <ScalarProperty Name="App_ID" ColumnName="App_ID" />
+                <ScalarProperty Name="App_FatherID" ColumnName="App_FatherID" />
+                <ScalarProperty Name="AppT_ID" ColumnName="AppT_ID" />
+                <ScalarProperty Name="AppD_Name" ColumnName="AppD_Name" />
+                <ScalarProperty Name="AppD_ID" ColumnName="AppD_ID" />
+                <ScalarProperty Name="AppO_ID" ColumnName="AppO_ID" />
+                <ScalarProperty Name="AppO_Values" ColumnName="AppO_Values" />
+                <ScalarProperty Name="AppO_Title" ColumnName="AppO_Title" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="App_Flag" ColumnName="App_Flag" />
+                <ScalarProperty Name="App_IdeaFlag" ColumnName="App_IdeaFlag" />
+                <ScalarProperty Name="App_Order" ColumnName="App_Order" />
+                <ScalarProperty Name="App_OrderSub" ColumnName="App_OrderSub" />
+                <ScalarProperty Name="App_InnerIdea" ColumnName="App_InnerIdea" />
+                <ScalarProperty Name="Sub_Code" ColumnName="Sub_Code" />
+                <ScalarProperty Name="Sub_Time" ColumnName="Sub_Time" />
+                <ScalarProperty Name="AppT_Flag" ColumnName="AppT_Flag" />
+                <ScalarProperty Name="Instance_ID" ColumnName="Instance_ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Form_ID" ColumnName="Form_ID" />
+                <ScalarProperty Name="TEM_Name" ColumnName="TEM_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f______列表待办工作表" FunctionName="C6Model.Store.f______列表待办工作表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______列表待办工作表_Result">
+                <ScalarProperty Name="App_ID" ColumnName="App_ID" />
+                <ScalarProperty Name="AppO_Title" ColumnName="AppO_Title" />
+                <ScalarProperty Name="App_BeginTime" ColumnName="App_BeginTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f______列表待办流程表" FunctionName="C6Model.Store.f______列表待办流程表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______列表待办流程表_Result">
+                <ScalarProperty Name="App_ID" ColumnName="App_ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="App_Time" ColumnName="App_Time" />
+                <ScalarProperty Name="AppI_Content" ColumnName="AppI_Content" />
+                <ScalarProperty Name="AppDA_ButtonValue" ColumnName="AppDA_ButtonValue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="f______列表待办下步表" FunctionName="C6Model.Store.f______列表待办下步表">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="C6Model.f______列表待办下步表_Result">
+                <ScalarProperty Name="AppDAC_ID" ColumnName="AppDAC_ID" />
+                <ScalarProperty Name="AppT_ID" ColumnName="AppT_ID" />
+                <ScalarProperty Name="AppD_ID" ColumnName="AppD_ID" />
+                <ScalarProperty Name="AppDA_Type" ColumnName="AppDA_Type" />
+                <ScalarProperty Name="AppDACO_Type" ColumnName="AppDACO_Type" />
+                <ScalarProperty Name="AppDACO_ID" ColumnName="AppDACO_ID" />
+                <ScalarProperty Name="AppDACO_Values" ColumnName="AppDACO_Values" />
+                <ScalarProperty Name="Sub_Code" ColumnName="Sub_Code" />
+                <ScalarProperty Name="Sub_Time" ColumnName="Sub_Time" />
+                <ScalarProperty Name="Del_Flag" ColumnName="Del_Flag" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
