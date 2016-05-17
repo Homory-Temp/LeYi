@@ -277,5 +277,45 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f______计数流程查询数", userIdParameter);
         }
+    
+        public virtual ObjectResult<f______列表流程查询表_Result> f______列表流程查询表(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表流程查询表_Result>("f______列表流程查询表", userIdParameter);
+        }
+    
+        public virtual ObjectResult<f______列表流程单条表_Result> f______列表流程单条表(Nullable<int> app_ID)
+        {
+            var app_IDParameter = app_ID.HasValue ?
+                new ObjectParameter("App_ID", app_ID) :
+                new ObjectParameter("App_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表流程单条表_Result>("f______列表流程单条表", app_IDParameter);
+        }
+    
+        public virtual ObjectResult<f______列表流程流程表_Result> f______列表流程流程表(Nullable<int> app_ID)
+        {
+            var app_IDParameter = app_ID.HasValue ?
+                new ObjectParameter("App_ID", app_ID) :
+                new ObjectParameter("App_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表流程流程表_Result>("f______列表流程流程表", app_IDParameter);
+        }
+    
+        public virtual ObjectResult<string> f______列表流程文件表(string appT_ID, Nullable<int> appO_ID)
+        {
+            var appT_IDParameter = appT_ID != null ?
+                new ObjectParameter("AppT_ID", appT_ID) :
+                new ObjectParameter("AppT_ID", typeof(string));
+    
+            var appO_IDParameter = appO_ID.HasValue ?
+                new ObjectParameter("AppO_ID", appO_ID) :
+                new ObjectParameter("AppO_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("f______列表流程文件表", appT_IDParameter, appO_IDParameter);
+        }
     }
 }
