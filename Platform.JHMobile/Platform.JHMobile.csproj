@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\待办工作Controller.cs" />
     <Compile Include="Controllers\流程查询Controller.cs" />
     <Compile Include="Controllers\信息门户Controller.cs" />
     <Compile Include="Controllers\已收寻呼Controller.cs" />
@@ -599,6 +600,8 @@
     <Content Include="Views\流程查询\流程查询列表单页.cshtml" />
     <Content Include="Views\流程查询\首页.cshtml" />
     <Content Include="Views\流程查询\流程查询列表内容.cshtml" />
+    <Content Include="Views\待办工作\首页.cshtml" />
+    <Content Include="Views\待办工作\待办工作列表单页.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,0 +1,41 @@
+﻿@using Platform.JHMobile.Models
+@model List<f______列表待办工作表_Result>
+@{
+    foreach (var obj in Model)
+    {
+        <div class="row" onclick="top.location = '@Url.Action("待办工作列表内容", "待办工作", new { id = obj.App_ID })';">
+            <div class="col-xs-12">
+                <div class="chat-wrap scroll-chat-widget">
+                    <ul class="media-list media-xs media-dotted media-chat">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <img class="media-object img-circle" src="~/Content/img/流程.jpg" alt="" />
+                            </a>
+                            <div class="media-body" style="background-color:#fff;">
+                                <p class="name" style="background-color:#5C96F7; padding:8px">
+                                    <small><span>@Html.Raw(obj.AppO_Title)</span></small>
+                                </p>
+                                <p class="small">
+                                    <div class="row">
+                                        <div class="col-xs-8 text-left">
+                                            <div>@obj.App_BeginTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
+                                        </div>
+                                        <div class="col-xs-4 text-right">
+                                            <div>@obj.UserName</div>
+                                        </div>
+                                    </div>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+}
+<div class="row">
+    <div class="col-md-12 text-center">
+        -&nbsp;&nbsp;&nbsp;&nbsp;第&nbsp;@(ViewBag.Current)&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;-
+    </div>
+</div>
+<div class="row">&nbsp;</div>
