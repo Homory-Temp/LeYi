@@ -1,0 +1,49 @@
+﻿@using Platform.JHMobile.Models
+
+@model 待办工作办理内容
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="page-heading" style="margin-top: 5px; margin-bottom: 5px;">待办工作</h1>
+                <div class="the-box toolbar no-border no-margin">
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("首页", "首页")';">
+                                <i class="fa fa-home fa-lg"></i>
+                            </div>
+                            <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("待办工作列表内容", "待办工作", new { id = @Model.对象.App_ID })';">
+                                <i class="fa fa-reply fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-12"><strong>标题：</strong></div>
+            <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.对象.AppO_Title</div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-12"><strong>意见：</strong></div>
+            <div class="col-md-12 text-center">
+                <input name="stepText" class="form-control mm" type="text" value="@Model.文本" />
+            </div>
+            <div class="col-md-12"><strong>提示：</strong></div>
+            <div class="col-md-12 text-center">
+                <input name="stepHint" class="form-control mm" type="text" value="" />
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <input class="btn btn-warning" type="submit" onclick='this.form.action = "@Url.Action("待办工作流转返回处理", "待办工作", new { id = Model.对象.App_ID })"' value="提交" />
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+    </div>
+                }

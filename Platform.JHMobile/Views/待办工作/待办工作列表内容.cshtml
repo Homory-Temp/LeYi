@@ -1,0 +1,136 @@
+﻿@using Platform.JHMobile.Models
+@using Platform.JHMobile.Controllers;
+@model 待办工作对象内容
+
+@using (Html.BeginForm())
+{
+    <div id="area" class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="page-heading" style="margin-top: 5px; margin-bottom: 5px;">待办工作</h1>
+                <div class="the-box toolbar no-border no-margin">
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("首页", "首页")';">
+                                <i class="fa fa-home fa-lg"></i>
+                            </div>
+                            <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("首页", "待办工作")';">
+                                <i class="fa fa-reply fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-12"><strong>标题：</strong></div>
+            <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.对象.AppO_Title</div>
+            @{
+                if (!string.IsNullOrEmpty(Model.对象.App_InnerIdea) && Model.对象.App_InnerIdea.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).Length > 1)
+                {
+                    <div class="col-md-12"><strong>提示：</strong></div>
+                    <div class="col-md-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.对象.App_InnerIdea.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries)[1]</div>
+                }
+            }
+        </div>
+        <div class="row">&nbsp;</div>
+        @{
+            if (ViewBag.XType == "Message")
+            {
+                <div class="row">
+                    <div class="col-md-12"><strong>正文：</strong></div>
+                    <div class="col-md-12">
+                        @Html.Raw(ViewBag.Html)
+                        @{
+                            if (!string.IsNullOrEmpty(ViewBag.PDF))
+                            {
+                                <input id="pdfPath" type="hidden" value="@string.Format("../../{0}", ViewBag.PDF.Replace(OfficeController.Directory, "").Replace("\\", "/"))" />
+                                <iframe id="viewer" style="width: 100%; height: 389px;" src="~/PDFViewer/web/viewer.html"></iframe>
+                            }
+                        }
+                    </div>
+                    @{
+                        if (!string.IsNullOrEmpty(ViewBag.PDF))
+                        {
+                            <div class="col-md-12">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a target="_blank" href="@string.Format("../../{0}", ViewBag.PDF.Replace(OfficeController.Directory, "").Replace("\\", "/"))">正文下载</a>
+                            </div>
+                        }
+                    }
+                </div>
+                        }
+        }
+        @{
+            if (ViewBag.XType == "Ask" || ViewBag.XType == "Accept" || ViewBag.XType == "Send")
+            {
+                <div class="row">
+                    <div class="col-md-12"><strong>正文：</strong></div>
+                    <div class="col-md-12">
+                        @Html.Raw(ViewBag.Html)
+                        @{
+                            if (!string.IsNullOrEmpty(ViewBag.PDF))
+                            {
+                                <input id="pdfPath" type="hidden" value="@string.Format("../../{0}", ViewBag.PDF.Replace(OfficeController.Directory, "").Replace("\\", "/"))" />
+                                <iframe id="viewer" style="width: 100%; height: 389px;" src="~/PDFViewer/web/viewer.html"></iframe>
+                            }
+                        }
+                    </div>
+                    @{
+                        if (!string.IsNullOrEmpty(ViewBag.PDF))
+                        {
+                            <div class="col-md-12">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a target="_blank" href="@string.Format("../../{0}", ViewBag.PDF.Replace(OfficeController.Directory, "").Replace("\\", "/"))">正文下载</a>
+                            </div>
+                        }
+                    }
+                </div>
+                        }
+        }
+        <div class="row">
+            @{
+                <div class="col-md-12"><strong>流程：</strong></div>
+                <div class="col-md-12 table-responsive">
+                    <table class="table table-striped table-hover">
+                        @{
+                            var index = 0;
+                            foreach (var flow in Model.流程)
+                            {
+                                index++;
+                                <tr>
+                                    <td>
+                                        <div>&nbsp;&nbsp;<strong>@(index)</strong>、<strong>@(flow.AppDA_ButtonValue)</strong></div>
+                                    </td>
+                                    <td>
+                                        <div>&nbsp;&nbsp;<strong>@(flow.UserName)</strong> @(index == 1 ? "发起" : "办理")于 <strong>@flow.App_Time.Value.ToString("yyyy-MM-dd HH:mm:ss")</strong></div>
+                                        <div>&nbsp;&nbsp;<strong>意见</strong>：@(string.IsNullOrEmpty(flow.AppI_Content) ? "无" : flow.AppI_Content)</div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-12"><strong>意见：</strong></div>
+            <div class="col-md-12 text-center">
+                <input name="stepText" class="form-control mm" type="text" />
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                @{
+                    foreach (var button in Model.按钮)
+                    {
+                        <input class="btn btn-warning" type="submit" onclick='this.form.action = "@Url.Action("待办工作流转" + 待办工作Controller.待办工作流转处理(button.AppDA_Type), "待办工作", new { id = Model.对象.App_ID })"' value="@button.AppDA_ButtonValue" />
+                    }
+                }
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+    </div>
+                    }

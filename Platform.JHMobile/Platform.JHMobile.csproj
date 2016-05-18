@@ -156,6 +156,8 @@
     <Compile Include="Models\Common\DynamicController.cs" />
     <Compile Include="Models\Common\OfficeController.cs" />
     <Compile Include="Models\Entity\信息门户对象内容.cs" />
+    <Compile Include="Models\Entity\待办工作办理内容.cs" />
+    <Compile Include="Models\Entity\待办工作对象内容.cs" />
     <Compile Include="Models\Entity\流程查询对象内容.cs" />
     <Compile Include="Models\Entity\信息门户对象模块.cs" />
     <Compile Include="Models\Entity\已收寻呼对象历史.cs" />
@@ -602,6 +604,10 @@
     <Content Include="Views\流程查询\流程查询列表内容.cshtml" />
     <Content Include="Views\待办工作\首页.cshtml" />
     <Content Include="Views\待办工作\待办工作列表单页.cshtml" />
+    <Content Include="Views\待办工作\待办工作列表内容.cshtml" />
+    <Content Include="Views\待办工作\待办工作流转返回.cshtml" />
+    <Content Include="Views\待办工作\待办工作流转办结.cshtml" />
+    <Content Include="Views\待办工作\待办工作流转下步.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
