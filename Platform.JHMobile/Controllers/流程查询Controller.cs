@@ -36,7 +36,7 @@ namespace Platform.JHMobile.Controllers
                 return 认证();
             var id = RouteData.Values["id"]?.ToString();
             if (string.IsNullOrEmpty(id))
-                return RedirectToAction("TaskDone", "Task");
+                return RedirectToAction("首页", "流程查询");
             var int_id = int.Parse(id);
             var task = DB.f______列表流程单条表(int_id).FirstOrDefault();
             if (task.AppT_ID.StartsWith("IOA_Ask", StringComparison.OrdinalIgnoreCase))
