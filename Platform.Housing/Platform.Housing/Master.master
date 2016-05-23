@@ -1,0 +1,33 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Master.master.cs" Inherits="Master" %>
+
+<%@ Register TagPrefix="telerik" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <link href="styles/base.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="bookmart" href="favicon.ico" type="image/x-icon" />
+</head>
+<body>
+    <form id="form" runat="server">
+        <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
+        <div style="margin: auto 30px;">
+            <table>
+                <tr>
+                    <td>
+                        <img src="images/logo.png" alt="" />
+                    </td>
+                    <td>
+                        <h3>梁溪教育学生住房信息检索平台</h3>
+                    </td>
+                </tr>
+            </table>
+            <asp:ContentPlaceHolder ID="body" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

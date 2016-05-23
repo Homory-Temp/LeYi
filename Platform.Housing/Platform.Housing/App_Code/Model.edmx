@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_BT.dbo.Housing_Department”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Housing_Department">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Ordinal" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_BT.dbo.Housing_Member”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Housing_Member">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="OnlineId" />
+          </Key>
+          <Property Name="DepartmentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OnlineId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Housing_Department" EntityType="Self.Housing_Department" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Housing_Department].[Id] AS [Id], 
+    [Housing_Department].[Name] AS [Name], 
+    [Housing_Department].[Ordinal] AS [Ordinal]
+    FROM [dbo].[Housing_Department] AS [Housing_Department]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Housing_Member" EntityType="Self.Housing_Member" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Housing_Member].[DepartmentId] AS [DepartmentId], 
+    [Housing_Member].[UserId] AS [UserId], 
+    [Housing_Member].[OnlineId] AS [OnlineId]
+    FROM [dbo].[Housing_Member] AS [Housing_Member]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Housing_Department" EntityType="Model.Housing_Department" />
+          <EntitySet Name="Housing_Member" EntityType="Model.Housing_Member" />
+        </EntityContainer>
+        <EntityType Name="Housing_Department">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Ordinal" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Housing_Member">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="OnlineId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="OnlineId" Type="Guid" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Housing_Department">
+            <EntityTypeMapping TypeName="Model.Housing_Department">
+              <MappingFragment StoreEntitySet="Housing_Department">
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Housing_Member">
+            <EntityTypeMapping TypeName="Model.Housing_Member">
+              <MappingFragment StoreEntitySet="Housing_Member">
+                <ScalarProperty Name="OnlineId" ColumnName="OnlineId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

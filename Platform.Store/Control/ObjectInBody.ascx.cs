@@ -66,6 +66,12 @@ public partial class Control_ObjectInBody : SingleStoreControl
                 specification.Text = so.Specification;
                 stored.Text = so.Amount.ToAmount();
                 obj.SelectedIndex = obj.FindItemIndexByValue(@in.ObjectId.ToString());
+
+                var last = so.StoreIn.OrderByDescending(o => o.AutoId).FirstOrDefault();
+                if (last != null)
+                {
+                    perPrice.Value = (double)last.SourcePerPrice;
+                }
             }
             age.Text = @in.Age;
         }
@@ -124,6 +130,12 @@ public partial class Control_ObjectInBody : SingleStoreControl
             unit.Text = so.Unit;
             specification.Text = so.Specification;
             stored.Text = so.Amount.ToAmount();
+
+            var last = so.StoreIn.OrderByDescending(o => o.AutoId).FirstOrDefault();
+            if (last != null)
+            {
+                perPrice.Value = (double)last.SourcePerPrice;
+            }
         }
     }
 }
