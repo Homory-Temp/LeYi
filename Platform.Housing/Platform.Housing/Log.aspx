@@ -5,8 +5,9 @@
         <telerik:RadComboBox ID="combo" runat="server" Skin="Bootstrap" DataTextField="Name" DataValueField="Id" Width="450" Filter="Contains" MarkFirstMatch="true" AutoPostBack="true" OnSelectedIndexChanged="combo_SelectedIndexChanged" LocalizationPath="~/Language"></telerik:RadComboBox>
         <br /><br />
         <telerik:RadDatePicker ID="from" runat="server" Skin="Bootstrap"></telerik:RadDatePicker>&nbsp;&nbsp;&nbsp;&nbsp;
-        <telerik:RadDatePicker ID="to" runat="server" Skin="Bootstrap"></telerik:RadDatePicker>
+        <telerik:RadDatePicker ID="to" runat="server" Skin="Bootstrap"></telerik:RadDatePicker>&nbsp;&nbsp;&nbsp;&nbsp;
         <telerik:RadButton ID="query" runat="server" Skin="Bootstrap" Text="检索" OnClick="query_Click"></telerik:RadButton>
+        <telerik:RadButton ID="back" runat="server" Skin="Bootstrap" Text="返回" OnClick="back_Click" Style="float: right;"></telerik:RadButton>
         <br /><br />
         <telerik:RadGrid ID="grid" runat="server" Width="100%" OnNeedDataSource="grid_NeedDataSource" AllowPaging="True" PageSize="20" AllowSorting="True" ShowGroupPanel="False" RenderMode="Classic" LocalizationPath="~/Language">
             <MasterTableView AutoGenerateColumns="False" AllowFilteringByColumn="False" DataKeyNames="时间,学生信息查询内容,地址信息查询内容,用户姓名" CommandItemDisplay="None">

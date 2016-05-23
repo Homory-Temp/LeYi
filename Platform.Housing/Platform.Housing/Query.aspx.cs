@@ -45,6 +45,11 @@ public partial class Query : SsoPage
         grid.Rebind();
     }
 
+    protected void back_Click(object sender, EventArgs e)
+    {
+        Response.Redirect(string.Format("Grid.aspx?OnlineId={0}", Request.QueryString["OnlineId"]));
+    }
+
     protected void query_Click(object sender, EventArgs e)
     {
         try

@@ -119,4 +119,9 @@ public partial class Grid : SsoPage
     {
         Response.Redirect(string.Format("Query.aspx?OnlineId={0}", Request.QueryString["OnlineId"]));
     }
+
+    protected void log_Click(object sender, EventArgs e)
+    {
+        Response.Redirect(string.Format("Log.aspx?OnlineId={0}", Request.QueryString["OnlineId"]));
+    }
 }

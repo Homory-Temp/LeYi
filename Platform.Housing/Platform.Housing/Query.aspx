@@ -6,7 +6,8 @@
         <br /><br />
         <telerik:RadTextBox ID="basic" runat="server" Label="学生信息：" LabelWidth="80" Width="300" Skin="Bootstrap"></telerik:RadTextBox>&nbsp;&nbsp;&nbsp;&nbsp;
         <telerik:RadTextBox ID="extended" runat="server" Label="地址信息：" LabelWidth="80" Width="500" Skin="Bootstrap"></telerik:RadTextBox>&nbsp;&nbsp;&nbsp;&nbsp;
-        <telerik:RadButton ID="query" runat="server" Skin="Bootstrap" Text="检索" OnClick="query_Click"></telerik:RadButton>
+        <telerik:RadButton ID="query" runat="server" Skin="Bootstrap" Text="检索" OnClick="query_Click"></telerik:RadButton>&nbsp;&nbsp;&nbsp;&nbsp;
+        <telerik:RadButton ID="back" runat="server" Skin="Bootstrap" Text="数据维护" OnClick="back_Click" Style="float: right;"></telerik:RadButton>
         <br /><br />
         <telerik:RadGrid ID="grid" runat="server" Width="100%" OnNeedDataSource="grid_NeedDataSource" AllowPaging="True" PageSize="20" AllowSorting="True" ShowGroupPanel="False" RenderMode="Classic" LocalizationPath="~/Language">
             <MasterTableView AutoGenerateColumns="False" AllowFilteringByColumn="False" DataKeyNames="学校,姓名,身份证号,入学年份,户籍,住址" CommandItemDisplay="None">

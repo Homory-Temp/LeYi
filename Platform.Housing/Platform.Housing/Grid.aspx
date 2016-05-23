@@ -5,6 +5,7 @@
         <telerik:RadComboBox ID="combo" runat="server" Skin="Bootstrap" DataTextField="Name" DataValueField="Id" Width="450" Filter="Contains" MarkFirstMatch="true" AutoPostBack="true" OnSelectedIndexChanged="combo_SelectedIndexChanged" LocalizationPath="~/Language"></telerik:RadComboBox>
         <telerik:RadButton ID="import" runat="server" Skin="Bootstrap" Text="导入" OnClick="import_Click"></telerik:RadButton>
         <telerik:RadButton ID="query" runat="server" Skin="Bootstrap" Text="检索" OnClick="query_Click"></telerik:RadButton>
+        <telerik:RadButton ID="log" runat="server" Skin="Bootstrap" Text="日志" OnClick="log_Click"></telerik:RadButton>
         <br /><br />
         <telerik:RadGrid ID="grid" runat="server" Width="100%" OnNeedDataSource="grid_NeedDataSource" AllowPaging="True" PageSize="20" AllowSorting="True" ShowGroupPanel="False" RenderMode="Classic" LocalizationPath="~/Language" OnBatchEditCommand="grid_BatchEditCommand">
             <MasterTableView AutoGenerateColumns="False" EditMode="Batch" AllowFilteringByColumn="False" DataKeyNames="学校,姓名,身份证号,入学年份,户籍,住址" CommandItemDisplay="Top" InsertItemPageIndexAction="ShowItemOnFirstPage">

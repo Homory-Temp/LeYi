@@ -52,6 +52,11 @@ public partial class Log : SsoPage
         grid.Rebind();
     }
 
+    protected void back_Click(object sender, EventArgs e)
+    {
+        Response.Redirect(string.Format("Grid.aspx?OnlineId={0}", Request.QueryString["OnlineId"]));
+    }
+
     protected void grid_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
     {
         if (combo.SelectedIndex == -1)
