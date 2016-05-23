@@ -51,7 +51,12 @@ public partial class StoreAction_ObjectAddX : SingleStorePage
             Notify(ap, "请选择物资类型", "error");
             return;
         }
-        var id = Save();
+        var r = Save();
+        if (r == Guid.Empty)
+        {
+            Notify(ap, "同级分类下请勿创建同名物资", "error");
+            return;
+        }
         Response.Redirect("~/StoreAction/In?StoreId={0}".Formatted(StoreId));
     }
 
@@ -67,7 +72,12 @@ public partial class StoreAction_ObjectAddX : SingleStorePage
             Notify(ap, "请选择物资类型", "error");
             return;
         }
-        Save();
+        var r = Save();
+        if (r == Guid.Empty)
+        {
+            Notify(ap, "同级分类下请勿创建同名物资", "error");
+            return;
+        }
         Response.Redirect(Request.Url.PathAndQuery);
     }
 
@@ -83,12 +93,23 @@ public partial class StoreAction_ObjectAddX : SingleStorePage
             Notify(ap, "请选择物资类型", "error");
             return;
         }
-        Save();
+        var r = Save();
+        if (r == Guid.Empty)
+        {
+            Notify(ap, "同级分类下请勿创建同名物资", "error");
+            return;
+        }
         Response.Redirect("~/StoreAction/In?StoreId={0}".Formatted(StoreId));
     }
 
     protected Guid Save()
     {
+        var test = name.Text.Trim();
+        var testx = tree.SelectedValue.GlobalId();
+        if (db.Value.StoreObject.Count(x => x.Name == test && x.State < 2 && x.CatalogId == testx) > 0)
+        {
+            return Guid.Empty;
+        }
         var id = db.Value.GlobalId();
         var img = new[] { p0, p1, p2, p3 }.ToList();
         var photo = img.Count(o => !o.Src.Contains("/Content/Images/Transparent.png")) == 0 ? string.Empty : img.Where(o => !o.Src.Contains("/Content/Images/Transparent.png")).Select(o => o.Src).Aggregate("", (a, b) => a += "*" + b, o => o.Substring(1));

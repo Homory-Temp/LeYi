@@ -51,8 +51,13 @@ public partial class StoreAction_ObjectAdd : SingleStorePage
             Notify(ap, "请选择物资类型", "error");
             return;
         }
-        var id = Save();
-        Response.Redirect("~/StoreAction/In?StoreId={0}&ObjectId={1}".Formatted(StoreId, id));
+        var r = Save();
+        if (r == Guid.Empty)
+        {
+            Notify(ap, "同级分类下请勿创建同名物资", "error");
+            return;
+        }
+        Response.Redirect("~/StoreAction/In?StoreId={0}&ObjectId={1}".Formatted(StoreId, r));
     }
 
     protected void goon_ServerClick(object sender, EventArgs e)
@@ -67,7 +72,12 @@ public partial class StoreAction_ObjectAdd : SingleStorePage
             Notify(ap, "请选择物资类型", "error");
             return;
         }
-        Save();
+        var r = Save();
+        if (r == Guid.Empty)
+        {
+            Notify(ap, "同级分类下请勿创建同名物资", "error");
+            return;
+        }
         Response.Redirect(Request.Url.PathAndQuery);
     }
 
