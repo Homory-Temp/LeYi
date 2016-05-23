@@ -8,7 +8,7 @@
         <telerik:RadTextBox ID="extended" runat="server" Label="地址信息：" LabelWidth="80" Width="500" Skin="Bootstrap"></telerik:RadTextBox>&nbsp;&nbsp;&nbsp;&nbsp;
         <telerik:RadButton ID="query" runat="server" Skin="Bootstrap" Text="检索" OnClick="query_Click"></telerik:RadButton>
         <br /><br />
-        <telerik:RadGrid ID="grid" runat="server" Width="100%" OnNeedDataSource="grid_NeedDataSource" AllowPaging="False" AllowSorting="True" ShowGroupPanel="False" RenderMode="Classic" LocalizationPath="~/Language">
+        <telerik:RadGrid ID="grid" runat="server" Width="100%" OnNeedDataSource="grid_NeedDataSource" AllowPaging="True" PageSize="20" AllowSorting="True" ShowGroupPanel="False" RenderMode="Classic" LocalizationPath="~/Language">
             <MasterTableView AutoGenerateColumns="False" AllowFilteringByColumn="False" DataKeyNames="学校,姓名,身份证号,入学年份,户籍,住址" CommandItemDisplay="None">
                 <Columns>
                     <telerik:GridBoundColumn HeaderStyle-Width="80" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center" DataField="姓名" HeaderText="姓名 *" SortExpression="姓名" UniqueName="姓名">
@@ -32,6 +32,7 @@
                 </Columns>
                 <HeaderStyle HorizontalAlign="Center" />
                 <NoRecordsTemplate><div style="width: 100%; text-align: center;">无记录</div></NoRecordsTemplate>
+                <PagerStyle Mode="NextPrevAndNumeric" PageSizes="10,20,60,100" Position="Bottom" PageSizeControlType="RadComboBox" AlwaysVisible="true" PagerTextFormat="{4} 第{0}页，共{1}页；第{2}-{3}项，共{5}项" />
             </MasterTableView>
         </telerik:RadGrid>
     </telerik:RadAjaxPanel>

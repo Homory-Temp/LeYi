@@ -5,6 +5,27 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Account" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="256" />
+          <Property Name="Stamp" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PasswordEx" Type="nvarchar(max)" />
+          <Property Name="CryptoKey" Type="nvarchar(max)" />
+          <Property Name="CryptoSalt" Type="nvarchar(max)" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="PinYin" Type="nvarchar" MaxLength="256" />
+          <Property Name="WXOpenId" Type="nvarchar(max)" />
+        </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Platform_BT.dbo.Housing_Department”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Housing_Department">
@@ -30,6 +51,7 @@
           <Property Name="OnlineId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Housing_Department" EntityType="Self.Housing_Department" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Housing_Department].[Id] AS [Id], 
@@ -52,6 +74,7 @@
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Housing_Department" EntityType="Model.Housing_Department" />
           <EntitySet Name="Housing_Member" EntityType="Model.Housing_Member" />
+          <EntitySet Name="User" EntityType="Model.User" />
         </EntityContainer>
         <EntityType Name="Housing_Department">
           <Key>
@@ -72,6 +95,27 @@
           <Property Name="DepartmentId" Type="Guid" Nullable="false" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="OnlineId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Account" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="RealName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Stamp" Type="Guid" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordEx" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CryptoKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CryptoSalt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="WXOpenId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -94,6 +138,28 @@
                 <ScalarProperty Name="OnlineId" ColumnName="OnlineId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="WXOpenId" ColumnName="WXOpenId" />
+                <ScalarProperty Name="PinYin" ColumnName="PinYin" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CryptoSalt" ColumnName="CryptoSalt" />
+                <ScalarProperty Name="CryptoKey" ColumnName="CryptoKey" />
+                <ScalarProperty Name="PasswordEx" ColumnName="PasswordEx" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Stamp" ColumnName="Stamp" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

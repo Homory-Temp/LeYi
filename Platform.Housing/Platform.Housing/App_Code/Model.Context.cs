@@ -25,4 +25,5 @@ public partial class Entities : DbContext
 
     public virtual DbSet<Housing_Department> Housing_Department { get; set; }
     public virtual DbSet<Housing_Member> Housing_Member { get; set; }
+    public virtual DbSet<User> User { get; set; }
 }

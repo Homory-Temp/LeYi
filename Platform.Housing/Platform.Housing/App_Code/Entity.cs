@@ -59,3 +59,12 @@ public class HousingCount
     public int 数量 { get; set; }
     public Housing_Department 单位 { get; set; }
 }
+
+public class HousingLog
+{
+    public DateTime 时间 { get; set; }
+    public string 学生信息查询内容 { get; set; }
+    public string 地址信息查询内容 { get; set; }
+    public Guid 用户ID { get; set; }
+    public string 用户姓名 { get; set; }
+}

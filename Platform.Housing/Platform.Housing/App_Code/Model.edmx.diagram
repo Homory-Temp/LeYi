@@ -7,6 +7,7 @@
       <Diagram DiagramId="30f5de168b6d481ca7362ccbcf71ded7" Name="Diagram">
         <EntityTypeShape EntityType="Model.Housing_Department" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model.Housing_Member" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

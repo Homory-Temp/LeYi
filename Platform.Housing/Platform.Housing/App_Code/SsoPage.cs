@@ -28,6 +28,8 @@ public class SsoPage : System.Web.UI.Page
                     return;
                 }
                 Session["HousingId"] = obj.DepartmentId;
+                Session["MemberId"] = obj.UserId;
+                Session["MemberName"] = db.Value.User.SingleOrDefault(o => o.Id == obj.UserId).RealName;
             }
         }
         catch

@@ -23,3 +23,23 @@ public partial class Housing_Member
     public System.Guid UserId { get; set; }
     public System.Guid OnlineId { get; set; }
 }
+
+public partial class User
+{
+    public System.Guid Id { get; set; }
+    public string Account { get; set; }
+    public string RealName { get; set; }
+    public string DisplayName { get; set; }
+    public string Icon { get; set; }
+    public System.Guid Stamp { get; set; }
+    public string Password { get; set; }
+    public string PasswordEx { get; set; }
+    public string CryptoKey { get; set; }
+    public string CryptoSalt { get; set; }
+    public int Type { get; set; }
+    public int State { get; set; }
+    public int Ordinal { get; set; }
+    public string Description { get; set; }
+    public string PinYin { get; set; }
+    public string WXOpenId { get; set; }
+}

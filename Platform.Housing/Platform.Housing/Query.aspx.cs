@@ -47,6 +47,22 @@ public partial class Query : SsoPage
 
     protected void query_Click(object sender, EventArgs e)
     {
+        try
+        {
+            if (!string.IsNullOrEmpty(basic.Text) || !string.IsNullOrEmpty(extended.Text))
+            {
+                var id = Guid.Parse(combo.SelectedValue).ToString().ToUpper();
+                using (IStorageEngine engine = STSdb.FromFile(Server.MapPath(string.Format("App_Data/Housing_{0}.record.queryx", id))))
+                {
+                    var table = engine.OpenXTablePortable<Guid, HousingLog>("Record");
+                    table[Guid.NewGuid()] = new HousingLog { 时间 = DateTime.Now, 用户ID = (Guid)Session["MemberId"], 用户姓名 = Session["MemberName"].ToString(), 学生信息查询内容 = basic.Text, 地址信息查询内容 = extended.Text };
+                    engine.Commit();
+                }
+            }
+        }
+        catch
+        {
+        }
         grid.Rebind();
     }
 
