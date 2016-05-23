@@ -34,7 +34,7 @@
                             <telerik:RadTextBox ID="year" runat="server" Text='<%# Bind("入学年份") %>' Width="60" EnabledStyle-HorizontalAlign="Center"></telerik:RadTextBox>
                         </EditItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn HeaderStyle-Width="100" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center" DataField="户籍" HeaderText="户籍 *" SortExpression="户籍" UniqueName="户籍">
+                    <telerik:GridTemplateColumn HeaderStyle-Width="130" ItemStyle-Width="130" ItemStyle-HorizontalAlign="Center" DataField="户籍" HeaderText="户籍 *" SortExpression="户籍" UniqueName="户籍">
                         <ItemTemplate>
                             <%# Eval("户籍") %>
                         </ItemTemplate>

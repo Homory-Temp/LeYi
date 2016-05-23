@@ -18,7 +18,7 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn HeaderStyle-Width="80" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center" DataField="入学年份" HeaderText="入学年份 *" SortExpression="入学年份" UniqueName="入学年份">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn HeaderStyle-Width="100" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center" DataField="户籍" HeaderText="户籍 *" SortExpression="户籍" UniqueName="户籍">
+                    <telerik:GridBoundColumn HeaderStyle-Width="130" ItemStyle-Width="130" ItemStyle-HorizontalAlign="Center" DataField="户籍" HeaderText="户籍 *" SortExpression="户籍" UniqueName="户籍">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="住址" HeaderText="住址 *" SortExpression="住址" UniqueName="住址">
                     </telerik:GridBoundColumn>
