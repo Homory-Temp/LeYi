@@ -53,3 +53,9 @@ public class HousingRecordX : HousingRecord
 
     }
 }
+
+public class HousingCount
+{
+    public int 数量 { get; set; }
+    public Housing_Department 单位 { get; set; }
+}

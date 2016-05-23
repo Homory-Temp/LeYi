@@ -60,6 +60,18 @@ public partial class Grid : SsoPage
                 var table = engine.OpenXTablePortable<HousingKey, HousingValue>("Record");
                 list = table.Where(o => o.Key.学校 == gid).Select(o => new HousingRecord(o.Key, o.Value)).ToList();
             }
+            try
+            {
+                using (IStorageEngine engine = STSdb.FromFile(Server.MapPath("App_Data/Housing__Count.record")))
+                {
+                    var table = engine.OpenXTablePortable<Guid, int>("Record");
+                    table[gid] = list.Count;
+                    engine.Commit();
+                }
+            }
+            catch
+            {
+            }
             grid.DataSource = list;
         }
     }
