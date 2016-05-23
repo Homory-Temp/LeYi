@@ -19,6 +19,13 @@
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../Content/Homory/js/common.js"></script>
     <script src="../Content/Homory/js/notify.min.js"></script>
+    <script>
+        function sg(sender, e) {
+            if (e.get_keyCode() == 13) {
+                $("#search").click();
+            }
+        }
+    </script>
     <!--[if lt IE 9]>
 	    <script src="../Content/Homory/js/html5shiv.js"></script>
 	    <script src="../Content/Homory/js/respond.min.js"></script>
@@ -57,12 +64,16 @@
                 </div>
                 <div class="col-md-10" style="text-align: left;">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <span class="btn btn-tumblr">物资：</span>
                             <input id="add" runat="server" type="button" class="btn btn-info" value="新增" onserverclick="add_ServerClick" />
                         </div>
-                        <div class="col-md-4">&nbsp;</div>
-                        <div class="col-md-4 text-right">
+                        <div class="col-md-6">
+                            <telerik:RadTextBox ID="toSearch" runat="server" Width="200" EmptyMessage="输入要检索的物资名称" ClientEvents-OnKeyPress="sg"></telerik:RadTextBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                             <input id="search" runat="server" type="button" class="btn btn-info" value="检索" onserverclick="search_ServerClick" />
+                        </div>
+                        <div class="col-md-3 text-right">
                             <input id="view_simple" runat="server" type="button" value="简洁模式" onserverclick="view_simple_ServerClick" />
                             <input id="view_photo" runat="server" type="button" value="图文模式" onserverclick="view_photo_ServerClick" />
                         </div>
