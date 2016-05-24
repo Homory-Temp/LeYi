@@ -33,6 +33,13 @@
                         <p class="name" style="background-color:#98C86C; padding:8px"><small>寻呼内容</small></p>
                         <p class="small">
                             &nbsp;&nbsp;&nbsp;&nbsp;@Html.Raw(Model.列表寻呼未阅表.CallContent)
+                            @{
+                                if (Model.列表寻呼未阅表.CallContent.Contains("onclick"))
+                                {
+                                    <br />
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;（流程信息请电脑访问）</span>
+                                }
+                            }
                         </p>
                     </div>
                 </li>
