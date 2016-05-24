@@ -14,8 +14,8 @@ namespace Platform.JHMobile.Controllers
             if (string.IsNullOrEmpty(Account))
                 return 认证();
             ViewBag.未阅寻呼数 = DB.f______计数寻呼未阅数(Account).Single();
-            ViewBag.已阅寻呼数 = DB.f______计数寻呼已阅数(Account).Single();
-            ViewBag.历史寻呼数 = DB.f______计数寻呼历史数(Account).Single();
+            //ViewBag.已阅寻呼数 = DB.f______计数寻呼已阅数(Account).Single();
+            //ViewBag.历史寻呼数 = DB.f______计数寻呼历史数(Account).Single();
             return View();
         }
 

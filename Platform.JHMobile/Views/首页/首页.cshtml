@@ -11,11 +11,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6 metro_left">
+        <div class="col-xs-12 metro_left metro_right">
             <div class="metro metro_0" onclick="top.location = '@Url.Action("首页", "已收寻呼")';">
-                <div><i class="fa fa-comments fa-5x"></i></div>
-                <div class="metro_text">已收寻呼</div>
-                <div class="metro_text">@ViewBag.已收寻呼数</div>
+                <div><i class="fa fa-comments fa-5x"></i>&nbsp;&nbsp;<span class="badge" style="background-color: white; color: #e77960;">@ViewBag.已收寻呼数</span></div>
+                <div class="metro_text">网络寻呼</div>
             </div>
         </div>
     </div>
@@ -24,30 +23,26 @@
             <div class="metro metro_2" onclick="top.location = '@Url.Action("首页", "信息门户")';">
                 <div><i class="fa fa-envelope fa-5x"></i></div>
                 <div class="metro_text">信息门户</div>
-                <div class="metro_text">@ViewBag.信息门户数</div>
             </div>
         </div>
         <div class="col-xs-6 metro_right">
             <div class="metro metro_3" onclick="top.location = '@Url.Action("首页", "待阅信息")';">
-                <div><i class="fa fa-envelope-o fa-5x"></i></div>
+                <div><i class="fa fa-envelope-o fa-5x"></i>&nbsp;&nbsp;<span class="badge" style="background-color: white; color: #e9cc4c;">@ViewBag.待阅信息数</span></div>
                 <div class="metro_text">待阅信息</div>
-                <div class="metro_text">@ViewBag.待阅信息数</div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-6 metro_left">
             <div class="metro metro_4" onclick="top.location = '@Url.Action("首页", "待办工作")';">
-                <div><i class="fa fa-tasks fa-5x"></i></div>
+                <div><i class="fa fa-tasks fa-5x"></i>&nbsp;&nbsp;<span class="badge" style="background-color: white; color: #ba769f;">@ViewBag.待办工作数</span></div>
                 <div class="metro_text">待办工作</div>
-                <div class="metro_text">@ViewBag.待办工作数</div>
             </div>
         </div>
         <div class="col-xs-6 metro_right">
             <div class="metro metro_5" onclick="top.location = '@Url.Action("首页", "流程查询")';">
                 <div><i class="fa fa-database fa-5x"></i></div>
                 <div class="metro_text">流程查询</div>
-                <div class="metro_text">@ViewBag.流程查询数</div>
             </div>
         </div>
     </div>

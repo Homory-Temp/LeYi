@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "已收寻呼";
+    ViewBag.Title = "网络寻呼";
 }
 <div class="container">
     <div class="row">
         <div class="col-xs-12 metro_left metro_right">
-            <h1 class="page-heading" style="margin: 5px;">已收寻呼</h1>
+            <h1 class="page-heading" style="margin: 5px;">网络寻呼</h1>
             <div class="the-box toolbar no-border no-margin">
                 <div class="row">
                     <div class="col-xs-7">
@@ -20,16 +20,14 @@
     <div class="row">
         <div class="col-xs-6 metro_left">
             <div class="metro metro_0" onclick="top.location = '@Url.Action("寻呼列表未阅", "已收寻呼")';">
-                <div><i class="fa fa-comments fa-5x"></i></div>
+                <div><i class="fa fa-comments fa-5x"></i>&nbsp;&nbsp;<span class="badge" style="background-color: white; color: #e77960;">@ViewBag.未阅寻呼数</span></div>
                 <div class="metro_text">未阅寻呼</div>
-                <div class="metro_text">@ViewBag.未阅寻呼数</div>
             </div>
         </div>
         <div class="col-xs-6 metro_right">
             <div class="metro metro_0" onclick="top.location = '@Url.Action("寻呼列表已阅", "已收寻呼")';">
                 <div><i class="fa fa-comments-o fa-5x"></i></div>
                 <div class="metro_text">已阅寻呼</div>
-                <div class="metro_text">@ViewBag.已阅寻呼数</div>
             </div>
         </div>
     </div>
@@ -38,7 +36,12 @@
             <div class="metro metro_0" onclick="top.location = '@Url.Action("寻呼列表历史", "已收寻呼")';">
                 <div><i class="fa fa-history fa-5x"></i></div>
                 <div class="metro_text">历史寻呼</div>
-                <div class="metro_text">@ViewBag.历史寻呼数</div>
+            </div>
+        </div>
+        <div class="col-xs-6 metro_right">
+            <div class="metro metro_0" style="background-color: gray;" onclick="return; top.location = '@Url.Action("寻呼发送", "已收寻呼")';">
+                <div><i class="fa fa-comments-o fa-5x"></i></div>
+                <div class="metro_text">发送寻呼</div>
             </div>
         </div>
     </div>

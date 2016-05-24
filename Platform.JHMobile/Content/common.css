@@ -58,6 +58,36 @@
     background-color: #6fb57f;
 }
 
+.metro_0c {
+    color: #e77960;
+    background-color: white;
+}
+
+.metro_1c {
+    color: #50a6a7;
+    background-color: white;
+}
+
+.metro_2c {
+    color: #6d8dbe;
+    background-color: white;
+}
+
+.metro_3c {
+    color: #e9cc4c;
+    background-color: white;
+}
+
+.metro_4c {
+    color: #ba769f;
+    background-color: white;
+}
+
+.metro_5c {
+    color: #6fb57f;
+    background-color: white;
+}
+
 .panel-heading span a, .panel-heading span a:hover, .panel-heading span a:active, .panel-heading span a:visited {
     color: white;
 }
