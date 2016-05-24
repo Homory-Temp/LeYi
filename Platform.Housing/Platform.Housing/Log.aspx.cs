@@ -77,10 +77,16 @@ public partial class Log : SsoPage
                 et = tt;
             }
             et = et.AddDays(1).AddMilliseconds(-1);
+            var uid = Guid.Parse(Session["MemberId"].ToString());
+            var root = db.Value.Housing_Member.Count(o => o.UserId == uid && o.DepartmentId == Guid.Empty) > 0;
             using (IStorageEngine engine = STSdb.FromFile(Server.MapPath(string.Format("App_Data/Housing_{0}.record.queryx", id))))
             {
                 var table = engine.OpenXTablePortable<Guid, HousingLog>("Record");
                 list = table.Where(o => o.Value.时间 >= st && o.Value.时间 <= et).OrderByDescending(o => o.Value.时间).Select(o => o.Value).ToList();
+            }
+            if (!root)
+            {
+                list = list.Join(db.Value.Housing_Member.Where(x => x.DepartmentId != Guid.Empty), o => o.用户ID, o => o.UserId, (a, b) => a).ToList();
             }
             grid.DataSource = list;
         }
