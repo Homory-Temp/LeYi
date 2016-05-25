@@ -327,10 +327,16 @@
                             会议管理：
 						<telerik:RadButton ID="Meeting" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
                             <ToggleStates>
-                                <telerik:RadButtonToggleState Text="√ 创建会议" Value="True" CssClass="btn btn-info" />
-                                <telerik:RadButtonToggleState Text="× 创建会议" Value="False" CssClass="btn btn-primary" />
+                                <telerik:RadButtonToggleState Text="√ 全局管理" Value="True" CssClass="btn btn-info" />
+                                <telerik:RadButtonToggleState Text="× 全局管理" Value="False" CssClass="btn btn-primary" />
                             </ToggleStates>
                         </telerik:RadButton>
+                            <telerik:RadButton ID="MeetingLocal" runat="server" ButtonType="ToggleButton" ToggleType="CustomToggle" AutoPostBack="True" CssClass="btn btn-info" Style="margin: 10px;" OnClick="Right_OnClick" Width="100" Height="40" ForeColor="White">
+                                <ToggleStates>
+                                    <telerik:RadButtonToggleState Text="√ 创建会议" Value="True" CssClass="btn btn-info" />
+                                    <telerik:RadButtonToggleState Text="× 创建会议" Value="False" CssClass="btn btn-primary" />
+                                </ToggleStates>
+                            </telerik:RadButton>
                         </div>
                         <input id="gid" runat="server" type="hidden" />
                     </asp:Panel>
