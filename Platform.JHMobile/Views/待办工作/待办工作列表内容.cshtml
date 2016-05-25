@@ -117,7 +117,7 @@
         <div class="row">
             <div class="col-md-12"><strong>意见：</strong></div>
             <div class="col-md-12 text-center">
-                <input name="stepText" class="form-control mm" type="text" />
+                <input id="vix" name="stepText" class="form-control mm" type="text" placeholder="请填写意见" />
             </div>
         </div>
         <div class="row">&nbsp;</div>
@@ -126,7 +126,7 @@
                 @{
                     foreach (var button in Model.按钮)
                     {
-                        <input class="btn btn-warning" type="submit" onclick='this.form.action = "@Url.Action("待办工作流转" + 待办工作Controller.待办工作流转处理(button.AppDA_Type), "待办工作", new { id = Model.对象.App_ID })"' value="@button.AppDA_ButtonValue" />
+                        <input class="btn btn-warning" type="submit" onclick='if(!vix.value){return;} this.form.action = "@Url.Action("待办工作流转" + 待办工作Controller.待办工作流转处理(button.AppDA_Type), "待办工作", new { id = Model.对象.App_ID })"' value="@button.AppDA_ButtonValue" />
                     }
                 }
             </div>

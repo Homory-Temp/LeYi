@@ -144,6 +144,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\待办工作Controller.cs" />
+    <Compile Include="Controllers\已阅信息Controller.cs" />
     <Compile Include="Controllers\流程查询Controller.cs" />
     <Compile Include="Controllers\信息门户Controller.cs" />
     <Compile Include="Controllers\已收寻呼Controller.cs" />
@@ -184,6 +185,9 @@
     <Compile Include="Models\f______列表寻呼附件表_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\f______列表已阅信息表_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\f______列表待办下步表_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -209,6 +213,15 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\f______列表流程流程表_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\f______已阅信息发文表_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\f______已阅信息收文表_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\f______已阅信息类型表_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\f______待阅信息发文表_Result.cs">
@@ -608,6 +621,11 @@
     <Content Include="Views\待办工作\待办工作流转返回.cshtml" />
     <Content Include="Views\待办工作\待办工作流转办结.cshtml" />
     <Content Include="Views\待办工作\待办工作流转下步.cshtml" />
+    <Content Include="Views\已阅信息\已阅信息列表单页.cshtml" />
+    <Content Include="Views\已阅信息\已阅信息列表内容发文.cshtml" />
+    <Content Include="Views\已阅信息\已阅信息列表内容收文.cshtml" />
+    <Content Include="Views\已阅信息\已阅信息列表内容通知.cshtml" />
+    <Content Include="Views\已阅信息\首页.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

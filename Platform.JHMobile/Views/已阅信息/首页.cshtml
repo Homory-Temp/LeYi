@@ -11,7 +11,7 @@
 
     function loadList() {
         $("#handler").hide();
-        var href = '@Url.Action("待阅信息列表单页", "待阅信息")' + "/" + _index;
+        var href = '@Url.Action("已阅信息列表单页", "已阅信息")' + "/" + _index;
         $.ajax({
             url: href,
             type: "GET",
@@ -31,15 +31,12 @@
 <div id="area" class="container">
     <div class="row">
         <div class="col-xs-12">
-            <h1 class="page-heading" style="margin: 5px;">待阅信息</h1>
+            <h1 class="page-heading" style="margin: 5px;">已阅信息</h1>
             <div class="the-box toolbar no-border no-margin">
                 <div class="row">
                     <div class="col-xs-7">
                         <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("首页", "首页")';">
                             <i class="fa fa-home fa-lg"></i>
-                        </div>
-                        <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("首页", "已阅信息")';">
-                            <i class="fa fa-history fa-lg"></i>
                         </div>
                     </div>
                 </div>

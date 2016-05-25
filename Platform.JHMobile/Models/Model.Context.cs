@@ -441,5 +441,50 @@ namespace Platform.JHMobile.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表待办下步表_Result>("f______列表待办下步表", appD_IDParameter, versionParameter, appDA_TypeParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> f______计数已阅信息数(string userID)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("f______计数已阅信息数", userIDParameter);
+        }
+    
+        public virtual ObjectResult<f______列表已阅信息表_Result> f______列表已阅信息表(string userID)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______列表已阅信息表_Result>("f______列表已阅信息表", userIDParameter);
+        }
+    
+        public virtual ObjectResult<f______已阅信息发文表_Result> f______已阅信息发文表(Nullable<int> appG_ID)
+        {
+            var appG_IDParameter = appG_ID.HasValue ?
+                new ObjectParameter("AppG_ID", appG_ID) :
+                new ObjectParameter("AppG_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______已阅信息发文表_Result>("f______已阅信息发文表", appG_IDParameter);
+        }
+    
+        public virtual ObjectResult<f______已阅信息类型表_Result> f______已阅信息类型表(Nullable<int> appG_ID)
+        {
+            var appG_IDParameter = appG_ID.HasValue ?
+                new ObjectParameter("AppG_ID", appG_ID) :
+                new ObjectParameter("AppG_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______已阅信息类型表_Result>("f______已阅信息类型表", appG_IDParameter);
+        }
+    
+        public virtual ObjectResult<f______已阅信息收文表_Result> f______已阅信息收文表(Nullable<int> appG_ID)
+        {
+            var appG_IDParameter = appG_ID.HasValue ?
+                new ObjectParameter("AppG_ID", appG_ID) :
+                new ObjectParameter("AppG_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<f______已阅信息收文表_Result>("f______已阅信息收文表", appG_IDParameter);
+        }
     }
 }

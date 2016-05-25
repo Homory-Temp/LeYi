@@ -1,0 +1,46 @@
+﻿@using Platform.JHMobile.Models
+@model f______已阅信息收文表_Result
+<div id="area" class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="page-heading" style="margin-top: 5px; margin-bottom: 5px;">已阅信息查看</h1>
+            <div class="the-box toolbar no-border no-margin">
+                <div class="row">
+                    <div class="col-xs-7">
+                        <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("首页", "首页")';">
+                            <i class="fa fa-home fa-lg"></i>
+                        </div>
+                        <div class="btn btn-warning" type="button" onclick="top.location = '@Url.Action("首页", "已阅信息")';">
+                            <i class="fa fa-reply fa-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-md-12"><h4><strong>@Model.AcceptTitle</strong></h4></div>
+        <div class="col-xs-5">发布人：@Model.UserName</div>
+        <div class="col-xs-7 text-right">发布时间：@Model.AppG_Begintime.Value.ToString("yyyy-MM-dd")</div>
+        <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-12">
+            @{
+                if (!string.IsNullOrEmpty(ViewBag.PDF))
+                {
+                    <input id="pdfPath" type="hidden" value="@string.Format("../../{0}", ViewBag.PDF.Replace(OfficeController.Directory, "").Replace("\\", "/"))" />
+                    <iframe id="viewer" style="width: 100%; height: 389px;" src="~/PDFViewer/web/viewer.html"></iframe>
+                }
+            }
+        </div>
+        @{
+            if (!string.IsNullOrEmpty(ViewBag.PDF))
+            {
+                <div class="col-md-12 text-center">
+                    <a class="btn btn-warning" target="_blank" href="@string.Format("../../{0}", ViewBag.Link.Replace(OfficeController.Directory, "").Replace("\\", "/"))">正文下载</a>
+                </div>
+            }
+        }
+        <div class="col-md-12">&nbsp;</div>
+    </div>
+</div>
