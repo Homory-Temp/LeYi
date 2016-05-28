@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Platform_BT.dbo.M_寻呼机构”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="M_寻呼机构">
+          <Key>
+            <PropertyRef Name="机构ID" />
+            <PropertyRef Name="金和ID" />
+          </Key>
+          <Property Name="机构ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="金和ID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="机构名称" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="父级ID" Type="uniqueidentifier" />
+          <Property Name="序号" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MModelStoreContainer">
+          <EntitySet Name="M_寻呼机构" EntityType="Self.M_寻呼机构" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [M_寻呼机构].[机构ID] AS [机构ID], 
+    [M_寻呼机构].[金和ID] AS [金和ID], 
+    [M_寻呼机构].[机构名称] AS [机构名称], 
+    [M_寻呼机构].[父级ID] AS [父级ID], 
+    [M_寻呼机构].[序号] AS [序号]
+    FROM [dbo].[M_寻呼机构] AS [M_寻呼机构]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="M_寻呼机构">
+          <Key>
+            <PropertyRef Name="机构ID" />
+            <PropertyRef Name="金和ID" />
+          </Key>
+          <Property Name="机构ID" Type="Guid" Nullable="false" />
+          <Property Name="金和ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="机构名称" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="父级ID" Type="Guid" />
+          <Property Name="序号" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="M_寻呼机构" EntityType="Self.M_寻呼机构" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MModelStoreContainer" CdmEntityContainer="MEntities">
+          <EntitySetMapping Name="M_寻呼机构">
+            <EntityTypeMapping TypeName="MModel.M_寻呼机构">
+              <MappingFragment StoreEntitySet="M_寻呼机构">
+                <ScalarProperty Name="序号" ColumnName="序号" />
+                <ScalarProperty Name="机构ID" ColumnName="机构ID" />
+                <ScalarProperty Name="金和ID" ColumnName="金和ID" />
+                <ScalarProperty Name="机构名称" ColumnName="机构名称" />
+                <ScalarProperty Name="父级ID" ColumnName="父级ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
