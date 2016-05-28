@@ -91,8 +91,16 @@ public partial class Grid : SsoPage
                 switch (command.Type)
                 {
                     case GridBatchEditingCommandType.Insert:
+                        {
+                            table[key] = value;
+                            engine.Commit();
+                            break;
+                        }
                     case GridBatchEditingCommandType.Update:
                         {
+                            var old = command.OldValues;
+                            var okey = new HousingKey { 学校 = gid, 姓名 = old["姓名"].V(), 住址 = old["住址"].V(), 入学年份 = old["入学年份"].V(), 户籍 = old["户籍"].V(), 身份证号 = old["身份证号"].V() };
+                            table.Delete(okey);
                             table[key] = value;
                             engine.Commit();
                             break;

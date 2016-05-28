@@ -25,6 +25,12 @@ public partial class DepotQuery_InPrint : DepotPageSingle
         }
     }
 
+    protected void exp_click(object sender, EventArgs e)
+    {
+        var orderId = "OrderId".Query().GlobalId();
+        ap.ResponseScripts.Add(string.Format("window.open('{0}', '_blank');", "../DepotQuery/InExport?DepotId={0}&OrderId={1}".Formatted(Depot.Id, orderId)));
+    }
+
     protected string OpName(Guid id)
     {
         try

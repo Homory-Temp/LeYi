@@ -634,7 +634,7 @@
           <Property Name="用户在编" Type="bit" Nullable="false" />
           <Property Name="用户同步" Type="bit" Nullable="false" />
           <Property Name="用户单位" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="用户部门" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="用户部门" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Platform_BT.dbo.Contact_Users”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -669,6 +669,7 @@
           <Property Name="Sync" Type="bit" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="PhoneX" Type="nvarchar(max)" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Platform_BT.dbo.ResourceMap”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -2026,7 +2027,7 @@
     [__用户].[用户证件] AS [用户证件], 
     [__用户].[用户在编] AS [用户在编], 
     [__用户].[用户同步] AS [用户同步], 
-    [__用户].[用户单位] AS [用户单位],
+    [__用户].[用户单位] AS [用户单位], 
     [__用户].[用户部门] AS [用户部门]
     FROM [dbo].[__用户] AS [__用户]</DefiningQuery>
           </EntitySet>
@@ -2047,7 +2048,8 @@
     [Contact_Users].[PerStaff] AS [PerStaff], 
     [Contact_Users].[Sync] AS [Sync], 
     [Contact_Users].[Type] AS [Type], 
-    [Contact_Users].[Ordinal] AS [Ordinal]
+    [Contact_Users].[Ordinal] AS [Ordinal], 
+    [Contact_Users].[PhoneX] AS [PhoneX]
     FROM [dbo].[Contact_Users] AS [Contact_Users]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ResourceMap" EntityType="Self.ResourceMap" store:Type="Views" store:Schema="dbo">
@@ -5049,6 +5051,7 @@
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="Ordinal" Type="Int32" Nullable="false" />
           <Property Name="PinYin" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneX" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="C__机构">
           <Key>
@@ -6129,6 +6132,7 @@
           <EntitySetMapping Name="Contact_Users">
             <EntityTypeMapping TypeName="Homory.Model.Contact_Users">
               <MappingFragment StoreEntitySet="Contact_Users">
+                <ScalarProperty Name="PhoneX" ColumnName="PhoneX" />
                 <ScalarProperty Name="PinYin" ColumnName="PinYin" />
                 <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
                 <ScalarProperty Name="Type" ColumnName="Type" />

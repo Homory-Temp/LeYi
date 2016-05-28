@@ -31,5 +31,6 @@ namespace Homory.Model
         public int Type { get; set; }
         public int Ordinal { get; set; }
         public string PinYin { get; set; }
+        public string PhoneX { get; set; }
     }
 }

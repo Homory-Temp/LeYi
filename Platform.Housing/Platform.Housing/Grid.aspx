@@ -1,4 +1,4 @@
-﻿<%@ Page Title="梁溪教育学生住房信息检索平台" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeFile="Grid.aspx.cs" Inherits="Grid" %>
+﻿<%@ Page Title="梁溪教育入学辅助查询系统" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeFile="Grid.aspx.cs" Inherits="Grid" %>
 <%@ Register TagPrefix="telerik" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI" %>
 <asp:Content ID="content" ContentPlaceHolderID="body" runat="Server">
     <telerik:RadAjaxPanel ID="ap" runat="server">
@@ -80,5 +80,10 @@
                 <PagerStyle Mode="NextPrevAndNumeric" PageSizes="10,20,60,100" Position="Bottom" PageSizeControlType="RadComboBox" AlwaysVisible="true" PagerTextFormat="{4} 第{0}页，共{1}页；第{2}-{3}项，共{5}项" />
             </MasterTableView>
         </telerik:RadGrid>
+        <style>
+            input {
+                cursor: auto;
+            }
+        </style>
     </telerik:RadAjaxPanel>
 </asp:Content>

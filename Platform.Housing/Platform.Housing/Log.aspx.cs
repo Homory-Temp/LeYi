@@ -84,10 +84,10 @@ public partial class Log : SsoPage
                 var table = engine.OpenXTablePortable<Guid, HousingLog>("Record");
                 list = table.Where(o => o.Value.时间 >= st && o.Value.时间 <= et).OrderByDescending(o => o.Value.时间).Select(o => o.Value).ToList();
             }
-            if (!root)
-            {
+            //if (!root)
+            //{
                 list = list.Join(db.Value.Housing_Member.Where(x => x.DepartmentId != Guid.Empty), o => o.用户ID, o => o.UserId, (a, b) => a).ToList();
-            }
+            //}
             grid.DataSource = list;
         }
     }

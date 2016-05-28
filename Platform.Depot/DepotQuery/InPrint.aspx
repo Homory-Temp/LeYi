@@ -140,6 +140,8 @@
                 <div class="col-md-12 text-center">
                     <input type="button" class="btn btn-tumblr" value="打印" id="in" onclick="return printTarget();" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="button" class="btn btn-tumblr" value="导出" id="exp" runat="server" onserverclick="exp_click" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="button" class="btn btn-tumblr" value="返回" id="go" runat="server" onserverclick="go_ServerClick" />
                 </div>
             </div>
