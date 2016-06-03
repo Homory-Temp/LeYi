@@ -49,7 +49,7 @@ public partial class Online : System.Web.UI.Page
         sb.Append("\r\n");
         foreach (var child in children)
         {
-            var relations = db.RelationshipUsers.Where(o => o.DelFlag == "0" && o.DeptID == child.DeptID && o.RelaPrimary == 1);
+            var relations = db.RelationshipUsers.Where(o => o.DelFlag == "0" && o.DeptID == child.DeptID && o.RelaPrimary == 1).OrderBy(o => o.UserOrder);
             if (relations.Count() == 0)
                 continue;
             sb.AppendFormat("【{0}】", child.DeptName);
@@ -93,7 +93,7 @@ public partial class Online : System.Web.UI.Page
             }
         }
         sb.AppendFormat("<{0}人>\t", users);
-        for (var i = 0; i < Days.Count; i++)
+        for (var i = 0; i < Days.Count * 2; i++)
         {
             sb.AppendFormat("{0}\t", total[i]);
         }
@@ -126,11 +126,11 @@ public partial class Online : System.Web.UI.Page
         sb.Append("\r\n");
         foreach (var child in children)
         {
-            sb.AppendFormat("【{0}】\r\n", child.DeptName);
+            sb.AppendFormat("【{0}】\r\n", "公文账号");
             var inners = db.Department.Where(o => o.DeptDelFlag == 0 && o.DeptParentID == child.DeptID);
             foreach (var inner in children)
             {
-                var relations = db.RelationshipUsers.Where(o => o.DelFlag == "0" && o.DeptID == inner.DeptID /*&& o.RelaPrimary == 1*/);
+                var relations = db.RelationshipUsers.Where(o => o.DelFlag == "0" && o.DeptID == inner.DeptID /*&& o.RelaPrimary == 1*/).OrderBy(o => o.UserOrder);
                 if (relations.Count() == 0)
                     continue;
                 sb.AppendFormat("  **【{0}】", inner.DeptName);
@@ -173,9 +173,10 @@ public partial class Online : System.Web.UI.Page
                     sb.AppendFormat("{0}\r\n", me);
                 }
             }
+            break;
         }
         sb.AppendFormat("<{0}人>\t", users);
-        for (var i = 0; i < Days.Count; i++)
+        for (var i = 0; i < Days.Count * 2; i++)
         {
             sb.AppendFormat("{0}\t", total[i]);
         }

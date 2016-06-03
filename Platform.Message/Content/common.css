@@ -1,0 +1,35 @@
+﻿body, .bg {
+    background: url("img/bg.gif") center 0 repeat;
+}
+
+.bgx {
+    background: #FFFFFF;
+}
+
+input[type=text] {
+    padding: 4px 0;
+    vertical-align: middle;
+}
+
+.rowx {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+html .RadTreeView_Metro .rtPlus, html .RadTreeView_Metro .rtMinus {
+    background-color: transparent;
+}
+
+html .RadTreeView_Metro .rtSelected .rtIn, html .RadTreeView_Metro .rtHover .rtIn {
+    background-color: transparent;
+    border-color: transparent;
+    color: inherit;
+}
+
+html .RadTreeView label {
+    display: inline-block;
+}
+
+.RadTreeView .btn {
+    margin: 4px;
+}

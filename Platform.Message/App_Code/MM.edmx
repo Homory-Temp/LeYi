@@ -5,65 +5,116 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“Platform_BT.dbo.M_寻呼机构”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="M_寻呼机构">
+        <EntityType Name="M_寻呼">
           <Key>
-            <PropertyRef Name="机构ID" />
-            <PropertyRef Name="金和ID" />
+            <PropertyRef Name="GId" />
           </Key>
-          <Property Name="机构ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="金和ID" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="机构名称" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="父级ID" Type="uniqueidentifier" />
-          <Property Name="序号" Type="int" Nullable="false" />
+          <Property Name="GId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="TopId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ordinal" Type="int" Nullable="false" />
+          <Property Name="TargetId" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Online" Type="bit" Nullable="false" />
+          <Property Name="Prior" Type="bit" Nullable="false" />
+          <Property Name="PriorName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Type" Type="nchar" MaxLength="1" Nullable="false" />
         </EntityType>
+        <Function Name="M_寻呼_发送" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="nvarchar" Mode="In" />
+          <Parameter Name="msg" Type="int" Mode="In" />
+          <Parameter Name="content" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="d_userID" Type="nvarchar" Mode="In" />
+          <Parameter Name="attrs" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="M_寻呼_列表" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Account" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="M_寻呼_文件" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="path" Type="nvarchar" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="type" Type="nvarchar" Mode="In" />
+          <Parameter Name="size" Type="int" Mode="In" />
+        </Function>
+        <Function Name="M_寻呼_用户" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="onlineId" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <EntityContainer Name="MModelStoreContainer">
-          <EntitySet Name="M_寻呼机构" EntityType="Self.M_寻呼机构" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [M_寻呼机构].[机构ID] AS [机构ID], 
-    [M_寻呼机构].[金和ID] AS [金和ID], 
-    [M_寻呼机构].[机构名称] AS [机构名称], 
-    [M_寻呼机构].[父级ID] AS [父级ID], 
-    [M_寻呼机构].[序号] AS [序号]
-    FROM [dbo].[M_寻呼机构] AS [M_寻呼机构]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="M_寻呼" EntityType="Self.M_寻呼" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="M_寻呼机构">
-          <Key>
-            <PropertyRef Name="机构ID" />
-            <PropertyRef Name="金和ID" />
-          </Key>
-          <Property Name="机构ID" Type="Guid" Nullable="false" />
-          <Property Name="金和ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="机构名称" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="父级ID" Type="Guid" />
-          <Property Name="序号" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="MEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="M_寻呼机构" EntityType="Self.M_寻呼机构" />
+          <EntitySet Name="M_寻呼" EntityType="MModel.M_寻呼" />
+          <FunctionImport Name="M_寻呼_列表" EntitySet="M_寻呼" ReturnType="Collection(MModel.M_寻呼)">
+          <Parameter Name="Account" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="M_寻呼_用户" ReturnType="Collection(String)">
+          <Parameter Name="onlineId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="M_寻呼_文件" ReturnType="Collection(Int32)">
+            <Parameter Name="path" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="type" Mode="In" Type="String" />
+            <Parameter Name="size" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="M_寻呼_发送" ReturnType="Collection(Int32)">
+            <Parameter Name="userID" Mode="In" Type="String" />
+            <Parameter Name="msg" Mode="In" Type="Int32" />
+            <Parameter Name="content" Mode="In" Type="String" />
+            <Parameter Name="d_userID" Mode="In" Type="String" />
+            <Parameter Name="attrs" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <EntityType Name="M_寻呼">
+          <Key>
+            <PropertyRef Name="GId" />
+          </Key>
+          <Property Name="GId" Type="Guid" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="TopId" Type="Guid" Nullable="false" />
+          <Property Name="Ordinal" Type="Int32" Nullable="false" />
+          <Property Name="TargetId" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Online" Type="Boolean" Nullable="false" />
+          <Property Name="Prior" Type="Boolean" Nullable="false" />
+          <Property Name="PriorName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MModelStoreContainer" CdmEntityContainer="MEntities">
-          <EntitySetMapping Name="M_寻呼机构">
-            <EntityTypeMapping TypeName="MModel.M_寻呼机构">
-              <MappingFragment StoreEntitySet="M_寻呼机构">
-                <ScalarProperty Name="序号" ColumnName="序号" />
-                <ScalarProperty Name="机构ID" ColumnName="机构ID" />
-                <ScalarProperty Name="金和ID" ColumnName="金和ID" />
-                <ScalarProperty Name="机构名称" ColumnName="机构名称" />
-                <ScalarProperty Name="父级ID" ColumnName="父级ID" />
+          <EntitySetMapping Name="M_寻呼">
+            <EntityTypeMapping TypeName="MModel.M_寻呼">
+              <MappingFragment StoreEntitySet="M_寻呼">
+                <ScalarProperty Name="GId" ColumnName="GId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PriorName" ColumnName="PriorName" />
+                <ScalarProperty Name="Prior" ColumnName="Prior" />
+                <ScalarProperty Name="Online" ColumnName="Online" />
+                <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="TopId" ColumnName="TopId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="M_寻呼_列表" FunctionName="MModel.Store.M_寻呼_列表" />
+          <FunctionImportMapping FunctionImportName="M_寻呼_用户" FunctionName="MModel.Store.M_寻呼_用户" />
+          <FunctionImportMapping FunctionImportName="M_寻呼_文件" FunctionName="MModel.Store.M_寻呼_文件" />
+          <FunctionImportMapping FunctionImportName="M_寻呼_发送" FunctionName="MModel.Store.M_寻呼_发送" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

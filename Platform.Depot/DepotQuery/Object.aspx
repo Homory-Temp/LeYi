@@ -189,6 +189,30 @@
                                     <asp:Label runat="server" Text='<%# Eval("State") %>' ToolTip='<%# Eval("State").ToString() == "已报废" ? ((DateTime)Eval("StateTime")).ToString("yyyy-MM-dd") : "" %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="固产分库编号" DataField="NumberX" SortExpression="NumberX" UniqueName="NumberX">
+                                <ItemTemplate>
+                                    <asp:HyperLink runat="server" Text='<%# Eval("NumberX") %>' NavigateUrl='<%# "../DepotQuery/ObjectSingle?DepotId={0}&Number={1}".Formatted(Depot.Id, Server.UrlEncode(Eval("NumberX").ToString())) %>'></asp:HyperLink>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <telerik:RadTextBox ID="NumberX" runat="server" EnabledStyle-HorizontalAlign="Center" Text='<%# Bind("NumberX") %>'>
+                                    </telerik:RadTextBox>
+                                </EditItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="数量" ReadOnly="True" DataField="Amount" SortExpression="Amount" UniqueName="Amount">
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%# Eval("Amount").ToAmount() %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="单价" ReadOnly="True" DataField="PriceX" SortExpression="PriceX" UniqueName="PriceX">
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%# Eval("PriceX").ToMoney() %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn HeaderStyle-BorderColor="Black" HeaderText="总价" ReadOnly="True" DataField="TotalX" SortExpression="TotalX" UniqueName="TotalX">
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%# Eval("TotalX").ToMoney() %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
                         </Columns>
                     </MasterTableView>
                 </telerik:RadGrid>

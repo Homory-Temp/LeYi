@@ -10,11 +10,18 @@
 using System;
 using System.Collections.Generic;
 
-public partial class M_寻呼机构
+public partial class M_寻呼
 {
-    public System.Guid 机构ID { get; set; }
-    public string 金和ID { get; set; }
-    public string 机构名称 { get; set; }
-    public Nullable<System.Guid> 父级ID { get; set; }
-    public int 序号 { get; set; }
+    public System.Guid GId { get; set; }
+    public System.Guid Id { get; set; }
+    public string Name { get; set; }
+    public Nullable<System.Guid> ParentId { get; set; }
+    public System.Guid TopId { get; set; }
+    public int Ordinal { get; set; }
+    public string TargetId { get; set; }
+    public bool Online { get; set; }
+    public bool Prior { get; set; }
+    public string PriorName { get; set; }
+    public string Phone { get; set; }
+    public string Type { get; set; }
 }

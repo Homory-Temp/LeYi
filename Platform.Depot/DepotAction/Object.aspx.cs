@@ -292,7 +292,7 @@ public partial class DepotAction_Object : DepotPageSingle
 
     protected void fix_ServerClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/DepotQuery/ObjectToFixed?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
+        Response.Redirect("~/DepotQuery/Object?DepotId={0}&ObjectId={1}".Formatted(Depot.Id, (sender as HtmlInputButton).Attributes["match"]));
     }
 
     protected void clear_ServerClick(object sender, EventArgs e)

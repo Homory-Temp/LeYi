@@ -10,6 +10,8 @@
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Core.Objects;
+using System.Linq;
 
 public partial class MEntities : DbContext
 {
@@ -23,5 +25,78 @@ public partial class MEntities : DbContext
         throw new UnintentionalCodeFirstException();
     }
 
-    public virtual DbSet<M_寻呼机构> M_寻呼机构 { get; set; }
+    public virtual DbSet<M_寻呼> M_寻呼 { get; set; }
+
+    public virtual ObjectResult<M_寻呼> M_寻呼_列表(string account)
+    {
+        var accountParameter = account != null ?
+            new ObjectParameter("Account", account) :
+            new ObjectParameter("Account", typeof(string));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<M_寻呼>("M_寻呼_列表", accountParameter);
+    }
+
+    public virtual ObjectResult<M_寻呼> M_寻呼_列表(string account, MergeOption mergeOption)
+    {
+        var accountParameter = account != null ?
+            new ObjectParameter("Account", account) :
+            new ObjectParameter("Account", typeof(string));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<M_寻呼>("M_寻呼_列表", mergeOption, accountParameter);
+    }
+
+    public virtual ObjectResult<string> M_寻呼_用户(Nullable<System.Guid> onlineId)
+    {
+        var onlineIdParameter = onlineId.HasValue ?
+            new ObjectParameter("onlineId", onlineId) :
+            new ObjectParameter("onlineId", typeof(System.Guid));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("M_寻呼_用户", onlineIdParameter);
+    }
+
+    public virtual ObjectResult<Nullable<int>> M_寻呼_文件(string path, string name, string type, Nullable<int> size)
+    {
+        var pathParameter = path != null ?
+            new ObjectParameter("path", path) :
+            new ObjectParameter("path", typeof(string));
+
+        var nameParameter = name != null ?
+            new ObjectParameter("name", name) :
+            new ObjectParameter("name", typeof(string));
+
+        var typeParameter = type != null ?
+            new ObjectParameter("type", type) :
+            new ObjectParameter("type", typeof(string));
+
+        var sizeParameter = size.HasValue ?
+            new ObjectParameter("size", size) :
+            new ObjectParameter("size", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("M_寻呼_文件", pathParameter, nameParameter, typeParameter, sizeParameter);
+    }
+
+    public virtual ObjectResult<Nullable<int>> M_寻呼_发送(string userID, Nullable<int> msg, string content, string d_userID, string attrs)
+    {
+        var userIDParameter = userID != null ?
+            new ObjectParameter("userID", userID) :
+            new ObjectParameter("userID", typeof(string));
+
+        var msgParameter = msg.HasValue ?
+            new ObjectParameter("msg", msg) :
+            new ObjectParameter("msg", typeof(int));
+
+        var contentParameter = content != null ?
+            new ObjectParameter("content", content) :
+            new ObjectParameter("content", typeof(string));
+
+        var d_userIDParameter = d_userID != null ?
+            new ObjectParameter("d_userID", d_userID) :
+            new ObjectParameter("d_userID", typeof(string));
+
+        var attrsParameter = attrs != null ?
+            new ObjectParameter("attrs", attrs) :
+            new ObjectParameter("attrs", typeof(string));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("M_寻呼_发送", userIDParameter, msgParameter, contentParameter, d_userIDParameter, attrsParameter);
+    }
 }
